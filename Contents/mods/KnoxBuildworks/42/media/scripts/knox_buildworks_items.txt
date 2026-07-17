@@ -1,0 +1,15 @@
+module KnoxBuildworks
+{
+    item KBW_Blueprint
+    {
+        DisplayCategory = Literature,
+        ItemType = base:literature,
+        Weight = 0.1,
+        Icon = Paper,
+        CanBeWrite = false,
+        StaticModel = SheetOfPaper,
+        WorldStaticModel = SheetOfPaper,
+        ReadType = newspaper,
+        Tags = base:blueprint;base:paper,
+    }
+}

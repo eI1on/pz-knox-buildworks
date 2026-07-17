@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Blacksmithing",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.advanced_forge",
+      "displayName": "Advanced Forge",
+      "translationKey": "IGUI_KBW_Vanilla_Advanced_Forge",
+      "tooltipKey": "Tooltip_craft_forgeIIIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Advanced_Forge"
+          }
+        }
+      ],
+      "iconName": "Build_ForgeAdvanced"
+    },
+    {
+      "id": "kbw.vanilla.blast_furnace",
+      "displayName": "Blast Furnace",
+      "translationKey": "IGUI_KBW_Vanilla_Blast_Furnace",
+      "tooltipKey": "Tooltip_craft_furnaceIIIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Blast_Furnace"
+          }
+        }
+      ],
+      "iconName": "Build_FurnaceAdvanced"
+    },
+    {
+      "id": "kbw.vanilla.charcoal_burner_darkgreenbarrel",
+      "displayName": "Charcoal Burner",
+      "translationKey": "IGUI_KBW_Vanilla_Charcoal_Burner_DarkGreenBarrel",
+      "tooltipKey": "Tooltip_craft_charcoalBurnerDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Charcoal_Burner_DarkGreenBarrel"
+          }
+        }
+      ],
+      "iconName": "Build_CharcoalDrum"
+    },
+    {
+      "id": "kbw.vanilla.charcoal_burner_lightgreenbarrel",
+      "displayName": "Charcoal Burner",
+      "translationKey": "IGUI_KBW_Vanilla_Charcoal_Burner_LightGreenBarrel",
+      "tooltipKey": "Tooltip_craft_charcoalBurnerDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Charcoal_Burner_LightGreenBarrel"
+          }
+        }
+      ],
+      "iconName": "Build_CharcoalDrum"
+    },
+    {
+      "id": "kbw.vanilla.charcoal_burner_metaldrum",
+      "displayName": "Charcoal Burner",
+      "translationKey": "IGUI_KBW_Vanilla_Charcoal_Burner_MetalDrum",
+      "tooltipKey": "Tooltip_craft_charcoalBurnerDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Charcoal_Burner_MetalDrum"
+          }
+        }
+      ],
+      "iconName": "Build_CharcoalDrum"
+    },
+    {
+      "id": "kbw.vanilla.charcoal_burner_orangebarrel",
+      "displayName": "Charcoal Burner",
+      "translationKey": "IGUI_KBW_Vanilla_Charcoal_Burner_OrangeBarrel",
+      "tooltipKey": "Tooltip_craft_charcoalBurnerDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Charcoal_Burner_OrangeBarrel"
+          }
+        }
+      ],
+      "iconName": "Build_CharcoalDrum"
+    },
+    {
+      "id": "kbw.vanilla.charcoal_pit",
+      "displayName": "Charcoal Burning Pit",
+      "translationKey": "IGUI_KBW_Vanilla_Charcoal_Pit",
+      "tooltipKey": "Tooltip_craft_charcoalPitDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Blacksmithing"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Charcoal_Pit"
+          }
+        }
+      ],
+      "iconName": "Build_Coalpit"
+    },
+    {
+      "id": "kbw.vanilla.dome_kiln",
+      "displayName": "Dome Kiln",
+      "translationKey": "IGUI_KBW_Vanilla_Dome_Kiln",
+      "tooltipKey": "Tooltip_KBW_Vanilla_Dome_Kiln",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Dome_Kiln"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.forge",
+      "displayName": "Forge",
+      "translationKey": "IGUI_KBW_Vanilla_Forge",
+      "tooltipKey": "Tooltip_craft_forgeIIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Forge"
+          }
+        }
+      ],
+      "iconName": "Build_SmeltingFurnace"
+    },
+    {
+      "id": "kbw.vanilla.grindstone",
+      "displayName": "Grindstone",
+      "translationKey": "IGUI_KBW_Vanilla_Grindstone",
+      "tooltipKey": "Tooltip_craft_grindstoneDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Grindstone"
+          }
+        }
+      ],
+      "iconName": "Build_Grindstone"
+    },
+    {
+      "id": "kbw.vanilla.forge_primitive_forge",
+      "displayName": "Primitive Forge",
+      "translationKey": "IGUI_KBW_Vanilla_Forge_Primitive_Forge",
+      "tooltipKey": "Tooltip_craft_forgeIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Forge_Primitive_Forge"
+          }
+        }
+      ],
+      "iconName": "Item_Anvil_Stone"
+    },
+    {
+      "id": "kbw.vanilla.primitive_furnace",
+      "displayName": "Primitive Furnace",
+      "translationKey": "IGUI_KBW_Vanilla_Primitive_Furnace",
+      "tooltipKey": "Tooltip_craft_furnaceIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Primitive_Furnace"
+          }
+        }
+      ],
+      "iconName": "Build_PrimitiveFurnace"
+    },
+    {
+      "id": "kbw.vanilla.smelting_furnace",
+      "displayName": "Smelting Furnace",
+      "translationKey": "IGUI_KBW_Vanilla_Smelting_Furnace",
+      "tooltipKey": "Tooltip_craft_furnaceIIDesc",
+      "category": "Blacksmithing",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "blacksmithing"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Smelting_Furnace"
+          }
+        }
+      ],
+      "iconName": "Build_SmeltingFurnace"
+    }
+  ]
+}

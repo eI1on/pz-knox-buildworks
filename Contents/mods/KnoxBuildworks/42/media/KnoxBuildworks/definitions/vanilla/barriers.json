@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Barriers",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.barricademetalbar",
+      "displayName": "Metal Bar Barricade",
+      "translationKey": "IGUI_KBW_Vanilla_BarricadeMetalBar",
+      "tooltipKey": "Tooltip_craft_BigMetalFenceDesc",
+      "category": "Barriers",
+      "subcategory": "Barricades",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "barriers"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BarricadeMetalBar"
+          }
+        }
+      ],
+      "iconName": "Build_BarricadeWindow_Bars"
+    },
+    {
+      "id": "kbw.vanilla.barricademetalsheet",
+      "displayName": "Metal Sheet Barricade",
+      "translationKey": "IGUI_KBW_Vanilla_BarricadeMetalSheet",
+      "tooltipKey": "Tooltip_craft_BigMetalFenceDesc",
+      "category": "Barriers",
+      "subcategory": "Barricades",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "barriers"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BarricadeMetalSheet"
+          }
+        }
+      ],
+      "iconName": "Build_BarricadeWindow_Sheet"
+    },
+    {
+      "id": "kbw.vanilla.barricadeplanks",
+      "displayName": "Planks Barricade",
+      "translationKey": "IGUI_KBW_Vanilla_BarricadePlanks",
+      "tooltipKey": "Tooltip_craft_BigMetalFenceDesc",
+      "category": "Barriers",
+      "subcategory": "Barricades",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "barriers"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BarricadePlanks"
+          }
+        }
+      ],
+      "iconName": "Build_BarricadeWindow_Plank"
+    }
+  ]
+}

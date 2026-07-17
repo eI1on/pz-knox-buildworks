@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Floors",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.dirtfloor",
+      "displayName": "Dirt Floor",
+      "translationKey": "IGUI_KBW_Vanilla_DirtFloor",
+      "tooltipKey": "Tooltip_craft_dirtFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Floors"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DirtFloor"
+          }
+        }
+      ],
+      "iconName": "Build_FloorDirt"
+    },
+    {
+      "id": "kbw.vanilla.gravelfloor",
+      "displayName": "Gravel Floor",
+      "translationKey": "IGUI_KBW_Vanilla_GravelFloor",
+      "tooltipKey": "Tooltip_craft_gravelFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Floors"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "GravelFloor"
+          }
+        }
+      ],
+      "iconName": "Build_FloorGravel"
+    },
+    {
+      "id": "kbw.vanilla.metalfloorlvl1",
+      "displayName": "Metal Floor",
+      "translationKey": "IGUI_KBW_Vanilla_MetalFloorLvl1",
+      "tooltipKey": "Tooltip_craft_MetalRoofDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalFloorLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalfloor",
+        "name": "Metal Floor",
+        "level": 1
+      },
+      "iconName": "Build_FloorTileMetal"
+    },
+    {
+      "id": "kbw.vanilla.sandfloor",
+      "displayName": "Sand Floor",
+      "translationKey": "IGUI_KBW_Vanilla_SandFloor",
+      "tooltipKey": "Tooltip_craft_sandFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Floors"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SandFloor"
+          }
+        }
+      ],
+      "iconName": "Build_FloorSand"
+    },
+    {
+      "id": "kbw.vanilla.brickfloorlvl1",
+      "displayName": "Tile Floor",
+      "translationKey": "IGUI_KBW_Vanilla_BrickFloorLvl1",
+      "tooltipKey": "Tooltip_craft_brickFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickFloorLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickfloor",
+        "name": "Tile Floor",
+        "level": 1
+      },
+      "iconName": "Build_FloorTilePorcelain"
+    },
+    {
+      "id": "kbw.vanilla.woodfloorlvl3",
+      "displayName": "Wood Floor (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFloorLvl3",
+      "tooltipKey": "Tooltip_craft_woodenFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFloorLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfloor",
+        "name": "Wood Floor",
+        "level": 3
+      },
+      "iconName": "Build_FloorTileWood"
+    },
+    {
+      "id": "kbw.vanilla.woodfloorlvl2",
+      "displayName": "Wood Floor (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFloorLvl2",
+      "tooltipKey": "Tooltip_craft_woodenFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFloorLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfloor",
+        "name": "Wood Floor",
+        "level": 2
+      },
+      "iconName": "Build_FloorTileWood"
+    },
+    {
+      "id": "kbw.vanilla.woodfloorlvl1",
+      "displayName": "Wood Floor (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFloorLvl1",
+      "tooltipKey": "Tooltip_craft_woodenFloorDesc",
+      "category": "Floors",
+      "subcategory": "Floors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "floors"
+      ],
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFloorLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfloor",
+        "name": "Wood Floor",
+        "level": 1
+      },
+      "iconName": "Build_FloorTileWood"
+    }
+  ]
+}

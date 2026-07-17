@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Doors",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.brickdoorframelvl2",
+      "displayName": "Brick Door Frame (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickDoorFrameLvl2",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickDoorFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickdoorframe",
+        "name": "Brick Door Frame",
+        "level": 2
+      },
+      "iconName": "Build_DoorframeBrick"
+    },
+    {
+      "id": "kbw.vanilla.brickdoorframelvl1",
+      "displayName": "Brick Door Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickDoorFrameLvl1",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickDoorFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickdoorframe",
+        "name": "Brick Door Frame",
+        "level": 1
+      },
+      "iconName": "Build_DoorframeBrick"
+    },
+    {
+      "id": "kbw.vanilla.logdoorframelvl1",
+      "displayName": "Log Door Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_LogDoorFrameLvl1",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LogDoorFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.logdoorframe",
+        "name": "Log Door Frame",
+        "level": 1
+      },
+      "iconName": "Build_DoorframeLogs"
+    },
+    {
+      "id": "kbw.vanilla.metaldoorframelvl2",
+      "displayName": "Metal Door Frame (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalDoorFrameLvl2",
+      "tooltipKey": "Tooltip_craft_doorFrameMetalDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalDoorFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metaldoorframe",
+        "name": "Metal Door Frame",
+        "level": 2
+      },
+      "iconName": "Build_DoorframeMetal"
+    },
+    {
+      "id": "kbw.vanilla.metaldoorframelvl1",
+      "displayName": "Metal Door Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalDoorFrameLvl1",
+      "tooltipKey": "Tooltip_craft_doorFrameMetalDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalDoorFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metaldoorframe",
+        "name": "Metal Door Frame",
+        "level": 1
+      },
+      "iconName": "Build_DoorframeMetal"
+    },
+    {
+      "id": "kbw.vanilla.stonedoorframe",
+      "displayName": "Stone Door Frame",
+      "translationKey": "IGUI_KBW_Vanilla_StoneDoorFrame",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "StoneDoorFrame"
+          }
+        }
+      ],
+      "iconName": "Build_DoorframeStone"
+    },
+    {
+      "id": "kbw.vanilla.wooddoorframelvl3",
+      "displayName": "Wood Door Frame (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodDoorFrameLvl3",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodDoorFrameLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wooddoorframe",
+        "name": "Wood Door Frame",
+        "level": 3
+      },
+      "iconName": "Build_DoorframeWood"
+    },
+    {
+      "id": "kbw.vanilla.wooddoorframelvl2",
+      "displayName": "Wood Door Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodDoorFrameLvl2",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodDoorFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wooddoorframe",
+        "name": "Wood Door Frame",
+        "level": 2
+      },
+      "iconName": "Build_DoorframeWood"
+    },
+    {
+      "id": "kbw.vanilla.wooddoorframelvl1",
+      "displayName": "Wood Door Frame (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodDoorFrameLvl1",
+      "tooltipKey": "Tooltip_craft_doorFrameDesc",
+      "category": "Doors",
+      "subcategory": "Door Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodDoorFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wooddoorframe",
+        "name": "Wood Door Frame",
+        "level": 1
+      },
+      "iconName": "Build_DoorframeWood"
+    },
+    {
+      "id": "kbw.vanilla.doubledoor",
+      "displayName": "Double Door",
+      "translationKey": "IGUI_KBW_Vanilla_DoubleDoor",
+      "tooltipKey": "Tooltip_craft_doubleWoodenDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DoubleDoor"
+          }
+        }
+      ],
+      "iconName": "Build_DoubleWoodGate"
+    },
+    {
+      "id": "kbw.vanilla.metaldoorlvl2",
+      "displayName": "Metal Door (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalDoorLvl2",
+      "tooltipKey": "Tooltip_craft_metalDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalDoorLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metaldoor",
+        "name": "Metal Door",
+        "level": 2
+      },
+      "iconName": "Build_DoorMetal"
+    },
+    {
+      "id": "kbw.vanilla.metaldoorlvl1",
+      "displayName": "Metal Door (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalDoorLvl1",
+      "tooltipKey": "Tooltip_craft_metalDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalDoorLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metaldoor",
+        "name": "Metal Door",
+        "level": 1
+      },
+      "iconName": "Build_DoorWeldedMetal"
+    },
+    {
+      "id": "kbw.vanilla.woodendoorlvl3",
+      "displayName": "Wood Door (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenDoorLvl3",
+      "tooltipKey": "Tooltip_craft_woodenDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenDoorLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodendoor",
+        "name": "Wood Door",
+        "level": 3
+      },
+      "iconName": "Build_DoorWood"
+    },
+    {
+      "id": "kbw.vanilla.woodendoorlvl2",
+      "displayName": "Wood Door (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenDoorLvl2",
+      "tooltipKey": "Tooltip_craft_woodenDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenDoorLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodendoor",
+        "name": "Wood Door",
+        "level": 2
+      },
+      "iconName": "Build_DoorWood"
+    },
+    {
+      "id": "kbw.vanilla.woodendoorlvl1",
+      "displayName": "Wood Door (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenDoorLvl1",
+      "tooltipKey": "Tooltip_craft_woodenDoorDesc",
+      "category": "Doors",
+      "subcategory": "Doors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "doors"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenDoorLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodendoor",
+        "name": "Wood Door",
+        "level": 1
+      },
+      "iconName": "Build_DoorWood"
+    }
+  ]
+}

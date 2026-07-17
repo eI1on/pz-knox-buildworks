@@ -1,0 +1,13 @@
+{
+  "Sandbox_KnoxBuildworks": "Knox Buildworks",
+  "Sandbox_KBW_ReplaceBuildMenu": "Replace vanilla Build Menu",
+  "Sandbox_KBW_ReplaceBuildMenu_tooltip": "The sidebar Build button opens Knox Buildworks instead of the vanilla Build Menu. When this is off, the Build button keeps vanilla as the primary action and exposes Knox Buildworks from its hover drawer.",
+  "Sandbox_KBW_EnablePlanningMode": "Enable Planning Mode",
+  "Sandbox_KBW_EnablePlanningMode_tooltip": "Allow players to open Knox Planning Mode for blueprints, ghost overlays, and build queues. Admins can turn this off for stricter servers.",
+  "Sandbox_KBW_MaxPlacementsPerBlueprint": "Max planned buildables per blueprint",
+  "Sandbox_KBW_MaxPlacementsPerBlueprint_tooltip": "Upper limit of ghost placements a single blueprint can hold.",
+  "Sandbox_KBW_BuildXPMultiplier": "Build XP multiplier",
+  "Sandbox_KBW_BuildXPMultiplier_tooltip": "Multiplies the XP awarded when a Knox Buildworks construction finishes.",
+  "Sandbox_KBW_BlueprintRadius": "Blueprint radius (tiles)",
+  "Sandbox_KBW_BlueprintRadius_tooltip": "Half-size of the square a blueprint may cover, measured from its first ghost. 200 gives a 400x400 area."
+}

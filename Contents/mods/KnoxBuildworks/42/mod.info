@@ -1,0 +1,7 @@
+name=Knox Buildworks
+poster=poster.png
+id=KnoxBuildworks
+description=
+tags=Build 42,Misc,Multiplayer,Interface
+versionMin=42.0
+require=ElyonLib

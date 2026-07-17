@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Pottery",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.hand_press",
+      "displayName": "Hand Press",
+      "translationKey": "IGUI_KBW_Vanilla_Hand_Press",
+      "tooltipKey": "Tooltip_craft_handpressDesc",
+      "category": "Pottery",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "pottery"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Hand_Press"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.kiln_large",
+      "displayName": "Kiln Large",
+      "translationKey": "IGUI_KBW_Vanilla_Kiln_Large",
+      "tooltipKey": "Tooltip_craft_kilnLargeDesc",
+      "category": "Pottery",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Pottery"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "pottery"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Kiln_Large"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.kiln_small",
+      "displayName": "Kiln Small",
+      "translationKey": "IGUI_KBW_Vanilla_Kiln_Small",
+      "tooltipKey": "Tooltip_craft_kilnSmallDesc",
+      "category": "Pottery",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Pottery"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "pottery"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Kiln_Small"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.pottery_bench",
+      "displayName": "Pottery Bench",
+      "translationKey": "IGUI_KBW_Vanilla_Pottery_Bench",
+      "tooltipKey": "Tooltip_craft_potteryBenchDesc",
+      "category": "Pottery",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Cloth",
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "pottery"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Pottery_Bench"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.pottery_wheel",
+      "displayName": "Pottery Wheel",
+      "translationKey": "IGUI_KBW_Vanilla_Pottery_Wheel",
+      "tooltipKey": "Tooltip_craft_potteryWheelDesc",
+      "category": "Pottery",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "pottery"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Pottery_Wheel"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Windows",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.brickwindowframelvl2",
+      "displayName": "Brick Window Frame",
+      "translationKey": "IGUI_KBW_Vanilla_BrickWindowFrameLvl2",
+      "tooltipKey": "Tooltip_craft_woodenFrameDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickWindowFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickwindowframe",
+        "name": "Brick Window Frame",
+        "level": 2
+      },
+      "iconName": "Build_WindowframeBrick"
+    },
+    {
+      "id": "kbw.vanilla.brickwindowframelvl1",
+      "displayName": "Brick Window Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickWindowFrameLvl1",
+      "tooltipKey": "Tooltip_craft_woodenFrameDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickWindowFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickwindowframe",
+        "name": "Brick Window Frame",
+        "level": 1
+      },
+      "iconName": "Build_WindowframeBrick"
+    },
+    {
+      "id": "kbw.vanilla.logwindowframelvl1",
+      "displayName": "Log Window Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_LogWindowFrameLvl1",
+      "tooltipKey": "Tooltip_craft_woodenFrameDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LogWindowFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.logwindowframe",
+        "name": "Log Window Frame",
+        "level": 1
+      },
+      "iconName": "Build_WindowframeLogs"
+    },
+    {
+      "id": "kbw.vanilla.metalwindowframelvl2",
+      "displayName": "Metal Window Frame",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWindowFrameLvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWindowFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalwindowframe",
+        "name": "Metal Window Frame",
+        "level": 2
+      },
+      "iconName": "Build_WindowframeMetal"
+    },
+    {
+      "id": "kbw.vanilla.metalwindowframelvl1",
+      "displayName": "Metal Window Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWindowFrameLvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWindowFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalwindowframe",
+        "name": "Metal Window Frame",
+        "level": 1
+      },
+      "iconName": "Build_WindowframeMetal"
+    },
+    {
+      "id": "kbw.vanilla.stonewindowframe",
+      "displayName": "Stone Window Frame",
+      "translationKey": "IGUI_KBW_Vanilla_StoneWindowFrame",
+      "tooltipKey": "Tooltip_craft_woodenFrameDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "StoneWindowFrame"
+          }
+        }
+      ],
+      "iconName": "Build_WindowframeStone"
+    },
+    {
+      "id": "kbw.vanilla.woodenwindowframelvl3",
+      "displayName": "Wood Window Frame (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWindowFrameLvl3",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWindowFrameLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwindowframe",
+        "name": "Wood Window Frame",
+        "level": 3
+      },
+      "iconName": "Build_WindowframeWood"
+    },
+    {
+      "id": "kbw.vanilla.woodenwindowframelvl2",
+      "displayName": "Wood Window Frame (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWindowFrameLvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWindowFrameLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwindowframe",
+        "name": "Wood Window Frame",
+        "level": 2
+      },
+      "iconName": "Build_WindowframeWood"
+    },
+    {
+      "id": "kbw.vanilla.woodenwindowframelvl1",
+      "displayName": "Wood Window Frame (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWindowFrameLvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Windows",
+      "subcategory": "Window Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWindowFrameLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwindowframe",
+        "name": "Wood Window Frame",
+        "level": 1
+      },
+      "iconName": "Build_WindowframeWood"
+    },
+    {
+      "id": "kbw.vanilla.wooden_windows",
+      "displayName": "Wooden Windows",
+      "translationKey": "IGUI_KBW_Vanilla_Wooden_Windows",
+      "tooltipKey": "Tooltip_craft_WindowDesc",
+      "category": "Windows",
+      "subcategory": "Windows",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "windows"
+      ],
+      "placement": {
+        "kind": "object",
+        "needWindowFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wooden_Windows"
+          }
+        }
+      ],
+      "iconName": "Build_WindowBlack"
+    }
+  ]
+}

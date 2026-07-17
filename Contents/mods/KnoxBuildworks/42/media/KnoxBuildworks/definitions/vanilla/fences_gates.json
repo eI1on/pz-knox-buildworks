@@ -1,0 +1,685 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Fences & Gates",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.barbedwirefence",
+      "displayName": "Barbed Wire Fence",
+      "translationKey": "IGUI_KBW_Vanilla_BarbedWireFence",
+      "tooltipKey": "Tooltip_craft_barbedFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BarbedWireFence"
+          }
+        }
+      ],
+      "iconName": "Build_FenceWire"
+    },
+    {
+      "id": "kbw.vanilla.metalbigmetalfence",
+      "displayName": "Big Metal Pole Fence",
+      "translationKey": "IGUI_KBW_Vanilla_MetalBigMetalFence",
+      "tooltipKey": "Tooltip_craft_BigMetalFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalBigMetalFence"
+          }
+        }
+      ],
+      "iconName": "Build_FenceHighMetalPosts"
+    },
+    {
+      "id": "kbw.vanilla.metalbigwirefence",
+      "displayName": "Big Metal Wire Fence",
+      "translationKey": "IGUI_KBW_Vanilla_MetalBigWireFence",
+      "tooltipKey": "Tooltip_craft_BigWiredFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalBigWireFence"
+          }
+        }
+      ],
+      "iconName": "Build_DoubleWireFence"
+    },
+    {
+      "id": "kbw.vanilla.brickfencelvl2",
+      "displayName": "Brick Fence (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickFenceLvl2",
+      "tooltipKey": "Tooltip_craft_brickFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickFenceLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickfence",
+        "name": "Brick Fence",
+        "level": 2
+      },
+      "iconName": "Build_FenceBrick"
+    },
+    {
+      "id": "kbw.vanilla.logfence",
+      "displayName": "Log Fence",
+      "translationKey": "IGUI_KBW_Vanilla_LogFence",
+      "tooltipKey": "Tooltip_craft_stickFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LogFence"
+          }
+        }
+      ],
+      "iconName": "Build_FenceLogs"
+    },
+    {
+      "id": "kbw.vanilla.metalfencelvl2",
+      "displayName": "Metal Fence (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalFenceLvl2",
+      "tooltipKey": "Tooltip_craft_metalFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalFenceLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalfence",
+        "name": "Metal Fence",
+        "level": 2
+      },
+      "iconName": "Build_FenceMetal"
+    },
+    {
+      "id": "kbw.vanilla.metalfencelvl1",
+      "displayName": "Metal Fence (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalFenceLvl1",
+      "tooltipKey": "Tooltip_craft_metalFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalFenceLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalfence",
+        "name": "Metal Fence",
+        "level": 1
+      },
+      "iconName": "Build_FenceMetal"
+    },
+    {
+      "id": "kbw.vanilla.metalsmallpolefence",
+      "displayName": "Small Metal Pole Fence (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalSmallPoleFence",
+      "tooltipKey": "Tooltip_craft_MetalPoleFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalSmallPoleFence"
+          }
+        }
+      ],
+      "iconName": "Build_FenceMetalPosts"
+    },
+    {
+      "id": "kbw.vanilla.metalsmallwirefence",
+      "displayName": "Small Metal Wire Fence",
+      "translationKey": "IGUI_KBW_Vanilla_MetalSmallWireFence",
+      "tooltipKey": "Tooltip_craft_BigWiredFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalSmallWireFence"
+          }
+        }
+      ],
+      "iconName": "Build_ShortWireFence"
+    },
+    {
+      "id": "kbw.vanilla.stickfence",
+      "displayName": "Stick Fence",
+      "translationKey": "IGUI_KBW_Vanilla_StickFence",
+      "tooltipKey": "Tooltip_craft_stickFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "StickFence"
+          }
+        }
+      ],
+      "iconName": "Build_FenceStakes"
+    },
+    {
+      "id": "kbw.vanilla.woodfencelvl3",
+      "displayName": "Wood Fence (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFenceLvl3",
+      "tooltipKey": "Tooltip_craft_woodenFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFenceLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfence",
+        "name": "Wood Fence",
+        "level": 3
+      },
+      "iconName": "Build_FenceWood"
+    },
+    {
+      "id": "kbw.vanilla.woodfencelvl2",
+      "displayName": "Wood Fence (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFenceLvl2",
+      "tooltipKey": "Tooltip_craft_woodenFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFenceLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfence",
+        "name": "Wood Fence",
+        "level": 2
+      },
+      "iconName": "Build_FenceWood"
+    },
+    {
+      "id": "kbw.vanilla.woodfencelvl1",
+      "displayName": "Wood Fence (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFenceLvl1",
+      "tooltipKey": "Tooltip_craft_woodenFenceDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Fences",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFenceLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodfence",
+        "name": "Wood Fence",
+        "level": 1
+      },
+      "iconName": "Build_FenceWood"
+    },
+    {
+      "id": "kbw.vanilla.doublefencegate",
+      "displayName": "Big Double Pole Gate",
+      "translationKey": "IGUI_KBW_Vanilla_DoubleFenceGate",
+      "tooltipKey": "Tooltip_craft_doublePoleGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DoubleFenceGate"
+          }
+        }
+      ],
+      "iconName": "Build_DoublePoleGate"
+    },
+    {
+      "id": "kbw.vanilla.doublewiregate",
+      "displayName": "Big Double Wire Gate",
+      "translationKey": "IGUI_KBW_Vanilla_DoubleWireGate",
+      "tooltipKey": "Tooltip_craft_doubleWireGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DoubleWireGate"
+          }
+        }
+      ],
+      "iconName": "Build_DoubleWireGate"
+    },
+    {
+      "id": "kbw.vanilla.metalpolefencegate",
+      "displayName": "Big Pole Fence Gate",
+      "translationKey": "IGUI_KBW_Vanilla_MetalPoleFenceGate",
+      "tooltipKey": "Tooltip_craft_poleFenceGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalPoleFenceGate"
+          }
+        }
+      ],
+      "iconName": "Build_PoleGate"
+    },
+    {
+      "id": "kbw.vanilla.metalwirefencegate",
+      "displayName": "Big Wire Fence Gate",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWireFenceGate",
+      "tooltipKey": "Tooltip_craft_wireFenceGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWireFenceGate"
+          }
+        }
+      ],
+      "iconName": "Build_TallWireGate"
+    },
+    {
+      "id": "kbw.vanilla.metalpolefencegatesmall",
+      "displayName": "Small Pole Fence Gate",
+      "translationKey": "IGUI_KBW_Vanilla_MetalPoleFenceGateSmall",
+      "tooltipKey": "Tooltip_craft_poleFenceGateSmallDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalPoleFenceGateSmall"
+          }
+        }
+      ],
+      "iconName": "Build_FenceMetalPosts"
+    },
+    {
+      "id": "kbw.vanilla.metalwirefencegatesmall",
+      "displayName": "Small Wire Fence Gate",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWireFenceGateSmall",
+      "tooltipKey": "Tooltip_craft_wireFenceGateSmallDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWireFenceGateSmall"
+          }
+        }
+      ],
+      "iconName": "Build_ShortWireGate"
+    },
+    {
+      "id": "kbw.vanilla.loggate",
+      "displayName": "Wide Log Gate",
+      "translationKey": "IGUI_KBW_Vanilla_LogGate",
+      "tooltipKey": "Tooltip_craft_logGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LogGate"
+          }
+        }
+      ],
+      "iconName": "Build_FenceOpenLogs"
+    },
+    {
+      "id": "kbw.vanilla.woodfencegate",
+      "displayName": "Wood Fence Gate",
+      "translationKey": "IGUI_KBW_Vanilla_WoodFenceGate",
+      "tooltipKey": "Tooltip_craft_woodFenceGateDesc",
+      "category": "Fences & Gates",
+      "subcategory": "Gates",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "fences_gates"
+      ],
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodFenceGate"
+          }
+        }
+      ],
+      "iconName": "Build_DoorFenceWood"
+    }
+  ]
+}

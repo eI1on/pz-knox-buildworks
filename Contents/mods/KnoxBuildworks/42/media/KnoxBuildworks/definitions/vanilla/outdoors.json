@@ -1,0 +1,847 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Outdoors",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.amphora",
+      "displayName": "Amphora",
+      "translationKey": "IGUI_KBW_Vanilla_Amphora",
+      "tooltipKey": "Tooltip_craft_amphoraDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Outdoors"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Amphora"
+          }
+        }
+      ],
+      "iconName": "Build_Amphora"
+    },
+    {
+      "id": "kbw.vanilla.skullpoleantlers",
+      "displayName": "Antlers Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleAntlers",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleAntlers"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_Antlers"
+    },
+    {
+      "id": "kbw.vanilla.skullpolebull",
+      "displayName": "Bull Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleBull",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleBull"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullBull"
+    },
+    {
+      "id": "kbw.vanilla.stonecairn",
+      "displayName": "Cairn",
+      "translationKey": "IGUI_KBW_Vanilla_StoneCairn",
+      "tooltipKey": "Tooltip_craft_stonePileDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "StoneCairn"
+          }
+        }
+      ],
+      "iconName": "Build_Cairn"
+    },
+    {
+      "id": "kbw.vanilla.campfire",
+      "displayName": "Campfire",
+      "translationKey": "IGUI_KBW_Vanilla_Campfire",
+      "tooltipKey": "Tooltip_craft_campfireDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Campfire"
+          }
+        }
+      ],
+      "iconName": "Build_Campfire"
+    },
+    {
+      "id": "kbw.vanilla.chopping_block",
+      "displayName": "Chopping Block",
+      "translationKey": "IGUI_KBW_Vanilla_Chopping_Block",
+      "tooltipKey": "Tooltip_craft_choppingBlockDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Chopping_Block"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.composter",
+      "displayName": "Composter",
+      "translationKey": "IGUI_KBW_Vanilla_Composter",
+      "tooltipKey": "Tooltip_craft_composterDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Composter"
+          }
+        }
+      ],
+      "iconName": "Build_Composter"
+    },
+    {
+      "id": "kbw.vanilla.compostershoddy",
+      "displayName": "Composter (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_ComposterShoddy",
+      "tooltipKey": "Tooltip_craft_composterDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ComposterShoddy"
+          }
+        }
+      ],
+      "iconName": "Build_Composter"
+    },
+    {
+      "id": "kbw.vanilla.skullpolecow",
+      "displayName": "Cow Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleCow",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleCow"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullCow"
+    },
+    {
+      "id": "kbw.vanilla.skullpoledeer",
+      "displayName": "Deer Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleDeer",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleDeer"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullStag"
+    },
+    {
+      "id": "kbw.vanilla.skullpoledeerdoe",
+      "displayName": "Doe Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleDeerDoe",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleDeerDoe"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullDoe"
+    },
+    {
+      "id": "kbw.vanilla.woodlamppillar",
+      "displayName": "Lamp On Pillar",
+      "translationKey": "IGUI_KBW_Vanilla_WoodLampPillar",
+      "tooltipKey": "Tooltip_craft_lampOnPillarDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Fiber",
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodLampPillar"
+          }
+        }
+      ],
+      "iconName": "Build_FlashlightLamp"
+    },
+    {
+      "id": "kbw.vanilla.leanto_shelter",
+      "displayName": "Lean-To Shelter",
+      "translationKey": "IGUI_KBW_Vanilla_LeanTo_Shelter",
+      "tooltipKey": "Tooltip_craft_shelterDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LeanTo_Shelter"
+          }
+        }
+      ],
+      "iconName": "Build_LeanToShelterSticks"
+    },
+    {
+      "id": "kbw.vanilla.leather_shelter",
+      "displayName": "Leather Shelter",
+      "translationKey": "IGUI_KBW_Vanilla_Leather_Shelter",
+      "tooltipKey": "Tooltip_craft_shelterDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Leather_Shelter"
+          }
+        }
+      ],
+      "iconName": "Build_LeanToShelterLeather"
+    },
+    {
+      "id": "kbw.vanilla.skullpolepig",
+      "displayName": "Pig Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPolePig",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPolePig"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullPig"
+    },
+    {
+      "id": "kbw.vanilla.raincollectorround",
+      "displayName": "Rain Collector Barrel",
+      "translationKey": "IGUI_KBW_Vanilla_RainCollectorRound",
+      "tooltipKey": "Tooltip_craft_rainCollectorDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RainCollectorRound"
+          }
+        }
+      ],
+      "iconName": "Build_RainCollectorBarrel2"
+    },
+    {
+      "id": "kbw.vanilla.raincollectorround_tarp",
+      "displayName": "Rain Collector Barrel Tarp",
+      "translationKey": "IGUI_KBW_Vanilla_RainCollectorRound_Tarp",
+      "tooltipKey": "Tooltip_craft_rainCollectorDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RainCollectorRound_Tarp"
+          }
+        }
+      ],
+      "iconName": "Build_RainCollectorBarrel"
+    },
+    {
+      "id": "kbw.vanilla.raincollector",
+      "displayName": "Rain Collector Crate",
+      "translationKey": "IGUI_KBW_Vanilla_RainCollector",
+      "tooltipKey": "Tooltip_craft_rainCollectorDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RainCollector"
+          }
+        }
+      ],
+      "iconName": "Build_RainCollectorCrate2"
+    },
+    {
+      "id": "kbw.vanilla.raincollector_tarp",
+      "displayName": "Rain Collector Crate Tarp",
+      "translationKey": "IGUI_KBW_Vanilla_RainCollector_Tarp",
+      "tooltipKey": "Tooltip_craft_rainCollectorDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RainCollector_Tarp"
+          }
+        }
+      ],
+      "iconName": "Build_RainCollectorCrate"
+    },
+    {
+      "id": "kbw.vanilla.ruggedcross",
+      "displayName": "Rugged Cross",
+      "translationKey": "IGUI_KBW_Vanilla_RuggedCross",
+      "tooltipKey": "Tooltip_craft_woodenCrossDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RuggedCross"
+          }
+        }
+      ],
+      "iconName": "Build_CrossSimple"
+    },
+    {
+      "id": "kbw.vanilla.sandbagwall",
+      "displayName": "Sandbag Wall",
+      "translationKey": "IGUI_KBW_Vanilla_SandbagWall",
+      "tooltipKey": "Tooltip_craft_sandBagDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Outdoors"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SandbagWall"
+          }
+        }
+      ],
+      "iconName": "Build_SandbagWall"
+    },
+    {
+      "id": "kbw.vanilla.skullpolesheep",
+      "displayName": "Sheep Skull Pole",
+      "translationKey": "IGUI_KBW_Vanilla_SkullPoleSheep",
+      "tooltipKey": "Tooltip_craft_skullPoleDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SkullPoleSheep"
+          }
+        }
+      ],
+      "iconName": "Build_Stake_SkullSheep"
+    },
+    {
+      "id": "kbw.vanilla.tarp_shelter",
+      "displayName": "Tarp Shelter",
+      "translationKey": "IGUI_KBW_Vanilla_Tarp_Shelter",
+      "tooltipKey": "Tooltip_craft_shelterDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Stone",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Tarp_Shelter"
+          }
+        }
+      ],
+      "iconName": "Build_LeanToShelterTarp"
+    },
+    {
+      "id": "kbw.vanilla.woodcross",
+      "displayName": "Wood Cross",
+      "translationKey": "IGUI_KBW_Vanilla_WoodCross",
+      "tooltipKey": "Tooltip_craft_woodenCrossDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodCross"
+          }
+        }
+      ],
+      "iconName": "Build_Cross"
+    },
+    {
+      "id": "kbw.vanilla.woodpicket",
+      "displayName": "Wood Picket",
+      "translationKey": "IGUI_KBW_Vanilla_WoodPicket",
+      "tooltipKey": "Tooltip_craft_woodenPicketDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodPicket"
+          }
+        }
+      ],
+      "iconName": "Build_WoodPicket"
+    },
+    {
+      "id": "kbw.vanilla.woodsign",
+      "displayName": "Wood Sign",
+      "translationKey": "IGUI_KBW_Vanilla_WoodSign",
+      "tooltipKey": "Tooltip_craft_signDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodSign"
+          }
+        }
+      ],
+      "iconName": "Build_WoodSign"
+    },
+    {
+      "id": "kbw.vanilla.woodstake",
+      "displayName": "Wooden Stake",
+      "translationKey": "IGUI_KBW_Vanilla_WoodStake",
+      "tooltipKey": "Tooltip_craft_woodenStakeDesc",
+      "category": "Outdoors",
+      "subcategory": "Outdoors",
+      "materialTags": [
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "outdoors"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodStake"
+          }
+        }
+      ],
+      "iconName": "Item_Handle"
+    }
+  ]
+}

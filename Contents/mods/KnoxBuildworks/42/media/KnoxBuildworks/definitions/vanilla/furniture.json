@@ -1,0 +1,1797 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Furniture",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.wood_bed",
+      "displayName": "Bed",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Bed",
+      "tooltipKey": "Tooltip_craft_bedDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Bed"
+          }
+        }
+      ],
+      "iconName": "Build_Bed"
+    },
+    {
+      "id": "kbw.vanilla.metal_lockerbig_lvl2",
+      "displayName": "Big Metal Locker",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_LockerBig_Lvl2",
+      "tooltipKey": "Tooltip_craft_lockerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_LockerBig_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_lockerbig",
+        "name": "Big Metal Locker",
+        "level": 2
+      },
+      "iconName": "Build_CabinetMetal"
+    },
+    {
+      "id": "kbw.vanilla.metal_lockerbig_lvl1",
+      "displayName": "Big Metal Locker (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_LockerBig_Lvl1",
+      "tooltipKey": "Tooltip_craft_lockerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_LockerBig_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_lockerbig",
+        "name": "Big Metal Locker",
+        "level": 1
+      },
+      "iconName": "Build_CabinetMetal"
+    },
+    {
+      "id": "kbw.vanilla.coffin",
+      "displayName": "Coffin",
+      "translationKey": "IGUI_KBW_Vanilla_Coffin",
+      "tooltipKey": "Tooltip_craft_coffinDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Coffin"
+          }
+        }
+      ],
+      "iconName": "Build_Coffin"
+    },
+    {
+      "id": "kbw.vanilla.log_bench",
+      "displayName": "Log Bench",
+      "translationKey": "IGUI_KBW_Vanilla_Log_Bench",
+      "tooltipKey": "Tooltip_craft_benchDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Log_Bench"
+          }
+        }
+      ],
+      "iconName": "Build_LogBench"
+    },
+    {
+      "id": "kbw.vanilla.log_stool",
+      "displayName": "Log Stool 1",
+      "translationKey": "IGUI_KBW_Vanilla_Log_Stool",
+      "tooltipKey": "Tooltip_craft_stoolDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Log_Stool"
+          }
+        }
+      ],
+      "iconName": "Build_LogSeat"
+    },
+    {
+      "id": "kbw.vanilla.other_log_stool",
+      "displayName": "Log Stool 2",
+      "translationKey": "IGUI_KBW_Vanilla_Other_Log_Stool",
+      "tooltipKey": "Tooltip_craft_stoolDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Other_Log_Stool"
+          }
+        }
+      ],
+      "iconName": "Build_LogStool"
+    },
+    {
+      "id": "kbw.vanilla.log_table",
+      "displayName": "Log Table",
+      "translationKey": "IGUI_KBW_Vanilla_Log_Table",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Log_Table"
+          }
+        }
+      ],
+      "iconName": "Build_LogTable"
+    },
+    {
+      "id": "kbw.vanilla.barreloven",
+      "displayName": "Metal Barrel Oven",
+      "translationKey": "IGUI_KBW_Vanilla_BarrelOven",
+      "tooltipKey": "Tooltip_craft_barrelOvenDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BarrelOven"
+          }
+        }
+      ],
+      "iconName": "Build_BarrelOven"
+    },
+    {
+      "id": "kbw.vanilla.metal_counter_lvl2",
+      "displayName": "Metal Counter",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Counter_Lvl2",
+      "tooltipKey": "Tooltip_craft_metalCounterDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Counter_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_counter",
+        "name": "Metal Counter",
+        "level": 2
+      },
+      "iconName": "Build_MetalCounter"
+    },
+    {
+      "id": "kbw.vanilla.metal_counter_lvl1",
+      "displayName": "Metal Counter (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Counter_Lvl1",
+      "tooltipKey": "Tooltip_craft_metalCounterDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Counter_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_counter",
+        "name": "Metal Counter",
+        "level": 1
+      },
+      "iconName": "Build_MetalCounter"
+    },
+    {
+      "id": "kbw.vanilla.metal_countercorner_lvl2",
+      "displayName": "Metal Counter Corner",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_CounterCorner_Lvl2",
+      "tooltipKey": "Tooltip_craft_metalCounterCornerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_CounterCorner_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_countercorner",
+        "name": "Metal Counter Corner",
+        "level": 2
+      },
+      "iconName": "Build_MetalCounterCorner"
+    },
+    {
+      "id": "kbw.vanilla.metal_countercorner_lvl1",
+      "displayName": "Metal Counter Corner (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_CounterCorner_Lvl1",
+      "tooltipKey": "Tooltip_craft_metalCounterCornerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_CounterCorner_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_countercorner",
+        "name": "Metal Counter Corner",
+        "level": 1
+      },
+      "iconName": "Build_MetalCounterCorner"
+    },
+    {
+      "id": "kbw.vanilla.metal_crate_lvl2",
+      "displayName": "Metal Crate",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Crate_Lvl2",
+      "tooltipKey": "Tooltip_craft_crateDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Crate_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_crate",
+        "name": "Metal Crate",
+        "level": 2
+      },
+      "iconName": "Build_CrateMetal"
+    },
+    {
+      "id": "kbw.vanilla.metal_crate_lvl1",
+      "displayName": "Metal Crate (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Crate_Lvl1",
+      "tooltipKey": "Tooltip_craft_crateDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Crate_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_crate",
+        "name": "Metal Crate",
+        "level": 1
+      },
+      "iconName": "Build_CrateMetal"
+    },
+    {
+      "id": "kbw.vanilla.metal_shelves_lvl2",
+      "displayName": "Metal Shelves",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Shelves_Lvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Shelves_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_shelves",
+        "name": "Metal Shelves",
+        "level": 2
+      },
+      "iconName": "Build_ShelvesMetal"
+    },
+    {
+      "id": "kbw.vanilla.metal_shelves_lvl1",
+      "displayName": "Metal Shelves (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Shelves_Lvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Shelves_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_shelves",
+        "name": "Metal Shelves",
+        "level": 1
+      },
+      "iconName": "Build_ShelvesMetal"
+    },
+    {
+      "id": "kbw.vanilla.rugged_stool",
+      "displayName": "Rugged Stool",
+      "translationKey": "IGUI_KBW_Vanilla_Rugged_Stool",
+      "tooltipKey": "Tooltip_craft_stoolDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Rugged_Stool"
+          }
+        }
+      ],
+      "iconName": "Build_LogSeat2"
+    },
+    {
+      "id": "kbw.vanilla.rugged_table",
+      "displayName": "Rugged Table",
+      "translationKey": "IGUI_KBW_Vanilla_Rugged_Table",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Rugged_Table"
+          }
+        }
+      ],
+      "iconName": "Build_LogTable2"
+    },
+    {
+      "id": "kbw.vanilla.metal_lockersmall_lvl2",
+      "displayName": "Small Metal Locker",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_LockerSmall_Lvl2",
+      "tooltipKey": "Tooltip_craft_lockerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_LockerSmall_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_lockersmall",
+        "name": "Small Metal Locker",
+        "level": 2
+      },
+      "iconName": "Build_GunLocker"
+    },
+    {
+      "id": "kbw.vanilla.metal_lockersmall_lvl1",
+      "displayName": "Small Metal Locker (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_LockerSmall_Lvl1",
+      "tooltipKey": "Tooltip_craft_lockerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_LockerSmall_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metal_lockersmall",
+        "name": "Small Metal Locker",
+        "level": 1
+      },
+      "iconName": "Build_GunLocker"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablesmall_lvl3",
+      "displayName": "Small Wood Table (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableSmall_Lvl3",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableSmall_Lvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tablesmall",
+        "name": "Small Wood Table",
+        "level": 3
+      },
+      "iconName": "Build_TableSmallWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablesmall_lvl2",
+      "displayName": "Small Wood Table (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableSmall_Lvl2",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableSmall_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tablesmall",
+        "name": "Small Wood Table",
+        "level": 2
+      },
+      "iconName": "Build_TableSmallWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablesmall_lvl1",
+      "displayName": "Small Wood Table (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableSmall_Lvl1",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableSmall_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tablesmall",
+        "name": "Small Wood Table",
+        "level": 1
+      },
+      "iconName": "Build_TableSmallWood"
+    },
+    {
+      "id": "kbw.vanilla.stick_bookcase",
+      "displayName": "Stick Bookcase",
+      "translationKey": "IGUI_KBW_Vanilla_Stick_Bookcase",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Stick_Bookcase"
+          }
+        }
+      ],
+      "iconName": "Build_StickBookcase"
+    },
+    {
+      "id": "kbw.vanilla.stick_bookcasesmall_lvl1",
+      "displayName": "Stick Small Bookcase",
+      "translationKey": "IGUI_KBW_Vanilla_Stick_BookcaseSmall_Lvl1",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Cloth",
+        "Fiber"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Stick_BookcaseSmall_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.stick_bookcasesmall",
+        "name": "Stick Small Bookcase",
+        "level": 1
+      },
+      "iconName": "Build_StickBookcaseSmall"
+    },
+    {
+      "id": "kbw.vanilla.stone_cabinet",
+      "displayName": "Stone Cabinet",
+      "translationKey": "IGUI_KBW_Vanilla_Stone_Cabinet",
+      "tooltipKey": "Tooltip_craft_stoneCabinetDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Stone_Cabinet"
+          }
+        }
+      ],
+      "iconName": "Build_CabinetStone"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelement_lvl3",
+      "displayName": "Wood Bar Element (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElement_Lvl3",
+      "tooltipKey": "Tooltip_craft_barElementDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElement_Lvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelement",
+        "name": "Wood Bar Element",
+        "level": 3
+      },
+      "iconName": "Build_WoodCounter"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelement_lvl2",
+      "displayName": "Wood Bar Element (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElement_Lvl2",
+      "tooltipKey": "Tooltip_craft_barElementDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElement_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelement",
+        "name": "Wood Bar Element",
+        "level": 2
+      },
+      "iconName": "Build_WoodCounter"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelement_lvl1",
+      "displayName": "Wood Bar Element (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElement_Lvl1",
+      "tooltipKey": "Tooltip_craft_barElementDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElement_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelement",
+        "name": "Wood Bar Element",
+        "level": 1
+      },
+      "iconName": "Build_WoodCounter"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelementcorner_lvl3",
+      "displayName": "Wood Bar Element Corner (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElementCorner_Lvl3",
+      "tooltipKey": "Tooltip_craft_barElementCornerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElementCorner_Lvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelementcorner",
+        "name": "Wood Bar Element Corner",
+        "level": 3
+      },
+      "iconName": "Build_WoodCounterCorner"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelementcorner_lvl2",
+      "displayName": "Wood Bar Element Corner (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElementCorner_Lvl2",
+      "tooltipKey": "Tooltip_craft_barElementCornerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElementCorner_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelementcorner",
+        "name": "Wood Bar Element Corner",
+        "level": 2
+      },
+      "iconName": "Build_WoodCounterCorner"
+    },
+    {
+      "id": "kbw.vanilla.wood_barelementcorner_lvl1",
+      "displayName": "Wood Bar Element Corner (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BarElementCorner_Lvl1",
+      "tooltipKey": "Tooltip_craft_barElementCornerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BarElementCorner_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_barelementcorner",
+        "name": "Wood Bar Element Corner",
+        "level": 1
+      },
+      "iconName": "Build_WoodCounterCorner"
+    },
+    {
+      "id": "kbw.vanilla.wood_bookcase_lvl2",
+      "displayName": "Wood Bookcase",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Bookcase_Lvl2",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Bookcase_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_bookcase",
+        "name": "Wood Bookcase",
+        "level": 2
+      },
+      "iconName": "Build_Bookcase"
+    },
+    {
+      "id": "kbw.vanilla.wood_bookcase_lvl1",
+      "displayName": "Wood Bookcase (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Bookcase_Lvl1",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Bookcase_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_bookcase",
+        "name": "Wood Bookcase",
+        "level": 1
+      },
+      "iconName": "Build_Bookcase"
+    },
+    {
+      "id": "kbw.vanilla.wood_chair_lvl3",
+      "displayName": "Wood Chair (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Chair_Lvl3",
+      "tooltipKey": "Tooltip_craft_chairDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Chair_Lvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_chair",
+        "name": "Wood Chair",
+        "level": 3
+      },
+      "iconName": "Build_Chair"
+    },
+    {
+      "id": "kbw.vanilla.wood_chair_lvl2",
+      "displayName": "Wood Chair (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Chair_Lvl2",
+      "tooltipKey": "Tooltip_craft_chairDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Chair_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_chair",
+        "name": "Wood Chair",
+        "level": 2
+      },
+      "iconName": "Build_Chair"
+    },
+    {
+      "id": "kbw.vanilla.wood_chair_lvl1",
+      "displayName": "Wood Chair (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Chair_Lvl1",
+      "tooltipKey": "Tooltip_craft_chairDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Chair_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_chair",
+        "name": "Wood Chair",
+        "level": 1
+      },
+      "iconName": "Build_Chair"
+    },
+    {
+      "id": "kbw.vanilla.wood_crate_lvl2",
+      "displayName": "Wood Crate",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Crate_Lvl2",
+      "tooltipKey": "Tooltip_craft_crateDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Crate_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_crate",
+        "name": "Wood Crate",
+        "level": 2
+      },
+      "iconName": "Build_CrateWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_crate_lvl1",
+      "displayName": "Wood Crate (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Crate_Lvl1",
+      "tooltipKey": "Tooltip_craft_crateDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Crate_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_crate",
+        "name": "Wood Crate",
+        "level": 1
+      },
+      "iconName": "Build_CrateWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_shelvesdouble_lvl1",
+      "displayName": "Wood Double Shelves (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_ShelvesDouble_Lvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_ShelvesDouble_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_shelvesdouble",
+        "name": "Wood Double Shelves",
+        "level": 1
+      },
+      "iconName": "Build_ShelvesWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_shelves_lvl2",
+      "displayName": "Wood Shelves",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Shelves_Lvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Shelves_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_shelves",
+        "name": "Wood Shelves",
+        "level": 2
+      },
+      "iconName": "Build_ShelfWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_shelves_lvl1",
+      "displayName": "Wood Shelves (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Shelves_Lvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Shelves_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_shelves",
+        "name": "Wood Shelves",
+        "level": 1
+      },
+      "iconName": "Build_ShelfWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_bookcasesmall_lvl2",
+      "displayName": "Wood Small Bookcase",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BookcaseSmall_Lvl2",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BookcaseSmall_Lvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_bookcasesmall",
+        "name": "Wood Small Bookcase",
+        "level": 2
+      },
+      "iconName": "Build_BookcaseShort"
+    },
+    {
+      "id": "kbw.vanilla.wood_bookcasesmall_lvl1",
+      "displayName": "Wood Small Bookcase (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_BookcaseSmall_Lvl1",
+      "tooltipKey": "Tooltip_craft_bookcaseDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_BookcaseSmall_Lvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_bookcasesmall",
+        "name": "Wood Small Bookcase",
+        "level": 1
+      },
+      "iconName": "Build_BookcaseShort"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablelvl3",
+      "displayName": "Wood Table (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableLvl3",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_table",
+        "name": "Wood Table",
+        "level": 3
+      },
+      "iconName": "Build_TableLargeWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablelvl2",
+      "displayName": "Wood Table (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableLvl2",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_table",
+        "name": "Wood Table",
+        "level": 2
+      },
+      "iconName": "Build_TableLargeWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_tablelvl1",
+      "displayName": "Wood Table (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableLvl1",
+      "tooltipKey": "Tooltip_craft_tableDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_table",
+        "name": "Wood Table",
+        "level": 1
+      },
+      "iconName": "Build_TableLargeWood"
+    },
+    {
+      "id": "kbw.vanilla.wood_tabledrawerlvl2",
+      "displayName": "Wood Table with Drawer",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableDrawerLvl2",
+      "tooltipKey": "Tooltip_craft_tableDrawerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableDrawerLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tabledrawer",
+        "name": "Wood Table with Drawer",
+        "level": 2
+      },
+      "iconName": "Build_Sidetable"
+    },
+    {
+      "id": "kbw.vanilla.wood_tabledrawerlvl3",
+      "displayName": "Wood Table with Drawer (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableDrawerLvl3",
+      "tooltipKey": "Tooltip_craft_tableDrawerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableDrawerLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tabledrawer",
+        "name": "Wood Table with Drawer",
+        "level": 3
+      },
+      "iconName": "Build_Sidetable"
+    },
+    {
+      "id": "kbw.vanilla.wood_tabledrawerlvl1",
+      "displayName": "Wood Table with Drawer (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_TableDrawerLvl1",
+      "tooltipKey": "Tooltip_craft_tableDrawerDesc",
+      "category": "Furniture",
+      "subcategory": "Furniture",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "furniture"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_TableDrawerLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.wood_tabledrawer",
+        "name": "Wood Table with Drawer",
+        "level": 1
+      },
+      "iconName": "Build_Sidetable"
+    }
+  ]
+}

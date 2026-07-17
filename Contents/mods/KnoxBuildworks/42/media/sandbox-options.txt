@@ -1,0 +1,47 @@
+VERSION = 1,
+
+option KnoxBuildworks.ReplaceBuildMenu
+{
+	type = boolean,
+	default = false,
+	page = KnoxBuildworks,
+	translation = KBW_ReplaceBuildMenu,
+}
+
+option KnoxBuildworks.EnablePlanningMode
+{
+	type = boolean,
+	default = true,
+	page = KnoxBuildworks,
+	translation = KBW_EnablePlanningMode,
+}
+
+option KnoxBuildworks.MaxPlacementsPerBlueprint
+{
+	type = integer,
+	min = 50,
+	max = 5000,
+	default = 1000,
+	page = KnoxBuildworks,
+	translation = KBW_MaxPlacementsPerBlueprint,
+}
+
+option KnoxBuildworks.BuildXPMultiplier
+{
+	type = double,
+	min = 0.0,
+	max = 10.0,
+	default = 1.0,
+	page = KnoxBuildworks,
+	translation = KBW_BuildXPMultiplier,
+}
+
+option KnoxBuildworks.BlueprintRadius
+{
+	type = integer,
+	min = 20,
+	max = 2000,
+	default = 200,
+	page = KnoxBuildworks,
+	translation = KBW_BlueprintRadius,
+}

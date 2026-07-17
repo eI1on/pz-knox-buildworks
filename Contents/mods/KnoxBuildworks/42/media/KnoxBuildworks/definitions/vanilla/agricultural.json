@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Agricultural",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.cooking_pit",
+      "displayName": "Cooking Pit",
+      "translationKey": "IGUI_KBW_Vanilla_Cooking_Pit",
+      "tooltipKey": "Tooltip_craft_cookingPitDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Cooking_Pit"
+          }
+        }
+      ],
+      "iconName": "Build_CookingPit"
+    },
+    {
+      "id": "kbw.vanilla.hecklecomb",
+      "displayName": "Heckle Comb",
+      "translationKey": "IGUI_KBW_Vanilla_HeckleComb",
+      "tooltipKey": "Tooltip_craft_heckleCombDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "HeckleComb"
+          }
+        }
+      ],
+      "iconName": "Build_HeckleComb"
+    },
+    {
+      "id": "kbw.vanilla.drying_rack",
+      "displayName": "LargePlantDryingRack",
+      "translationKey": "IGUI_KBW_Vanilla_Drying_Rack",
+      "tooltipKey": "Tooltip_craft_dryGrainRackDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Drying_Rack"
+          }
+        }
+      ],
+      "iconName": "Build_HerbDryerLarge"
+    },
+    {
+      "id": "kbw.vanilla.ripplecomb",
+      "displayName": "Ripple Comb",
+      "translationKey": "IGUI_KBW_Vanilla_RippleComb",
+      "tooltipKey": "Tooltip_craft_rippleCombDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RippleComb"
+          }
+        }
+      ],
+      "iconName": "Build_RippleComb"
+    },
+    {
+      "id": "kbw.vanilla.scutchingboard",
+      "displayName": "Scutching Board",
+      "translationKey": "IGUI_KBW_Vanilla_ScutchingBoard",
+      "tooltipKey": "Tooltip_craft_scutchingBoardDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ScutchingBoard"
+          }
+        }
+      ],
+      "iconName": "Build_ScutchingBoard"
+    },
+    {
+      "id": "kbw.vanilla.simple_cooking_pit",
+      "displayName": "Simple Cooking Pit",
+      "translationKey": "IGUI_KBW_Vanilla_Simple_Cooking_Pit",
+      "tooltipKey": "Tooltip_craft_cookingPitDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Simple_Cooking_Pit"
+          }
+        }
+      ],
+      "iconName": "Build_CookingPitSimple"
+    },
+    {
+      "id": "kbw.vanilla.simpleloom",
+      "displayName": "Simple Loom",
+      "translationKey": "IGUI_KBW_Vanilla_SimpleLoom",
+      "tooltipKey": "Tooltip_craft_loomSimpleDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SimpleLoom"
+          }
+        }
+      ],
+      "iconName": "Build_LoomSimple"
+    },
+    {
+      "id": "kbw.vanilla.simple_drying_rack",
+      "displayName": "SimpleLargePlantDryingRack",
+      "translationKey": "IGUI_KBW_Vanilla_Simple_Drying_Rack",
+      "tooltipKey": "Tooltip_craft_dryGrainRackDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Leather"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Simple_Drying_Rack"
+          }
+        }
+      ],
+      "iconName": "Build_HerbDryerLarge"
+    },
+    {
+      "id": "kbw.vanilla.simple_herb_drying_rack",
+      "displayName": "SimpleSmallPlantDryingRack",
+      "translationKey": "IGUI_KBW_Vanilla_Simple_Herb_Drying_Rack",
+      "tooltipKey": "Tooltip_craft_dryHerbsRackDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Leather"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Simple_Herb_Drying_Rack"
+          }
+        }
+      ],
+      "iconName": "Build_HerbDryerSmall"
+    },
+    {
+      "id": "kbw.vanilla.herb_drying_rack",
+      "displayName": "SmallPlantDryingRack",
+      "translationKey": "IGUI_KBW_Vanilla_Herb_Drying_Rack",
+      "tooltipKey": "Tooltip_craft_dryHerbsRackDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Herb_Drying_Rack"
+          }
+        }
+      ],
+      "iconName": "Build_HerbDryerSmall"
+    },
+    {
+      "id": "kbw.vanilla.stone_mill",
+      "displayName": "Stone Mill",
+      "translationKey": "IGUI_KBW_Vanilla_Stone_Mill",
+      "tooltipKey": "Tooltip_craft_stoneMillDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Stone_Mill"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanilla.stone_quern",
+      "displayName": "Stone Quern",
+      "translationKey": "IGUI_KBW_Vanilla_Stone_Quern",
+      "tooltipKey": "Tooltip_craft_stoneQuernDesc",
+      "category": "Agricultural",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "agricultural"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Stone_Quern"
+          }
+        }
+      ]
+    }
+  ]
+}

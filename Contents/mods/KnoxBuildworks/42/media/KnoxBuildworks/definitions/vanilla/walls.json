@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Walls",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.woodenpole",
+      "displayName": "Wood Pole",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenPole",
+      "tooltipKey": "Tooltip_craft_woodenPoleDesc",
+      "category": "Walls",
+      "subcategory": "Poles",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall",
+        "isPole": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenPole"
+          }
+        }
+      ],
+      "iconName": "Build_WoodPole_Tall"
+    },
+    {
+      "id": "kbw.vanilla.metalwallframe",
+      "displayName": "Metal Wall Frame",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWallFrame",
+      "tooltipKey": "Tooltip_craft_woodenWallFrameDesc",
+      "category": "Walls",
+      "subcategory": "Wall Frames",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWallFrame"
+          }
+        }
+      ],
+      "iconName": "Build_WallframeMetal"
+    },
+    {
+      "id": "kbw.vanilla.woodenwallframe",
+      "displayName": "Wooden Wall Frame",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWallFrame",
+      "tooltipKey": "Tooltip_craft_woodenWallFrameDesc",
+      "category": "Walls",
+      "subcategory": "Wall Frames",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWallFrame"
+          }
+        }
+      ],
+      "iconName": "Build_WallframeWood"
+    },
+    {
+      "id": "kbw.vanilla.brickwalllvl2",
+      "displayName": "Brick Wall (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickWallLvl2",
+      "tooltipKey": "Tooltip_craft_brickWallDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickWallLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickwall",
+        "name": "Brick Wall",
+        "level": 2
+      },
+      "iconName": "Build_WallBrick"
+    },
+    {
+      "id": "kbw.vanilla.brickwalllvl1",
+      "displayName": "Brick Wall (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_BrickWallLvl1",
+      "tooltipKey": "Tooltip_craft_brickWallDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Brick",
+        "Concrete"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "BrickWallLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.brickwall",
+        "name": "Brick Wall",
+        "level": 1
+      },
+      "iconName": "Build_WallBrick"
+    },
+    {
+      "id": "kbw.vanilla.logwall",
+      "displayName": "Log Wall",
+      "translationKey": "IGUI_KBW_Vanilla_LogWall",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "LogWall"
+          }
+        }
+      ],
+      "iconName": "Build_WallLogs"
+    },
+    {
+      "id": "kbw.vanilla.metalwalllvl2",
+      "displayName": "Metal Wall (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWallLvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWallLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalwall",
+        "name": "Metal Wall",
+        "level": 2
+      },
+      "iconName": "Build_WallMetal"
+    },
+    {
+      "id": "kbw.vanilla.metalwalllvl1",
+      "displayName": "Metal Wall (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_MetalWallLvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "MetalWallLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.metalwall",
+        "name": "Metal Wall",
+        "level": 1
+      },
+      "iconName": "Build_WallMetal"
+    },
+    {
+      "id": "kbw.vanilla.stonewall",
+      "displayName": "Stone Wall",
+      "translationKey": "IGUI_KBW_Vanilla_StoneWall",
+      "tooltipKey": "Tooltip_craft_stoneWallDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Concrete",
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "StoneWall"
+          }
+        }
+      ],
+      "iconName": "Build_WallStone"
+    },
+    {
+      "id": "kbw.vanilla.woodenwalllvl3",
+      "displayName": "Wooden Wall (Good)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWallLvl3",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWallLvl3"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwall",
+        "name": "Wooden Wall",
+        "level": 3
+      },
+      "iconName": "Build_WallWood"
+    },
+    {
+      "id": "kbw.vanilla.woodenwalllvl2",
+      "displayName": "Wooden Wall (Poor)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWallLvl2",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWallLvl2"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwall",
+        "name": "Wooden Wall",
+        "level": 2
+      },
+      "iconName": "Build_WallWood"
+    },
+    {
+      "id": "kbw.vanilla.woodenwalllvl1",
+      "displayName": "Wooden Wall (Shoddy)",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenWallLvl1",
+      "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
+      "category": "Walls",
+      "subcategory": "Walls",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "walls"
+      ],
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "WoodenWallLvl1"
+          }
+        }
+      ],
+      "group": {
+        "id": "vanilla.woodenwall",
+        "name": "Wooden Wall",
+        "level": 1
+      },
+      "iconName": "Build_WallWood"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Stairs",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.log_stairs",
+      "displayName": "Log Stairs",
+      "translationKey": "IGUI_KBW_Vanilla_Log_Stairs",
+      "tooltipKey": "Tooltip_craft_stairsDesc",
+      "category": "Stairs",
+      "subcategory": "Stairs",
+      "materialTags": [
+        "Cloth",
+        "Fiber",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "stairs"
+      ],
+      "placement": {
+        "kind": "stairs"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Log_Stairs"
+          }
+        }
+      ],
+      "iconName": "Build_StairsLogs"
+    },
+    {
+      "id": "kbw.vanilla.metal_stairs",
+      "displayName": "Metal Stairs",
+      "translationKey": "IGUI_KBW_Vanilla_Metal_Stairs",
+      "tooltipKey": "Tooltip_craft_stairsDesc",
+      "category": "Stairs",
+      "subcategory": "Stairs",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "stairs"
+      ],
+      "placement": {
+        "kind": "stairs"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Metal_Stairs"
+          }
+        }
+      ],
+      "iconName": "Build_StairsMetal"
+    },
+    {
+      "id": "kbw.vanilla.wood_stairs",
+      "displayName": "Wooden Stairs",
+      "translationKey": "IGUI_KBW_Vanilla_Wood_Stairs",
+      "tooltipKey": "Tooltip_craft_stairsDesc",
+      "category": "Stairs",
+      "subcategory": "Stairs",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "stairs"
+      ],
+      "placement": {
+        "kind": "stairs"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Wood_Stairs"
+          }
+        }
+      ],
+      "iconName": "Build_StairsWood"
+    }
+  ]
+}

@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Animals",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.butcherhook",
+      "displayName": "Butcher Hook",
+      "translationKey": "IGUI_KBW_Vanilla_ButcherHook",
+      "tooltipKey": "Tooltip_craft_butcherHookDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ButcherHook"
+          }
+        }
+      ],
+      "iconName": "Build_ButcherHook"
+    },
+    {
+      "id": "kbw.vanilla.chickenhutch",
+      "displayName": "Chicken Coop 1",
+      "translationKey": "IGUI_KBW_Vanilla_ChickenHutch",
+      "tooltipKey": "Tooltip_craft_chickenHutchDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ChickenHutch"
+          }
+        }
+      ],
+      "iconName": "Build_Coop"
+    },
+    {
+      "id": "kbw.vanilla.chickenhutch2",
+      "displayName": "Chicken Coop 2",
+      "translationKey": "IGUI_KBW_Vanilla_ChickenHutch2",
+      "tooltipKey": "Tooltip_craft_chickenHutchDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ChickenHutch2"
+          }
+        }
+      ],
+      "iconName": "Build_Coop2"
+    },
+    {
+      "id": "kbw.vanilla.churnbucket",
+      "displayName": "Churn Bucket",
+      "translationKey": "IGUI_KBW_Vanilla_ChurnBucket",
+      "tooltipKey": "Tooltip_craft_churnBucketDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "ChurnBucket"
+          }
+        }
+      ],
+      "iconName": "Build_ButterChurn"
+    },
+    {
+      "id": "kbw.vanilla.dryingracklarge",
+      "displayName": "Large Drying Rack",
+      "translationKey": "IGUI_KBW_Vanilla_DryingRackLarge",
+      "tooltipKey": "Tooltip_craft_dryLeatherRackLargeDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DryingRackLarge"
+          }
+        }
+      ],
+      "iconName": "Build_DryingFrameLarge"
+    },
+    {
+      "id": "kbw.vanilla.feedingtroughdouble",
+      "displayName": "Long Wood Feeding Trough",
+      "translationKey": "IGUI_KBW_Vanilla_FeedingTroughDouble",
+      "tooltipKey": "Tooltip_craft_feedingTroughDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "FeedingTroughDouble"
+          }
+        }
+      ],
+      "iconName": "Build_TroughWoodLong"
+    },
+    {
+      "id": "kbw.vanilla.dryingrackmedium",
+      "displayName": "Medium Drying Rack",
+      "translationKey": "IGUI_KBW_Vanilla_DryingRackMedium",
+      "tooltipKey": "Tooltip_craft_dryLeatherRackMediumDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DryingRackMedium"
+          }
+        }
+      ],
+      "iconName": "Build_DryingFrameSmall"
+    },
+    {
+      "id": "kbw.vanilla.feedingtroughdoublemetal",
+      "displayName": "Metal Feeding Trough",
+      "translationKey": "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal",
+      "tooltipKey": "Tooltip_craft_feedingTroughDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Cloth",
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "FeedingTroughDoubleMetal"
+          }
+        }
+      ],
+      "iconName": "Build_TroughMetal"
+    },
+    {
+      "id": "kbw.vanilla.feedingtroughsimple",
+      "displayName": "Short Wood Feeding Trough",
+      "translationKey": "IGUI_KBW_Vanilla_FeedingTroughSimple",
+      "tooltipKey": "Tooltip_craft_feedingTroughDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "FeedingTroughSimple"
+          }
+        }
+      ],
+      "iconName": "Build_TroughWoodShort"
+    },
+    {
+      "id": "kbw.vanilla.dryingracksmall",
+      "displayName": "Small Drying Rack",
+      "translationKey": "IGUI_KBW_Vanilla_DryingRackSmall",
+      "tooltipKey": "Tooltip_craft_dryLeatherRackSmallDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "DryingRackSmall"
+          }
+        }
+      ],
+      "iconName": "Build_DryingFrameSmall"
+    },
+    {
+      "id": "kbw.vanilla.softeningbeam",
+      "displayName": "Softening Beam",
+      "translationKey": "IGUI_KBW_Vanilla_SofteningBeam",
+      "tooltipKey": "Tooltip_craft_softeningBeamDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "SofteningBeam"
+          }
+        }
+      ],
+      "iconName": "Build_SofteningBeam"
+    },
+    {
+      "id": "kbw.vanilla.spinning_wheel",
+      "displayName": "Spinning Wheel",
+      "translationKey": "IGUI_KBW_Vanilla_Spinning_Wheel",
+      "tooltipKey": "Tooltip_craft_spinningWheelDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Spinning_Wheel"
+          }
+        }
+      ],
+      "iconName": "Build_SpinningWheel"
+    },
+    {
+      "id": "kbw.vanilla.tanninbarrel",
+      "displayName": "Tannin Barrel",
+      "translationKey": "IGUI_KBW_Vanilla_TanninBarrel",
+      "tooltipKey": "Tooltip_craft_tanningBarrelDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "TanninBarrel"
+          }
+        }
+      ],
+      "iconName": "Build_TanningBarrel"
+    }
+  ]
+}

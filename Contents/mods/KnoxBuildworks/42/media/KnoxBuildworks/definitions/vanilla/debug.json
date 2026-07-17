@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 generated entity scripts",
+  "category": "Debug",
+  "buildables": [
+    {
+      "id": "kbw.vanilla.piano",
+      "displayName": "Piano",
+      "translationKey": "IGUI_KBW_Vanilla_Piano",
+      "tooltipKey": "Tooltip_craft_debugModeDesc",
+      "category": "Debug",
+      "subcategory": "Admin",
+      "materialTags": [
+        "Metal",
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "debug"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Piano"
+          }
+        }
+      ]
+    }
+  ]
+}
