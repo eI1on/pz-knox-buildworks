@@ -48,7 +48,7 @@ end
 
 ---@param input KBW.BuildInput
 ---@param item InventoryItem
----@param inputIndex integer
+---@param inputIndex number
 function RecipeData:record(input, item, inputIndex)
     if not input or not item then return end
     inputIndex = tonumber(inputIndex) or 1
@@ -93,7 +93,7 @@ function RecipeData:getAllKeepInputItems()
     return javaList(self.kept)
 end
 
----@param index integer
+---@param index number
 function RecipeData:getInputItems(index)
     local entry = self.inputs[(tonumber(index) or 0) + 1]
     return entry and javaList(entry.items) or ArrayList.new()

@@ -68,6 +68,15 @@ function StageConfig.sprite(definition, stage)
     assign(result, "onIsValid", callbacks.onIsValid)
     assign(result, "timedActionOnIsValid", callbacks.timedActionOnIsValid)
 
+    if not (stage and stage.entityCompat) and placement.kind == "floor" then
+        if result.onIsValid == nil then
+            result.onIsValid = "KnoxBuildworks.JsonCallbacks.Floor.OnIsValid"
+        end
+        if result.onCreate == nil then
+            result.onCreate = "KnoxBuildworks.JsonCallbacks.Floor.OnCreate"
+        end
+    end
+
     assign(result, "lightRadius", light.radius)
     assign(result, "lightsourceItem", light.item)
     assign(result, "lightsourceTags", light.tags)

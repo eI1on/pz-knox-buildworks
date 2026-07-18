@@ -15,7 +15,7 @@ local function translated(key)
     return nil
 end
 
----@param key string|integer
+---@param key string|number
 function I18n.text(key, fallback)
     return translated(key) or fallback or key or ""
 end

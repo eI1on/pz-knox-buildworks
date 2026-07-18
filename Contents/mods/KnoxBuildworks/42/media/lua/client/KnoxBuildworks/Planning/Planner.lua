@@ -95,7 +95,7 @@ end
 
 -- Ghost drawing follows the player's active blueprint; when no blueprint is
 -- active (Hide ghosts in planning mode) nothing is drawn.
----@param playerIndex integer
+---@param playerIndex number
 ---@param x number
 ---@param y number
 ---@param z number

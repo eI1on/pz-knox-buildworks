@@ -4,6 +4,7 @@ local TableUtil = require("KnoxBuildworks/Util/Table")
 local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local Properties = require("KnoxBuildworks/Definitions/Properties")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
+local LuaCallback = require("KnoxBuildworks/Util/LuaCallback")
 
 ---@class KBW.SchemaModule
 ---@type KBW.SchemaModule
@@ -118,8 +119,8 @@ local function validateStageConfiguration(errors, stage)
             for callbackIndex = 1, #callbackNames do
                 local name = callbackNames[callbackIndex]
                 local value = stage.callbacks[name]
-                if value ~= nil and (type(value) ~= "string" or value == "") then
-                    add(errors, owner .. " callbacks." .. name .. " must be a non-empty string")
+                if value ~= nil and not LuaCallback.isValidName(value) then
+                    add(errors, owner .. " callbacks." .. name .. " must be a namespaced Lua function path")
                 end
             end
         end
@@ -133,6 +134,14 @@ local function validateStageConfiguration(errors, stage)
         elseif light.item == nil and type(light.tags) ~= "table" and light.debugItem == nil then
             add(errors, owner .. " lightSource requires item, tags or debugItem")
         end
+    end
+end
+
+local function validateCallbackCompatibility(errors, stage)
+    local onCreate = stage.callbacks and stage.callbacks.onCreate
+    if LuaCallback.requiresNativeRecipe(onCreate) and not EntityCompat.usesNativeRecipeInputs(stage) then
+        add(errors, "stage " .. stage.id .. " callback " .. onCreate
+            .. " requires an entity-backed native CraftRecipe")
     end
 end
 
@@ -235,6 +244,7 @@ function Schema.normalize(definition, templates, materialGroups)
         validateStageConfiguration(errors, stage)
         validateEntityReference(errors, stage)
         EntityCompat.hydrateStage(stage)
+        validateCallbackCompatibility(errors, stage)
         Schema.expandSprites(resolved, stage)
         Matrix.normalizeStage(stage)
         if type(stage.sprites) ~= "table" then
@@ -301,6 +311,7 @@ function Schema.normalize(definition, templates, materialGroups)
                 validateStageConfiguration(errors, stage)
                 validateEntityReference(errors, stage)
                 EntityCompat.hydrateStage(stage)
+                validateCallbackCompatibility(errors, stage)
                 Schema.expandSprites(TableUtil.merge(resolved, option), stage)
                 Matrix.normalizeStage(stage)
                 Properties.normalizeStage(stage, resolved, errors)

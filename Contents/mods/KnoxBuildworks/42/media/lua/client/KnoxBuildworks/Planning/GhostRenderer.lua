@@ -42,7 +42,7 @@ local function colorAlpha(color, fallback)
     return alpha
 end
 
----@param activeLevel integer|nil
+---@param activeLevel number|nil
 function GhostRenderer.levelAlpha(cellZ, activeLevel, base)
     if activeLevel == nil then return base end
     local diff = math.abs((cellZ or 0) - activeLevel)
@@ -222,7 +222,7 @@ function GhostRenderer.placementCells(placement)
 end
 
 ---@param placement KBW.BlueprintPlacement
----@param activeLevel integer|nil
+---@param activeLevel number|nil
 function GhostRenderer.renderPlacement(placement, activeLevel, color)
     local cells = GhostRenderer.placementCells(placement)
     if not cells then return end
@@ -245,8 +245,8 @@ function GhostRenderer.renderPlacementLayerAll(placement, color)
 end
 
 ---@param room KBW.BlueprintRoom
----@param activeLevel integer|nil
----@param playerIndex integer
+---@param activeLevel number|nil
+---@param playerIndex number
 function GhostRenderer.renderRoom(room, defaultZ, activeLevel, highlightRoomId, playerIndex)
     local roomZ = tonumber(room.z)
     if roomZ == nil then roomZ = tonumber(defaultZ) or 0 end
@@ -354,8 +354,8 @@ local function visibleTileBounds(playerIndex, z)
 end
 
 ---@param blueprint KBW.Blueprint
----@param activeLevel integer|nil
----@param playerIndex integer
+---@param activeLevel number|nil
+---@param playerIndex number
 function GhostRenderer.renderBlueprint(blueprint, activeLevel, highlightId, highlightRoomId, playerIndex)
     local area = blueprint.gatherArea
     if area then
@@ -394,7 +394,7 @@ end
 ---@param blueprint KBW.Blueprint
 ---@param dx number
 ---@param dy number
----@param playerIndex integer
+---@param playerIndex number
 function GhostRenderer.renderBlueprintOffset(blueprint, dx, dy, playerIndex)
     local color = GhostRenderer.HIGHLIGHT_COLOR
     local alpha = colorAlpha(color, 0.30)
@@ -434,7 +434,7 @@ function GhostRenderer.renderBlueprintOffset(blueprint, dx, dy, playerIndex)
 end
 
 ---@param z number
----@param playerIndex integer
+---@param playerIndex number
 function GhostRenderer.renderRect(x1, y1, x2, y2, z, color, playerIndex)
     local minX, maxX = math.min(x1, x2), math.max(x1, x2)
     local minY, maxY = math.min(y1, y2), math.max(y1, y2)
@@ -444,7 +444,7 @@ function GhostRenderer.renderRect(x1, y1, x2, y2, z, color, playerIndex)
 end
 
 ---@param z number
----@param playerIndex integer
+---@param playerIndex number
 function GhostRenderer.renderRectBorder(x1, y1, x2, y2, z, color, playerIndex)
     local minX, maxX = math.min(x1, x2), math.max(x1, x2)
     local minY, maxY = math.min(y1, y2), math.max(y1, y2)
@@ -467,7 +467,7 @@ end
 ---@param x number
 ---@param y number
 ---@param z number
----@param playerIndex integer
+---@param playerIndex number
 function GhostRenderer.renderTileHighlight(x, y, z, color, alpha, playerIndex)
     queueAreaHighlight(
         playerIndex, x, y, x + 1, y + 1, z, color,

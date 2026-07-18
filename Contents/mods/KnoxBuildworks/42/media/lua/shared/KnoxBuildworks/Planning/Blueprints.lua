@@ -49,7 +49,7 @@ local function randomId(prefix, length)
             idFallback = (idFallback + 17) % 36
             roll = idFallback
         end
-        -- ensure integer index for string.sub (type-checkers expect integer)
+        -- ensure number index for string.sub (type-checkers expect number)
         chars[charIndex] = string.sub(ID_ALPHABET, math.floor(roll) + 1, math.floor(roll) + 1)
     end
     return tostring(prefix or "") .. table.concat(chars)
@@ -463,7 +463,7 @@ end
 
 ---@param player IsoPlayer
 ---@param targetUser string
----@param level integer|string
+---@param level number|string
 function Blueprints.setPlayerAccess(player, id, targetUser, level)
     local blueprint = Blueprints.get(player, id)
     if not blueprint or not Blueprints.canManageAccess(player, blueprint) then return false end
@@ -484,7 +484,7 @@ end
 
 ---@param player IsoPlayer
 ---@param factionName string
----@param level integer|string
+---@param level number|string
 function Blueprints.setFactionAccess(player, id, factionName, level)
     local blueprint = Blueprints.get(player, id)
     if not blueprint or not Blueprints.canManageAccess(player, blueprint) then return false end
@@ -517,7 +517,7 @@ end
 
 ---@param player IsoPlayer
 ---@param name string|nil
----@param level integer|string
+---@param level number|string
 function Blueprints.create(player, name, level)
     local items = Blueprints.sharedItems()
     local id = newId("bp", storeIdTaken(items))
@@ -1266,7 +1266,7 @@ function Blueprints.rename(player, id, name)
 end
 
 ---@param player IsoPlayer
----@param level integer|string
+---@param level number|string
 function Blueprints.setLevel(player, id, level)
     local blueprint = Blueprints.get(player, id)
     level = tonumber(level)

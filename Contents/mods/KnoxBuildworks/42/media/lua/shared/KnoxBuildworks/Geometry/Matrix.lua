@@ -145,7 +145,7 @@ function Matrix.getFaceSprite(stage, face)
 end
 
 ---@param cells KBW.GeometryCell[]|nil
----@return {minX:integer,maxX:integer,minY:integer,maxY:integer,minZ:integer,maxZ:integer,width:integer,height:integer,depth:integer}
+---@return {minX:number,maxX:number,minY:number,maxY:number,minZ:number,maxZ:number,width:number,height:number,depth:number}
 function Matrix.getBounds(cells)
     local bounds = { minX = 0, maxX = 0, minY = 0, maxY = 0, minZ = 0, maxZ = 0 }
     cells = cells or {}

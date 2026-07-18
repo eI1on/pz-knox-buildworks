@@ -91,7 +91,7 @@ local function isCollapsed(data, key)
 end
 
 ---@param player IsoPlayer
----@param key string|integer
+---@param key string|number
 function PinnedRecipes.toggleCollapsed(player, key)
     if not player or not key then return end
     local data = uiData(player)

@@ -104,7 +104,7 @@ end
 -- World tile under the mouse for a plan at buildZ. When buildZ is above the
 -- visible ground plane the caller renders/places the ghost at buildZ, so it
 -- floats over the pointed-at ground column without changing the player camera.
----@param playerNum integer
+---@param playerNum number
 function PlanCursor.pickTileAt(playerNum, buildZ)
     local wx, wy = mouseWorldAt(playerNum, pickFloor(playerNum, buildZ))
     return floorInt(wx), floorInt(wy)

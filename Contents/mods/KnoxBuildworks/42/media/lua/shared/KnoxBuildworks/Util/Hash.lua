@@ -20,8 +20,8 @@ end
 
 ---@param text string
 ---@param state {value:number}
----@param from? integer
----@param to? integer
+---@param from? number
+---@param to? number
 function Hash.update(state, text, from, to)
     from = from or 1
     to = to or #text

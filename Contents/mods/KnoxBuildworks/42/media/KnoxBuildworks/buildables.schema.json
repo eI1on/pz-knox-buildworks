@@ -143,12 +143,12 @@
     },
     "callbacks": {
       "type": "object",
-      "description": "Named Lua callbacks invoked by Knox with its documented compatibility payload.",
+      "description": "Optional namespaced Lua overrides invoked by Knox with its documented compatibility payload. JSON-only floors receive Knox-owned placement and creation lifecycle callbacks when the corresponding fields are omitted. Callback portability still depends on the function's object, recipe-data, sprite, and native-system assumptions.",
       "properties": {
-        "onAddToMenu": { "type": "string", "minLength": 1 },
-        "onCreate": { "type": "string", "minLength": 1 },
-        "onIsValid": { "type": "string", "minLength": 1 },
-        "timedActionOnIsValid": { "type": "string", "minLength": 1 }
+        "onAddToMenu": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$" },
+        "onCreate": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$" },
+        "onIsValid": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$" },
+        "timedActionOnIsValid": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+$" }
       },
       "additionalProperties": false
     },

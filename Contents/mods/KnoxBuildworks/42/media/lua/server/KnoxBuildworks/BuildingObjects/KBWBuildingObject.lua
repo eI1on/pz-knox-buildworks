@@ -250,7 +250,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     return o
 end
 
----@param key string | integer
+---@param key string | number
 function KBWBuildingObject:rotateKey(key)
     if getCore():isKey("Rotate building", key) then
         if self.isWallLike then
@@ -568,14 +568,27 @@ function KBWBuildingObject:getBuildHealth()
     return base + bonus + (highest * (self.skillBaseHealth or 0))
 end
 
-function KBWBuildingObject:runOnCreate(part)
+function KBWBuildingObject:runOnCreate(part, context)
     local onCreate = StageConfig.sprite(self.definition, self.stage).onCreate
     if not onCreate or not part then return nil end
+    local square = part:getSquare()
     return LuaCallback.callObject(onCreate, {
         thumpable = part,
         craftRecipeData = self.craftRecipeData,
         character = self.character,
-        facing = string.lower(faceName(self.nSprite))
+        facing = string.lower(faceName(self.nSprite)),
+        north = self.north == true,
+        square = square,
+        definition = self.definition,
+        stage = self.stage,
+        buildObject = self,
+        buildableId = self.buildableId,
+        stageId = self.stage and self.stage.id or nil,
+        tile = context and context.tile or nil,
+        tileIndex = context and context.tileIndex or nil,
+        x = square and square:getX() or nil,
+        y = square and square:getY() or nil,
+        z = square and square:getZ() or nil
     })
 end
 
@@ -638,6 +651,18 @@ function KBWBuildingObject:verifyAuthoritative(x, y, z)
     )
     if not definition or not stage then return false, reason or "unknown buildable" end
     self.definition, self.stage = definition, stage
+    local spriteConfig = StageConfig.sprite(definition, stage)
+    if spriteConfig.onIsValid and not LuaCallback.resolve(spriteConfig.onIsValid) then
+        return false, "OnIsValid callback is unavailable: " .. tostring(spriteConfig.onIsValid)
+    end
+    if spriteConfig.onCreate and not LuaCallback.resolve(spriteConfig.onCreate) then
+        return false, "OnCreate callback is unavailable: " .. tostring(spriteConfig.onCreate)
+    end
+    if LuaCallback.requiresNativeRecipe(spriteConfig.onCreate)
+        and not EntityCompat.usesNativeRecipeInputs(stage) then
+        return false, "OnCreate callback requires an entity-backed native CraftRecipe: "
+            .. tostring(spriteConfig.onCreate)
+    end
     local finishOk, finishReason = FinishActions.validate(self.character, definition, stage, self.finish, true)
     if not finishOk then return false, finishReason or "invalid finish" end
     local choicesOk, choicesReason = Resolver.validateChoices(definition, stage, self.inputChoices)
@@ -773,13 +798,14 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     if previous then replacedIndex = square:transmitRemoveItemFromSquare(previous) or -1 end
     local footprint = self:getFootprint() or { { dx = 0, dy = 0, dz = 0, sprite = sprite } }
     local groupId = string.format("%s:%d:%d:%d:%d", self.buildableId, x, y, z, getTimestampMs())
+    local placement = StageConfig.placement(self.definition, self.stage)
     for index = 1, #footprint do
         local tile = footprint[index]
         if tile.sprite then
             local target = self:ensureSquareExists(x + (tile.dx or 0), y + (tile.dy or 0), z + (tile.dz or 0))
             self.modData.KBW.groupId, self.modData.KBW.partIndex, self.modData.KBW.partCount = groupId,
                 index, #footprint
-            if (self.definition.placement or {}).kind == "floor" then
+            if placement.kind == "floor" then
                 local part = target:addFloor(tile.sprite)
                 EntityCompat.attach(part, self.stage, true)
                 target:disableErosion()
@@ -789,7 +815,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 Properties.applyToObject(
                     part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = true }
                 )
-                self:transmitPart(part, self:runOnCreate(part))
+                self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
             elseif self.isProp then
                 -- Vanilla isProp scripts place a moveable world prop instead
                 -- of an IsoThumpable (ISBuildIsoEntity:setInfo).
@@ -804,6 +830,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                     or IsoThumpable.new(getCell(), target, tile.sprite, north, self)
                 self:applyPartFlags(part)
                 buildUtil.setInfo(part, self)
+                part:setCanBePlastered(self.canBePlastered == true)
                 local health = self:getBuildHealth()
                 part:setMaxHealth(health)
                 part:setHealth(health)
@@ -833,7 +860,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 part:setExplored(true)
                 self:attachLightSource(part, spriteConfig, torchItem)
                 target:RecalcAllWithNeighbours(true)
-                self:transmitPart(part, self:runOnCreate(part))
+                self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
                 buildUtil.setHaveConstruction(target, true)
             end
         end

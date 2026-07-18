@@ -2529,7 +2529,7 @@ function KBWCatalog.open(player, restoreState)
 end
 
 ---@param item unknown
----@param playerNum integer
+---@param playerNum number
 function KBWCatalog.onSetDragItem(item, playerNum)
     local state = KBWCatalog.dragReturnState
     if not state or item ~= nil then return end

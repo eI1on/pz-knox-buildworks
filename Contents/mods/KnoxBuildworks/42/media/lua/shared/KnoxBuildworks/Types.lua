@@ -43,7 +43,7 @@
 ---@field inputs? KBW.BuildInput[]
 ---@field materials? KBW.BuildInput[]|string
 ---@field tools? KBW.BuildInput[]
----@field skills? table<string, integer>
+---@field skills? table<string, number>
 ---@field knowledge? KBW.KnowledgeRequirement
 ---@field recipes? string[]
 ---@field debugOnly? boolean
@@ -54,9 +54,9 @@
 ---@field blocks? boolean
 ---@field kind? string
 ---@field properties? table<string, unknown>
----@field dx? integer
----@field dy? integer
----@field dz? integer
+---@field dx? number
+---@field dy? number
+---@field dz? number
 
 ---@class KBW.GeometryLayer
 ---@field rows (KBW.GeometryCell|string|boolean)[][]
@@ -90,7 +90,7 @@
 ---@field onCreate? string
 ---@field onIsValid? string
 ---@field timedActionOnIsValid? string
----@field lightRadius? integer
+---@field lightRadius? number
 ---@field lightsourceItem? string
 ---@field lightsourceTags? string[]
 ---@field lightsourceFuel? string
@@ -141,7 +141,7 @@
 ---@field needWindowFrame? boolean
 ---@field isPole? boolean
 ---@field wallCoveringType? 'plaster'|'paint'|'paintThump'|'wallpaper'|'paintSign'
----@field sign? integer|string
+---@field sign? number|string
 
 ---@class KBW.AnimVariable
 ---@field key string
@@ -186,7 +186,7 @@
 ---@field z? number
 
 ---@class KBW.LightSourceConfig
----@field radius integer
+---@field radius number
 ---@field item? string
 ---@field tags? string[]
 ---@field fuel? string
@@ -195,7 +195,7 @@
 
 ---@class KBW.BuildStage
 ---@field id string
----@field level? integer
+---@field level? number
 ---@field translationKey? string
 ---@field labelKey? string
 ---@field displayName? string
@@ -227,7 +227,7 @@
 ---@field id string
 ---@field name? string
 ---@field translationKey? string
----@field level? integer
+---@field level? number
 
 ---@class KBW.BuildableDefinition
 ---@field id string
@@ -263,7 +263,7 @@
 ---@field source? string
 
 ---@class KBW.DefinitionBundle
----@field schemaVersion integer
+---@field schemaVersion number
 ---@field templates? table<string, table>
 ---@field materialGroups? table<string, table>
 ---@field buildables KBW.BuildableDefinition[]
@@ -280,7 +280,7 @@
 
 ---@class KBW.RequirementAvailableItem
 ---@field fullType string
----@field count integer
+---@field count number
 ---@field uses number
 ---@field available number
 ---@field item? InventoryItem
@@ -335,11 +335,11 @@
 ---@field color? {r:number, g:number, b:number, a:number}
 
 ---@class KBW.GatherArea
----@field x1 integer
----@field y1 integer
----@field x2 integer
----@field y2 integer
----@field z integer
+---@field x1 number
+---@field y1 number
+---@field x2 number
+---@field y2 number
+---@field z number
 
 ---@class KBW.BlueprintPlacement
 ---@field id string
@@ -347,9 +347,9 @@
 ---@field stageId? string
 ---@field variantId? string
 ---@field materialId? string
----@field x integer
----@field y integer
----@field z integer
+---@field x number
+---@field y number
+---@field z number
 ---@field direction KBW.Direction
 ---@field finish? KBW.WallFinish
 ---@field finishTarget? table<string, unknown>
@@ -359,11 +359,11 @@
 ---@class KBW.Blueprint
 ---@field id string
 ---@field name string
----@field level integer
+---@field level number
 ---@field origin {x:number, y:number, z:number}
 ---@field anchored boolean
 ---@field anchor? {x:number, y:number}
----@field radius integer
+---@field radius number
 ---@field owner string
 ---@field access KBW.BlueprintAccess
 ---@field rooms KBW.BlueprintRoom[]
@@ -381,15 +381,15 @@
 ---@field row? KBW.BuildInput
 
 ---@class KBW.BlueprintTotals
----@field placements integer
+---@field placements number
 ---@field materials table<string, KBW.BlueprintTotalRow>
 ---@field tools table<string, KBW.BlueprintTotalRow>
----@field skills table<string, {name:string, needed:integer}>
+---@field skills table<string, {name:string, needed:number}>
 
 ---@class KBW.PlacementCell
----@field x integer
----@field y integer
----@field z integer
+---@field x number
+---@field y number
+---@field z number
 ---@field sprite? string
 ---@field blocks? boolean
 

@@ -450,16 +450,17 @@ local function verifyScriptComponents(object, script, scriptName)
     local spriteConfig = object:getComponent(ComponentType.SpriteConfig)
     local isMaster = spriteConfig == nil or not spriteConfig:isValidMultiSquare()
         or spriteConfig:isMultiSquareMaster()
-    local componentScripts = script:getComponentScripts()
+    local componentTypes = ComponentType.GetList()
     local valid = true
-    for componentIndex = 0, componentScripts:size() - 1 do
-        local componentScript = componentScripts:get(componentIndex)
-        if (isMaster or not componentScript:isoMasterOnly())
-            and not object:hasComponent(componentScript.type) then
+    for typeIndex = 0, componentTypes:size() - 1 do
+        local componentType = componentTypes:get(typeIndex)
+        local componentScript = script:getComponentScriptFor(componentType)
+        if componentScript and (isMaster or not componentScript:isoMasterOnly())
+            and not object:hasComponent(componentType) then
             valid = false
             Log:error(
                 "Entity script %s did not create native %s component",
-                tostring(scriptName), tostring(componentScript.type)
+                tostring(scriptName), tostring(componentType)
             )
         end
     end

@@ -3,7 +3,7 @@
 ---@type KBW.SafeLayoutModule
 local SafeLayout = {}
 
----@param playerNum integer
+---@param playerNum number
 ---@param height number
 function SafeLayout.calculate(playerNum, height)
     playerNum = playerNum or 0

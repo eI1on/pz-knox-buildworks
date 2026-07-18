@@ -249,11 +249,8 @@ function Placement.validate(cursor, square)
     local previousStage = Placement.previousStageOf(cursor.stage) or Placement.optionalReplacementStageOf(cursor.stage)
     local previous = Placement.findPrevious(square, cursor.definition.id, previousStage, cursor.north == true)
     if previousStage and not previous then return false, "previous stage missing" end
-    -- A matching previous stage short-circuits the remaining collision and
-    -- support checks, mirroring vanilla ISBuildIsoEntity:isValidPerSquare
-    -- (the frame being replaced would otherwise fail the wall-blocked tests).
-    if previous then return true, nil, previous end
-    if placement.againstWall or placement.needToBeAgainstWall then
+    local kind = placement.kind
+    if not previous and (placement.againstWall or placement.needToBeAgainstWall) then
         -- Vanilla checks the square the shelf FACES INTO (n -> y+1, w -> x+1)
         -- for the wall, and refuses when another special object already sits on
         -- the original square (ISBuildIsoEntity "AGAINST WALLS").
@@ -283,8 +280,7 @@ function Placement.validate(cursor, square)
         end
         if not found then return false, "wall required" end
     end
-    local kind = placement.kind
-    if kind == "floor" then
+    if not previous and kind == "floor" then
         -- Floors provide their own floor and may extend over open air when an
         -- adjacent floor or wall supports them - mirrors vanilla
         -- BuildRecipeCode.floor.OnIsValid (which also disables collision tests).
@@ -299,7 +295,7 @@ function Placement.validate(cursor, square)
             end
         end
         if not square:connectedWithFloor() then return false, "no adjacent floor support" end
-    elseif placement.requiresFloor ~= false and not square:getFloor() then
+    elseif not previous and placement.requiresFloor ~= false and not square:getFloor() then
         return false, "floor required"
     end
     local spriteConfig = StageConfig.sprite(cursor.definition, cursor.stage)
@@ -313,6 +309,14 @@ function Placement.validate(cursor, square)
                         + (tile.dz or 0))
                 if not target then return false, "missing footprint square" end
                 local sprite, props = spriteProps(tile.sprite)
+                local spriteType = sprite and sprite:getType() or nil
+                if spriteType == IsoObjectType.doorFrN or spriteType == IsoObjectType.doorFrW then
+                    local frameNorth = spriteType == IsoObjectType.doorFrN
+                    local adjacent = frameNorth and target:getN() or target:getW()
+                    if adjacent and adjacent:getModData()["ConnectedToStairs" .. tostring(frameNorth)] then
+                        return false, "stairs blocked"
+                    end
+                end
                 local extendsN = (tile.dy or 0) > 0
                 local extendsW = (tile.dx or 0) > 0
                 local params = {
@@ -321,12 +325,30 @@ function Placement.validate(cursor, square)
                     north = cursor.north,
                     canBuildOverWater = false,
                     testCollisions = true,
-                    facing = facingName(cursor)
+                    facing = facingName(cursor),
+                    character = cursor.character,
+                    definition = cursor.definition,
+                    stage = cursor.stage,
+                    buildObject = cursor,
+                    placement = placement,
+                    buildableId = cursor.buildableId,
+                    stageId = cursor.stage and cursor.stage.id or nil,
+                    tile = tile,
+                    tileIndex = tileIndex,
+                    spriteName = tile.sprite,
+                    x = target:getX(),
+                    y = target:getY(),
+                    z = target:getZ()
                 }
-                if spriteConfig.onIsValid and not LuaCallback.callBool(spriteConfig.onIsValid, params, true) then
-                    return false, "script OnIsValid rejected"
+                if spriteConfig.onIsValid then
+                    if not LuaCallback.resolve(spriteConfig.onIsValid) then
+                        return false, "script OnIsValid is unavailable"
+                    end
+                    if not LuaCallback.callBool(spriteConfig.onIsValid, params, false) then
+                        return false, "script OnIsValid rejected"
+                    end
                 end
-                if kind == "floor" then
+                if not previous and kind == "floor" then
                     -- Vanilla floor OnIsValid rejects rebuilding the same floor
                     -- sprite and skips the generic collision tests entirely.
                     for i = 0, target:getObjects():size() - 1 do
@@ -338,7 +360,7 @@ function Placement.validate(cursor, square)
                     end
                     params.testCollisions = false
                 end
-                if params.testCollisions ~= false then
+                if not previous and params.testCollisions ~= false then
                     if target:has(IsoPropertyType.GARAGE_DOOR) then return false, "garage door blocked" end
                     if extendsN
                         and (target:getProperties():has(IsoFlagType.collideN) or target:getProperties():has(IsoFlagType.WallN)

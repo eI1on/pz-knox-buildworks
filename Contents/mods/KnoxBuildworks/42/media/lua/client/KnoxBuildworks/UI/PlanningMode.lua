@@ -1146,13 +1146,13 @@ function KBWPlanningMode:catalogSource()
     return self.catalogSourceCache
 end
 
----@param key string|integer
+---@param key string|number
 function KBWPlanningMode:isKeyConsumed(key)
     if Keyboard and key == Keyboard.KEY_ESCAPE then return true end
     return false
 end
 
----@param key string|integer
+---@param key string|number
 function KBWPlanningMode:onKeyRelease(key)
     if Keyboard and key == Keyboard.KEY_ESCAPE then self:close() end
 end
