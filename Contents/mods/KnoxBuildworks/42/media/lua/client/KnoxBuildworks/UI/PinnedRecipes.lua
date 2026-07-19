@@ -30,7 +30,7 @@ local PINNED_OPACITY_STEP = 0.05
 local GEAR_TEXTURE = getTexture("media/ui/inventoryPanes/Button_Gear.png")
     or getTexture("media/ui/inventoryPanes/Button_Settings.png")
 local BOOK_TEXTURE = getTexture("media/ui/craftingMenus/BuildProperty_Book_16.png")
-local HUD_REFRESH_MS = 1000
+local HUD_REFRESH_MS = 2000
 local AREA_RESCAN_MS = 15000
 -- Keep world discovery deliberately small per tick; gather totals may take a
 -- moment to fill for a huge area, but gameplay never pays one large frame.
@@ -668,17 +668,40 @@ function PinnedRecipes.isPinned(player, definition, stage, variantId, materialId
     return false
 end
 
+-- Pinned buildable ids as a set, cached per hudGeneration so per-frame and
+-- per-sort pinned checks stop walking the pinned list every call.
+local pinnedIdsCache = nil
+
+---@param player IsoPlayer
+---@return table<string, boolean> set
+---@return number count
+function PinnedRecipes.pinnedBuildableIds(player)
+    if not player then return {}, 0 end
+    local playerKey = player.getPlayerNum and player:getPlayerNum() or 0
+    local cached = pinnedIdsCache
+    if cached and cached.generation == hudGeneration and cached.playerKey == playerKey then
+        return cached.set, cached.count
+    end
+    local data = uiData(player)
+    local set = {}
+    local count = 0
+    local order = data.pinnedRecipeOrder or {}
+    for orderIndex = 1, #order do
+        local entry = data.pinnedRecipes[order[orderIndex]]
+        if entry and entry.id and not set[entry.id] then
+            set[entry.id] = true
+            count = count + 1
+        end
+    end
+    pinnedIdsCache = { generation = hudGeneration, playerKey = playerKey, set = set, count = count }
+    return set, count
+end
+
 ---@param player IsoPlayer
 ---@param definition KBW.BuildableDefinition
 function PinnedRecipes.hasPinnedDefinition(player, definition)
     if not player or not definition then return false end
-    local data = uiData(player)
-    local order = data.pinnedRecipeOrder or {}
-    for orderIndex = 1, #order do
-        local entry = data.pinnedRecipes[order[orderIndex]]
-        if entryMatchesDefinition(entry, definition) then return true end
-    end
-    return false
+    return Groups.anyMemberIn(definition, PinnedRecipes.pinnedBuildableIds(player))
 end
 
 ---@param player IsoPlayer
@@ -1348,9 +1371,18 @@ function KBWPinnedRecipesPanel:render()
 
     local maxTextWidth = PINNED_MAX_TEXT_WIDTH
     local now = getTimestampMs and getTimestampMs() or 0
-    if not self.cachedLines or self.cachedGeneration ~= hudGeneration or now >= (self.nextLinesRefresh or 0) then
+    -- Rebuild immediately when a pin changes; container changes rebuild at
+    -- most ~once per second (OnContainerUpdate can fire near-continuously);
+    -- the TTL backstops state the revision cannot see (daylight, perks).
+    local inventoryRev = Requirements.inventoryRevision()
+    local sinceBuild = now - (self.lastLinesBuildAt or 0)
+    if not self.cachedLines or self.cachedGeneration ~= hudGeneration
+        or (self.cachedInventoryRev ~= inventoryRev and sinceBuild > 1000)
+        or now >= (self.nextLinesRefresh or 0) then
         self.cachedLines = buildLines(player, maxTextWidth, false)
         self.cachedGeneration = hudGeneration
+        self.cachedInventoryRev = inventoryRev
+        self.lastLinesBuildAt = now
         self.nextLinesRefresh = now + HUD_REFRESH_MS
         self.cachedWidth, self.cachedHeight = measurePinnedLines(self.cachedLines, maxTextWidth)
     end

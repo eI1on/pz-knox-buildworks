@@ -20,6 +20,8 @@ local IconResolver = require("KnoxBuildworks/UI/IconResolver")
 local FinishOptions = require("KnoxBuildworks/UI/FinishOptions")
 local I18n = require("KnoxBuildworks/I18n")
 local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
+local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
 require("KnoxBuildworks/UI/BlueprintAccessWindow")
 require("KnoxBuildworks/UI/BlueprintImportWindow")
 require "ISUI/ISTickBox"
@@ -366,8 +368,10 @@ function KBWPlanningCatalogPanel:createChildren()
     if self.search.setPlaceholderText then
         self.search:setPlaceholderText(safeText("IGUI_KBW_SearchPlaceholder", "Search..."))
     end
+    -- Debounced like the main catalogue: typing marks the query dirty and
+    -- update() rebuilds once keystrokes pause.
     self.search.onTextChange = function (box)
-        if box and box.target then box.target:refreshCatalog() end
+        if box and box.target then box.target.searchDirtyAt = getTimestampMs() end
     end
     self:addChild(self.search)
 
@@ -497,21 +501,27 @@ function KBWPlanningCatalogPanel:catalogSource()
     return self.owner:catalogSource()
 end
 
+function KBWPlanningCatalogPanel:update()
+    if ISPanel.update then ISPanel.update(self) end
+    CatalogIndex.pumpVisibility(6)
+    if self.lastVisibilityGeneration == nil then
+        self.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
+    elseif self.lastVisibilityGeneration ~= CatalogIndex.visibilityGeneration then
+        self.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
+        self:refreshCatalog()
+        return
+    end
+    if self.searchDirtyAt and getTimestampMs() - self.searchDirtyAt >= 220 then
+        self.searchDirtyAt = nil
+        self:refreshCatalog()
+    end
+end
+
 function KBWPlanningCatalogPanel:refreshCategories()
     local selected = self.categoryFilter:getOptionData(self.categoryFilter.selected) or "All"
     self.categoryFilter:clear()
     self.categoryFilter:addOptionWithData(safeText("IGUI_KBW_AllCategories", "All categories"), "All")
-    local seen = {}
-    local categories = {}
-    local source = self:catalogSource()
-    for entryIndex = 1, #source do
-        local category = source[entryIndex].category or "General"
-        if not seen[category] then
-            seen[category] = true
-            categories[#categories + 1] = category
-        end
-    end
-    table.sort(categories, function (a, b) return I18n.category(a) < I18n.category(b) end)
+    local categories = CatalogIndex.get().categories
     for categoryIndex = 1, #categories do
         local category = categories[categoryIndex]
         self.categoryFilter:addOptionWithData(I18n.category(category), category)
@@ -525,40 +535,61 @@ function KBWPlanningCatalogPanel:refreshCategories()
 end
 
 function KBWPlanningCatalogPanel:refreshCatalog()
+    local refreshStart = Profiler.now()
     local query = string.lower(self.search and self.search:getInternalText() or "")
     local category = self.categoryFilter:getOptionData(self.categoryFilter.selected) or "All"
-    local source = self:catalogSource()
-    local filtered = {}
-    for entryIndex = 1, #source do
-        local definition = source[entryIndex]
-        local include = category == "All" or definition.category == category
+    local index = CatalogIndex.get()
+    local shouldShowAll = CatalogVisibility.shouldShowAll(self.player)
+    local allCategories = category == "All"
+    local hasQuery = query ~= ""
+    -- Iterate the precomputed name order and partition into
+    -- pinned+favourite > pinned > favourite > rest buckets: the same ordering
+    -- the previous comparator produced, without a per-refresh table.sort
+    -- (Kahlua re-enters the Lua comparator for every comparison).
+    local source = index.orderByName
+    local pinnedIds, pinnedCount = PinnedRecipes.pinnedBuildableIds(self.player)
+    local checkPins = pinnedCount > 0
+    local pinnedFavorites, pinned, favorites, rest = {}, {}, {}, {}
+    for sourceIndex = 1, #source do
+        local record = source[sourceIndex]
+        local include = allCategories or record.category == category
+        if include and not record.alwaysVisible then
+            include = CatalogIndex.recordVisible(self.player, record, shouldShowAll)
+        end
+        if include and hasQuery then
+            include = string.find(record.searchTextExtended, query, 1, true) ~= nil
+        end
         if include then
-            include = CatalogVisibility.definitionPasses(
-                self.player, definition, CatalogVisibility.shouldShowAll(self.player)
-            )
+            local definition = record.definition
+            local isPinned = checkPins and Groups.anyMemberIn(definition, pinnedIds)
+            local isFavorite = self.owner:isFavorite(definition) == true
+            local bucket = rest
+            if isPinned and isFavorite then
+                bucket = pinnedFavorites
+            elseif isPinned then
+                bucket = pinned
+            elseif isFavorite then
+                bucket = favorites
+            end
+            bucket[#bucket + 1] = definition
         end
-        if include and query ~= "" then
-            local haystack = string.lower(displayName(definition) .. " "
-                    .. tostring(definition.id or "") .. " "
-                    .. I18n.category(definition.category) .. " "
-                    .. I18n.subcategory(definition.subcategory))
-            include = string.find(haystack, query, 1, true) ~= nil
-        end
-        if include then filtered[#filtered + 1] = definition end
     end
-    table.sort(filtered, function (a, b)
-        local pinnedA = self.owner:isPinnedDefinition(a)
-        local pinnedB = self.owner:isPinnedDefinition(b)
-        if pinnedA ~= pinnedB then return pinnedA end
-        local favA = self.owner:isFavorite(a)
-        local favB = self.owner:isFavorite(b)
-        if favA ~= favB then return favA end
-        return tostring(displayName(a)) < tostring(displayName(b))
-    end)
+    local filtered = pinnedFavorites
+    for entryIndex = 1, #pinned do
+        filtered[#filtered + 1] = pinned[entryIndex]
+    end
+    for entryIndex = 1, #favorites do
+        filtered[#filtered + 1] = favorites[entryIndex]
+    end
+    for entryIndex = 1, #rest do
+        filtered[#filtered + 1] = rest[entryIndex]
+    end
     self.catalogGrid:setItems(filtered, self.owner.selectedBuildable and self.owner.selectedBuildable.id or nil)
     if self.catalogGrid.selectedIndex > 0 and filtered[self.catalogGrid.selectedIndex] then
         self.owner:onCatalogSelected(filtered[self.catalogGrid.selectedIndex])
     end
+    Profiler.add("planning.refreshCatalog", refreshStart)
+    Profiler.count("planning.refreshCatalogRuns")
 end
 
 ---@param definition KBW.BuildableDefinition
@@ -604,16 +635,19 @@ local function addDefaultOption(combo, label)
     combo.selected = 1
 end
 
-function KBWPlanningCatalogPanel:refreshOptionCombo(combo, options, defaultLabel)
+function KBWPlanningCatalogPanel:refreshOptionCombo(combo, options, defaultLabel, skipDefault)
     if not combo then return end
     local previous = combo:getOptionData(combo.selected)
     combo:clear()
-    addDefaultOption(combo, defaultLabel)
     options = options or {}
+    if not skipDefault or #options == 0 then
+        addDefaultOption(combo, defaultLabel)
+    end
     for optionIndex = 1, #options do
         local option = options[optionIndex]
         combo:addOptionWithData(I18n.optionName(option, optionIndex), option.id or "")
     end
+    combo.selected = 1
     if previous then
         for optionIndex = 1, combo:getOptionCount() do
             if combo:getOptionData(optionIndex) == previous then combo.selected = optionIndex end
@@ -629,9 +663,12 @@ function KBWPlanningCatalogPanel:refreshVariantMaterialChoices(definition, stage
         self.variantCombo, baseDefinition and baseDefinition.variants or {},
         safeText("IGUI_KBW_DefaultVariant", "Default variant")
     )
+    -- materialRequired definitions have no buildable base: skip the default
+    -- row so the first material option is always selected.
     self:refreshOptionCombo(
         self.materialCombo, baseDefinition and baseDefinition.materialOptions or {},
-        safeText("IGUI_KBW_DefaultMaterial", "Default material")
+        safeText("IGUI_KBW_DefaultMaterial", "Default material"),
+        baseDefinition ~= nil and baseDefinition.materialRequired == true
     )
     self:refreshFinishChoices(baseDefinition, stage)
 end
@@ -768,8 +805,6 @@ function KBWPlanningMode:new(player, hiddenUI)
     o.borderColor = Theme.border
     o.roomColorIndex = 1
     o.selectedBuildable = nil
-    o.catalogSourceHash = nil
-    o.catalogSourceCache = nil
     o.opacityIndex = 2
     o.catalogWidth = catalogW
     return o
@@ -1138,12 +1173,8 @@ function KBWPlanningMode:createChildren()
 end
 
 function KBWPlanningMode:catalogSource()
-    local hash = Registry.hash or ""
-    if self.catalogSourceHash ~= hash or not self.catalogSourceCache then
-        self.catalogSourceHash = hash
-        self.catalogSourceCache = Groups.groupedList(Registry:list())
-    end
-    return self.catalogSourceCache
+    -- Shared with the main catalogue: one grouped list per registry hash.
+    return CatalogIndex.get().list
 end
 
 ---@param key string|number

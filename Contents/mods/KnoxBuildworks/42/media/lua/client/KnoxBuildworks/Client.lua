@@ -29,13 +29,22 @@ local function onDefinitionsLoaded()
     if player then hello(player) end
 end
 
+local function startCatalogPrewarm(player)
+    local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
+    CatalogIndex.prewarm(player)
+end
+
 local function onCreatePlayer(index, player)
     PinnedRecipes.ensurePanel()
     if KBW.Runtime.loaded then
         hello(player)
+        startCatalogPrewarm(player)
     else
         pendingHelloPlayer = player
-        Loader.startAsync(onDefinitionsLoaded)
+        Loader.startAsync(function ()
+            onDefinitionsLoaded()
+            startCatalogPrewarm(player)
+        end)
     end
 end
 

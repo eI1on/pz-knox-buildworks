@@ -6,6 +6,7 @@ local Groups = require("KnoxBuildworks/Definitions/Groups")
 local Theme = require("KnoxBuildworks/UI/Theme")
 local IconResolver = require("KnoxBuildworks/UI/IconResolver")
 local I18n = require("KnoxBuildworks/I18n")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
 
 ---@class KBWBuildCardGrid: ISPanel
 KBWBuildCardGrid = ISPanel:derive("KBWBuildCardGrid")
@@ -23,10 +24,15 @@ local function shorten(text, width)
     return text .. "..."
 end
 
--- Requirement checks do recursive inventory scans; refresh at most this many
--- cards per frame so opening/switching large categories cannot hitch a frame.
-local STATUS_BUDGET_PER_FRAME = 4
-local STATUS_TTL_MS = 1500
+-- Card readiness re-evaluates when the inventory revision changes (or a slow
+-- TTL catches state the revision cannot see, e.g. perk levels or daylight),
+-- at most this many cards per frame so opening or switching large categories
+-- cannot hitch a frame. OnContainerUpdate can fire near-continuously (world
+-- containers, appliances), so revision-triggered refreshes are additionally
+-- rate-limited per card.
+local STATUS_BUDGET_PER_FRAME = 8
+local STATUS_TTL_MS = 4000
+local STATUS_REV_MIN_MS = 400
 
 ---@param x number
 ---@param y number
@@ -255,10 +261,28 @@ function KBWBuildCardGrid:cardData(definition)
     local id = definition.id or tostring(definition)
     local entry = self.cardCache[id]
     if not entry then
+        Profiler.count("grid.cardDataBuilds")
         local stage = definition.stages and definition.stages[1]
+        local statusDefinition = Groups.resolveDefinition(definition, stage)
+        local statusStage = stage
+        if statusDefinition and statusDefinition.materialRequired == true then
+            local firstOption = (statusDefinition.materialOptions or {})[1]
+            local optionStages = firstOption and firstOption.stages or nil
+            if optionStages and #optionStages > 0 then
+                local targetId = stage and (Groups.resolveStageId(stage) or stage.id) or nil
+                statusStage = optionStages[1]
+                for stageIndex = 1, #optionStages do
+                    if optionStages[stageIndex].id == targetId then
+                        statusStage = optionStages[stageIndex]
+                        break
+                    end
+                end
+            end
+        end
         entry = {
             stage = stage,
-            statusDefinition = Groups.resolveDefinition(definition, stage),
+            statusStage = statusStage,
+            statusDefinition = statusDefinition,
             name = displayName(definition)
         }
         entry.texture, entry.textureColor = IconResolver.textureForDefinition(definition, stage)
@@ -271,16 +295,21 @@ end
 function KBWBuildCardGrid:cardStatus(definition)
     local entry = self:cardData(definition)
     local now = getTimestampMs()
-    local stale = entry.status == nil or (now - (entry.statusTime or 0)) > STATUS_TTL_MS
+    local rev = Requirements.inventoryRevision()
+    local age = now - (entry.statusTime or 0)
+    local stale = entry.status == nil
+        or age > STATUS_TTL_MS
+        or (entry.statusRev ~= rev and age > STATUS_REV_MIN_MS)
     if stale and self.statusBudget > 0 then
         self.statusBudget = self.statusBudget - 1
-        entry.status = entry.stage and Requirements.evaluate(self.player, entry.statusDefinition, entry.stage)
+        local snapshot = Requirements.snapshot(self.player, self.player:getSquare())
+        entry.status = entry.statusStage
+            and Requirements.evaluateReadiness(self.player, entry.statusDefinition, entry.statusStage, snapshot)
             or { ok = false }
         entry.status.pending = nil
+        entry.statusRev = rev
         entry.statusTime = now
     elseif entry.status == nil then
-        -- Budget exhausted this frame; render a muted pending state, it will
-        -- resolve within a few frames without a hitch.
         entry.status = { ok = false, pending = true }
         entry.statusTime = 0
     end

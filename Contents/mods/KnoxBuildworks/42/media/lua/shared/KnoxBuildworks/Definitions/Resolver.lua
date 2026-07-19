@@ -31,6 +31,9 @@ end
 function Resolver.resolve(buildableId, variantId, materialId)
     local base = Registry:get(buildableId)
     if not base then return nil, "unknown buildable" end
+    if base.materialRequired == true and (materialId == nil or materialId == "") then
+        return nil, "material selection required"
+    end
     local definition = base
     if variantId and variantId ~= "" then
         local variant = findOption(base.variants, variantId)

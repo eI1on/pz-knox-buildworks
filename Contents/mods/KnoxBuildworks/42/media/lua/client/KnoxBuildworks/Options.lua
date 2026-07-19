@@ -7,6 +7,7 @@ Options:addKeyBind(
     "OpenCatalog", "UI_optionscreen_KBW_OpenCatalog", Keyboard.KEY_F7, "UI_optionscreen_KBW_OpenCatalog_Tooltip"
 )
 Options:addTickBox("Debug", "UI_optionscreen_KBW_Debug", false, "UI_optionscreen_KBW_Debug_Tooltip")
+Options:addTickBox("Profile", "UI_optionscreen_KBW_Profile", false, "UI_optionscreen_KBW_Profile_Tooltip")
 local pinnedAlignment = Options:addComboBox(
     "PinnedAlignment", "UI_optionscreen_KBW_PinnedAlignment", "UI_optionscreen_KBW_PinnedAlignment_Tooltip"
 )
@@ -46,6 +47,10 @@ end
 
 function Options:apply()
     Log:setDebug(self:getOption("Debug"):getValue())
+    local profile = self:getOption("Profile")
+    if profile and profile.getValue then
+        KnoxBuildworks.Runtime.profile = profile:getValue() == true
+    end
     local opacity = self:getOption("PinnedOpacity")
     if opacity and opacity.getValue and opacity.setValue then
         local rounded = clampPercent(opacity:getValue())

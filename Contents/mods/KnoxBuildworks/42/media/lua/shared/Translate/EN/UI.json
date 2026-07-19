@@ -3,6 +3,8 @@
     "UI_optionscreen_KBW_OpenCatalog_Tooltip": "Opens the independent Knox Buildworks catalog.",
     "UI_optionscreen_KBW_Debug": "Verbose debug logging",
     "UI_optionscreen_KBW_Debug_Tooltip": "Print registry, validation, and network diagnostics.",
+    "UI_optionscreen_KBW_Profile": "Performance profiling",
+    "UI_optionscreen_KBW_Profile_Tooltip": "Measure definition loading and catalog timings and print them to the console. Leave off during normal play.",
     "UI_optionscreen_KBW_PinnedAlignment": "Pinned recipe alignment",
     "UI_optionscreen_KBW_PinnedAlignment_Tooltip": "Choose where pinned build recipes are drawn on the game HUD.",
     "UI_optionscreen_KBW_PinnedAlignment_Auto": "Auto (side with space)",

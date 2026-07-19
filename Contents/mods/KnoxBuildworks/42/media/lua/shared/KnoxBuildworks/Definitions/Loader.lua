@@ -5,6 +5,7 @@ local Hash = require("KnoxBuildworks/Util/Hash")
 local Schema = require("KnoxBuildworks/Definitions/Schema")
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Overrides = require("KnoxBuildworks/Definitions/Overrides")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
 local Log = require("KnoxBuildworks/Log")
 
 ---@class KBW.LoaderModule
@@ -15,8 +16,9 @@ local Loader = { providers = {} }
 -- one tick never runs long enough to stutter the loading screen or the game
 -- regardless of file size or machine speed.
 local STEP_BUDGET_MS = 3
-local HASH_SLICE = 8192  -- bytes hashed between clock checks
-local NORMALIZE_MAX = 50 -- hard cap on buildables normalized per tick
+local HASH_SLICE = 8192    -- bytes hashed between clock checks
+local DECODE_SLICE = 400   -- JSON parse steps between clock checks
+local NORMALIZE_MAX = 50   -- hard cap on buildables normalized per tick
 
 local function nowMs()
     return getTimestampMs and getTimestampMs() or 0
@@ -119,8 +121,12 @@ local function normalizeOne(state, bundle, raw)
 end
 
 local function finishState()
+    local finalizeStart = Profiler.now()
     Registry:finalize()
+    Profiler.add("loader.finalize", finalizeStart)
     KBW.Runtime.loaded = true
+    Profiler.mem("loader.heapAfterLoad")
+    Profiler.report("definitions loaded")
 end
 
 -- Synchronous load. Used on the server (the hash must exist before the first
@@ -130,13 +136,16 @@ function Loader.loadAll()
     local files = collectFileList()
     for fileIndex = 1, #files do
         local entry = files[fileIndex]
+        local fileStart = Profiler.now()
         local bundle, err, fileHash = readModJson(entry.modId, entry.path)
+        Profiler.add("loader.readHashDecode", fileStart)
         if not bundle then
             Log:error("Skipped %s: %s", entry.source, err)
         else
             acceptBundle(state, entry.source, bundle, fileHash)
         end
     end
+    local normalizeStart = Profiler.now()
     for bundleIndex = 1, #state.bundles do
         local bundle = state.bundles[bundleIndex]
         local buildables = bundle.data.buildables or {}
@@ -144,6 +153,7 @@ function Loader.loadAll()
             normalizeOne(state, bundle, buildables[buildableIndex])
         end
     end
+    Profiler.add("loader.normalize", normalizeStart)
     finishState()
     return Registry
 end
@@ -176,38 +186,59 @@ function Loader.stepAsync()
                 state.bundleIndex, state.buildableIndex = 1, 1
                 return
             end
+            local readStart = Profiler.now()
             local text, err = readModText(entry.modId, entry.path)
+            Profiler.add("loader.read", readStart)
             if not text then
                 Log:error("Skipped %s: %s", entry.source, err)
                 return
             end
-            state.pending = { entry = entry, text = text, hash = Hash.begin(), pos = 1 }
+            Profiler.count("loader.bytes", #text)
+            Profiler.count("loader.files")
+            state.pending = { entry = entry, text = text, hash = Hash.begin(), pos = 1, json = nil }
             return
         end
         local text = pending.text
         local deadline = nowMs() + STEP_BUDGET_MS
-        while pending.pos <= #text do
-            local last = math.min(pending.pos + HASH_SLICE - 1, #text)
-            Hash.update(pending.hash, text, pending.pos, last)
-            pending.pos = last + 1
-            if nowMs() >= deadline then break end
+        if pending.pos <= #text then
+            local hashStart = Profiler.now()
+            while pending.pos <= #text do
+                local last = math.min(pending.pos + HASH_SLICE - 1, #text)
+                Hash.update(pending.hash, text, pending.pos, last)
+                pending.pos = last + 1
+                if nowMs() >= deadline then break end
+            end
+            Profiler.add("loader.hash", hashStart)
+            if pending.pos <= #text then return end
+            pending.fileHash = Hash.finish(pending.hash)
         end
-        if pending.pos > #text then
-            local fileHash = Hash.finish(pending.hash)
-            local bundle, err = SafeJSON.decode(text)
-            if not bundle then
-                Log:error("Skipped %s: %s", pending.entry.source, err)
+        -- Hashing is complete; decode the JSON in bounded slices so even a
+        -- multi-megabyte file never blocks a tick past the budget.
+        if not pending.json then pending.json = SafeJSON.newSession(text) end
+        local decodeStart = Profiler.now()
+        local done = false
+        while nowMs() < deadline do
+            done = SafeJSON.stepSession(pending.json, DECODE_SLICE)
+            if done then break end
+        end
+        Profiler.add("loader.decode", decodeStart)
+        if done then
+            local session = pending.json
+            if session.err then
+                Log:error("Skipped %s: %s", pending.entry.source, session.err)
             else
-                acceptBundle(state, pending.entry.source, bundle, fileHash)
+                acceptBundle(state, pending.entry.source, session.result, pending.fileHash)
             end
             state.pending = nil
         end
     elseif state.phase == "normalize" then
         local deadline = nowMs() + STEP_BUDGET_MS
+        local normalizeStart = Profiler.now()
         local processed = 0
         while processed < NORMALIZE_MAX do
             local bundle = state.bundles[state.bundleIndex]
             if not bundle then
+                Profiler.add("loader.normalize", normalizeStart)
                 finishState()
                 asyncFinish()
                 return
@@ -223,6 +254,7 @@ function Loader.stepAsync()
                 state.buildableIndex = 1
             end
         end
+        Profiler.add("loader.normalize", normalizeStart)
     end
 end
 

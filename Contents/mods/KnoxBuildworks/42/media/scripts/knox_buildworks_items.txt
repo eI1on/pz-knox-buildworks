@@ -12,4 +12,30 @@ module KnoxBuildworks
         ReadType = newspaper,
         Tags = base:blueprint;base:paper,
     }
+
+    item AsphaltMixturePowder
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 5.0,
+        Icon = AsphaltMixture,
+        Tooltip = Tooltip_KBW_AsphaltMixturePowder,
+        SurvivalGear = true,
+        WorldStaticModel = KBW_BagOfAsphaltMixture,
+    }
+
+    item BucketAsphaltMixtureFull
+    {
+        DisplayCategory = Material,
+        ItemType = base:drainable,
+        Weight = 10.0,
+        Icon = MetalBucket_Concrete,
+        PourType = Bucket,
+        ReplaceOnDeplete = Base.Bucket,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        StaticModel = BucketFullConcrete_Ground,
+        WorldStaticModel = BucketFullConcrete_Ground,
+        Tags = base:hasmetal;kbw:asphalt,
+    }
 }

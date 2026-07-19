@@ -1,4 +1,4 @@
----Catalog provides the Knox Buildworks custom user-interface layer.
+--- Catalog provides the Knox Buildworks custom user-interface layer.
 require "ISUI/ISCollapsableWindow"
 require "ISUI/ISResizeWidget"
 require "ISUI/ISButton"
@@ -29,6 +29,8 @@ local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
 local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 local I18n = require("KnoxBuildworks/I18n")
+local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
 
 ---@class KBWCatalog: ISCollapsableWindow
 KBWCatalog = ISCollapsableWindow:derive("KBWCatalog")
@@ -575,6 +577,7 @@ function KBWCatalog:new(player)
     o.categoryButtons = {}
     o.backgroundColor = Theme.backdrop
     o.borderColor = Theme.border
+    o.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
     return o
 end
 
@@ -634,11 +637,6 @@ end
 local function installResizeHook(owner, widget)
     if not widget then return end
     widget.kbwOwner = owner
-    -- ISResizeWidget calculates drag deltas from the widget's local mouse
-    -- coordinates. Knox relayouts the resize handles while resizing, so the
-    -- native local delta feeds back into itself and makes the window explode in
-    -- size. Use absolute mouse coordinates instead; the widget may move, but the
-    -- drag baseline stays stable.
     widget.resizeFunction = false
     widget.onMouseDown = KBWCatalog.resizeWidgetMouseDown
     widget.onMouseMove = KBWCatalog.resizeWidgetMouseMove
@@ -719,7 +717,7 @@ function KBWCatalog:createChildren()
     end
     if self.search.setPlaceholderText then self.search:setPlaceholderText(getText("IGUI_KBW_SearchPlaceholder")) end
     self.search.onTextChange = function (box)
-        if box and box.target then box.target:refreshGrid() end
+        if box and box.target then box.target.searchDirtyAt = getTimestampMs() end
     end
     self.search.target = self
     self
@@ -808,9 +806,7 @@ function KBWCatalog:createChildren()
 
     local showAllLabel = getText("IGUI_CraftingUI_ShowAllVersion")
     local showAllWidth = 28 + getTextManager():MeasureStringX(UIFont.Small, showAllLabel)
-    self.showAllTickBox = ISTickBox:new(
-        12, top + 112, showAllWidth, 24, "", self, self.onShowAllVersionsChanged
-    )
+    self.showAllTickBox = ISTickBox:new(12, top + 112, showAllWidth, 24, "", self, self.onShowAllVersionsChanged)
     self.showAllTickBox:initialise()
     self.showAllTickBox:addOption(showAllLabel)
     self.showAllTickBox.selected[1] = CatalogVisibility.shouldShowAll(self.player)
@@ -1077,6 +1073,7 @@ function KBWCatalog:layout(liveResize)
                 UIFont.Small, stageDisplayText(stage, self.stage and self.stage.selected or 1, stageCount), textWidth
             )
             or {}
+        self.infoStageLines = stageLines
         local stageBlockHeight = self.showStageLabel
             and math.max(28, (#stageLines * (FONT_HGT_SMALL + 2)) + (stageCount > 1 and 18 or 8))
             or (stageCount > 1 and 18 or 8)
@@ -1169,6 +1166,7 @@ function KBWCatalog:layout(liveResize)
         self.infoNameLines = nil
         self.infoTooltipLines = nil
         self.infoMetaEntries = nil
+        self.infoStageLines = nil
         self.previewX = nil
         self.previewY = nil
     end
@@ -1200,61 +1198,33 @@ function KBWCatalog:layout(liveResize)
     end
 end
 
-function KBWCatalog:definitionList()
-    local hash = Registry.hash or ""
-    if self.definitionListCache and self.definitionListHash == hash then return self.definitionListCache end
-    self.definitionListHash = hash
-    self.definitionListCache = Groups.groupedList(Registry:list())
-    return self.definitionListCache
-end
-
 function KBWCatalog:refreshCategories()
-    local seen = {}
-    local categories = {}
-    local definitions = self:definitionList()
-    for definitionIndex = 1, #definitions do
-        local definition = definitions[definitionIndex]
-        if not seen[definition.category] then
-            seen[definition.category] = true
-            categories[#categories + 1] = definition.category
-        end
-    end
-    table.sort(categories, function (a, b) return I18n.category(a) < I18n.category(b) end)
-    self.categories = categories
+    self.categories = CatalogIndex.get().categories
 end
 
 function KBWCatalog:refreshFilterOptions()
-    local subcategories, materials, skills = {}, {}, {}
-    local definitions = self:definitionList()
-    for definitionIndex = 1, #definitions do
-        local definition = definitions[definitionIndex]
-        if self.category == "All" or definition.category == self.category then
-            subcategories[definition.subcategory or "General"] = true
-            local materialTags = definition.materialTags or {}
-            for tagIndex = 1, #materialTags do
-                materials[materialTags[tagIndex]] = true
-            end
-            local stages = definition.stages or {}
-            for stageIndex = 1, #stages do
-                local stage = stages[stageIndex]
-                for skill in pairs((stage.requirements or {}).skills or {}) do
-                    skills[skill] = true
-                end
-            end
-        end
-    end
+    local index = CatalogIndex.get()
+    local sets = self.category ~= "All" and index.filtersByCategory[self.category] or index.allFilters
+    local subcategories = sets and sets.subcategories or {}
+    local materials = sets and sets.materials or {}
+    local skills = sets and sets.skills or {}
     local function fill(combo, allLabel, set, display)
         combo:clear()
         combo:addOption(allLabel)
         local values = { false }
         local names = {}
+        local labels = {}
         for name in pairs(set) do
             names[#names + 1] = name
+            labels[name] = display(name)
         end
-        table.sort(names, function (a, b) return display(a) < display(b) end)
+        table.sort(names, function (a, b)
+            if labels[a] ~= labels[b] then return labels[a] < labels[b] end
+            return tostring(a) < tostring(b)
+        end)
         for nameIndex = 1, #names do
             local name = names[nameIndex]
-            combo:addOption(display(name))
+            combo:addOption(labels[name])
             values[#values + 1] = name
         end
         combo.selected = 1
@@ -1327,79 +1297,88 @@ function KBWCatalog:layoutCategoryButtons(gridWidth)
     Theme.applyActionButton(self.categoryNext, self.categoryOffset < maxOffset, false)
 end
 
-local requirementsMatchQuery
-
 function KBWCatalog:filteredDefinitions()
-    local result, data, query = {}, uiData(self.player), string.lower(self.search:getInternalText() or "")
+    local filterStart = Profiler.now()
+    local index = CatalogIndex.get()
+    local data, query = uiData(self.player), string.lower(self.search:getInternalText() or "")
     local subcategory = self.subcategoryValues and self.subcategoryValues[self.subcategoryFilter.selected]
     local materialTag = self.materialFilterValues and self.materialFilterValues[self.materialFilter.selected]
     local skillName = self.skillFilterValues and self.skillFilterValues[self.skillFilter.selected]
     local searchMode = self.searchModeValues and self.searchModeValues[self.searchMode.selected] or "name"
     local sortMode = self.sortValues and self.sortValues[self.sortCombo.selected] or "none"
-    local definitions = self:definitionList()
-    for definitionIndex = 1, #definitions do
-        local definition = definitions[definitionIndex]
-        local include = self.category == "All" or definition.category == self.category
+    local shouldShowAll = CatalogVisibility.shouldShowAll(self.player)
+    local scope = self.scope
+    local category = self.category
+    local allCategories = category == "All"
+    local hasQuery = query ~= ""
+    local favorites = data.favorites
+    local isFavoritesScope = scope == "Favorites"
+    local recentSet = nil
+    if scope == "Recent" then
+        recentSet = {}
+        for recentIndex = 1, #data.recent do
+            recentSet[data.recent[recentIndex]] = true
+        end
+    end
+    local source = sortMode == "az" and index.orderByName or index.orderById
+    local pinnedIds, pinnedCount = PinnedRecipes.pinnedBuildableIds(self.player)
+    local checkPins = pinnedCount > 0
+    local pinnedResult = {}
+    local result = {}
+    for sourceIndex = 1, #source do
+        local record = source[sourceIndex]
+        local include = allCategories or record.category == category
         if include then
-            include = CatalogVisibility.definitionPasses(
-                self.player, definition, CatalogVisibility.shouldShowAll(self.player)
-            )
-        end
-        if include and subcategory then include = (definition.subcategory or "General") == subcategory end
-        if include and materialTag then include = TableUtil.contains(definition.materialTags or {}, materialTag) end
-        if include and skillName then
-            include = false
-            local stages = definition.stages or {}
-            for stageIndex = 1, #stages do
-                local stage = stages[stageIndex]
-                if ((stage.requirements or {}).skills or {})[skillName] then include = true end
-            end
-        end
-        if self.scope == "Favorites" then include = include and data.favorites[definition.id] == true end
-        if self.scope == "Recent" then
-            include = false
-            for recentIndex = 1, #data.recent do
-                local id = data.recent[recentIndex]
-                if id == definition.id and (self.category == "All" or definition.category == self.category) then
-                    include = true
+            if recentSet then
+                include = recentSet[record.id] == true
+            else
+                if isFavoritesScope then include = favorites[record.id] == true end
+                if include and subcategory then include = record.subcategory == subcategory end
+                if include and materialTag then include = TableUtil.contains(record.materialTags, materialTag) end
+                if include and skillName then include = record.skills[skillName] == true end
+                if include and not record.alwaysVisible then
+                    include = CatalogIndex.recordVisible(self.player, record, shouldShowAll)
                 end
             end
         end
-        if include and query ~= "" then
-            local nameMatch = string.find(string.lower(displayName(definition) .. " "
-                        .. definition.id .. " "
-                        .. table.concat(definition.tags or {}, " ")), query, 1, true) ~= nil
-            local requirementMatch = requirementsMatchQuery(definition, query)
+        if include and hasQuery then
             if searchMode == "requirements" then
-                include = requirementMatch
+                include = string.find(CatalogIndex.requirementText(record), query, 1, true) ~= nil
             elseif searchMode == "everything" then
-                include = nameMatch or requirementMatch
+                include = string.find(record.searchText, query, 1, true) ~= nil
+                    or string.find(CatalogIndex.requirementText(record), query, 1, true) ~= nil
             else
-                include = nameMatch
+                include = string.find(record.searchText, query, 1, true) ~= nil
             end
         end
-        if include then result[#result + 1] = definition end
-    end
-    table.sort(result, function (a, b)
-        local pinnedA = PinnedRecipes.hasPinnedDefinition(self.player, a)
-        local pinnedB = PinnedRecipes.hasPinnedDefinition(self.player, b)
-        if pinnedA ~= pinnedB then return pinnedA end
-        if sortMode == "az" then
-            local nameA = string.lower(displayName(a))
-            local nameB = string.lower(displayName(b))
-            if nameA ~= nameB then return nameA < nameB end
+        if include then
+            if checkPins and Groups.anyMemberIn(record.definition, pinnedIds) then
+                pinnedResult[#pinnedResult + 1] = record.definition
+            else
+                result[#result + 1] = record.definition
+            end
         end
-        return tostring(a.id) < tostring(b.id)
-    end)
+    end
+    if #pinnedResult > 0 then
+        for resultIndex = 1, #result do
+            pinnedResult[#pinnedResult + 1] = result[resultIndex]
+        end
+        result = pinnedResult
+    end
+    Profiler.add("catalog.filter", filterStart)
+    Profiler.count("catalog.filterRuns")
     return result
 end
 
 function KBWCatalog:refreshGrid()
+    local refreshStart = Profiler.now()
     local selectedId = self.selected and self.selected.id
     self.grid:setItems(self:filteredDefinitions(), selectedId)
     self.selected = self.grid.items[self.grid.selectedIndex]
     self:refreshSelectionControls()
     self:layout()
+    Profiler.add("catalog.refreshGrid", refreshStart)
+    Profiler.count("catalog.refreshGridRuns")
 end
 
 function KBWCatalog:refreshVariantMaterialControls()
@@ -1413,11 +1392,17 @@ function KBWCatalog:refreshVariantMaterialControls()
         self.variant:addOption(I18n.optionName(entry, entry.id))
     end
     self.variant.selected = 1
-    self.material:addOption(getText("IGUI_KBW_BaseMaterial"))
     local materialOptions = baseDefinition and baseDefinition.materialOptions or {}
+    local materialRequired = baseDefinition ~= nil and baseDefinition.materialRequired == true and #materialOptions > 0
+    self.materialValues = {}
+    if not materialRequired then
+        self.material:addOption(getText("IGUI_KBW_BaseMaterial"))
+        self.materialValues[1] = ""
+    end
     for entryIndex = 1, #materialOptions do
         local entry = materialOptions[entryIndex]
         self.material:addOption(I18n.optionName(entry, entry.id))
+        self.materialValues[#self.materialValues + 1] = entry.id
     end
     self.material.selected = 1
     self.variant:setEnabled(#variants > 0)
@@ -1453,73 +1438,6 @@ end
 function KBWCatalog:onCategoryPage(button)
     self.categoryOffset = (self.categoryOffset or 1) + button.internal
     self:layoutCategoryButtons(self.grid.width)
-end
-
-local function itemDisplayNameForSearch(fullType)
-    if type(fullType) == "string" and string.find(fullType, ".", 1, true) then
-        return getItemNameFromFullType(fullType) .. " " .. fullType
-    end
-    return tostring(fullType or "")
-end
-
-local function textMatchesQuery(text, query)
-    return string.find(string.lower(tostring(text or "")), query, 1, true) ~= nil
-end
-
-local function inputMatchesQuery(input, query)
-    if textMatchesQuery(input.id, query) or textMatchesQuery(input.label, query) or textMatchesQuery(input.role, query) then
-        return true
-    end
-    local items = input.items or {}
-    for itemIndex = 1, #items do
-        if textMatchesQuery(itemDisplayNameForSearch(items[itemIndex]), query) then return true end
-    end
-    local tags = input.tags or {}
-    for tagIndex = 1, #tags do
-        if textMatchesQuery(tags[tagIndex], query) then return true end
-    end
-    local flags = input.flags or {}
-    for flagIndex = 1, #flags do
-        if textMatchesQuery(flags[flagIndex], query) then return true end
-    end
-    return false
-end
-
----@param definition KBW.BuildableDefinition
-function requirementsMatchQuery(definition, query)
-    local definitionTools = definition.tools or {}
-    for toolIndex = 1, #definitionTools do
-        if inputMatchesQuery(definitionTools[toolIndex], query) then return true end
-    end
-    local stages = definition.stages or {}
-    for stageIndex = 1, #stages do
-        local req = stages[stageIndex].requirements or {}
-        local inputs = req.inputs or {}
-        for inputIndex = 1, #inputs do
-            if inputMatchesQuery(inputs[inputIndex], query) then return true end
-        end
-        local materials = req.materials or {}
-        for materialIndex = 1, #materials do
-            if inputMatchesQuery(materials[materialIndex], query) then return true end
-        end
-        local tools = req.tools or {}
-        for toolIndex = 1, #tools do
-            if inputMatchesQuery(tools[toolIndex], query) then return true end
-        end
-        local skills = req.skills or {}
-        for skillName in pairs(skills) do
-            if textMatchesQuery(skillName, query)
-                or textMatchesQuery(getText("IGUI_perks_" .. tostring(skillName)), query) then
-                return true
-            end
-        end
-        local recipes = req.recipes or {}
-        for recipeIndex = 1, #recipes do
-            local recipe = recipes[recipeIndex]
-            if textMatchesQuery(recipe.id or recipe.name or recipe, query) then return true end
-        end
-    end
-    return false
 end
 
 function KBWCatalog:onMouseWheel(delta)
@@ -1581,22 +1499,40 @@ function KBWCatalog:stageCountForSelection()
     return #stages
 end
 
+-- Memoized per (selection, stage, variant, material): render() and the
+-- requirement panels call this many times per interaction and per frame, and
+-- the variant/material merge deep-copies the definition. The cache is also
+-- cleared whenever visibleStages is rebuilt.
 function KBWCatalog:effectiveDefinition()
     if not self.selected then return nil end
+    local key = tostring(self.selected.id) .. "|" .. tostring(self.stage and self.stage.selected or 1) .. "|"
+        .. tostring(self.variant.selected or 1) .. "|" .. tostring(self.material.selected or 1)
+    local cached = self.effectiveCache
+    if cached and cached.key == key then return cached.value end
     local rawStage = self:rawSelectedStage()
     local baseDefinition = Groups.resolveDefinition(self.selected, rawStage)
     local variantIndex = (self.variant.selected or 1) - 1
     local variant = variantIndex > 0 and baseDefinition.variants and baseDefinition.variants[variantIndex]
     local effective = variant and TableUtil.merge(baseDefinition, variant) or baseDefinition
-    local materialIndex = (self.material.selected or 1) - 1
-    local material = materialIndex > 0 and baseDefinition.materialOptions
-        and baseDefinition.materialOptions[materialIndex]
+    local materialId = self:selectedMaterial()
+    local material = nil
+    if materialId ~= "" then
+        local materialOptions = baseDefinition.materialOptions or {}
+        for optionIndex = 1, #materialOptions do
+            if materialOptions[optionIndex].id == materialId then
+                material = materialOptions[optionIndex]
+                break
+            end
+        end
+    end
     effective = material and TableUtil.merge(effective, material) or effective
     effective.id = baseDefinition.id
+    self.effectiveCache = { key = key, value = effective }
     return effective
 end
 
 function KBWCatalog:refreshSelectionControls()
+    self.effectiveCache = nil
     self.stage:clear()
     self.variant:clear()
     self.material:clear()
@@ -1626,10 +1562,15 @@ function KBWCatalog:refreshSelectionControls()
 end
 
 function KBWCatalog:refreshStageAndFinish()
+    self.effectiveCache = nil
     self.stage:clear()
-    self.visibleStages = CatalogVisibility.filteredStages(
-        self.player, self.selected, CatalogVisibility.shouldShowAll(self.player)
-    )
+    local shouldShowAll = CatalogVisibility.shouldShowAll(self.player)
+    if Groups.isGroup(self.selected) then
+        self.visibleStages = CatalogVisibility.filteredStages(self.player, self.selected, shouldShowAll)
+    else
+        local effective = self:effectiveDefinition()
+        self.visibleStages = CatalogVisibility.filteredStages(self.player, effective or self.selected, shouldShowAll)
+    end
     local definition = self:effectiveDefinition()
     if not self.selected or not definition then return end
     local stages = self.visibleStages or {}
@@ -1664,7 +1605,18 @@ function KBWCatalog:refreshFinishOptions()
 end
 
 function KBWCatalog:selectedStage()
-    if Groups.isGroup(self.selected) then return self:rawSelectedStage() end
+    if Groups.isGroup(self.selected) then
+        local rawStage = self:rawSelectedStage()
+        local optionActive = (self.variant.selected or 1) > 1 or self:selectedMaterial() ~= ""
+        if not optionActive or not rawStage then return rawStage end
+        local effective = self:effectiveDefinition()
+        local stages = effective and effective.stages or {}
+        local targetId = Groups.resolveStageId(rawStage)
+        for stageIndex = 1, #stages do
+            if stages[stageIndex].id == targetId then return stages[stageIndex] end
+        end
+        return stages[1] or rawStage
+    end
     local definition = self:effectiveDefinition()
     if self.visibleStages then return self.visibleStages[self.stage.selected or 1] end
     return definition and definition.stages[self.stage.selected or 1]
@@ -1677,10 +1629,9 @@ function KBWCatalog:selectedVariant()
 end
 
 function KBWCatalog:selectedMaterial()
-    local definition = Groups.resolveDefinition(self.selected, self:rawSelectedStage()) or self.selected
-    local index = (self.material.selected or 1) - 1
-    return index > 0 and definition.materialOptions
-        and definition.materialOptions[index] and definition.materialOptions[index].id or ""
+    local values = self.materialValues
+    if values then return values[self.material.selected or 1] or "" end
+    return ""
 end
 
 function KBWCatalog:selectedFinish()
@@ -1795,7 +1746,9 @@ function KBWCatalog:onIngredientChoice(row, fullType, itemKey)
         end
     end
     if self.accessPanel and self.accessPanel.setSelectedRow then self.accessPanel:setSelectedRow(refreshedRow) end
-    if self.requirements and self.requirements.setSelectedRow then self.requirements:setSelectedRow(refreshedRow) end
+    if self.requirements and self.requirements.setSelectedRow then
+        self.requirements:setSelectedRow(refreshedRow)
+    end
     if self.ingredientDrawer then
         self.ingredientDrawer:setRow(refreshedRow, fullType, self.inputChoiceItems[key])
     end
@@ -2003,18 +1956,29 @@ function KBWCatalog:restoreState(state)
 end
 
 -- Requirement evaluation does recursive inventory scans, far too heavy to run
--- per frame in prerender. updateActions() (event-driven) refreshes this cache
--- eagerly; prerender reuses it and only re-evaluates on a slow TTL.
+-- per frame in prerender. The cache is keyed by selection and the inventory
+-- revision, so it only re-evaluates when a container actually changed (with a
+-- slow TTL for state the revision cannot see, e.g. daylight or perk levels).
+-- onIngredientChoice clears it when manual ingredient choices change.
 ---@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
+---@param stage      KBW.BuildStage
 function KBWCatalog:cachedSelectionStatus(definition, stage)
     if not definition or not stage then return { ok = false } end
-    local key = tostring(definition.id) .. "|" .. tostring(stage.id)
+    -- Variant/material indices are part of the key: they swap the effective
+    -- stage list without changing definition or stage ids.
+    local key = tostring(definition.id) .. "|"
+        .. tostring(stage.id) .. "|"
+        .. tostring(self.variant.selected or 1) .. "|"
+        .. tostring(self.material.selected or 1)
     local now = getTimestampMs()
+    local rev = Requirements.inventoryRevision()
     local cache = self.selectionStatusCache
-    if cache and cache.key == key and (now - cache.time) < 1200 then return cache.status end
+    if cache and cache.key == key then
+        local age = now - cache.time
+        if (cache.rev == rev and age < 4000) or age < 400 then return cache.status end
+    end
     local status = Requirements.evaluate(self.player, definition, stage, nil, self:selectedInputChoices())
-    self.selectionStatusCache = { key = key, status = status, time = now }
+    self.selectionStatusCache = { key = key, status = status, time = now, rev = rev }
     local finishOk = hasFinishItem(self.player, self:selectedFinish(), definition, stage)
     Theme.applyActionButton(self.buildButton, Integrity.isAllowed(self.player) and status.ok and finishOk, true)
     return status
@@ -2022,16 +1986,7 @@ end
 
 function KBWCatalog:updateActions()
     local definition, stage = self:effectiveDefinition(), self:selectedStage()
-    local status = definition and stage
-        and Requirements.evaluate(self.player, definition, stage, nil, self:selectedInputChoices())
-        or { ok = false }
-    if definition and stage then
-        self.selectionStatusCache = {
-            key = tostring(definition.id) .. "|" .. tostring(stage.id),
-            status = status,
-            time = getTimestampMs()
-        }
-    end
+    local status = definition and stage and self:cachedSelectionStatus(definition, stage) or { ok = false }
     local allowed = Integrity.isAllowed(self.player)
     local finishOk = hasFinishItem(self.player, self:selectedFinish(), definition, stage)
     Theme.applyActionButton(self.buildButton, allowed and status.ok and finishOk, true)
@@ -2155,8 +2110,21 @@ function KBWCatalog:positionHeaderActions()
     end
 end
 
+-- Debounce window between the last keystroke and the catalogue rebuild.
+local SEARCH_DEBOUNCE_MS = 220
+
 function KBWCatalog:update()
     ISPanel.update(self)
+    CatalogIndex.pumpVisibility(6)
+    if self.lastVisibilityGeneration ~= CatalogIndex.visibilityGeneration then
+        self.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
+        self:refreshGrid()
+        return
+    end
+    if self.searchDirtyAt and getTimestampMs() - self.searchDirtyAt >= SEARCH_DEBOUNCE_MS then
+        self.searchDirtyAt = nil
+        self:refreshGrid()
+    end
     if self.moving or self.isResizingFromWidget then return end;
     local now = getTimestampMs()
     if self.lastSafeLayoutCheck and now - self.lastSafeLayoutCheck < 750 then return end;
@@ -2200,7 +2168,7 @@ function KBWCatalog:resizeFromWidgetMouse(widget)
     self:layout(true)
 end
 
----@param width number
+---@param width  number
 ---@param height number
 function KBWCatalog:resizeFromWidget(width, height)
     local minWidth = self.minimumWidth or DETAILED_MIN_WIDTH
@@ -2386,20 +2354,25 @@ function KBWCatalog:render()
                     texture, previewX + 16, previewY + 9, 80, 80, 1, textureColor.r, textureColor.g, textureColor.b
                 )
             end
-            local cells = Matrix.getFaceCells(stage, "S") or {}
-            local bounds = Matrix.getBounds(cells)
+            local boundsText = stage.__kbwBoundsText
+            if not boundsText then
+                local cells = Matrix.getFaceCells(stage, "S") or {}
+                local bounds = Matrix.getBounds(cells)
+                boundsText = string.format("%dx%dx%d", bounds.width, bounds.height, bounds.depth)
+                stage.__kbwBoundsText = boundsText
+            end
             self:drawTextCentre(
-                string.format("%dx%dx%d", bounds.width, bounds.height, bounds.depth),
-                previewX + math.floor(previewWidth / 2), previewY + previewHeight - 28,
+                boundsText, previewX + math.floor(previewWidth / 2), previewY + previewHeight - 28,
                 Theme.accent
                     .r,
                 Theme.accent.g, Theme.accent.b, 1, UIFont.Small
             )
             local stageCount = self:stageCountForSelection()
             local stageIndex = self.stage and self.stage.selected or 1
-            local stageLines = self.showStageLabel
-                and wrapTextForFont(UIFont.Small, stageDisplayText(stage, stageIndex, stageCount), textWidth)
-                or {}
+            local stageLines = self.infoStageLines
+                or (self.showStageLabel
+                    and wrapTextForFont(UIFont.Small, stageDisplayText(stage, stageIndex, stageCount), textWidth)
+                    or {})
             local stageY = self.stageLabelY or (previewY + previewHeight + 8)
             if #stageLines > 0 then drawLinesForFont(self, UIFont.Small, stageLines, x, stageY, Theme.accent, 1) end
             self.stageDotHits = {}
@@ -2521,14 +2494,18 @@ function KBWCatalog.open(player, restoreState)
         return
     end
     if KBWCatalog.instance then KBWCatalog.instance:close() end
+    local openStart = Profiler.now()
     local ui = KBWCatalog:new(player or getPlayer())
     ui:initialise()
     ui:addToUIManager()
     KBWCatalog.instance = ui
     ui:restoreState(restoreState)
+    Profiler.add("catalog.open", openStart)
+    Profiler.mem("catalog.heapAfterOpen")
+    Profiler.report("catalog open")
 end
 
----@param item unknown
+---@param item      unknown
 ---@param playerNum number
 function KBWCatalog.onSetDragItem(item, playerNum)
     local state = KBWCatalog.dragReturnState

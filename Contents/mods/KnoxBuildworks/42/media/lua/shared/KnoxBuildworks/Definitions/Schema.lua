@@ -41,6 +41,29 @@ local function validateRequirementRows(errors, stageId, rows, label)
     end
 end
 
+local function normalizeRequirements(errors, stage, materialGroups, definitionTools)
+    stage.requirements = stage.requirements or {}
+    stage.requirements.knowledge = stage.requirements.knowledge or {}
+    stage.requirements.inputs = stage.requirements.inputs or {}
+    if type(stage.requirements.materials) == "string" then
+        local group = materialGroups[stage.requirements.materials]
+        if not group then
+            add(errors, "stage " .. stage.id .. " references unknown material group")
+        else
+            stage.requirements.materials = TableUtil.copy(group)
+        end
+    end
+    validateRequirementRows(errors, stage.id, stage.requirements.inputs, "requirement input")
+    validateRequirementRows(errors, stage.id, stage.requirements.materials, "material")
+    validateRequirementRows(errors, stage.id, stage.requirements.tools, "tool")
+    validateRequirementRows(errors, stage.id, definitionTools, "definition tool")
+    for perkName in pairs(stage.requirements.skills or {}) do
+        if not Perks[perkName] then
+            add(errors, "stage " .. stage.id .. " references missing skill " .. perkName)
+        end
+    end
+end
+
 local function validateEntityReference(errors, stage)
     local reference = stage and stage.entityCompat
     if reference == nil then return end
@@ -229,6 +252,12 @@ function Schema.normalize(definition, templates, materialGroups)
         or ("IGUI_KBW_Buildable_" .. string.gsub(resolved.id or "Invalid", "[^%w]", "_"))
     resolved.tooltipKey = resolved.tooltipKey
         or ("Tooltip_KBW_Buildable_" .. string.gsub(resolved.id or "Invalid", "[^%w]", "_"))
+    if resolved.materialRequired ~= nil and type(resolved.materialRequired) ~= "boolean" then
+        add(errors, "materialRequired must be a boolean")
+    end
+    if resolved.materialRequired == true and #(resolved.materialOptions or {}) == 0 then
+        add(errors, "materialRequired needs at least one materialOptions entry")
+    end
     resolved.aliases = resolved.aliases or {}
     resolved.tags = resolved.tags or {}
     resolved.subcategory = resolved.subcategory or "General"
@@ -274,26 +303,7 @@ function Schema.normalize(definition, templates, materialGroups)
                 end
             end
         end
-        stage.requirements = stage.requirements or {}
-        stage.requirements.knowledge = stage.requirements.knowledge or {}
-        stage.requirements.inputs = stage.requirements.inputs or {}
-        if type(stage.requirements.materials) == "string" then
-            local group = materialGroups[stage.requirements.materials]
-            if not group then
-                add(errors, "stage " .. stage.id .. " references unknown material group")
-            else
-                stage.requirements.materials = TableUtil.copy(group)
-            end
-        end
-        validateRequirementRows(errors, stage.id, stage.requirements.inputs, "requirement input")
-        validateRequirementRows(errors, stage.id, stage.requirements.materials, "material")
-        validateRequirementRows(errors, stage.id, stage.requirements.tools, "tool")
-        validateRequirementRows(errors, stage.id, resolved.tools, "definition tool")
-        for perkName in pairs(stage.requirements.skills or {}) do
-            if not Perks[perkName] then
-                add(errors, "stage " .. stage.id .. " references missing skill " .. perkName)
-            end
-        end
+        normalizeRequirements(errors, stage, materialGroups, resolved.tools)
         Properties.normalizeStage(stage, resolved, errors)
     end
     -- Variants and material options may replace the complete stage list. Normalize
@@ -314,6 +324,7 @@ function Schema.normalize(definition, templates, materialGroups)
                 validateCallbackCompatibility(errors, stage)
                 Schema.expandSprites(TableUtil.merge(resolved, option), stage)
                 Matrix.normalizeStage(stage)
+                normalizeRequirements(errors, stage, materialGroups, resolved.tools)
                 Properties.normalizeStage(stage, resolved, errors)
             end
         end

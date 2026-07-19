@@ -124,9 +124,16 @@ function Groups.groupedList(definitions)
             result[#result + 1] = bucket.members[1].definition
         end
     end
+    -- Resolve display names once before sorting; the comparator runs
+    -- O(n log n) times and getText-backed lookups are not cheap in Kahlua.
+    local names = {}
+    for resultIndex = 1, #result do
+        local entry = result[resultIndex]
+        names[entry] = displayName(entry)
+    end
     table.sort(result, function (a, b)
-        local nameA = displayName(a)
-        local nameB = displayName(b)
+        local nameA = names[a]
+        local nameB = names[b]
         if nameA ~= nameB then return nameA < nameB end
         return tostring(a.id) < tostring(b.id)
     end)
@@ -156,6 +163,20 @@ end
 function Groups.resolveStageId(stage)
     if stage and stage.__kbwStageId then return stage.__kbwStageId end
     return stage and stage.id or nil
+end
+
+---True when the definition's buildable id (or any group member's id) is a
+---key in idSet. Allocation-free, safe to call per visible card per frame.
+---@param definition KBW.BuildableDefinition
+---@param idSet table<string, boolean>
+function Groups.anyMemberIn(definition, idSet)
+    if not definition then return false end
+    if not Groups.isGroup(definition) then return idSet[definition.id] == true end
+    local members = definition.__kbwMembers or {}
+    for memberIndex = 1, #members do
+        if idSet[members[memberIndex].id] then return true end
+    end
+    return false
 end
 
 ---@param definition KBW.BuildableDefinition

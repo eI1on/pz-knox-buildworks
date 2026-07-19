@@ -1,9 +1,22 @@
 ---IconResolver provides the Knox Buildworks custom user-interface layer.
+--
+-- Every lookup family is cached, with failed lookups cached separately (as
+-- false) so the render loop never repeats getTexture/getSprite/ScriptManager
+-- probes for the same source. Icon sources are immutable once definitions are
+-- loaded, so the caches never need invalidation during a session.
 ---@class KBW.IconResolverModule
 ---@type KBW.IconResolverModule
 local IconResolver = {}
 local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
+
+local textureNameCache = {} -- icon/texture name -> Texture | false
+local spriteTextureCache = {} -- sprite name -> Texture | false
+local tagItemCache = {} -- tag name -> fullType | false
+local tagNameCache = {} -- tag name -> display name
+local itemTextureCache = {} -- fullType -> { texture = Texture|false, color = table|nil }
+local definitionIconCache = {} -- stage -> definition id -> { texture, color }
 
 local function scriptFor(fullType)
     if not fullType then return nil end
@@ -62,6 +75,13 @@ local function firstItemForTag(tagName)
 end
 
 local function textureFromItem(fullType)
+    if not fullType then return nil, nil end
+    local cached = itemTextureCache[fullType]
+    if cached then
+        if cached.texture == false then return nil, nil end
+        return cached.texture, cached.color
+    end
+    Profiler.count("icons.itemLookups")
     local script = scriptFor(fullType)
     if script and script.getNormalTexture then
         local color = { r = 1, g = 1, b = 1, a = 1 }
@@ -70,54 +90,90 @@ local function textureFromItem(fullType)
             color.g = script:getG()
             color.b = script:getB()
         end
-        return script:getNormalTexture(), color
+        local texture = script:getNormalTexture()
+        itemTextureCache[fullType] = { texture = texture or false, color = color }
+        if texture then return texture, color end
+        return nil, nil
     end
+    itemTextureCache[fullType] = { texture = false }
     return nil, nil
 end
 
 local function textureFromTextureName(name)
     if type(name) ~= "string" or name == "" then return nil end
+    local cached = textureNameCache[name]
+    if cached ~= nil then
+        if cached == false then return nil end
+        return cached
+    end
+    Profiler.count("icons.textureLookups")
     local texture = getTexture(name)
-    if texture then return texture end
-    texture = getTexture("media/textures/" .. name .. ".png")
-    if texture then return texture end
-    texture = getTexture("media/ui/" .. name .. ".png")
-    if texture then return texture end
-    texture = getTexture("media/ui/Entity/" .. name .. ".png")
-    if texture then return texture end
-    texture = getTexture("media/ui/craftingMenus/" .. name .. ".png")
-    if texture then return texture end
-    return nil
+        or getTexture("media/textures/" .. name .. ".png")
+        or getTexture("media/ui/" .. name .. ".png")
+        or getTexture("media/ui/Entity/" .. name .. ".png")
+        or getTexture("media/ui/craftingMenus/" .. name .. ".png")
+    textureNameCache[name] = texture or false
+    return texture
 end
 
 function IconResolver.textureForItem(fullType)
     return textureFromItem(fullType)
 end
 
+local function firstItemForTagCached(tagName)
+    if not tagName then return nil end
+    local cached = tagItemCache[tagName]
+    if cached ~= nil then
+        if cached == false then return nil end
+        return cached
+    end
+    Profiler.count("icons.tagLookups")
+    local fullType = firstItemForTag(tagName)
+    tagItemCache[tagName] = fullType or false
+    return fullType
+end
+
 function IconResolver.firstItemForTag(tagName)
-    return firstItemForTag(tagName)
+    return firstItemForTagCached(tagName)
 end
 
 function IconResolver.textureForTag(tagName)
-    local fullType = firstItemForTag(tagName)
+    local fullType = firstItemForTagCached(tagName)
     if fullType then return textureFromItem(fullType) end
     return nil, nil
 end
 
 function IconResolver.displayNameForTag(tagName)
+    local key = tostring(tagName or "?")
+    local cached = tagNameCache[key]
+    if cached then return cached end
+    local result = nil
     local tag, normalized = tagValue(tagName)
     if tag and tag.getTranslationName then
         local translated = tag:getTranslationName()
-        if translated and translated ~= "" then return translated end
+        if translated and translated ~= "" then result = translated end
     end
-    local fullType = firstItemForTag(normalized or tagName)
-    if fullType and getItemNameFromFullType then return getItemNameFromFullType(fullType) end
-    return normalized or tostring(tagName or "?")
+    if not result then
+        local fullType = firstItemForTagCached(normalized or tagName)
+        if fullType and getItemNameFromFullType then result = getItemNameFromFullType(fullType) end
+    end
+    result = result or normalized or key
+    tagNameCache[key] = result
+    return result
 end
 
 local function textureFromSprite(spriteName)
-    local sprite = spriteName and getSprite(spriteName)
-    return sprite and sprite:getTextureForCurrentFrame(IsoDirections.N) or nil
+    if not spriteName then return nil end
+    local cached = spriteTextureCache[spriteName]
+    if cached ~= nil then
+        if cached == false then return nil end
+        return cached
+    end
+    Profiler.count("icons.spriteLookups")
+    local sprite = getSprite(spriteName)
+    local texture = sprite and sprite:getTextureForCurrentFrame(IsoDirections.N) or nil
+    spriteTextureCache[spriteName] = texture or false
+    return texture
 end
 
 local function firstSprite(stage)
@@ -130,11 +186,7 @@ function IconResolver.textureForSpriteName(spriteName)
     return textureFromSprite(spriteName)
 end
 
----@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
----@param direction KBW.Direction
-function IconResolver.textureForDefinition(definition, stage, direction)
-    if not definition and not stage then return nil, nil end
+local function resolveDefinitionTexture(definition, stage, direction)
     local recipe = StageConfig.recipe(definition, stage)
     local iconTexture = (stage and (stage.iconTexture or stage.icon)) or definition.iconTexture or definition.icon
     local texture = textureFromTextureName(iconTexture)
@@ -152,6 +204,34 @@ function IconResolver.textureForDefinition(definition, stage, direction)
     local face = direction or "S"
     texture = textureFromSprite(Matrix.getFaceSprite(stage, face) or firstSprite(stage))
     return texture, { r = 1, g = 1, b = 1, a = 1 }
+end
+
+---Resolved definition/stage icons are memoized in a module-local cache for
+---the default (south-facing) direction, which is what the catalogue, planning
+---catalogue, and pinned HUD all request. The fallback order is unchanged:
+---explicit texture, icon name, icon sprite, icon item, then face sprite.
+---@param definition KBW.BuildableDefinition
+---@param stage KBW.BuildStage
+---@param direction KBW.Direction
+function IconResolver.textureForDefinition(definition, stage, direction)
+    if not definition and not stage then return nil, nil end
+    local cacheable = direction == nil and stage ~= nil
+    local cacheKey = definition and tostring(definition.id or "") or ""
+    local stageCache = cacheable and definitionIconCache[stage] or nil
+    local cached = stageCache and stageCache[cacheKey] or nil
+    if cached then
+        return cached.texture, cached.color
+    end
+    Profiler.count("icons.definitionResolves")
+    local texture, color = resolveDefinitionTexture(definition, stage, direction)
+    if cacheable then
+        if not stageCache then
+            stageCache = {}
+            definitionIconCache[stage] = stageCache
+        end
+        stageCache[cacheKey] = { texture = texture, color = color }
+    end
+    return texture, color
 end
 
 return IconResolver

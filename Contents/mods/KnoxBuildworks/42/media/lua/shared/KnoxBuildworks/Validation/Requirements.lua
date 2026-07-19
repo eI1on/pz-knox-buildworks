@@ -3,10 +3,29 @@ local Log = require("KnoxBuildworks/Log")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local RecipeData = require("KnoxBuildworks/Crafting/RecipeData")
+local Profiler = require("KnoxBuildworks/Util/Profiler")
 
 ---@class KBW.RequirementsModule
 ---@type KBW.RequirementsModule
 local Requirements = {}
+
+-- Revision counter for player inventory/container state. UI readiness caches
+-- key off this instead of re-walking containers on a timer: any container
+-- change bumps it, and stale statuses re-evaluate lazily.
+local inventoryRev = 1
+
+local function bumpInventoryRev()
+    inventoryRev = inventoryRev + 1
+end
+
+if Events and Events.OnContainerUpdate then
+    Events.OnContainerUpdate.Add(bumpInventoryRev)
+end
+
+---@return number
+function Requirements.inventoryRevision()
+    return inventoryRev
+end
 
 local activeInput = nil
 
@@ -373,6 +392,222 @@ local function normalizedInputs(definition, stage)
     return rows
 end
 
+-- ---------------------------------------------------------------------------
+-- Inventory snapshot + readiness-only evaluation.
+--
+-- Requirements.evaluate below walks the player's containers recursively per
+-- input (several Java-side recursions per buildable). That is correct and
+-- detailed, but far too heavy to run for every visible catalogue card. The
+-- snapshot walks the inventory ONCE per (revision, square) and readiness
+-- checks count against it in Lua with the exact same item predicates.
+-- ---------------------------------------------------------------------------
+
+local function acceptAll()
+    return true
+end
+
+local snapshotCache = nil
+
+---One recursive walk of the player's inventory plus the on-ground material
+---map for the given square, cached until a container changes or the square
+---differs. Shared by every readiness check in a refresh cycle.
+---@param player IsoPlayer
+---@param square IsoGridSquare|nil
+---@return table snapshot
+function Requirements.snapshot(player, square)
+    local squareKey = square and (square:getX() .. ":" .. square:getY() .. ":" .. square:getZ()) or ""
+    local cached = snapshotCache
+    if cached and cached.player == player and cached.rev == inventoryRev and cached.squareKey == squareKey then
+        return cached
+    end
+    local snapshotStart = Profiler.now()
+    local snapshot = {
+        player = player,
+        rev = inventoryRev,
+        squareKey = squareKey,
+        byType = {},
+        allItems = {},
+        tagCache = {},
+        ground = (square and buildUtil and buildUtil.getMaterialOnGround) and buildUtil.getMaterialOnGround(square)
+            or {}
+    }
+    local inventory = player and player.getInventory and player:getInventory() or nil
+    local items = inventory and inventory:getAllEvalRecurse(acceptAll, ArrayList.new()) or nil
+    if items then
+        local byType = snapshot.byType
+        local allItems = snapshot.allItems
+        for itemIndex = 0, items:size() - 1 do
+            local item = items:get(itemIndex)
+            local fullType = item:getFullType()
+            local list = byType[fullType]
+            if not list then
+                list = {}
+                byType[fullType] = list
+            end
+            list[#list + 1] = item
+            allItems[#allItems + 1] = item
+        end
+    end
+    snapshotCache = snapshot
+    Profiler.add("requirements.snapshot", snapshotStart)
+    Profiler.count("requirements.snapshotBuilds")
+    return snapshot
+end
+
+---Items carrying the tag, filtered lazily from the snapshot and cached per
+---tag name so hundreds of cards sharing common tool tags scan once.
+local function snapshotTagItems(snapshot, tagName)
+    local cached = snapshot.tagCache[tagName]
+    if cached then return cached end
+    local result = {}
+    local tag = tagValue(tagName)
+    if tag then
+        local allItems = snapshot.allItems
+        for itemIndex = 1, #allItems do
+            local item = allItems[itemIndex]
+            if item:hasTag(tag) then result[#result + 1] = item end
+        end
+    end
+    snapshot.tagCache[tagName] = result
+    return result
+end
+
+---Counts available units for one input against the snapshot, honouring the
+---same predicate flags and ground-item rules as the detailed evaluation
+---(carried items pass predicateNotBroken; ground items are counted as-is).
+local function countAvailable(snapshot, input, countUses, includeGround)
+    local total = 0
+    local seenItems = {}
+    local oldInput = activeInput
+    activeInput = input
+    local types = input.items or {}
+    for typeIndex = 1, #types do
+        local fullType = types[typeIndex]
+        local list = snapshot.byType[fullType]
+        if list then
+            for itemIndex = 1, #list do
+                local item = list[itemIndex]
+                if not seenItems[item] and predicateNotBroken(item) then
+                    seenItems[item] = true
+                    total = total + amountForItem(item, countUses)
+                end
+            end
+        end
+        if includeGround then
+            local groundItems = snapshot.ground[fullType] or {}
+            for groundIndex = 1, #groundItems do
+                local item = groundItems[groundIndex]
+                if not seenItems[item] then
+                    seenItems[item] = true
+                    total = total + amountForItem(item, countUses)
+                end
+            end
+        end
+    end
+    local tags = input.tags or {}
+    for tagIndex = 1, #tags do
+        local tagName = tags[tagIndex]
+        local tagged = snapshotTagItems(snapshot, tagName)
+        for itemIndex = 1, #tagged do
+            local item = tagged[itemIndex]
+            if not seenItems[item] and predicateNotBroken(item) then
+                seenItems[item] = true
+                total = total + amountForItem(item, countUses)
+            end
+        end
+        if includeGround then
+            local tag = tagValue(tagName)
+            if tag then
+                for _, itemsOnGround in pairs(snapshot.ground) do
+                    itemsOnGround = itemsOnGround or {}
+                    for groundIndex = 1, #itemsOnGround do
+                        local item = itemsOnGround[groundIndex]
+                        if not seenItems[item] and item:hasTag(tag) then
+                            seenItems[item] = true
+                            total = total + amountForItem(item, countUses)
+                        end
+                    end
+                end
+            end
+        end
+    end
+    activeInput = oldInput
+    return total
+end
+
+---Normalized inputs cached per stage. The normalized rows derive only from
+---the immutable definition/stage data and are treated as read-only by the
+---readiness path; the detailed evaluate/consume paths keep building fresh
+---copies.
+local function readinessInputs(definition, stage)
+    local cached = stage.__kbwReadinessInputs
+    if not cached then
+        cached = normalizedInputs(definition, stage)
+        stage.__kbwReadinessInputs = cached
+    end
+    return cached
+end
+
+---Whether the stage recipe carries CanBeDoneInDark, resolved once per stage.
+local function stageCanBeDoneInDark(definition, stage)
+    local cached = stage.__kbwCanBeDoneInDark
+    if cached == nil then
+        cached = recipeHasTag(StageConfig.recipe(definition, stage), "CanBeDoneInDark")
+        stage.__kbwCanBeDoneInDark = cached
+    end
+    return cached
+end
+
+---Readiness-only evaluation for catalogue cards: same pass/fail logic as
+---Requirements.evaluate, but counts against the shared snapshot, skips the
+---Available Ingredients / Possible Items detail rows, and exits early.
+---@param player IsoPlayer
+---@param definition KBW.BuildableDefinition
+---@param stage KBW.BuildStage
+---@param snapshot table
+---@return {ok: boolean}
+function Requirements.evaluateReadiness(player, definition, stage, snapshot)
+    if not player or not definition or not stage then return { ok = false } end
+    Profiler.count("requirements.readinessEvals")
+    local cheat = player:isBuildCheat()
+    local req = stage.requirements or {}
+    if req.debugOnly and not isDebugEnabled() then return { ok = false } end
+    if not cheat and player.tooDarkToRead and player:tooDarkToRead()
+        and not stageCanBeDoneInDark(definition, stage) then
+        return { ok = false }
+    end
+    if not cheat then
+        local inputs = readinessInputs(definition, stage)
+        for inputIndex = 1, #inputs do
+            local input = inputs[inputIndex]
+            local needed = input.uses or input.amount or 1
+            local countUses = input.uses ~= nil or input.mode == "drain"
+            local includeGround = input.mode ~= "keep"
+            if countAvailable(snapshot, input, countUses, includeGround) < needed then
+                return { ok = false }
+            end
+        end
+        for perkName, needed in pairs(req.skills or {}) do
+            local perk = Perks[perkName]
+            local available = perk and player:getPerkLevel(perk) or 0
+            if perk == nil or available < needed then return { ok = false } end
+        end
+    end
+    -- Knowledge is not bypassed by the build cheat, matching evaluate().
+    local knowledge = req.knowledge or {}
+    if knowledge.needToBeLearned ~= false then
+        local requiredRecipes = req.recipes or {}
+        for recipeIndex = 1, #requiredRecipes do
+            if not player:isRecipeActuallyKnown(requiredRecipes[recipeIndex]) then return { ok = false } end
+        end
+        local knowledgeRecipes = knowledge.recipes or {}
+        for recipeIndex = 1, #knowledgeRecipes do
+            if not player:isRecipeActuallyKnown(knowledgeRecipes[recipeIndex]) then return { ok = false } end
+        end
+    end
+    return { ok = true }
+end
+
 ---@param player IsoPlayer
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
@@ -380,6 +615,7 @@ end
 ---@param choices table<string, string>|nil
 ---@return KBW.RequirementStatus
 function Requirements.evaluate(player, definition, stage, square, choices)
+    Profiler.count("requirements.fullEvals")
     local status = { ok = true, materials = {}, tools = {}, skills = {}, recipes = {}, rows = {} }
     if not player or not definition or not stage then
         status.ok = false
