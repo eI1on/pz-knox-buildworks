@@ -512,7 +512,6 @@ local function beginWallCoveringCursor(player, definition, stage, finish)
         getCell():setDrag(ISPaperCursor:new(player, wallpaperType, sprite), player:getPlayerNum())
         return true
     end
-    if not ISPaintCursor then require "BuildingObjects/ISPaintCursor" end
     local args = { actionType = action }
     if action == "paintThump" or action == "paintSign" then
         local paintType = (finish and finish.paintType)
@@ -527,7 +526,16 @@ local function beginWallCoveringCursor(player, definition, stage, finish)
         end
     end
     if action == "paintSign" then args.sign = (finish and finish.sign) or wall.sign or wall.signIndex end
-    local cursor = ISPaintCursor:new(player, action, args)
+    local cursor = nil
+    if action == "paintThump" then
+        local WallFinishCursor = require("KnoxBuildworks/BuildingObjects/KBWWallFinishCursor")
+        cursor = WallFinishCursor.new(player, action, args, finish)
+    else
+        if not ISPaintCursor then require "BuildingObjects/ISPaintCursor" end
+        if not ISPaintCursor then return false end
+        cursor = ISPaintCursor:new(player, action, args)
+    end
+    if not cursor then return false end
     if action == "plaster" then patchPlasterCursor(cursor) end
     getCell():setDrag(cursor, player:getPlayerNum())
     return true

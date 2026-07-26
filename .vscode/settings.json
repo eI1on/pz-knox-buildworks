@@ -1,0 +1,10 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/Contents/mods/knox_buildworks_vanilla_expanded/42/media/KnoxBuildworks/definitions/**/*.json"
+      ],
+      "url": "./Contents/mods/KnoxBuildworks/42/media/KnoxBuildworks/buildables.schema.json"
+    }
+  ]
+}

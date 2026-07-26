@@ -7,8 +7,10 @@ local Catalog = require("KnoxBuildworks/UI/Catalog")
 local Options = require("KnoxBuildworks/Options")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 require("KnoxBuildworks/Planning/Planner")
+require("KnoxBuildworks/World/WellSystem")
 local PinnedRecipes = require("KnoxBuildworks/UI/PinnedRecipes")
 require("KnoxBuildworks/UI/Sidebar")
+require("KnoxBuildworks/Debug/DebugMenuDock")
 
 local function hello(player)
     if isClient() then
@@ -224,4 +226,3 @@ Events.OnKeyPressed.Add(onKeyPressed)
 Events.OnPlayerUpdate.Add(refreshNearbyBlueprints)
 Events.OnFillInventoryObjectContextMenu.Add(inventoryContextMenu)
 return true
-

@@ -45,3 +45,53 @@ option KnoxBuildworks.BlueprintRadius
 	page = KnoxBuildworks,
 	translation = KBW_BlueprintRadius,
 }
+
+option KnoxBuildworks.WellWaterMode
+{
+	type = enum,
+	numValues = 2,
+	default = 1,
+	page = KnoxBuildworks,
+	translation = KBW_WellWaterMode,
+	valueTranslation = KBW_WellWaterMode,
+}
+
+option KnoxBuildworks.WellCapacity
+{
+	type = integer,
+	min = 1,
+	max = 10000,
+	default = 1500,
+	page = KnoxBuildworks,
+	translation = KBW_WellCapacity,
+}
+
+option KnoxBuildworks.WellInitialPercent
+{
+	type = integer,
+	min = 0,
+	max = 100,
+	default = 25,
+	page = KnoxBuildworks,
+	translation = KBW_WellInitialPercent,
+}
+
+option KnoxBuildworks.WellHourlyRefill
+{
+	type = double,
+	min = 0.0,
+	max = 100.0,
+	default = 3.0,
+	page = KnoxBuildworks,
+	translation = KBW_WellHourlyRefill,
+}
+
+option KnoxBuildworks.WellRainRefillMultiplier
+{
+	type = double,
+	min = 0.0,
+	max = 10.0,
+	default = 1.5,
+	page = KnoxBuildworks,
+	translation = KBW_WellRainRefillMultiplier,
+}

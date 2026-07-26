@@ -46,9 +46,6 @@ local function recipeHasTag(recipe, wanted)
     return false
 end
 
--- B42's ItemContainer *TagEval methods require a non-null Lua closure.
--- Vanilla defines this predicate locally in each module; Knox keeps the
--- current input in activeInput so tag and item scans can respect script flags.
 local function predicateNotBroken(item)
     local input = activeInput
     if not item then return false end
@@ -105,8 +102,6 @@ local function tagValue(name)
         key = string.gsub(key, "[^A-Z0-9]", "_")
         tag = ItemTag[key] or ItemTag[string.upper(normalized)]
     end
-    -- An unresolved tag still surfaces as a Possible Items tag row; warn once
-    -- so the definition gets fixed instead of hiding the gap.
     if not tag and normalized and not warnedTags[normalized] then
         warnedTags[normalized] = true
         Log:warning("Unresolved item tag '%s' in requirements", tostring(name))
@@ -593,7 +588,6 @@ function Requirements.evaluateReadiness(player, definition, stage, snapshot)
             if perk == nil or available < needed then return { ok = false } end
         end
     end
-    -- Knowledge is not bypassed by the build cheat, matching evaluate().
     local knowledge = req.knowledge or {}
     if knowledge.needToBeLearned ~= false then
         local requiredRecipes = req.recipes or {}
@@ -634,17 +628,12 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         status.ok = false
         status.reason = "debug only"
     end
-    -- UI callers evaluate without a build square; fall back to the player's
-    -- square so on-the-ground materials count exactly like they do at
-    -- build/consume time.
     if square == nil and player.getSquare then square = player:getSquare() end
     local inputs = normalizedInputs(definition, stage)
     for inputIndex = 1, #inputs do
         local input = inputs[inputIndex]
         local needed = input.uses or input.amount or 1
         local countUses = input.uses ~= nil or input.mode == "drain"
-        -- Kept items (tools) must be carried - consumeInput's keep mode only
-        -- accepts inventory matches - so ground items never count for them.
         local groundSquare = input.mode ~= "keep" and square or nil
         local selectedFullType = choices and choices[input.id] or nil
         local selectedTypes = selectedFullType and { selectedFullType } or input.items

@@ -240,9 +240,18 @@ local function evaluateVisibility(player, record, shouldShowAll)
 end
 
 local function queueVisibility(record, player, shouldShowAll)
-    if visibilityQueued[record] then return end
-    visibilityQueued[record] = true
-    visibilityQueue[#visibilityQueue + 1] = { record = record, player = player, showAll = shouldShowAll == true }
+    local queued = visibilityQueued[record]
+    if queued then
+        -- A filter toggle can happen while an inventory-triggered refresh is
+        -- already queued. Keep the newest mode so an old "show all" value
+        -- cannot overwrite the user's latest checkbox state.
+        queued.player = player
+        queued.showAll = shouldShowAll == true
+        return
+    end
+    local entry = { record = record, player = player, showAll = shouldShowAll == true }
+    visibilityQueued[record] = entry
+    visibilityQueue[#visibilityQueue + 1] = entry
 end
 
 ---Player-dependent visibility with the static fast path applied. Definitions

@@ -22,6 +22,19 @@ function LuaCallback.isValidName(name)
     return true
 end
 
+local function isResolvableName(name)
+    if type(name) ~= "string" or name == "" then return false end
+    local count = 0
+    for token in string.gmatch(name, "[^%.]+") do
+        if not string.match(token, "^[A-Za-z_][A-Za-z0-9_]*$") then return false end
+        count = count + 1
+    end
+    if count < 1 then return false end
+    if string.sub(name, 1, 1) == "." or string.sub(name, -1) == "." then return false end
+    if string.find(name, "..", 1, true) then return false end
+    return true
+end
+
 ---@param name string|nil
 ---@return boolean
 function LuaCallback.requiresNativeRecipe(name)
@@ -53,12 +66,15 @@ local function loadKnownCallbackModule(name)
     if string.sub(name, 1, 15) == "BuildRecipeCode" and not BuildRecipeCode then
         require "BuildRecipeCode/buildRecipeCode"
     end
+    if not string.find(name, ".", 1, true) and _G[name] == nil then
+        require "CraftRecipeCode/CraftRecipe_BuildMenu"
+    end
 end
 
 ---@param name string|nil
 function LuaCallback.resolve(name)
     if type(name) == "function" then return name end
-    if not LuaCallback.isValidName(name) then return nil end
+    if not isResolvableName(name) then return nil end
     loadKnownCallbackModule(name)
     local value = _G
     for token in string.gmatch(name, "[^%.]+") do

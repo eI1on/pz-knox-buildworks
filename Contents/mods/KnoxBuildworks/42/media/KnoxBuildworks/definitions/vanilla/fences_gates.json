@@ -125,6 +125,7 @@
       "group": {
         "id": "vanilla.brickfence",
         "name": "Brick Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_brickfence",
         "level": 2
       },
       "iconName": "Build_FenceBrick"
@@ -192,6 +193,7 @@
       "group": {
         "id": "vanilla.metalfence",
         "name": "Metal Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_metalfence",
         "level": 2
       },
       "iconName": "Build_FenceMetal"
@@ -227,6 +229,7 @@
       "group": {
         "id": "vanilla.metalfence",
         "name": "Metal Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_metalfence",
         "level": 1
       },
       "iconName": "Build_FenceMetal"
@@ -354,6 +357,7 @@
       "group": {
         "id": "vanilla.woodfence",
         "name": "Wood Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodfence",
         "level": 3
       },
       "iconName": "Build_FenceWood"
@@ -390,6 +394,7 @@
       "group": {
         "id": "vanilla.woodfence",
         "name": "Wood Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodfence",
         "level": 2
       },
       "iconName": "Build_FenceWood"
@@ -426,6 +431,7 @@
       "group": {
         "id": "vanilla.woodfence",
         "name": "Wood Fence",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodfence",
         "level": 1
       },
       "iconName": "Build_FenceWood"

@@ -1,27 +1,16 @@
 module KnoxBuildworks
 {
-    craftRecipe MakeBucketOfAsphaltMixture
-    {
-        timedAction = MixingBucket,
-        time = 150,
-        Tags = InHandCraft,
-        category = Masonry,
-        inputs
-        {
-            item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug] mode:destroy,
-            -fluid 10.0 categories[Water] mode:mixture,
-            item 1 [KnoxBuildworks.AsphaltMixturePowder],
-        }
-        outputs
-        {
-            item 1 KnoxBuildworks.BucketAsphaltMixtureFull,
-        }
-    }
-
     model KBW_BagOfAsphaltMixture
     {
-        mesh = WorldItems/BMBagOfAsphaltMixture,
-        texture = WorldItems/BMBagOfAsphalt,
+        mesh = WorldItems/KBWBagOfAsphaltMixture,
+        texture = WorldItems/KBWBagOfAsphalt,
         scale = 0.006,
+    }
+
+    model KBW_Blueprint
+    {
+        mesh = WorldItems/KBWBlueprint,
+        texture = WorldItems/KBWBlueprint,
+        scale = 0.0025,
     }
 }

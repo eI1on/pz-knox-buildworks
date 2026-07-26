@@ -66,6 +66,7 @@
       "group": {
         "id": "vanilla.metal_lockerbig",
         "name": "Big Metal Locker",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_lockerbig",
         "level": 2
       },
       "iconName": "Build_CabinetMetal"
@@ -102,6 +103,7 @@
       "group": {
         "id": "vanilla.metal_lockerbig",
         "name": "Big Metal Locker",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_lockerbig",
         "level": 1
       },
       "iconName": "Build_CabinetMetal"
@@ -328,6 +330,7 @@
       "group": {
         "id": "vanilla.metal_counter",
         "name": "Metal Counter",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_counter",
         "level": 2
       },
       "iconName": "Build_MetalCounter"
@@ -364,6 +367,7 @@
       "group": {
         "id": "vanilla.metal_counter",
         "name": "Metal Counter",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_counter",
         "level": 1
       },
       "iconName": "Build_MetalCounter"
@@ -400,6 +404,7 @@
       "group": {
         "id": "vanilla.metal_countercorner",
         "name": "Metal Counter Corner",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_countercorner",
         "level": 2
       },
       "iconName": "Build_MetalCounterCorner"
@@ -436,6 +441,7 @@
       "group": {
         "id": "vanilla.metal_countercorner",
         "name": "Metal Counter Corner",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_countercorner",
         "level": 1
       },
       "iconName": "Build_MetalCounterCorner"
@@ -472,6 +478,7 @@
       "group": {
         "id": "vanilla.metal_crate",
         "name": "Metal Crate",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_crate",
         "level": 2
       },
       "iconName": "Build_CrateMetal"
@@ -508,6 +515,7 @@
       "group": {
         "id": "vanilla.metal_crate",
         "name": "Metal Crate",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_crate",
         "level": 1
       },
       "iconName": "Build_CrateMetal"
@@ -545,6 +553,7 @@
       "group": {
         "id": "vanilla.metal_shelves",
         "name": "Metal Shelves",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_shelves",
         "level": 2
       },
       "iconName": "Build_ShelvesMetal"
@@ -582,6 +591,7 @@
       "group": {
         "id": "vanilla.metal_shelves",
         "name": "Metal Shelves",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_shelves",
         "level": 1
       },
       "iconName": "Build_ShelvesMetal"
@@ -680,6 +690,7 @@
       "group": {
         "id": "vanilla.metal_lockersmall",
         "name": "Small Metal Locker",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_lockersmall",
         "level": 2
       },
       "iconName": "Build_GunLocker"
@@ -716,6 +727,7 @@
       "group": {
         "id": "vanilla.metal_lockersmall",
         "name": "Small Metal Locker",
+        "translationKey": "IGUI_KBW_Group_vanilla_metal_lockersmall",
         "level": 1
       },
       "iconName": "Build_GunLocker"
@@ -752,6 +764,7 @@
       "group": {
         "id": "vanilla.wood_tablesmall",
         "name": "Small Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tablesmall",
         "level": 3
       },
       "iconName": "Build_TableSmallWood"
@@ -788,6 +801,7 @@
       "group": {
         "id": "vanilla.wood_tablesmall",
         "name": "Small Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tablesmall",
         "level": 2
       },
       "iconName": "Build_TableSmallWood"
@@ -824,6 +838,7 @@
       "group": {
         "id": "vanilla.wood_tablesmall",
         "name": "Small Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tablesmall",
         "level": 1
       },
       "iconName": "Build_TableSmallWood"
@@ -891,6 +906,7 @@
       "group": {
         "id": "vanilla.stick_bookcasesmall",
         "name": "Stick Small Bookcase",
+        "translationKey": "IGUI_KBW_Group_vanilla_stick_bookcasesmall",
         "level": 1
       },
       "iconName": "Build_StickBookcaseSmall"
@@ -958,6 +974,7 @@
       "group": {
         "id": "vanilla.wood_barelement",
         "name": "Wood Bar Element",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelement",
         "level": 3
       },
       "iconName": "Build_WoodCounter"
@@ -994,6 +1011,7 @@
       "group": {
         "id": "vanilla.wood_barelement",
         "name": "Wood Bar Element",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelement",
         "level": 2
       },
       "iconName": "Build_WoodCounter"
@@ -1030,6 +1048,7 @@
       "group": {
         "id": "vanilla.wood_barelement",
         "name": "Wood Bar Element",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelement",
         "level": 1
       },
       "iconName": "Build_WoodCounter"
@@ -1066,6 +1085,7 @@
       "group": {
         "id": "vanilla.wood_barelementcorner",
         "name": "Wood Bar Element Corner",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelementcorner",
         "level": 3
       },
       "iconName": "Build_WoodCounterCorner"
@@ -1102,6 +1122,7 @@
       "group": {
         "id": "vanilla.wood_barelementcorner",
         "name": "Wood Bar Element Corner",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelementcorner",
         "level": 2
       },
       "iconName": "Build_WoodCounterCorner"
@@ -1138,6 +1159,7 @@
       "group": {
         "id": "vanilla.wood_barelementcorner",
         "name": "Wood Bar Element Corner",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_barelementcorner",
         "level": 1
       },
       "iconName": "Build_WoodCounterCorner"
@@ -1174,6 +1196,7 @@
       "group": {
         "id": "vanilla.wood_bookcase",
         "name": "Wood Bookcase",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_bookcase",
         "level": 2
       },
       "iconName": "Build_Bookcase"
@@ -1210,6 +1233,7 @@
       "group": {
         "id": "vanilla.wood_bookcase",
         "name": "Wood Bookcase",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_bookcase",
         "level": 1
       },
       "iconName": "Build_Bookcase"
@@ -1246,6 +1270,7 @@
       "group": {
         "id": "vanilla.wood_chair",
         "name": "Wood Chair",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_chair",
         "level": 3
       },
       "iconName": "Build_Chair"
@@ -1282,6 +1307,7 @@
       "group": {
         "id": "vanilla.wood_chair",
         "name": "Wood Chair",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_chair",
         "level": 2
       },
       "iconName": "Build_Chair"
@@ -1318,6 +1344,7 @@
       "group": {
         "id": "vanilla.wood_chair",
         "name": "Wood Chair",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_chair",
         "level": 1
       },
       "iconName": "Build_Chair"
@@ -1354,6 +1381,7 @@
       "group": {
         "id": "vanilla.wood_crate",
         "name": "Wood Crate",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_crate",
         "level": 2
       },
       "iconName": "Build_CrateWood"
@@ -1390,6 +1418,7 @@
       "group": {
         "id": "vanilla.wood_crate",
         "name": "Wood Crate",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_crate",
         "level": 1
       },
       "iconName": "Build_CrateWood"
@@ -1427,6 +1456,7 @@
       "group": {
         "id": "vanilla.wood_shelvesdouble",
         "name": "Wood Double Shelves",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_shelvesdouble",
         "level": 1
       },
       "iconName": "Build_ShelvesWood"
@@ -1464,6 +1494,7 @@
       "group": {
         "id": "vanilla.wood_shelves",
         "name": "Wood Shelves",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_shelves",
         "level": 2
       },
       "iconName": "Build_ShelfWood"
@@ -1501,6 +1532,7 @@
       "group": {
         "id": "vanilla.wood_shelves",
         "name": "Wood Shelves",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_shelves",
         "level": 1
       },
       "iconName": "Build_ShelfWood"
@@ -1537,6 +1569,7 @@
       "group": {
         "id": "vanilla.wood_bookcasesmall",
         "name": "Wood Small Bookcase",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_bookcasesmall",
         "level": 2
       },
       "iconName": "Build_BookcaseShort"
@@ -1573,6 +1606,7 @@
       "group": {
         "id": "vanilla.wood_bookcasesmall",
         "name": "Wood Small Bookcase",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_bookcasesmall",
         "level": 1
       },
       "iconName": "Build_BookcaseShort"
@@ -1609,6 +1643,7 @@
       "group": {
         "id": "vanilla.wood_table",
         "name": "Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_table",
         "level": 3
       },
       "iconName": "Build_TableLargeWood"
@@ -1645,6 +1680,7 @@
       "group": {
         "id": "vanilla.wood_table",
         "name": "Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_table",
         "level": 2
       },
       "iconName": "Build_TableLargeWood"
@@ -1681,6 +1717,7 @@
       "group": {
         "id": "vanilla.wood_table",
         "name": "Wood Table",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_table",
         "level": 1
       },
       "iconName": "Build_TableLargeWood"
@@ -1717,6 +1754,7 @@
       "group": {
         "id": "vanilla.wood_tabledrawer",
         "name": "Wood Table with Drawer",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tabledrawer",
         "level": 2
       },
       "iconName": "Build_Sidetable"
@@ -1753,6 +1791,7 @@
       "group": {
         "id": "vanilla.wood_tabledrawer",
         "name": "Wood Table with Drawer",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tabledrawer",
         "level": 3
       },
       "iconName": "Build_Sidetable"
@@ -1789,6 +1828,7 @@
       "group": {
         "id": "vanilla.wood_tabledrawer",
         "name": "Wood Table with Drawer",
+        "translationKey": "IGUI_KBW_Group_vanilla_wood_tabledrawer",
         "level": 1
       },
       "iconName": "Build_Sidetable"

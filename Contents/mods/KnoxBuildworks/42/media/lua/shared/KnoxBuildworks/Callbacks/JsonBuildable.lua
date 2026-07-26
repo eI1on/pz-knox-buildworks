@@ -4,10 +4,12 @@ KBW.JsonCallbacks = KBW.JsonCallbacks or {}
 KBW.JsonCallbacks.Floor = KBW.JsonCallbacks.Floor or {}
 KBW.JsonCallbacks.DoorFrame = KBW.JsonCallbacks.DoorFrame or {}
 KBW.JsonCallbacks.Surface = KBW.JsonCallbacks.Surface or {}
+KBW.JsonCallbacks.Visibility = KBW.JsonCallbacks.Visibility or {}
 
 local Floor = KBW.JsonCallbacks.Floor
 local DoorFrame = KBW.JsonCallbacks.DoorFrame
 local Surface = KBW.JsonCallbacks.Surface
+local Visibility = KBW.JsonCallbacks.Visibility
 
 function Floor.OnIsValid(params)
     if not params or not params.square or not params.tileInfo then return false end
@@ -102,6 +104,13 @@ function Surface.EnablePlaster(params)
     if not object or not instanceof(object, "IsoThumpable") then return nil end
     object:setCanBePlastered(true)
     return nil
+end
+
+function Visibility.BrickWallLvl2(params)
+    if params and params.shouldShowAll then return true end
+    local player = params and params.player or nil
+    if not player then return false end
+    return player:getPerkLevel(Perks.Masonry) >= 5
 end
 
 return KBW.JsonCallbacks

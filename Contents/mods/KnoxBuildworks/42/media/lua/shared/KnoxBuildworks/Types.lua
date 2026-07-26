@@ -139,6 +139,7 @@
 ---@field needToBeAgainstWall? boolean
 ---@field dontNeedFrame? boolean
 ---@field needWindowFrame? boolean
+---@field providesWindowFrame? boolean Marks the completed wall edge as a valid support for a separately built window.
 ---@field isPole? boolean
 ---@field wallCoveringType? 'plaster'|'paint'|'paintThump'|'wallpaper'|'paintSign'
 ---@field sign? number|string
@@ -165,6 +166,8 @@
 ---@field dismantable? boolean
 ---@field blockAllSquare? boolean
 ---@field canPassThrough? boolean
+---@field isDoorFrame? boolean
+---@field isCorner? boolean
 ---@field hoppable? boolean
 ---@field canBarricade? boolean
 ---@field canBePadlocked? boolean
@@ -192,6 +195,16 @@
 ---@field fuel? string
 ---@field debugItem? string
 ---@field offsets? table<KBW.DirectionName, KBW.LightOffset>
+
+---@class KBW.NativeObjectConfig
+---@field type 'fireplace'|'generator'
+---@field item? string Full item type used to initialize IsoGenerator; required only when type is generator.
+
+---@class KBW.WellConfig
+---@field capacity? number Finite capacity; the sandbox value is used when omitted.
+---@field initialPercent? number Initial fill percentage from 0 through 100.
+---@field refillPerHour? number Clean groundwater added every in-game hour.
+---@field rainFactor? number Base factor used by B42's native rain-catcher simulation.
 
 ---@class KBW.BuildStage
 ---@field id string
@@ -222,6 +235,8 @@
 ---@field requirements? KBW.RequirementSet
 ---@field placement? KBW.PlacementConfig
 ---@field construction? KBW.ConstructionConfig
+---@field nativeObject? KBW.NativeObjectConfig
+---@field well? true|KBW.WellConfig
 
 ---@class KBW.BuildableGroup
 ---@field id string

@@ -46,7 +46,7 @@ local function clampPercent(value)
 end
 
 function Options:apply()
-    Log:setDebug(self:getOption("Debug"):getValue())
+    -- Log:setDebug(self:getOption("Debug"):getValue())
     local profile = self:getOption("Profile")
     if profile and profile.getValue then
         KnoxBuildworks.Runtime.profile = profile:getValue() == true

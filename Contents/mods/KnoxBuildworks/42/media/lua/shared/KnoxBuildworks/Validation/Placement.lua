@@ -1,4 +1,4 @@
----Placement provides the Knox Buildworks construction validation layer.
+--- Placement provides the Knox Buildworks construction validation layer.
 ---@class KBW.PlacementModule
 ---@type KBW.PlacementModule
 local Placement = {}
@@ -36,7 +36,7 @@ local REASON_KEYS = {
     ["door frame required"] = "IGUI_KBW_Reason_DoorFrameRequired"
 }
 
----@param reason string|nil
+---@param reason string | nil
 function Placement.reasonText(reason)
     reason = tostring(reason or "")
     local key = REASON_KEYS[reason]
@@ -87,13 +87,58 @@ local function hasWallSupport(square, north, isPole)
     )
 end
 
+local function isRelevantOverlayWall(object, north, isCorner)
+    local modData = object:getModData()
+    if modData and modData.WindowWall then return true end
+    local props = object:getProperties()
+    if not props or instanceof(object, "IsoWindow") or props:has(IsoFlagType.solidfloor) then return false end
+    if isCorner then return props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WallSE) end
+    if north then
+        return props:has(IsoFlagType.WallN) or props:has(IsoFlagType.WindowN) or props:has(IsoFlagType.WallNW)
+            or props:has(IsoFlagType.WallSE) or props:has(IsoFlagType.DoorWallN)
+            or (props:has(IsoFlagType.HoppableN) and props:has(IsoFlagType.WallNTrans))
+    end
+    return props:has(IsoFlagType.WallW) or props:has(IsoFlagType.WindowW) or props:has(IsoFlagType.WallNW)
+        or props:has(IsoFlagType.WallSE) or props:has(IsoFlagType.DoorWallW)
+        or (props:has(IsoFlagType.HoppableW) and props:has(IsoFlagType.WallWTrans))
+end
+
+local function hasOverlayWallSupport(square, north, isCorner)
+    for objectIndex = 0, square:getObjects():size() - 1 do
+        if isRelevantOverlayWall(square:getObjects():get(objectIndex), north, isCorner) then return true end
+    end
+    return false
+end
+
+local function isDeclaredWindowFrame(object, north)
+    if not object or not instanceof(object, "IsoThumpable") or object:getNorth() ~= north then return false end
+    local modData = object:getModData()
+    return modData and modData.KBW and modData.KBW.providesWindowFrame == true
+end
+
+local function tileProvidesWindowFrame(props, north)
+    if not props then return false end
+    if north then
+        return props:has(IsoPropertyType.WINDOW_N)
+            or props:has(IsoPropertyType.WINDOW_FRAME_N)
+            or props:has(IsoFlagType.WindowN)
+    end
+    return props:has(IsoPropertyType.WINDOW_W)
+        or props:has(IsoPropertyType.WINDOW_FRAME_W)
+        or props:has(IsoFlagType.WindowW)
+end
+
 local function checkWallFrame(square, north, wantsWindow)
     local hasFrame = false
     local hasBuilt = false
     for i = 0, square:getSpecialObjects():size() - 1 do
         local item = square:getSpecialObjects():get(i)
         if instanceof(item, "IsoThumpable") then
-            if wantsWindow and item:isWindow() and item:getNorth() == north then hasFrame = true end
+            if wantsWindow and item:getNorth() == north
+                and (item:isWindow() or isDeclaredWindowFrame(item, north)
+                    or tileProvidesWindowFrame(item:getProperties(), north)) then
+                hasFrame = true
+            end
             if not wantsWindow and item:isDoorFrame() and item:getNorth() == north then hasFrame = true end
             if not wantsWindow and item:isDoor() and item:getNorth() == north then hasBuilt = true end
         end
@@ -103,8 +148,7 @@ local function checkWallFrame(square, north, wantsWindow)
         local sprite = object and object:getSprite()
         local props = sprite and sprite:getProperties()
         if wantsWindow then
-            if north and props and props:has(IsoPropertyType.WINDOW_N) then hasFrame = true end
-            if not north and props and props:has(IsoPropertyType.WINDOW_W) then hasFrame = true end
+            if tileProvidesWindowFrame(props, north) then hasFrame = true end
             if instanceof(object, "IsoWindow") and object:getNorth() == north then hasBuilt = true end
         else
             if north and object:getType() == IsoObjectType.doorFrN then hasFrame = true end
@@ -159,9 +203,9 @@ end
 -- too: the recorded entity name, the stage id (for multi-stage buildables),
 -- and the buildable id all count, so `previousStage` can name either a
 -- vanilla entity or a Knox stage/buildable.
----@param square IsoGridSquare|nil
+---@param square      IsoGridSquare | nil
 ---@param buildableId string
----@param north boolean
+---@param north       boolean
 function Placement.findPrevious(square, buildableId, previousStage, north)
     if not previousStage then return nil end
     local names = {}
@@ -210,8 +254,8 @@ end
 -- Public frame lookup for the planning system: does the square already hold
 -- a door frame (wantsWindow=false) or window frame (wantsWindow=true) on the
 -- given edge, without a door/window already hung there?
----@param square IsoGridSquare|nil
----@param north boolean
+---@param square IsoGridSquare | nil
+---@param north  boolean
 function Placement.hasWallFrame(square, north, wantsWindow)
     if not square then return false end
     local hasFrame, hasBuilt = checkWallFrame(square, north == true, wantsWindow == true)
@@ -235,7 +279,7 @@ function Placement.optionalReplacementStageOf(stage)
     return nil
 end
 
----@param square IsoGridSquare|nil
+---@param square IsoGridSquare | nil
 function Placement.validate(cursor, square)
     if not square or not cursor.character then return false, "missing square or player" end
     local placement = StageConfig.placement(cursor.definition, cursor.stage)
@@ -251,34 +295,38 @@ function Placement.validate(cursor, square)
     if previousStage and not previous then return false, "previous stage missing" end
     local kind = placement.kind
     if not previous and (placement.againstWall or placement.needToBeAgainstWall) then
-        -- Vanilla checks the square the shelf FACES INTO (n -> y+1, w -> x+1)
-        -- for the wall, and refuses when another special object already sits on
-        -- the original square (ISBuildIsoEntity "AGAINST WALLS").
-        local face = facingName(cursor)
-        local wallX, wallY = square:getX(), square:getY()
-        if face == "n" then wallY = wallY + 1 end
-        if face == "w" then wallX = wallX + 1 end
-        local wallSquare = getSquare(wallX, wallY, square:getZ())
-        local found = false
-        if wallSquare then
-            for i = 0, wallSquare:getObjects():size() - 1 do
-                local wallObject = wallSquare:getObjects():get(i)
-                local props = wallObject and wallObject:getProperties()
-                if props
-                    and (props:has(IsoPropertyType.WALL_NW) or (cursor.north and props:has(IsoPropertyType.WALL_N))
-                        or (not cursor.north and props:has(IsoPropertyType.WALL_W))) then
-                    for j = 0, square:getSpecialObjects():size() - 1 do
-                        local special = square:getSpecialObjects():get(j)
-                        if special ~= wallObject and instanceof(special, "IsoThumpable") and not special:isFloor() then
-                            return false, "square already occupied"
+        if kind == "overlay" then
+            local objectConfig = (cursor.stage and cursor.stage.object) or {}
+            if not hasOverlayWallSupport(square, cursor.north == true, objectConfig.isCorner == true) then
+                return false, "wall required"
+            end
+        else
+            local face = facingName(cursor)
+            local wallX, wallY = square:getX(), square:getY()
+            -- if face == "n" then wallY = wallY + 1 end
+            -- if face == "w" then wallX = wallX + 1 end
+            local wallSquare = getSquare(wallX, wallY, square:getZ())
+            local found = false
+            if wallSquare then
+                for i = 0, wallSquare:getObjects():size() - 1 do
+                    local wallObject = wallSquare:getObjects():get(i)
+                    local props = wallObject and wallObject:getProperties()
+                    if props
+                        and (props:has(IsoPropertyType.WALL_NW) or (cursor.north and props:has(IsoPropertyType.WALL_N))
+                            or (not cursor.north and props:has(IsoPropertyType.WALL_W))) then
+                        for j = 0, square:getSpecialObjects():size() - 1 do
+                            local special = square:getSpecialObjects():get(j)
+                            if special ~= wallObject and instanceof(special, "IsoThumpable") and not special:isFloor() then
+                                return false, "square already occupied"
+                            end
                         end
+                        found = true
+                        break
                     end
-                    found = true
-                    break
                 end
             end
+            if not found then return false, "wall required" end
         end
-        if not found then return false, "wall required" end
     end
     if not previous and kind == "floor" then
         -- Floors provide their own floor and may extend over open air when an

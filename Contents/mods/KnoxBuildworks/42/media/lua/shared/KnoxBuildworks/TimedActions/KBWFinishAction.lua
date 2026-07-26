@@ -132,7 +132,11 @@ function KBWFinishAction:complete()
     -- the placement cursor snapped or replaced a previous construction stage.
     local wallType = WallFinishes.objectWallType(self.thumpable)
     local north = WallFinishes.objectNorth(self.thumpable)
-    local resolvedSprite = WallFinishes.spriteForWallType(self.mode, self.finish, north, wallType) or self.sprite
+    local currentSprite = self.thumpable:getSprite()
+    local baseSprite = currentSprite and currentSprite:getName() or nil
+    local resolvedSprite = WallFinishes.spriteForWallType(
+        self.mode, self.finish, north, wallType, baseSprite
+    ) or self.sprite
     if not resolvedSprite then return false end
     if self.mode == "plaster" then
         self.thumpable:setSpriteFromName(resolvedSprite)

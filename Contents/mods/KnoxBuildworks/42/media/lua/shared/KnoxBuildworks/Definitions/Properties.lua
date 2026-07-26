@@ -2,6 +2,7 @@
 local KBW = require("KnoxBuildworks/Core")
 local TableUtil = require("KnoxBuildworks/Util/Table")
 local Log = require("KnoxBuildworks/Log")
+local NativeObjectTypes = require("KnoxBuildworks/World/NativeObjectTypes")
 
 -- Extensible stage-property handlers. A handler binds behavior to a
 -- stage-level JSON key so new script properties (e.g. container capacity)
@@ -126,12 +127,58 @@ Properties.register("container", {
     end,
     applyToObject = function (part, buildObj, stage, context)
         if not context.isFloor and part.getContainer and part:getContainer() then
-            part:getContainer():setCapacity(stage.container.capacity or 30)
+            if stage.container.capacity ~= nil then
+                part:getContainer():setCapacity(stage.container.capacity)
+            end
         end
+    end
+})
+
+Properties.register("nativeObject", {
+    normalize = function (value, stage, definition, addError)
+        return NativeObjectTypes.validate(value, addError)
+    end,
+    applyToCursor = function (buildObj, stage)
+        buildObj.nativeObject = stage.nativeObject
+    end
+})
+
+Properties.register("well", {
+    normalize = function (value, stage, definition, addError)
+        if value ~= true and type(value) ~= "table" then
+            addError("must be true or an options object")
+            return value
+        end
+        if type(value) == "table" then
+            local numericFields = {
+                capacity = { minimum = 1, maximum = nil },
+                initialPercent = { minimum = 0, maximum = 100 },
+                refillPerHour = { minimum = 0, maximum = nil },
+                rainFactor = { minimum = 0, maximum = nil }
+            }
+            local names = TableUtil.sortedKeys(numericFields)
+            for index = 1, #names do
+                local name = names[index]
+                local field = value[name]
+                local limits = numericFields[name]
+                if field ~= nil and type(field) ~= "number" then
+                    addError("'" .. name .. "' must be a number")
+                elseif type(field) == "number" and field < limits.minimum then
+                    addError("'" .. name .. "' must be at least " .. tostring(limits.minimum))
+                elseif type(field) == "number" and limits.maximum and field > limits.maximum then
+                    addError("'" .. name .. "' must not exceed " .. tostring(limits.maximum))
+                end
+            end
+        end
+        return value
+    end,
+    applyToObject = function (part, buildObj, stage, context)
+        if context.tileIndex ~= 1 then return end
+        local WellSystem = require("KnoxBuildworks/World/WellSystem")
+        WellSystem.configureObject(part, stage.well, true)
     end
 })
 
 KBW.Properties = Properties
 
 return Properties
-

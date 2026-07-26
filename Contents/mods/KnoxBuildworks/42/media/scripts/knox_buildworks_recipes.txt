@@ -1,0 +1,37 @@
+module Base
+{
+    craftRecipe MakeBucketOfAsphaltMixture
+    {
+        timedAction = MixingBucket,
+        time = 150,
+        Tags = InHandCraft,
+        category = Masonry,
+        inputs
+        {
+            item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug] mode:destroy,
+            -fluid 10.0 categories[Water] mode:mixture,
+            item 1 [KnoxBuildworks.AsphaltMixturePowder],
+        }
+        outputs
+        {
+            item 1 KnoxBuildworks.BucketAsphaltMixtureFull,
+        }
+    }
+
+    craftRecipe CreateKBWBlueprint
+    {
+        timedAction = Making,
+        time        = 40,
+        Tags = InHandCraft,
+
+        inputs
+        {
+            item 1 tags[Write] mode:keep,
+            item 1 tags[Magazine;Hardcover;Picturebook;Newspaper;Softcover],
+        }
+        outputs
+        {
+            item 1 KnoxBuildworks.KBW_Blueprint,
+        }
+    }
+}

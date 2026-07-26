@@ -61,8 +61,10 @@ end
 local function finishSprite(entry, wall, mode)
     local wallType = WallFinishes.objectWallType(wall)
     local north = WallFinishes.objectNorth(wall)
-    return WallFinishes.spriteForWallType(mode, entry.finish, north, wallType)
-        or WallFinishes.spriteFor(mode, entry.finish, north, entry.definition, entry.stage)
+    local sprite = wall and wall:getSprite() or nil
+    local baseSprite = sprite and sprite:getName() or nil
+    return WallFinishes.spriteForWallType(mode, entry.finish, north, wallType, baseSprite)
+        or WallFinishes.spriteFor(mode, entry.finish, north, entry.definition, entry.stage, baseSprite)
 end
 
 local function queuePlaster(entry, wall)

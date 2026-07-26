@@ -1883,7 +1883,10 @@ local function placementBuiltInWorld(placement)
             for objectIndex = 0, list:size() - 1 do
                 local object = list:get(objectIndex)
                 local sprite = object and object.getSprite and object:getSprite() or nil
-                if sprite and sprite:getName() == expected and objectWallEdge(object, north) then return true end
+                local objectExpected = sprite and WallFinishes.spriteForWallType(
+                    action, placement.finish, north, wallType, sprite:getName()
+                ) or expected
+                if sprite and sprite:getName() == objectExpected and objectWallEdge(object, north) then return true end
             end
             return false
         end

@@ -147,7 +147,9 @@ local function queueWallCovering(player, blueprintId, blueprint, placement, defi
     local mode = WallFinishes.actionMode(action)
     local wallType = WallFinishes.objectWallType(target)
     local north = WallFinishes.objectNorth(target)
-    local sprite = WallFinishes.spriteForWallType(mode, placement.finish, north, wallType)
+    local currentSprite = target:getSprite()
+    local baseSprite = currentSprite and currentSprite:getName() or nil
+    local sprite = WallFinishes.spriteForWallType(mode, placement.finish, north, wallType, baseSprite)
     if not sprite then return false, "finish sprite is unavailable for target wall" end
     local inventory = player:getInventory()
     local item = nil

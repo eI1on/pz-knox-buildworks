@@ -6,6 +6,7 @@ local Integrity = require("KnoxBuildworks/Network/Integrity")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local BlueprintFiles = require("KnoxBuildworks/Planning/BlueprintFiles")
 local Log = require("KnoxBuildworks/Log")
+require("KnoxBuildworks/World/WellSystem")
 require "KnoxBuildworks/BuildingObjects/KBWBuildingObject"
 
 ---@class KBW.ServerModule
@@ -130,4 +131,3 @@ Events.OnServerStarted.Add(function ()
 end)
 Events.OnClientCommand.Add(Server.onClientCommand)
 return Server
-

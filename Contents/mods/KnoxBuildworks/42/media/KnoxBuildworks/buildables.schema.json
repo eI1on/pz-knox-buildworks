@@ -233,6 +233,10 @@
         "needWindowFrame": {
           "type": "boolean"
         },
+        "providesWindowFrame": {
+          "type": "boolean",
+          "description": "Marks the completed wall edge as a valid frame for a separately built window. Use this when a visual window-frame sprite does not declare native WindowN or WindowW tile properties."
+        },
         "isPole": {
           "type": "boolean"
         },
@@ -324,7 +328,8 @@
           "type": "boolean"
         },
         "isProp": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Uses B42 moveable-style world-object construction instead of a generic IsoThumpable. Use this for decorative pass-through objects. Non-floor sprites carrying native roof metadata are handled this way automatically."
         },
         "dismantable": {
           "type": "boolean"
@@ -334,6 +339,14 @@
         },
         "canPassThrough": {
           "type": "boolean"
+        },
+        "isDoorFrame": {
+          "type": "boolean",
+          "description": "Marks the completed IsoThumpable as a passable door frame. Use this for decorative door-frame sprites whose tile type is reported as a wall instead of doorFrN/doorFrW."
+        },
+        "isCorner": {
+          "type": "boolean",
+          "description": "Marks a completed object as a corner and, for wall overlays that require wall support, restricts placement to WallNW or WallSE corner/pillar objects."
         },
         "hoppable": {
           "type": "boolean"
@@ -364,7 +377,7 @@
     },
     "callbacks": {
       "type": "object",
-      "description": "Optional namespaced Lua overrides invoked by Knox with its documented compatibility payload. JSON-only floors receive Knox-owned placement and creation lifecycle callbacks when the corresponding fields are omitted. Callback portability still depends on the function's object, recipe-data, sprite, and native-system assumptions.",
+      "description": "Optional namespaced Lua overrides invoked by Knox with its documented compatibility payload. JSON-only floors receive Knox-owned floor lifecycle defaults, while JSON-only stairs receive the vanilla BuildRecipeCode.stairs placement and creation defaults when the corresponding fields are omitted. Callback portability still depends on the function's object, recipe-data, sprite, and native-system assumptions.",
       "properties": {
         "onAddToMenu": {
           "type": "string",
@@ -791,6 +804,74 @@
                       "minLength": 1
                     }
                   }
+                },
+                "nativeObject": {
+                  "description": "Creates a Knox-supported native world-object subclass instead of a generic IsoThumpable.",
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "required": [
+                        "type",
+                        "item"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "type": {
+                          "const": "generator",
+                          "description": "Creates a usable IsoGenerator."
+                        },
+                        "item": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "Full item type used to initialize the native generator, for example Base.Generator."
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "type": {
+                          "const": "fireplace",
+                          "description": "Creates a usable IsoFireplace with native fuel, light, heat and context-menu behavior."
+                        }
+                      }
+                    }
+                  ]
+                },
+                "well": {
+                  "description": "Marks the first built part as a water well. True uses sandbox defaults; an object overrides individual finite-well settings.",
+                  "oneOf": [
+                    {
+                      "const": true
+                    },
+                    {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "capacity": {
+                          "type": "number",
+                          "minimum": 1
+                        },
+                        "initialPercent": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "refillPerHour": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "rainFactor": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  ]
                 },
                 "sprites": {
                   "type": "object",

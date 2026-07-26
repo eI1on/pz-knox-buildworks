@@ -8,6 +8,7 @@ local Catalog = require("KnoxBuildworks/UI/Catalog")
 
 local UI_BORDER_SPACING = 10
 local POPUP_HOVER_GRACE = 8
+local PLANNING_MODE_TEXTURE = getTexture("media/ui/KBW_Planning_Mode.png")
 
 -- Integrates Knox Buildworks with the left sidebar's Build button.
 --
@@ -108,7 +109,7 @@ local function popupEntries(owner)
     end
     if planningEnabled() then
         entries[#entries + 1] = {
-            icon = owner.mapIconOn or owner.mapIconOff or owner.moveableIconBuildOn,
+            icon = PLANNING_MODE_TEXTURE or owner.moveableIconBuildOn,
             label = getText("IGUI_KBW_PlanningMode"),
             onClick = togglePlanning,
             isActive = function () return KBWPlanningMode and KBWPlanningMode.instance ~= nil end

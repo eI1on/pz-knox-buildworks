@@ -76,6 +76,19 @@ function StageConfig.sprite(definition, stage)
             result.onCreate = "KnoxBuildworks.JsonCallbacks.Floor.OnCreate"
         end
     end
+    if not (stage and stage.entityCompat) and placement.kind == "stairs" then
+        if result.onIsValid == nil then
+            result.onIsValid = "BuildRecipeCode.stairs.OnIsValid"
+        end
+        if result.onCreate == nil then
+            result.onCreate = "BuildRecipeCode.stairs.OnCreate"
+        end
+    end
+    if not (stage and stage.entityCompat) and placement.needWindowFrame == true then
+        if result.onCreate == nil then
+            result.onCreate = "BuildRecipeCode.windowGlass.OnCreate"
+        end
+    end
 
     assign(result, "lightRadius", light.radius)
     assign(result, "lightsourceItem", light.item)

@@ -393,11 +393,26 @@ function WallFinishes.actionMode(action)
     return action
 end
 
+local function mappedFaceSprite(entry, north, baseSprite)
+    if type(entry) ~= "table" then return nil end
+    if baseSprite and getSprite then
+        local sprite = getSprite(baseSprite)
+        local props = sprite and sprite:getProperties() or nil
+        if props then
+            if props:has("WallNW") and entry.Corner then return entry.Corner end
+            if props:has(IsoFlagType.WallSE) and entry.Pillar then return entry.Pillar end
+        end
+    end
+    if north then return entry.N or entry.W end
+    return entry.W or entry.N
+end
+
 ---@param action string
 ---@param finish KBW.WallFinish|nil
 ---@param north boolean
 ---@param wallType string|nil
-function WallFinishes.spriteForWallType(action, finish, north, wallType)
+---@param baseSprite string|nil
+function WallFinishes.spriteForWallType(action, finish, north, wallType, baseSprite)
     local mode = WallFinishes.actionMode(action)
     local mapping = WallFinishes.mappingForWallType(wallType)
     if not mapping then return nil end
@@ -423,9 +438,7 @@ function WallFinishes.spriteForWallType(action, finish, north, wallType)
         end
         entry = finish and finish.wallpaperType and papers and papers[finish.wallpaperType] or nil
     end
-    if type(entry) ~= "table" then return nil end
-    if north then return entry.N or entry.W end
-    return entry.W or entry.N
+    return mappedFaceSprite(entry, north, baseSprite)
 end
 
 function WallFinishes.objectWallType(object)
@@ -434,6 +447,26 @@ function WallFinishes.objectWallType(object)
     local kbw = data and data.KBW or nil
     if kbw and kbw.wallType then return tostring(kbw.wallType) end
     return wallTypeFromSprite(object:getSprite():getName())
+end
+
+function WallFinishes.prepareObject(object)
+    local wallType = WallFinishes.objectWallType(object)
+    if not wallType or registeredWallTypes[wallType] then return wallType end
+    local data = object and object.getModData and object:getModData() or nil
+    local kbw = data and data.KBW or nil
+    if not kbw or not kbw.buildableId then return wallType end
+    local Registry = require("KnoxBuildworks/Definitions/Registry")
+    local Resolver = require("KnoxBuildworks/Definitions/Resolver")
+    local definition = Resolver.resolve(kbw.buildableId, kbw.variantId, kbw.materialId)
+        or Registry:get(kbw.buildableId)
+    if not definition then return wallType end
+    local stage = Registry:getStage(definition, kbw.stageId)
+        or (definition.stages and definition.stages[1])
+    if stage then
+        local sprite = object:getSprite()
+        WallFinishes.mappingFor(definition, stage, sprite and sprite:getName() or nil)
+    end
+    return wallType
 end
 
 function WallFinishes.objectNorth(object)
@@ -456,10 +489,13 @@ end
 ---@param hasPlasterAction boolean|nil
 function WallFinishes.canApplyToObject(action, finish, object, hasPlasterAction)
     local mode = WallFinishes.actionMode(action)
-    local wallType = WallFinishes.objectWallType(object)
+    local wallType = WallFinishes.prepareObject(object)
     if not wallType then return false, "no compatible wall face", nil end
     local rules = WallFinishes.surfaceRules(nil, nil, wallType)
-    if not WallFinishes.spriteForWallType(mode, finish, WallFinishes.objectNorth(object), wallType) then
+    local objectSprite = object:getSprite() and object:getSprite():getName() or nil
+    if not WallFinishes.spriteForWallType(
+            mode, finish, WallFinishes.objectNorth(object), wallType, objectSprite
+        ) then
         return false, "finish is not mapped for this wall surface", wallType
     end
     if mode == "plaster" then
@@ -529,6 +565,8 @@ end
 ---@param stage KBW.BuildStage
 function WallFinishes.isPlasterable(definition, stage)
     local config = finishConfig(definition, stage)
+    local surface = config.surface or (config.mapping and config.mapping.surface) or nil
+    if surface and surface.canPlaster ~= nil then return surface.canPlaster == true end
     if config.enabled == false then return false end
     if config.enabled == true then return true end
     if not stage then return false end
@@ -575,9 +613,7 @@ function WallFinishes.spriteFor(mode, finish, north, definition, stage, baseSpri
         end
         entry = finish and finish.wallpaperType and papers and papers[finish.wallpaperType] or nil
     end
-    if type(entry) ~= "table" then return nil end
-    if north then return entry.N or entry.W end
-    return entry.W or entry.N
+    return mappedFaceSprite(entry, north, baseSprite)
 end
 
 -- Final visible face for previews (ghosts, cursors, catalog).

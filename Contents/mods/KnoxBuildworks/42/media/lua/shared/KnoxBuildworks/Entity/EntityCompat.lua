@@ -454,14 +454,16 @@ local function verifyScriptComponents(object, script, scriptName)
     local valid = true
     for typeIndex = 0, componentTypes:size() - 1 do
         local componentType = componentTypes:get(typeIndex)
-        local componentScript = script:getComponentScriptFor(componentType)
-        if componentScript and (isMaster or not componentScript:isoMasterOnly())
-            and not object:hasComponent(componentType) then
-            valid = false
-            Log:error(
-                "Entity script %s did not create native %s component",
-                tostring(scriptName), tostring(componentType)
-            )
+        if componentType ~= nil then
+            local componentScript = script:getComponentScriptFor(componentType)
+            if componentScript and (isMaster or not componentScript:isoMasterOnly())
+                and not object:hasComponent(componentType) then
+                valid = false
+                Log:error(
+                    "Entity script %s did not create native %s component",
+                    tostring(scriptName), tostring(componentType)
+                )
+            end
         end
     end
     return valid

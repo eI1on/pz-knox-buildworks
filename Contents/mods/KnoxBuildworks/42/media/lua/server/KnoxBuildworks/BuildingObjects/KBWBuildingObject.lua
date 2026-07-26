@@ -14,6 +14,7 @@ local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local Properties = require("KnoxBuildworks/Definitions/Properties")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
+local NativeObjectFactory = require("KnoxBuildworks/BuildingObjects/NativeObjectFactory")
 
 ---@class KBWBuildingObject: ISBuildingObject
 KBWBuildingObject = ISBuildingObject:derive("KBWBuildingObject")
@@ -32,7 +33,47 @@ local function configuredBoolean(value, default)
     return value == true
 end
 
-local function currentBuildContainers(character)
+local function isGarageDoorSprite(spriteName)
+    if not spriteName then return false end
+    local sprite = getSprite(spriteName)
+    local properties = sprite and sprite:getProperties() or nil
+    return properties and properties:has(IsoPropertyType.GARAGE_DOOR) == true
+end
+
+local function isFloorAttachmentSprite(spriteName)
+    if not spriteName then return false end
+    local sprite = getSprite(spriteName)
+    local properties = sprite and sprite:getProperties() or nil
+    if not properties then return false end
+    return (properties:has("MoveType") and properties:get("MoveType") == "FloorRug") or properties:has(
+            IsoFlagType.attachedFloor
+        ) or properties:has(IsoFlagType.FloorOverlay)
+end
+
+local function isRoofObjectSprite(spriteName)
+    if not spriteName then return false end
+    local sprite = getSprite(spriteName)
+    local properties = sprite and sprite:getProperties() or nil
+    if not properties or properties:has(IsoFlagType.solidfloor) then return false end
+    if properties:has(IsoFlagType.WallN) or properties:has(IsoFlagType.WallNTrans) or properties:has(IsoFlagType.WallW)
+        or properties:has(IsoFlagType.WallWTrans) or properties:has(IsoFlagType.WallNW) then
+        return false
+    end
+    return properties:has("RoofGroup") or properties:has("WestRoofB")
+        or properties:has("WestRoofM") or properties:has("WestRoofT")
+        or properties:has("isEave")
+end
+
+local function nativeContainerType(spriteName)
+    if not spriteName then return nil end
+    local sprite = getSprite(spriteName)
+    local properties = sprite and sprite:getProperties() or nil
+    local containerType = properties and properties:get("container") or nil
+    if containerType == "" then return nil end
+    return containerType
+end
+
+local function listedBuildContainers(character)
     if ISInventoryPaneContextMenu and ISInventoryPaneContextMenu.getContainers then
         local containers = ISInventoryPaneContextMenu.getContainers(character)
         if containers then return containers end
@@ -40,6 +81,39 @@ local function currentBuildContainers(character)
     local containers = ArrayList.new()
     if character and character.getInventory then containers:add(character:getInventory()) end
     return containers
+end
+
+local function accessibleBuildContainers(character, containers)
+    local accessible = ArrayList.new()
+    if not character then return accessible end
+    local checker = BuildLogic and BuildLogic.new(character, nil, nil) or nil
+    local candidate = ArrayList.new()
+    local seen = {}
+
+    local function add(container)
+        if not container then return end
+        local key = tostring(container)
+        if seen[key] then return end
+        seen[key] = true
+        if checker then
+            candidate:clear()
+            candidate:add(container)
+            if not checker:isContainersAccessible(candidate) then return end
+        end
+        accessible:add(container)
+    end
+
+    add(character:getInventory())
+    if containers then
+        for containerIndex = 0, containers:size() - 1 do
+            add(containers:get(containerIndex))
+        end
+    end
+    return accessible
+end
+
+local function currentBuildContainers(character)
+    return accessibleBuildContainers(character, listedBuildContainers(character))
 end
 
 local function applyNativeInputChoices(logic, recipe, choices, containers)
@@ -77,6 +151,35 @@ local function applyNativeInputChoices(logic, recipe, choices, containers)
         end
     end
     logic:autoPopulateInputs()
+end
+
+local function newNativeBuildLogic(character, recipe, choices, containers)
+    if not BuildLogic or not character or not recipe or not containers then return nil end
+    local logic = BuildLogic.new(character, nil, nil)
+    logic:setContainers(containers)
+    logic:setRecipe(recipe)
+    applyNativeInputChoices(logic, recipe, choices, containers)
+    return logic
+end
+
+local function nativeInputFailure(logic, recipe, containers)
+    if not logic then return "native build logic unavailable" end
+    if not containers or containers:size() == 0 then return "no construction containers available" end
+    if not logic:isContainersAccessible(containers) then return "construction container is no longer accessible" end
+    local missing = {}
+    local inputs = recipe and recipe:getInputs() or nil
+    if inputs then
+        for inputIndex = 0, inputs:size() - 1 do
+            local input = inputs:get(inputIndex)
+            if not logic:isInputSatisfied(input) then
+                local label = input:getOriginalLine()
+                if not label or label == "" then label = "input_" .. tostring(inputIndex + 1) end
+                missing[#missing + 1] = label
+            end
+        end
+    end
+    if #missing > 0 then return "native recipe inputs unavailable: " .. table.concat(missing, "; ") end
+    return "native recipe rejected the current items or character state"
 end
 
 ---@class KBW.FACE_KEYSModule
@@ -135,8 +238,10 @@ end
 ---@param variantId   string | nil
 ---@param materialId  string | nil
 ---@param direction   KBW.Direction
+---@param inputChoices table<string, string> | nil
+---@param containers ArrayList<ItemContainer> | nil
 ---@return KBWBuildingObject
-function KBWBuildingObject:new(player, buildableId, stageId, variantId, materialId, direction, inputChoices)
+function KBWBuildingObject:new(player, buildableId, stageId, variantId, materialId, direction, inputChoices, containers)
     local o = {}
     setmetatable(o, self)
     self.__index = self
@@ -159,7 +264,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     applySprites(o, o.stage.sprites)
     local placement = StageConfig.placement(o.definition, o.stage)
     local kind = placement.kind
-    if kind == "wall" then
+    if kind == "wall" or placement.needWindowFrame == true then
         o.nSprite = wallEdgeDirection(o.nSprite)
         o.direction = o.nSprite
     else
@@ -183,11 +288,14 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     -- legacy ISBuildingObject hammer path enabled would silently require a
     -- hammer even for welding, masonry or JSON-only tool recipes.
     o.noNeedHammer = true
-    o.isWallLike = kind == "wall" or kind == "wallCovering"
+    o.isWallLike = kind == "wall" or kind == "wallCovering" or placement.needWindowFrame == true
     o.isFloor = kind == "floor"
     o.canBeAlwaysPlaced = kind == "overlay"
     o.canPassThrough = configuredBoolean(objectConfig.canPassThrough, kind == "overlay")
-    o.isThumpable = spriteConfig.isThumpable ~= false and kind ~= "overlay"
+    o.isDoorFrame = objectConfig.isDoorFrame == true
+    o.isCorner = objectConfig.isCorner == true
+    o.isProp = objectConfig.isProp == true or spriteConfig.isProp == true
+    o.isThumpable = configuredBoolean(objectConfig.isThumpable, spriteConfig.isThumpable ~= false and kind ~= "overlay")
     o.dismantable = objectConfig.dismantable ~= false
     o.blockAllTheSquare = configuredBoolean(objectConfig.blockAllSquare, kind == "object")
     o.hoppable = objectConfig.hoppable == true or o.stage.hoppable == true
@@ -214,11 +322,8 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     local craftRecipe = StageConfig.recipe(o.definition, o.stage)
     o.craftRecipe = EntityCompat.craftRecipeObject(o.stage)
     if o.craftRecipe and EntityCompat.usesNativeRecipeInputs(o.stage) and BuildLogic then
-        o.containers = currentBuildContainers(o.character)
-        o.buildPanelLogic = BuildLogic.new(o.character, nil, nil)
-        o.buildPanelLogic:setContainers(o.containers)
-        o.buildPanelLogic:setRecipe(o.craftRecipe)
-        applyNativeInputChoices(o.buildPanelLogic, o.craftRecipe, o.inputChoices, o.containers)
+        o.containers = containers or currentBuildContainers(o.character)
+        o.buildPanelLogic = newNativeBuildLogic(o.character, o.craftRecipe, o.inputChoices, o.containers)
     end
     o.maxTime = craftRecipe.time or 200
     o.xpAward = craftRecipe.xpAward
@@ -241,6 +346,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
             materialId = o.materialId,
             entity = entityMetadata.entity,
             schemaVersion = KBW.SCHEMA_VERSION,
+            providesWindowFrame = placement.providesWindowFrame == true and true or nil,
             wallType = kind == "wall" and WallFinishes.wallType(o.definition, o.stage) or nil
         }
     }
@@ -291,6 +397,11 @@ function KBWBuildingObject:tryBuild(x, y, z)
     self.direction = self.nSprite
     self:getSprite()
     if self.modData and self.modData.KBW then self.modData.KBW.direction = self.nSprite end
+    if self.buildPanelLogic and EntityCompat.usesNativeRecipeInputs(self.stage) then
+        self.containers = currentBuildContainers(self.character)
+        self.buildPanelLogic:setContainers(self.containers)
+        applyNativeInputChoices(self.buildPanelLogic, self.craftRecipe, self.inputChoices, self.containers)
+    end
     local buildAction = ISBuildingObject.tryBuild(self, x, y, z)
     local construction = StageConfig.construction(self.definition, self.stage)
     local timedActionOnIsValid = StageConfig.sprite(self.definition, self.stage).timedActionOnIsValid
@@ -354,9 +465,9 @@ function KBWBuildingObject:getFootprint()
     return Matrix.getFaceCells(self.stage, direction)
 end
 
----ISBuildAction's TimedActionOnIsValid bridge expects the vanilla entity
----cursor's getFace():getFaceName() shape. JSON-only cursors provide the same
----minimal adapter without creating a native FaceScript.
+--- ISBuildAction's TimedActionOnIsValid bridge expects the vanilla entity
+--- cursor's getFace():getFaceName() shape. JSON-only cursors provide the same
+--- minimal adapter without creating a native FaceScript.
 function KBWBuildingObject:getFace()
     local name = string.lower(faceName(self.nSprite))
     return { getFaceName = function () return name end }
@@ -598,23 +709,23 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
             self.character, self.stage, square, self.definition, self.inputChoices
         )
         self.craftRecipeData = recipeData
-        return consumed
+        return consumed, consumed and nil or "Knox recipe inputs changed before consumption"
     end
 
-    -- Vanilla starts a fresh in-progress recipe on the authoritative server;
-    -- in SP/client placement ISBuildingObject:tryBuild already did this.
-    if isServer() then
-        local containers = self.containers or currentBuildContainers(self.character)
-        self.containers = containers
-        self.buildPanelLogic:setContainers(containers)
-        applyNativeInputChoices(self.buildPanelLogic, self.craftRecipe, self.inputChoices, containers)
-        self.buildPanelLogic:startCraftAction(nil)
-    end
-    self.craftRecipeData = self.buildPanelLogic:getRecipeData()
+    local containers = accessibleBuildContainers(
+        self.character, self.containers or listedBuildContainers(self.character)
+    )
+    self.containers = containers
+    local logic = newNativeBuildLogic(self.character, self.craftRecipe, self.inputChoices, containers)
+    if not logic then return false, "native build logic unavailable" end
+    logic:startCraftAction(nil)
+    self.craftRecipeData = logic:getRecipeData()
     self.nativeRecipeHandled = true
     if self.character:isBuildCheat() then return true end
-    if not self.buildPanelLogic:performCurrentRecipe() then return false end
-    local inProgress = self.buildPanelLogic:getRecipeDataInProgress()
+    if not logic:performCurrentRecipe() then
+        return false, nativeInputFailure(logic, self.craftRecipe, containers)
+    end
+    local inProgress = logic:getRecipeDataInProgress()
     inProgress:luaCallOnCreate(self.character)
     inProgress:processDestroyAndUsedItems(self.character)
     return true
@@ -624,6 +735,11 @@ function KBWBuildingObject:transmitPart(part, result)
     if result ~= nil then
         if result.objectAlreadyTransmitted then return end
         if result.replaceObject and result.object ~= nil then
+            local sourceModData = part and part.getModData and part:getModData() or nil
+            local replacementModData = result.object.getModData and result.object:getModData() or nil
+            if sourceModData and sourceModData.KBW and replacementModData then
+                replacementModData.KBW = sourceModData.KBW
+            end
             result.object:transmitCompleteItemToClients()
             return
         end
@@ -658,10 +774,15 @@ function KBWBuildingObject:verifyAuthoritative(x, y, z)
     if spriteConfig.onCreate and not LuaCallback.resolve(spriteConfig.onCreate) then
         return false, "OnCreate callback is unavailable: " .. tostring(spriteConfig.onCreate)
     end
-    if LuaCallback.requiresNativeRecipe(spriteConfig.onCreate)
-        and not EntityCompat.usesNativeRecipeInputs(stage) then
-        return false, "OnCreate callback requires an entity-backed native CraftRecipe: "
-            .. tostring(spriteConfig.onCreate)
+    if self.nativeObject and self.nativeObject.type == "generator" then
+        local itemType = self.nativeObject.item
+        if not getScriptManager() or not getScriptManager():getItem(itemType) then
+            return false, "native generator item is unavailable: " .. tostring(itemType)
+        end
+    end
+    if LuaCallback.requiresNativeRecipe(spriteConfig.onCreate) and not EntityCompat.usesNativeRecipeInputs(stage) then
+        return false,
+            "OnCreate callback requires an entity-backed native CraftRecipe: " .. tostring(spriteConfig.onCreate)
     end
     local finishOk, finishReason = FinishActions.validate(self.character, definition, stage, self.finish, true)
     if not finishOk then return false, finishReason or "invalid finish" end
@@ -750,6 +871,8 @@ function KBWBuildingObject:applyPartFlags(part)
     local objectConfig = self.objectConfig or {}
     if objectConfig.blockAllSquare ~= nil then self.blockAllTheSquare = objectConfig.blockAllSquare == true end
     if objectConfig.canPassThrough ~= nil then self.canPassThrough = objectConfig.canPassThrough == true end
+    if objectConfig.isDoorFrame ~= nil then self.isDoorFrame = objectConfig.isDoorFrame == true end
+    if objectConfig.isCorner ~= nil then self.isCorner = objectConfig.isCorner == true end
     if objectConfig.hoppable ~= nil then self.hoppable = objectConfig.hoppable == true end
     if objectConfig.thumpDamage ~= nil then self.thumpDmg = objectConfig.thumpDamage end
     if objectConfig.canBarricade ~= nil then self.canBarricade = objectConfig.canBarricade == true end
@@ -790,8 +913,12 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     end
     local spriteConfig = StageConfig.sprite(self.definition, self.stage)
     local torchItem = self:findLightSourceItem(spriteConfig)
-    if not self:consumeConstructionRequirements(square) then
-        Log:error("Consumption race rejected %s", self.buildableId)
+    local consumed, consumptionReason = self:consumeConstructionRequirements(square)
+    if not consumed then
+        Log:warning(
+            "Server rejected build %s at %d,%d,%d during consumption: %s",
+            tostring(self.buildableId), x, y, z, tostring(consumptionReason or "requirements changed")
+        )
         return false
     end
     local replacedIndex = -1
@@ -803,10 +930,12 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         local tile = footprint[index]
         if tile.sprite then
             local target = self:ensureSquareExists(x + (tile.dx or 0), y + (tile.dy or 0), z + (tile.dz or 0))
+            local nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
             self.modData.KBW.groupId, self.modData.KBW.partIndex, self.modData.KBW.partCount = groupId,
                 index, #footprint
             if placement.kind == "floor" then
                 local part = target:addFloor(tile.sprite)
+                part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
                 target:disableErosion()
                 sendServerCommand(
@@ -816,12 +945,77 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                     part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = true }
                 )
                 self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
-            elseif self.isProp then
+            elseif nativeObjectType then
+                local part, nativeState, nativeError = NativeObjectFactory.create(
+                    nativeObjectType, self.nativeObject, target, tile.sprite
+                )
+                if not part then
+                    Log:error(
+                        "Failed to create native %s for %s: %s", tostring(nativeObjectType), tostring(self.buildableId),
+                        tostring(nativeError)
+                    )
+                    return false
+                end
+                part:getModData().KBW = copyTable(self.modData.KBW)
+                EntityCompat.attach(part, self.stage, true)
+                local nativeInsertIndex = previous and target == square and replacedIndex >= 0 and replacedIndex or nil
+                NativeObjectFactory.insert(part, nativeState, target, nativeInsertIndex)
+                Properties.applyToObject(
+                    part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = false }
+                )
+                if part.setExplored then part:setExplored(true) end
+                local callbackResult = self:runOnCreate(part, { tile = tile, tileIndex = index })
+                NativeObjectFactory.finalize(part, nativeState, target)
+                if callbackResult and callbackResult.replaceObject then
+                    self:transmitPart(part, callbackResult)
+                elseif nativeState.alreadyTransmitted then
+                    if part.transmitModData then part:transmitModData() end
+                else
+                    self:transmitPart(part, callbackResult)
+                end
+                buildUtil.setHaveConstruction(target, true)
+            elseif self.isProp or isFloorAttachmentSprite(tile.sprite) or isRoofObjectSprite(tile.sprite) then
                 -- Vanilla isProp scripts place a moveable world prop instead
-                -- of an IsoThumpable (ISBuildIsoEntity:setInfo).
+                -- of an IsoThumpable (ISBuildIsoEntity:setInfo). Floor rugs
+                -- and non-floor roof pieces must follow this path as well.
+                -- IsoThumpable's pathfinding collision remains north/west
+                -- oriented even when the object is marked passable.
                 local props = ISMoveableSpriteProps.new(IsoObject.new(target, tile.sprite):getSprite())
                 props.rawWeight = 10
-                props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)
+                local part = props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)
+                if part then
+                    part:getModData().KBW = copyTable(self.modData.KBW)
+                    Properties.applyToObject(part, self, {
+                        square = target,
+                        spriteConfig = spriteConfig,
+                        tileIndex = index,
+                        isFloor = isFloorAttachmentSprite(tile.sprite)
+                    })
+                    self:runOnCreate(part, { tile = tile, tileIndex = index })
+                    if part.transmitModData then part:transmitModData() end
+                end
+            elseif isGarageDoorSprite(tile.sprite) then
+                -- Garage-door behavior is owned by IsoDoor. Its sprite-name
+                -- constructor reads GarageDoor=1..6 and derives the open part
+                -- at the engine's +8/-8 offset. A generic IsoThumpable has no
+                -- open sprite and becomes a null-sprite object when toggled.
+                local part = IsoDoor.new(getCell(), target, tile.sprite, north)
+                local health = math.max(tonumber(self:getBuildHealth()) or 0, tonumber(part:getHealth()) or 0)
+                part:setHealth(health)
+                part:getModData().KBW = copyTable(self.modData.KBW)
+                EntityCompat.attach(part, self.stage, true)
+                if previous and target == square and replacedIndex >= 0 then
+                    target:AddSpecialObject(part, replacedIndex)
+                else
+                    target:AddSpecialObject(part)
+                end
+                Properties.applyToObject(
+                    part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = false }
+                )
+                part:setExplored(true)
+                target:RecalcAllWithNeighbours(true)
+                self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
+                buildUtil.setHaveConstruction(target, true)
             else
                 local faceKey = faceName(self.nSprite)
                 local openSprite = (self.stage.sprites and self.stage.sprites[faceKey .. "_open"])
@@ -829,7 +1023,19 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 local part = openSprite and IsoThumpable.new(getCell(), target, tile.sprite, openSprite, north, self)
                     or IsoThumpable.new(getCell(), target, tile.sprite, north, self)
                 self:applyPartFlags(part)
+                local configuredIsContainer = self.isContainer
+                local configuredContainerType = self.containerType
+                local tileContainerType = nativeContainerType(tile.sprite)
+                if tileContainerType then
+                    self.isContainer = true
+                    self.containerType = tileContainerType
+                elseif self.stage.container == nil then
+                    self.isContainer = false
+                    self.containerType = nil
+                end
                 buildUtil.setInfo(part, self)
+                self.isContainer = configuredIsContainer
+                self.containerType = configuredContainerType
                 part:setCanBePlastered(self.canBePlastered == true)
                 local health = self:getBuildHealth()
                 part:setMaxHealth(health)

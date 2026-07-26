@@ -113,24 +113,306 @@
         "walls"
       ],
       "placement": {
-        "kind": "wall"
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.finish.brick.wall",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_36",
+              "N": "walls_exterior_house_02_37",
+              "Corner": "walls_exterior_house_02_38",
+              "Pillar": "walls_exterior_house_02_38"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_01_0",
+              "N": "walls_exterior_house_01_1",
+              "Corner": "walls_exterior_house_01_2",
+              "Pillar": "walls_exterior_house_01_2"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_02_96",
+              "N": "walls_exterior_house_02_97",
+              "Corner": "walls_exterior_house_02_98",
+              "Pillar": "walls_exterior_house_02_98"
+            },
+            "PaintGreen": {
+              "W": "walls_exterior_house_02_52",
+              "N": "walls_exterior_house_02_53",
+              "Corner": "walls_exterior_house_02_54",
+              "Pillar": "walls_exterior_house_02_54"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_house_02_16",
+              "N": "walls_exterior_house_02_17",
+              "Corner": "walls_exterior_house_02_18",
+              "Pillar": "walls_exterior_house_02_18"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_01_4",
+              "N": "walls_exterior_house_01_5",
+              "Corner": "walls_exterior_house_01_6",
+              "Pillar": "walls_exterior_house_01_6"
+            },
+            "PaintRed": {
+              "W": "walls_exterior_house_02_64",
+              "N": "walls_exterior_house_02_65",
+              "Corner": "walls_exterior_house_02_66",
+              "Pillar": "walls_exterior_house_02_66"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_house_02_48",
+              "N": "walls_exterior_house_02_49",
+              "Corner": "walls_exterior_house_02_50",
+              "Pillar": "walls_exterior_house_02_50"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_4",
+            "walls_exterior_house_01_5",
+            "walls_exterior_house_01_6",
+            "walls_exterior_house_01_7",
+            "walls_exterior_house_01_16",
+            "walls_exterior_house_01_17",
+            "walls_exterior_house_01_18",
+            "walls_exterior_house_01_52",
+            "walls_exterior_house_01_53",
+            "walls_exterior_house_01_54"
+          ]
+        }
       },
       "stages": [
         {
           "id": "built",
+          "health": 800,
+          "skillBaseHealth": 70,
           "level": 1,
-          "entityCompat": {
-            "module": "Base",
-            "entity": "BrickWallLvl2"
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 2,
+                "flags": [
+                  "DontRecordInput"
+                ]
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 5
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 50
+            },
+            "category": "Masonry"
+          },
+          "callbacks": {
+            "onAddToMenu": "KnoxBuildworks.JsonCallbacks.Visibility.BrickWallLvl2"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_exterior_house_01_18"
           }
+        }
+      ],
+      "variants": [
+        {
+          "id": "vanilla",
+          "labelKey": "IGUI_KBW_Variant_BrickVanilla",
+          "iconSprite": "walls_exterior_house_01_4",
+          "stages": [
+            {
+              "id": "built",
+              "level": 1,
+              "entityCompat": {
+                "module": "Base",
+                "entity": "BrickWallLvl2"
+              }
+            }
+          ]
+        },
+        {
+          "id": "old_weathered",
+          "labelKey": "IGUI_KBW_Variant_BrickOldWeathered",
+          "iconSprite": "walls_exterior_house_01_52",
+          "stages": [
+            {
+              "id": "built",
+              "health": 800,
+              "skillBaseHealth": 70,
+              "level": 1,
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_exterior_house_01_52"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "N": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_exterior_house_01_53"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "mortar",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 2,
+                    "flags": [
+                      "DontRecordInput"
+                    ]
+                  },
+                  {
+                    "id": "masonry_units",
+                    "role": "material",
+                    "mode": "consume",
+                    "resourceType": "Item",
+                    "items": [
+                      "Base.ClayBrick"
+                    ],
+                    "amount": 4
+                  }
+                ],
+                "skills": {
+                  "Masonry": 5
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 50
+                },
+                "category": "Masonry"
+              },
+              "callbacks": {
+                "onAddToMenu": "KnoxBuildworks.JsonCallbacks.Visibility.BrickWallLvl2"
+              },
+              "object": {
+                "isThumpable": true,
+                "canBarricade": false,
+                "cornerSprite": "walls_exterior_house_01_54"
+              }
+            }
+          ]
         }
       ],
       "group": {
         "id": "vanilla.brickwall",
         "name": "Brick Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_brickwall",
         "level": 2
       },
-      "iconName": "Build_WallBrick"
+      "iconSprite": "walls_exterior_house_01_16",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.brickwalllvl1",
@@ -164,6 +446,7 @@
       "group": {
         "id": "vanilla.brickwall",
         "name": "Brick Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_brickwall",
         "level": 1
       },
       "iconName": "Build_WallBrick"
@@ -232,6 +515,7 @@
       "group": {
         "id": "vanilla.metalwall",
         "name": "Metal Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_metalwall",
         "level": 2
       },
       "iconName": "Build_WallMetal"
@@ -268,6 +552,7 @@
       "group": {
         "id": "vanilla.metalwall",
         "name": "Metal Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_metalwall",
         "level": 1
       },
       "iconName": "Build_WallMetal"
@@ -335,6 +620,7 @@
       "group": {
         "id": "vanilla.woodenwall",
         "name": "Wooden Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodenwall",
         "level": 3
       },
       "iconName": "Build_WallWood"
@@ -371,6 +657,7 @@
       "group": {
         "id": "vanilla.woodenwall",
         "name": "Wooden Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodenwall",
         "level": 2
       },
       "iconName": "Build_WallWood"
@@ -407,6 +694,7 @@
       "group": {
         "id": "vanilla.woodenwall",
         "name": "Wooden Wall",
+        "translationKey": "IGUI_KBW_Group_vanilla_woodenwall",
         "level": 1
       },
       "iconName": "Build_WallWood"
