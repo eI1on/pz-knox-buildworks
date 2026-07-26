@@ -1,0 +1,1005 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_corner_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_corner_wall",
+      "displayName": "Wooden Panel Corner Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_corner_wall",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_wooden_01_26"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_exterior_wooden_01_26"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_1",
+      "displayName": "Wooden Panel Roof Slope Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_1",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_24",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_2",
+      "displayName": "Wooden Panel Roof Slope Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_2",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_25",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_25"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_36"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_3",
+      "displayName": "Wooden Panel Roof Slope Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_3",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_26",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_4",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_4",
+      "displayName": "Wooden Panel Roof Slope Wall 4",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_4",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_32",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_5",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_5",
+      "displayName": "Wooden Panel Roof Slope Wall 5",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_5",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_33",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_33"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_28"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_slope_wall_6",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_slope_wall_6",
+      "displayName": "Wooden Panel Roof Slope Wall 6",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_slope_wall_6",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_34",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_34"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.wooden_panel.wooden_panel_roof_slope_wall",
+        "level": 6,
+        "translationKey": "IGUI_KBW_Group_walls_wooden_panel_wooden_panel_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_end_small",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_end_small",
+      "displayName": "Wooden Panel Roof End Small",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_end_small",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_39",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_39"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_31"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_end_medium",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_end_medium",
+      "displayName": "Wooden Panel Roof End Medium",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_end_medium",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_38",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_38"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.wooden_panel.wooden_panel_roof_end_big",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_wooden_panel_roof_end_big",
+      "displayName": "Wooden Panel Roof End Big",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_wooden_panel_wooden_panel_roof_end_big",
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_02_40",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_02_41"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    }
+  ]
+}

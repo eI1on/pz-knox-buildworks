@@ -1,0 +1,5 @@
+name=Knox Buildworks - Vanilla Expanded
+id=KnoxBuildworksVanillaExpanded
+description=
+require=KnoxBuildworks
+versionMin=42.0

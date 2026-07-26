@@ -1,0 +1,2155 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_wall",
+      "displayName": "Cinderblock Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_wall",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_commercial_03_16",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.wall",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_commercial_03_16",
+              "N": "walls_commercial_03_17",
+              "Corner": "walls_commercial_03_18"
+            },
+            "PaintBrown": {
+              "W": "walls_commercial_03_0",
+              "N": "walls_commercial_03_1",
+              "Corner": "walls_commercial_03_2"
+            },
+            "PaintGrey": {
+              "W": "walls_commercial_03_48",
+              "N": "walls_commercial_03_49",
+              "Corner": "walls_commercial_03_50"
+            },
+            "PaintWhite": {
+              "W": "walls_commercial_01_48",
+              "N": "walls_commercial_01_49",
+              "Corner": "walls_commercial_01_50"
+            }
+          },
+          "baseSprites": [
+            "walls_commercial_03_16",
+            "walls_commercial_03_17",
+            "walls_commercial_03_18"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_commercial_03_18"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "variants": [
+        {
+          "id": "dark_grey",
+          "labelKey": "IGUI_KBWVE_Variant_CinderblockDarkGrey",
+          "iconSprite": "walls_commercial_03_32",
+          "stages": [
+            {
+              "id": "built",
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_32"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "N": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_33"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "concrete_mix",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 6
+                  }
+                ],
+                "skills": {
+                  "Masonry": 3
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 30
+                },
+                "category": "Masonry"
+              },
+              "object": {
+                "isThumpable": true,
+                "canBarricade": false,
+                "cornerSprite": "walls_commercial_03_34"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_door_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_door_frame",
+      "displayName": "Cinderblock Door Frame",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_door_frame",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_commercial_03_26",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.door_frame",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_commercial_03_26",
+              "N": "walls_commercial_03_27"
+            },
+            "PaintBrown": {
+              "W": "walls_commercial_03_10",
+              "N": "walls_commercial_03_11"
+            },
+            "PaintGrey": {
+              "W": "walls_commercial_03_58",
+              "N": "walls_commercial_03_59"
+            },
+            "PaintWhite": {
+              "W": "walls_commercial_01_58",
+              "N": "walls_commercial_01_59"
+            }
+          },
+          "baseSprites": [
+            "walls_commercial_03_26",
+            "walls_commercial_03_27"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "callbacks": {
+            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+          },
+          "object": {
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "dark_grey",
+          "labelKey": "IGUI_KBWVE_Variant_CinderblockDarkGrey",
+          "iconSprite": "walls_commercial_03_42",
+          "stages": [
+            {
+              "id": "built",
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_42"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "N": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_43"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "concrete_mix",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 4
+                  }
+                ],
+                "skills": {
+                  "Masonry": 3
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 30
+                },
+                "category": "Masonry"
+              },
+              "callbacks": {
+                "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+              },
+              "object": {
+                "isThumpable": false,
+                "isDoorFrame": true,
+                "blockAllSquare": false,
+                "canPassThrough": true,
+                "canBarricade": false
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_window_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_window_frame",
+      "displayName": "Cinderblock Window Frame",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_window_frame",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_commercial_03_24",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.window_frame",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_commercial_03_24",
+              "N": "walls_commercial_03_25"
+            },
+            "PaintBrown": {
+              "W": "walls_commercial_03_8",
+              "N": "walls_commercial_03_9"
+            },
+            "PaintGrey": {
+              "W": "walls_commercial_03_56",
+              "N": "walls_commercial_03_57"
+            },
+            "PaintWhite": {
+              "W": "walls_commercial_01_56",
+              "N": "walls_commercial_01_57"
+            }
+          },
+          "baseSprites": [
+            "walls_commercial_03_24",
+            "walls_commercial_03_25"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_25"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 5
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          }
+        }
+      ],
+      "variants": [
+        {
+          "id": "dark_grey",
+          "labelKey": "IGUI_KBWVE_Variant_CinderblockDarkGrey",
+          "iconSprite": "walls_commercial_03_40",
+          "stages": [
+            {
+              "id": "built",
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_40"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "N": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_41"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "concrete_mix",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 5
+                  }
+                ],
+                "skills": {
+                  "Masonry": 3
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 30
+                },
+                "category": "Masonry"
+              },
+              "object": {
+                "isThumpable": true,
+                "hoppable": true,
+                "canBarricade": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_corner_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_corner_wall",
+      "displayName": "Cinderblock Corner Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_corner_wall",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_18"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_commercial_03_18",
+            "isCorner": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "iconSprite": "walls_commercial_03_18",
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.corner_wall",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_commercial_03_18"
+            },
+            "PaintBrown": {
+              "W": "walls_commercial_03_2"
+            },
+            "PaintGrey": {
+              "W": "walls_commercial_03_50"
+            },
+            "PaintWhite": {
+              "W": "walls_commercial_01_50"
+            }
+          },
+          "baseSprites": [
+            "walls_commercial_03_18"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "id": "dark_grey",
+          "labelKey": "IGUI_KBWVE_Variant_CinderblockDarkGrey",
+          "iconSprite": "walls_commercial_03_34",
+          "stages": [
+            {
+              "id": "built",
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_34"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "concrete_mix",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 6
+                  }
+                ],
+                "skills": {
+                  "Masonry": 3
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 30
+                },
+                "category": "Masonry"
+              },
+              "object": {
+                "isThumpable": true,
+                "canBarricade": false,
+                "cornerSprite": "walls_commercial_03_34",
+                "isCorner": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_pillar",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_pillar",
+      "displayName": "Cinderblock Pillar",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_pillar",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_commercial_03_19",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_03_19"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "canPassThrough": true,
+            "canBarricade": false,
+            "isCorner": true
+          }
+        }
+      ],
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.pillar",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_commercial_03_19",
+              "Pillar": "walls_commercial_03_19"
+            },
+            "PaintBrown": {
+              "W": "walls_commercial_03_3",
+              "Pillar": "walls_commercial_03_3"
+            },
+            "PaintGrey": {
+              "W": "walls_commercial_03_51",
+              "Pillar": "walls_commercial_03_51"
+            },
+            "PaintWhite": {
+              "W": "walls_commercial_01_51",
+              "Pillar": "walls_commercial_01_51"
+            }
+          },
+          "baseSprites": [
+            "walls_commercial_03_19"
+          ]
+        }
+      },
+      "variants": [
+        {
+          "id": "dark_grey",
+          "labelKey": "IGUI_KBWVE_Variant_CinderblockDarkGrey",
+          "iconSprite": "walls_commercial_03_35",
+          "stages": [
+            {
+              "id": "built",
+              "geometry": {
+                "faces": {
+                  "W": {
+                    "layers": [
+                      {
+                        "rows": [
+                          [
+                            "walls_commercial_03_35"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "requirements": {
+                "inputs": [
+                  {
+                    "id": "tool_masons_trowel",
+                    "role": "tool",
+                    "mode": "keep",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:masonstrowel"
+                    ],
+                    "amount": 1,
+                    "flags": [
+                      "Prop1",
+                      "MayDegradeLight"
+                    ]
+                  },
+                  {
+                    "id": "concrete_mix",
+                    "role": "consumable",
+                    "mode": "drain",
+                    "resourceType": "Item",
+                    "tags": [
+                      "base:concrete"
+                    ],
+                    "amount": 1,
+                    "uses": 2
+                  }
+                ],
+                "skills": {
+                  "Masonry": 3
+                }
+              },
+              "construction": {
+                "time": 200,
+                "timedAction": "BuildWallNoTool",
+                "completionSound": "BuildWoodenStructureLarge",
+                "xp": {
+                  "Masonry": 30
+                },
+                "category": "Masonry"
+              },
+              "object": {
+                "canPassThrough": true,
+                "canBarricade": false,
+                "isCorner": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_1",
+      "displayName": "Cinderblock Roof Slope Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_1",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_56",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_1",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_56",
+              "N": "walls_exterior_roofs_09_69"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_96",
+              "N": "walls_exterior_roofs_10_109"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_128",
+              "N": "walls_exterior_roofs_10_141"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_224",
+              "N": "walls_exterior_roofs_10_237"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_56",
+            "walls_exterior_roofs_09_69"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_56"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_69"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_2",
+      "displayName": "Cinderblock Roof Slope Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_2",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_57",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_2",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_57",
+              "N": "walls_exterior_roofs_09_68"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_97",
+              "N": "walls_exterior_roofs_10_108"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_129",
+              "N": "walls_exterior_roofs_10_140"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_225",
+              "N": "walls_exterior_roofs_10_236"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_57",
+            "walls_exterior_roofs_09_68"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_57"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_68"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_3",
+      "displayName": "Cinderblock Roof Slope Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_3",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_58",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_3",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_58",
+              "N": "walls_exterior_roofs_09_67"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_98",
+              "N": "walls_exterior_roofs_10_107"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_130",
+              "N": "walls_exterior_roofs_10_139"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_226",
+              "N": "walls_exterior_roofs_10_235"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_58",
+            "walls_exterior_roofs_09_67"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_58"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_67"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_4",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_4",
+      "displayName": "Cinderblock Roof Slope Wall 4",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_4",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_64",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_4",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_59",
+              "N": "walls_exterior_roofs_09_66"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_104",
+              "N": "walls_exterior_roofs_10_101"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_136",
+              "N": "walls_exterior_roofs_10_133"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_232",
+              "N": "walls_exterior_roofs_10_229"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_59",
+            "walls_exterior_roofs_09_66"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_64"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_61"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_5",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_5",
+      "displayName": "Cinderblock Roof Slope Wall 5",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_5",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_65",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_5",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_60",
+              "N": "walls_exterior_roofs_09_65"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_105",
+              "N": "walls_exterior_roofs_10_100"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_137",
+              "N": "walls_exterior_roofs_10_132"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_233",
+              "N": "walls_exterior_roofs_10_228"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_60",
+            "walls_exterior_roofs_09_65"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_65"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_60"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall_6",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_slope_wall_6",
+      "displayName": "Cinderblock Roof Slope Wall 6",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall_6",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_66",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_slope_wall_6",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_61",
+              "N": "walls_exterior_roofs_09_64"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_10_106",
+              "N": "walls_exterior_roofs_10_99"
+            },
+            "PaintGrey": {
+              "W": "walls_exterior_roofs_10_138",
+              "N": "walls_exterior_roofs_10_131"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_10_234",
+              "N": "walls_exterior_roofs_10_227"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_61",
+            "walls_exterior_roofs_09_64"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_59"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.cinderblock_tan.tan_cinderblock_roof_slope_wall",
+        "level": 6,
+        "translationKey": "IGUI_KBW_Group_walls_cinderblock_tan_tan_cinderblock_roof_slope_wall"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_end_small",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_end_small",
+      "displayName": "Cinderblock Roof End Small",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_end_small",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_71",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_end_small",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_71",
+              "N": "walls_exterior_roofs_09_63"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_08_39",
+              "N": "walls_exterior_roofs_08_31"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_71",
+            "walls_exterior_roofs_09_63"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_71"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_63"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_end_medium",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_end_medium",
+      "displayName": "Cinderblock Roof End Medium",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_end_medium",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_70",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_end_medium",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_70",
+              "N": "walls_exterior_roofs_09_62"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_08_38",
+              "N": "walls_exterior_roofs_08_30"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_70",
+            "walls_exterior_roofs_09_62"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_70"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_62"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.cinderblock_tan.tan_cinderblock_roof_end_big",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_cinderblock_tan_roof_end_big",
+      "displayName": "Cinderblock Roof End Big",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_cinderblock_tan_tan_cinderblock_roof_end_big",
+      "category": "Walls",
+      "subcategory": "Cinderblock",
+      "material": "Concrete",
+      "iconSprite": "walls_exterior_roofs_09_72",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.cinderblock.roof_end_big",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_09_72",
+              "N": "walls_exterior_roofs_09_73"
+            },
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_08_40",
+              "N": "walls_exterior_roofs_08_41"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_09_72",
+            "walls_exterior_roofs_09_73"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_72"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_09_73"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 6
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    }
+  ]
+}

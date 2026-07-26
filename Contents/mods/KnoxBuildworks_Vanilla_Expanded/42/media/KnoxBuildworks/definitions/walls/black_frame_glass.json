@@ -1,0 +1,2448 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_wall1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_wall1",
+      "displayName": "Black Frame Glass Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_wall1",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_96",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_96"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_97"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_98"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_corner_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_corner_wall",
+      "displayName": "Black Frame Glass Corner Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_corner_wall",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_18"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_98"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_corner_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_corner_wall"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_wall2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_wall2",
+      "displayName": "Black Frame Glass Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_wall2",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_16",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_18"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_wall1",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_wall1"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_corner_wall1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_corner_wall1",
+      "displayName": "Black Frame Glass Corner Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_corner_wall1",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_18"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_corner_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_corner_wall"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_wall3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_wall3",
+      "displayName": "Black Frame Glass Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_wall3",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_32",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_34"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_wall1",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_wall1"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_corner_wall2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_corner_wall2",
+      "displayName": "Black Frame Glass Corner Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_corner_wall2",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_98"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_34"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_corner_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_corner_wall"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_wall4",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_wall4",
+      "displayName": "Black Frame Glass Wall 4",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_wall4",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_02_8",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_02_8"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_02_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_02_10"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_wall1",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_wall1"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_corner_wall3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_corner_wall3",
+      "displayName": "Black Frame Glass Corner Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_corner_wall3",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_114"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_02_10"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_corner_wall",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_corner_wall"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_wall5",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_wall5",
+      "displayName": "Black Frame Glass Wall 5",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_wall5",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_112",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_112"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_113"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true,
+            "cornerSprite": "walls_commercial_01_114"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_wall1",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_wall1"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_pillar",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_pillar",
+      "displayName": "Black Frame Glass Pillar",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_pillar",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_19",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_19"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_door_frame1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_door_frame1",
+      "displayName": "Black Frame Glass Door Frame 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_door_frame1",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_26",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ],
+          "callbacks": {
+            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+          },
+          "object": {
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_door_frame",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_door_frame"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_door_frame2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_door_frame2",
+      "displayName": "Black Frame Glass Door Frame 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_door_frame2",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_42",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_42"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ],
+          "callbacks": {
+            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+          },
+          "object": {
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_door_frame",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_door_frame"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_door_frame3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_door_frame3",
+      "displayName": "Black Frame Glass Door Frame 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_door_frame3",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_106",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_106"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_107"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ],
+          "callbacks": {
+            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+          },
+          "object": {
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.black_frame_glass.black_frame_glass_door_frame",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_black_frame_glass_black_frame_glass_door_frame"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_fence_post",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_fence_post",
+      "displayName": "Black Frame Glass Fence Post",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_fence_post",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_31",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_31"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_fence",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_fence",
+      "displayName": "Black Frame Glass Fence",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_fence",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_28",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.black_frame_glass.black_frame_glass_fence_corner",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_black_frame_glass_fence_corner",
+      "displayName": "Black Frame Glass Fence Corner",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_black_frame_glass_black_frame_glass_fence_corner",
+      "category": "Walls",
+      "subcategory": "Black Frame Glass",
+      "material": "Glass",
+      "iconSprite": "walls_commercial_01_30",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_commercial_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 3
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    }
+  ]
+}

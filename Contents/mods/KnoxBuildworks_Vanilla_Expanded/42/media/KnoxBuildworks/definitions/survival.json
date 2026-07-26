@@ -1,0 +1,2973 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.fireplace",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_fireplace",
+      "displayName": "Fireplace",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_fireplace",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "iconSprite": "fixtures_fireplaces_01_0",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_0"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_5"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildCairn",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "nativeObject": {
+            "type": "fireplace"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.fireplace_2tiles",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_fireplace_2tiles",
+      "displayName": "Fireplace Double",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_fireplace_2tiles",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "iconSprite": "fixtures_fireplaces_01_1",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_1",
+                        "fixtures_fireplaces_01_2"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_4"
+                      ],
+                      [
+                        "fixtures_fireplaces_01_3"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildCairn",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "nativeObject": {
+            "type": "fireplace"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.fireplace_wooden_shelf",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_fireplace_wooden_shelf",
+      "displayName": "Fireplace Wooden Shelf",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_fireplace_wooden_shelf",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_23",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "y": -2,
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_31"
+                      ],
+                      [
+                        "fixtures_fireplaces_01_30"
+                      ],
+                      [
+                        "fixtures_fireplaces_01_23"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_14",
+                        "fixtures_fireplaces_01_15",
+                        "fixtures_fireplaces_01_22"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.red_brick_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_red_brick_fireplacejamb_sides_west",
+      "displayName": "Red Brick Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_red_brick_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_24",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_13"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.red_brick_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_red_brick_fireplacejamb_sides_north",
+      "displayName": "Red Brick Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_red_brick_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_26",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.red_brick_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_red_brick_fireplacejamb_middle",
+      "displayName": "Red Brick Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_red_brick_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_25",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_25"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.grey_brick_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_grey_brick_fireplacejamb_sides_west",
+      "displayName": "Grey Brick Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_grey_brick_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_27",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_27"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_10"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.grey_brick_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_grey_brick_fireplacejamb_sides_north",
+      "displayName": "Grey Brick Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_grey_brick_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_29",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.grey_brick_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_grey_brick_fireplacejamb_middle",
+      "displayName": "Grey Brick Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_grey_brick_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "iconSprite": "fixtures_fireplaces_01_28",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_units",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 30
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fireplacejamb_sides_west",
+      "displayName": "White Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_32",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_21"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fireplacejamb_sides_north",
+      "displayName": "White Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_34",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_19"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fireplacejamb_middle",
+      "displayName": "White Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_33",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_20"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.black_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_black_fireplacejamb_sides_west",
+      "displayName": "Black Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_black_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_40",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_45"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.black_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_black_fireplacejamb_sides_north",
+      "displayName": "Black Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_black_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_42",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_42"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.black_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_black_fireplacejamb_middle",
+      "displayName": "Black Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_black_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_41",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_41"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_44"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBlack"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_black_marble_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_black_marble_fireplacejamb_sides_west",
+      "displayName": "White Black Marble Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_black_marble_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "iconSprite": "fixtures_fireplaces_01_48",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_48"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_53"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_black_marble_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_black_marble_fireplacejamb_sides_north",
+      "displayName": "White Black Marble Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_black_marble_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "iconSprite": "fixtures_fireplaces_01_50",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_50"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_51"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_black_marble_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_black_marble_fireplacejamb_middle",
+      "displayName": "White Black Marble Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_black_marble_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "iconSprite": "fixtures_fireplaces_01_49",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_49"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_52"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_masons_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:crudechisel",
+                  "base:masonschisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fancy_fireplacejamb_sides_west",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fancy_fireplacejamb_sides_west",
+      "displayName": "White Fancy Jamb Sides West + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fancy_fireplacejamb_sides_west",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_56",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_56"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_61"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_carpentry_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:carpentrychisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3,
+              "Carving": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30,
+              "Carving": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fancy_fireplacejamb_sides_north",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fancy_fireplacejamb_sides_north",
+      "displayName": "White Fancy Jamb Sides North + Mirrored",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fancy_fireplacejamb_sides_north",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_58",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_58"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_59"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_carpentry_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:carpentrychisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3,
+              "Carving": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30,
+              "Carving": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.white_fancy_fireplacejamb_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_fireplace_white_fancy_fireplacejamb_middle",
+      "displayName": "White Fancy Jamb Middle",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_fireplace_white_fancy_fireplacejamb_middle",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Wood",
+      "iconSprite": "fixtures_fireplaces_01_57",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_57"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_60"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "tool_carpentry_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:carpentrychisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3,
+              "Carving": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30,
+              "Carving": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.generator.generator",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_generator_generator",
+      "displayName": "Generator",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_generator_generator",
+      "category": "Survival",
+      "subcategory": "Generator",
+      "material": "Metal",
+      "iconSprite": "appliances_misc_01_0",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_misc_01_0"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "electrical_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "electronic_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Electricity": 5
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "Electricity": 50
+            },
+            "category": "Electrical"
+          },
+          "nativeObject": {
+            "type": "generator",
+            "item": "Base.Generator"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.metal_drums.metal_drum",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_metal_drums_metal_drum",
+      "displayName": "Metal Drum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_metal_drums_metal_drum",
+      "category": "Survival",
+      "subcategory": "Metal Drums",
+      "material": "Metal",
+      "iconSprite": "crafted_01_24",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_24"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 5
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 3
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.metal_drums.metal_drum_3",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_metal_drums_metal_drum",
+      "displayName": "Metal Drum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_metal_drums_metal_drum",
+      "category": "Survival",
+      "subcategory": "Metal Drums",
+      "material": "Metal",
+      "iconSprite": "crafted_01_28",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 5
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 3
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 40
+            },
+            "category": "Welding"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.water_well.water_well",
+      "translationKey": "IGUI_KBWVE_Buildable_survival_water_well_water_well",
+      "displayName": "Water Well",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_water_well_water_well",
+      "category": "Survival",
+      "subcategory": "Water Well",
+      "material": "Stone",
+      "iconSprite": "camping_01_16",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "camping_01_16"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "entityCompat": {
+            "module": "Base",
+            "entity": "Well"
+          },
+          "well": true,
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "well_lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Log"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "well_bucket",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BucketEmpty",
+                  "Base.Bucket"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "well_rope",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "tool_saw",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:saw",
+                  "base:crudesaw"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Masonry": 4,
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 2400,
+            "timedAction": "BuildCairn",
+            "completionSound": "BuildFenceCairn",
+            "xp": {
+              "Masonry": 40,
+              "Woodwork": 20
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "canPassThrough": true
+          }
+        }
+      ]
+    }
+  ]
+}

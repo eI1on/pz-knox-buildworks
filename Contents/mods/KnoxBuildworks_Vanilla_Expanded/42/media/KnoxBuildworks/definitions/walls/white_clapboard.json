@@ -1,0 +1,1949 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_wall",
+      "displayName": "Clapboard Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_wall",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_01_32",
+      "placement": {
+        "kind": "wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.wall",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_house_01_32",
+              "N": "walls_exterior_house_01_33",
+              "Corner": "walls_exterior_house_01_34"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_02_20",
+              "N": "walls_exterior_house_02_21",
+              "Corner": "walls_exterior_house_02_22"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_01_48",
+              "N": "walls_exterior_house_01_49",
+              "Corner": "walls_exterior_house_01_50"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_02_68",
+              "N": "walls_exterior_house_02_69",
+              "Corner": "walls_exterior_house_02_70"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_32",
+              "N": "walls_exterior_house_02_33",
+              "Corner": "walls_exterior_house_02_34"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_house_02_80",
+              "N": "walls_exterior_house_02_81",
+              "Corner": "walls_exterior_house_02_82"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_32",
+            "walls_exterior_house_01_33",
+            "walls_exterior_house_01_34"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_exterior_house_01_34"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_door_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_door_frame",
+      "displayName": "Clapboard Door Frame",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_door_frame",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_01_42",
+      "placement": {
+        "kind": "wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.door_frame",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_house_01_42",
+              "N": "walls_exterior_house_01_43"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_02_30",
+              "N": "walls_exterior_house_02_31"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_01_58",
+              "N": "walls_exterior_house_01_59"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_02_78",
+              "N": "walls_exterior_house_02_79"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_42",
+              "N": "walls_exterior_house_02_43"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_house_02_90",
+              "N": "walls_exterior_house_02_91"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_42",
+            "walls_exterior_house_01_43"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_42"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ],
+          "callbacks": {
+            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
+          },
+          "object": {
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_window_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_window_frame",
+      "displayName": "Clapboard Window Frame",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_window_frame",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_01_40",
+      "placement": {
+        "kind": "wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.window_frame",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_house_01_40",
+              "N": "walls_exterior_house_01_41"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_02_28",
+              "N": "walls_exterior_house_02_29"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_01_56",
+              "N": "walls_exterior_house_01_57"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_02_76",
+              "N": "walls_exterior_house_02_77"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_40",
+              "N": "walls_exterior_house_02_41"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_house_02_88",
+              "N": "walls_exterior_house_02_89"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_40",
+            "walls_exterior_house_01_41"
+          ]
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_41"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "glass_panels",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_corner_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_corner_wall",
+      "displayName": "Clapboard Corner Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_corner_wall",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "cornerSprite": "walls_exterior_house_01_34",
+            "isCorner": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "iconSprite": "walls_exterior_house_01_34",
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.corner_wall",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_house_01_34"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_02_22"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_01_50"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_02_70"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_34"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_house_02_82"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_34"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_pillar",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_pillar",
+      "displayName": "Clapboard Pillar",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_pillar",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_01_35",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_01_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "canPassThrough": true,
+            "canBarricade": false,
+            "isCorner": true
+          }
+        }
+      ],
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.pillar",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_house_01_35",
+              "Pillar": "walls_exterior_house_01_35"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_house_02_23",
+              "Pillar": "walls_exterior_house_02_23"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_house_01_51",
+              "Pillar": "walls_exterior_house_01_51"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_house_02_71",
+              "Pillar": "walls_exterior_house_02_71"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_house_02_35",
+              "Pillar": "walls_exterior_house_02_35"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_house_02_83",
+              "Pillar": "walls_exterior_house_02_83"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_house_01_35"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_1",
+      "displayName": "Clapboard Roof Slope Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_1",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_24",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_1",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_24",
+              "N": "walls_exterior_roofs_03_37"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_0",
+              "N": "walls_exterior_roofs_05_13"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_0",
+              "N": "walls_exterior_roofs_03_13"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_24",
+              "N": "walls_exterior_roofs_05_37"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_24",
+            "walls_exterior_roofs_03_37"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_2",
+      "displayName": "Clapboard Roof Slope Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_2",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_25",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_25"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_36"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_2",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_25",
+              "N": "walls_exterior_roofs_03_36"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_1",
+              "N": "walls_exterior_roofs_05_12"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_1",
+              "N": "walls_exterior_roofs_03_12"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_25",
+              "N": "walls_exterior_roofs_05_36"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_25",
+            "walls_exterior_roofs_03_36"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_3",
+      "displayName": "Clapboard Roof Slope Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_3",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_26",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_3",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_26",
+              "N": "walls_exterior_roofs_03_35"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_2",
+              "N": "walls_exterior_roofs_05_11"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_2",
+              "N": "walls_exterior_roofs_03_11"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_26",
+              "N": "walls_exterior_roofs_05_35"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_26",
+            "walls_exterior_roofs_03_35"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_4",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_4",
+      "displayName": "Clapboard Roof Slope Wall 4",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_4",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_32",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_4",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_32",
+              "N": "walls_exterior_roofs_03_29"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_8",
+              "N": "walls_exterior_roofs_05_5"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_8",
+              "N": "walls_exterior_roofs_03_5"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_32",
+              "N": "walls_exterior_roofs_05_29"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_32",
+            "walls_exterior_roofs_03_29"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_5",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_5",
+      "displayName": "Clapboard Roof Slope Wall 5",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_5",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_33",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_33"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_28"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_5",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_33",
+              "N": "walls_exterior_roofs_03_28"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_9",
+              "N": "walls_exterior_roofs_05_4"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_9",
+              "N": "walls_exterior_roofs_03_4"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_33",
+              "N": "walls_exterior_roofs_05_28"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_33",
+            "walls_exterior_roofs_03_28"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_slope_wall_6",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_slope_wall_6",
+      "displayName": "Clapboard Roof Slope Wall 6",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_slope_wall_6",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_34",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_34"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.white_clapboard.white_clapboard_roof_slope_wall",
+        "level": 6,
+        "translationKey": "IGUI_KBW_Group_walls_white_clapboard_white_clapboard_roof_slope_wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_slope_wall_6",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_34",
+              "N": "walls_exterior_roofs_03_27"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_10",
+              "N": "walls_exterior_roofs_05_3"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_10",
+              "N": "walls_exterior_roofs_03_3"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_34",
+              "N": "walls_exterior_roofs_05_27"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_34",
+            "walls_exterior_roofs_03_27"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_end_small",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_end_small",
+      "displayName": "Clapboard Roof End Small",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_end_small",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_39",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_39"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_31"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_end_small",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_39",
+              "N": "walls_exterior_roofs_03_31"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_15",
+              "N": "walls_exterior_roofs_05_7"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_15",
+              "N": "walls_exterior_roofs_03_7"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_39",
+              "N": "walls_exterior_roofs_05_31"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_39",
+            "walls_exterior_roofs_03_31"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_end_medium",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_end_medium",
+      "displayName": "Clapboard Roof End Medium",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_end_medium",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_38",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_38"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_end_medium",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_38",
+              "N": "walls_exterior_roofs_03_30"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_14",
+              "N": "walls_exterior_roofs_05_6"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_14",
+              "N": "walls_exterior_roofs_03_6"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_38",
+              "N": "walls_exterior_roofs_05_30"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_38",
+            "walls_exterior_roofs_03_30"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.white_clapboard.white_clapboard_roof_end_big",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_white_clapboard_roof_end_big",
+      "displayName": "Clapboard Roof End Big",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_clapboard_white_clapboard_roof_end_big",
+      "category": "Walls",
+      "subcategory": "Clapboard",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_roofs_03_40",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_roofs_03_41"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.clapboard.roof_end_big",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": true,
+          "canWallpaper": false,
+          "paintRequiresPlaster": false,
+          "wallpaperRequiresPlaster": false
+        },
+        "mapping": {
+          "directPaints": {
+            "PaintWhite": {
+              "W": "walls_exterior_roofs_03_40",
+              "N": "walls_exterior_roofs_03_41"
+            },
+            "PaintBlue": {
+              "W": "walls_exterior_roofs_05_16",
+              "N": "walls_exterior_roofs_05_17"
+            },
+            "PaintBrown": {
+              "W": "walls_exterior_roofs_03_16",
+              "N": "walls_exterior_roofs_03_17"
+            },
+            "PaintLightBrown": {
+              "W": "walls_exterior_roofs_05_40",
+              "N": "walls_exterior_roofs_05_41"
+            }
+          },
+          "baseSprites": [
+            "walls_exterior_roofs_03_40",
+            "walls_exterior_roofs_03_41"
+          ]
+        }
+      }
+    }
+  ]
+}
