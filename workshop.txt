@@ -1,5 +1,5 @@
 version=1
-id=
+id=3772269882
 title=[B42] Knox Buildworks
 description=[h1]Knox Buildworks[/h1]
 description=[i]Plan it. See it. Build it.[/i]
@@ -28,6 +28,13 @@ description=[*][b]Persistent blueprints[/b] with rooms, Z levels, ghosts, gather
 description=[*][b]Multiplayer integrity[/b] with synchronized plans and server-side validation.
 description=[/list]
 description=
+description=[h2]Choose it, place it, build it[/h2]
+description=Each catalogue entry represents a complete construction recipe, not merely a sprite. Choose the buildable family and quality, then select any available model variant, material set or wall finish. Knox resolves that combination into its exact footprint, directional sprites, requirements, skills, construction stage and placement rules.
+description=
+description=Select [b]Build[/b] to use the construction cursor immediately. The preview rotates and snaps according to the object, marks valid and invalid placement, and supports repeated building while the required materials remain available. When construction begins, the game performs the timed action, uses or drains the selected ingredients, preserves required tools, awards configured XP and creates the appropriate world object. In multiplayer, the server validates the same selection again before anything is consumed or placed.
+description=
+description=Select [b]Place Plan[/b] instead to save that exact configuration as a non-blocking ghost without spending materials. The planned object remembers its position, direction, Z level, quality, variant, material and finish until you are ready to construct it.
+description=
 description=[h2]Know what the recipe will use[/h2]
 description=Materials and tools are separate from skills and knowledge, so a missing hammer never looks like a missing Carpentry level. Recipe rows explain whether an item is consumed, kept, drained by uses, destroyed or allowed to degrade.
 description=
@@ -44,6 +51,9 @@ description=
 description=Draw walls in lines and floors in areas while large objects remain safe single placements. Floors, walls, furniture and finishes can share a planned tile, and plans can be moved, edited or erased later.
 description=
 description=A [b]gather area[/b] can include world containers and vehicle storage. Review whole-project totals, build one ghost, or queue the plan. Blueprints can be exported as JSON, imported at a new origin, or written onto an in-game blueprint item.
+description=
+description=[b]Planning Mode in action[/b]
+description=[img]https://i.imgur.com/i5lLGS4.gif[/img]
 description=
 description=[h2]Designed for multiplayer[/h2]
 description=The server rechecks buildable choices, requirements, skills, recipes, finishes, position and permissions. Integrity checks prevent mismatched clients from building with incompatible definitions. Blueprint owners can grant [b]view[/b], [b]contribute[/b] or [b]build[/b] access to their faction or individual players.
@@ -72,4 +82,5 @@ description=This mod's permissions fall under TIS's policy: [url=https://theindi
 description=This mod cannot be modified by anyone else, for anything else, at all, ever. Even if the user disappears, they would much rather you didn't touch the fruits of their hard labour.
 description=[/quote]
 description=[url=http://theindiestone.com/forums/index.php/topic/2530-mod-permissions/?p=36479][img]https://raw.githubusercontent.com/eI1on/workshop_resources/main/mod_permissions_images/on_lockdown.png[/img][/url]
-tags=Build 42;Framework;Interface;Misc;Multiplayer;Textures;QoL;WIP
+tags=Build 42;Building;Framework;Interface;Misc;Multiplayer;Textures;QoL;WIP
+visibility=public
