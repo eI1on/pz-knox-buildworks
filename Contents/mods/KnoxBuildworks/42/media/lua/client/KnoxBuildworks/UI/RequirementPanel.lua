@@ -375,7 +375,8 @@ function KBWRequirementPanel:setSelectedRow(row)
 end
 
 function KBWRequirementPanel:onMouseWheel(delta)
-    self:setYScroll(self:getYScroll() - delta * 36)
+    local minimum = math.min(0, self.height - self:getScrollHeight())
+    self:setYScroll(math.max(minimum, math.min(0, self:getYScroll() - delta * 36)))
     if self.vscroll then self:updateScrollbars() end
     return true
 end

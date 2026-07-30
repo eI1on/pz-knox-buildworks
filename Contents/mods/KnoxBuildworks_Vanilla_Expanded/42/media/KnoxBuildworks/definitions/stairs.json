@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.stairs.metal_stairs.modern_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_metal_stairs_modern_stairs",
       "displayName": "Modern Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_metal_stairs_modern_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Metal Stairs",
       "material": "Wood",
@@ -111,7 +111,7 @@
       "id": "kbw.vanillaexpanded.stairs.metal_stairs.metal_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_metal_stairs_metal_stairs",
       "displayName": "Metal Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_metal_stairs_metal_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Metal Stairs",
       "material": "Metal",
@@ -159,7 +159,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -263,7 +262,7 @@
       "id": "kbw.vanillaexpanded.stairs.metal_stairs.elevator_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_metal_stairs_elevator_stairs",
       "displayName": "Elevator Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_metal_stairs_elevator_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Metal Stairs",
       "material": "Metal",
@@ -311,7 +310,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -415,7 +413,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.simple_wooden_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_simple_wooden_stairs",
       "displayName": "Simple Wooden Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_simple_wooden_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",
@@ -521,7 +519,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.brown_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_brown_stairs",
       "displayName": "Brown Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_brown_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",
@@ -648,7 +646,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.dark_brown_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_dark_brown_stairs",
       "displayName": "Dark Brown Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_dark_brown_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",
@@ -775,7 +773,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.yellow_brown_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_yellow_brown_stairs",
       "displayName": "Yellow Brown Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_yellow_brown_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",
@@ -902,7 +900,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.white_industrial_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_white_industrial_stairs",
       "displayName": "White Industrial Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_white_industrial_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",
@@ -1029,7 +1027,7 @@
       "id": "kbw.vanillaexpanded.stairs.wooden_stairs.white_motel_stairs",
       "translationKey": "IGUI_KBWVE_Buildable_stairs_wooden_white_motel_stairs",
       "displayName": "White Motel Stairs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_stairs_wooden_stairs_white_motel_stairs",
+      "tooltipKey": "Tooltip_KBW_Shared_Stairs",
       "category": "Stairs",
       "subcategory": "Wooden Stairs",
       "material": "Wood",

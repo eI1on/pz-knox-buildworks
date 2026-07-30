@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.containers.lockers.location_business_bank_01_40",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_location_business_bank_01_40",
       "displayName": "Wall Vault",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_lockers_location_business_bank_01_40",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Lockers",
       "material": "Metal",
@@ -141,10 +141,6 @@
           "object": {
             "blockAllSquare": false,
             "canBePadlocked": true
-          },
-          "container": {
-            "type": "locker",
-            "capacity": 30
           }
         }
       ]
@@ -153,7 +149,7 @@
       "id": "kbw.vanillaexpanded.containers.lockers.location_business_bank_01_43",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_location_business_bank_01_43",
       "displayName": "Standing Vault",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_lockers_location_business_bank_01_43",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Lockers",
       "material": "Metal",
@@ -310,10 +306,6 @@
           "object": {
             "blockAllSquare": true,
             "canBePadlocked": true
-          },
-          "container": {
-            "type": "locker",
-            "capacity": 50
           }
         }
       ]
@@ -322,7 +314,7 @@
       "id": "kbw.vanillaexpanded.containers.lockers.location_military_generic_01_23",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_location_military_generic_01_23",
       "displayName": "Military Locker",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_lockers_location_military_generic_01_23",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Lockers",
       "material": "Metal",
@@ -490,7 +482,7 @@
       "id": "kbw.vanillaexpanded.containers.lockers.furniture_storage_02_12",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_furniture_storage_02_12",
       "displayName": "Yellow Wall Locker",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_lockers_furniture_storage_02_12",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Lockers",
       "material": "Metal",
@@ -679,7 +671,7 @@
       "id": "kbw.vanillaexpanded.containers.lockers.furniture_storage_02_4",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_furniture_storage_02_4",
       "displayName": "Blue Wall Locker",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_lockers_furniture_storage_02_4",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Lockers",
       "material": "Metal",

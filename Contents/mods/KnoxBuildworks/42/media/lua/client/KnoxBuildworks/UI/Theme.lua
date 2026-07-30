@@ -24,18 +24,141 @@ Theme.primary = { r = 0.30, g = 0.44, b = 0.29, a = 0.88 }
 Theme.primaryHover = { r = 0.38, g = 0.52, b = 0.35, a = 0.94 }
 Theme.disabled = { r = 0.16, g = 0.15, b = 0.14, a = 0.55 }
 
--- Widgets must always receive their own copy of a palette color. Vanilla
--- widget code (ISButton:setEnable, setBorderRGBA, setBackgroundRGBA) writes
--- into the assigned color table IN PLACE, so a shared table would let one
--- disabled button repaint every panel in the mod red/black for the session.
+local PANEL_TONES = {
+    {
+        backdrop = { .025, .022, .020 }, surface = { .070, .065, .060 }, raised = { .115, .100, .086 },
+        selected = { .160, .180, .130 }, selectedSoft = { .115, .135, .105 }, accent = { .760, .700, .420 },
+        primary = { .300, .440, .290 }, primaryHover = { .380, .520, .350 }
+    },
+    {
+        backdrop = { .055, .055, .055 }, surface = { .105, .105, .105 }, raised = { .155, .155, .155 },
+        selected = { .170, .180, .185 }, selectedSoft = { .125, .135, .140 }, accent = { .760, .760, .720 },
+        primary = { .300, .410, .430 }, primaryHover = { .380, .500, .520 }
+    },
+    {
+        backdrop = { .040, .052, .064 }, surface = { .075, .092, .108 }, raised = { .120, .140, .160 },
+        selected = { .120, .175, .210 }, selectedSoft = { .090, .135, .165 }, accent = { .520, .760, .900 },
+        primary = { .220, .410, .540 }, primaryHover = { .290, .500, .640 }
+    },
+    {
+        backdrop = { .025, .050, .040 }, surface = { .055, .095, .075 }, raised = { .085, .140, .110 },
+        selected = { .100, .205, .145 }, selectedSoft = { .070, .150, .110 }, accent = { .560, .820, .550 },
+        primary = { .200, .480, .300 }, primaryHover = { .270, .570, .370 }
+    },
+    {
+        backdrop = { .018, .025, .055 }, surface = { .045, .055, .105 }, raised = { .075, .085, .155 },
+        selected = { .100, .120, .235 }, selectedSoft = { .075, .090, .180 }, accent = { .570, .680, .980 },
+        primary = { .250, .330, .620 }, primaryHover = { .330, .420, .730 }
+    },
+    {
+        backdrop = { .050, .025, .052 }, surface = { .095, .055, .100 }, raised = { .145, .085, .150 },
+        selected = { .205, .105, .220 }, selectedSoft = { .150, .075, .165 }, accent = { .850, .590, .900 },
+        primary = { .490, .240, .540 }, primaryHover = { .590, .320, .640 }
+    },
+    {
+        backdrop = { .075, .060, .042 }, surface = { .125, .100, .070 }, raised = { .180, .145, .095 },
+        selected = { .220, .175, .095 }, selectedSoft = { .165, .130, .075 }, accent = { .940, .710, .310 },
+        primary = { .520, .390, .180 }, primaryHover = { .620, .480, .240 }
+    }
+}
+
+local function optionValue(options, id, fallback)
+    local option = options and options.getOption and options:getOption(id)
+    return option and option.getValue and option:getValue() or fallback
+end
+
+local function setColor(target, values, alpha)
+    target.r = values[1]
+    target.g = values[2]
+    target.b = values[3]
+    if alpha ~= nil then target.a = alpha end
+end
+
+local function optionColor(options, id, fallback)
+    local value = optionValue(options, id, fallback)
+    if type(value) ~= "table" then return fallback end
+    return {
+        r = tonumber(value.r) or fallback.r,
+        g = tonumber(value.g) or fallback.g,
+        b = tonumber(value.b) or fallback.b,
+        a = tonumber(value.a) or fallback.a
+    }
+end
+
+function Theme.applyAccessibility(options)
+    local opacity = tonumber(optionValue(options, "PanelOpacity", 86)) or 86
+    if opacity > 1 then opacity = opacity / 100 end
+    opacity = math.max(.35, math.min(1, opacity))
+    local tone = PANEL_TONES[tonumber(optionValue(options, "PanelTone", 1)) or 1] or PANEL_TONES[1]
+    setColor(Theme.backdrop, tone.backdrop, opacity)
+    setColor(Theme.surface, tone.surface, math.min(1, opacity * .90))
+    setColor(Theme.surfaceRaised, tone.raised, math.min(1, opacity * 1.02))
+    setColor(Theme.selected, tone.selected, .92)
+    setColor(Theme.selectedSoft, tone.selectedSoft, .72)
+    setColor(Theme.accent, tone.accent, 1)
+    setColor(Theme.primary, tone.primary, .88)
+    setColor(Theme.primaryHover, tone.primaryHover, .94)
+    local highContrast = optionValue(options, "HighContrast", false) == true
+    if highContrast then
+        setColor(Theme.text, { 1, 1, 1 }, 1)
+        setColor(Theme.textMuted, { .80, .80, .78 }, 1)
+        setColor(Theme.border, { .80, .78, .70 }, .95)
+        setColor(Theme.borderSoft, { .55, .54, .50 }, .85)
+        setColor(Theme.accent, { .95, .84, .38 }, 1)
+    else
+        setColor(Theme.text, { .92, .91, .88 }, 1)
+        setColor(Theme.textMuted, { .64, .63, .60 }, 1)
+        setColor(Theme.border, { .48, .46, .42 }, .75)
+        setColor(Theme.borderSoft, { .30, .29, .27 }, .65)
+        setColor(Theme.accent, tone.accent, 1)
+    end
+end
+
+function Theme.previewBackground(options)
+    local mode = tonumber(optionValue(options, "PreviewBackground", 1)) or 1
+    if mode == 2 then return "light" end
+    if mode == 3 then return "dark" end
+    if mode == 4 then return "custom" end
+    return "checker"
+end
+
+function Theme.drawPreviewBackground(panel, x, y, width, height, options)
+    local mode = Theme.previewBackground(options)
+    if mode == "light" then
+        panel:drawRect(x, y, width, height, .96, .64, .64, .62)
+        return
+    end
+    if mode == "dark" then
+        panel:drawRect(x, y, width, height, .96, .025, .025, .025)
+        return
+    end
+    if mode == "custom" then
+        local color = optionColor(options, "BuildableBackgroundColor", { r = .35, g = .35, b = .35, a = 1 })
+        panel:drawRect(x, y, width, height, color.a, color.r, color.g, color.b)
+        return
+    end
+    local cell = 12
+    panel:drawRect(x, y, width, height, .96, .48, .48, .46)
+    local rows = math.ceil(height / cell)
+    local columns = math.ceil(width / cell)
+    for row = 0, rows - 1 do
+        for column = 0, columns - 1 do
+            if (row + column) % 2 == 0 then
+                panel:drawRect(
+                    x + column * cell, y + row * cell, math.min(cell, width - column * cell),
+                    math.min(cell, height - row * cell), .72, .22, .22, .22
+                )
+            end
+        end
+    end
+end
+
 local function cloneColor(c)
     return { r = c.r or 1, g = c.g or 1, b = c.b or 1, a = c.a or 1 }
 end
 
 Theme.color = cloneColor
 
--- Remembers the button's current border/background as its "enabled" look, so
--- toggling enabled state can restore them exactly.
 function Theme.lockButtonColors(button)
     if not button then
         return
@@ -44,9 +167,6 @@ function Theme.lockButtonColors(button)
     button.backgroundColorEnabled = cloneColor(button.backgroundColor)
 end
 
--- Knox replacement for ISButton:setEnable. The vanilla method hardcodes a red
--- border and pure black background for disabled buttons, which fights the
--- Knox palette (and mutates color tables in place - see cloneColor above).
 function Theme.setButtonEnabled(button, enabled)
     if not button then
         return

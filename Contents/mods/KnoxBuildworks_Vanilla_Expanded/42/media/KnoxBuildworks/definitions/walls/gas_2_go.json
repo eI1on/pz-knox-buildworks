@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.gas_2_go.gas2go_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_gas_2_go_wall",
       "displayName": "Gas2Go Walls Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_gas_2_go_gas2go_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_Gas2GoWall",
       "category": "Walls",
       "subcategory": "Gas 2 Go",
       "material": "Wood",
@@ -325,7 +325,7 @@
       "id": "kbw.vanillaexpanded.walls.gas_2_go.gas2go_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_gas_2_go_corner_wall",
       "displayName": "Gas2Go Walls Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_gas_2_go_gas2go_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_Gas2GoWall",
       "category": "Walls",
       "subcategory": "Gas 2 Go",
       "material": "Wood",
@@ -347,7 +347,8 @@
                     ]
                   }
                 ]
-              }}
+              }
+            }
           },
           "requirements": {
             "inputs": [

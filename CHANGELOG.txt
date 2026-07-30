@@ -1,0 +1,43 @@
+Knox Buildworks - UI, Accessibility & Performance Update
+
+[i]A major catalogue update focused on readability, faster navigation and better support for different resolutions and font sizes.[/i]
+
+[b]Catalogue and compact mode[/b]
+[list]
+[*]Reworked the catalogue layout for larger fonts and smaller window sizes.
+[*]The window now opens at a more practical size, while compact and detailed modes remember their own dimensions.
+[*]Added a compact mode with a condensed icon grid, B41-inspired subcategory list and grouped-buildable carousel.
+[*]Compact hover tooltips now show descriptions, item icons, requirements and storage information.
+[/list]
+
+[b]Buildable information[/b]
+[list]
+[*]Buildable dimensions are now displayed below the object preview.
+[*]Storage capacity is shown in the UI.
+[*]Multi-tile and multi-container objects list each available container and its capacity separately.
+[/list]
+
+[b]Appearance and accessibility[/b]
+[list]
+[*]Added a dedicated appearance menu with multiple UI themes, panel opacity and high-contrast options.
+[*]Added checkerboard, light, dark and custom-colour backgrounds to improve the visibility of buildable sprites.
+[*]Improved responsive positioning, text wrapping, scrolling and panel sizing throughout the catalogue and Planning Mode.
+[/list]
+
+[b]Detailed-list performance[/b]
+[list]
+[*]Greatly reduced freezing when opening the detailed list, selecting buildables and resizing the window.
+[*]Added cached text layouts, native text wrapping, lazy icon loading and only-visible row processing.
+[*]Detailed rows now respect the selected preview background and wrap long text correctly.
+[/list]
+
+[b]Translations and general fixes[/b]
+[list]
+[*]Shortened and improved English and Simplified Chinese (thank you @唐小驴) buildable descriptions.
+[*]Moved shared category, subcategory and description translations into the main mod for add-on reuse.
+[*]Fixed numerous scrollbar, resize-handle, carousel, selector, clipping and large-font overlap issues.
+[*]Added military crates (with a capacity of 100)
+[*]Fixed Double Wrought Iron Gate needing a door frame
+[/list]
+
+[i]Thank you to everyone who reported accessibility, scaling and catalogue usability issues.[/i]

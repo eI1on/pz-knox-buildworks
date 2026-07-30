@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.diner_walls.diner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_diner_wall",
       "displayName": "Diner Walls Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_diner_walls_diner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_DinerWall",
       "category": "Walls",
       "subcategory": "Diner Walls",
       "material": "Wood",
@@ -433,7 +433,7 @@
       "id": "kbw.vanillaexpanded.walls.diner_walls.diner_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_diner_corner_wall",
       "displayName": "Diner Walls Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_diner_walls_diner_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_DinerWall",
       "category": "Walls",
       "subcategory": "Diner Walls",
       "material": "Wood",
@@ -455,7 +455,8 @@
                     ]
                   }
                 ]
-              }}
+              }
+            }
           },
           "requirements": {
             "inputs": [

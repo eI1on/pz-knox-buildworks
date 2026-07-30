@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.decorations.garage.car_lift_pillar",
       "translationKey": "IGUI_KBWVE_Buildable_decorations_garage_car_lift_pillar",
       "displayName": "Car Lift Pillar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_garage_car_lift_pillar",
+      "tooltipKey": "Tooltip_KBW_Shared_GarageDecoration",
       "category": "Decorations",
       "subcategory": "Garage",
       "material": "Metal",
@@ -66,7 +66,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -171,7 +170,7 @@
       "id": "kbw.vanillaexpanded.decorations.garage.car_lift_upper",
       "translationKey": "IGUI_KBWVE_Buildable_decorations_garage_car_lift_upper",
       "displayName": "Car Lift Upper Middle Part",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_garage_car_lift_upper",
+      "tooltipKey": "Tooltip_KBW_Shared_GarageDecoration",
       "category": "Decorations",
       "subcategory": "Garage",
       "material": "Metal",
@@ -232,7 +231,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -337,7 +335,7 @@
       "id": "kbw.vanillaexpanded.decorations.garage.car_lift_lower",
       "translationKey": "IGUI_KBWVE_Buildable_decorations_garage_car_lift_lower",
       "displayName": "Car Lift Lower Part",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_garage_car_lift_lower",
+      "tooltipKey": "Tooltip_KBW_Shared_GarageDecoration",
       "category": "Decorations",
       "subcategory": "Garage",
       "material": "Metal",
@@ -398,7 +396,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -503,7 +500,7 @@
       "id": "kbw.vanillaexpanded.decorations.garage.car_lift_middle",
       "translationKey": "IGUI_KBWVE_Buildable_decorations_garage_car_lift_middle",
       "displayName": "Car Lift Lower Middle Part",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_garage_car_lift_middle",
+      "tooltipKey": "Tooltip_KBW_Shared_GarageDecoration",
       "category": "Decorations",
       "subcategory": "Garage",
       "material": "Metal",
@@ -564,7 +561,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",

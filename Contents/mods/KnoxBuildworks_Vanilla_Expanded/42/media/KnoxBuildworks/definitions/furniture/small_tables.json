@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.furniture.small_tables.furniture_tables_low_01_12",
       "translationKey": "IGUI_KBWVE_Buildable_furniture_small_tables_furniture_tables_low_01_12",
       "displayName": "Brown Low Table",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_furniture_small_tables_furniture_tables_low_01_12",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Furniture",
       "subcategory": "Small Tables",
       "material": "Wood",
@@ -103,7 +103,7 @@
       "id": "kbw.vanillaexpanded.furniture.small_tables.furniture_tables_low_01_18",
       "translationKey": "IGUI_KBWVE_Buildable_furniture_small_tables_furniture_tables_low_01_18",
       "displayName": "Black Low Modern Table",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_furniture_small_tables_furniture_tables_low_01_18",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Furniture",
       "subcategory": "Small Tables",
       "material": "Wood",
@@ -210,10 +210,6 @@
               "Woodwork": 30
             },
             "category": "Carpentry"
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]

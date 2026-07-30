@@ -41,15 +41,6 @@ local ESCAPES = {
     t = '\t'
 }
 
--- The definition files are pretty-printed (roughly half the bytes are
--- indentation), so whitespace is skipped with one engine-side pattern find
--- per token instead of a per-byte interpreted loop.
-local function skipWhitespace(text, index, length)
-    local nonSpace = find(text, "%S", index)
-    if nonSpace then return nonSpace end
-    return length + 1
-end
-
 ---Parses the string whose opening quote sits at index. Every search is
 ---bounded by the next quote, so no call ever scans past the current token:
 ---the candidate segment is extracted first (it is the return value in the

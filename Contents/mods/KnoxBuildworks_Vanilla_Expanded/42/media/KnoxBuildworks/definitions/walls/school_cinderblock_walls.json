@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.school_cinderblock_walls.school_cinderblock_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_school_cinderblock_wall",
       "displayName": "School Cinderblock Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_school_cinderblock_walls_school_cinderblock_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_SchoolCinderblockWall",
       "category": "Walls",
       "subcategory": "School Cinderblock Walls",
       "material": "Concrete",
@@ -284,7 +284,7 @@
       "id": "kbw.vanillaexpanded.walls.school_cinderblock_walls.school_cinderblock_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_school_cinderblock_corner_wall",
       "displayName": "School Cinderblock Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_school_cinderblock_walls_school_cinderblock_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_SchoolCinderblockWall",
       "category": "Walls",
       "subcategory": "School Cinderblock Walls",
       "material": "Concrete",
@@ -307,7 +307,8 @@
                     ]
                   }
                 ]
-              }}
+              }
+            }
           },
           "requirements": {
             "inputs": [

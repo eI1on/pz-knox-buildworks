@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.recreational.music.recreational_01_0",
       "translationKey": "IGUI_KBWVE_Buildable_recreational_music_recreational_01_0",
       "displayName": "Oldies Jukebox",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_recreational_music_recreational_01_0",
+      "tooltipKey": "Tooltip_KBW_Shared_MusicDecoration",
       "category": "Recreational",
       "subcategory": "Music",
       "material": "Electronics",
@@ -155,7 +155,7 @@
       "id": "kbw.vanillaexpanded.recreational.music.recreational_01_9",
       "translationKey": "IGUI_KBWVE_Buildable_recreational_music_recreational_01_9",
       "displayName": "Western Piano",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_recreational_music_recreational_01_9",
+      "tooltipKey": "Tooltip_KBW_Shared_MusicDecoration",
       "category": "Recreational",
       "subcategory": "Music",
       "material": "Wood",
@@ -172,7 +172,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "recreational_01_13"
@@ -199,7 +198,6 @@
               "E": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "recreational_01_31"

@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_pizzawhirled_01_35",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_pizzawhirled_01_35",
       "displayName": "Pizzawhirled Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_pizzawhirled_01_35",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -116,10 +116,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -128,7 +124,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_pizzawhirled_01_34",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_pizzawhirled_01_34",
       "displayName": "Pizzawhirled Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_pizzawhirled_01_34",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -239,10 +235,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -251,7 +243,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_pie_01_43",
       "translationKey": "IGUI_KBWVE_Buildable_containers_pie_store_counter",
       "displayName": "Pie Store Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_pie_store_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -375,7 +367,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_pie_01_42",
       "translationKey": "IGUI_KBWVE_Buildable_containers_pie_store_corner_counter",
       "displayName": "Pie Store Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_pie_store_corner_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -499,7 +491,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_seahorse_01_43",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_seahorse_01_43",
       "displayName": "Seahorse Coffee Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_seahorse_01_43",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -621,7 +613,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_seahorse_01_42",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_seahorse_01_42",
       "displayName": "Seahorse Coffee Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_seahorse_01_42",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -743,7 +735,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_spiffos_01_59",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_spiffos_01_59",
       "displayName": "Spiffos Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_spiffos_01_59",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -865,7 +857,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_spiffos_01_58",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_spiffos_01_58",
       "displayName": "Spiffos Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_spiffos_01_58",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -987,7 +979,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_entertainment_theatre_01_11",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_location_entertainment_theatre_01_11",
       "displayName": "Theater Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_entertainment_theatre_01_11",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1109,7 +1101,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_entertainment_theatre_01_10",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_location_entertainment_theatre_01_10",
       "displayName": "Theater Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_entertainment_theatre_01_10",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1320,7 +1312,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_shop_zippee_01_19",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_location_shop_zippee_01_19",
       "displayName": "Zippee Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_shop_zippee_01_19",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1442,7 +1434,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_shop_zippee_01_18",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_location_shop_zippee_01_18",
       "displayName": "Zippee Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_shop_zippee_01_18",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1564,7 +1556,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_diner_01_27",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_diner_01_27",
       "displayName": "Diner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_diner_01_27",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1675,10 +1667,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -1687,7 +1675,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_diner_01_26",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_diner_01_26",
       "displayName": "Diner Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_diner_01_26",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1798,10 +1786,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -1810,7 +1794,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.brown_bar_counter",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_brown_bar_counter",
       "displayName": "Brown Bar Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_brown_bar_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -1953,7 +1937,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.brown_bar_counter_corner",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_brown_bar_counter_corner",
       "displayName": "Brown Bar Counter Corner",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_brown_bar_counter_corner",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2096,7 +2080,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.black_bar_counter",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_black_bar_counter",
       "displayName": "Black Bar Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_black_bar_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2239,7 +2223,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.black_bar_counter_corner",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_black_bar_counter_corner",
       "displayName": "Black Bar Counter Corner",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_black_bar_counter_corner",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2382,7 +2366,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_bar_01_59",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_bar_01_59",
       "displayName": "Oak Bar Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_bar_01_59",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2520,7 +2504,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.location_restaurant_bar_01_58",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_bar_01_58",
       "displayName": "Oak Corner Bar Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_location_restaurant_bar_01_58",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2658,7 +2642,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.left_bar_brown_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_left_bar_brown_wall_bar",
       "displayName": "Left Bar Brown Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_left_bar_brown_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2780,7 +2764,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.bar_brown_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_bar_brown_wall_bar",
       "displayName": "Bar Brown Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_bar_brown_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -2902,7 +2886,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.right_bar_brown_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_right_bar_brown_wall_bar",
       "displayName": "Right Bar Brown Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_right_bar_brown_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -3024,7 +3008,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.left_bar_black_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_left_bar_black_wall_bar",
       "displayName": "Left Bar Black Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_left_bar_black_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -3146,7 +3130,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.bar_black_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_bar_black_wall_bar",
       "displayName": "Bar Black Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_bar_black_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",
@@ -3268,7 +3252,7 @@
       "id": "kbw.vanillaexpanded.containers.restaurant.right_bar_black_wall_bar",
       "translationKey": "IGUI_KBWVE_Buildable_containers_restaurant_right_bar_black_wall_bar",
       "displayName": "Right Bar Black Wall Bar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_restaurant_right_bar_black_wall_bar",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Restaurant",
       "material": "Wood",

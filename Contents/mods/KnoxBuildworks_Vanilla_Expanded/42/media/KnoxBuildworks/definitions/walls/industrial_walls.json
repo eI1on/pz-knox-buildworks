@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.white_industrial_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_white_industrial_wall",
       "displayName": "White Industrial Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_white_industrial_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_WhiteGreenIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -44,7 +44,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -191,7 +190,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -342,7 +340,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -459,7 +456,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.white_industrial_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_white_industrial_corner_wall",
       "displayName": "White Industrial Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_white_industrial_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_WhiteGreenIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -481,11 +478,11 @@
                     ]
                   }
                 ]
-              }}
+              }
+            }
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -617,7 +614,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -719,7 +715,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.chestnut_industrial_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_chestnut_industrial_wall",
       "displayName": "Chestnut Industrial Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_chestnut_industrial_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_ChestnutIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -758,7 +754,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -905,7 +900,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1017,7 +1011,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.chestnut_industrial_door_frame_1",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_chestnut_industrial_door_frame_1",
       "displayName": "Chestnut Industrial Double Door Frame 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_chestnut_industrial_door_frame_1",
+      "tooltipKey": "Tooltip_KBW_Shared_DoorTrim",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -1056,7 +1050,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1173,7 +1166,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.chestnut_industrial_door_frame_2",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_chestnut_industrial_door_frame_2",
       "displayName": "Chestnut Industrial Double Door Frame 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_chestnut_industrial_door_frame_2",
+      "tooltipKey": "Tooltip_KBW_Shared_DoorTrim",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -1212,7 +1205,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1368,7 +1360,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1485,7 +1476,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.chestnut_industrial_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_chestnut_industrial_corner_wall",
       "displayName": "Chestnut Industrial Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_chestnut_industrial_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_ChestnutIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -1512,7 +1503,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1628,23 +1618,22 @@
         {
           "id": "built",
           "geometry": {
-              "faces": {
-                "W": {
-                  "layers": [
-                    {
-                      "rows": [
-                        [
-                          "industry_railroad_05_11"
-                        ]
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_railroad_05_11"
                       ]
-                    }
-                  ]
-                }
+                    ]
+                  }
+                ]
+              }
             }
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1746,7 +1735,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.brown_industrial_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_brown_industrial_wall",
       "displayName": "Brown Industrial Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_brown_industrial_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_BrownIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -1785,7 +1774,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1932,7 +1920,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2044,7 +2031,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.brown_industrial_door_frame_1",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_brown_industrial_door_frame_1",
       "displayName": "Brown Industrial Double Door Frame 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_brown_industrial_door_frame_1",
+      "tooltipKey": "Tooltip_KBW_Shared_DoorTrim",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -2083,7 +2070,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2200,7 +2186,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.brown_industrial_door_frame_2",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_brown_industrial_door_frame_2",
       "displayName": "Brown Industrial Double Door Frame 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_brown_industrial_door_frame_2",
+      "tooltipKey": "Tooltip_KBW_Shared_DoorTrim",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -2239,7 +2225,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2395,7 +2380,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2512,7 +2496,7 @@
       "id": "kbw.vanillaexpanded.walls.industrial_walls.brown_industrial_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_industrial_brown_industrial_corner_wall",
       "displayName": "Brown Industrial Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_industrial_walls_brown_industrial_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_BrownIndustrialWall",
       "category": "Walls",
       "subcategory": "Industrial Walls",
       "material": "Metal",
@@ -2539,7 +2523,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2671,7 +2654,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",

@@ -129,7 +129,7 @@
       "id": "kbw.vanillaexpanded.containers.others.furniture_storage_01_53",
       "translationKey": "IGUI_KBWVE_Buildable_small_table",
       "displayName": "Small Table",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_furniture_storage_01_53",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -250,7 +250,7 @@
       "id": "kbw.vanillaexpanded.containers.others.location_community_medical_01_36",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_medical_01_36",
       "displayName": "Pale Drawers",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_location_community_medical_01_36",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -459,10 +459,6 @@
           },
           "object": {
             "canBePadlocked": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ],
@@ -472,7 +468,7 @@
       "id": "kbw.vanillaexpanded.containers.others.fixtures_bathroom_02_24_2",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_fixtures_bathroom_wooden_toilet",
       "displayName": "Wooden Toilet",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_fixtures_bathroom_02_24_2",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -562,10 +558,6 @@
           "object": {
             "blockAllSquare": true,
             "canBePadlocked": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ],
@@ -575,7 +567,7 @@
       "id": "kbw.vanillaexpanded.containers.others.location_community_school_01_4",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_school_01_4",
       "displayName": "Dark School Bench",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_location_community_school_01_4",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -694,7 +686,7 @@
       "id": "kbw.vanillaexpanded.containers.others.location_community_school_01_12",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_school_01_12",
       "displayName": "Light School Bench",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_location_community_school_01_12",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -813,7 +805,7 @@
       "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_empty_shelves",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_empty_shelves",
       "displayName": "Wooden Barrel Empty Shelves",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_wooden_barrel_empty_shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -899,10 +891,6 @@
               "Woodwork": 30
             },
             "category": "Carpentry"
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -911,7 +899,7 @@
       "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_shelves1",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_shelves1",
       "displayName": "Wooden Barrel Shelves 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_wooden_barrel_shelves1",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -997,10 +985,6 @@
               "Woodwork": 30
             },
             "category": "Carpentry"
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ],
@@ -1014,7 +998,7 @@
       "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_shelves2",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_shelves2",
       "displayName": "Wooden Barrel Shelves 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_wooden_barrel_shelves2",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -1100,10 +1084,6 @@
               "Woodwork": 30
             },
             "category": "Carpentry"
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ],
@@ -1117,7 +1097,7 @@
       "id": "kbw.vanillaexpanded.containers.others.scarecrow",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_scarecrow",
       "displayName": "Scarecrow",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_scarecrow",
+      "tooltipKey": "Tooltip_KBW_Shared_ClothesStand",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Stone",
@@ -1220,7 +1200,7 @@
       "id": "kbw.vanillaexpanded.containers.others.skeleton",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_skeleton",
       "displayName": "Skeleton",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_skeleton",
+      "tooltipKey": "Tooltip_KBW_Shared_ClothesStand",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Stone",
@@ -1323,7 +1303,7 @@
       "id": "kbw.vanillaexpanded.containers.others.logs",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
       "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_logs",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -1424,7 +1404,7 @@
       "id": "kbw.vanillaexpanded.containers.others.logs_2",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
       "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_logs",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -1525,7 +1505,7 @@
       "id": "kbw.vanillaexpanded.containers.others.logs_3",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
       "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_logs",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -1626,7 +1606,7 @@
       "id": "kbw.vanillaexpanded.containers.others.logs_4",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
       "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_logs",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",
@@ -1727,7 +1707,7 @@
       "id": "kbw.vanillaexpanded.containers.others.logs_5",
       "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
       "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_logs",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Others",
       "material": "Wood",

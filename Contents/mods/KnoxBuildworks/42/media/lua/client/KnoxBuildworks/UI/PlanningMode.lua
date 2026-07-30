@@ -787,7 +787,8 @@ function KBWPlanningMode:new(player, hiddenUI)
     local screenH = getPlayerScreenHeight(playerNum)
     local catalogW = math.min(410, math.max(360, math.floor(screenW * 0.28)))
     local maxEditorW = math.max(460, screenW - catalogW - 48)
-    local width = math.min(500, maxEditorW)
+    local preferredEditorW = math.max(500, 56 + getTextManager():getFontHeight(UIFont.Small) * 24)
+    local width = math.min(preferredEditorW, maxEditorW)
     local height = math.min(screenH - 48, math.max(760, screenH - 72))
     local x = screenLeft + 12
     local y = screenTop + 36
@@ -828,7 +829,8 @@ function KBWPlanningMode:createChildren()
     self.contentY = self.subHeaderY + FONT_HGT_SMALL + 8
     local leftW = math.floor((self.width - pad * 3) * 0.46)
     if leftW < 232 then leftW = 232 end
-    if leftW > 252 then leftW = 252 end
+    local maximumLeftWidth = math.max(252, FONT_HGT_SMALL * 11 + 24)
+    if leftW > maximumLeftWidth then leftW = maximumLeftWidth end
     local rightX = pad + leftW + pad
     local rightW = self.width - rightX - pad
     self.leftX = pad
@@ -909,17 +911,37 @@ function KBWPlanningMode:createChildren()
         safeText("Tooltip_KBW_PinBlueprint", "Pin this blueprint's total requirements to the HUD.")
     )
     yLeft = yLeft + buttonH + gap
-    self.exportButton = makeButton(
-        self, pad, yLeft, thirdLeft, buttonH, safeText("IGUI_KBW_ExportJSON", "Export"), self.onExportBlueprint
-    )
-    self.importButton = makeButton(
-        self, pad + thirdLeft + gap, yLeft, thirdLeft, buttonH, safeText("IGUI_KBW_Import", "Import"),
-        self.onImportBlueprint
-    )
-    self.copyJsonButton = makeButton(
-        self, pad + (thirdLeft + gap) * 2, yLeft, thirdLeft, buttonH,
-        safeText("IGUI_KBW_CopyBlueprintJSON", "Copy JSON"), self.onCopyBlueprintJSON
-    )
+    local exportLabel = safeText("IGUI_KBW_ExportJSON", "Export")
+    local importLabel = safeText("IGUI_KBW_Import", "Import")
+    local copyJsonLabel = safeText("IGUI_KBW_CopyBlueprintJSON", "Copy JSON")
+    local exportRowMinimum = getTextManager():MeasureStringX(UIFont.Small, exportLabel) + 20
+        + getTextManager():MeasureStringX(UIFont.Small, importLabel) + 20
+        + getTextManager():MeasureStringX(UIFont.Small, copyJsonLabel) + 20
+        + gap * 2
+    if exportRowMinimum <= leftW then
+        self.exportButton = makeButton(
+            self, pad, yLeft, thirdLeft, buttonH, exportLabel, self.onExportBlueprint
+        )
+        self.importButton = makeButton(
+            self, pad + thirdLeft + gap, yLeft, thirdLeft, buttonH, importLabel, self.onImportBlueprint
+        )
+        self.copyJsonButton = makeButton(
+            self, pad + (thirdLeft + gap) * 2, yLeft, thirdLeft, buttonH, copyJsonLabel,
+            self.onCopyBlueprintJSON
+        )
+        yLeft = yLeft + buttonH + gap
+    else
+        self.exportButton = makeButton(
+            self, pad, yLeft, halfLeft, buttonH, exportLabel, self.onExportBlueprint
+        )
+        self.importButton = makeButton(
+            self, pad + halfLeft + gap, yLeft, halfLeft, buttonH, importLabel, self.onImportBlueprint
+        )
+        self.copyJsonButton = makeButton(
+            self, pad, yLeft + buttonH + gap, leftW, buttonH, copyJsonLabel, self.onCopyBlueprintJSON
+        )
+        yLeft = yLeft + (buttonH + gap) * 2
+    end
     setOptionalTooltip(
         self.exportButton,
         safeText(
@@ -933,8 +955,6 @@ function KBWPlanningMode:createChildren()
             "Tooltip_KBW_ImportBlueprint", "Import a blueprint .json file from Zomboid/Lua/KnoxBuildworks/exports."
         )
     )
-    yLeft = yLeft + buttonH + gap
-
     self.levelDownButton = makeButton(self, pad, yLeft, 40, buttonH, "-Z", self.onLevelDown)
     self.levelUpButton = makeButton(self, pad + 46, yLeft, 40, buttonH, "+Z", self.onLevelUp)
     setOptionalTooltip(self.levelDownButton, safeText("Tooltip_KBW_LevelDown", "Plan one level lower."))

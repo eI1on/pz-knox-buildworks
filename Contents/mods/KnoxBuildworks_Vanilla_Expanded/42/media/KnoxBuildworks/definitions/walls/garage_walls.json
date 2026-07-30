@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.garage_walls.dark_grey_garage_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_garage_dark_grey_garage_wall",
       "displayName": "Dark Grey Garage Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_garage_walls_dark_grey_garage_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_DarkGreyGarageWall",
       "category": "Walls",
       "subcategory": "Garage Walls",
       "material": "Wood",
@@ -393,7 +393,7 @@
       "id": "kbw.vanillaexpanded.walls.garage_walls.dark_grey_garage_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_garage_dark_grey_garage_corner_wall",
       "displayName": "Dark Grey Garage Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_garage_walls_dark_grey_garage_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_DarkGreyGarageWall",
       "category": "Walls",
       "subcategory": "Garage Walls",
       "material": "Wood",
@@ -610,7 +610,7 @@
       "id": "kbw.vanillaexpanded.walls.garage_walls.light_grey_garage_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_garage_light_grey_garage_wall",
       "displayName": "Light Grey Garage Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_garage_walls_light_grey_garage_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_LightGreyGarageWall",
       "category": "Walls",
       "subcategory": "Garage Walls",
       "material": "Wood",
@@ -998,7 +998,7 @@
       "id": "kbw.vanillaexpanded.walls.garage_walls.light_grey_garage_corner_wall",
       "translationKey": "IGUI_KBWVE_Buildable_walls_garage_light_grey_garage_corner_wall",
       "displayName": "Light Grey Garage Corner Wall",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_garage_walls_light_grey_garage_corner_wall",
+      "tooltipKey": "Tooltip_KBW_Shared_LightGreyGarageWall",
       "category": "Walls",
       "subcategory": "Garage Walls",
       "material": "Wood",
@@ -1020,7 +1020,8 @@
                     ]
                   }
                 ]
-              }}
+              }
+            }
           },
           "requirements": {
             "inputs": [

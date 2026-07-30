@@ -1,6 +1,7 @@
 ---Options provides the Knox Buildworks client layer.
 require "PZAPI/ModOptions"
 local Log = require("KnoxBuildworks/Log")
+local Theme = require("KnoxBuildworks/UI/Theme")
 
 local Options = PZAPI.ModOptions:create("KnoxBuildworks", "Knox Buildworks")
 Options:addKeyBind(
@@ -8,6 +9,34 @@ Options:addKeyBind(
 )
 Options:addTickBox("Debug", "UI_optionscreen_KBW_Debug", false, "UI_optionscreen_KBW_Debug_Tooltip")
 Options:addTickBox("Profile", "UI_optionscreen_KBW_Profile", false, "UI_optionscreen_KBW_Profile_Tooltip")
+Options:addSlider(
+    "PanelOpacity", "UI_optionscreen_KBW_PanelOpacity", 35, 100, 5, 86,
+    "UI_optionscreen_KBW_PanelOpacity_Tooltip"
+)
+local panelTone = Options:addComboBox(
+    "PanelTone", "UI_optionscreen_KBW_PanelTone", "UI_optionscreen_KBW_PanelTone_Tooltip"
+)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Warm", true)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Charcoal", false)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Slate", false)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Forest", false)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Midnight", false)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Aubergine", false)
+panelTone:addItem("UI_optionscreen_KBW_PanelTone_Sandstone", false)
+Options:addTickBox(
+    "HighContrast", "UI_optionscreen_KBW_HighContrast", false, "UI_optionscreen_KBW_HighContrast_Tooltip"
+)
+local previewBackground = Options:addComboBox(
+    "PreviewBackground", "UI_optionscreen_KBW_PreviewBackground", "UI_optionscreen_KBW_PreviewBackground_Tooltip"
+)
+previewBackground:addItem("UI_optionscreen_KBW_PreviewBackground_Checker", true)
+previewBackground:addItem("UI_optionscreen_KBW_PreviewBackground_Light", false)
+previewBackground:addItem("UI_optionscreen_KBW_PreviewBackground_Dark", false)
+previewBackground:addItem("UI_optionscreen_KBW_PreviewBackground_Custom", false)
+Options:addColorPicker(
+    "BuildableBackgroundColor", "UI_optionscreen_KBW_BuildableBackgroundColor", 0.35, 0.35, 0.35, 1,
+    "UI_optionscreen_KBW_BuildableBackgroundColor_Tooltip"
+)
 local pinnedAlignment = Options:addComboBox(
     "PinnedAlignment", "UI_optionscreen_KBW_PinnedAlignment", "UI_optionscreen_KBW_PinnedAlignment_Tooltip"
 )
@@ -47,6 +76,7 @@ end
 
 function Options:apply()
     -- Log:setDebug(self:getOption("Debug"):getValue())
+    Theme.applyAccessibility(self)
     local profile = self:getOption("Profile")
     if profile and profile.getValue then
         KnoxBuildworks.Runtime.profile = profile:getValue() == true
@@ -55,6 +85,12 @@ function Options:apply()
     if opacity and opacity.getValue and opacity.setValue then
         local rounded = clampPercent(opacity:getValue())
         if tonumber(opacity:getValue()) ~= rounded then opacity:setValue(rounded) end
+    end
+    local panelOpacity = self:getOption("PanelOpacity")
+    if panelOpacity and panelOpacity.getValue and panelOpacity.setValue then
+        local rounded = clampPercent(panelOpacity:getValue())
+        if rounded < 35 then rounded = 35 end
+        if tonumber(panelOpacity:getValue()) ~= rounded then panelOpacity:setValue(rounded) end
     end
 end
 

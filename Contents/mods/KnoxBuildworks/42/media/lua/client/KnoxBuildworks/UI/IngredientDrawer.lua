@@ -190,7 +190,7 @@ function KBWIngredientDrawer:new(x, y, w, h, target, onClose, onChoice)
     o.selectedItemKey = nil
     o.availableExpanded = true
     o.possibleExpanded = true
-    o.backgroundColor = { r = 0.018, g = 0.016, b = 0.014, a = 0.96 }
+    o.backgroundColor = Theme.backdrop
     o.borderColor = Theme.border
     return o
 end
@@ -245,7 +245,8 @@ function KBWIngredientDrawer:setRow(row, selectedFullType, selectedItemKeyValue)
 end
 
 function KBWIngredientDrawer:onMouseWheel(delta)
-    self:setYScroll(self:getYScroll() - delta * 34)
+    local minimum = math.min(0, self.height - self:getScrollHeight())
+    self:setYScroll(math.max(minimum, math.min(0, self:getYScroll() - delta * 34)))
     if self.vscroll then self:updateScrollbars() end
     return true
 end
@@ -502,7 +503,8 @@ function KBWIngredientDrawer:prerender()
     local headerHeight = math.max(72, 22 + (#titleLines + #nameLines) * lineHeight() + 18)
     self.clickRows = {}
     self:drawRect(
-        6, headerY + 4, width - 12, headerHeight - 8, 0.98, Theme.backdrop.r, Theme.backdrop.g, Theme.backdrop.b
+        6, headerY + 4, width - 12, headerHeight - 8, Theme.backdrop.a, Theme.backdrop.r, Theme.backdrop.g,
+        Theme.backdrop.b
     )
     self:drawRectBorder(
         6, headerY + 4, width - 12, headerHeight - 8, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g,

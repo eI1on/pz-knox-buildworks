@@ -159,6 +159,10 @@ function KBWAccessPanel:drawWidth()
     return self.width - (self.vscroll and self.vscroll:getWidth() or 0)
 end
 
+function KBWAccessPanel:hasRows()
+    return self.rows ~= nil and #self.rows > 0
+end
+
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
 function KBWAccessPanel:setSelection(definition, stage)
@@ -185,7 +189,8 @@ function KBWAccessPanel:setSelectedRow(row)
 end
 
 function KBWAccessPanel:onMouseWheel(delta)
-    self:setYScroll(self:getYScroll() - delta * 30)
+    local minimum = math.min(0, self.height - self:getScrollHeight())
+    self:setYScroll(math.max(minimum, math.min(0, self:getYScroll() - delta * 30)))
     if self.vscroll then self:updateScrollbars() end
     return true
 end

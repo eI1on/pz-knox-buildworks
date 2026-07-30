@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalPanelWall",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -44,7 +44,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -126,7 +125,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_2",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_2",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalPanelWall",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -165,7 +164,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -247,7 +245,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_3",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_3",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalPanelWall",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -286,7 +284,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -368,7 +365,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_4",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_4",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalPanelWall",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -407,7 +404,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -489,7 +485,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_5",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_5",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalPanelWall",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -528,7 +524,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -610,7 +605,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_6",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_6",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -649,7 +644,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -731,7 +725,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_7",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_7",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -770,7 +764,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -852,7 +845,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_8",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_8",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -891,7 +884,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -973,7 +965,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_9",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_9",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -1012,7 +1004,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1094,7 +1085,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_10",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_10",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -1133,7 +1124,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1215,7 +1205,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.scaffold_side_11",
       "translationKey": "IGUI_KBWVE_Buildable_walls_scaffold_scaffold_side",
       "displayName": "Scaffold Side",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_scaffold_scaffold_side_11",
+      "tooltipKey": "Tooltip_KBW_Shared_MetalBarrier",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Metal",
@@ -1254,7 +1244,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1336,7 +1325,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.wide_plank",
       "translationKey": "IGUI_KBWVE_Buildable_wide_plank",
       "displayName": "Wide Plank",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_wide_plank",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Wood",
@@ -1430,7 +1419,7 @@
       "id": "kbw.vanillaexpanded.walls.scaffold.wide_plank_2",
       "translationKey": "IGUI_KBWVE_Buildable_wide_plank",
       "displayName": "Wide Plank",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_wide_plank",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
       "category": "Walls",
       "subcategory": "Scaffold",
       "material": "Wood",

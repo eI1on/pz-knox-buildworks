@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_roofs_glass",
       "displayName": "Glass",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -45,7 +45,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -137,7 +136,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_pitched_1",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_pitched_1",
       "displayName": "Glass Pitched 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_pitched_1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -177,7 +176,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -274,7 +272,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_pitched_2",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_pitched_2",
       "displayName": "Glass Pitched 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_pitched_2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -314,7 +312,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -411,7 +408,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_pitched_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_pitched_3",
       "displayName": "Glass Pitched 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_pitched_3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -451,7 +448,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -548,7 +544,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_half_pitched_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_half_pitched_3",
       "displayName": "Glass Half Pitched 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_half_pitched_3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -588,7 +584,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -680,7 +675,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_inner_1",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_inner_1",
       "displayName": "Glass Inner 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_inner_1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -709,7 +704,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -806,7 +800,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_inner_2",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_inner_2",
       "displayName": "Glass Inner 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_inner_2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -835,7 +829,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -932,7 +925,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_inner_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_inner_3",
       "displayName": "Glass Inner 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_inner_3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -961,7 +954,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1058,7 +1050,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_valley_1",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_valley_1",
       "displayName": "Glass Valley 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_valley_1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1087,7 +1079,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1179,7 +1170,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_valley_2",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_valley_2",
       "displayName": "Glass Valley 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_valley_2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1208,7 +1199,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1305,7 +1295,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_valley_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_valley_3",
       "displayName": "Glass Valley 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_valley_3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1334,7 +1324,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1431,7 +1420,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_outer_1",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_outer_1",
       "displayName": "Glass Outer 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_outer_1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1471,7 +1460,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1568,7 +1556,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_outer_2",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_outer_2",
       "displayName": "Glass Outer 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_outer_2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1608,7 +1596,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1705,7 +1692,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_outer_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_outer_3",
       "displayName": "Glass Outer 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_outer_3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1745,7 +1732,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1842,7 +1828,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_patio_pitched",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_patio_pitched",
       "displayName": "Glass Patio Pitched",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_patio_pitched",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -1882,7 +1868,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1974,7 +1959,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_patio_inner",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_patio_inner",
       "displayName": "Glass Patio  Inner",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_patio_inner",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -2003,7 +1988,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2095,7 +2079,7 @@
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_patio_valley",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_patio_valley",
       "displayName": "Glass Patio Valley",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_roofing_glass_roofs_glass_patio_valley",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -2124,7 +2108,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",

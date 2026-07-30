@@ -5,7 +5,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_19",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_19",
       "displayName": "Generic Shop Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_19",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -116,10 +116,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -128,7 +124,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_18",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_18",
       "displayName": "Generic Shop Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_18",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -239,10 +235,6 @@
           },
           "object": {
             "isThumpable": true
-          },
-          "container": {
-            "type": "crate",
-            "capacity": 30
           }
         }
       ]
@@ -251,7 +243,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_89",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_89",
       "displayName": "Shop Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_89",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -384,7 +376,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_93",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_93",
       "displayName": "Trapzoid Shop Shelves",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_93",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -507,7 +499,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_restaurant_pie_01_43",
       "translationKey": "IGUI_KBWVE_Buildable_containers_pie_store_counter",
       "displayName": "Pie Store Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_pie_store_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -631,7 +623,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_restaurant_pie_01_42",
       "translationKey": "IGUI_KBWVE_Buildable_containers_pie_store_corner_counter",
       "displayName": "Pie Store Corner Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_pie_store_corner_counter",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -755,7 +747,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_restaurant_pie_01_53",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_location_restaurant_pie_01_53",
       "displayName": "Pie Display Stand",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_restaurant_pie_01_53",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -878,7 +870,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_greenes_01_25",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_location_shop_greenes_01_25",
       "displayName": "Greene 's Grocery Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_greenes_01_25",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -1011,7 +1003,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_greenes_01_29",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_location_shop_greenes_01_29",
       "displayName": "Grocery Trapezoid Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_greenes_01_29",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -1134,7 +1126,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_99",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_99",
       "displayName": "Glass Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_99",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Metal",
@@ -1292,7 +1284,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_98",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_98",
       "displayName": "Glass Corner Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_98",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Metal",
@@ -1450,7 +1442,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_35",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_35",
       "displayName": "Rounded Glass Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_35",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -1591,7 +1583,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_restaurant_pie_01_51",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_location_restaurant_pie_01_51",
       "displayName": "Glass Display Stand",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_restaurant_pie_01_51",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -1722,7 +1714,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_83",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_01_83",
       "displayName": "White Display Counter",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_01_83",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
@@ -1862,7 +1854,7 @@
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_generic_01_73",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_large_shop_shelves",
       "displayName": "Large Shop Shelves",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_shop_generic_location_shop_generic_large_shop_shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
       "material": "Wood",
