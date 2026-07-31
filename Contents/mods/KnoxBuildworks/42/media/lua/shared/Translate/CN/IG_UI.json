@@ -752,5 +752,9 @@
   "IGUI_KBW_Subcategory_Wooden_Stairs": "木楼梯",
   "IGUI_KBW_Subcategory_Stone": "石材",
   "IGUI_KBW_Subcategory_Clapboard": "护墙板",
-  "IGUI_KBW_Subcategory_Cinderblock": "煤渣砖"
+  "IGUI_KBW_Subcategory_Cinderblock": "煤渣砖",
+  "IGUI_KBW_Buildable_MilitaryCrateGreen": "绿色军用箱",
+  "IGUI_KBW_Buildable_MilitaryCrateGray": "灰色军用箱",
+  "IGUI_KBW_Buildable_MilitaryCratePaintable": "白色军用箱",
+  "IGUI_KBW_Group_MilitaryCrate": "军用箱"
 }

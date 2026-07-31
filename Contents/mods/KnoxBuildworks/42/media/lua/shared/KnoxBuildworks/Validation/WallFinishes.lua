@@ -1,9 +1,10 @@
 ---WallFinishes provides the Knox Buildworks construction validation layer.
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
--- Wall finish pipeline: plasterable walls can be built directly with a finish
--- (plaster, plaster + paint color, plaster + wallpaper).
+-- Finish pipeline: plasterable walls can be built directly with plaster,
+-- paint, or wallpaper, while custom-color objects use their PaintingType and
+-- the base game's OtherPainting color table.
 --
--- Sprite mappings are per WALL TYPE. The four vanilla wall types ("wall",
+-- Sprite mappings are per surface type. The four vanilla wall types ("wall",
 -- "doorframe", "windowsframe", "pillar") are bridged automatically from the
 -- vanilla Painting/WallPaper tables, and mods/tilepacks can register their
 -- own wall types either from Lua:
@@ -39,6 +40,7 @@ local WallFinishes = {}
 
 local registeredWallTypes = {}
 local registeredSpriteTypes = {}
+local registeredSpriteDirections = {}
 
 local function translated(key, fallback)
     if not getText then return fallback or key end
@@ -258,9 +260,10 @@ end
 -- Bridges a vanilla Painting/WallPaper wall type into the registry shape.
 local function vanillaMapping(wallType)
     local painting = Painting and Painting[wallType] or nil
-    if not painting then return nil end
+    local customColors = OtherPainting and OtherPainting[wallType] or nil
+    if not painting and not customColors then return nil end
     local mapping = {
-        plaster = painting.plasterTile
+        plaster = painting and painting.plasterTile
             and {
                 W = painting.plasterTile,
                 N = painting.plasterTileNorth or painting.plasterTile
@@ -270,14 +273,15 @@ local function vanillaMapping(wallType)
         directPaints = {},
         directWallpapers = {},
         surface = {
-            paintRequiresPlaster = true,
+            canPaint = customColors and true or nil,
+            paintRequiresPlaster = customColors and false or true,
             wallpaperRequiresPlaster = true
         }
     }
     local paintItems = ISPaintMenu and ISPaintMenu.PaintMenuItems or {}
     for itemIndex = 1, #paintItems do
         local name = paintItems[itemIndex].paint
-        if painting[name] then
+        if painting and painting[name] then
             mapping.paints[name] = { W = painting[name], N = painting[name .. "North"] or painting[name] }
         end
     end
@@ -308,6 +312,66 @@ local function wallTypeFromSprite(spriteName)
     if props:has(IsoFlagType.WallSE) then return "pillar" end
     if props:has("WallN") or props:has("WallW") or props:has("WallNW") then return "wall" end
     return nil
+end
+
+local function eachStageSprite(stage, callback)
+    local seen = {}
+    for direction, spriteName in pairs((stage and stage.sprites) or {}) do
+        if type(spriteName) == "string" and not seen[spriteName] then
+            seen[spriteName] = true
+            callback(spriteName, direction)
+        end
+    end
+    for direction, cells in pairs((stage and stage.footprints) or {}) do
+        for cellIndex = 1, #cells do
+            local spriteName = cells[cellIndex].sprite
+            if type(spriteName) == "string" and not seen[spriteName] then
+                seen[spriteName] = true
+                callback(spriteName, direction)
+            end
+        end
+    end
+end
+
+function WallFinishes.prepareStage(definition, stage)
+    local config = finishConfig(definition, stage)
+    if config.enabled == false then return end
+    if type(config.mapping) == "table" then WallFinishes.mappingFor(definition, stage) end
+    local surface = config.surface or (config.mapping and config.mapping.surface) or {}
+    local paintingType = config.wallType
+    if surface.canPaint ~= true or type(paintingType) ~= "string" or paintingType == "" then return end
+    local seen = {}
+    local function prepareSprite(spriteName, direction)
+        if type(spriteName) ~= "string" or spriteName == "" or seen[spriteName] then return end
+        seen[spriteName] = true
+        registeredSpriteTypes[spriteName] = paintingType
+        if direction == "N" or direction == "S" then
+            registeredSpriteDirections[spriteName] = "N"
+        elseif direction == "W" or direction == "E" then
+            registeredSpriteDirections[spriteName] = "W"
+        end
+        local sprite = getSprite and getSprite(spriteName) or nil
+        local props = sprite and sprite:getProperties() or nil
+        if props then
+            props:set("IsPaintable", "")
+            props:set("PaintingType", paintingType)
+        end
+    end
+    eachStageSprite(stage, prepareSprite)
+    local mapping = config.mapping or {}
+    local function prepareMapping(spriteMap)
+        for finishName, faces in pairs(spriteMap or {}) do
+            if type(faces) == "table" then
+                for direction, spriteName in pairs(faces) do prepareSprite(spriteName, direction) end
+            end
+        end
+    end
+    prepareMapping(mapping.paints)
+    prepareMapping(mapping.directPaints or mapping.barePaints)
+    prepareMapping(mapping.wallpapers)
+    prepareMapping(mapping.directWallpapers or mapping.bareWallpapers)
+    local baseSprites = mapping.baseSprites or mapping.sprites or {}
+    for spriteIndex = 1, #baseSprites do prepareSprite(baseSprites[spriteIndex]) end
 end
 
 ---@param definition KBW.BuildableDefinition
@@ -352,8 +416,13 @@ function WallFinishes.mappingFor(definition, stage, spriteName)
 end
 
 ---@param wallType string|nil
-function WallFinishes.mappingForWallType(wallType)
+---@param spriteName string|nil
+function WallFinishes.mappingForWallType(wallType, spriteName)
     wallType = tostring(wallType or "wall")
+    if spriteName and registeredWallTypes[wallType]
+        and registeredSpriteTypes[spriteName] ~= wallType then
+        return vanillaMapping(wallType)
+    end
     return registeredWallTypes[wallType] or vanillaMapping(wallType)
 end
 
@@ -362,18 +431,23 @@ local function surfaceValue(surface, key, fallback)
     return fallback
 end
 
--- Surface capabilities are addon-extensible. JSON stages may declare:
+-- Surface capabilities are addon-extensible and are not limited to walls.
+-- JSON stages may declare:
 -- "finishes": { "wallType": "addon.wall", "surface": {
 --   "canPlaster": true, "canPaint": true, "canWallpaper": true,
 --   "paintRequiresPlaster": false, "wallpaperRequiresPlaster": false } }
+-- Non-wall custom-color objects use their native PaintingType as wallType,
+-- for example "crates", and normally set canPlaster/canWallpaper to false.
 -- The default preserves vanilla constructed-wall behavior: paint and paper
 -- require a plastered/paintable surface unless an addon opts out.
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
 ---@param wallType string|nil
-function WallFinishes.surfaceRules(definition, stage, wallType)
+---@param spriteName string|nil
+function WallFinishes.surfaceRules(definition, stage, wallType, spriteName)
     local config = finishConfig(definition, stage)
-    local mapping = wallType and WallFinishes.mappingForWallType(wallType) or WallFinishes.mappingFor(definition, stage)
+    local mapping = wallType and WallFinishes.mappingForWallType(wallType, spriteName)
+        or WallFinishes.mappingFor(definition, stage)
     mapping = mapping or { paints = {}, wallpapers = {} }
     local surface = config.surface or mapping.surface or {}
     return {
@@ -407,6 +481,20 @@ local function mappedFaceSprite(entry, north, baseSprite)
     return entry.W or entry.N
 end
 
+---@param wallType string|nil
+---@param finish KBW.WallFinish|nil
+function WallFinishes.customColorFor(wallType, finish)
+    if not finish or not finish.paintType then return nil end
+    local reference = OtherPainting and OtherPainting[wallType] or nil
+    local color = reference and reference[finish.paintType] or nil
+    if not color then return nil end
+    local r = color.r or color[1]
+    local g = color.g or color[2]
+    local b = color.b or color[3]
+    if type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number" then return nil end
+    return { r = r, g = g, b = b, a = color.a or color[4] or 1 }
+end
+
 ---@param action string
 ---@param finish KBW.WallFinish|nil
 ---@param north boolean
@@ -414,7 +502,7 @@ end
 ---@param baseSprite string|nil
 function WallFinishes.spriteForWallType(action, finish, north, wallType, baseSprite)
     local mode = WallFinishes.actionMode(action)
-    local mapping = WallFinishes.mappingForWallType(wallType)
+    local mapping = WallFinishes.mappingForWallType(wallType, baseSprite)
     if not mapping then return nil end
     local entry = nil
     if mode == "plaster" then
@@ -425,8 +513,15 @@ function WallFinishes.spriteForWallType(action, finish, north, wallType, baseSpr
             direct = true
         end
         local paints = direct and mapping.directPaints or mapping.paints
-        if direct and (not paints or paints[finish and finish.paintType] == nil) then paints = mapping.paints end
-        entry = finish and finish.paintType and paints and paints[finish.paintType] or nil
+        if direct and (not paints
+            or (paints[finish and finish.paintType] == nil and paints["*"] == nil)) then
+            paints = mapping.paints
+        end
+        entry = finish and finish.paintType and paints
+            and (paints[finish.paintType] or paints["*"]) or nil
+        if WallFinishes.customColorFor(wallType, finish) then
+            return mappedFaceSprite(entry, north, baseSprite) or baseSprite
+        end
     elseif mode == "wallpaper" then
         local direct = finish and finish.plaster == false
         if finish and finish.plaster == nil and mapping.surface and mapping.surface.wallpaperRequiresPlaster == false then
@@ -472,6 +567,9 @@ end
 function WallFinishes.objectNorth(object)
     if not object then return false end
     if instanceof(object, "IsoThumpable") and object.getNorth then return object:getNorth() == true end
+    local sprite = object.getSprite and object:getSprite() or nil
+    local spriteName = sprite and sprite:getName() or nil
+    if registeredSpriteDirections[spriteName] then return registeredSpriteDirections[spriteName] == "N" end
     local props = object.getProperties and object:getProperties() or nil
     if not props then return false end
     return props:has("WallN") or props:has("WindowN") or props:has("DoorWallN")
@@ -491,8 +589,8 @@ function WallFinishes.canApplyToObject(action, finish, object, hasPlasterAction)
     local mode = WallFinishes.actionMode(action)
     local wallType = WallFinishes.prepareObject(object)
     if not wallType then return false, "no compatible wall face", nil end
-    local rules = WallFinishes.surfaceRules(nil, nil, wallType)
     local objectSprite = object:getSprite() and object:getSprite():getName() or nil
+    local rules = WallFinishes.surfaceRules(nil, nil, wallType, objectSprite)
     if not WallFinishes.spriteForWallType(
             mode, finish, WallFinishes.objectNorth(object), wallType, objectSprite
         ) then
@@ -601,10 +699,18 @@ function WallFinishes.spriteFor(mode, finish, north, definition, stage, baseSpri
     if mode == "plaster" then
         entry = mapping.plaster
     elseif mode == "paint" then
+        local wallType = WallFinishes.wallType(definition, stage, baseSprite)
         local direct = finish and finish.plaster == false
         local paints = direct and mapping.directPaints or mapping.paints
-        if direct and (not paints or paints[finish and finish.paintType] == nil) then paints = mapping.paints end
-        entry = finish and finish.paintType and paints and paints[finish.paintType] or nil
+        if direct and (not paints
+            or (paints[finish and finish.paintType] == nil and paints["*"] == nil)) then
+            paints = mapping.paints
+        end
+        entry = finish and finish.paintType and paints
+            and (paints[finish.paintType] or paints["*"]) or nil
+        if WallFinishes.customColorFor(wallType, finish) then
+            return mappedFaceSprite(entry, north, baseSprite) or baseSprite
+        end
     elseif mode == "wallpaper" then
         local direct = finish and finish.plaster == false
         local papers = direct and mapping.directWallpapers or mapping.wallpapers
@@ -670,6 +776,31 @@ local function sortedKeys(map)
     return keys
 end
 
+local function paintNamesFor(mapping, wallType, direct)
+    local colors = OtherPainting and OtherPainting[wallType] or nil
+    if colors then
+        local names = {}
+        local seen = {}
+        local items = ISPaintMenu and ISPaintMenu.PaintMenuItems or {}
+        for itemIndex = 1, #items do
+            local name = items[itemIndex].paint
+            if colors[name] then
+                names[#names + 1] = name
+                seen[name] = true
+            end
+        end
+        local extras = sortedKeys(colors)
+        for extraIndex = 1, #extras do
+            local name = extras[extraIndex]
+            if not seen[name] then names[#names + 1] = name end
+        end
+        return names
+    end
+    local paints = direct and mapping.directPaints or mapping.paints
+    if direct and #sortedKeys(paints) == 0 then paints = mapping.paints or {} end
+    return sortedKeys(paints)
+end
+
 -- Finish entries for the catalog/planning combos. Every entry is a
 -- self-contained finish selection stored on placements and cursors.
 ---@param definition KBW.BuildableDefinition
@@ -679,12 +810,13 @@ function WallFinishes.entriesFor(definition, stage)
     local config = finishConfig(definition, stage)
     local mapping = WallFinishes.mappingFor(definition, stage)
     if not mapping then return entries end
+    local wallType = WallFinishes.wallType(definition, stage)
     local rules = WallFinishes.surfaceRules(definition, stage)
     local plasterLabel = translated("ContextMenu_Plaster", "Plaster")
     local canPlaster = rules.canPlaster and mapping.plaster ~= nil and WallFinishes.isPlasterable(definition, stage)
     if canPlaster then
         entries[#entries + 1] = { label = plasterLabel, actionType = "wallFinish", plaster = true }
-        local paintNames = sortedKeys(mapping.paints)
+        local paintNames = paintNamesFor(mapping, wallType, false)
         for nameIndex = 1, #paintNames do
             local name = paintNames[nameIndex]
             if allowedByConfig(config.paints, name) then
@@ -712,9 +844,7 @@ function WallFinishes.entriesFor(definition, stage)
         end
     end
     if rules.canPaint and not rules.paintRequiresPlaster then
-        local paints = mapping.directPaints or {}
-        if #sortedKeys(paints) == 0 then paints = mapping.paints or {} end
-        local paintNames = sortedKeys(paints)
+        local paintNames = paintNamesFor(mapping, wallType, true)
         for nameIndex = 1, #paintNames do
             local name = paintNames[nameIndex]
             if allowedByConfig(config.paints, name) then

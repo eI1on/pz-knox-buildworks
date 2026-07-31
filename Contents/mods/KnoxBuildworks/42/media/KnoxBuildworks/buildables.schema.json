@@ -600,13 +600,14 @@
           },
           "finishes": {
             "type": "object",
-            "description": "Wall finish surface and sprite mapping. paintRequiresPlaster/wallpaperRequiresPlaster default to true.",
+            "description": "Paint/plaster/wallpaper surface capabilities and optional sprite mappings. Non-wall custom-color objects may use wallType as their native PaintingType. paintRequiresPlaster/wallpaperRequiresPlaster default to true.",
             "properties": {
               "enabled": {
                 "type": "boolean"
               },
               "wallType": {
-                "type": "string"
+                "type": "string",
+                "description": "Surface mapping id. For vanilla custom-color objects this is the native PaintingType, such as crates, chair, door or table."
               },
               "paints": {
                 "type": [
@@ -662,7 +663,8 @@
                     "type": "object"
                   },
                   "directPaints": {
-                    "type": "object"
+                    "type": "object",
+                    "description": "Paint sprite mappings for surfaces that do not require plaster. The '*' key may provide one directional neutral base for every color in the surface's native OtherPainting table."
                   },
                   "directWallpapers": {
                     "type": "object"

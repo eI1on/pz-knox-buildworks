@@ -752,5 +752,9 @@
   "IGUI_KBW_Subcategory_Wooden_Stairs": "Wooden Stairs",
   "IGUI_KBW_Subcategory_Stone": "Stone",
   "IGUI_KBW_Subcategory_Clapboard": "Clapboard",
-  "IGUI_KBW_Subcategory_Cinderblock": "Cinderblock"
+  "IGUI_KBW_Subcategory_Cinderblock": "Cinderblock",
+  "IGUI_KBW_Buildable_MilitaryCrateGreen": "Green Military Crate",
+  "IGUI_KBW_Buildable_MilitaryCrateGray": "Gray Military Crate",
+  "IGUI_KBW_Buildable_MilitaryCratePaintable": "White Military Crate",
+  "IGUI_KBW_Group_MilitaryCrate": "Military Crate"
 }

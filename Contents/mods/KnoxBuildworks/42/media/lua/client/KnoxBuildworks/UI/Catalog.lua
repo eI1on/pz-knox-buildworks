@@ -3189,7 +3189,9 @@ function KBWCatalog:render()
                 local finishTexture = finishSpriteName and IconResolver.textureForSpriteName(finishSpriteName) or nil
                 if finishTexture then
                     texture = finishTexture
-                    textureColor = { r = 1, g = 1, b = 1, a = 1 }
+                    textureColor = WallFinishes.customColorFor(
+                        WallFinishes.wallType(definition, stage), selectedFinish
+                    ) or { r = 1, g = 1, b = 1, a = 1 }
                 end
             end
             local previewX = self.previewX or x

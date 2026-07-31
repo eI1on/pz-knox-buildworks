@@ -123,13 +123,22 @@
 ---@field paintRequiresPlaster? boolean
 ---@field wallpaperRequiresPlaster? boolean
 
+---@class KBW.FinishMapping
+---@field plaster? table<KBW.DirectionName, string>
+---@field paints? table<string, table<KBW.DirectionName, string>>
+---@field wallpapers? table<string, table<KBW.DirectionName, string>>
+---@field directPaints? table<string, table<KBW.DirectionName, string>>
+---@field directWallpapers? table<string, table<KBW.DirectionName, string>>
+---@field baseSprites? string[]
+---@field surface? KBW.FinishSurface
+
 ---@class KBW.FinishConfig
 ---@field enabled? boolean
 ---@field wallType? string
 ---@field paints? string[]|boolean
 ---@field wallpapers? string[]|boolean
 ---@field surface? KBW.FinishSurface
----@field mapping? table<string, unknown>
+---@field mapping? KBW.FinishMapping
 
 ---@class KBW.PlacementConfig
 ---@field kind? 'object'|'wall'|'floor'|'stairs'|'overlay'|'wallCovering'

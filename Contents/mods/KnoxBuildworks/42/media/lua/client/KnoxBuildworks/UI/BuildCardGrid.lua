@@ -183,7 +183,9 @@ function KBWBuildCardGrid:visualFor(definition, entry, selected)
         local finishTexture = spriteName and IconResolver.textureForSpriteName(spriteName) or nil
         if finishTexture then
             texture = finishTexture
-            textureColor = { r = 1, g = 1, b = 1, a = 1 }
+            textureColor = WallFinishes.customColorFor(
+                WallFinishes.wallType(preview.definition, preview.stage), preview.finish
+            ) or { r = 1, g = 1, b = 1, a = 1 }
         end
     end
     return texture or entry.texture, textureColor or entry.textureColor

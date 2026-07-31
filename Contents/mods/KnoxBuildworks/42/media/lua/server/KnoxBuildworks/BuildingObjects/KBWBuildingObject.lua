@@ -347,7 +347,9 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
             entity = entityMetadata.entity,
             schemaVersion = KBW.SCHEMA_VERSION,
             providesWindowFrame = placement.providesWindowFrame == true and true or nil,
-            wallType = kind == "wall" and WallFinishes.wallType(o.definition, o.stage) or nil
+            wallType = ((o.stage.finishes or o.definition.finishes) and WallFinishes.wallType(
+                o.definition, o.stage
+            )) or nil
         }
     }
     -- Registered stage-property handlers derive their cursor fields last so

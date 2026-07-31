@@ -47,7 +47,7 @@ local function defineClass()
     end
 
     function KBWWallFinishCursor:knoxPaintSprite(object)
-        if self.action ~= "paintThump" or not isKnoxObject(object) then return nil end
+        if self.action ~= "paintThump" or not object or not object.getSprite or not object:getSprite() then return nil end
         local finish = self.kbwFinish
         if not finish or not finish.paintType then return nil end
         local valid = WallFinishes.canApplyToObject("paint", finish, object, false)
@@ -61,10 +61,13 @@ local function defineClass()
     end
 
     function KBWWallFinishCursor:canPaint(object)
+        if object and object:getSquare() and object:getSprite() and object:getSquare():isCouldSee(self.player)
+            and self:hasItems() and self:knoxPaintSprite(object) then
+            return true
+        end
         if isKnoxObject(object) then
             if not object:getSquare() or not object:getSprite() then return false end
             if not object:getSquare():isCouldSee(self.player) or not self:hasItems() then return false end
-            if self:knoxPaintSprite(object) then return true end
             local wallType = WallFinishes.prepareObject(object)
             if not (Painting and Painting[wallType]) then return false end
         end

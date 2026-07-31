@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "definitions": [
     "media/KnoxBuildworks/definitions/core.json",
+    "media/KnoxBuildworks/definitions/military_crates.json",
     "media/KnoxBuildworks/definitions/vanilla/agricultural.json",
     "media/KnoxBuildworks/definitions/vanilla/animals.json",
     "media/KnoxBuildworks/definitions/vanilla/barriers.json",

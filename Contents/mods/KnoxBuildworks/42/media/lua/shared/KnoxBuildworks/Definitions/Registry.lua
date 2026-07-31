@@ -43,17 +43,15 @@ function Registry:register(definition, source)
     end
     definition.__source = source
     self.entries[definition.id] = definition
-    local function registerFinishStages(stages)
+    local function prepareFinishStages(stages)
         stages = stages or {}
         for stageIndex = 1, #stages do
             local stage = stages[stageIndex]
             local config = stage.finishes or definition.finishes
-            if config and type(config.mapping) == "table" then
-                WallFinishes.mappingFor(definition, stage)
-            end
+            if config then WallFinishes.prepareStage(definition, stage) end
         end
     end
-    registerFinishStages(definition.stages)
+    prepareFinishStages(definition.stages)
     local function indexStages(stages, optionId)
         stages = stages or {}
         for stageIndex = 1, #stages do
@@ -95,13 +93,13 @@ function Registry:register(definition, source)
     local variants = definition.variants or {}
     for optionIndex = 1, #variants do
         local option = variants[optionIndex]
-        registerFinishStages(option.stages)
+        prepareFinishStages(option.stages)
         indexStages(option.stages, "variant-" .. tostring(option.id))
     end
     local materialOptions = definition.materialOptions or {}
     for optionIndex = 1, #materialOptions do
         local option = materialOptions[optionIndex]
-        registerFinishStages(option.stages)
+        prepareFinishStages(option.stages)
         indexStages(option.stages, "material-" .. tostring(option.id))
     end
     Log:debug("Registered %s from %s", definition.id, source)

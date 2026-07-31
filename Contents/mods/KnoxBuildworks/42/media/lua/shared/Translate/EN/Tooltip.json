@@ -132,5 +132,7 @@
   "Tooltip_KBW_Shared_GreyFrameGlassWall": "Grey-framed glass wall section.",
   "Tooltip_KBW_Shared_JailWall": "Secure wall for a jail or holding area.",
   "Tooltip_KBW_Shared_BrickSewerWall": "Sturdy brick sewer wall.",
-  "Tooltip_KBW_Shared_MallRailingPost": "Railing post repurposed from a shopping mall."
+  "Tooltip_KBW_Shared_MallRailingPost": "Railing post repurposed from a shopping mall.",
+  "Tooltip_KBW_Buildable_MilitaryCrate": "A durable 100-capacity metal military crate that can be repainted.",
+  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "A neutral white military crate designed as a clean base for custom paint colors."
 }

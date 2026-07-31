@@ -3,8 +3,8 @@ require "TimedActions/ISBaseTimedAction"
 
 -- One timed action for all three wall finish steps. The completion bodies
 -- mirror the vanilla actions exactly (ISPlasterAction / ISPaintAction /
--- ISWallpaperAction), but the sprite is resolved by Knox's wall-type mapping
--- beforehand, so custom tilepack walls finish onto their own sprites. Unlike
+-- ISWallpaperAction), but the sprite is resolved by Knox's surface mapping
+-- beforehand, so custom tilepack walls and objects use their own bases. Unlike
 -- vanilla plastering, every step plays the Paint animation and shows the
 -- relevant work tool in hand.
 --
@@ -154,6 +154,13 @@ function KBWFinishAction:complete()
     end
     self.thumpable:setSpriteFromName(resolvedSprite)
     self.thumpable:transmitUpdatedSpriteToClients()
+    if self.mode == "paint" then
+        local color = WallFinishes.customColorFor(wallType, self.finish)
+        if color then
+            self.thumpable:setCustomColor(ColorInfo.new(color.r, color.g, color.b, color.a))
+            self.thumpable:transmitCustomColorToClients()
+        end
+    end
     if consumeAllowed(self.character) then
         if self.item then self.item:UseAndSync() end
         if self.mode == "wallpaper" then
