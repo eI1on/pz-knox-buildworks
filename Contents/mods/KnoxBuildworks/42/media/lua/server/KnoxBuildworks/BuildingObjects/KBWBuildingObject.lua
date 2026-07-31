@@ -1076,8 +1076,13 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     if self.character and self.xpAward and not self.nativeRecipeHandled then
         local multiplier = tonumber(KBW.sandboxValue("KnoxBuildworks.BuildXPMultiplier", 1.0)) or 1.0
         for perkName, amount in pairs(self.xpAward) do
-            if Perks[perkName] and tonumber(amount) then
-                self.character:getXp():AddXP(Perks[perkName], tonumber(amount) * multiplier)
+            local perk = Perks[perkName]
+            local xp = tonumber(amount)
+            if perk and xp then
+                -- B42.20 requires the exposed helper here. On a server it
+                -- routes through GameServer.addXp(), which updates the remote
+                -- player's XP and network checker; direct XP mutation does not.
+                addXp(self.character, perk, xp * multiplier)
             end
         end
     end

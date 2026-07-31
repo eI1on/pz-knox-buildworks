@@ -3,18 +3,22 @@ local JSON = require("ElyonLib/FileUtils/JSON")
 local SafeJSON = require("KnoxBuildworks/Util/SafeJSON")
 local Log = require("KnoxBuildworks/Log")
 
--- Authoritative blueprint persistence: one JSON file per blueprint under
+-- Authoritative blueprint persistence: one JSON-formatted .txt file per
+-- blueprint under
 -- Lua/KnoxBuildworks/blueprints/<save>/. Only the authoritative side (the
 -- server, or the local session in singleplayer) reads and writes here;
 -- multiplayer clients keep a synced in-memory cache instead.
 --
--- PZ exposes no file-delete API for the Lua directory, so BlueprintFiles.remove
--- empties the file and loadAll skips files that hold no valid blueprint.
+-- B42.20 limits writable files to ini/cfg/txt/log. Legacy .json files remain
+-- readable and are migrated on load. PZ exposes no file-delete API for the Lua
+-- directory, so removal writes a .txt tombstone that overrides legacy data.
 ---@class KBW.BlueprintFilesModule
 ---@type KBW.BlueprintFilesModule
 local BlueprintFiles = {}
 
 BlueprintFiles.ROOT = "KnoxBuildworks/blueprints"
+BlueprintFiles.EXTENSION = ".txt"
+BlueprintFiles.LEGACY_EXTENSION = ".json"
 
 -- One subfolder per save so two saves on the same machine never share
 -- blueprints. getWorld():getWorld() is the save folder name (Core.gameSaveWorld).
@@ -30,7 +34,7 @@ function BlueprintFiles.folder()
 end
 
 local function filePath(id)
-    return BlueprintFiles.folder() .. "/" .. tostring(id) .. ".json"
+    return BlueprintFiles.folder() .. "/" .. tostring(id) .. BlueprintFiles.EXTENSION
 end
 
 local function readText(path)
@@ -50,19 +54,36 @@ function BlueprintFiles.loadAll()
     if not listFilesInZomboidLuaDirectory then return items end
     local names = listFilesInZomboidLuaDirectory(BlueprintFiles.folder())
     if not names then return items end
-    for nameIndex = 0, names:size() - 1 do
-        local name = tostring(names:get(nameIndex))
-        if string.sub(name, -5) == ".json" then
-            local text = readText(BlueprintFiles.folder() .. "/" .. name)
-            if text and text ~= "" then
-                local data, err = SafeJSON.decode(text)
-                if type(data) == "table" and data.id then
-                    items[tostring(data.id)] = data
-                elseif err then
-                    Log:warning("Skipped blueprint file %s: %s", name, err)
+    local currentIds = {}
+    local function loadExtension(extension, current)
+        for nameIndex = 0, names:size() - 1 do
+            local name = tostring(names:get(nameIndex))
+            if string.sub(string.lower(name), -#extension) == extension then
+                local text = readText(BlueprintFiles.folder() .. "/" .. name)
+                if text and text ~= "" then
+                    local data, err = SafeJSON.decode(text)
+                    if type(data) == "table" and data.id then
+                        local id = tostring(data.id)
+                        if current then currentIds[id] = true end
+                        if data.deleted == true then
+                            items[id] = nil
+                        else
+                            items[id] = data
+                        end
+                    elseif err then
+                        Log:warning("Skipped blueprint file %s: %s", name, err)
+                    end
                 end
             end
         end
+    end
+    -- Current files deliberately win over stale legacy files with the same id.
+    loadExtension(BlueprintFiles.LEGACY_EXTENSION, false)
+    loadExtension(BlueprintFiles.EXTENSION, true)
+    -- Preserve existing saves without ever trying to write the now-forbidden
+    -- .json extension. The old file can remain; the new .txt wins thereafter.
+    for id, blueprint in pairs(items) do
+        if not currentIds[id] then BlueprintFiles.save(blueprint) end
     end
     return items
 end
@@ -139,10 +160,17 @@ end
 
 function BlueprintFiles.remove(id)
     if not id then return end
-    dirty[tostring(id)] = nil
-    -- Truncate; there is no delete API for the Lua directory.
-    local writer = getFileWriter(filePath(id), false, false)
-    if writer then writer:close() end
+    id = tostring(id)
+    dirty[id] = nil
+    -- The tombstone prevents an undeletable legacy .json file from restoring
+    -- the blueprint on the next load.
+    local writer = getFileWriter(filePath(id), true, false)
+    if not writer then
+        Log:error("Could not write blueprint tombstone %s", filePath(id))
+        return
+    end
+    writer:write(JSON.stringify({ id = id, deleted = true }))
+    writer:close()
 end
 
 return BlueprintFiles

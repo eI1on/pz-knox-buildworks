@@ -1,0 +1,280 @@
+tileGeometry
+{
+    VERSION = 2,
+
+    tileset
+    {
+        name = kbw_location_military_generic_01,
+
+        /* kbw_location_military_generic_01_0 */
+        tile
+        {
+            xy = 0x0,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_1 */
+        tile
+        {
+            xy = 1x0,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_2 */
+        tile
+        {
+            xy = 2x0,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_3 */
+        tile
+        {
+            xy = 3x0,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_4 */
+        tile
+        {
+            xy = 4x0,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_5 */
+        tile
+        {
+            xy = 5x0,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_8 */
+        tile
+        {
+            xy = 0x1,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_9 */
+        tile
+        {
+            xy = 1x1,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_10 */
+        tile
+        {
+            xy = 2x1,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_11 */
+        tile
+        {
+            xy = 3x1,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_12 */
+        tile
+        {
+            xy = 4x1,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_13 */
+        tile
+        {
+            xy = 5x1,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_16 */
+        tile
+        {
+            xy = 0x2,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_17 */
+        tile
+        {
+            xy = 1x2,
+
+            box
+            {
+                translate = -117x69x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_18 */
+        tile
+        {
+            xy = 2x2,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_19 */
+        tile
+        {
+            xy = 3x2,
+
+            box
+            {
+                translate = -117x8373x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_20 */
+        tile
+        {
+            xy = 4x2,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+
+        /* kbw_location_military_generic_01_21 */
+        tile
+        {
+            xy = 5x2,
+
+            box
+            {
+                translate = -117x16578x51,
+                rotate = 0x198x0,
+                min = -4883x0x-4697,
+                max = 4883x8015x4697,
+            }
+        }
+    }
+
+    tileset
+    {
+        name = location_military_generic_01,
+
+        /* location_military_generic_01_0 */
+        tile
+        {
+            xy = 0x0,
+
+            box
+            {
+                translate = 0x51x0,
+                rotate = 0x0x0,
+                min = -5000x0x-5000,
+                max = 5000x8443x5000,
+            }
+        }
+    }
+}

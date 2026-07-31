@@ -946,13 +946,13 @@ function KBWPlanningMode:createChildren()
         self.exportButton,
         safeText(
             "Tooltip_KBW_ExportBlueprint",
-            "Write the selected blueprint to a .json file in Zomboid/Lua/KnoxBuildworks/exports."
+            "Write the selected blueprint as a JSON-formatted .txt file in Zomboid/Lua/KnoxBuildworks/exports."
         )
     )
     setOptionalTooltip(
         self.importButton,
         safeText(
-            "Tooltip_KBW_ImportBlueprint", "Import a blueprint .json file from Zomboid/Lua/KnoxBuildworks/exports."
+            "Tooltip_KBW_ImportBlueprint", "Import a blueprint .txt file from Zomboid/Lua/KnoxBuildworks/exports."
         )
     )
     self.levelDownButton = makeButton(self, pad, yLeft, 40, buttonH, "-Z", self.onLevelDown)

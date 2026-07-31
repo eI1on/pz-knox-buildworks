@@ -84,7 +84,7 @@ end
 
 -- SHARED STORAGE ----------------------------------------------------------
 -- Blueprints are shared and server-authoritative. The authoritative store (the
--- server, or the local session in singleplayer) keeps one JSON file per
+-- server, or the local session in singleplayer) keeps one JSON-formatted .txt file per
 -- blueprint under Lua/KnoxBuildworks/blueprints/<save>/ and mirrors it in
 -- memory; multiplayer clients hold a synced in-memory cache of the blueprints
 -- they are allowed to view. Each player's *active* blueprint is a local view
@@ -1704,11 +1704,11 @@ function Blueprints.importBlueprintItem(player, item)
 end
 
 -- FILE EXPORT / IMPORT ------------------------------------------------------
--- Players exchange blueprints as plain .json files in Lua/KnoxBuildworks/
+-- Players exchange blueprints as JSON-formatted .txt files in Lua/KnoxBuildworks/
 -- exports/ (their own Zomboid/Lua folder): export writes there, import lists
--- whatever .json files were dropped there - from another player or another
--- save - and reads them with the non-throwing decoder so a malformed file is
--- reported instead of erroring.
+-- current .txt files plus legacy .json files dropped there - from another
+-- player or another save - and reads them with the non-throwing decoder so a
+-- malformed file is reported instead of erroring.
 
 -- Export file names must stay ASCII so they survive any OS and language.
 -- A readable ASCII fragment is retained when a blueprint title has one; the
@@ -1730,7 +1730,7 @@ function Blueprints.exportFileName(blueprint)
     local id = string.gsub(tostring(blueprint and blueprint.id or "blueprint"), "[^A-Za-z0-9_-]", "_")
     local prefix = "knox_blueprint"
     if slug ~= "" then prefix = prefix .. "_" .. slug end
-    return prefix .. "_" .. id .. ".json"
+    return prefix .. "_" .. id .. ".txt"
 end
 
 ---@param blueprint KBW.Blueprint
@@ -1744,6 +1744,11 @@ function Blueprints.exportToFile(blueprint)
     return path
 end
 
+local function isBlueprintExportFile(fileName)
+    local lowerName = string.lower(tostring(fileName or ""))
+    return string.sub(lowerName, -4) == ".txt" or string.sub(lowerName, -5) == ".json"
+end
+
 function Blueprints.listImportFiles()
     local names = {}
     if not listFilesInZomboidLuaDirectory then return names end
@@ -1751,7 +1756,7 @@ function Blueprints.listImportFiles()
     if not files then return names end
     for fileIndex = 0, files:size() - 1 do
         local name = tostring(files:get(fileIndex))
-        if string.sub(name, -5) == ".json" then names[#names + 1] = name end
+        if isBlueprintExportFile(name) then names[#names + 1] = name end
     end
     table.sort(names)
     return names
@@ -1783,6 +1788,7 @@ end
 ---@param fileName string
 function Blueprints.readImportFile(fileName)
     if not fileName or string.find(fileName, "[/\\]") then return nil, "invalid_file_name" end
+    if not isBlueprintExportFile(fileName) then return nil, "invalid_file_name" end
     local reader = getFileReader(Blueprints.EXPORT_FOLDER .. "/" .. fileName, false)
     if not reader then return nil, "file_not_found" end
     local lines, line = {}, reader:readLine()

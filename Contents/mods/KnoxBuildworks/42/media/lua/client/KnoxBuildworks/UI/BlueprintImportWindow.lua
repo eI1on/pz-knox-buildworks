@@ -6,7 +6,8 @@ require "ISUI/ISScrollingListBox"
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local Theme = require("KnoxBuildworks/UI/Theme")
 
--- Picker for blueprint .json files dropped into Lua/KnoxBuildworks/exports/
+-- Picker for JSON-formatted blueprint .txt files (and legacy .json files)
+-- dropped into Lua/KnoxBuildworks/exports/
 -- (exports from this or another save, or files received from other players).
 -- Selecting a file imports it as a new private blueprint anchored at the
 -- player, then hands off to the Move blueprint cursor to pick the origin.
