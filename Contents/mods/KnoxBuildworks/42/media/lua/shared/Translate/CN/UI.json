@@ -18,6 +18,8 @@
   "UI_optionscreen_KBW_PanelTone_Sandstone": "砂岩",
   "UI_optionscreen_KBW_HighContrast": "高对比度 Knox UI",
   "UI_optionscreen_KBW_HighContrast_Tooltip": "提高 Knox Buildworks 中的文字、边框和选择对比度。",
+  "UI_optionscreen_KBW_FadeUnavailableIcons": "淡化不可建造物的图标",
+  "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip": "将当前无法建造的图标变暗。关闭此选项可让所有图标保持清晰可见；可用状态标记和建造限制不会改变。",
   "UI_optionscreen_KBW_PreviewBackground": "物体预览背景",
   "UI_optionscreen_KBW_PreviewBackground_Tooltip": "选择物体预览的背景；棋盘格可让深色和浅色贴图都清晰可见。",
   "UI_optionscreen_KBW_PreviewBackground_Checker": "对比棋盘格",

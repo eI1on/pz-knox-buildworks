@@ -2,6 +2,7 @@
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local LuaCallback = require("KnoxBuildworks/Util/LuaCallback")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 
 ---@class KBW.CatalogVisibilityModule
 ---@type KBW.CatalogVisibilityModule
@@ -32,6 +33,8 @@ end
 ---@return boolean
 function CatalogVisibility.stagePasses(player, definition, stage, shouldShowAll)
     if not stage then return false end
+    stage = BuildableRules.effectiveStage(definition, stage)
+    if not stage then return false end
     local recipe = StageConfig.recipe(definition, stage)
     if not recipe.onAddToMenu then return true end
     if shouldShowAll == nil then shouldShowAll = CatalogVisibility.shouldShowAll(player) end
@@ -49,6 +52,7 @@ end
 ---@param shouldShowAll boolean|nil
 ---@return boolean
 function CatalogVisibility.definitionPasses(player, definition, shouldShowAll)
+    if not BuildableRules.isEnabled(definition) then return false end
     local stages = definition and definition.stages or {}
     for stageIndex = 1, #stages do
         if CatalogVisibility.stagePasses(player, definition, stages[stageIndex], shouldShowAll) then return true end
@@ -66,10 +70,14 @@ function CatalogVisibility.filteredStages(player, definition, shouldShowAll)
     for stageIndex = 1, #stages do
         local stage = stages[stageIndex]
         if CatalogVisibility.stagePasses(player, definition, stage, shouldShowAll) then
-            result[#result + 1] = stage
+            result[#result + 1] = BuildableRules.effectiveStage(definition, stage)
         end
     end
     return result
+end
+
+function CatalogVisibility.definitionEnabled(definition)
+    return BuildableRules.isEnabled(definition)
 end
 
 return CatalogVisibility

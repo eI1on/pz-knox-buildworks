@@ -570,6 +570,12 @@ function KBWBuildCardGrid:invalidateStatuses()
     end
 end
 
+local function unavailableIconAlpha()
+    local option = Options:getOption("FadeUnavailableIcons")
+    if option and option.getValue and option:getValue() == false then return 1 end
+    return 0.42
+end
+
 function KBWBuildCardGrid:prerender()
     ISPanel.prerender(self)
     if self.vscroll then
@@ -581,6 +587,7 @@ function KBWBuildCardGrid:prerender()
     local columns, scroll = self:columns(), self:getYScroll()
     self.statusBudget = STATUS_BUDGET_PER_FRAME
     self.statusSnapshot = nil
+    local unavailableAlpha = unavailableIconAlpha()
 
     if self.viewMode == "list" then
         local layouts = self:listLayouts().rows
@@ -610,7 +617,7 @@ function KBWBuildCardGrid:prerender()
                 )
                 if texture then
                     self:drawTextureScaledAspect(
-                        texture, x + 11, y + 11, 52, 52, status.ok and 1 or 0.42, textureColor.r, textureColor.g,
+                        texture, x + 11, y + 11, 52, 52, status.ok and 1 or unavailableAlpha, textureColor.r, textureColor.g,
                         textureColor.b
                     )
                 end
@@ -702,7 +709,7 @@ function KBWBuildCardGrid:prerender()
                             local inset = self.compactMode and 3 or 8
                             self:drawTextureScaledAspect(
                                 texture, previewX + inset, previewY + inset, previewWidth - inset * 2,
-                                previewHeight - inset * 2, status.ok and 1 or 0.42, textureColor.r, textureColor.g,
+                                previewHeight - inset * 2, status.ok and 1 or unavailableAlpha, textureColor.r, textureColor.g,
                                 textureColor.b
                             )
                         end

@@ -13,6 +13,7 @@ local TableUtil = require("KnoxBuildworks/Util/Table")
 local Theme = require("KnoxBuildworks/UI/Theme")
 local Options = require("KnoxBuildworks/Options")
 local IconResolver = require("KnoxBuildworks/UI/IconResolver")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 local I18n = require("KnoxBuildworks/I18n")
 
 ---@class KBW.PinnedRecipesModule
@@ -697,6 +698,11 @@ function PinnedRecipes.pinnedBuildableIds(player)
     return set, count
 end
 
+function PinnedRecipes.invalidate()
+    hudGeneration = hudGeneration + 1
+    pinnedIdsCache = nil
+end
+
 ---@param player IsoPlayer
 ---@param definition KBW.BuildableDefinition
 function PinnedRecipes.hasPinnedDefinition(player, definition)
@@ -955,6 +961,7 @@ local function buildLines(player, maxWidth, includeTitle)
         if entry then
             local definition = effectiveDefinition(entry)
             local stage = definition and Registry:getStage(definition, entry.stageId) or nil
+            stage = stage and BuildableRules.effectiveStage(definition, stage) or nil
             if definition and stage then
                 if recipeCount > 0 or blueprintCount > 0 then addDivider(lines) end
                 recipeCount = recipeCount + 1

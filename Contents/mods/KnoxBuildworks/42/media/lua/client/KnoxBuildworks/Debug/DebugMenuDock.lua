@@ -23,6 +23,7 @@ function DebugMenuDock.register()
         id = "KnoxBuildworks.DebugBuildTests",
         title = getText("IGUI_KBW_DebugTestDockTooltip"),
         label = getText("IGUI_KBW_DebugTestDockLabel"),
+        icon = "media/ui/KBW_Dock_TestRunner.png",
         onClick = openBuildTests,
         visibleWhen = visibleWhen
     })
@@ -30,6 +31,7 @@ function DebugMenuDock.register()
         id = "KnoxBuildworks.DebugTileBrowser",
         title = getText("IGUI_KBW_DebugTilesDockTooltip"),
         label = getText("IGUI_KBW_DebugTilesDockLabel"),
+        icon = "media/ui/KBW_Dock_TileBrowser.png",
         onClick = openTileBrowser,
         visibleWhen = visibleWhen
     })

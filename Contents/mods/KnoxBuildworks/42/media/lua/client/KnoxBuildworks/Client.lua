@@ -9,8 +9,10 @@ local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 require("KnoxBuildworks/Planning/Planner")
 require("KnoxBuildworks/World/WellSystem")
 local PinnedRecipes = require("KnoxBuildworks/UI/PinnedRecipes")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 require("KnoxBuildworks/UI/Sidebar")
 require("KnoxBuildworks/Debug/DebugMenuDock")
+require("KnoxBuildworks/Admin/BuildableEditorDock")
 
 local function hello(player)
     if isClient() then
@@ -58,6 +60,31 @@ local function refreshPlanningUI()
     end
 end
 
+local function refreshBuildableRuleConsumers()
+    local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
+    CatalogIndex.invalidate()
+    PinnedRecipes.invalidate()
+    if KBWCatalog and KBWCatalog.instance then
+        local catalog = KBWCatalog.instance
+        catalog.selectionStatusCache = nil
+        catalog:refreshCategories()
+        catalog:refreshFilterOptions()
+        catalog:refreshCompactGroups()
+        catalog:refreshGrid()
+    end
+    if KBWPlanningMode and KBWPlanningMode.instance then
+        local planning = KBWPlanningMode.instance
+        local panel = planning.catalogPanel
+        if panel and panel.refreshCategories then panel:refreshCategories() end
+        if panel and panel.refreshCatalog then panel:refreshCatalog() end
+    end
+    if KBWBuildableEditor and KBWBuildableEditor.instance and KBWBuildableEditor.instance.onRulesSync then
+        KBWBuildableEditor.instance:onRulesSync(BuildableRules.getDocument(), BuildableRules.revision)
+    end
+end
+
+BuildableRules.addListener(refreshBuildableRuleConsumers)
+
 -- Small server-echoed blueprint deltas (edits made by other players).
 ---@class KBW.BLUEPRINT_DELTASModule
 ---@type KBW.BLUEPRINT_DELTASModule
@@ -99,6 +126,12 @@ local function onServerCommand(module, command, args)
     elseif BLUEPRINT_DELTAS[command] then
         Blueprints.applyRemoteDelta(command, args)
         refreshPlanningUI()
+    elseif command == "BuildableRulesSync" then
+        BuildableRules.applySync(args.document or {}, args.revision)
+    elseif command == "BuildableRulesError" then
+        if KBWBuildableEditor and KBWBuildableEditor.instance and KBWBuildableEditor.instance.onRulesError then
+            KBWBuildableEditor.instance:onRulesError(args.code, args.errors or {}, args.revision)
+        end
     end
 end
 

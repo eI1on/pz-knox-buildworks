@@ -76,7 +76,7 @@ function KBWCatalogAppearanceSettings:new(player, target)
     local controlHeight = math.max(26, fontHeight + 10)
     local rowHeight = controlHeight + 10
     local titleBarHeight = math.max(16, fontHeight + 1)
-    local height = math.max(280, titleBarHeight + 36 + rowHeight * 4 + controlHeight * 2)
+    local height = math.max(320, titleBarHeight + 36 + rowHeight * 5 + controlHeight * 2)
     local o = ISCollapsableWindow:new(120, 120, 460, height)
     setmetatable(o, self)
     self.__index = self
@@ -130,7 +130,16 @@ function KBWCatalogAppearanceSettings:createChildren()
     self.highContrast:addOption(getText("IGUI_KBW_HighContrast"))
     self:addChild(self.highContrast)
 
-    local opacityY = top + self.rowHeight * 4
+    self.fadeUnavailableIcons = ISTickBox:new(
+        18, top + self.rowHeight * 4, self.width - 36, self.controlHeight, "",
+        self, self.onFadeUnavailableIconsChanged
+    )
+    self.fadeUnavailableIcons:initialise()
+    self.fadeUnavailableIcons:addOption(getText("IGUI_KBW_FadeUnavailableIcons"))
+    self.fadeUnavailableIcons.tooltip = getText("IGUI_KBW_FadeUnavailableIconsTooltip")
+    self:addChild(self.fadeUnavailableIcons)
+
+    local opacityY = top + self.rowHeight * 5
     self.opacityDown = configureButton(
         ISButton:new(controlX, opacityY, 42, self.controlHeight, "-", self, self.onOpacityDown)
     )
@@ -168,6 +177,9 @@ function KBWCatalogAppearanceSettings:syncFromOptions()
     if self.highContrast then
         self.highContrast.selected[1] = optionValue("HighContrast", false) == true
     end
+    if self.fadeUnavailableIcons then
+        self.fadeUnavailableIcons.selected[1] = optionValue("FadeUnavailableIcons", true) ~= false
+    end
     self:refreshColorButton()
 end
 
@@ -199,6 +211,11 @@ end
 
 function KBWCatalogAppearanceSettings:onHighContrastChanged(clickedOption, enabled)
     setOption("HighContrast", enabled == true)
+    self:notifyTarget()
+end
+
+function KBWCatalogAppearanceSettings:onFadeUnavailableIconsChanged(clickedOption, enabled)
+    setOption("FadeUnavailableIcons", enabled == true)
     self:notifyTarget()
 end
 
@@ -257,6 +274,7 @@ function KBWCatalogAppearanceSettings:onReset()
         PreviewBackground = 1,
         BuildableBackgroundColor = { r = .35, g = .35, b = .35, a = 1 },
         HighContrast = false,
+        FadeUnavailableIcons = true,
         PanelOpacity = 86
     }
     for id, value in pairs(values) do
@@ -284,7 +302,7 @@ function KBWCatalogAppearanceSettings:render()
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     self:drawText(
-        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 4,
+        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 5,
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     local value = tonumber(optionValue("PanelOpacity", 86)) or 86
@@ -292,7 +310,7 @@ function KBWCatalogAppearanceSettings:render()
     local centreX = self.opacityDown:getRight()
         + math.floor((self.opacityUp:getX() - self.opacityDown:getRight()) / 2)
     self:drawTextCentre(
-        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 4,
+        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 5,
         Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
 end

@@ -26,6 +26,10 @@ panelTone:addItem("UI_optionscreen_KBW_PanelTone_Sandstone", false)
 Options:addTickBox(
     "HighContrast", "UI_optionscreen_KBW_HighContrast", false, "UI_optionscreen_KBW_HighContrast_Tooltip"
 )
+Options:addTickBox(
+    "FadeUnavailableIcons", "UI_optionscreen_KBW_FadeUnavailableIcons", true,
+    "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip"
+)
 local previewBackground = Options:addComboBox(
     "PreviewBackground", "UI_optionscreen_KBW_PreviewBackground", "UI_optionscreen_KBW_PreviewBackground_Tooltip"
 )

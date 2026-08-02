@@ -9,6 +9,7 @@ local BuildTestRunner = require("KnoxBuildworks/Debug/BuildTestRunner")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local I18n = require("KnoxBuildworks/I18n")
 local Theme = require("KnoxBuildworks/UI/Theme")
+local VirtualListBox = require("KnoxBuildworks/UI/VirtualListBox")
 
 ---@class KBWDebugBuildTestWindow: ISCollapsableWindow
 KBWDebugBuildTestWindow = ISCollapsableWindow:derive("KBWDebugBuildTestWindow")
@@ -83,7 +84,7 @@ function KBWDebugBuildTestWindow:createChildren()
     self.resultCombo:initialise()
     self:addChild(self.resultCombo)
 
-    self.caseList = ISScrollingListBox:new(PADDING, 0, LIST_MIN_W, 400)
+    self.caseList = VirtualListBox:new(PADDING, 0, LIST_MIN_W, 400)
     self.caseList:initialise()
     self.caseList:instantiate()
     self.caseList.itemheight = 48
@@ -180,13 +181,14 @@ function KBWDebugBuildTestWindow:refreshCases(selectCurrent)
     local selectedKey = selectCurrent and state.currentKey
         or (self:selectedCase() and self:selectedCase().key or state.currentKey)
     self.filteredCases = BuildTestRunner.filteredCases(self.player, self.cases)
-    self.caseList:clear()
+    local rows = {}
     local selectedIndex = 0
     for caseIndex = 1, #self.filteredCases do
         local testCase = self.filteredCases[caseIndex]
-        self.caseList:addItem(BuildTestRunner.caseName(testCase), testCase)
+        rows[caseIndex] = { name = BuildTestRunner.caseName(testCase), testCase = testCase }
         if testCase.key == selectedKey then selectedIndex = caseIndex end
     end
+    self.caseList:replaceItems(rows, "name", "testCase")
     if selectedIndex == 0 and #self.filteredCases > 0 then selectedIndex = 1 end
     self.caseList.selected = selectedIndex
     self:refreshDetails()
@@ -253,7 +255,7 @@ function KBWDebugBuildTestWindow:detailsText(testCase)
     if testCase.materialId ~= "" then
         lines[#lines + 1] = "<LINE>" .. getText("IGUI_KBW_Material") .. ": " .. testCase.materialId
     end
-    lines[#lines + 1] = "<LINE><LINE><H2>" .. getText("IGUI_KBW_DebugTestExpectedInputs")
+    lines[#lines + 1] = " <LINE> <LINE> <H2>" .. getText("IGUI_KBW_DebugTestExpectedInputs")
     local inputs = Requirements.getInputs(testCase.definition, testCase.stage)
     if #inputs == 0 then lines[#lines + 1] = "<LINE>" .. getText("IGUI_KBW_DebugTestNoInputs") end
     for inputIndex = 1, #inputs do
@@ -266,11 +268,11 @@ function KBWDebugBuildTestWindow:detailsText(testCase)
             .. (fullType and itemName(fullType) or tostring(input.id)) .. " (" .. tostring(input.mode or "consume") .. ")"
     end
     if result and result.note and result.note ~= "" then
-        lines[#lines + 1] = "<LINE><LINE><H2>" .. getText("IGUI_KBW_DebugTestNote")
+        lines[#lines + 1] = " <LINE> <LINE> <H2>" .. getText("IGUI_KBW_DebugTestNote")
         lines[#lines + 1] = "<LINE>" .. result.note
     end
     if state.currentKey == testCase.key and state.prepared then
-        lines[#lines + 1] = "<LINE><LINE><RGB:0.58,0.85,0.55>" .. getText("IGUI_KBW_DebugTestPreparedHint")
+        lines[#lines + 1] = " <LINE> <LINE> <RGB:0.58,0.85,0.55>" .. getText("IGUI_KBW_DebugTestPreparedHint")
         local totals = {}
         local order = {}
         local spawned = state.prepared.spawned or {}
@@ -285,7 +287,7 @@ function KBWDebugBuildTestWindow:detailsText(testCase)
             total.count = total.count + 1
             total.units = total.units + (tonumber(entry.supplied) or 0)
         end
-        lines[#lines + 1] = "<LINE><LINE><H2>" .. getText("IGUI_KBW_DebugTestSpawned")
+        lines[#lines + 1] = " <LINE> <LINE> <H2>" .. getText("IGUI_KBW_DebugTestSpawned")
         for typeIndex = 1, #order do
             local fullType = order[typeIndex]
             local total = totals[fullType]
@@ -300,7 +302,7 @@ function KBWDebugBuildTestWindow:refreshDetails(message)
     local testCase = self:selectedCase()
     self.details.text = self:detailsText(testCase)
     if message and message ~= "" then
-        self.details.text = self.details.text .. "<LINE><LINE><RGB:0.95,0.55,0.32>" .. tostring(message)
+        self.details.text = self.details.text .. " <LINE> <LINE> <RGB:0.95,0.55,0.32>" .. tostring(message)
     end
     self.details:paginate()
     local hasSelection = testCase ~= nil

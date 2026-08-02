@@ -18,6 +18,8 @@
     "UI_optionscreen_KBW_PanelTone_Sandstone": "Sandstone",
     "UI_optionscreen_KBW_HighContrast": "High-contrast Knox UI",
     "UI_optionscreen_KBW_HighContrast_Tooltip": "Increase text, border, and selection contrast throughout Knox Buildworks.",
+    "UI_optionscreen_KBW_FadeUnavailableIcons": "Fade unavailable buildable icons",
+    "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip": "Dim icons that cannot currently be built. Turn this off to keep every buildable icon fully visible; availability markers and restrictions remain unchanged.",
     "UI_optionscreen_KBW_PreviewBackground": "Object preview background",
     "UI_optionscreen_KBW_PreviewBackground_Tooltip": "Choose the backing used behind object previews; checkerboard makes both dark and light sprites visible.",
     "UI_optionscreen_KBW_PreviewBackground_Checker": "Contrast checkerboard",

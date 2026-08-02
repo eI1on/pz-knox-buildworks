@@ -5,6 +5,7 @@ local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Integrity = require("KnoxBuildworks/Network/Integrity")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local BlueprintFiles = require("KnoxBuildworks/Planning/BlueprintFiles")
+local BuildableRulesServer = require("KnoxBuildworks/Admin/BuildableRulesServer")
 local Log = require("KnoxBuildworks/Log")
 require("KnoxBuildworks/World/WellSystem")
 require "KnoxBuildworks/BuildingObjects/KBWBuildingObject"
@@ -115,6 +116,10 @@ function Server.onClientCommand(module, command, player, args)
         Log[allowed and "info" or "warning"](Log, "%s: %s", player:getUsername(), logMessage)
         -- Push every blueprint this player may see on connect.
         Blueprints.serverSyncAll(player)
+        BuildableRulesServer.syncTo(player, false, nil)
+    elseif command == "BuildableRulesRequest" or command == "BuildableRulesSave" then
+        if not Integrity.isAllowed(player) then return end
+        BuildableRulesServer.onClientCommand(player, command, args)
     elseif command == "BPRequest" then
         Blueprints.serverSyncAll(player)
     elseif command == "BPBuildBatchStart" or command == "BPBuildBatchEnd" then
@@ -128,6 +133,7 @@ end
 
 Events.OnServerStarted.Add(function ()
     Loader.loadAll()
+    BuildableRulesServer.load()
 end)
 Events.OnClientCommand.Add(Server.onClientCommand)
 return Server

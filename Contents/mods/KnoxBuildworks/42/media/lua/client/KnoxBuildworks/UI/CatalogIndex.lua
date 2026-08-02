@@ -17,6 +17,7 @@ local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local LuaCallback = require("KnoxBuildworks/Util/LuaCallback")
 local Profiler = require("KnoxBuildworks/Util/Profiler")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 
 ---@class KBW.CatalogIndexModule
 ---@type KBW.CatalogIndexModule
@@ -63,7 +64,8 @@ local function skillsFor(definition)
     local skills = {}
     local stages = definition.stages or {}
     for stageIndex = 1, #stages do
-        local requirements = stages[stageIndex].requirements or {}
+        local effective = BuildableRules.effectiveStage(definition, stages[stageIndex])
+        local requirements = (effective and effective.requirements) or {}
         for skillName in pairs(requirements.skills or {}) do
             skills[skillName] = true
         end
@@ -390,7 +392,8 @@ function CatalogIndex.requirementText(record)
     end
     local stages = definition.stages or {}
     for stageIndex = 1, #stages do
-        local requirements = stages[stageIndex].requirements or {}
+        local effective = BuildableRules.effectiveStage(definition, stages[stageIndex])
+        local requirements = (effective and effective.requirements) or {}
         local inputs = requirements.inputs or {}
         for inputIndex = 1, #inputs do
             appendInput(pieces, inputs[inputIndex])

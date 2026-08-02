@@ -34,6 +34,7 @@ local Profiler = require("KnoxBuildworks/Util/Profiler")
 local BuildableInfo = require("KnoxBuildworks/UI/BuildableInfo")
 local Options = require("KnoxBuildworks/Options")
 local CatalogSettings = require("KnoxBuildworks/UI/CatalogSettings")
+local Guide = require("KnoxBuildworks/UI/Guide")
 
 ---@class KBWCatalog: ISCollapsableWindow
 KBWCatalog = ISCollapsableWindow:derive("KBWCatalog")
@@ -780,6 +781,7 @@ function KBWCatalog:bringChromeToTop()
             .scopeRecent,
         self.sizeButton,
         self.appearanceButton,
+        self.infoButton,
         self.plansButton,
         self.planButton,
         self.buildButton,
@@ -817,6 +819,8 @@ end
 
 function KBWCatalog:createChildren()
     ISCollapsableWindow.createChildren(self)
+    self.infoButton:setVisible(true)
+    setOptionalTooltip(self.infoButton, getText("IGUI_KBW_OpenGuide"))
     installResizeHook(self, self.resizeWidget)
     installResizeHook(self, self.resizeWidget2)
     local top = contentTop(self)
@@ -2024,6 +2028,7 @@ function KBWCatalog:filteredDefinitions()
     for sourceIndex = 1, #source do
         local record = source[sourceIndex]
         local include = allCategories or record.category == category
+        if include and not CatalogVisibility.definitionEnabled(record.definition) then include = false end
         if include then
             if recentSet then
                 include = recentSet[record.id] == true
@@ -2778,6 +2783,10 @@ end
 
 function KBWCatalog:onAppearance()
     CatalogSettings.open(self.player, self)
+end
+
+function KBWCatalog:onInfo()
+    Guide.open(self.player, "welcome")
 end
 
 function KBWCatalog:onAppearanceChanged(livePreview)

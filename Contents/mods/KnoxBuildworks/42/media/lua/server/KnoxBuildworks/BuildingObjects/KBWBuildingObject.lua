@@ -792,7 +792,7 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
     self.containers = containers
     local logic = newNativeBuildLogic(self.character, self.craftRecipe, self.inputChoices, containers)
     if not logic then return false, "native build logic unavailable" end
-    local nativeAwards = EntityCompat.xpAwards(self.stage)
+    local nativeAwards = self.stage._kbwAdminXpOverride and {} or EntityCompat.xpAwards(self.stage)
     Log:info(
         "Entity XP check for %s uses recipe %s with %d award(s)", tostring(self.buildableId),
         tostring(self.craftRecipe:getName()), #nativeAwards
@@ -989,13 +989,6 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     if not self.character then
         self.character = type(self.player) == "number" and getSpecificPlayer(self.player) or self.player
     end
-    self.craftRecipe = self.craftRecipe or EntityCompat.craftRecipeObject(self.stage)
-    local craftRecipeConfig = StageConfig.recipe(self.definition, self.stage)
-    if self.xpAward == nil then self.xpAward = craftRecipeConfig.xpAward end
-    if self.useNativeXpAward == nil then
-        local construction = StageConfig.construction(self.definition, self.stage)
-        self.useNativeXpAward = self.craftRecipe ~= nil and (self.stage.xp == nil and construction.xp == nil)
-    end
     if self.isWallLike then
         self.nSprite = north == true and 2 or 1
         self.direction = self.nSprite
@@ -1010,6 +1003,13 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         )
         return false
     end
+    -- The rules document may have changed after the client opened its cursor.
+    -- Rebuild every recipe/XP field from the stage the server just resolved.
+    self.craftRecipe = EntityCompat.craftRecipeObject(self.stage)
+    local craftRecipeConfig = StageConfig.recipe(self.definition, self.stage)
+    local construction = StageConfig.construction(self.definition, self.stage)
+    self.xpAward = craftRecipeConfig.xpAward
+    self.useNativeXpAward = self.craftRecipe ~= nil and (self.stage.xp == nil and construction.xp == nil)
     self:ensureSquaresExist(x, y, z)
     local square = getCell():getGridSquare(x, y, z)
     local ok, reason, previous = Placement.validate(self, square)
@@ -1198,7 +1198,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 tostring(self.buildableId)
             )
         end
-    elseif self.character and self.xpAward and not self.nativeRecipeHandled then
+    elseif self.character and self.xpAward and (not self.nativeRecipeHandled or self.stage._kbwAdminXpOverride) then
         local multiplier = tonumber(KBW.sandboxValue("KnoxBuildworks.BuildXPMultiplier", 1.0)) or 1.0
         for perkName, amount in pairs(self.xpAward) do
             local perk = Perks[perkName]

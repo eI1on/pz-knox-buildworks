@@ -8,6 +8,7 @@ KBW.SCHEMA_VERSION = 1
 KBW.NETWORK_MODULE = "KnoxBuildworks"
 KBW.MANIFEST_PATH = "media/KnoxBuildworks/manifest.json"
 KBW.OVERRIDE_PATH = "KnoxBuildworks/overrides.json"
+KBW.BUILDABLE_RULES_ROOT = "KnoxBuildworks/buildable-rules"
 KBW.Runtime = KBW.Runtime or { loaded = false, integrity = "unknown", integrityMessage = nil, debug = false }
 
 -- Safe sandbox option accessor; returns the default when the option system

@@ -553,6 +553,7 @@ function KBWPlanningCatalogPanel:refreshCatalog()
     for sourceIndex = 1, #source do
         local record = source[sourceIndex]
         local include = allCategories or record.category == category
+        if include and not CatalogVisibility.definitionEnabled(record.definition) then include = false end
         if include and not record.alwaysVisible then
             include = CatalogIndex.recordVisible(self.player, record, shouldShowAll)
         end
@@ -682,7 +683,7 @@ function KBWPlanningCatalogPanel:refreshFinishChoices(baseDefinition, stage)
     self.finishCombo:clear()
     self.finishEntries = FinishOptions.entriesFor(baseDefinition, stage)
     if #self.finishEntries == 0 then
-        self.finishCombo:addOptionWithData(safeText("IGUI_KBW_NoFinish", "No finish (bare wall)"), 0)
+        self.finishCombo:addOptionWithData(safeText("IGUI_KBW_NoFinish", "No finish (no color)"), 0)
         self.finishCombo.selected = 1
         self.finishCombo:setEnabled(false)
         return

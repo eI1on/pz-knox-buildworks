@@ -10,6 +10,7 @@ local Registry = require("KnoxBuildworks/Definitions/Registry")
 local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
 local I18n = require("KnoxBuildworks/I18n")
 local Theme = require("KnoxBuildworks/UI/Theme")
+local VirtualListBox = require("KnoxBuildworks/UI/VirtualListBox")
 
 ---@class KBWDebugTileGrid: ISPanel
 KBWDebugTileGrid = ISPanel:derive("KBWDebugTileGrid")
@@ -276,7 +277,7 @@ function KBWDebugTileBrowser:createChildren()
     self.searchEntry.target = self
     self:addChild(self.searchEntry)
 
-    self.tilesetList = ISScrollingListBox:new(PADDING, top + CONTROL_H + GAP, 280, 500)
+    self.tilesetList = VirtualListBox:new(PADDING, top + CONTROL_H + GAP, 280, 500)
     self.tilesetList:initialise()
     self.tilesetList:instantiate()
     self.tilesetList.itemheight = 24
@@ -353,16 +354,17 @@ end
 function KBWDebugTileBrowser:populateTilesets()
     local query = string.lower(self.searchEntry:getInternalText() or "")
     local exactSheet, exactIndex = string.match(query, "^(.-)_(%d+)$")
-    self.tilesetList:clear()
+    local rows = {}
     local selectedIndex = 0
     for tilesetIndex = 1, #self.tilesets do
         local name = self.tilesets[tilesetIndex]
         if query == "" or string.find(string.lower(name), query, 1, true)
             or (exactSheet and string.lower(name) == exactSheet) then
-            self.tilesetList:addItem(name, name)
-            if self.grid.tileset == name then selectedIndex = #self.tilesetList.items end
+            rows[#rows + 1] = { name = name, value = name }
+            if self.grid.tileset == name then selectedIndex = #rows end
         end
     end
+    self.tilesetList:replaceItems(rows, "name", "value")
     if selectedIndex == 0 and #self.tilesetList.items > 0 then selectedIndex = 1 end
     self.tilesetList.selected = selectedIndex
     if selectedIndex > 0 then

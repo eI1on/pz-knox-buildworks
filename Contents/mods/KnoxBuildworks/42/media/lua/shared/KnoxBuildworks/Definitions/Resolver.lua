@@ -2,6 +2,7 @@
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local TableUtil = require("KnoxBuildworks/Util/Table")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 
 -- Single source of truth for turning (buildableId, variantId, materialId) into a
 -- merged definition. KBWBuildingObject, Blueprints, Planner and Server all resolve
@@ -67,6 +68,8 @@ function Resolver.resolveStage(buildableId, variantId, materialId, stageId)
     if not definition then return nil, nil, reason end
     local stage = Registry:getStage(definition, stageId)
     if not stage then return definition, nil, "unknown stage" end
+    stage = BuildableRules.effectiveStage(definition, stage)
+    if not stage then return definition, nil, "buildable disabled by server" end
     return definition, stage
 end
 
