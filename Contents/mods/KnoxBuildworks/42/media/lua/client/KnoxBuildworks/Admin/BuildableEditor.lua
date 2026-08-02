@@ -1463,9 +1463,7 @@ end
 function KBWBuildableEditor:new(player)
     local screenW, screenH = getCore():getScreenWidth(), getCore():getScreenHeight()
     local fontH = getTextManager():getFontHeight(UIFont.Small)
-    local width = math.min(1180, screenW - 50)
-    local height = math.min(math.max(820, 820 + math.max(0, fontH - 18) * 18), screenH - 50)
-    local o = ISCollapsableWindow:new(math.floor((screenW - width) / 2), math.floor((screenH - height) / 2), width, height)
+    local o = ISCollapsableWindow:new(math.floor((screenW - 720) / 2), math.floor((screenH - 520) / 2), 720, 520)
     setmetatable(o, self)
     self.__index = self
     o.player = player
@@ -1476,8 +1474,8 @@ function KBWBuildableEditor:new(player)
     o.actionH = math.max(30, fontH + 10)
     o.rowH = math.max(48, fontH * 2 + 12)
     o.statusH = math.max(52, fontH * 2 + 12)
-    o.minimumWidth = math.min(920, width)
-    o.minimumHeight = math.min(math.max(750, 750 + math.max(0, fontH - 18) * 26), height)
+    o.minimumWidth = 720
+    o.minimumHeight = 520
     return o
 end
 
