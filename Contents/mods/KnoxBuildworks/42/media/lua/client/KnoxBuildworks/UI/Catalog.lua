@@ -503,7 +503,7 @@ local function hasFinishItem(player, finish, definition, stage)
     end
     if not finish or finish.none then return true end
     if WallFinishes.isWallFinish(finish) then
-        return WallFinishes.validateItems(player, finish) == true
+        return WallFinishes.validateItems(player, finish, definition, stage) == true
     end
     local inventory = player:getInventory()
     if finish.paintType then return inventory:getFirstTypeRecurse(finish.paintType) ~= nil end

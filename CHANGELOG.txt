@@ -1,4 +1,20 @@
-[b]Knox Buildworks - UI, Accessibility & B42.20 Compatibility Update[/b]
+[b]Knox Buildworks - August 2, 2026 Update[/b]
+
+[list]
+[*][b]Build 42.20 multiplayer XP:[/b] Fixed XP awards for entity-backed buildables. Knox Buildworks now verifies the native CraftRecipe award, applies a safe fallback when Build 42.20 skips it, avoids duplicate XP and displays the normal crafting XP halo above the player.
+[*][b]New server-authoritative Build Rules Editor:[/b] Added a new administration UI to the ElyonLib dock. Admins can enable, disable or inherit rules by category, subcategory and individual buildable, then customize each build stage's materials, tools, accepted items or tags, item-use behavior, skills, XP, learned recipes and construction time. Rules are validated, revision-checked, stored by the server and synchronized to every client, with the catalogue, pinned recipes, planning tools and construction all respecting the active settings.
+[*][b]Rule presets and sharing:[/b] Added Current Server Rules, Definition Defaults and Disable All starting points, plus named client-side preset import and export. Presets can be backed up, shared and moved between servers without changing a server until an admin validates and saves them.
+[*][b]Wall-finish policies:[/b] Added a Finishes tab where admins can make plaster, paint or wallpaper requirements free for all walls, then set individual walls to inherit, require or waive each cost. Non-wall paintable objects, including military crates, retain their normal paint requirements.
+[*][b]Admin UI and performance:[/b] Reworked the preset area for clearer navigation and virtualized large scrolling lists to greatly improve performance in the Rules Editor, Test Runner and Tile Browser. Added distinct ElyonLib dock icons for all three tools.
+[*][b]New in-game guide:[/b] Added a Survival Guide-style Knox Buildworks manual, opened from new information buttons. It covers the catalogue, variants, requirements, building, painting, functional objects, pinned recipes, planning, queues, sharing, accessibility, multiplayer troubleshooting and the complete admin workflow.
+[*][b]Accessibility option:[/b] Added a toggle to Knox UI Appearance that prevents unavailable buildable icons from fading. Readiness indicators and building restrictions remain unchanged.
+[*][b]Localization overhaul:[/b] Added full Spanish and Russian localization to both Knox Buildworks and Vanilla Expanded, completed and synchronized the English, Simplified Chinese, Spanish and Russian key sets, removed stray translations and centralized shared category and subcategory names in the main mod for add-on reuse.
+[*][b]General and buildable fixes:[/b] Improved editor validation and error feedback, corrected the Large White Window name, allowed it to be installed in compatible passable interior arches without turning those walls into window frames, removed the obsolete tile-property patches, and tightened catalogue, pinned-recipe, planning and placement behavior around live rule changes.
+[*][b]Buildables definitions:[/b] Removed the glass panels from the definitions of some window frames.
+[/list]
+
+
+[b]Previous Update - UI, Accessibility & B42.20 Compatibility[/b]
 
 [list]
 [*][b]Responsive catalogue:[/b] Reworked the layout for large fonts, smaller windows and different resolutions. The catalogue now opens at a more practical size and remembers the dimensions of each display mode.

@@ -2665,7 +2665,7 @@
                 "items": [
                   "Base.GlassPanel"
                 ],
-                "amount": 2
+                "amount": 1
               },
               {
                 "id": "door_hinges",
@@ -4920,16 +4920,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               },
               {
                 "id": "door_hinges",

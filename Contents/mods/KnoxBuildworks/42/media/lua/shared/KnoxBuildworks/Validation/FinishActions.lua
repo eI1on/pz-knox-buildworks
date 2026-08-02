@@ -105,7 +105,7 @@ function FinishActions.validate(player, definition, stage, finish, requireItems)
             if finish.wallpaperType and not WallFinishes.spriteFor("wallpaper", finish, false, definition, stage) then
                 return false, "wallpaper not available for this wall"
             end
-            if requireItems then return WallFinishes.validateItems(player, finish) end
+            if requireItems then return WallFinishes.validateItems(player, finish, definition, stage) end
             return true
         end
         return true

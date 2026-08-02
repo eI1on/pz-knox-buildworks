@@ -1,6 +1,7 @@
 ---FinishQueue provides the Knox Buildworks blueprint planning layer.
 local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 local KBWFinishAction = require("KnoxBuildworks/TimedActions/KBWFinishAction")
+local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 local Log = require("KnoxBuildworks/Log")
 
 -- Applies a wall finish after the wall itself is built, by chaining Knox
@@ -76,7 +77,8 @@ local function queuePlaster(entry, wall)
     end
     local bucket = nil
     local trowel = nil
-    if not cheat(player) then
+    local required = BuildableRules.wallFinishRequirement(entry.definition, entry.stage, "plaster")
+    if required and not cheat(player) then
         trowel = player:getInventory():getFirstTagEvalRecurse(ItemTag.PLASTER_TROWEL, predicateNotBroken)
         bucket = player:getInventory():getFirstTagEvalRecurse(ItemTag.PLASTER_BUCKET, predicateEnoughDrain)
         if not trowel or not bucket then
@@ -86,7 +88,9 @@ local function queuePlaster(entry, wall)
         ISWorldObjectContextMenu.transferIfNeeded(player, trowel)
         ISWorldObjectContextMenu.transferIfNeeded(player, bucket)
     end
-    ISTimedActionQueue.add(KBWFinishAction:new(player, "plaster", wall, sprite, bucket, trowel, nil, nil, entry.finish))
+    ISTimedActionQueue.add(KBWFinishAction:new(
+        player, "plaster", wall, sprite, bucket, trowel, nil, nil, entry.finish, true
+    ))
     return true
 end
 
@@ -98,7 +102,8 @@ local function queuePaint(entry, wall)
         return false
     end
     local paintCan = nil
-    if not cheat(player) then
+    local required = BuildableRules.wallFinishRequirement(entry.definition, entry.stage, "paint")
+    if required and not cheat(player) then
         local brush = player:getInventory():getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
         if not brush then return false end
         ISWorldObjectContextMenu.transferIfNeeded(player, brush)
@@ -106,7 +111,9 @@ local function queuePaint(entry, wall)
         if not paintCan then return false end
         ISWorldObjectContextMenu.transferIfNeeded(player, paintCan)
     end
-    ISTimedActionQueue.add(KBWFinishAction:new(player, "paint", wall, sprite, paintCan, nil, nil, nil, entry.finish))
+    ISTimedActionQueue.add(KBWFinishAction:new(
+        player, "paint", wall, sprite, paintCan, nil, nil, nil, entry.finish, true
+    ))
     return true
 end
 
@@ -118,7 +125,8 @@ local function queueWallpaper(entry, wall)
         return false
     end
     local roll = nil
-    if not cheat(player) then
+    local required = BuildableRules.wallFinishRequirement(entry.definition, entry.stage, "wallpaper")
+    if required and not cheat(player) then
         roll = player:getInventory():getFirstTypeRecurse(entry.finish.wallpaperType)
         local brush = player:getInventory():getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
         local paste = player:getInventory():getFirstTagEvalRecurse(ItemTag.WALLPAPER_PASTE, predicateEnoughDrain)
@@ -129,7 +137,9 @@ local function queueWallpaper(entry, wall)
         ISWorldObjectContextMenu.transferIfNeeded(player, paste)
         ISWorldObjectContextMenu.transferIfNeeded(player, scissors)
     end
-    ISTimedActionQueue.add(KBWFinishAction:new(player, "wallpaper", wall, sprite, roll, nil, nil, nil, entry.finish))
+    ISTimedActionQueue.add(KBWFinishAction:new(
+        player, "wallpaper", wall, sprite, roll, nil, nil, nil, entry.finish, true
+    ))
     return true
 end
 

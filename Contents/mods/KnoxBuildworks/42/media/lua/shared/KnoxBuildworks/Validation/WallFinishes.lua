@@ -882,13 +882,14 @@ end
 -- pipeline. Direct-paint/direct-paper surfaces omit plaster requirements.
 ---@param player IsoPlayer
 ---@param finish KBW.WallFinish|nil
-function WallFinishes.validateItems(player, finish)
+function WallFinishes.validateItems(player, finish, definition, stage)
     if not WallFinishes.isWallFinish(finish) then return true end
     if not player then return false, "missing player" end
     if player.isBuildCheat and player:isBuildCheat() then return true end
     local inventory = player:getInventory()
     if not inventory then return false, "missing inventory" end
-    if finish.plaster ~= false then
+    local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
+    if finish.plaster ~= false and BuildableRules.wallFinishRequirement(definition, stage, "plaster") then
         if not scanTag(inventory, ItemTag.PLASTER_TROWEL, predicateNotBroken) then
             return false, "missing plastering trowel"
         end
@@ -896,11 +897,11 @@ function WallFinishes.validateItems(player, finish)
             return false, "missing plaster bucket"
         end
     end
-    if finish.paintType then
+    if finish.paintType and BuildableRules.wallFinishRequirement(definition, stage, "paint") then
         if not scanTag(inventory, ItemTag.PAINTBRUSH, predicateNotBroken) then return false, "missing paintbrush" end
         if not firstType(inventory, finish.paintType) then return false, "missing selected paint" end
     end
-    if finish.wallpaperType then
+    if finish.wallpaperType and BuildableRules.wallFinishRequirement(definition, stage, "wallpaper") then
         if not scanTag(inventory, ItemTag.PAINTBRUSH, predicateNotBroken) then return false, "missing paintbrush" end
         if not firstType(inventory, finish.wallpaperType) then return false, "missing selected wallpaper" end
         if not scanTag(inventory, ItemTag.WALLPAPER_PASTE, predicateEnoughDrain) then
@@ -968,10 +969,11 @@ end
 -- Requirement-panel rows describing what the selected finish will use.
 ---@param player IsoPlayer
 ---@param finish KBW.WallFinish|nil
-function WallFinishes.statusRows(player, finish)
+function WallFinishes.statusRows(player, finish, definition, stage)
     local rows = {}
     if not WallFinishes.isWallFinish(finish) then return rows end
-    if finish.plaster ~= false then
+    local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
+    if finish.plaster ~= false and BuildableRules.wallFinishRequirement(definition, stage, "plaster") then
         rows[#rows + 1] = tagRow(
             player, "finish-plaster-trowel", translated("IGUI_KBW_PlasterTrowel", "Plastering trowel"),
             ItemTag.PLASTER_TROWEL, "base:plastertrowel", "keep", "tool", predicateNotBroken,
@@ -982,14 +984,14 @@ function WallFinishes.statusRows(player, finish)
             "base:plasterbucket", "drain", "material", predicateEnoughDrain
         )
     end
-    if finish.paintType then
+    if finish.paintType and BuildableRules.wallFinishRequirement(definition, stage, "paint") then
         rows[#rows + 1] = tagRow(
             player, "finish-brush", translated("IGUI_KBW_Paintbrush", "Paintbrush"), ItemTag.PAINTBRUSH,
             "base:paintbrush", "keep", "tool", predicateNotBroken
         )
         rows[#rows + 1] = itemRow(player, "finish-paint", finish.paintType, "drain", "material")
     end
-    if finish.wallpaperType then
+    if finish.wallpaperType and BuildableRules.wallFinishRequirement(definition, stage, "wallpaper") then
         rows[#rows + 1] = tagRow(
             player, "finish-brush", translated("IGUI_KBW_Paintbrush", "Paintbrush"), ItemTag.PAINTBRUSH,
             "base:paintbrush", "keep", "tool", predicateNotBroken
@@ -1011,8 +1013,8 @@ end
 -- checks matter there).
 ---@param player IsoPlayer
 ---@param finish KBW.WallFinish|nil
-function WallFinishes.fetchRows(player, finish)
-    return WallFinishes.statusRows(player, finish)
+function WallFinishes.fetchRows(player, finish, definition, stage)
+    return WallFinishes.statusRows(player, finish, definition, stage)
 end
 
 return WallFinishes

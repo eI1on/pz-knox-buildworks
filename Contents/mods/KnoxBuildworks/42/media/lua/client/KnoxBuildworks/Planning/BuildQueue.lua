@@ -258,7 +258,7 @@ local function missingRowsFor(state, placement, rows)
             anyMissing = true
         end
     end
-    local finishRows = WallFinishes.fetchRows(state.player, placement.finish)
+    local finishRows = WallFinishes.fetchRows(state.player, placement.finish, definition, stage)
     for rowIndex = 1, #finishRows do
         local row = finishRows[rowIndex]
         if not row.ok then

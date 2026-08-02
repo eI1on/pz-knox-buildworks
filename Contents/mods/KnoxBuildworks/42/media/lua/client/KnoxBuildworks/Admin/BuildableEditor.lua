@@ -26,7 +26,12 @@ KBWBuildableEditor.instance = nil
 
 local PAD = 10
 local GAP = 7
-local TABS = { "availability", "requirements", "skills", "knowledge" }
+local TABS = { "availability", "requirements", "finishes", "skills", "knowledge" }
+local TAB_TEXT_KEYS = {
+    "IGUI_KBW_AdminEditorTabAvailability", "IGUI_KBW_AdminEditorTabRequirements",
+    "IGUI_KBW_AdminEditorTabFinishes", "IGUI_KBW_AdminEditorTabSkillsXP",
+    "IGUI_KBW_AdminEditorTabKnowledge"
+}
 
 local function comboData(combo)
     return combo and combo:getOptionData(combo.selected) or nil
@@ -148,6 +153,23 @@ local function policyValue(value)
     return nil
 end
 
+local function addFinishPolicyOptions(combo, allowInherit)
+    if allowInherit then combo:addOptionWithData(getText("IGUI_KBW_AdminEditorInherit"), "inherit") end
+    combo:addOptionWithData(getText("IGUI_KBW_AdminEditorFinishRequired"), "required")
+    combo:addOptionWithData(getText("IGUI_KBW_AdminEditorFinishWaived"), "waived")
+end
+
+local function finishPolicyData(value, allowInherit)
+    if value == nil then return allowInherit and "inherit" or "required" end
+    return value == true and "required" or "waived"
+end
+
+local function finishPolicyValue(value)
+    if value == "required" then return true end
+    if value == "waived" then return false end
+    return nil
+end
+
 local function allStages(definition)
     local result, seen = {}, {}
     local function add(stages)
@@ -202,7 +224,10 @@ local function cleanEmptyRules(document, definition, stage)
         and rule.needToBeLearned == nil and rule.time == nil then
         parent.stages[tostring(stage.id)] = nil
     end
-    if parent.enabled == nil and #TableUtil.sortedKeys(parent.stages or {}) == 0 then
+    if parent.finishRequirements and #TableUtil.sortedKeys(parent.finishRequirements) == 0 then
+        parent.finishRequirements = nil
+    end
+    if parent.enabled == nil and parent.finishRequirements == nil and #TableUtil.sortedKeys(parent.stages or {}) == 0 then
         document.buildables[definition.id] = nil
     end
 end
@@ -264,14 +289,13 @@ function KBWBuildableEditor:createChildren()
 
     self.stageCombo = makeCombo(self, self.onStageChanged)
     self.tabButtons = {}
-    local orderedKeys = {
-        "IGUI_KBW_AdminEditorTabAvailability", "IGUI_KBW_AdminEditorTabRequirements",
-        "IGUI_KBW_AdminEditorTabSkillsXP", "IGUI_KBW_AdminEditorTabKnowledge"
-    }
-    for keyIndex = 1, #orderedKeys do
-        local key = orderedKeys[keyIndex]
+    for keyIndex = 1, #TAB_TEXT_KEYS do
+        local key = TAB_TEXT_KEYS[keyIndex]
         local button = makeButton(self, getText(key), self.onTab, false)
         button.tabId = TABS[keyIndex]
+        button.kbwPreferredWidth = math.max(
+            76, getTextManager():MeasureStringX(UIFont.Small, getText(key)) + 24
+        )
         self.tabButtons[#self.tabButtons + 1] = button
     end
 
@@ -283,6 +307,25 @@ function KBWBuildableEditor:createChildren()
     addPolicyOptions(self.buildablePolicy)
     self.timeOverride = makeTick(self, getText("IGUI_KBW_AdminEditorOverrideBuildTime"), self.onTimeOverride)
     self.timeEntry = makeEntry(self, true)
+
+    self.wallFinishDefaults = {}
+    self.wallFinishOverrides = {}
+    local finishRequirements = { "plaster", "paint", "wallpaper" }
+    for requirementIndex = 1, #finishRequirements do
+        local requirement = finishRequirements[requirementIndex]
+        local defaultCombo = makeCombo(self, self.onFinishPolicyChanged)
+        defaultCombo.kbwFinishRequirement = requirement
+        defaultCombo.kbwFinishScope = "default"
+        addFinishPolicyOptions(defaultCombo, false)
+        defaultCombo.tooltip = getText("IGUI_KBW_AdminEditorWallFinishDefaultsHint")
+        self.wallFinishDefaults[requirement] = defaultCombo
+        local overrideCombo = makeCombo(self, self.onFinishPolicyChanged)
+        overrideCombo.kbwFinishRequirement = requirement
+        overrideCombo.kbwFinishScope = "buildable"
+        addFinishPolicyOptions(overrideCombo, true)
+        overrideCombo.tooltip = getText("IGUI_KBW_AdminEditorWallFinishOverridesHint")
+        self.wallFinishOverrides[requirement] = overrideCombo
+    end
 
     self.inputsOverride = makeTick(self, getText("IGUI_KBW_AdminEditorOverrideInputs"), self.onInputsOverride)
     self.inputList = makeList(self, self.drawInput, self.onInputSelected)
@@ -583,6 +626,10 @@ function KBWBuildableEditor:tabControls()
         requirements = { self.inputsOverride, self.inputList, self.inputId, self.inputRole, self.inputMode,
             self.inputSource, self.inputValues, self.inputAmount, self.inputHand, self.inputDegrade,
             self.inputAdd, self.inputUpdate, self.inputRemove },
+        finishes = {
+            self.wallFinishDefaults.plaster, self.wallFinishDefaults.paint, self.wallFinishDefaults.wallpaper,
+            self.wallFinishOverrides.plaster, self.wallFinishOverrides.paint, self.wallFinishOverrides.wallpaper
+        },
         skills = { self.skillsOverride, self.skillList, self.skillPerk, self.skillAmount, self.skillAdd,
             self.skillRemove, self.xpOverride, self.xpList, self.xpPerk, self.xpAmount, self.xpAdd, self.xpRemove },
         knowledge = { self.knowledgeOverride, self.needKnown, self.recipeList, self.recipeCombo,
@@ -615,6 +662,12 @@ function KBWBuildableEditor:refreshEditor()
     self.timeOverride:setSelected(1, rule ~= nil and rule.time ~= nil)
     local defaultTime = stage and StageConfig.construction(definition, stage).time or 200
     self.timeEntry:setText(rule and rule.time and tostring(rule.time) or tostring(defaultTime or 200))
+    local finishDefaults = self.draft.wallFinishRequirements or {}
+    local finishOverrides = parent and parent.finishRequirements or {}
+    for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+        selectComboData(self.wallFinishDefaults[requirement], finishPolicyData(finishDefaults[requirement], false))
+        selectComboData(self.wallFinishOverrides[requirement], finishPolicyData(finishOverrides[requirement], true))
+    end
     self:refreshInputs()
     self:refreshSkillsXP()
     self:refreshKnowledge()
@@ -664,6 +717,27 @@ function KBWBuildableEditor:onTimeOverride(_, selected)
         rule.time = tonumber(self.timeEntry:getInternalText()) or (StageConfig.construction(definition, stage).time or 200)
     elseif rule then
         rule.time = nil
+        cleanEmptyRules(self.draft, definition, stage)
+    end
+    self:markDirty()
+    self:updateEnabledStates()
+end
+
+function KBWBuildableEditor:onFinishPolicyChanged(combo)
+    local requirement = combo and combo.kbwFinishRequirement or nil
+    if not requirement then return end
+    local value = finishPolicyValue(comboData(combo))
+    if combo.kbwFinishScope == "default" then
+        self.draft.wallFinishRequirements = self.draft.wallFinishRequirements or {}
+        self.draft.wallFinishRequirements[requirement] = value
+    else
+        local definition, stage = self:selectedDefinition(), self:selectedStage()
+        if not definition or not BuildableRules.isWallBuildable(definition, stage) then return end
+        local parent = buildableRule(self.draft, definition, value ~= nil)
+        if parent then
+            parent.finishRequirements = parent.finishRequirements or {}
+            parent.finishRequirements[requirement] = value
+        end
         cleanEmptyRules(self.draft, definition, stage)
     end
     self:markDirty()
@@ -998,6 +1072,10 @@ function KBWBuildableEditor:updateEnabledStates()
     local xp = hasSelection and rule ~= nil and rule.xp ~= nil
     local knowledge = hasSelection and rule ~= nil and (rule.recipes ~= nil or rule.needToBeLearned ~= nil)
     local requirementsEditable = hasSelection and BuildableRules.canOverrideRequirements(definition, stage) == true
+    local wallSelected = hasSelection and BuildableRules.isWallBuildable(definition, stage) == true
+    for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+        self.wallFinishOverrides[requirement]:setEnabled(wallSelected)
+    end
     self.inputsOverride:disableOption(getText("IGUI_KBW_AdminEditorOverrideInputs"), not requirementsEditable)
     self.skillsOverride:disableOption(getText("IGUI_KBW_AdminEditorOverrideSkills"), not requirementsEditable)
     self.knowledgeOverride:disableOption(getText("IGUI_KBW_AdminEditorOverrideKnowledge"), not requirementsEditable)
@@ -1341,12 +1419,20 @@ function KBWBuildableEditor:layout()
     self.stageCombo:setY(top)
     self.stageCombo:setWidth(rightW)
     local tabsY = top + self.controlH + GAP
-    local tabW = math.floor((rightW - GAP * 3) / 4)
+    local preferredTabsW = GAP * (#self.tabButtons - 1)
+    for tabIndex = 1, #self.tabButtons do
+        preferredTabsW = preferredTabsW + self.tabButtons[tabIndex].kbwPreferredWidth
+    end
+    local tabExtra = math.max(0, math.floor((rightW - preferredTabsW) / #self.tabButtons))
+    local tabX = rightX
     for tabIndex = 1, #self.tabButtons do
         local button = self.tabButtons[tabIndex]
-        button:setX(rightX + (tabIndex - 1) * (tabW + GAP))
+        button:setX(tabX)
         button:setY(tabsY)
-        button:setWidth(tabIndex == #self.tabButtons and rightX + rightW - button:getX() or tabW)
+        button:setWidth(tabIndex == #self.tabButtons
+            and rightX + rightW - button:getX()
+            or button.kbwPreferredWidth + tabExtra)
+        tabX = button:getRight() + GAP
     end
     local contentY = tabsY + self.actionH + GAP + self.fontH + 4
     local contentH = bodyBottom - contentY
@@ -1361,6 +1447,28 @@ function KBWBuildableEditor:layout()
     self.buildablePolicy:setX(controlX) self.buildablePolicy:setY(contentY + (self.controlH + GAP) * 2) self.buildablePolicy:setWidth(controlW)
     self.timeOverride:setX(rightX) self.timeOverride:setY(contentY + (self.controlH + GAP) * 3 + GAP) self.timeOverride:setWidth(labelW)
     self.timeEntry:setX(controlX) self.timeEntry:setY(self.timeOverride:getY()) self.timeEntry:setWidth(controlW)
+
+    self.finishHeadersY = contentY
+    self.finishHintY = self.finishHeadersY + self.fontH + 2
+    local finishRowsY = self.finishHintY + self.fontH + GAP
+    local finishLabelW = math.max(110, math.floor(rightW * 0.23))
+    local finishComboW = math.floor((rightW - finishLabelW - GAP * 2) / 2)
+    self.finishDefaultsX = rightX + finishLabelW
+    self.finishOverridesX = self.finishDefaultsX + finishComboW + GAP
+    local finishRequirements = { "plaster", "paint", "wallpaper" }
+    for requirementIndex = 1, #finishRequirements do
+        local requirement = finishRequirements[requirementIndex]
+        local rowY = finishRowsY + (requirementIndex - 1) * (self.controlH + GAP)
+        local defaultCombo = self.wallFinishDefaults[requirement]
+        defaultCombo:setX(self.finishDefaultsX)
+        defaultCombo:setY(rowY)
+        defaultCombo:setWidth(finishComboW)
+        local overrideCombo = self.wallFinishOverrides[requirement]
+        overrideCombo:setX(self.finishOverridesX)
+        overrideCombo:setY(rowY)
+        overrideCombo:setWidth(rightX + rightW - self.finishOverridesX)
+    end
+    self.finishNoteY = self.wallFinishOverrides.wallpaper:getBottom() + GAP
 
     self.inputsOverride:setX(rightX) self.inputsOverride:setY(contentY) self.inputsOverride:setWidth(rightW)
     local inputFormH = (self.fontH + 3) * 4 + self.controlH * 4 + GAP * 5 + self.actionH
@@ -1451,6 +1559,45 @@ function KBWBuildableEditor:prerender()
         self:drawText(getText("IGUI_KBW_AdminEditorAmountUses"), self.inputAmount:getX(), labels.sourceY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
         self:drawText(getText("IGUI_KBW_AdminEditorHandModel"), self.inputHand:getX(), labels.flagsY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
         self:drawText(getText("IGUI_KBW_AdminEditorToolWear"), self.inputDegrade:getX(), labels.flagsY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
+    elseif self.activeTab == "finishes" then
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorWallFinishDefaults"), self.finishDefaultsX, self.finishHeadersY,
+            Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorWallFinishOverrides"), self.finishOverridesX, self.finishHeadersY,
+            Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorWallFinishDefaultsHint"), self.rightX, self.finishHintY,
+            Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        local labels = {
+            plaster = "IGUI_KBW_AdminEditorFinishPlaster",
+            paint = "IGUI_KBW_AdminEditorFinishPaint",
+            wallpaper = "IGUI_KBW_AdminEditorFinishWallpaper"
+        }
+        for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+            local defaultCombo = self.wallFinishDefaults[requirement]
+            self:drawText(
+                getText(labels[requirement]), self.rightX, defaultCombo:getY() + 3,
+                Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+            )
+        end
+        local overrideHint = BuildableRules.isWallBuildable(definition, stage)
+            and getText("IGUI_KBW_AdminEditorWallFinishOverridesHint")
+            or getText("IGUI_KBW_AdminEditorWallFinishNotWall")
+        self:drawText(
+            overrideHint, self.rightX, self.finishNoteY,
+            Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+            local overrideCombo = self.wallFinishOverrides[requirement]
+            self:drawText(
+                getText(labels[requirement]), self.rightX, overrideCombo:getY() + 3,
+                Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+            )
+        end
     end
 end
 
@@ -1463,7 +1610,19 @@ end
 function KBWBuildableEditor:new(player)
     local screenW, screenH = getCore():getScreenWidth(), getCore():getScreenHeight()
     local fontH = getTextManager():getFontHeight(UIFont.Small)
-    local o = ISCollapsableWindow:new(math.floor((screenW - 720) / 2), math.floor((screenH - 520) / 2), 720, 520)
+    local tabAreaW = GAP * (#TAB_TEXT_KEYS - 1)
+    for keyIndex = 1, #TAB_TEXT_KEYS do
+        tabAreaW = tabAreaW + math.max(
+            76, getTextManager():MeasureStringX(UIFont.Small, getText(TAB_TEXT_KEYS[keyIndex])) + 24
+        )
+    end
+    local minimumW = math.min(math.max(1000, 300 + PAD * 2 + GAP + tabAreaW), screenW - 40)
+    local minimumH = math.min(math.max(600, fontH * 8 + 440), screenH - 40)
+    local width = math.min(screenW - 60, math.max(minimumW, math.floor(screenW * 0.58)))
+    local height = math.min(screenH - 60, math.max(minimumH, math.floor(screenH * 0.64)))
+    local o = ISCollapsableWindow:new(
+        math.floor((screenW - width) / 2), math.floor((screenH - height) / 2), width, height
+    )
     setmetatable(o, self)
     self.__index = self
     o.player = player
@@ -1474,8 +1633,8 @@ function KBWBuildableEditor:new(player)
     o.actionH = math.max(30, fontH + 10)
     o.rowH = math.max(48, fontH * 2 + 12)
     o.statusH = math.max(52, fontH * 2 + 12)
-    o.minimumWidth = 720
-    o.minimumHeight = 520
+    o.minimumWidth = minimumW
+    o.minimumHeight = minimumH
     return o
 end
 

@@ -239,7 +239,8 @@ function BuildFromPlan.queue(player, blueprintId, placement, onBuilt)
     end
     -- Planned finishes (plaster/paint/wallpaper) only build when their
     -- materials are on hand; otherwise the queue retries after fetching.
-    if WallFinishes.isWallFinish(placement.finish) and WallFinishes.validateItems(player, placement.finish) ~= true then
+    if WallFinishes.isWallFinish(placement.finish)
+        and WallFinishes.validateItems(player, placement.finish, cursor.definition, cursor.stage) ~= true then
         say(player, getText("IGUI_KBW_CannotBuild"), true)
         return false, "finish materials missing"
     end

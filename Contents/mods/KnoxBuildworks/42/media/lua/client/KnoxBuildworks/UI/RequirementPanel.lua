@@ -343,7 +343,7 @@ function KBWRequirementPanel:setSelection(definition, stage, finish)
     self.rows = materialRows(status.rows or {})
     -- Selected wall finish adds its own materials (plaster bucket, brush,
     -- paint can / wallpaper roll + paste).
-    local finishRows = WallFinishes.statusRows(self.player, finish)
+    local finishRows = WallFinishes.statusRows(self.player, finish, definition, stage)
     for rowIndex = 1, #finishRows do
         self.rows[#self.rows + 1] = finishRows[rowIndex]
     end

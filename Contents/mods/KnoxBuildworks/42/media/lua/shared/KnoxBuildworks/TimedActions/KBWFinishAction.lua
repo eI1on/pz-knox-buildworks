@@ -48,6 +48,26 @@ local function maybeDegradeTrowel(character, tool)
     tool:damageCheck(skillForTool(character, tool), 6.0, false)
 end
 
+-- Only build-with-finish actions opt into the administrative wall policy.
+-- Resolve the policy from the completed object's authoritative Knox metadata
+-- so a client cannot make unrelated paintable objects free by setting a flag.
+local function finishRequirementsWaived(action)
+    if not action or action.useWallBuildRules ~= true or not action.thumpable then return false end
+    local data = action.thumpable:getModData()
+    data = data and data.KBW or nil
+    if not data or not data.buildableId or not data.stageId then return false end
+    local Registry = require("KnoxBuildworks/Definitions/Registry")
+    local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
+    local definition = Registry:get(tostring(data.buildableId))
+    local stage = definition and Registry:getStage(definition, tostring(data.stageId)) or nil
+    if not definition then return false end
+    -- Material/variant-specific stages may not exist on the base registry
+    -- definition. The wall policy is buildable-wide, so a base wall placement
+    -- remains sufficient; stage-only wall placements stay conservative.
+    if not stage and not BuildableRules.isWallBuildable(definition, nil) then return false end
+    return not BuildableRules.wallFinishRequirement(definition, stage, tostring(action.mode or ""))
+end
+
 function KBWFinishAction:isValid()
     if not self.thumpable or not self.thumpable:getSquare() then return false end
     if self.blueprintId then
@@ -66,6 +86,7 @@ function KBWFinishAction:isValid()
         local validTarget = WallFinishes.canApplyToObject(self.mode, self.finish, self.thumpable, false)
         if not validTarget then return false end
     end
+    if finishRequirementsWaived(self) then return true end
     if cheat(self.character) then return true end
     local inventory = self.character:getInventory()
     if self.mode == "plaster" then
@@ -127,6 +148,7 @@ end
 function KBWFinishAction:complete()
     if not self.thumpable then return false end
     local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
+    local requirementsWaived = finishRequirementsWaived(self)
     -- Resolve against the object that actually exists at completion time. This
     -- preserves door/window/corner wall types and the final N/W face even when
     -- the placement cursor snapped or replaced a previous construction stage.
@@ -146,7 +168,7 @@ function KBWFinishAction:complete()
         self.thumpable:sendObjectChange(IsoObjectChange.PAINTABLE)
         local square = self.thumpable:getSquare()
         if square then square:RecalcAllWithNeighbours(true) end
-        if consumeAllowed(self.character) and self.item then
+        if not requirementsWaived and consumeAllowed(self.character) and self.item then
             self.item:UseAndSync()
             maybeDegradeTrowel(self.character, self.tool)
         end
@@ -161,7 +183,7 @@ function KBWFinishAction:complete()
             self.thumpable:transmitCustomColorToClients()
         end
     end
-    if consumeAllowed(self.character) then
+    if not requirementsWaived and consumeAllowed(self.character) then
         if self.item then self.item:UseAndSync() end
         if self.mode == "wallpaper" then
             local paste = self.character:getInventory():getFirstTagRecurse(ItemTag.WALLPAPER_PASTE)
@@ -183,8 +205,11 @@ end
 ---@param blueprintId string
 ---@param placementId string
 ---@param finish KBW.WallFinish|nil
+---@param useWallBuildRules boolean|nil
 ---@return KBWFinishAction
-function KBWFinishAction:new(character, mode, thumpable, sprite, item, tool, blueprintId, placementId, finish)
+function KBWFinishAction:new(
+    character, mode, thumpable, sprite, item, tool, blueprintId, placementId, finish, useWallBuildRules
+)
     local o = ISBaseTimedAction.new(self, character)
     o.character = character
     o.mode = mode
@@ -195,6 +220,7 @@ function KBWFinishAction:new(character, mode, thumpable, sprite, item, tool, blu
     o.blueprintId = blueprintId
     o.placementId = placementId
     o.finish = finish
+    o.useWallBuildRules = useWallBuildRules == true
     o.maxTime = o:getDuration()
     o.caloriesModifier = mode == "plaster" and 8 or 4
     return o

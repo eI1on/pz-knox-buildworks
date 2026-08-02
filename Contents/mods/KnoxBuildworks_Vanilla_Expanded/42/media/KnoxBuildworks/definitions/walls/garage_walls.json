@@ -333,16 +333,6 @@
                 "amount": 4
               },
               {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
-              },
-              {
                 "id": "tool_paintbrush",
                 "role": "tool",
                 "mode": "keep",
@@ -936,16 +926,6 @@
                   "Base.Nails"
                 ],
                 "amount": 4
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               },
               {
                 "id": "tool_paintbrush",

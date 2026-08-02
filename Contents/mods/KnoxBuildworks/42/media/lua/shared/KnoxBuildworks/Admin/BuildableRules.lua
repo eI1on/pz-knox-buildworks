@@ -27,6 +27,7 @@ local MAX_NUMBER = 1000000
 
 local VALID_ROLES = { material = true, tool = true, consumable = true, component = true, resource = true }
 local VALID_MODES = { consume = true, keep = true, drain = true, destroy = true }
+local VALID_FINISH_REQUIREMENTS = { plaster = true, paint = true, wallpaper = true }
 local VALID_FLAGS = {
     Prop1 = true,
     Prop2 = true,
@@ -37,7 +38,14 @@ local VALID_FLAGS = {
 }
 
 local function emptyDocument()
-    return { version = Rules.VERSION, revision = 0, categories = {}, subcategories = {}, buildables = {} }
+    return {
+        version = Rules.VERSION,
+        revision = 0,
+        categories = {},
+        subcategories = {},
+        wallFinishRequirements = {},
+        buildables = {}
+    }
 end
 
 Rules.document = emptyDocument()
@@ -67,6 +75,26 @@ local function copyBooleanRule(source)
     if type(source) ~= "table" or source.enabled == nil then return nil end
     if type(source.enabled) ~= "boolean" then return false end
     return { enabled = source.enabled }
+end
+
+local function validateFinishRequirements(source, path, errors)
+    if source == nil then return nil end
+    if type(source) ~= "table" then
+        addError(errors, path, "must be an object")
+        return nil
+    end
+    validateKnownKeys(source, VALID_FINISH_REQUIREMENTS, path, errors)
+    local result = {}
+    for requirement in pairs(VALID_FINISH_REQUIREMENTS) do
+        if source[requirement] ~= nil then
+            if type(source[requirement]) ~= "boolean" then
+                addError(errors, path .. "." .. requirement, "must be true or false")
+            else
+                result[requirement] = source[requirement]
+            end
+        end
+    end
+    return result
 end
 
 local function knownScopes()
@@ -351,13 +379,17 @@ function Rules.validateDocument(source)
     local errors = {}
     if type(source) ~= "table" then return nil, { "document: must be an object" } end
     validateKnownKeys(source, {
-        version = true, revision = true, categories = true, subcategories = true, buildables = true
+        version = true, revision = true, categories = true, subcategories = true,
+        wallFinishRequirements = true, buildables = true
     }, "document", errors)
     if source.version ~= nil and tonumber(source.version) ~= Rules.VERSION then
         addError(errors, "version", "is unsupported")
     end
     local result = emptyDocument()
     result.revision = math.max(0, math.floor(tonumber(source.revision) or 0))
+    result.wallFinishRequirements = validateFinishRequirements(
+        source.wallFinishRequirements or {}, "wallFinishRequirements", errors
+    ) or {}
     local categories, subcategories = knownScopes()
     local categorySource = source.categories or {}
     if type(categorySource) ~= "table" then
@@ -426,13 +458,39 @@ function Rules.validateDocument(source)
             elseif type(rawRule) ~= "table" then
                 addError(errors, "buildables." .. buildableId, "must be an object")
             else
-                validateKnownKeys(rawRule, { enabled = true, stages = true }, "buildables." .. buildableId, errors)
+                validateKnownKeys(
+                    rawRule, { enabled = true, finishRequirements = true, stages = true },
+                    "buildables." .. buildableId, errors
+                )
                 local cleanRule = { stages = {} }
                 if rawRule.enabled ~= nil then
                     if type(rawRule.enabled) ~= "boolean" then
                         addError(errors, "buildables." .. buildableId .. ".enabled", "must be true or false")
                     else
                         cleanRule.enabled = rawRule.enabled
+                    end
+                end
+                local finishRequirements = validateFinishRequirements(
+                    rawRule.finishRequirements, "buildables." .. buildableId .. ".finishRequirements", errors
+                )
+                if finishRequirements and #TableUtil.sortedKeys(finishRequirements) > 0 then
+                    local wallStage = false
+                    for _, stages in pairs(knownStageIds(definition)) do
+                        for stageIndex = 1, #stages do
+                            if Rules.isWallBuildable(definition, stages[stageIndex]) then
+                                wallStage = true
+                                break
+                            end
+                        end
+                        if wallStage then break end
+                    end
+                    if wallStage then
+                        cleanRule.finishRequirements = finishRequirements
+                    else
+                        addError(
+                            errors, "buildables." .. buildableId .. ".finishRequirements",
+                            "can only override wall buildables"
+                        )
                     end
                 end
                 local rawStages = rawRule.stages or {}
@@ -497,6 +555,38 @@ end
 
 function Rules.isEnabled(definition, stage)
     return Rules.isEnabledIn(Rules.document, definition, stage)
+end
+
+---@param definition KBW.BuildableDefinition|nil
+---@param stage KBW.BuildStage|nil
+function Rules.isWallBuildable(definition, stage)
+    if not definition then return false end
+    local actual = definitionFor(definition, stage)
+    return tostring(StageConfig.placement(actual, stage).kind or "") == "wall"
+end
+
+---Returns whether a material/tool group is required while building a wall
+---with its selected finish. Non-wall paintables deliberately always return
+---true, so broad wall policies never make crates or other objects free to
+---paint.
+---@param document table|nil
+---@param definition KBW.BuildableDefinition|nil
+---@param stage KBW.BuildStage|nil
+---@param requirement "plaster"|"paint"|"wallpaper"
+function Rules.wallFinishRequirementIn(document, definition, stage, requirement)
+    if not VALID_FINISH_REQUIREMENTS[requirement] or not Rules.isWallBuildable(definition, stage) then return true end
+    document = document or emptyDocument()
+    local actual = definitionFor(definition, stage)
+    local buildableRule = actual and (document.buildables or {})[actual.id] or nil
+    local overrides = buildableRule and buildableRule.finishRequirements or nil
+    if overrides and overrides[requirement] ~= nil then return overrides[requirement] == true end
+    local defaults = document.wallFinishRequirements or {}
+    if defaults[requirement] ~= nil then return defaults[requirement] == true end
+    return true
+end
+
+function Rules.wallFinishRequirement(definition, stage, requirement)
+    return Rules.wallFinishRequirementIn(Rules.document, definition, stage, requirement)
 end
 
 ---@param definition KBW.BuildableDefinition

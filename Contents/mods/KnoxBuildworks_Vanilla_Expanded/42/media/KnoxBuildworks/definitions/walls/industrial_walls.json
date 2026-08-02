@@ -374,16 +374,6 @@
                 "amount": 1
               },
               {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
-              },
-              {
                 "id": "torch_fuel",
                 "role": "consumable",
                 "mode": "drain",
@@ -1394,16 +1384,6 @@
                 "amount": 1
               },
               {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
-              },
-              {
                 "id": "torch_fuel",
                 "role": "consumable",
                 "mode": "drain",
@@ -2412,16 +2392,6 @@
                   "Base.MetalPipe"
                 ],
                 "amount": 1
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               },
               {
                 "id": "torch_fuel",

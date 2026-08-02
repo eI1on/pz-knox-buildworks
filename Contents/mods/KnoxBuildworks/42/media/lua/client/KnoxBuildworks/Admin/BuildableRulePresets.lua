@@ -55,6 +55,7 @@ local function emptyDocument()
         revision = 0,
         categories = {},
         subcategories = {},
+        wallFinishRequirements = {},
         buildables = {}
     }
 end

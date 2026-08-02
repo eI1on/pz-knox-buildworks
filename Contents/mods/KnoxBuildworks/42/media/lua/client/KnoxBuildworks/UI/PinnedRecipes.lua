@@ -966,7 +966,7 @@ local function buildLines(player, maxWidth, includeTitle)
                 if recipeCount > 0 or blueprintCount > 0 then addDivider(lines) end
                 recipeCount = recipeCount + 1
                 local status = Requirements.evaluate(player, definition, stage, nil, entry.choices)
-                local finishRows = WallFinishes.statusRows(player, entry.finish)
+                local finishRows = WallFinishes.statusRows(player, entry.finish, definition, stage)
                 for finishRowIndex = 1, #finishRows do
                     local finishRow = finishRows[finishRowIndex]
                     status.rows[#status.rows + 1] = finishRow

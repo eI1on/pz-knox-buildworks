@@ -1528,7 +1528,7 @@ function Blueprints.totals(player, blueprint)
             -- Planned wall finishes add their own materials (plaster bucket
             -- uses, paint cans, wallpaper + paste).
             if WallFinishes.isWallFinish(placement.finish) then
-                local finishRows = WallFinishes.statusRows(player, placement.finish)
+                local finishRows = WallFinishes.statusRows(player, placement.finish, definition, stage)
                 for rowIndex = 1, #finishRows do
                     local row = finishRows[rowIndex]
                     local key = (row.possibleItems and row.possibleItems[1]) or row.label or row.id

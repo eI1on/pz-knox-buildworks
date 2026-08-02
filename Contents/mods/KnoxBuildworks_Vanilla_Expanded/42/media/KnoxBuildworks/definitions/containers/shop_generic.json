@@ -337,16 +337,6 @@
                   "Base.Nails"
                 ],
                 "amount": 4
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
@@ -869,7 +859,7 @@
     {
       "id": "kbw.vanillaexpanded.containers.shop_generic.location_shop_greenes_01_25",
       "translationKey": "IGUI_KBWVE_Buildable_containers_shop_generic_location_shop_greenes_01_25",
-      "displayName": "Greene 's Grocery Display Counter",
+      "displayName": "Greene's Grocery Display Counter",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
       "subcategory": "Shop Generic",
@@ -964,16 +954,6 @@
                   "Base.Nails"
                 ],
                 "amount": 4
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {

@@ -627,16 +627,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
@@ -1152,16 +1142,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
@@ -1945,16 +1925,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
@@ -2738,16 +2708,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
@@ -3397,16 +3357,6 @@
                   "Prop2",
                   "MayDegradeLight"
                 ]
-              },
-              {
-                "id": "glass_panels",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.GlassPanel"
-                ],
-                "amount": 2
               }
             ],
             "skills": {
