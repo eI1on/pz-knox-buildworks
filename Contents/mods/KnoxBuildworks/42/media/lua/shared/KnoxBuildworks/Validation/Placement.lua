@@ -128,7 +128,32 @@ local function tileProvidesWindowFrame(props, north)
         or props:has(IsoFlagType.WindowW)
 end
 
-local function checkWallFrame(square, north, wantsWindow)
+---Matches an exact sprite name or a prefix pattern ending in `*`.
+---@param spriteName string|nil
+---@param patterns string[]|nil
+function Placement.matchesWindowSupportSprite(spriteName, patterns)
+    if not spriteName or not patterns then return false end
+    for patternIndex = 1, #patterns do
+        local pattern = tostring(patterns[patternIndex] or "")
+        if pattern == spriteName then return true end
+        if string.sub(pattern, -1) == "*" then
+            local prefix = string.sub(pattern, 1, #pattern - 1)
+            if string.sub(spriteName, 1, #prefix) == prefix then return true end
+        end
+    end
+    return false
+end
+
+local function isCompatibleWindowSupport(object, north, patterns)
+    local sprite = object and object:getSprite() or nil
+    local spriteName = sprite and sprite:getName() or nil
+    if not Placement.matchesWindowSupportSprite(spriteName, patterns) then return false end
+    if instanceof(object, "IsoThumpable") then return object:getNorth() == north end
+    local props = sprite and sprite:getProperties() or nil
+    return props and (north and props:has(IsoFlagType.cutN) or not north and props:has(IsoFlagType.cutW)) or false
+end
+
+local function checkWallFrame(square, north, wantsWindow, windowSupportSprites)
     local hasFrame = false
     local hasBuilt = false
     for i = 0, square:getSpecialObjects():size() - 1 do
@@ -139,6 +164,7 @@ local function checkWallFrame(square, north, wantsWindow)
                     or tileProvidesWindowFrame(item:getProperties(), north)) then
                 hasFrame = true
             end
+            if wantsWindow and isCompatibleWindowSupport(item, north, windowSupportSprites) then hasFrame = true end
             if not wantsWindow and item:isDoorFrame() and item:getNorth() == north then hasFrame = true end
             if not wantsWindow and item:isDoor() and item:getNorth() == north then hasBuilt = true end
         end
@@ -149,6 +175,7 @@ local function checkWallFrame(square, north, wantsWindow)
         local props = sprite and sprite:getProperties()
         if wantsWindow then
             if tileProvidesWindowFrame(props, north) then hasFrame = true end
+            if isCompatibleWindowSupport(object, north, windowSupportSprites) then hasFrame = true end
             if instanceof(object, "IsoWindow") and object:getNorth() == north then hasBuilt = true end
         else
             if north and object:getType() == IsoObjectType.doorFrN then hasFrame = true end
@@ -256,9 +283,11 @@ end
 -- given edge, without a door/window already hung there?
 ---@param square IsoGridSquare | nil
 ---@param north  boolean
-function Placement.hasWallFrame(square, north, wantsWindow)
+---@param wantsWindow boolean
+---@param windowSupportSprites string[]|nil
+function Placement.hasWallFrame(square, north, wantsWindow, windowSupportSprites)
     if not square then return false end
-    local hasFrame, hasBuilt = checkWallFrame(square, north == true, wantsWindow == true)
+    local hasFrame, hasBuilt = checkWallFrame(square, north == true, wantsWindow == true, windowSupportSprites)
     return hasFrame and not hasBuilt
 end
 
@@ -479,7 +508,9 @@ function Placement.validate(cursor, square)
                         end
                     end
                     if placement.needWindowFrame then
-                        local hasFrame, hasWindow = checkWallFrame(target, cursor.north, true)
+                        local hasFrame, hasWindow = checkWallFrame(
+                            target, cursor.north, true, placement.windowSupportSprites
+                        )
                         if not hasFrame or hasWindow then return false, "window frame required" end
                     end
                     -- DOOR STUFF (vanilla ISBuildIsoEntity:isValidPerSquare):

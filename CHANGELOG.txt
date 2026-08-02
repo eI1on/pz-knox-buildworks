@@ -1,43 +1,16 @@
-Knox Buildworks - UI, Accessibility & Performance Update
+[b]Knox Buildworks - UI, Accessibility & B42.20 Compatibility Update[/b]
 
-[i]A major catalogue update focused on readability, faster navigation and better support for different resolutions and font sizes.[/i]
-
-[b]Catalogue and compact mode[/b]
 [list]
-[*]Reworked the catalogue layout for larger fonts and smaller window sizes.
-[*]The window now opens at a more practical size, while compact and detailed modes remember their own dimensions.
-[*]Added a compact mode with a condensed icon grid, B41-inspired subcategory list and grouped-buildable carousel.
-[*]Compact hover tooltips now show descriptions, item icons, requirements and storage information.
+[*][b]Responsive catalogue:[/b] Reworked the layout for large fonts, smaller windows and different resolutions. The catalogue now opens at a more practical size and remembers the dimensions of each display mode.
+[*][b]Compact mode:[/b] Added a condensed icon grid, B41 Building Menu inspired subcategory navigation, grouped-buildable carousel and full material/finish options.
+[*][b]Layout fixes:[/b] Fixed blocked resize handles after switching modes, incorrect scrollbar sizing, clipped or overflowing text, overlapping controls and large-font issues in the catalogue and Planning Mode.
+[*][b]Buildable information:[/b] Added dimensions and storage capacities, including separate values for each available tile and container on multi-tile or multi-container objects.
+[*][b]Improved tooltips:[/b] Compact-mode tooltips now show item icons, descriptions, requirements, dimensions and storage information.
+[*][b]Appearance and accessibility:[/b] Added an appearance menu with multiple themes, opacity and high-contrast settings, plus checkerboard, light, dark and custom-colour buildable backgrounds.
+[*][b]Detailed-list performance:[/b] Greatly reduced freezing when opening the detailed list, selecting buildables or resizing the window. Detailed rows now respect the selected preview background and wrap long text correctly.
+[*][b]Translations and descriptions:[/b] Shortened and consolidated reusable English and Simplified Chinese descriptions, moved shared category and subcategory translations into the main mod.
+[*][b]Military crates:[/b] Added green, gray and white military crates with 100 storage capacity. Every variant can be painted using the white directional base sprites and the game's native custom-colour system.
+[*][b]B42.20 multiplayer compatibility:[/b] Fixed construction XP not being awarded correctly after completing buildables in multiplayer.
+[*][b]B42.20 file compatibility:[/b] Blueprint saves and exports now use JSON-formatted .txt files. Existing .json blueprints remain readable and are migrated automatically, while buildable definition files remain in JSON format.
+[*][b]General fixes:[/b] Restored and improved grouped carousels and selectors, fixed group/finish preview updates, and corrected the Double Wrought Iron Gate's erroneous door-frame requirement.
 [/list]
-
-[b]Buildable information[/b]
-[list]
-[*]Buildable dimensions are now displayed below the object preview.
-[*]Storage capacity is shown in the UI.
-[*]Multi-tile and multi-container objects list each available container and its capacity separately.
-[/list]
-
-[b]Appearance and accessibility[/b]
-[list]
-[*]Added a dedicated appearance menu with multiple UI themes, panel opacity and high-contrast options.
-[*]Added checkerboard, light, dark and custom-colour backgrounds to improve the visibility of buildable sprites.
-[*]Improved responsive positioning, text wrapping, scrolling and panel sizing throughout the catalogue and Planning Mode.
-[/list]
-
-[b]Detailed-list performance[/b]
-[list]
-[*]Greatly reduced freezing when opening the detailed list, selecting buildables and resizing the window.
-[*]Added cached text layouts, native text wrapping, lazy icon loading and only-visible row processing.
-[*]Detailed rows now respect the selected preview background and wrap long text correctly.
-[/list]
-
-[b]Translations and general fixes[/b]
-[list]
-[*]Shortened and improved English and Simplified Chinese (thank you @唐小驴) buildable descriptions.
-[*]Moved shared category, subcategory and description translations into the main mod for add-on reuse.
-[*]Fixed numerous scrollbar, resize-handle, carousel, selector, clipping and large-font overlap issues.
-[*]Added military crates (with a capacity of 100)
-[*]Fixed Double Wrought Iron Gate needing a door frame
-[/list]
-
-[i]Thank you to everyone who reported accessibility, scaling and catalogue usability issues.[/i]

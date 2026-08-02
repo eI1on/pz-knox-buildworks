@@ -149,6 +149,7 @@
 ---@field dontNeedFrame? boolean
 ---@field needWindowFrame? boolean
 ---@field providesWindowFrame? boolean Marks the completed wall edge as a valid support for a separately built window.
+---@field windowSupportSprites? string[] Additional support sprites accepted by this window; a trailing `*` matches a sprite-name prefix.
 ---@field isPole? boolean
 ---@field wallCoveringType? 'plaster'|'paint'|'paintThump'|'wallpaper'|'paintSign'
 ---@field sign? number|string

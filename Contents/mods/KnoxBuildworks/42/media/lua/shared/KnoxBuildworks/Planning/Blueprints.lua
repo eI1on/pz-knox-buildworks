@@ -994,6 +994,12 @@ local function providedFrameKind(definition, stage, direction)
     return nil
 end
 
+local function providesCompatibleWindowSupport(definition, stage, direction, requiredDefinition, requiredStage)
+    local requiredPlacement = StageConfig.placement(requiredDefinition, requiredStage)
+    local spriteName = Matrix.getFaceSprite(stage, tonumber(direction) or 1)
+    return Placement.matchesWindowSupportSprite(spriteName, requiredPlacement.windowSupportSprites)
+end
+
 -- A frame and its filler (door frame + door, window frame + window pane) may
 -- share the same tile edge in a plan.
 local function frameAndFillCompatible(existing, incoming)
@@ -1003,12 +1009,22 @@ local function frameAndFillCompatible(existing, incoming)
     local incomingDefinition, incomingStage = resolveDefinition(incoming)
     local existingDefinition, existingStage = resolveDefinition(existing)
     local need = requiredFrameKind(incomingDefinition, incomingStage, incoming.direction)
-    if need and providedFrameKind(existingDefinition, existingStage, existing.direction) == need then
-        return true
+    if need then
+        if providedFrameKind(existingDefinition, existingStage, existing.direction) == need then return true end
+        if need == "window" and providesCompatibleWindowSupport(
+                existingDefinition, existingStage, existing.direction, incomingDefinition, incomingStage
+            ) then
+            return true
+        end
     end
     need = requiredFrameKind(existingDefinition, existingStage, existing.direction)
-    if need and providedFrameKind(incomingDefinition, incomingStage, incoming.direction) == need then
-        return true
+    if need then
+        if providedFrameKind(incomingDefinition, incomingStage, incoming.direction) == need then return true end
+        if need == "window" and providesCompatibleWindowSupport(
+                incomingDefinition, incomingStage, incoming.direction, existingDefinition, existingStage
+            ) then
+            return true
+        end
     end
     return false
 end
@@ -1038,11 +1054,19 @@ function Blueprints.hasRequiredFrame(player, blueprint, placement)
             if providedFrameKind(existingDefinition, existingStage, existing.direction) == need then
                 return true
             end
+            if need == "window" and providesCompatibleWindowSupport(
+                    existingDefinition, existingStage, existing.direction, definition, stage
+                ) then
+                return true
+            end
         end
     end
     local square = getCell() and getCell():getGridSquare(placement.x, placement.y, placement.z) or nil
     if square then
-        return Placement.hasWallFrame(square, directionNorth(placement.direction), need == "window")
+        local placementConfig = StageConfig.placement(definition, stage)
+        return Placement.hasWallFrame(
+            square, directionNorth(placement.direction), need == "window", placementConfig.windowSupportSprites
+        )
     end
     return false
 end

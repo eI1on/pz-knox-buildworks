@@ -273,6 +273,29 @@ function EntityCompat.craftRecipeObject(stage)
     return component and component:getCraftRecipe() or nil
 end
 
+local function xpAwardsForRecipe(recipe)
+    local result = {}
+    if not recipe then return result end
+    for awardIndex = 0, recipe:getXPAwardCount() - 1 do
+        local award = recipe:getXPAward(awardIndex)
+        local perk = award and award:getPerk() or nil
+        local amount = award and tonumber(award:getAmount()) or nil
+        if perk and amount and amount > 0 then
+            result[#result + 1] = { perk = perk, perkName = tostring(perk:getId()), amount = amount }
+        end
+    end
+    return result
+end
+
+---Returns the native CraftRecipe XP awards as Lua-friendly perk/amount pairs.
+---B42.20 exposes CraftRecipe.XpAward to Lua, which lets Knox verify that the
+---server-side native recipe lifecycle actually credited the builder.
+---@param stage KBW.BuildStage
+---@return table[]
+function EntityCompat.xpAwards(stage)
+    return xpAwardsForRecipe(EntityCompat.craftRecipeObject(stage))
+end
+
 local function spriteMetadata(script)
     local component = script:getComponentScriptFor(ComponentType.SpriteConfig)
     if not component then return nil end
@@ -339,10 +362,14 @@ local function recipeMetadata(script)
     }
     local timedAction = recipe:getTimedActionScript()
     if timedAction then result.timedAction = timedAction:getName() end
-    -- CraftRecipe:getXPAward() returns CraftRecipe$xp_Award, a private nested
-    -- Java type that is not exposed as indexable userdata in Kahlua. Native
-    -- BuildLogic awards entity-recipe XP during performCurrentRecipe(); Knox
-    -- therefore must not mirror or award it a second time.
+    local awards = xpAwardsForRecipe(recipe)
+    if #awards > 0 then
+        result.xpAward = {}
+        for awardIndex = 1, #awards do
+            local award = awards[awardIndex]
+            result.xpAward[award.perkName] = (result.xpAward[award.perkName] or 0) + award.amount
+        end
+    end
     return result
 end
 

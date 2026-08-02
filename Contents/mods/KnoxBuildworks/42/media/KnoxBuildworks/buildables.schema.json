@@ -237,6 +237,14 @@
           "type": "boolean",
           "description": "Marks the completed wall edge as a valid frame for a separately built window. Use this when a visual window-frame sprite does not declare native WindowN or WindowW tile properties."
         },
+        "windowSupportSprites": {
+          "type": "array",
+          "description": "Additional support sprites accepted by this window alongside native window frames. A trailing * matches a sprite-name prefix.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
         "isPole": {
           "type": "boolean"
         },

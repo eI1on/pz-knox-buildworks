@@ -130,9 +130,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -266,9 +264,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -402,9 +398,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -538,9 +532,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -663,9 +655,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -799,9 +789,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -935,9 +923,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1071,9 +1057,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1196,9 +1180,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1332,9 +1314,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1468,9 +1448,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1604,9 +1582,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1740,9 +1716,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -1876,9 +1850,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2001,9 +1973,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2137,9 +2107,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2273,9 +2241,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2409,9 +2375,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2545,9 +2509,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2681,9 +2643,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2806,9 +2766,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -2942,9 +2900,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3078,9 +3034,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3214,9 +3168,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3350,9 +3302,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3475,9 +3425,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3611,9 +3559,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3747,9 +3693,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -3883,9 +3827,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]
@@ -4019,9 +3961,7 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
+            "isThumpable": true
           }
         }
       ]

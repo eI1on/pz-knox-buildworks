@@ -4,7 +4,7 @@
     {
       "id": "kbw.vanillaexpanded.windows.wooden.large_white_windoww",
       "translationKey": "IGUI_KBWVE_Buildable_windows_wooden_large_white_windoww",
-      "displayName": "Large White Windoww",
+      "displayName": "Large White Window",
       "tooltipKey": "Tooltip_KBW_Shared_Window",
       "category": "Windows",
       "subcategory": "Wooden",
@@ -12,7 +12,10 @@
       "iconSprite": "fixtures_windows_01_72",
       "placement": {
         "kind": "object",
-        "needWindowFrame": true
+        "needWindowFrame": true,
+        "windowSupportSprites": [
+          "walls_interior_house_05_*"
+        ]
       },
       "stages": [
         {

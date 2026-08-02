@@ -103,6 +103,18 @@ local function validatePlacementConfiguration(errors, owner, placement)
         and (type(placement.maxDistance) ~= "number" or placement.maxDistance <= 0) then
         add(errors, owner .. " placement.maxDistance must be greater than zero")
     end
+    if placement.windowSupportSprites ~= nil then
+        if type(placement.windowSupportSprites) ~= "table" then
+            add(errors, owner .. " placement.windowSupportSprites must be an array")
+        else
+            for patternIndex = 1, #placement.windowSupportSprites do
+                local pattern = placement.windowSupportSprites[patternIndex]
+                if type(pattern) ~= "string" or pattern == "" then
+                    add(errors, owner .. " placement.windowSupportSprites must contain non-empty strings")
+                end
+            end
+        end
+    end
 end
 
 local function validateConstructionConfiguration(errors, owner, construction)

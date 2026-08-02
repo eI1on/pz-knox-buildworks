@@ -66,7 +66,7 @@ description=
 description=[h2]For add-on creators[/h2]
 description=Knox is also a data-driven framework. Add-ons can define templates, material groups, stages, variants, multi-level geometry, recipes, skills and wall finishes through JSON, while still referencing native entities when engine components are needed.
 description=
-description=[url=https://ei1on.github.io/pz-knox-buildworks-docs/][b]Documentation[/b][/url] | [url=https://ei1on.github.io/pz-knox-buildworks-addon-studio/][b]Add-on Studio[/b][/url] | [url=https://github.com/eI1on/pz-knox-buildworks][b]Source and issues[/b][/url]
+description=[url=https://ei1on.github.io/pz-knox-buildworks-docs/][b]Documentation[/b][/url] | [url=https://github.com/eI1on/pz-knox-buildworks][b]Source and issues[/b][/url]
 description=
 description=[hr][/hr]
 description=[h2]Please note[/h2]

@@ -64,6 +64,38 @@ local function isRoofObjectSprite(spriteName)
         or properties:has("isEave")
 end
 
+local function isPassableWallOpeningSprite(spriteName, north)
+    local sprite = spriteName and getSprite(spriteName) or nil
+    local props = sprite and sprite:getProperties() or nil
+    if not props then return false end
+    if north then
+        return props:has(IsoFlagType.cutN) and not (
+            props:has(IsoFlagType.collideN) or props:has(IsoFlagType.WallN)
+                or props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WindowN)
+                or props:has(IsoFlagType.DoorWallN) or props:has(IsoFlagType.HoppableN)
+        )
+    end
+    return props:has(IsoFlagType.cutW) and not (
+        props:has(IsoFlagType.collideW) or props:has(IsoFlagType.WallW)
+            or props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WindowW)
+            or props:has(IsoFlagType.DoorWallW) or props:has(IsoFlagType.HoppableW)
+    )
+end
+
+local function isPassableWallOpening(stage)
+    local sprites = (stage and stage.sprites) or {}
+    local found = false
+    if sprites.W then
+        found = true
+        if not isPassableWallOpeningSprite(sprites.W, false) then return false end
+    end
+    if sprites.N then
+        found = true
+        if not isPassableWallOpeningSprite(sprites.N, true) then return false end
+    end
+    return found
+end
+
 local function nativeContainerType(spriteName)
     if not spriteName then return nil end
     local sprite = getSprite(spriteName)
@@ -182,6 +214,43 @@ local function nativeInputFailure(logic, recipe, containers)
     return "native recipe rejected the current items or character state"
 end
 
+local function snapshotXp(character, awards)
+    local xp = character and character:getXp() or nil
+    for awardIndex = 1, #awards do
+        local award = awards[awardIndex]
+        award.before = xp and xp:getXP(award.perk) or 0
+    end
+end
+
+local function nativeXpWasGranted(character, awards)
+    local xp = character and character:getXp() or nil
+    if not xp or #awards == 0 then return #awards == 0 end
+    for awardIndex = 1, #awards do
+        local award = awards[awardIndex]
+        if xp:getXP(award.perk) > (tonumber(award.before) or 0) then return true end
+    end
+    return false
+end
+
+local function showConfiguredXpHalo(character, perk, gained)
+    if not character or not perk or not gained or gained <= 0 then return end
+    if getCore():getOptionShowCraftingXP() ~= true then return end
+    if not HaloTextHelper or not HaloTextHelper.addGoodText then return end
+    local rounded = math.floor(gained * 10 + 0.5) / 10
+    local amountText = rounded == math.floor(rounded) and tostring(math.floor(rounded)) or tostring(rounded)
+    HaloTextHelper.addGoodText(character, getText(perk:getName()) .. " XP: " .. amountText, "[br/]")
+end
+
+local function awardConfiguredXp(character, perk, amount)
+    if not character or not perk or not amount or amount <= 0 then return 0 end
+    local xp = character:getXp()
+    local before = xp:getXP(perk)
+    addXp(character, perk, amount)
+    local gained = xp:getXP(perk) - before
+    showConfiguredXpHalo(character, perk, gained)
+    return gained
+end
+
 ---@class KBW.FACE_KEYSModule
 ---@type KBW.FACE_KEYSModule
 local FACE_KEYS = {
@@ -232,14 +301,14 @@ local function applySprites(object, sprites)
     object:setSouthSprite(sprites.S or sprites.N)
 end
 
----@param player      IsoPlayer
----@param buildableId string
----@param stageId     string | nil
----@param variantId   string | nil
----@param materialId  string | nil
----@param direction   KBW.Direction
+---@param player       IsoPlayer
+---@param buildableId  string
+---@param stageId      string | nil
+---@param variantId    string | nil
+---@param materialId   string | nil
+---@param direction    KBW.Direction
 ---@param inputChoices table<string, string> | nil
----@param containers ArrayList<ItemContainer> | nil
+---@param containers   ArrayList<ItemContainer> | nil
 ---@return KBWBuildingObject
 function KBWBuildingObject:new(player, buildableId, stageId, variantId, materialId, direction, inputChoices, containers)
     local o = {}
@@ -291,14 +360,15 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.isWallLike = kind == "wall" or kind == "wallCovering" or placement.needWindowFrame == true
     o.isFloor = kind == "floor"
     o.canBeAlwaysPlaced = kind == "overlay"
-    o.canPassThrough = configuredBoolean(objectConfig.canPassThrough, kind == "overlay")
+    local passableWallOpening = kind == "wall" and isPassableWallOpening(o.stage)
+    o.canPassThrough = configuredBoolean(objectConfig.canPassThrough, kind == "overlay" or passableWallOpening)
     o.isDoorFrame = objectConfig.isDoorFrame == true
     o.isCorner = objectConfig.isCorner == true
     o.isProp = objectConfig.isProp == true or spriteConfig.isProp == true
     o.isThumpable = configuredBoolean(objectConfig.isThumpable, spriteConfig.isThumpable ~= false and kind ~= "overlay")
     o.dismantable = objectConfig.dismantable ~= false
     o.blockAllTheSquare = configuredBoolean(objectConfig.blockAllSquare, kind == "object")
-    o.hoppable = objectConfig.hoppable == true or o.stage.hoppable == true
+    o.hoppable = not passableWallOpening and (objectConfig.hoppable == true or o.stage.hoppable == true)
     o.dontNeedFrame = spriteConfig.dontNeedFrame == true
     o.needWindowFrame = spriteConfig.needWindowFrame == true
     o.needToBeAgainstWall = spriteConfig.needToBeAgainstWall == true
@@ -310,7 +380,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.skillBaseHealth = spriteConfig.skillBaseHealth or 0
     o.breakSound = spriteConfig.breakSound
     o.thumpDmg = objectConfig.thumpDamage or o.thumpDmg
-    o.canBarricade = objectConfig.canBarricade == true
+    o.canBarricade = not passableWallOpening and objectConfig.canBarricade == true
     o.buildLow = objectConfig.buildLow == true
     o.drawFloorGrid = objectConfig.drawFloorGrid ~= false
     o.objectConfig = objectConfig
@@ -327,8 +397,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     end
     o.maxTime = craftRecipe.time or 200
     o.xpAward = craftRecipe.xpAward
-    -- Build sounds and completion sounds come from the recipe's timed-action
-    -- script, matching vanilla ISBuildIsoEntity:new.
+    o.useNativeXpAward = o.craftRecipe ~= nil and (o.stage.xp == nil and construction.xp == nil)
     local actionScript = craftRecipe.timedAction and getScriptManager()
         and getScriptManager():getTimedActionScript(craftRecipe.timedAction) or nil
     if actionScript then
@@ -347,9 +416,8 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
             entity = entityMetadata.entity,
             schemaVersion = KBW.SCHEMA_VERSION,
             providesWindowFrame = placement.providesWindowFrame == true and true or nil,
-            wallType = ((o.stage.finishes or o.definition.finishes) and WallFinishes.wallType(
-                o.definition, o.stage
-            )) or nil
+            wallType = ((o.stage.finishes or o.definition.finishes) and WallFinishes.wallType(o.definition, o.stage))
+                or nil
         }
     }
     -- Registered stage-property handlers derive their cursor fields last so
@@ -706,7 +774,11 @@ function KBWBuildingObject:runOnCreate(part, context)
 end
 
 function KBWBuildingObject:consumeConstructionRequirements(square)
-    if not self.buildPanelLogic or not EntityCompat.usesNativeRecipeInputs(self.stage) then
+    local usesNativeInputs = EntityCompat.usesNativeRecipeInputs(self.stage)
+    if usesNativeInputs and not self.craftRecipe then
+        self.craftRecipe = EntityCompat.craftRecipeObject(self.stage)
+    end
+    if not usesNativeInputs or not self.craftRecipe or not BuildLogic then
         local consumed, recipeData = Requirements.consume(
             self.character, self.stage, square, self.definition, self.inputChoices
         )
@@ -720,6 +792,12 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
     self.containers = containers
     local logic = newNativeBuildLogic(self.character, self.craftRecipe, self.inputChoices, containers)
     if not logic then return false, "native build logic unavailable" end
+    local nativeAwards = EntityCompat.xpAwards(self.stage)
+    Log:info(
+        "Entity XP check for %s uses recipe %s with %d award(s)", tostring(self.buildableId),
+        tostring(self.craftRecipe:getName()), #nativeAwards
+    )
+    snapshotXp(self.character, nativeAwards)
     logic:startCraftAction(nil)
     self.craftRecipeData = logic:getRecipeData()
     self.nativeRecipeHandled = true
@@ -730,6 +808,15 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
     local inProgress = logic:getRecipeDataInProgress()
     inProgress:luaCallOnCreate(self.character)
     inProgress:processDestroyAndUsedItems(self.character)
+    self.nativeXpPending = #nativeAwards > 0 and not nativeXpWasGranted(self.character, nativeAwards)
+    if #nativeAwards > 0 and not self.nativeXpPending then
+        Log:info("Entity recipe XP credited during native completion for %s", tostring(self.buildableId))
+    elseif #nativeAwards == 0 then
+        Log:info(
+            "Entity recipe %s has no configured XP award for %s", tostring(self.craftRecipe:getName()),
+            tostring(self.buildableId)
+        )
+    end
     return true
 end
 
@@ -851,6 +938,11 @@ function KBWBuildingObject:applyPartFlags(part)
     self.blockAllTheSquare = props:has(IsoPropertyType.BLOCKS_PLACEMENT) == true
     self.canPassThrough = not (props:has(IsoFlagType.solid) or props:has(IsoFlagType.solidtrans)
         or props:has(IsoFlagType.doorN) or props:has(IsoFlagType.doorW)
+        or props:has(IsoFlagType.collideN) or props:has(IsoFlagType.collideW)
+        or props:has(IsoFlagType.WindowN) or props:has(IsoFlagType.WindowW)
+        or props:has(IsoFlagType.windowN) or props:has(IsoFlagType.windowW)
+        or props:has(IsoFlagType.DoorWallN) or props:has(IsoFlagType.DoorWallW)
+        or props:has(IsoFlagType.HoppableN) or props:has(IsoFlagType.HoppableW)
         or props:has(IsoFlagType.WallN) or props:has(IsoFlagType.WallNTrans)
         or props:has(IsoFlagType.WallW) or props:has(IsoFlagType.WallWTrans)
         or props:has(IsoFlagType.WallNW))
@@ -878,6 +970,14 @@ function KBWBuildingObject:applyPartFlags(part)
     if objectConfig.hoppable ~= nil then self.hoppable = objectConfig.hoppable == true end
     if objectConfig.thumpDamage ~= nil then self.thumpDmg = objectConfig.thumpDamage end
     if objectConfig.canBarricade ~= nil then self.canBarricade = objectConfig.canBarricade == true end
+    local sprite = part:getSprite()
+    if isPassableWallOpeningSprite(sprite and sprite:getName() or nil, self.north == true) then
+        -- Cut-only arches are openings, not windows: they remain walkable and
+        -- cannot inherit old window-frame interaction flags from definitions.
+        self.canPassThrough = true
+        self.hoppable = false
+        self.canBarricade = false
+    end
 end
 
 ---@param x      number
@@ -889,9 +989,13 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     if not self.character then
         self.character = type(self.player) == "number" and getSpecificPlayer(self.player) or self.player
     end
-    -- The timed action's north argument is the authoritative wall edge. A
-    -- serialized cursor can otherwise arrive with a stale/default nSprite,
-    -- which used to make an auto-snapped planned wall build on the wrong edge.
+    self.craftRecipe = self.craftRecipe or EntityCompat.craftRecipeObject(self.stage)
+    local craftRecipeConfig = StageConfig.recipe(self.definition, self.stage)
+    if self.xpAward == nil then self.xpAward = craftRecipeConfig.xpAward end
+    if self.useNativeXpAward == nil then
+        local construction = StageConfig.construction(self.definition, self.stage)
+        self.useNativeXpAward = self.craftRecipe ~= nil and (self.stage.xp == nil and construction.xp == nil)
+    end
     if self.isWallLike then
         self.nSprite = north == true and 2 or 1
         self.direction = self.nSprite
@@ -918,8 +1022,8 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     local consumed, consumptionReason = self:consumeConstructionRequirements(square)
     if not consumed then
         Log:warning(
-            "Server rejected build %s at %d,%d,%d during consumption: %s",
-            tostring(self.buildableId), x, y, z, tostring(consumptionReason or "requirements changed")
+            "Server rejected build %s at %d,%d,%d during consumption: %s", tostring(self.buildableId), x, y, z,
+            tostring(consumptionReason or "requirements changed")
         )
         return false
     end
@@ -1073,16 +1177,39 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
             end
         end
     end
-    if self.character and self.xpAward and not self.nativeRecipeHandled then
+    if self.character and self.nativeXpPending and self.craftRecipe then
+        Log:warning(
+            "Native recipe XP was not credited during %s; applying the B42.20 CraftRecipe fallback",
+            tostring(self.buildableId)
+        )
+        self.craftRecipe:addXP(self.character, true)
+        self.nativeXpPending = false
+    elseif self.character and self.craftRecipe and self.useNativeXpAward and not self.nativeRecipeHandled then
+        local nativeAwards = EntityCompat.xpAwards(self.stage)
+        Log:info(
+            "Entity XP completion for %s uses recipe %s with %d award(s) outside BuildLogic", tostring(self.buildableId),
+            tostring(self.craftRecipe:getName()), #nativeAwards
+        )
+        if #nativeAwards > 0 then
+            self.craftRecipe:addXP(self.character, true)
+        else
+            Log:info(
+                "Entity recipe %s has no configured XP award for %s", tostring(self.craftRecipe:getName()),
+                tostring(self.buildableId)
+            )
+        end
+    elseif self.character and self.xpAward and not self.nativeRecipeHandled then
         local multiplier = tonumber(KBW.sandboxValue("KnoxBuildworks.BuildXPMultiplier", 1.0)) or 1.0
         for perkName, amount in pairs(self.xpAward) do
             local perk = Perks[perkName]
             local xp = tonumber(amount)
             if perk and xp then
-                -- B42.20 requires the exposed helper here. On a server it
-                -- routes through GameServer.addXp(), which updates the remote
-                -- player's XP and network checker; direct XP mutation does not.
-                addXp(self.character, perk, xp * multiplier)
+                local requested = xp * multiplier
+                local gained = awardConfiguredXp(self.character, perk, requested)
+                Log:info(
+                    "Awarded %s/%s %s XP (requested %s) for %s", tostring(perkName), tostring(perk:getId()),
+                    tostring(gained), tostring(requested), tostring(self.buildableId)
+                )
             end
         end
     end
