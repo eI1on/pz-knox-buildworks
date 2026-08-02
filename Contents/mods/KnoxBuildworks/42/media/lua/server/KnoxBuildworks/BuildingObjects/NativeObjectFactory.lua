@@ -8,6 +8,46 @@ local function register(objectType, handler)
     handlers[objectType] = handler
 end
 
+local function initializeSpriteContainers(object, sprite, markMoved)
+    if markMoved ~= false and object.setMovedThumpable then object:setMovedThumpable(true) end
+    if object.createContainersFromSpriteProperties then
+        object:createContainersFromSpriteProperties()
+        if object.getContainerCount and object.getContainerByIndex then
+            for index = 0, object:getContainerCount() - 1 do
+                local container = object:getContainerByIndex(index)
+                if container then container:setExplored(true) end
+            end
+        end
+    end
+    local properties = sprite and sprite:getProperties() or nil
+    if properties and properties:has(IsoFlagType.waterPiped) then
+        object:getModData().canBeWaterPiped = true
+    end
+end
+
+local function registerSpriteObject(objectType, constructor)
+    register(objectType, {
+        create = function (config, square, spriteName)
+            local sprite = spriteName and getSprite(spriteName) or nil
+            if not sprite then
+                return nil, "could not resolve " .. objectType .. " sprite " .. tostring(spriteName)
+            end
+            local object = constructor(getCell(), square, sprite)
+            if not object then
+                return nil, "could not initialize native " .. objectType .. " from " .. tostring(spriteName)
+            end
+            initializeSpriteContainers(object, sprite)
+            return object, {
+                alreadyAdded = false,
+                alreadyTransmitted = false
+            }
+        end,
+        finalize = function (object, square)
+            square:RecalcAllWithNeighbours(true)
+        end
+    })
+end
+
 register("generator", {
     create = function (config, square, spriteName)
         local item = config and instanceItem(config.item) or nil
@@ -33,7 +73,9 @@ register("fireplace", {
         if not sprite then
             return nil, "could not resolve fireplace sprite " .. tostring(spriteName)
         end
-        return IsoFireplace.new(getCell(), square, sprite), {
+        local object = IsoFireplace.new(getCell(), square, sprite)
+        initializeSpriteContainers(object, sprite, false)
+        return object, {
             alreadyAdded = false,
             alreadyTransmitted = false
         }
@@ -42,6 +84,26 @@ register("fireplace", {
         square:RecalcAllWithNeighbours(true)
     end
 })
+
+registerSpriteObject("barbecue", function (cell, square, sprite)
+    return IsoBarbecue.new(cell, square, sprite)
+end)
+
+registerSpriteObject("clothingDryer", function (cell, square, sprite)
+    return IsoClothingDryer.new(cell, square, sprite)
+end)
+
+registerSpriteObject("clothingWasher", function (cell, square, sprite)
+    return IsoClothingWasher.new(cell, square, sprite)
+end)
+
+registerSpriteObject("combinationWasherDryer", function (cell, square, sprite)
+    return IsoCombinationWasherDryer.new(cell, square, sprite)
+end)
+
+registerSpriteObject("stove", function (cell, square, sprite)
+    return IsoStove.new(cell, square, sprite)
+end)
 
 function NativeObjectFactory.resolve(config, spriteName)
     return NativeObjectTypes.resolve(config, spriteName)

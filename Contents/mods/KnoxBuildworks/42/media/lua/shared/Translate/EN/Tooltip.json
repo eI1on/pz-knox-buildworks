@@ -134,5 +134,15 @@
   "Tooltip_KBW_Shared_BrickSewerWall": "Sturdy brick sewer wall.",
   "Tooltip_KBW_Shared_MallRailingPost": "Railing post repurposed from a shopping mall.",
   "Tooltip_KBW_Buildable_MilitaryCrate": "A durable 100-capacity metal military crate that can be repainted.",
-  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "A neutral white military crate designed as a clean base for custom paint colors."
+  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "A neutral white military crate designed as a clean base for custom paint colors.",
+  "Tooltip_KBW_Shared_ElectricOven": "A functional electric oven with native stove storage and controls.",
+  "Tooltip_KBW_Shared_WoodStove": "A functional wood-burning stove for cooking and heat.",
+  "Tooltip_KBW_Shared_Barbecue": "A functional outdoor barbecue with native fuel and cooking behavior.",
+  "Tooltip_KBW_Shared_Refrigerator": "A functional refrigerator with separate fridge and freezer storage where supported by the tiles.",
+  "Tooltip_KBW_Shared_Freezer": "A functional freezer whose storage capacity comes from its tiles.",
+  "Tooltip_KBW_Shared_LaundryAppliance": "A functional powered laundry appliance; washers can be reconnected to a water supply.",
+  "Tooltip_KBW_Shared_Toilet": "A plumbable bathroom toilet with a small water reservoir.",
+  "Tooltip_KBW_Shared_Shower": "A plumbable shower fixture.",
+  "Tooltip_KBW_Shared_Bathtub": "A two-tile plumbable bathtub with a large water reservoir.",
+  "Tooltip_KBW_Shared_Sink": "A plumbable sink with a small water reservoir."
 }

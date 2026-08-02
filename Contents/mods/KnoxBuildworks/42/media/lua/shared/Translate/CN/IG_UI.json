@@ -926,5 +926,10 @@
   "IGUI_KBW_GuideAdminWorkflowTitle": "建议的管理员流程",
   "IGUI_KBW_GuideAdminWorkflowBody": " <H2> 安全修改服务器规则 <TEXT> <LINE> <LINE> <INDENT:18> 1. 编辑前重新载入“当前服务器规则”。 <LINE> 2. 导出命名预设，以便恢复当前设置。 <LINE> 3. 多个相关部件需要相同处理时，优先使用类别或子类别规则。 <LINE> 4. 只把单个可建造物和阶段覆盖用于例外。 <LINE> 5. 检查“最终状态”并验证每个已编辑部分。 <LINE> 6. 保存并等待新版本同步的确认。 <LINE> 7. 以普通玩家身份加入并测试受影响的配方、规划和权限。 <INDENT:0> <LINE> <LINE> 如果结果不符合预期，请重新载入备份预设，检查后通过“验证并保存”应用。",
   "IGUI_KBW_GuideAboutTitle": "我为何制作 Knox Buildworks",
-  "IGUI_KBW_GuideAboutBody": " <H2> 为建造爱好者而生的热情项目 <TEXT> <LINE> <LINE> 我一直希望 Project Zomboid 能拥有这样的建造体验：庞大的建造集合仍然井然有序，各种选择清楚易懂，并且在花费第一块木板之前就能规划整座基地。这个想法最初始于我为 Build 41 制作的 Building Menu。 <LINE> <LINE> Build 42 改变了建造系统并加入新的原版建造菜单，但我想要的规划工具、组合选择、详细配方信息、灵活显示方式和多人管理功能，仍然超出了原版菜单所提供的范围。与其放弃这些想法，我选择重新开始，并围绕它们制作 Knox Buildworks。 <LINE> <LINE> 这个模组希望让建造成为游戏中更完整的一部分：自然地浏览，理解配方会做什么，设计大型工程，与朋友分享，并让服务器社区拥有实用的管理能力，同时保留建造的乐趣。 <LINE> <LINE> <PUSHRGB:0.88,0.78,0.40> <SPACE> Knox Buildworks 是为社区制作的，也会继续根据玩家反馈成长。 <POPRGB> <SPACE> 如果你喜欢本模组并希望支持投入其中的时间，可使用下方按钮打开我的 Ko-fi 页面。支持始终是自愿的；游玩、报告问题和分享模组同样非常感谢。"
+  "IGUI_KBW_GuideAboutBody": " <H2> 为建造爱好者而生的热情项目 <TEXT> <LINE> <LINE> 我一直希望 Project Zomboid 能拥有这样的建造体验：庞大的建造集合仍然井然有序，各种选择清楚易懂，并且在花费第一块木板之前就能规划整座基地。这个想法最初始于我为 Build 41 制作的 Building Menu。 <LINE> <LINE> Build 42 改变了建造系统并加入新的原版建造菜单，但我想要的规划工具、组合选择、详细配方信息、灵活显示方式和多人管理功能，仍然超出了原版菜单所提供的范围。与其放弃这些想法，我选择重新开始，并围绕它们制作 Knox Buildworks。 <LINE> <LINE> 这个模组希望让建造成为游戏中更完整的一部分：自然地浏览，理解配方会做什么，设计大型工程，与朋友分享，并让服务器社区拥有实用的管理能力，同时保留建造的乐趣。 <LINE> <LINE> <PUSHRGB:0.88,0.78,0.40> <SPACE> Knox Buildworks 是为社区制作的，也会继续根据玩家反馈成长。 <POPRGB> <SPACE> 如果你喜欢本模组并希望支持投入其中的时间，可使用下方按钮打开我的 Ko-fi 页面。支持始终是自愿的；游玩、报告问题和分享模组同样非常感谢。",
+  "IGUI_KBW_Category_Appliances": "家用电器",
+  "IGUI_KBW_Subcategory_Cooking": "烹饪设备",
+  "IGUI_KBW_Subcategory_Refrigeration": "制冷设备",
+  "IGUI_KBW_Subcategory_Laundry": "洗衣设备",
+  "IGUI_KBW_Subcategory_Bathroom_Fixtures": "浴室设施"
 }

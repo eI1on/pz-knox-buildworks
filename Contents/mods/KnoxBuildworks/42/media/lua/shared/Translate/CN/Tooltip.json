@@ -134,5 +134,15 @@
   "Tooltip_KBW_Shared_BrickSewerWall": "坚固的砖砌下水道墙。",
   "Tooltip_KBW_Shared_MallRailingPost": "由购物中心设施改装的栏杆柱。",
   "Tooltip_KBW_Buildable_MilitaryCrate": "耐用的金属军用箱，储物容量为 100，可重新上漆。",
-  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "以中性白色为底色的军用箱，适合使用各种油漆自定义颜色。"
+  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "以中性白色为底色的军用箱，适合使用各种油漆自定义颜色。",
+  "Tooltip_KBW_Shared_ElectricOven": "可正常使用的电烤箱，具有原生炉灶储物与控制功能。",
+  "Tooltip_KBW_Shared_WoodStove": "可用于烹饪和取暖的燃木炉。",
+  "Tooltip_KBW_Shared_Barbecue": "具有原生燃料与烹饪功能的户外烧烤炉。",
+  "Tooltip_KBW_Shared_Refrigerator": "可正常使用的冰箱；在瓷砖支持时提供独立的冷藏和冷冻储物空间。",
+  "Tooltip_KBW_Shared_Freezer": "可正常使用的冷冻柜，其储物容量由瓷砖属性决定。",
+  "Tooltip_KBW_Shared_LaundryAppliance": "可正常使用的电动洗衣设备；洗衣机可以重新连接供水。",
+  "Tooltip_KBW_Shared_Toilet": "可连接供水、带小型储水量的浴室马桶。",
+  "Tooltip_KBW_Shared_Shower": "可连接供水的淋浴设施。",
+  "Tooltip_KBW_Shared_Bathtub": "占两格、可连接供水并带大型储水量的浴缸。",
+  "Tooltip_KBW_Shared_Sink": "可连接供水、带小型储水量的水槽。"
 }

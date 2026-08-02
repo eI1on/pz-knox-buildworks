@@ -134,5 +134,15 @@
   "Tooltip_KBW_Shared_BrickSewerWall": "Pared resistente de ladrillo para alcantarillado.",
   "Tooltip_KBW_Shared_MallRailingPost": "Poste de barandilla reutilizado de un centro comercial.",
   "Tooltip_KBW_Buildable_MilitaryCrate": "Caja militar metálica duradera de 100 de capacidad que puede repintarse.",
-  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "Caja militar blanca neutra diseñada como base limpia para colores personalizados de pintura."
+  "Tooltip_KBW_Buildable_MilitaryCratePaintable": "Caja militar blanca neutra diseñada como base limpia para colores personalizados de pintura.",
+  "Tooltip_KBW_Shared_ElectricOven": "Horno eléctrico funcional con almacenamiento y controles de cocina nativos.",
+  "Tooltip_KBW_Shared_WoodStove": "Estufa de leña funcional para cocinar y calentar.",
+  "Tooltip_KBW_Shared_Barbecue": "Barbacoa exterior funcional con combustible y cocción nativos.",
+  "Tooltip_KBW_Shared_Refrigerator": "Refrigerador funcional con espacios separados de refrigeración y congelación cuando las baldosas lo permiten.",
+  "Tooltip_KBW_Shared_Freezer": "Congelador funcional cuya capacidad de almacenamiento procede de sus baldosas.",
+  "Tooltip_KBW_Shared_LaundryAppliance": "Electrodoméstico de lavandería funcional; las lavadoras pueden volver a conectarse al suministro de agua.",
+  "Tooltip_KBW_Shared_Toilet": "Inodoro de baño conectable a la red de agua, con un pequeño depósito.",
+  "Tooltip_KBW_Shared_Shower": "Ducha conectable a la red de agua.",
+  "Tooltip_KBW_Shared_Bathtub": "Bañera de dos baldosas conectable a la red de agua, con un depósito grande.",
+  "Tooltip_KBW_Shared_Sink": "Lavabo conectable a la red de agua, con un pequeño depósito."
 }

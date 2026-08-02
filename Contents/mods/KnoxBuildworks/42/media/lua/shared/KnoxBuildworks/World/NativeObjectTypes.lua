@@ -1,8 +1,27 @@
 local NativeObjectTypes = {}
 
 local SUPPORTED_TYPES = {
+    barbecue = true,
+    clothingDryer = true,
+    clothingWasher = true,
+    combinationWasherDryer = true,
     fireplace = true,
-    generator = true
+    generator = true,
+    stove = true
+}
+
+local SUPPORTED_TYPE_MESSAGE = table.concat({
+    "'barbecue'", "'clothingDryer'", "'clothingWasher'", "'combinationWasherDryer'",
+    "'fireplace'", "'generator'", "'stove'"
+}, ", ")
+
+local ISO_TYPE_MAP = {
+    IsoBarbecue = "barbecue",
+    IsoClothingDryer = "clothingDryer",
+    IsoClothingWasher = "clothingWasher",
+    IsoCombinationWasherDryer = "combinationWasherDryer",
+    IsoFireplace = "fireplace",
+    IsoStove = "stove"
 }
 
 function NativeObjectTypes.isSupported(objectType)
@@ -17,7 +36,7 @@ function NativeObjectTypes.validate(config, addError)
 
     local objectType = config.type
     if not NativeObjectTypes.isSupported(objectType) then
-        addError("'type' must be 'fireplace' or 'generator'")
+        addError("'type' must be one of " .. SUPPORTED_TYPE_MESSAGE)
         return config
     end
 
@@ -42,7 +61,9 @@ function NativeObjectTypes.detectFromSprite(spriteName)
 
     local isoType = properties:has("IsoType") and properties:get("IsoType") or nil
     local containerType = properties:has("container") and properties:get("container") or nil
-    if isoType == "IsoFireplace" or containerType == "fireplace" then return "fireplace" end
+    local detected = ISO_TYPE_MAP[isoType]
+    if detected then return detected end
+    if containerType == "fireplace" then return "fireplace" end
     return nil
 end
 

@@ -497,8 +497,19 @@
         "type": "object",
         "required": [
           "id",
-          "category",
           "stages"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "category"
+            ]
+          },
+          {
+            "required": [
+              "extends"
+            ]
+          }
         ],
         "properties": {
           "id": {
@@ -847,6 +858,25 @@
                         "type": {
                           "const": "fireplace",
                           "description": "Creates a usable IsoFireplace with native fuel, light, heat and context-menu behavior."
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "type": {
+                          "enum": [
+                            "barbecue",
+                            "clothingDryer",
+                            "clothingWasher",
+                            "combinationWasherDryer",
+                            "stove"
+                          ],
+                          "description": "Creates the matching native B42 appliance class. When omitted, Knox Buildworks detects it from the tile's IsoType property."
                         }
                       }
                     }

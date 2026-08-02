@@ -1,4 +1,4 @@
-[b]Knox Buildworks - August 2, 2026 Update[/b]
+[b]Knox Buildworks - Build Rules & Appliances Update[/b]
 
 [list]
 [*][b]Build 42.20 multiplayer XP:[/b] Fixed XP awards for entity-backed buildables. Knox Buildworks now verifies the native CraftRecipe award, applies a safe fallback when Build 42.20 skips it, avoids duplicate XP and displays the normal crafting XP halo above the player.
@@ -9,6 +9,7 @@
 [*][b]New in-game guide:[/b] Added a Survival Guide-style Knox Buildworks manual, opened from new information buttons. It covers the catalogue, variants, requirements, building, painting, functional objects, pinned recipes, planning, queues, sharing, accessibility, multiplayer troubleshooting and the complete admin workflow.
 [*][b]Accessibility option:[/b] Added a toggle to Knox UI Appearance that prevents unavailable buildable icons from fading. Readiness indicators and building restrictions remain unchanged.
 [*][b]Localization overhaul:[/b] Added full Spanish and Russian localization to both Knox Buildworks and Vanilla Expanded, completed and synchronized the English, Simplified Chinese, Spanish and Russian key sets, removed stray translations and centralized shared category and subcategory names in the main mod for add-on reuse.
+[*][b]New functional appliances and bathroom fixtures:[/b] Added 36 buildables to Vanilla Expanded, including ovens, a wood stove, charcoal and propane BBQs, refrigerators and freezers, washing machines and dryers, toilets, a shower, a bathtub and several sinks. Matching styles are grouped for easier browsing, recipes use balanced welding, electrical and plumbing requirements.
 [*][b]General and buildable fixes:[/b] Improved editor validation and error feedback, corrected the Large White Window name, allowed it to be installed in compatible passable interior arches without turning those walls into window frames, removed the obsolete tile-property patches, and tightened catalogue, pinned-recipe, planning and placement behavior around live rule changes.
 [*][b]Buildables definitions:[/b] Removed the glass panels from the definitions of some window frames.
 [/list]
