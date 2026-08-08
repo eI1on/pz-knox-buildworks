@@ -1,12 +1,12 @@
----Log provides the Knox Buildworks shared runtime layer.
 local KBW = require("KnoxBuildworks/Core")
 local Logger = require("ElyonLib/Core/Logger")
 
 local Log = Logger:new(KBW.ID, KBW.VERSION)
+Log:setLogLevel("ERROR")
 
 function Log:setDebug(enabled)
     KBW.Runtime.debug = enabled == true
-    self:setLogLevel(KBW.Runtime.debug and "DEBUG" or "INFO")
+    self:setLogLevel(KBW.Runtime.debug and "DEBUG" or "ERROR")
 end
 
 ---@param scope string

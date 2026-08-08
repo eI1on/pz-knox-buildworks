@@ -46,6 +46,16 @@ local function recipeHasTag(recipe, wanted)
     return false
 end
 
+local function recipeDisplayName(recipeName)
+    local internalName = tostring(recipeName or "")
+    if internalName == "" then return "?" end
+    if getRecipeDisplayName then
+        local displayName = getRecipeDisplayName(internalName)
+        if displayName and displayName ~= "" then return tostring(displayName) end
+    end
+    return internalName
+end
+
 local function predicateNotBroken(item)
     local input = activeInput
     if not item then return false end
@@ -553,6 +563,40 @@ local function stageCanBeDoneInDark(definition, stage)
     return cached
 end
 
+---@param player IsoPlayer
+---@param knowledge KBW.KnowledgeRequirement
+---@return boolean, string
+local function knowledgeAlternativeStatus(player, knowledge)
+    local groups = knowledge and knowledge.skillAlternatives or {}
+    local labels = {}
+    for groupIndex = 1, #groups do
+        local group = groups[groupIndex] or {}
+        local mode = group.mode == "any" and "any" or "all"
+        local groupOk = mode == "all"
+        local foundSkill = false
+        local groupLabels = {}
+        for perkName, needed in pairs(group.skills or {}) do
+            foundSkill = true
+            local perk = Perks[perkName]
+            local available = perk and player:getPerkLevel(perk) or 0
+            local skillOk = perk ~= nil and available >= (tonumber(needed) or 0)
+            if mode == "any" then
+                groupOk = groupOk or skillOk
+            else
+                groupOk = groupOk and skillOk
+            end
+            groupLabels[#groupLabels + 1] = getText("IGUI_perks_" .. tostring(perkName))
+                .. " " .. tostring(needed)
+        end
+        table.sort(groupLabels)
+        if foundSkill then
+            labels[#labels + 1] = table.concat(groupLabels, mode == "any" and " / " or " + ")
+            if groupOk then return true, table.concat(labels, " / ") end
+        end
+    end
+    return false, table.concat(labels, " / ")
+end
+
 ---Readiness-only evaluation for catalogue cards: same pass/fail logic as
 ---Requirements.evaluate, but counts against the shared snapshot, skips the
 ---Available Ingredients / Possible Items detail rows, and exits early.
@@ -590,13 +634,18 @@ function Requirements.evaluateReadiness(player, definition, stage, snapshot)
     end
     local knowledge = req.knowledge or {}
     if knowledge.needToBeLearned ~= false then
+        local alternativeMet = knowledgeAlternativeStatus(player, knowledge)
         local requiredRecipes = req.recipes or {}
         for recipeIndex = 1, #requiredRecipes do
-            if not player:isRecipeActuallyKnown(requiredRecipes[recipeIndex]) then return { ok = false } end
+            if not player:isRecipeActuallyKnown(requiredRecipes[recipeIndex]) and not alternativeMet then
+                return { ok = false }
+            end
         end
         local knowledgeRecipes = knowledge.recipes or {}
         for recipeIndex = 1, #knowledgeRecipes do
-            if not player:isRecipeActuallyKnown(knowledgeRecipes[recipeIndex]) then return { ok = false } end
+            if not player:isRecipeActuallyKnown(knowledgeRecipes[recipeIndex]) and not alternativeMet then
+                return { ok = false }
+            end
         end
     end
     return { ok = true }
@@ -712,6 +761,7 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         if not row.ok then status.ok = false end
     end
     local knowledge = req.knowledge or {}
+    local alternativeMet, alternativeLabel = knowledgeAlternativeStatus(player, knowledge)
     local recipes = {}
     local requiredRecipes = req.recipes or {}
     for recipeIndex = 1, #requiredRecipes do
@@ -725,18 +775,22 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         local recipe = recipes[recipeIndex]
         local known = player:isRecipeActuallyKnown(recipe)
         local row = {
+            id = "knowledge:" .. tostring(recipe),
             kind = "knowledge",
             role = "knowledge",
-            name = recipe,
+            name = recipeDisplayName(recipe),
+            recipeName = recipe,
             needed = 1,
             available = known and 1 or 0,
-            ok = cheat or known,
+            ok = cheat or known or alternativeMet,
             sources = knowledge.sources or {},
-            needToBeLearned = knowledge.needToBeLearned ~= false
+            needToBeLearned = knowledge.needToBeLearned ~= false,
+            alternativeMet = alternativeMet,
+            alternativeLabel = alternativeLabel
         }
         status.recipes[#status.recipes + 1] = row
         status.rows[#status.rows + 1] = row
-        if row.needToBeLearned and not known then status.ok = false end
+        if row.needToBeLearned and not row.ok then status.ok = false end
     end
     return status
 end

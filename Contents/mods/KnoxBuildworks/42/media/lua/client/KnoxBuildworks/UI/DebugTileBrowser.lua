@@ -461,8 +461,7 @@ function KBWDebugTileBrowser:onSpriteSelected(spriteName)
     local contentWidth = math.max(80, self.details.width - self.details.marginLeft - self.details.marginRight - 18)
     local lines = { " <LEFT> " }
     appendWrapped(lines, spriteName, contentWidth, UIFont.Medium, "<H2>")
-    lines[#lines + 1] = " <LINE> <RGB:0.72,0.70,0.64> " .. string.format(
-        getText("IGUI_KBW_DebugTilesCoordinates"), math.floor(index / 8), index % 8, index
+    lines[#lines + 1] = " <LINE> <RGB:0.72,0.70,0.64> " .. getText("IGUI_KBW_DebugTilesCoordinates", math.floor(index / 8), index % 8, index
     )
     lines[#lines + 1] = " <LINE> <LINE> <H2> " .. getText("IGUI_KBW_DebugTilesProperties")
     local properties = propertyLines(spriteName)
@@ -488,13 +487,13 @@ end
 function KBWDebugTileBrowser:onCopy()
     if not self.selectedSprite then return end
     Clipboard.setClipboard(self.selectedSprite)
-    self.statusText = string.format(getText("IGUI_KBW_DebugTilesCopied"), self.selectedSprite)
+    self.statusText = getText("IGUI_KBW_DebugTilesCopied", self.selectedSprite)
 end
 
 function KBWDebugTileBrowser:onCopyJson()
     if not self.selectedSprite then return end
     Clipboard.setClipboard('"' .. self.selectedSprite .. '"')
-    self.statusText = string.format(getText("IGUI_KBW_DebugTilesCopied"), self.selectedSprite)
+    self.statusText = getText("IGUI_KBW_DebugTilesCopied", self.selectedSprite)
 end
 
 function KBWDebugTileBrowser:onPlaceTile()
@@ -613,6 +612,19 @@ function KBWDebugTileBrowser:close()
     if KBWDebugTileBrowser.instance == self then KBWDebugTileBrowser.instance = nil end
 end
 
+---@param key string|number
+function KBWDebugTileBrowser:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWDebugTileBrowser:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
+end
+
 function KBWDebugTileBrowser:new(player)
     local screenWidth = getCore():getScreenWidth()
     local screenHeight = getCore():getScreenHeight()
@@ -627,6 +639,7 @@ function KBWDebugTileBrowser:new(player)
     o.resizable = true
     o.minimumWidth = math.min(820, width)
     o.minimumHeight = math.min(500, height)
+    o:setWantKeyEvents(true)
     return o
 end
 

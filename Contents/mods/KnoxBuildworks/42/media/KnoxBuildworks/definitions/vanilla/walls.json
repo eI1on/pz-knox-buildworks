@@ -98,11 +98,11 @@
     },
     {
       "id": "kbw.vanilla.brickwalllvl2",
-      "displayName": "Brick Wall (Good)",
+      "displayName": "Classic Brick Wall",
       "translationKey": "IGUI_KBW_Vanilla_BrickWallLvl2",
-      "tooltipKey": "Tooltip_craft_brickWallDesc",
+      "tooltipKey": "Tooltip_KBW_Shared_ClassicBrickWall",
       "category": "Walls",
-      "subcategory": "Walls",
+      "subcategory": "Classic Brick",
       "materialTags": [
         "Brick",
         "Concrete"
@@ -407,7 +407,7 @@
       ],
       "group": {
         "id": "vanilla.brickwall",
-        "name": "Brick Wall",
+        "name": "Classic Brick Wall",
         "translationKey": "IGUI_KBW_Group_vanilla_brickwall",
         "level": 2
       },
@@ -433,6 +433,9 @@
       "placement": {
         "kind": "wall"
       },
+      "finishes": {
+        "enabled": false
+      },
       "stages": [
         {
           "id": "built",
@@ -445,7 +448,7 @@
       ],
       "group": {
         "id": "vanilla.brickwall",
-        "name": "Brick Wall",
+        "name": "Classic Brick Wall",
         "translationKey": "IGUI_KBW_Group_vanilla_brickwall",
         "level": 1
       },

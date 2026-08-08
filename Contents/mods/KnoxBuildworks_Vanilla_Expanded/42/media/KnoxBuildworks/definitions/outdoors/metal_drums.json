@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "source": "Project Zomboid Build 42 crafted_01 tile properties and native RainCollector component",
+  "category": "Outdoors",
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.outdoors.metal_drum",
+      "translationKey": "IGUI_KBWVE_Buildable_MetalDrum",
+      "displayName": "Metal Drum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_MetalDrum",
+      "category": "Outdoors",
+      "subcategory": "Water Collectors",
+      "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Water"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "water-collector",
+        "welding"
+      ],
+      "iconSprite": "crafted_01_24",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "construction": {
+        "time": 300,
+        "timedAction": "BuildWallMetal",
+        "completionSound": "BuildMetalStructureMedium",
+        "canWalk": false,
+        "category": "Welding",
+        "xp": {
+          "MetalWelding": 100
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "entityCompat": {
+            "module": "Base",
+            "entity": "RainCollector"
+          },
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_25"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 10
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 10
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 7
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 12
+              }
+            ],
+            "skills": {
+              "MetalWelding": 8
+            }
+          },
+          "object": {
+            "dismantable": true,
+            "blockAllSquare": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -38,6 +38,7 @@
 ---@field recipes? string[]
 ---@field sources? string[]
 ---@field needToBeLearned? boolean
+---@field skillAlternatives? {mode?: 'any'|'all', skills: table<string, number>}[]
 
 ---@class KBW.RequirementSet
 ---@field inputs? KBW.BuildInput[]
@@ -207,7 +208,7 @@
 ---@field offsets? table<KBW.DirectionName, KBW.LightOffset>
 
 ---@class KBW.NativeObjectConfig
----@field type 'barbecue'|'clothingDryer'|'clothingWasher'|'combinationWasherDryer'|'fireplace'|'generator'|'stove'
+---@field type 'barbecue'|'clothingDryer'|'clothingWasher'|'combinationWasherDryer'|'fireplace'|'generator'|'lightSwitch'|'stove'
 ---@field item? string Full item type used to initialize IsoGenerator; required only when type is generator.
 
 ---@class KBW.WellConfig
@@ -331,6 +332,7 @@
 ---@field item? InventoryItem
 ---@field selectedFullType? string
 ---@field name? string
+---@field recipeName? string Internal recipe id retained for validation/debugging.
 ---@field sources? string[]
 ---@field row? KBW.BuildInput
 

@@ -43,7 +43,12 @@ end
 
 local function normalizeRequirements(errors, stage, materialGroups, definitionTools)
     stage.requirements = stage.requirements or {}
-    stage.requirements.knowledge = stage.requirements.knowledge or {}
+    if stage.requirements.knowledge ~= nil and type(stage.requirements.knowledge) ~= "table" then
+        add(errors, "stage " .. stage.id .. " knowledge requirement must be an object")
+        stage.requirements.knowledge = {}
+    else
+        stage.requirements.knowledge = stage.requirements.knowledge or {}
+    end
     stage.requirements.inputs = stage.requirements.inputs or {}
     if type(stage.requirements.materials) == "string" then
         local group = materialGroups[stage.requirements.materials]
@@ -60,6 +65,26 @@ local function normalizeRequirements(errors, stage, materialGroups, definitionTo
     for perkName in pairs(stage.requirements.skills or {}) do
         if not Perks[perkName] then
             add(errors, "stage " .. stage.id .. " references missing skill " .. perkName)
+        end
+    end
+    for alternativeIndex, alternative in ipairs(stage.requirements.knowledge.skillAlternatives or {}) do
+        if type(alternative) ~= "table" then
+            add(errors, "stage " .. stage.id .. " has an invalid knowledge skill alternative")
+        elseif alternative.mode ~= nil and alternative.mode ~= "any" and alternative.mode ~= "all" then
+            add(errors, "stage " .. stage.id .. " has an invalid knowledge skill-alternative mode")
+        elseif type(alternative.skills) ~= "table" then
+            add(errors, "stage " .. stage.id .. " has an empty knowledge skill alternative")
+        else
+            local hasAlternativeSkill = false
+            for perkName in pairs(alternative.skills) do
+                hasAlternativeSkill = true
+                if not Perks[perkName] then
+                    add(errors, "stage " .. stage.id .. " knowledge alternative references missing skill " .. perkName)
+                end
+            end
+            if not hasAlternativeSkill then
+                add(errors, "stage " .. stage.id .. " has an empty knowledge skill alternative")
+            end
         end
     end
 end
@@ -102,6 +127,9 @@ local function validatePlacementConfiguration(errors, owner, placement)
     if placement.maxDistance ~= nil
         and (type(placement.maxDistance) ~= "number" or placement.maxDistance <= 0) then
         add(errors, owner .. " placement.maxDistance must be greater than zero")
+    end
+    if placement.requiresOutside ~= nil and type(placement.requiresOutside) ~= "boolean" then
+        add(errors, owner .. " placement.requiresOutside must be true or false")
     end
     if placement.windowSupportSprites ~= nil then
         if type(placement.windowSupportSprites) ~= "table" then

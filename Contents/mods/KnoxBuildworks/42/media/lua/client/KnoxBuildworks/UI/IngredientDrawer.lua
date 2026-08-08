@@ -532,7 +532,11 @@ function KBWIngredientDrawer:prerender()
     elseif row.kind == "knowledge" then
         y = drawSection(self, y, getText("IGUI_KBW_RequiredKnowledge"), true, nil)
         local color = row.ok and Theme.good or Theme.warn
-        y = drawTextBlock(self, y, row.name, color)
+        local knowledgeName = row.name
+        if row.alternativeLabel and row.alternativeLabel ~= "" then
+            knowledgeName = getText("IGUI_KBW_RecipeOrSkill", row.name, row.alternativeLabel)
+        end
+        y = drawTextBlock(self, y, knowledgeName, color)
         local sources = row.sources or {}
         for sourceIndex = 1, #sources do
             local source = sources[sourceIndex]

@@ -85,6 +85,40 @@ register("fireplace", {
     end
 })
 
+register("lightSwitch", {
+    create = function (config, square, spriteName)
+        local sprite = spriteName and getSprite(spriteName) or nil
+        if not sprite then
+            return nil, "could not resolve light-switch sprite " .. tostring(spriteName)
+        end
+        local object = IsoLightSwitch.new(getCell(), square, sprite, square:getRoomID())
+        if not object then
+            return nil, "could not initialize IsoLightSwitch from " .. tostring(spriteName)
+        end
+
+        object:addLightSourceFromSprite()
+
+        local properties = sprite:getProperties()
+        if properties and properties:has("IsTableTop") then
+            local moveable = ISMoveableSpriteProps.new(sprite)
+            local surface = moveable:getTotalTableHeight(square)
+            if moveable.surface and moveable.surfaceIsOffset then
+                surface = surface - moveable.surface
+            end
+            object:setRenderYOffset(surface)
+        end
+
+        return object, {
+            alreadyAdded = false,
+            alreadyTransmitted = false
+        }
+    end,
+    finalize = function (object, square)
+        square:RecalcAllWithNeighbours(true)
+        IsoGenerator.updateGenerator(square)
+    end
+})
+
 registerSpriteObject("barbecue", function (cell, square, sprite)
     return IsoBarbecue.new(cell, square, sprite)
 end)

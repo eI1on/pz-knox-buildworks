@@ -244,7 +244,7 @@ function KBWDebugBuildTestWindow:detailsText(testCase)
         "<H1>" .. BuildTestRunner.caseName(testCase),
         "<RGB:0.72,0.70,0.64>" .. testCase.buildableId,
         "<LINE><RGB:0.92,0.91,0.88>" .. getText("IGUI_KBW_DebugTestStatus") .. ": " .. statusLabel(status),
-        "<LINE>" .. string.format(getText("IGUI_KBW_DebugTestProgress"), passed, failed, skipped, pending),
+        "<LINE>" .. getText("IGUI_KBW_DebugTestProgress", passed, failed, skipped, pending),
         "<LINE>" .. getText("IGUI_KBW_Category") .. ": " .. I18n.category(testCase.category),
         "<LINE>" .. getText("IGUI_KBW_Subcategory") .. ": " .. I18n.subcategory(testCase.subcategory),
         "<LINE>" .. getText("IGUI_KBW_DebugTestStage") .. ": " .. tostring(testCase.stageId)
@@ -424,6 +424,19 @@ function KBWDebugBuildTestWindow:close()
     if KBWDebugBuildTestWindow.instance == self then KBWDebugBuildTestWindow.instance = nil end
 end
 
+---@param key string|number
+function KBWDebugBuildTestWindow:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWDebugBuildTestWindow:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
+end
+
 function KBWDebugBuildTestWindow:new(player)
     local screenWidth = getCore():getScreenWidth()
     local screenHeight = getCore():getScreenHeight()
@@ -438,6 +451,7 @@ function KBWDebugBuildTestWindow:new(player)
     o.resizable = true
     o.minimumWidth = math.min(780, width)
     o.minimumHeight = math.min(490, height)
+    o:setWantKeyEvents(true)
     return o
 end
 

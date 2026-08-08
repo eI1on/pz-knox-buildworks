@@ -14,12 +14,6 @@ local Theme = require("KnoxBuildworks/UI/Theme")
 
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 
-local function safeText(key, fallback)
-    local text = getText(key)
-    if text == key then return fallback end
-    return text
-end
-
 ---@class KBWBlueprintImportWindow: ISPanel
 KBWBlueprintImportWindow = ISPanel:derive("KBWBlueprintImportWindow")
 KBWBlueprintImportWindow.instance = nil
@@ -57,6 +51,7 @@ function KBWBlueprintImportWindow:new(x, y, width, height, player, onImported)
     o.backgroundColor = { r = Theme.backdrop.r, g = Theme.backdrop.g, b = Theme.backdrop.b, a = 0.94 }
     o.borderColor = Theme.border
     o.moveWithMouse = true
+    o:setWantKeyEvents(true)
     return o
 end
 
@@ -84,19 +79,19 @@ function KBWBlueprintImportWindow:createChildren()
     local buttonY = self.height - pad - buttonH
     local buttonW = math.floor((self.width - pad * 2 - gap * 2) / 3)
     self.importButton = ISButton:new(
-        pad, buttonY, buttonW, buttonH, safeText("IGUI_KBW_Import", "Import"), self, self.onImport
+        pad, buttonY, buttonW, buttonH, getText("IGUI_KBW_Import"), self, self.onImport
     )
     self.importButton:initialise()
     Theme.applyButton(self.importButton)
     self:addChild(self.importButton)
     self.refreshButton = ISButton:new(
-        pad + buttonW + gap, buttonY, buttonW, buttonH, safeText("IGUI_KBW_Refresh", "Refresh"), self, self.refreshFiles
+        pad + buttonW + gap, buttonY, buttonW, buttonH, getText("IGUI_KBW_Refresh"), self, self.refreshFiles
     )
     self.refreshButton:initialise()
     Theme.applyButton(self.refreshButton)
     self:addChild(self.refreshButton)
     self.closeButton = ISButton:new(
-        pad + (buttonW + gap) * 2, buttonY, buttonW, buttonH, safeText("IGUI_KBW_Close", "Close"), self, self.close
+        pad + (buttonW + gap) * 2, buttonY, buttonW, buttonH, getText("IGUI_KBW_Close"), self, self.close
     )
     self.closeButton:initialise()
     Theme.applyButton(self.closeButton)
@@ -160,13 +155,12 @@ function KBWBlueprintImportWindow:onImport()
     local blueprint, err = Blueprints.importFromFile(self.player, fileName)
     if not blueprint then
         self:say(
-            string.format(
-                safeText("IGUI_KBW_BlueprintImportFileFailed", "Import failed: %s"), Blueprints.importErrorText(err)
+            getText("IGUI_KBW_BlueprintImportFileFailed", Blueprints.importErrorText(err)
             ), true
         )
         return
     end
-    self:say(safeText("IGUI_KBW_PickBlueprintOrigin", "Pick where the blueprint origin should land"), false)
+    self:say(getText("IGUI_KBW_PickBlueprintOrigin"), false)
     local onImported = self.onImported
     self:close()
     if onImported then onImported(blueprint) end
@@ -176,11 +170,11 @@ function KBWBlueprintImportWindow:prerender()
     ISPanel.prerender(self)
     local pad = 12
     self:drawText(
-        safeText("IGUI_KBW_ImportBlueprintFile", "Import blueprint file"), pad, pad, Theme.accent.r, Theme.accent.g,
+        getText("IGUI_KBW_ImportBlueprintFile"), pad, pad, Theme.accent.r, Theme.accent.g,
         Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_ImportFolderHint", "Files from Zomboid/Lua/") .. Blueprints.EXPORT_FOLDER, pad,
+        getText("IGUI_KBW_ImportFolderHint") .. Blueprints.EXPORT_FOLDER, pad,
         pad + FONT_HGT_SMALL + 4, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
 end
@@ -189,6 +183,19 @@ function KBWBlueprintImportWindow:close()
     self:setVisible(false)
     self:removeFromUIManager()
     if KBWBlueprintImportWindow.instance == self then KBWBlueprintImportWindow.instance = nil end
+end
+
+---@param key string|number
+function KBWBlueprintImportWindow:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWBlueprintImportWindow:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
 end
 
 return KBWBlueprintImportWindow

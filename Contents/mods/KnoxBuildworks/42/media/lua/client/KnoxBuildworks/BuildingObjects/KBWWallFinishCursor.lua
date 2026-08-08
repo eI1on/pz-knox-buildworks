@@ -47,7 +47,9 @@ local function defineClass()
     end
 
     function KBWWallFinishCursor:knoxPaintSprite(object)
-        if self.action ~= "paintThump" or not object or not object.getSprite or not object:getSprite() then return nil end
+        if self.action ~= "paintThump" or not object or not object.getSprite or not object:getSprite() then
+            return nil
+        end
         local finish = self.kbwFinish
         if not finish or not finish.paintType then return nil end
         local valid = WallFinishes.canApplyToObject("paint", finish, object, false)
@@ -55,13 +57,12 @@ local function defineClass()
         local wallType = WallFinishes.prepareObject(object)
         local objectSprite = object:getSprite()
         local baseSprite = objectSprite and objectSprite:getName() or nil
-        return WallFinishes.spriteForWallType(
-            "paint", finish, WallFinishes.objectNorth(object), wallType, baseSprite
-        )
+        return WallFinishes.spriteForWallType("paint", finish, WallFinishes.objectNorth(object), wallType, baseSprite)
     end
 
     function KBWWallFinishCursor:canPaint(object)
-        if object and object:getSquare() and object:getSprite() and object:getSquare():isCouldSee(self.player)
+        if object and object:getSquare()
+            and object:getSprite() and object:getSquare():isCouldSee(self.player)
             and self:hasItems() and self:knoxPaintSprite(object) then
             return true
         end
@@ -101,9 +102,9 @@ local function defineClass()
     end
 
     ---@param character IsoPlayer
-    ---@param action string
-    ---@param args table
-    ---@param finish KBW.WallFinish
+    ---@param action    string
+    ---@param args      table
+    ---@param finish    KBW.WallFinish
     ---@return KBWWallFinishCursor
     function KBWWallFinishCursor:new(character, action, args, finish)
         local o = ISPaintCursor.new(self, character, action, args)
@@ -115,10 +116,10 @@ end
 Events.OnGameStart.Add(defineClass)
 
 ---@param character IsoPlayer
----@param action string
----@param args table
----@param finish KBW.WallFinish
----@return KBWWallFinishCursor|nil
+---@param action    string
+---@param args      table
+---@param finish    KBW.WallFinish
+---@return KBWWallFinishCursor | nil
 function WallFinishCursor.new(character, action, args, finish)
     defineClass()
     if not KBWWallFinishCursor then return nil end

@@ -52,7 +52,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -82,7 +83,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -112,7 +114,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -143,7 +146,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -173,7 +177,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -359,7 +364,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {
@@ -390,7 +396,8 @@
         "blacksmithing"
       ],
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresOutside": true
       },
       "stages": [
         {

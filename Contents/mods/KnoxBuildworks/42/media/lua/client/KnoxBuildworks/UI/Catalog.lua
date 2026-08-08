@@ -102,6 +102,30 @@ local function uiData(player)
     return root.KBW_UI
 end
 
+local function copyCategorySet(source)
+    local result = {}
+    if type(source) == "table" then
+        for category, selected in pairs(source) do
+            if selected == true then result[tostring(category)] = true end
+        end
+    end
+    return result
+end
+
+local function hasSelectedCategories(catalog)
+    if not catalog or not catalog.selectedCategories then return false end
+    for _ in pairs(catalog.selectedCategories) do
+        return true
+    end
+    return false
+end
+
+local function firstSelectedCategory(catalog)
+    if not catalog or not catalog.selectedCategories then return "All" end
+    for category in pairs(catalog.selectedCategories) do return category end
+    return "All"
+end
+
 local function configureButton(button, selected)
     button:initialise()
     Theme.applyButton(button, selected)
@@ -320,6 +344,9 @@ local function recipeMetadataEntries(definition, stage)
             texture = META_TEXTURES.surface,
             text = getText("IGUI_CraftingWindow_RequiresSurface")
         }
+    end
+    if StageConfig.placement(definition, stage).requiresOutside == true then
+        entries[#entries + 1] = { text = getText("IGUI_KBW_RequiresOutside") }
     end
     return entries
 end
@@ -645,7 +672,8 @@ function KBWCatalog:new(player)
     o.player = player
     o.compact = compact
     o.scope = "All"
-    o.category = "All"
+    o.selectedCategories = copyCategorySet(data.selectedCategories)
+    o.category = firstSelectedCategory(o)
     o.categoryPage = 1
     o.categoryOffset = 1
     o.viewMode = data.viewMode == "list" and "list" or "grid"
@@ -665,6 +693,7 @@ function KBWCatalog:new(player)
     o.backgroundColor = Theme.backdrop
     o.borderColor = Theme.border
     o.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
+    o:setWantKeyEvents(true)
     return o
 end
 
@@ -1870,11 +1899,28 @@ end
 
 function KBWCatalog:refreshCategories()
     self.categories = CatalogIndex.get().categories
+    local valid = {}
+    for categoryIndex = 1, #self.categories do valid[self.categories[categoryIndex]] = true end
+    for category in pairs(self.selectedCategories or {}) do
+        if not valid[category] then self.selectedCategories[category] = nil end
+    end
+    self.category = firstSelectedCategory(self)
 end
 
 function KBWCatalog:refreshFilterOptions()
     local index = CatalogIndex.get()
-    local sets = self.category ~= "All" and index.filtersByCategory[self.category] or index.allFilters
+    local sets = index.allFilters
+    if hasSelectedCategories(self) then
+        sets = { subcategories = {}, materials = {}, skills = {} }
+        for category in pairs(self.selectedCategories) do
+            local categorySets = index.filtersByCategory[category]
+            if categorySets then
+                for name in pairs(categorySets.subcategories or {}) do sets.subcategories[name] = true end
+                for name in pairs(categorySets.materials or {}) do sets.materials[name] = true end
+                for name in pairs(categorySets.skills or {}) do sets.skills[name] = true end
+            end
+        end
+    end
     local subcategories = sets and sets.subcategories or {}
     local materials = sets and sets.materials or {}
     local skills = sets and sets.skills or {}
@@ -1989,9 +2035,11 @@ function KBWCatalog:layoutCategoryButtons(gridWidth)
         button:setHeight(math.max(28, FONT_HGT_SMALL + 10))
         button.internal = value.id
         button:setTitle(value.label)
-        button
-            :setVisible(true)
-        Theme.applyButton(button, self.category == value.id)
+        button:setVisible(true)
+        setOptionalTooltip(button, getText("Tooltip_KBW_MultiCategory"))
+        local selected = value.id == "All" and not hasSelectedCategories(self)
+            or value.id ~= "All" and self.selectedCategories[value.id] == true
+        Theme.applyButton(button, selected)
     end
     Theme.applyActionButton(self.categoryPrev, self.categoryOffset > 1, false)
     Theme.applyActionButton(self.categoryNext, self.categoryOffset < maxOffset, false)
@@ -2008,8 +2056,8 @@ function KBWCatalog:filteredDefinitions()
     local sortMode = self.sortValues and self.sortValues[self.sortCombo.selected] or "none"
     local shouldShowAll = CatalogVisibility.shouldShowAll(self.player)
     local scope = self.scope
-    local category = self.category
-    local allCategories = category == "All"
+    local selectedCategories = self.selectedCategories or {}
+    local allCategories = not hasSelectedCategories(self)
     local hasQuery = query ~= ""
     local favorites = data.favorites
     local isFavoritesScope = scope == "Favorites"
@@ -2027,7 +2075,7 @@ function KBWCatalog:filteredDefinitions()
     local result = {}
     for sourceIndex = 1, #source do
         local record = source[sourceIndex]
-        local include = allCategories or record.category == category
+        local include = allCategories or selectedCategories[record.category] == true
         if include and not CatalogVisibility.definitionEnabled(record.definition) then include = false end
         if include then
             if recentSet then
@@ -2128,7 +2176,17 @@ function KBWCatalog:onScope(button)
 end
 
 function KBWCatalog:onCategory(button)
-    self.category = button.internal
+    local category = button.internal
+    self.selectedCategories = self.selectedCategories or {}
+    if category == "All" then
+        self.selectedCategories = {}
+    elseif isShiftKeyDown() then
+        self.selectedCategories[category] = not self.selectedCategories[category] or nil
+    else
+        self.selectedCategories = { [category] = true }
+    end
+    self.category = firstSelectedCategory(self)
+    uiData(self.player).selectedCategories = copyCategorySet(self.selectedCategories)
     self:refreshFilterOptions()
     self:refreshCompactGroups()
     self:layoutCategoryButtons(self.categoryCatalogWidth or self.grid.width)
@@ -2625,6 +2683,7 @@ function KBWCatalog:rememberDragReturn()
         selectedId = self.selected.id,
         scope = self.scope,
         category = self.category,
+        selectedCategories = copyCategorySet(self.selectedCategories),
         categoryPage = self.categoryPage,
         categoryOffset = self.categoryOffset,
         search = self.search and self.search:getInternalText() or "",
@@ -2641,7 +2700,11 @@ end
 function KBWCatalog:restoreState(state)
     if not state then return end
     self.scope = state.scope or self.scope
-    self.category = state.category or self.category
+    self.selectedCategories = copyCategorySet(state.selectedCategories)
+    if not hasSelectedCategories(self) and state.category and state.category ~= "All" then
+        self.selectedCategories[state.category] = true
+    end
+    self.category = firstSelectedCategory(self)
     self.categoryPage = state.categoryPage or self.categoryPage
     self.categoryOffset = state.categoryOffset or state.categoryPage or self.categoryOffset
     self:updateScopeButtons()
@@ -2808,6 +2871,10 @@ function KBWCatalog:onAppearanceChanged(livePreview)
     Theme.applyButton(self.categoryPrev, false)
     Theme.applyButton(self.categoryNext, false)
     applyViewButton(self.viewButton, self.viewMode)
+    if self.grid then
+        self.grid:hideBuildableTooltip()
+        self.grid:setCompactMode(self.compact, true)
+    end
     self:updateScopeButtons()
     self:updateFavorite()
     self:updateActions()
@@ -3384,6 +3451,19 @@ function KBWCatalog:close()
     self:setVisible(false)
     self:removeFromUIManager()
     if KBWCatalog.instance == self then KBWCatalog.instance = nil end
+end
+
+---@param key string|number
+function KBWCatalog:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWCatalog:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
 end
 
 ---@param player IsoPlayer

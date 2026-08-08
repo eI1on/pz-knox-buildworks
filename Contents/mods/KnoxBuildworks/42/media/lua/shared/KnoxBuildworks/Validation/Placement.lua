@@ -33,7 +33,8 @@ local REASON_KEYS = {
     ["window frame required"] = "IGUI_KBW_Reason_WindowFrameRequired",
     ["door needs floor"] = "IGUI_KBW_Reason_DoorNeedsFloor",
     ["door already built"] = "IGUI_KBW_Reason_DoorAlreadyBuilt",
-    ["door frame required"] = "IGUI_KBW_Reason_DoorFrameRequired"
+    ["door frame required"] = "IGUI_KBW_Reason_DoorFrameRequired",
+    ["outside required"] = "IGUI_KBW_Reason_OutsideRequired"
 }
 
 ---@param reason string | nil
@@ -55,9 +56,82 @@ local function objectSpriteBlocksWall(sprite, north)
         or props:has(IsoFlagType.DoorWallW) or props:has(IsoFlagType.HoppableW)
 end
 
+local function findReplaceableWall(square, north)
+    if not square then return nil end
+    for objectIndex = 0, square:getSpecialObjects():size() - 1 do
+        local object = square:getSpecialObjects():get(objectIndex)
+        if instanceof(object, "IsoThumpable") and object:getNorth() == (north == true) then
+            local props = object:getProperties()
+            local isOpening = object:isDoor() or object:isDoorFrame() or object:isWindow()
+            if props then
+                isOpening = isOpening or props:has(IsoFlagType.WindowN) or props:has(IsoFlagType.WindowW)
+                    or props:has(IsoFlagType.DoorWallN) or props:has(IsoFlagType.DoorWallW)
+                    or props:has(IsoFlagType.HoppableN) or props:has(IsoFlagType.HoppableW)
+            end
+            if not isOpening and objectSpriteBlocksWall(object:getSprite(), north) then return object end
+        end
+    end
+    return nil
+end
+
 local function spriteProps(spriteName)
     local sprite = spriteName and getSprite(spriteName)
     return sprite, sprite and sprite:getProperties() or nil
+end
+
+local function attachmentName(props)
+    if not props then return nil end
+    for _, name in ipairs({ "attachedN", "attachedW", "attachedE", "attachedS" }) do
+        if props:has(name) then return name end
+    end
+    if props:has("Facing") then
+        return ({ E = "attachedW", S = "attachedN", W = "attachedE", N = "attachedS" })[props:get("Facing")]
+    end
+    return nil
+end
+
+local function hasWallProperty(square, north, allowDoorFrame)
+    if not square then return false end
+    local wallName, doorName = north and "WallN" or "WallW", north and "DoorWallN" or "DoorWallW"
+    if square:has(wallName) or square:has("WallNW") or allowDoorFrame and square:has(doorName) then return true end
+    for objectIndex = 0, square:getObjects():size() - 1 do
+        local object = square:getObjects():get(objectIndex)
+        local props = object and object:getProperties()
+        if props and (props:has(wallName) or props:has("WallNW") or allowDoorFrame and props:has(doorName)) then
+            return true
+        end
+    end
+    return false
+end
+
+local function hasAttachedWallSupport(square, fixtureProps)
+    local attachment = attachmentName(fixtureProps)
+    if not square or not attachment then return false end
+    local wallSquare, north = square, attachment == "attachedN" or attachment == "attachedS"
+    if attachment == "attachedE" then
+        wallSquare = getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ())
+    elseif attachment == "attachedS" then
+        wallSquare = getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ())
+    end
+    if not wallSquare then return false end
+
+    if not hasWallProperty(wallSquare, north, fixtureProps:has("WallObjectAllowDoorframe")) then return false end
+
+    -- Match vanilla's high/low overlap behavior while still allowing fixtures
+    -- on different faces of a corner square.
+    local fixtureHigh, fixtureLow = fixtureProps:has("IsHigh"), fixtureProps:has("IsLow")
+    for objectIndex = 0, square:getObjects():size() - 1 do
+        local object = square:getObjects():get(objectIndex)
+        local props = object and object:getProperties()
+        if props and props:has("MoveType") and props:get("MoveType") == "WallObject"
+            and attachmentName(props) == attachment then
+            local objectHigh, objectLow = props:has("IsHigh"), props:has("IsLow")
+            if (not objectHigh and not objectLow) or objectHigh and fixtureHigh or objectLow and fixtureLow then
+                return false
+            end
+        end
+    end
+    return true
 end
 
 local function isWallSprite(sprite)
@@ -319,10 +393,14 @@ function Placement.validate(cursor, square)
     if (isClient() or isServer()) and SafeHouse.isSafeHouse(square, cursor.character:getUsername(), true) then
         return false, "safehouse denied"
     end
+    if placement.requiresOutside == true and not square:isOutside() then return false, "outside required" end
     local previousStage = Placement.previousStageOf(cursor.stage) or Placement.optionalReplacementStageOf(cursor.stage)
     local previous = Placement.findPrevious(square, cursor.definition.id, previousStage, cursor.north == true)
     if previousStage and not previous then return false, "previous stage missing" end
     local kind = placement.kind
+    if not previous and kind == "wall" and cursor.canPassThrough ~= true then
+        previous = findReplaceableWall(square, cursor.north == true)
+    end
     if not previous and (placement.againstWall or placement.needToBeAgainstWall) then
         if kind == "overlay" then
             local objectConfig = (cursor.stage and cursor.stage.object) or {}
@@ -330,27 +408,44 @@ function Placement.validate(cursor, square)
                 return false, "wall required"
             end
         else
-            local face = facingName(cursor)
-            local wallX, wallY = square:getX(), square:getY()
-            -- if face == "n" then wallY = wallY + 1 end
-            -- if face == "w" then wallX = wallX + 1 end
-            local wallSquare = getSquare(wallX, wallY, square:getZ())
             local found = false
-            if wallSquare then
-                for i = 0, wallSquare:getObjects():size() - 1 do
-                    local wallObject = wallSquare:getObjects():get(i)
-                    local props = wallObject and wallObject:getProperties()
-                    if props
-                        and (props:has(IsoPropertyType.WALL_NW) or (cursor.north and props:has(IsoPropertyType.WALL_N))
-                            or (not cursor.north and props:has(IsoPropertyType.WALL_W))) then
-                        for j = 0, square:getSpecialObjects():size() - 1 do
-                            local special = square:getSpecialObjects():get(j)
-                            if special ~= wallObject and instanceof(special, "IsoThumpable") and not special:isFloor() then
-                                return false, "square already occupied"
+            local preview = cursor.getFootprint and cursor:getFootprint() or nil
+            local previewSprite = preview and preview[1] and preview[1].sprite or nil
+            local selectedSprite, selectedProps = spriteProps(previewSprite)
+
+            if selectedSprite and selectedSprite:getType() == IsoObjectType.lightswitch
+                and selectedProps and not selectedProps:has("IsMoveAble") then
+                local face = facingName(cursor)
+                local wallSquare, north = square, face == "n" or face == "s"
+                if face == "e" then
+                    wallSquare = getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ())
+                elseif face == "s" then
+                    wallSquare = getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ())
+                end
+                found = hasWallProperty(wallSquare, north, false)
+            elseif selectedProps and selectedProps:has("MoveType")
+                and selectedProps:get("MoveType") == "WallObject" then
+                found = hasAttachedWallSupport(square, selectedProps)
+            else
+                local wallSquare = square
+                if wallSquare then
+                    for i = 0, wallSquare:getObjects():size() - 1 do
+                        local wallObject = wallSquare:getObjects():get(i)
+                        local props = wallObject and wallObject:getProperties()
+                        if props
+                            and (props:has(IsoPropertyType.WALL_NW)
+                                or (cursor.north and props:has(IsoPropertyType.WALL_N))
+                                or (not cursor.north and props:has(IsoPropertyType.WALL_W))) then
+                            for j = 0, square:getSpecialObjects():size() - 1 do
+                                local special = square:getSpecialObjects():get(j)
+                                if special ~= wallObject and instanceof(special, "IsoThumpable")
+                                    and not special:isFloor() then
+                                    return false, "square already occupied"
+                                end
                             end
+                            found = true
+                            break
                         end
-                        found = true
-                        break
                     end
                 end
             end
@@ -358,9 +453,6 @@ function Placement.validate(cursor, square)
         end
     end
     if not previous and kind == "floor" then
-        -- Floors provide their own floor and may extend over open air when an
-        -- adjacent floor or wall supports them - mirrors vanilla
-        -- BuildRecipeCode.floor.OnIsValid (which also disables collision tests).
         if square.HasStairsBelow and square:HasStairsBelow() then return false, "stairs below" end
         for i = 0, square:getObjects():size() - 1 do
             local object = square:getObjects():get(i)
@@ -372,8 +464,10 @@ function Placement.validate(cursor, square)
             end
         end
         if not square:connectedWithFloor() then return false, "no adjacent floor support" end
-    elseif not previous and placement.requiresFloor ~= false and not square:getFloor() then
-        return false, "floor required"
+    elseif not previous and placement.requiresFloor ~= false then
+        local hasRequiredFloor = square:getFloor() ~= nil
+        if kind == "wall" then hasRequiredFloor = square:hasFloor(cursor.north == true) end
+        if not hasRequiredFloor then return false, "floor required" end
     end
     local spriteConfig = StageConfig.sprite(cursor.definition, cursor.stage)
     local footprint = cursor.getFootprint and cursor:getFootprint() or nil
@@ -417,6 +511,9 @@ function Placement.validate(cursor, square)
                     y = target:getY(),
                     z = target:getZ()
                 }
+                if spriteType == IsoObjectType.lightswitch and props and not props:has("IsMoveAble") then
+                    params.testCollisions = false
+                end
                 if spriteConfig.onIsValid then
                     if not LuaCallback.resolve(spriteConfig.onIsValid) then
                         return false, "script OnIsValid is unavailable"
@@ -476,13 +573,10 @@ function Placement.validate(cursor, square)
                     if props and (target:getProperties():has(IsoPropertyType.BLOCKS_PLACEMENT) or target:isSolid()
                             or target:isSolidTrans())
                         and (props:has(IsoFlagType.solidtrans) or props:has("BlocksPlacement")) then
-                        -- Stackable furniture (crates) may go on top of an
-                        -- existing stack; ISMoveableSpriteProps enforces the
-                        -- height limit (vanilla ISBuildIsoEntity CHECK SOLID).
-                        if props:has("IsStackable") then
+                        if props:has("IsStackable") or props:has("IsTableTop") then
                             local moveProps = ISMoveableSpriteProps.new(sprite)
-                            if not moveProps:canPlaceMoveable("bogus", target, nil) then
-                                return false, "stack blocked"
+                            if not moveProps:canPlaceMoveable(cursor.character, target, nil) then
+                                return false, props:has("IsStackable") and "stack blocked" or "solid placement blocked"
                             end
                         else
                             return false, "solid placement blocked"
@@ -492,7 +586,9 @@ function Placement.validate(cursor, square)
                         for i = 0, target:getObjects():size() - 1 do
                             local object = target:getObjects():get(i)
                             local osprite = object:getSprite()
-                            if objectSpriteBlocksWall(osprite, cursor.north) then return false, "wall already blocked" end
+                            if object ~= previous and objectSpriteBlocksWall(osprite, cursor.north) then
+                                return false, "wall already blocked"
+                            end
                             local spriteGrid = osprite and osprite:getSpriteGrid()
                             if spriteGrid then
                                 local gridX = spriteGrid:getSpriteGridPosX(osprite)

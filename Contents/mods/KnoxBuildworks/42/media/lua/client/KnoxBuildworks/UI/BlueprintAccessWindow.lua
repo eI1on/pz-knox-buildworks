@@ -24,29 +24,22 @@ local LIST_ROW_H = FONT_HGT_SMALL * 2 + 14
 ---@class KBW.ACCESS_SCOPESModule
 ---@type KBW.ACCESS_SCOPESModule
 local ACCESS_SCOPES = {
-    { id = "private", label = "IGUI_KBW_ScopePrivate", fallback = "Private (only shared)" },
-    { id = "view", label = "IGUI_KBW_ScopeView", fallback = "Everyone can view" },
-    { id = "build", label = "IGUI_KBW_ScopeBuild", fallback = "Everyone can build" },
-    { id = "contribute", label = "IGUI_KBW_ScopeContribute", fallback = "Everyone can contribute" }
+    { id = "private", label = "IGUI_KBW_ScopePrivate" },
+    { id = "view", label = "IGUI_KBW_ScopeView" },
+    { id = "build", label = "IGUI_KBW_ScopeBuild" },
+    { id = "contribute", label = "IGUI_KBW_ScopeContribute" }
 }
 local GRANT_LEVELS = {
-    { id = "none", label = "IGUI_KBW_LevelNone", fallback = "None" },
-    { id = "view", label = "IGUI_KBW_LevelView", fallback = "View" },
-    { id = "build", label = "IGUI_KBW_LevelBuild", fallback = "Build" },
-    { id = "contribute", label = "IGUI_KBW_LevelContribute", fallback = "Contribute" }
+    { id = "none", label = "IGUI_KBW_LevelNone" },
+    { id = "view", label = "IGUI_KBW_LevelView" },
+    { id = "build", label = "IGUI_KBW_LevelBuild" },
+    { id = "contribute", label = "IGUI_KBW_LevelContribute" }
 }
 local SEGMENTS = {
-    { id = "view", label = "IGUI_KBW_LevelView", fallback = "View" },
-    { id = "build", label = "IGUI_KBW_LevelBuild", fallback = "Build" },
-    { id = "contribute", label = "IGUI_KBW_LevelContribute", fallback = "Contribute" }
+    { id = "view", label = "IGUI_KBW_LevelView" },
+    { id = "build", label = "IGUI_KBW_LevelBuild" },
+    { id = "contribute", label = "IGUI_KBW_LevelContribute" }
 }
-
-local function safeText(key, fallback)
-    if not getText then return fallback or key end
-    local text = getText(key)
-    if text == key then return fallback or key end
-    return text
-end
 
 local function measure(text)
     return getTextManager():MeasureStringX(UIFont.Small, tostring(text or ""))
@@ -95,7 +88,7 @@ local function fillGrantCombo(combo)
     combo:clear()
     for levelIndex = 1, #GRANT_LEVELS do
         combo:addOptionWithData(
-            safeText(GRANT_LEVELS[levelIndex].label, GRANT_LEVELS[levelIndex].fallback), GRANT_LEVELS[levelIndex].id
+            getText(GRANT_LEVELS[levelIndex].label), GRANT_LEVELS[levelIndex].id
         )
     end
     combo.selected = 1
@@ -105,7 +98,7 @@ local function fillScopeCombo(combo)
     combo:clear()
     for scopeIndex = 1, #ACCESS_SCOPES do
         combo:addOptionWithData(
-            safeText(ACCESS_SCOPES[scopeIndex].label, ACCESS_SCOPES[scopeIndex].fallback), ACCESS_SCOPES[scopeIndex].id
+            getText(ACCESS_SCOPES[scopeIndex].label), ACCESS_SCOPES[scopeIndex].id
         )
     end
     combo.selected = 1
@@ -115,7 +108,7 @@ local function levelLabel(level)
     level = tostring(level or "none")
     for levelIndex = 1, #GRANT_LEVELS do
         if GRANT_LEVELS[levelIndex].id == level then
-            return safeText(GRANT_LEVELS[levelIndex].label, GRANT_LEVELS[levelIndex].fallback)
+            return getText(GRANT_LEVELS[levelIndex].label)
         end
     end
     return tostring(level)
@@ -156,15 +149,15 @@ end
 -- (admins get contribute; then the user's faction grant; then the scope).
 local function candidateEffectiveAccess(blueprint, username)
     if isAdminName(username) then
-        return "contribute", safeText("IGUI_KBW_AccessAdmin", "Admin")
+        return "contribute", getText("IGUI_KBW_AccessAdmin")
     end
     local access = blueprint and blueprint.access or {}
     local userFaction = Blueprints.factionNameForUser(username)
     if userFaction and access.factions and access.factions[userFaction] and access.factions[userFaction] ~= "none" then
         return access.factions[userFaction],
-            string.format("%s: %s", safeText("IGUI_KBW_Faction", "Faction"), userFaction)
+            string.format("%s: %s", getText("IGUI_KBW_Faction"), userFaction)
     end
-    return scopeAsLevel(access.scope), safeText("IGUI_KBW_DefaultAccess", "Default access")
+    return scopeAsLevel(access.scope), getText("IGUI_KBW_DefaultAccess")
 end
 
 ---@class KBWBlueprintAccessWindow: ISCollapsableWindow
@@ -177,13 +170,13 @@ function KBWBlueprintAccessWindow:new(owner, player, blueprint)
     -- Segment widths drive the ACL list width, which drives the window width.
     local segW = 0
     for segmentIndex = 1, #SEGMENTS do
-        segW = math.max(segW, measure(safeText(SEGMENTS[segmentIndex].label, SEGMENTS[segmentIndex].fallback)))
+        segW = math.max(segW, measure(getText(SEGMENTS[segmentIndex].label)))
     end
     segW = segW + 14
     local removeW = FONT_HGT_SMALL + 10
     local segTotal = segW * 3 + 4 * 2 + 6 + removeW
     local leftW = math.max(330, segTotal + 150)
-    local rightW = math.max(230, measure(safeText("IGUI_KBW_FactionOwner", "Faction owner")) + 150)
+    local rightW = math.max(230, measure(getText("IGUI_KBW_FactionOwner")) + 150)
     local width = PAD * 3 + leftW + rightW
     local listH = LIST_ROW_H * 6 + 4
     local o = ISCollapsableWindow:new(0, 0, width, 100)
@@ -195,10 +188,11 @@ function KBWBlueprintAccessWindow:new(owner, player, blueprint)
     o.segW, o.removeW, o.segTotal = segW, removeW, segTotal
     o.leftW, o.rightW, o.listH = leftW, rightW, listH
     o.resizable = false
-    o.title = safeText("IGUI_KBW_BlueprintAccessTitle", "Blueprint access")
+    o.title = getText("IGUI_KBW_BlueprintAccessTitle")
     o.backgroundColor = Theme.backdrop
     o.borderColor = Theme.border
     o.moveWithMouse = true
+    o:setWantKeyEvents(true)
     return o
 end
 
@@ -212,9 +206,9 @@ function KBWBlueprintAccessWindow:createChildren()
 
     -- Top rows: default (everybody) scope and own-faction grant, with the
     -- combo x derived from the wider of the two measured labels.
-    local scopeLabel = safeText("IGUI_KBW_DefaultAccess", "Default access")
-    local factionLabel = safeText("IGUI_KBW_MyFactionAccess", "My faction: %s")
-    local labelW = math.max(measure(scopeLabel), measure(string.format(factionLabel, "WWWWWWWWWWWW")))
+    local scopeLabel = getText("IGUI_KBW_DefaultAccess")
+    local factionLabel = getText("IGUI_KBW_MyFactionAccess", "WWWWWWWWWWWW")
+    local labelW = math.max(measure(scopeLabel), measure(factionLabel))
     local comboX = PAD + math.min(labelW, math.floor(self.width * 0.45)) + ROW_GAP
     local comboW = math.min(260, self.width - comboX - PAD)
     self.labelX, self.comboX = PAD, comboX
@@ -287,11 +281,11 @@ function KBWBlueprintAccessWindow:createChildren()
     self.grantHeaderY = grantHeaderY
     local levelW = 0
     for levelIndex = 1, #GRANT_LEVELS do
-        levelW = math.max(levelW, measure(safeText(GRANT_LEVELS[levelIndex].label, GRANT_LEVELS[levelIndex].fallback)))
+        levelW = math.max(levelW, measure(getText(GRANT_LEVELS[levelIndex].label)))
     end
     levelW = levelW + 40
-    local addLabel = safeText("IGUI_KBW_AddSelected", "Add selected")
-    local applyLabel = safeText("IGUI_KBW_ApplyPlayerAccess", "Apply")
+    local addLabel = getText("IGUI_KBW_AddSelected")
+    local applyLabel = getText("IGUI_KBW_ApplyPlayerAccess")
     local addW = measure(addLabel) + 24
     local applyW = measure(applyLabel) + 24
 
@@ -313,7 +307,7 @@ function KBWBlueprintAccessWindow:createChildren()
     self.playerEntry:initialise()
     self.playerEntry:instantiate()
     if self.playerEntry.setPlaceholderText then
-        self.playerEntry:setPlaceholderText(safeText("IGUI_KBW_PlayerName", "Player username"))
+        self.playerEntry:setPlaceholderText(getText("IGUI_KBW_PlayerName"))
     end
     self:addChild(self.playerEntry)
 
@@ -330,7 +324,7 @@ function KBWBlueprintAccessWindow:createChildren()
     -- Footer: summary text (drawn in render) + close button.
     local footerY = grantY + COMBO_H + PAD
     self.footerY = footerY
-    local closeLabel = safeText("IGUI_KBW_Close", "Close")
+    local closeLabel = getText("IGUI_KBW_Close")
     local closeW = measure(closeLabel) + 32
     self.closeButton = makeButton(self, self.width - closeW - PAD, footerY, closeW, BUTTON_H, closeLabel, self.close)
     self:setHeight(footerY + BUTTON_H + PAD)
@@ -378,7 +372,7 @@ function KBWBlueprintAccessWindow:drawAclRow(list, y, item, alt)
         1, UIFont.Small
     )
     if row.kind == "owner" then
-        local label = safeText("IGUI_KBW_AccessOwner", "Owner")
+        local label = getText("IGUI_KBW_AccessOwner")
         list:drawText(
             label, list.width - PAD - measure(label), y + math.floor((item.height - FONT_HGT_SMALL) / 2), Theme.accent.r,
             Theme.accent.g, Theme.accent.b, 1, UIFont.Small
@@ -400,7 +394,7 @@ function KBWBlueprintAccessWindow:drawAclRow(list, y, item, alt)
         end
         list:drawRectBorder(rect.x1, segY, self.segW, segH, border.a, border.r, border.g, border.b)
         local textColor = active and Theme.text or (editable and Theme.textMuted or Theme.borderSoft)
-        local label = safeText(segment.label, segment.fallback)
+        local label = getText(segment.label)
         list:drawText(
             label, rect.x1 + math.floor((self.segW - measure(label)) / 2), segY + 4, textColor.r, textColor.g,
             textColor.b, 1, UIFont.Small
@@ -509,7 +503,7 @@ function KBWBlueprintAccessWindow:onApplyPlayer()
     local level = comboData(self.manualLevelCombo, "none")
     if Blueprints.setPlayerAccess(self.player, blueprint.id, username, level) then
         if HaloTextHelper and HaloTextHelper.addText then
-            HaloTextHelper.addText(self.player, safeText("IGUI_KBW_AccessUpdated", "Blueprint access updated"))
+            HaloTextHelper.addText(self.player, getText("IGUI_KBW_AccessUpdated"))
         end
         self.playerEntry:setText("")
         self:syncFromBlueprint()
@@ -584,7 +578,7 @@ function KBWBlueprintAccessWindow:refreshAcl()
             kind = "owner",
             user = blueprint.owner,
             label = tostring(blueprint.owner),
-            detail = safeText("IGUI_KBW_AccessOwner", "Owner"),
+            detail = getText("IGUI_KBW_AccessOwner"),
             level = "contribute"
         }
     end
@@ -595,8 +589,8 @@ function KBWBlueprintAccessWindow:refreshAcl()
             factionRows[#factionRows + 1] = {
                 kind = "faction",
                 faction = name,
-                label = string.format("%s: %s", safeText("IGUI_KBW_Faction", "Faction"), tostring(name)),
-                detail = safeText("IGUI_KBW_FactionGrant", "Everyone in this faction"),
+                label = string.format("%s: %s", getText("IGUI_KBW_Faction"), tostring(name)),
+                detail = getText("IGUI_KBW_FactionGrant"),
                 level = level,
                 ownFaction = ownFaction ~= nil and tostring(ownFaction) == tostring(name)
             }
@@ -611,9 +605,9 @@ function KBWBlueprintAccessWindow:refreshAcl()
                 kind = "player",
                 user = username,
                 label = tostring(username),
-                detail = userFaction and string.format("%s: %s", safeText("IGUI_KBW_Faction", "Faction"), userFaction)
-                    or (onlinePlayerByName(username) and safeText("IGUI_KBW_OnlinePlayer", "Online")
-                        or safeText("IGUI_KBW_OfflinePlayer", "Offline")),
+                detail = userFaction and string.format("%s: %s", getText("IGUI_KBW_Faction"), userFaction)
+                    or (onlinePlayerByName(username) and getText("IGUI_KBW_OnlinePlayer")
+                        or getText("IGUI_KBW_OfflinePlayer")),
                 level = level
             }
         end
@@ -660,23 +654,23 @@ function KBWBlueprintAccessWindow:refreshCandidates()
             for playerIndex = 0, players:size() - 1 do
                 local player = players:get(playerIndex)
                 if player and player.getUsername then
-                    addCandidate(player:getUsername(), safeText("IGUI_KBW_OnlinePlayer", "Online"))
+                    addCandidate(player:getUsername(), getText("IGUI_KBW_OnlinePlayer"))
                 end
             end
         end
     elseif getPlayer and getPlayer() and getPlayer().getUsername then
-        addCandidate(getPlayer():getUsername(), safeText("IGUI_KBW_ThisPlayer", "This player"))
+        addCandidate(getPlayer():getUsername(), getText("IGUI_KBW_ThisPlayer"))
     end
     if Faction and Faction.getPlayerFaction then
         local faction = Faction.getPlayerFaction(self.player)
         if faction then
             if faction.getOwner then
-                addCandidate(faction:getOwner(), safeText("IGUI_KBW_FactionOwner", "Faction owner"))
+                addCandidate(faction:getOwner(), getText("IGUI_KBW_FactionOwner"))
             end
             local members = faction.getPlayers and faction:getPlayers() or nil
             if members then
                 for memberIndex = 0, members:size() - 1 do
-                    addCandidate(members:get(memberIndex), safeText("IGUI_KBW_FactionMember", "Faction member"))
+                    addCandidate(members:get(memberIndex), getText("IGUI_KBW_FactionMember"))
                 end
             end
         end
@@ -692,30 +686,30 @@ function KBWBlueprintAccessWindow:render()
     ISCollapsableWindow.render(self)
     local labelY = self.scopeRowY + math.floor((COMBO_H - FONT_HGT_SMALL) / 2)
     self:drawText(
-        safeText("IGUI_KBW_DefaultAccess", "Default access"), self.labelX, labelY, Theme.text.r, Theme.text.g,
+        getText("IGUI_KBW_DefaultAccess"), self.labelX, labelY, Theme.text.r, Theme.text.g,
         Theme.text.b, 1, UIFont.Small
     )
     local faction = currentFactionName(self.player)
-    local factionText = faction and string.format(safeText("IGUI_KBW_MyFactionAccess", "My faction: %s"), faction)
-        or safeText("IGUI_KBW_NoFactionAccess", "You are not in a faction")
+    local factionText = faction and getText("IGUI_KBW_MyFactionAccess", faction)
+        or getText("IGUI_KBW_NoFactionAccess")
     self:drawText(
         factionText, self.labelX, self.factionRowY + math.floor((COMBO_H - FONT_HGT_SMALL) / 2), Theme.text.r,
         Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_PlayersWithAccess", "Players with access"), self.leftX, self.leftHeaderY, Theme.accent.r,
+        getText("IGUI_KBW_PlayersWithAccess"), self.leftX, self.leftHeaderY, Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_AddPlayers", "Players you can add"), self.rightX, self.leftHeaderY, Theme.accent.r,
+        getText("IGUI_KBW_AddPlayers"), self.rightX, self.leftHeaderY, Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_GrantAccess", "Grant access"), PAD, self.grantHeaderY, Theme.accent.r, Theme.accent.g,
+        getText("IGUI_KBW_GrantAccess"), PAD, self.grantHeaderY, Theme.accent.r, Theme.accent.g,
         Theme.accent.b, 1, UIFont.Small
     )
     if not self:canManage() then
-        local note = safeText("IGUI_KBW_AccessReadOnly", "Only the owner or an admin can change access")
+        local note = getText("IGUI_KBW_AccessReadOnly")
         self:drawText(
             note, PAD, self.footerY + math.floor((BUTTON_H - FONT_HGT_SMALL) / 2), Theme.textMuted.r, Theme.textMuted.g,
             Theme.textMuted.b, 1, UIFont.Small
@@ -726,6 +720,19 @@ end
 function KBWBlueprintAccessWindow:close()
     ISCollapsableWindow.close(self)
     if self.owner and self.owner.accessWindow == self then self.owner.accessWindow = nil end
+end
+
+---@param key string|number
+function KBWBlueprintAccessWindow:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWBlueprintAccessWindow:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
 end
 
 return KBWBlueprintAccessWindow

@@ -6,6 +6,7 @@
   "Tooltip_KBW_ListView": "Mostrar construibles como lista detallada.",
   "Tooltip_KBW_GridView": "Mostrar construibles como iconos en cuadrícula.",
   "Tooltip_KBW_ShowAllVersions": "Mostrar todas las versiones de construcción, incluidos niveles normalmente ocultos por reglas de catálogo basadas en habilidades.",
+  "Tooltip_KBW_MultiCategory": "Haz clic para mostrar solo esta categoría. Mayús-clic para añadirla o quitarla de la selección actual.",
   "Tooltip_KBW_Search": "Buscar en el catálogo de construibles actual.",
   "Tooltip_KBW_SearchMode": "Elige si la búsqueda coincide con nombres de recetas, objetos requeridos o ambos.",
   "Tooltip_KBW_Sort": "Elige el orden de los construibles. Las recetas fijadas permanecen primero.",
@@ -144,5 +145,10 @@
   "Tooltip_KBW_Shared_Toilet": "Inodoro de baño conectable a la red de agua, con un pequeño depósito.",
   "Tooltip_KBW_Shared_Shower": "Ducha conectable a la red de agua.",
   "Tooltip_KBW_Shared_Bathtub": "Bañera de dos baldosas conectable a la red de agua, con un depósito grande.",
-  "Tooltip_KBW_Shared_Sink": "Lavabo conectable a la red de agua, con un pequeño depósito."
+  "Tooltip_KBW_Shared_Sink": "Lavabo conectable a la red de agua, con un pequeño depósito.",
+  "Tooltip_KBW_Shared_LightSwitch": "Controla la iluminación de la habitación mientras haya electricidad de la red o de un generador.",
+  "Tooltip_KBW_Shared_TableLamp": "Lámpara de mesa eléctrica que conserva el color y el alcance de luz originales.",
+  "Tooltip_KBW_Shared_WallLamp": "Lámpara eléctrica que debe montarse en una pared compatible.",
+  "Tooltip_KBW_Shared_ExitSign": "Señal de salida iluminada que puede instalarse en una pared o marco de puerta.",
+  "Tooltip_KBW_Shared_FloorLamp": "Lámpara eléctrica de pie que conserva el color y el alcance originales."
 }

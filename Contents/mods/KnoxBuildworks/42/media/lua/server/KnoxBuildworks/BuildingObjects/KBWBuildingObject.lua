@@ -28,6 +28,24 @@ local function wallEdgeDirection(direction)
     return (direction == 2 or direction == 4) and 2 or 1
 end
 
+-- A north/west wall edge belongs to its anchor square, but a character can
+-- work on it from the square directly across that edge or from the adjacent
+-- approach square on the anchor side. Vanilla's generic wall finder may choose
+-- the anchor square and then try to path through the frame being replaced.
+-- Accept the character's current usable side first instead.
+---@param character IsoGameCharacter|nil
+---@param square IsoGridSquare|nil
+---@param north boolean
+local function isStandingAtWallEdge(character, square, north)
+    local current = character and character:getCurrentSquare() or nil
+    if not current or not square or current:getZ() ~= square:getZ() then return false end
+    if current == square then return true end
+    local acrossEdge = square:getAdjacentSquare(north and IsoDirections.N or IsoDirections.W)
+    if acrossEdge ~= nil and current == acrossEdge then return true end
+    local approach = square:getAdjacentSquare(north and IsoDirections.S or IsoDirections.E)
+    return approach ~= nil and current == approach and current:canReachTo(square)
+end
+
 local function configuredBoolean(value, default)
     if value == nil then return default == true end
     return value == true
@@ -365,6 +383,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.isDoorFrame = objectConfig.isDoorFrame == true
     o.isCorner = objectConfig.isCorner == true
     o.isProp = objectConfig.isProp == true or spriteConfig.isProp == true
+        or (objectConfig.canPassThrough == true and kind ~= "overlay" and kind ~= "floor")
     o.isThumpable = configuredBoolean(objectConfig.isThumpable, spriteConfig.isThumpable ~= false and kind ~= "overlay")
     o.dismantable = objectConfig.dismantable ~= false
     o.blockAllTheSquare = configuredBoolean(objectConfig.blockAllSquare, kind == "object")
@@ -614,7 +633,16 @@ function KBWBuildingObject:walkTo(x, y, z)
         if bottom then return luautils.walkAdj(self.character, bottom, false, occupied) end
     end
     if #occupied > 1 then return luautils.walkAdjSquares(self.character, occupied, true, true) end
-    if self.isWallLike then return luautils.walkAdjWall(self.character, square, self.north) end
+    if self.isWallLike then
+        local previousStage = Placement.previousStageOf(self.stage)
+        local frame = square and previousStage
+            and Placement.findPrevious(square, self.definition.id, previousStage, self.north == true) or nil
+        if frame and isStandingAtWallEdge(self.character, square, self.north == true) then
+            ISTimedActionQueue.clear(self.character)
+            return true
+        end
+        return luautils.walkAdjWall(self.character, square, self.north)
+    end
     return ISBuildingObject.walkTo(self, x, y, z)
 end
 
@@ -667,16 +695,22 @@ function KBWBuildingObject:isValid(square)
     return ISBuildingObject.isValid(self, square)
 end
 
--- Stackable furniture (crates) renders and builds with a vertical offset on
--- top of the existing stack, exactly like vanilla ISBuildIsoEntity.
+-- Stackable furniture and table-top fixtures render with the same vertical
+-- surface offset as vanilla moveables.
 ---@param spriteName string | nil
 ---@param square     IsoGridSquare | nil
 function KBWBuildingObject:getStackRenderOffset(spriteName, square)
     if not spriteName or not square then return 0 end
     local sharedSprite = getSprite(spriteName)
-    if not sharedSprite or not sharedSprite:getProperties():has("IsStackable") then return 0 end
+    if not sharedSprite then return 0 end
+    local properties = sharedSprite:getProperties()
+    if not properties:has("IsStackable") and not properties:has("IsTableTop") then return 0 end
     local props = ISMoveableSpriteProps.new(sharedSprite)
-    return props:getTotalTableHeight(square)
+    local offset = props:getTotalTableHeight(square)
+    if properties:has("IsTableTop") and props.surface and props.surfaceIsOffset then
+        offset = offset - props.surface
+    end
+    return offset
 end
 
 ---@param x      number
@@ -927,10 +961,6 @@ function KBWBuildingObject:attachLightSource(part, spriteConfig, torchItem)
     )
 end
 
--- Derives the built part's behaviour flags from its sprite properties before
--- buildUtil.setInfo persists them on the Java object, exactly like vanilla
--- ISBuildIsoEntity:setInfo - this is what makes built fences hoppable, doors
--- barricadable, and so on.
 function KBWBuildingObject:applyPartFlags(part)
     local props = part:getProperties()
     if not props then return end
@@ -1089,8 +1119,15 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 local props = ISMoveableSpriteProps.new(IsoObject.new(target, tile.sprite):getSprite())
                 props.rawWeight = 10
                 local part = props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)
+                local plainProp = false
+                if not part then
+                    part = IsoObject.new(target, tile.sprite)
+                    target:AddTileObject(part)
+                    plainProp = true
+                end
                 if part then
                     part:getModData().KBW = copyTable(self.modData.KBW)
+                    EntityCompat.attach(part, self.stage, true)
                     Properties.applyToObject(part, self, {
                         square = target,
                         spriteConfig = spriteConfig,
@@ -1098,7 +1135,11 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                         isFloor = isFloorAttachmentSprite(tile.sprite)
                     })
                     self:runOnCreate(part, { tile = tile, tileIndex = index })
-                    if part.transmitModData then part:transmitModData() end
+                    if plainProp and part.transmitCompleteItemToClients then
+                        part:transmitCompleteItemToClients()
+                    elseif part.transmitModData then
+                        part:transmitModData()
+                    end
                 end
             elseif isGarageDoorSprite(tile.sprite) then
                 -- Garage-door behavior is owned by IsoDoor. Its sprite-name

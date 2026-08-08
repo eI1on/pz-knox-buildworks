@@ -6,6 +6,7 @@
   "Tooltip_KBW_ListView": "Show buildables as a detailed list.",
   "Tooltip_KBW_GridView": "Show buildables as icon tiles.",
   "Tooltip_KBW_ShowAllVersions": "Show every construction version, including levels normally hidden by skill-based catalogue rules.",
+  "Tooltip_KBW_MultiCategory": "Click to show only this category. Shift-click to add or remove it from the current selection.",
   "Tooltip_KBW_Search": "Search the current buildable catalog.",
   "Tooltip_KBW_SearchMode": "Choose whether search matches recipe names, required items, or both.",
   "Tooltip_KBW_Sort": "Choose the buildable sort order. Pinned recipes stay first.",
@@ -144,5 +145,10 @@
   "Tooltip_KBW_Shared_Toilet": "A plumbable bathroom toilet with a small water reservoir.",
   "Tooltip_KBW_Shared_Shower": "A plumbable shower fixture.",
   "Tooltip_KBW_Shared_Bathtub": "A two-tile plumbable bathtub with a large water reservoir.",
-  "Tooltip_KBW_Shared_Sink": "A plumbable sink with a small water reservoir."
+  "Tooltip_KBW_Shared_Sink": "A plumbable sink with a small water reservoir.",
+  "Tooltip_KBW_Shared_LightSwitch": "Controls the lighting in its room while grid or generator power is available.",
+  "Tooltip_KBW_Shared_TableLamp": "A powered table lamp whose light color and radius follow its original fixture.",
+  "Tooltip_KBW_Shared_WallLamp": "A powered wall lamp that must be mounted on a compatible wall.",
+  "Tooltip_KBW_Shared_ExitSign": "An illuminated exit sign that can be mounted on a wall or door frame.",
+  "Tooltip_KBW_Shared_FloorLamp": "A freestanding powered lamp with the original fixture's light color and radius."
 }

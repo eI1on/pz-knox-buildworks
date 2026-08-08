@@ -1,4 +1,4 @@
----BuildPlanCursor provides the Knox Buildworks blueprint planning layer.
+--- BuildPlanCursor provides the Knox Buildworks blueprint planning layer.
 require "ISUI/ISPanel"
 
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
@@ -305,9 +305,9 @@ end
 
 Events.OnGameStart.Add(defineClass)
 
----@param player IsoPlayer
+---@param player      IsoPlayer
 ---@param blueprintId string
----@param onBuilt function|nil
+---@param onBuilt     function | nil
 function BuildPlanCursor.new(player, blueprintId, onBuilt)
     return KBWBuildPlanCursor:new(player, blueprintId, onBuilt)
 end

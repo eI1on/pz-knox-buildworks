@@ -30,6 +30,22 @@ Options:addTickBox(
     "FadeUnavailableIcons", "UI_optionscreen_KBW_FadeUnavailableIcons", true,
     "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip"
 )
+Options:addTickBox(
+    "HoverPreview", "UI_optionscreen_KBW_HoverPreview", false,
+    "UI_optionscreen_KBW_HoverPreview_Tooltip"
+)
+local catalogIconSize = Options:addComboBox(
+    "CatalogIconSize", "UI_optionscreen_KBW_CatalogIconSize", "UI_optionscreen_KBW_CatalogIconSize_Tooltip"
+)
+catalogIconSize:addItem("UI_optionscreen_KBW_Size_Default", true)
+catalogIconSize:addItem("UI_optionscreen_KBW_Size_Large", false)
+catalogIconSize:addItem("UI_optionscreen_KBW_Size_ExtraLarge", false)
+local hoverPreviewSize = Options:addComboBox(
+    "HoverPreviewSize", "UI_optionscreen_KBW_HoverPreviewSize", "UI_optionscreen_KBW_HoverPreviewSize_Tooltip"
+)
+hoverPreviewSize:addItem("UI_optionscreen_KBW_Size_Default", true)
+hoverPreviewSize:addItem("UI_optionscreen_KBW_Size_Large", false)
+hoverPreviewSize:addItem("UI_optionscreen_KBW_Size_ExtraLarge", false)
 local previewBackground = Options:addComboBox(
     "PreviewBackground", "UI_optionscreen_KBW_PreviewBackground", "UI_optionscreen_KBW_PreviewBackground_Tooltip"
 )
@@ -79,7 +95,8 @@ local function clampPercent(value)
 end
 
 function Options:apply()
-    -- Log:setDebug(self:getOption("Debug"):getValue())
+    local debugOption = self:getOption("Debug")
+    Log:setDebug(debugOption and debugOption:getValue() == true)
     Theme.applyAccessibility(self)
     local profile = self:getOption("Profile")
     if profile and profile.getValue then

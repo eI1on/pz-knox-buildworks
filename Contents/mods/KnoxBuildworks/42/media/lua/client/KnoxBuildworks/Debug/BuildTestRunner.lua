@@ -84,11 +84,27 @@ function BuildTestRunner.cases()
             end
         end
     end
-    table.sort(result, function(a, b)
-        local left = table.concat({ a.category, a.subcategory, a.groupId, string.format("%05d", a.groupLevel),
-            a.buildableId, a.variantId, a.materialId, string.format("%05d", a.stageLevel) }, "|")
-        local right = table.concat({ b.category, b.subcategory, b.groupId, string.format("%05d", b.groupLevel),
-            b.buildableId, b.variantId, b.materialId, string.format("%05d", b.stageLevel) }, "|")
+    table.sort(result, function (a, b)
+        local left = table.concat({
+            a.category,
+            a.subcategory,
+            a.groupId,
+            string.format("%05d", a.groupLevel),
+            a.buildableId,
+            a.variantId,
+            a.materialId,
+            string.format("%05d", a.stageLevel)
+        }, "|")
+        local right = table.concat({
+            b.category,
+            b.subcategory,
+            b.groupId,
+            string.format("%05d", b.groupLevel),
+            b.buildableId,
+            b.variantId,
+            b.materialId,
+            string.format("%05d", b.stageLevel)
+        }, "|")
         return left < right
     end)
     return result
@@ -115,7 +131,7 @@ function BuildTestRunner.categories(cases)
             result[#result + 1] = value
         end
     end
-    table.sort(result, function(a, b)
+    table.sort(result, function (a, b)
         if a == "All" then return true end
         if b == "All" then return false end
         return a < b
@@ -134,7 +150,7 @@ function BuildTestRunner.subcategories(cases, category)
             result[#result + 1] = value
         end
     end
-    table.sort(result, function(a, b)
+    table.sort(result, function (a, b)
         if a == "All" then return true end
         if b == "All" then return false end
         return a < b
@@ -182,9 +198,13 @@ local function grantSkillsAndKnowledge(player, testCase, changes)
     end
     local recipes = {}
     local directRecipes = requirements.recipes or {}
-    for recipeIndex = 1, #directRecipes do recipes[#recipes + 1] = directRecipes[recipeIndex] end
+    for recipeIndex = 1, #directRecipes do
+        recipes[#recipes + 1] = directRecipes[recipeIndex]
+    end
     local knowledgeRecipes = (requirements.knowledge or {}).recipes or {}
-    for recipeIndex = 1, #knowledgeRecipes do recipes[#recipes + 1] = knowledgeRecipes[recipeIndex] end
+    for recipeIndex = 1, #knowledgeRecipes do
+        recipes[#recipes + 1] = knowledgeRecipes[recipeIndex]
+    end
     for recipeIndex = 1, #recipes do
         local recipe = tostring(recipes[recipeIndex])
         if recipe ~= "" and not player:isRecipeActuallyKnown(recipe) then
@@ -226,11 +246,11 @@ end
 
 local function spawnInput(player, input, choices, spawned)
     if tostring(input.resourceType or "Item") ~= "Item" then
-        return false, string.format(getText("IGUI_KBW_DebugTestUnsupportedResource"), tostring(input.resourceType))
+        return false, getText("IGUI_KBW_DebugTestUnsupportedResource", tostring(input.resourceType))
     end
     local fullType = inputItemType(input)
     if not fullType then
-        return false, string.format(getText("IGUI_KBW_DebugTestUnresolvedInput"), tostring(input.id))
+        return false, getText("IGUI_KBW_DebugTestUnresolvedInput", tostring(input.id))
     end
     local needed = tonumber(input.uses or input.amount) or 1
     local uses = input.uses ~= nil or input.mode == "drain"
@@ -240,7 +260,7 @@ local function spawnInput(player, input, choices, spawned)
         guard = guard + 1
         local item = player:getInventory():AddItem(fullType)
         if not item then
-            return false, string.format(getText("IGUI_KBW_DebugTestSpawnFailed"), tostring(fullType))
+            return false, getText("IGUI_KBW_DebugTestSpawnFailed", tostring(fullType))
         end
         local modData = item:getModData()
         modData.KBWDebugBuildTest = tostring(input.id or "input")
@@ -259,14 +279,14 @@ local function spawnInput(player, input, choices, spawned)
         }
     end
     choices[tostring(input.id)] = fullType
-    return supplied >= needed, supplied >= needed and nil
-        or string.format(getText("IGUI_KBW_DebugTestSpawnFailed"), tostring(fullType))
+    return supplied >= needed,
+        supplied >= needed and nil or getText("IGUI_KBW_DebugTestSpawnFailed", tostring(fullType))
 end
 
----@param player IsoPlayer
+---@param player   IsoPlayer
 ---@param testCase KBW.BuildTestCase
 ---@return boolean
----@return string|nil
+---@return string | nil
 function BuildTestRunner.prepare(player, testCase)
     if not player or not testCase then return false, getText("IGUI_KBW_DebugTestNoSelection") end
     if isClient() then return false, getText("IGUI_KBW_DebugTestSingleplayerOnly") end

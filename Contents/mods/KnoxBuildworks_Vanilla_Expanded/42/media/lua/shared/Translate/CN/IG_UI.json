@@ -1,4 +1,5 @@
 {
+  "IGUI_KBWVE_Buildable_MetalDrum": "金属桶",
   "IGUI_KBW_Group_architecture_plus_door_trims_black_double_door_frame": "黑色双开门门框",
   "IGUI_KBW_Group_architecture_plus_door_trims_chestnut_double_door_frame": "栗色双开门门框",
   "IGUI_KBW_Group_architecture_plus_door_trims_grey_double_door_frame": "灰色双开门门框",
@@ -1309,5 +1310,23 @@
   "IGUI_KBWVE_Buildable_Appliance_DarkIndustrialSink": "深色工业水槽",
   "IGUI_KBWVE_Buildable_Appliance_ChromeSink": "铬制水槽",
   "IGUI_KBWVE_Buildable_Appliance_WhiteStandingSink": "白色立式水槽",
-  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "白色壁挂水槽"
+  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "白色壁挂水槽",
+  "IGUI_KBWVE_Group_LightSwitches": "电灯开关",
+  "IGUI_KBWVE_Group_TableLamps": "台灯",
+  "IGUI_KBWVE_Group_WallLamps": "壁灯",
+  "IGUI_KBWVE_Group_FloorLamps": "落地灯",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitch": "电灯开关",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitchAlternate": "备用式电灯开关",
+  "IGUI_KBWVE_Buildable_Lighting_StripedLamp": "条纹台灯",
+  "IGUI_KBWVE_Buildable_Lighting_GrayLamp": "灰色台灯",
+  "IGUI_KBWVE_Buildable_Lighting_RedLamp": "红色台灯",
+  "IGUI_KBWVE_Buildable_Lighting_GrayDeskLamp": "灰色书桌灯",
+  "IGUI_KBWVE_Buildable_Lighting_BlueLamp": "蓝色台灯",
+  "IGUI_KBWVE_Buildable_Lighting_WhiteLamp": "白色台灯",
+  "IGUI_KBWVE_Buildable_Lighting_PinkWallLamp": "粉色壁灯",
+  "IGUI_KBWVE_Buildable_Lighting_DarkWallLamp": "深色壁灯",
+  "IGUI_KBWVE_Buildable_Lighting_ExitSign": "出口标志",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp1": "落地灯（款式 1）",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp2": "落地灯（款式 2）",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp3": "落地灯（款式 3）"
 }

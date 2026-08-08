@@ -874,9 +874,10 @@
                             "clothingDryer",
                             "clothingWasher",
                             "combinationWasherDryer",
+                            "lightSwitch",
                             "stove"
                           ],
-                          "description": "Creates the matching native B42 appliance class. When omitted, Knox Buildworks detects it from the tile's IsoType property."
+                          "description": "Creates the matching native B42 appliance or light-switch class. When omitted, Knox Buildworks detects it from the tile's IsoType property or native sprite type."
                         }
                       }
                     }
@@ -974,7 +975,46 @@
                       }
                     },
                     "knowledge": {
-                      "type": "object"
+                      "type": "object",
+                      "properties": {
+                        "needToBeLearned": {
+                          "type": "boolean"
+                        },
+                        "recipes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "sources": {
+                          "type": "array"
+                        },
+                        "skillAlternatives": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "skills"
+                            ],
+                            "properties": {
+                              "mode": {
+                                "enum": [
+                                  "any",
+                                  "all"
+                                ]
+                              },
+                              "skills": {
+                                "type": "object",
+                                "minProperties": 1,
+                                "additionalProperties": {
+                                  "type": "integer",
+                                  "minimum": 0
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     },
                     "recipes": {
                       "type": "array",

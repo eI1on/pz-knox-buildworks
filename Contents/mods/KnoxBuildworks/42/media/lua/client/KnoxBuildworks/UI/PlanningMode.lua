@@ -49,18 +49,11 @@ local OPACITY_VALUES = { 0.08, 0.14, 0.22, 0.34 }
 -- Per-player/faction grant levels (labels for the access summary line; the
 -- access editor itself lives in UI/BlueprintAccessWindow.lua).
 local GRANT_LEVELS = {
-    { id = "none", label = "IGUI_KBW_LevelNone", fallback = "None" },
-    { id = "view", label = "IGUI_KBW_LevelView", fallback = "View" },
-    { id = "build", label = "IGUI_KBW_LevelBuild", fallback = "Build" },
-    { id = "contribute", label = "IGUI_KBW_LevelContribute", fallback = "Contribute" }
+    { id = "none", label = "IGUI_KBW_LevelNone" },
+    { id = "view", label = "IGUI_KBW_LevelView" },
+    { id = "build", label = "IGUI_KBW_LevelBuild" },
+    { id = "contribute", label = "IGUI_KBW_LevelContribute" }
 }
-
-local function safeText(key, fallback)
-    if not getText then return fallback or key end
-    local text = getText(key)
-    if text == key then return fallback or key end
-    return text
-end
 
 local function displayName(definition)
     return I18n.definitionName(definition)
@@ -244,18 +237,18 @@ local function levelLabel(level)
     level = tostring(level or "none")
     for levelIndex = 1, #GRANT_LEVELS do
         if GRANT_LEVELS[levelIndex].id == level then
-            return safeText(GRANT_LEVELS[levelIndex].label, GRANT_LEVELS[levelIndex].fallback)
+            return getText(GRANT_LEVELS[levelIndex].label)
         end
     end
-    if level == "private" then return safeText("IGUI_KBW_LevelNone", "None") end
+    if level == "private" then return getText("IGUI_KBW_LevelNone") end
     return tostring(level)
 end
 
 local function scopeShortLabel(scope)
-    if scope == "view" then return safeText("IGUI_KBW_AllCanViewShort", "All: view") end
-    if scope == "build" then return safeText("IGUI_KBW_AllCanBuildShort", "All: build") end
-    if scope == "contribute" then return safeText("IGUI_KBW_AllCanContributeShort", "All: edit") end
-    return safeText("IGUI_KBW_PrivateShort", "Private")
+    if scope == "view" then return getText("IGUI_KBW_AllCanViewShort") end
+    if scope == "build" then return getText("IGUI_KBW_AllCanBuildShort") end
+    if scope == "contribute" then return getText("IGUI_KBW_AllCanContributeShort") end
+    return getText("IGUI_KBW_PrivateShort")
 end
 
 local function currentFaction(player)
@@ -273,7 +266,7 @@ local function currentFactionName(player)
 end
 
 local function blueprintAccessSummary(player, blueprint)
-    if not blueprint then return safeText("IGUI_KBW_NoBlueprintSelected", "No blueprint selected") end
+    if not blueprint then return getText("IGUI_KBW_NoBlueprintSelected") end
     local access = blueprint.access or {}
     local playerCount = 0
     for _ in pairs(access.players or {}) do
@@ -366,7 +359,7 @@ function KBWPlanningCatalogPanel:createChildren()
             :setCentreVertically(true)
     end
     if self.search.setPlaceholderText then
-        self.search:setPlaceholderText(safeText("IGUI_KBW_SearchPlaceholder", "Search..."))
+        self.search:setPlaceholderText(getText("IGUI_KBW_SearchPlaceholder"))
     end
     -- Debounced like the main catalogue: typing marks the query dirty and
     -- update() rebuilds once keystrokes pause.
@@ -393,7 +386,7 @@ function KBWPlanningCatalogPanel:createChildren()
     applyCombo(self.stageCombo)
     self:addChild(self.stageCombo)
     setOptionalTooltip(
-        self.stageCombo, safeText("Tooltip_KBW_PlanningStage", "Choose the grouped buildable level to place.")
+        self.stageCombo, getText("Tooltip_KBW_PlanningStage")
     )
 
     self.variantCombo = ISComboBox:new(
@@ -404,7 +397,7 @@ function KBWPlanningCatalogPanel:createChildren()
     applyCombo(self.variantCombo)
     self:addChild(self.variantCombo)
     setOptionalTooltip(
-        self.variantCombo, safeText("Tooltip_KBW_PlanningVariant", "Choose the variant saved into the planned ghost.")
+        self.variantCombo, getText("Tooltip_KBW_PlanningVariant")
     )
 
     self.materialCombo = ISComboBox:new(
@@ -416,7 +409,7 @@ function KBWPlanningCatalogPanel:createChildren()
     self:addChild(self.materialCombo)
     setOptionalTooltip(
         self.materialCombo,
-        safeText("Tooltip_KBW_PlanningMaterial", "Choose the material set saved into the planned ghost.")
+        getText("Tooltip_KBW_PlanningMaterial")
     )
 
     self.finishCombo = ISComboBox:new(
@@ -426,7 +419,7 @@ function KBWPlanningCatalogPanel:createChildren()
     applyCombo(self.finishCombo)
     self:addChild(self.finishCombo)
     setOptionalTooltip(
-        self.finishCombo, safeText("Tooltip_KBW_PlanningFinish", "Plan the wall already plastered, painted or papered.")
+        self.finishCombo, getText("Tooltip_KBW_PlanningFinish")
     )
 
     self.catalogGrid = BuildCardGrid:new(
@@ -439,7 +432,7 @@ function KBWPlanningCatalogPanel:createChildren()
 
     self.placePlanButton = makeButton(
         self, 10, self.placePlanY, self.width - 20, self.placePlanH,
-        safeText("IGUI_KBW_PlanSelectedBuildable", "Plan selected buildable"), self.onPlanSelected
+        getText("IGUI_KBW_PlanSelectedBuildable"), self.onPlanSelected
     )
 
     self:refreshCategories()
@@ -520,7 +513,7 @@ end
 function KBWPlanningCatalogPanel:refreshCategories()
     local selected = self.categoryFilter:getOptionData(self.categoryFilter.selected) or "All"
     self.categoryFilter:clear()
-    self.categoryFilter:addOptionWithData(safeText("IGUI_KBW_AllCategories", "All categories"), "All")
+    self.categoryFilter:addOptionWithData(getText("IGUI_KBW_AllCategories"), "All")
     local categories = CatalogIndex.get().categories
     for categoryIndex = 1, #categories do
         local category = categories[categoryIndex]
@@ -603,7 +596,7 @@ function KBWPlanningCatalogPanel:refreshStageChoices(definition)
     )
     self.visibleStages = stages
     if #stages == 0 then
-        self.stageCombo:addOptionWithData(safeText("IGUI_KBW_NoStages", "No build levels"), 1)
+        self.stageCombo:addOptionWithData(getText("IGUI_KBW_NoStages"), 1)
         self.stageCombo.selected = 1
         self:refreshVariantMaterialChoices(definition, nil)
         return
@@ -662,13 +655,13 @@ function KBWPlanningCatalogPanel:refreshVariantMaterialChoices(definition, stage
     local baseDefinition = Groups.resolveDefinition(definition, stage)
     self:refreshOptionCombo(
         self.variantCombo, baseDefinition and baseDefinition.variants or {},
-        safeText("IGUI_KBW_DefaultVariant", "Default variant")
+        getText("IGUI_KBW_DefaultVariant")
     )
     -- materialRequired definitions have no buildable base: skip the default
     -- row so the first material option is always selected.
     self:refreshOptionCombo(
         self.materialCombo, baseDefinition and baseDefinition.materialOptions or {},
-        safeText("IGUI_KBW_DefaultMaterial", "Default material"),
+        getText("IGUI_KBW_DefaultMaterial"),
         baseDefinition ~= nil and baseDefinition.materialRequired == true
     )
     self:refreshFinishChoices(baseDefinition, stage)
@@ -683,7 +676,7 @@ function KBWPlanningCatalogPanel:refreshFinishChoices(baseDefinition, stage)
     self.finishCombo:clear()
     self.finishEntries = FinishOptions.entriesFor(baseDefinition, stage)
     if #self.finishEntries == 0 then
-        self.finishCombo:addOptionWithData(safeText("IGUI_KBW_NoFinish", "No finish (no color)"), 0)
+        self.finishCombo:addOptionWithData(getText("IGUI_KBW_NoFinish"), 0)
         self.finishCombo.selected = 1
         self.finishCombo:setEnabled(false)
         return
@@ -741,7 +734,7 @@ function KBWPlanningCatalogPanel:prerender()
     ISPanel.prerender(self)
     if not self.selectorPanelY then self:layoutSelectors() end
     self:drawText(
-        safeText("IGUI_KBW_PlanningCatalog", "Planning catalogue"), 10, self.topTitleY, Theme.accent.r, Theme.accent.g,
+        getText("IGUI_KBW_PlanningCatalog"), 10, self.topTitleY, Theme.accent.r, Theme.accent.g,
         Theme.accent.b, 1, UIFont.Small
     )
     self:drawRect(
@@ -753,27 +746,27 @@ function KBWPlanningCatalogPanel:prerender()
         Theme.border.b
     )
     self:drawText(
-        safeText("IGUI_KBW_PlanningSelection", "Selected plan setup"), 18, self.selectorHeaderY, Theme.accent.r,
+        getText("IGUI_KBW_PlanningSelection"), 18, self.selectorHeaderY, Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
-    local name = safeText("IGUI_KBW_NoBuildableSelected", "Select a buildable")
+    local name = getText("IGUI_KBW_NoBuildableSelected")
     if self.owner and self.owner.selectedBuildable then name = displayName(self.owner.selectedBuildable) end
     self:drawText(name, 18, self.selectedNameY, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
     self:drawText(
-        safeText("IGUI_KBW_Stage", "Stage"), 18, self.stageLabelY, Theme.textMuted.r, Theme.textMuted.g,
+        getText("IGUI_KBW_Stage"), 18, self.stageLabelY, Theme.textMuted.r, Theme.textMuted.g,
         Theme.textMuted.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_Variant", "Variant"), 18, self.variantLabelY, Theme.textMuted.r, Theme.textMuted.g,
+        getText("IGUI_KBW_Variant"), 18, self.variantLabelY, Theme.textMuted.r, Theme.textMuted.g,
         Theme.textMuted.b, 1, UIFont.Small
     )
     local materialX = self.materialCombo and self.materialCombo.x or (26 + math.floor((self.width - 44) / 2))
     self:drawText(
-        safeText("IGUI_KBW_MaterialSet", "Material set"), materialX, self.variantLabelY, Theme.textMuted.r,
+        getText("IGUI_KBW_MaterialSet"), materialX, self.variantLabelY, Theme.textMuted.r,
         Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_Finish", "Finish"), 18, self.finishLabelY, Theme.textMuted.r, Theme.textMuted.g,
+        getText("IGUI_KBW_Finish"), 18, self.finishLabelY, Theme.textMuted.r, Theme.textMuted.g,
         Theme.textMuted.b, 1, UIFont.Small
     )
 end
@@ -859,7 +852,7 @@ function KBWPlanningMode:createChildren()
     self:addChild(self.blueprintList)
 
     yLeft = yLeft + self.blueprintList.height + gap
-    local renameLabel = safeText("IGUI_KBW_Rename", "Rename")
+    local renameLabel = getText("IGUI_KBW_Rename")
     local renameW = math.max(64, getTextManager():MeasureStringX(UIFont.Small, renameLabel) + 20)
     self.blueprintName = ISTextEntryBox:new("", pad, yLeft, leftW - renameW - gap, buttonH)
     self.blueprintName:initialise()
@@ -870,51 +863,51 @@ function KBWPlanningMode:createChildren()
     )
     setOptionalTooltip(
         self.renameButton,
-        safeText("Tooltip_KBW_RenameBlueprint", "Rename the selected blueprint using the name field.")
+        getText("Tooltip_KBW_RenameBlueprint")
     )
     yLeft = yLeft + buttonH + gap
 
     local thirdLeft = math.floor((leftW - gap * 2) / 3)
     local halfLeft = math.floor((leftW - gap) / 2)
     self.newButton = makeButton(
-        self, pad, yLeft, thirdLeft, buttonH, safeText("IGUI_KBW_NewShort", "New"), self.onNewBlueprint
+        self, pad, yLeft, thirdLeft, buttonH, getText("IGUI_KBW_NewShort"), self.onNewBlueprint
     )
     self.duplicateButton = makeButton(
-        self, pad + thirdLeft + gap, yLeft, thirdLeft, buttonH, safeText("IGUI_KBW_Duplicate", "Duplicate"),
+        self, pad + thirdLeft + gap, yLeft, thirdLeft, buttonH, getText("IGUI_KBW_Duplicate"),
         self.onDuplicateBlueprint
     )
     self.deleteButton = makeButton(
-        self, pad + (thirdLeft + gap) * 2, yLeft, thirdLeft, buttonH, safeText("IGUI_KBW_Delete", "Delete"),
+        self, pad + (thirdLeft + gap) * 2, yLeft, thirdLeft, buttonH, getText("IGUI_KBW_Delete"),
         self.onDeleteBlueprint
     )
     setOptionalTooltip(
-        self.newButton, safeText("Tooltip_KBW_NewBlueprint", "Create a new blueprint at your current level.")
+        self.newButton, getText("Tooltip_KBW_NewBlueprint")
     )
     setOptionalTooltip(
-        self.duplicateButton, safeText("Tooltip_KBW_DuplicateBlueprint", "Duplicate the selected blueprint.")
+        self.duplicateButton, getText("Tooltip_KBW_DuplicateBlueprint")
     )
-    setOptionalTooltip(self.deleteButton, safeText("Tooltip_KBW_DeleteBlueprint", "Delete the selected blueprint."))
+    setOptionalTooltip(self.deleteButton, getText("Tooltip_KBW_DeleteBlueprint"))
     yLeft = yLeft + buttonH + gap
     self.activateButton = makeButton(
-        self, pad, yLeft, halfLeft, buttonH, safeText("IGUI_KBW_ActivateBlueprint", "Show ghosts"),
+        self, pad, yLeft, halfLeft, buttonH, getText("IGUI_KBW_ActivateBlueprint"),
         self.onActivateBlueprint
     )
     self.pinBlueprintButton = makeButton(
-        self, pad + halfLeft + gap, yLeft, halfLeft, buttonH, safeText("IGUI_KBW_PinBlueprint", "Pin"),
+        self, pad + halfLeft + gap, yLeft, halfLeft, buttonH, getText("IGUI_KBW_PinBlueprint"),
         self.onPinBlueprint
     )
     setOptionalTooltip(
         self.activateButton,
-        safeText("Tooltip_KBW_ActivateBlueprint", "Toggle this blueprint's ghost overlay in the world.")
+        getText("Tooltip_KBW_ActivateBlueprint")
     )
     setOptionalTooltip(
         self.pinBlueprintButton,
-        safeText("Tooltip_KBW_PinBlueprint", "Pin this blueprint's total requirements to the HUD.")
+        getText("Tooltip_KBW_PinBlueprint")
     )
     yLeft = yLeft + buttonH + gap
-    local exportLabel = safeText("IGUI_KBW_ExportJSON", "Export")
-    local importLabel = safeText("IGUI_KBW_Import", "Import")
-    local copyJsonLabel = safeText("IGUI_KBW_CopyBlueprintJSON", "Copy JSON")
+    local exportLabel = getText("IGUI_KBW_ExportJSON")
+    local importLabel = getText("IGUI_KBW_Import")
+    local copyJsonLabel = getText("IGUI_KBW_CopyBlueprintJSON")
     local exportRowMinimum = getTextManager():MeasureStringX(UIFont.Small, exportLabel) + 20
         + getTextManager():MeasureStringX(UIFont.Small, importLabel) + 20
         + getTextManager():MeasureStringX(UIFont.Small, copyJsonLabel) + 20
@@ -945,26 +938,21 @@ function KBWPlanningMode:createChildren()
     end
     setOptionalTooltip(
         self.exportButton,
-        safeText(
-            "Tooltip_KBW_ExportBlueprint",
-            "Write the selected blueprint as a JSON-formatted .txt file in Zomboid/Lua/KnoxBuildworks/exports."
-        )
+        getText("Tooltip_KBW_ExportBlueprint")
     )
     setOptionalTooltip(
         self.importButton,
-        safeText(
-            "Tooltip_KBW_ImportBlueprint", "Import a blueprint .txt file from Zomboid/Lua/KnoxBuildworks/exports."
-        )
+        getText("Tooltip_KBW_ImportBlueprint")
     )
     self.levelDownButton = makeButton(self, pad, yLeft, 40, buttonH, "-Z", self.onLevelDown)
     self.levelUpButton = makeButton(self, pad + 46, yLeft, 40, buttonH, "+Z", self.onLevelUp)
-    setOptionalTooltip(self.levelDownButton, safeText("Tooltip_KBW_LevelDown", "Plan one level lower."))
-    setOptionalTooltip(self.levelUpButton, safeText("Tooltip_KBW_LevelUp", "Plan one level higher."))
+    setOptionalTooltip(self.levelDownButton, getText("Tooltip_KBW_LevelDown"))
+    setOptionalTooltip(self.levelUpButton, getText("Tooltip_KBW_LevelUp"))
     self.levelLabelX = pad + 96
     local levelLabelW = getTextManager():MeasureStringX(UIFont.Small, "Z -88") + 12
     local useLevelX = self.levelLabelX + levelLabelW
     self.usePlayerLevelButton = makeButton(
-        self, useLevelX, yLeft, leftW - (useLevelX - pad), buttonH, safeText("IGUI_KBW_UsePlayerLevel", "Use my level"),
+        self, useLevelX, yLeft, leftW - (useLevelX - pad), buttonH, getText("IGUI_KBW_UsePlayerLevel"),
         self.onUsePlayerLevel
     )
     yLeft = yLeft + buttonH + gap
@@ -972,14 +960,11 @@ function KBWPlanningMode:createChildren()
     self.accessHeaderY = yLeft
     yLeft = yLeft + headerH
     self.manageAccessButton = makeButton(
-        self, pad, yLeft, leftW, buttonH, safeText("IGUI_KBW_ManageAccess", "Manage access"), self.onManageAccess
+        self, pad, yLeft, leftW, buttonH, getText("IGUI_KBW_ManageAccess"), self.onManageAccess
     )
     setOptionalTooltip(
         self.manageAccessButton,
-        safeText(
-            "Tooltip_KBW_ManageAccess",
-            "Open blueprint sharing controls for default, faction and per-player permissions."
-        )
+        getText("Tooltip_KBW_ManageAccess")
     )
     yLeft = yLeft + buttonH + gap + headerH
 
@@ -1023,69 +1008,64 @@ function KBWPlanningMode:createChildren()
     yRight = yRight + (math.floor((#ROOM_COLORS - 1) / perRow) + 1) * colorStep + gap
     local actionHalf = math.floor((rightW - gap) / 2)
     self.drawRoomButton = makeButton(
-        self, rightX, yRight, actionHalf, buttonH, safeText("IGUI_KBW_DrawRoom", "Draw room"), self.onDrawRoom
+        self, rightX, yRight, actionHalf, buttonH, getText("IGUI_KBW_DrawRoom"), self.onDrawRoom
     )
     self.eraseRoomButton = makeButton(
-        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, safeText("IGUI_KBW_EraseRoomTool", "Erase room"),
+        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, getText("IGUI_KBW_EraseRoomTool"),
         self.onEraseRoomTool
     )
-    setOptionalTooltip(self.drawRoomButton, safeText("Tooltip_KBW_DrawRoom", "Drag a rectangle to create a room zone."))
+    setOptionalTooltip(self.drawRoomButton, getText("Tooltip_KBW_DrawRoom"))
     setOptionalTooltip(
-        self.eraseRoomButton, safeText("Tooltip_KBW_EraseRoom", "Erase room zones without touching planned buildables.")
+        self.eraseRoomButton, getText("Tooltip_KBW_EraseRoom")
     )
     yRight = yRight + buttonH + gap
     self.eraseButton = makeButton(
-        self, rightX, yRight, actionHalf, buttonH, safeText("IGUI_KBW_EraseTool", "Erase plan"), self.onEraseTool
+        self, rightX, yRight, actionHalf, buttonH, getText("IGUI_KBW_EraseTool"), self.onEraseTool
     )
     self.buildToolButton = makeButton(
-        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, safeText("IGUI_KBW_BuildTool", "Build tool"),
+        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, getText("IGUI_KBW_BuildTool"),
         self.onBuildTool
     )
-    setOptionalTooltip(self.eraseButton, safeText("Tooltip_KBW_ErasePlan", "Erase planned buildables one at a time."))
+    setOptionalTooltip(self.eraseButton, getText("Tooltip_KBW_ErasePlan"))
     setOptionalTooltip(
-        self.buildToolButton, safeText("Tooltip_KBW_BuildTool", "Click planned buildables in the world to build them.")
+        self.buildToolButton, getText("Tooltip_KBW_BuildTool")
     )
     yRight = yRight + buttonH + gap
     self.gatherAreaButton = makeButton(
-        self, rightX, yRight, actionHalf, buttonH, safeText("IGUI_KBW_GatherArea", "Gather area"), self.onGatherArea
+        self, rightX, yRight, actionHalf, buttonH, getText("IGUI_KBW_GatherArea"), self.onGatherArea
     )
     self.buildAllButton = makeButton(
-        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, safeText("IGUI_KBW_BuildAll", "Build all"),
+        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, getText("IGUI_KBW_BuildAll"),
         self.onBuildAll
     )
     setOptionalTooltip(
         self.gatherAreaButton,
-        safeText(
-            "Tooltip_KBW_GatherArea", "Drag the container/vehicle area used for blueprint material counts and fetching."
-        )
+        getText("Tooltip_KBW_GatherArea")
     )
     setOptionalTooltip(
         self.buildAllButton,
-        safeText(
-            "Tooltip_KBW_BuildAll",
-            "Queue every planned buildable, fetching materials from the gather area when possible."
-        )
+        getText("Tooltip_KBW_BuildAll")
     )
     yRight = yRight + buttonH + gap
     self.stopToolButton = makeButton(
-        self, rightX, yRight, actionHalf, buttonH, safeText("IGUI_KBW_StopTool", "Stop tool"), self.onStopTool
+        self, rightX, yRight, actionHalf, buttonH, getText("IGUI_KBW_StopTool"), self.onStopTool
     )
     self.stopQueueButton = makeButton(
-        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, safeText("IGUI_KBW_StopQueue", "Stop queue"),
+        self, rightX + actionHalf + gap, yRight, actionHalf, buttonH, getText("IGUI_KBW_StopQueue"),
         self.onStopQueue
     )
-    setOptionalTooltip(self.stopToolButton, safeText("Tooltip_KBW_StopTool", "Cancel the active planning cursor."))
+    setOptionalTooltip(self.stopToolButton, getText("Tooltip_KBW_StopTool"))
     setOptionalTooltip(
-        self.stopQueueButton, safeText("Tooltip_KBW_StopQueue", "Stop the active blueprint build queue.")
+        self.stopQueueButton, getText("Tooltip_KBW_StopQueue")
     )
     yRight = yRight + buttonH + gap
     self.moveBlueprintButton = makeButton(
-        self, rightX, yRight, rightW, buttonH, safeText("IGUI_KBW_MoveBlueprintTool", "Move blueprint"),
+        self, rightX, yRight, rightW, buttonH, getText("IGUI_KBW_MoveBlueprintTool"),
         self.onMoveBlueprint
     )
     setOptionalTooltip(
         self.moveBlueprintButton,
-        safeText("Tooltip_KBW_MoveBlueprint", "Pick a new origin tile with the cursor; the whole blueprint follows.")
+        getText("Tooltip_KBW_MoveBlueprint")
     )
     yRight = yRight + buttonH + gap
 
@@ -1124,8 +1104,8 @@ function KBWPlanningMode:createChildren()
     self:addChild(self.roomList)
     yRight = yRight + self.roomList.height + gap
     local halfRight = math.floor((rightW - gap) / 2)
-    local updateRoomLabel = safeText("IGUI_KBW_UpdateRoom", "Update room")
-    local deleteRoomLabel = safeText("IGUI_KBW_DeleteRoom", "Delete room")
+    local updateRoomLabel = getText("IGUI_KBW_UpdateRoom")
+    local deleteRoomLabel = getText("IGUI_KBW_DeleteRoom")
     local roomLabelWidth = math.max(
         getTextManager():MeasureStringX(UIFont.Small, updateRoomLabel),
         getTextManager():MeasureStringX(UIFont.Small, deleteRoomLabel)
@@ -1147,7 +1127,7 @@ function KBWPlanningMode:createChildren()
     end
     setOptionalTooltip(
         self.updateRoomButton,
-        safeText("Tooltip_KBW_UpdateRoom", "Apply the name field and the selected color to the selected room.")
+        getText("Tooltip_KBW_UpdateRoom")
     )
 
     self.placementList = ISScrollingListBox:new(rightX, yRight, rightW, math.max(96, bottomY - yRight))
@@ -1170,11 +1150,11 @@ function KBWPlanningMode:createChildren()
     local bottomHalf = math.floor((self.width - pad * 2 - gap) / 2)
     self.buildSelectedButton = makeButton(
         self, pad, self.height - pad - bottomButtonH, bottomHalf, bottomButtonH,
-        safeText("IGUI_KBW_BuildPlacement", "Build selected"), self.onBuildSelected
+        getText("IGUI_KBW_BuildPlacement"), self.onBuildSelected
     )
     self.exitButton = makeButton(
         self, pad + bottomHalf + gap, self.height - pad - bottomButtonH, bottomHalf, bottomButtonH,
-        safeText("IGUI_KBW_ExitPlanningMode", "Exit planning mode"), self.onExit
+        getText("IGUI_KBW_ExitPlanningMode"), self.onExit
     )
 
     local catalogW = self.catalogWidth or 390
@@ -1249,8 +1229,7 @@ function KBWPlanningMode:drawBlueprintRow(list, y, item, alt)
     local rooms = blueprint.rooms or {}
     local placements = blueprint.placements or {}
     list:drawText(
-        string.format(
-            safeText("IGUI_KBW_BlueprintSummary", "Level %s | Rooms %s | Planned %s"), tostring(blueprint.level or 0),
+        getText("IGUI_KBW_BlueprintSummary", tostring(blueprint.level or 0),
             tostring(#rooms), tostring(#placements)
         ), 10, textY + 2, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
@@ -1461,15 +1440,14 @@ function KBWPlanningMode:refreshTotals()
     end
     local rooms = blueprint.rooms or {}
     addHeader(
-        string.format(
-            safeText("IGUI_KBW_BlueprintTotalsShort", "%s placements / %s rooms"), tostring(totals.placements or 0),
+        getText("IGUI_KBW_BlueprintTotalsShort", tostring(totals.placements or 0),
             tostring(#rooms)
         )
     )
-    addHeader(safeText("IGUI_KBW_MaterialsTools", "Materials & tools"))
+    addHeader(getText("IGUI_KBW_MaterialsTools"))
     addRows(mapToSortedList(totals.materials, "material"))
     addRows(mapToSortedList(totals.tools, "tool"))
-    addHeader(safeText("IGUI_KBW_SkillsKnowledge", "Skills & knowledge"))
+    addHeader(getText("IGUI_KBW_SkillsKnowledge"))
     addRows(mapToSortedList(totals.skills, "skill"))
 end
 
@@ -1554,7 +1532,7 @@ function KBWPlanningMode:updateBlueprintPinButton()
         and PinnedRecipes.isBlueprintPinned(self.player, blueprint)
     Theme.applyButton(self.pinBlueprintButton, pinned == true)
     self.pinBlueprintButton:setTitle(
-        pinned and safeText("IGUI_KBW_UnpinBlueprint", "Unpin") or safeText("IGUI_KBW_PinBlueprint", "Pin")
+        pinned and getText("IGUI_KBW_UnpinBlueprint") or getText("IGUI_KBW_PinBlueprint")
     )
 end
 
@@ -1617,8 +1595,8 @@ function KBWPlanningMode:updateActivateButton()
     local active = blueprint ~= nil and Blueprints.isActive(self.player, blueprint.id)
     Theme.applyButton(self.activateButton, active == true)
     self.activateButton:setTitle(
-        active and safeText("IGUI_KBW_DeactivateBlueprint", "Hide ghosts")
-            or safeText("IGUI_KBW_ActivateBlueprint", "Show ghosts")
+        active and getText("IGUI_KBW_DeactivateBlueprint")
+            or getText("IGUI_KBW_ActivateBlueprint")
     )
 end
 
@@ -1629,10 +1607,9 @@ function KBWPlanningMode:onExportBlueprint()
     say(
         self.player,
         path
-            and string.format(
-                safeText("IGUI_KBW_Exported", "Exported %s as Lua/%s"), tostring(blueprint.name or blueprint.id), path
+            and getText("IGUI_KBW_Exported", tostring(blueprint.name or blueprint.id), path
             )
-            or safeText("IGUI_KBW_ExportFailed", "Blueprint export failed"), path == nil
+            or getText("IGUI_KBW_ExportFailed"), path == nil
     )
 end
 
@@ -1650,7 +1627,7 @@ function KBWPlanningMode:onCopyBlueprintJSON()
     local blueprint = self:selectedBlueprint()
     if not blueprint or not Clipboard then return end
     Clipboard.setClipboard(Blueprints.exportJSON(blueprint))
-    say(self.player, safeText("IGUI_KBW_BlueprintCopiedJSON", "Blueprint JSON copied to clipboard"), false)
+    say(self.player, getText("IGUI_KBW_BlueprintCopiedJSON"), false)
 end
 
 function KBWPlanningMode:onLevelDown()
@@ -1691,7 +1668,7 @@ function KBWPlanningMode:onUpdateRoom()
     local room = self:selectedRoom()
     if not blueprint or not room then return end
     local name = self.roomName and self.roomName:getInternalText() or nil
-    if not name or name == "" then name = room.name or safeText("IGUI_KBW_RoomTypeGeneric", "Room") end
+    if not name or name == "" then name = room.name or getText("IGUI_KBW_RoomTypeGeneric") end
     local color = ROOM_COLORS[self.roomColorIndex or 1] or ROOM_COLORS[1]
     Blueprints.updateRoom(self.player, blueprint.id, room.id, {
         name = name,
@@ -1723,7 +1700,7 @@ end
 function KBWPlanningMode:roomTemplate()
     local color = ROOM_COLORS[self.roomColorIndex or 1] or ROOM_COLORS[1]
     local name = self.roomName:getInternalText()
-    if name == nil or name == "" then name = safeText("IGUI_KBW_RoomTypeGeneric", "Room") end
+    if name == nil or name == "" then name = getText("IGUI_KBW_RoomTypeGeneric") end
     return { name = name, type = "room", color = { r = color.r, g = color.g, b = color.b, a = color.a } }
 end
 
@@ -1816,7 +1793,7 @@ function KBWPlanningMode:onPlanSelected()
         definition = self.catalogPanel.catalogGrid.items[self.catalogPanel.catalogGrid.selectedIndex]
     end
     if not blueprint or not definition then
-        say(self.player, safeText("IGUI_KBW_SelectBuildableFirst", "Select a buildable first"), true)
+        say(self.player, getText("IGUI_KBW_SelectBuildableFirst"), true)
         return
     end
     local stage = self.catalogPanel and self.catalogPanel:selectedStage()
@@ -1873,23 +1850,22 @@ function KBWPlanningMode:prerender()
         self.placementList.height + headerH + 6
     )
     self:drawText(
-        safeText("IGUI_KBW_PlanningMode", "Knox Planning Mode"), leftX, self.titleY or 12, Theme.accent.r,
+        getText("IGUI_KBW_PlanningMode"), leftX, self.titleY or 12, Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_Blueprints", "Blueprints"), leftX, self.subHeaderY or 30, Theme.textMuted.r,
+        getText("IGUI_KBW_Blueprints"), leftX, self.subHeaderY or 30, Theme.textMuted.r,
         Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
     local blueprint = self:selectedBlueprint()
     self:drawText(
-        string.format(
-            safeText("IGUI_KBW_BlueprintLevel", "Z %s"),
+        getText("IGUI_KBW_BlueprintLevel",
             tostring((blueprint and blueprint.level) or math.floor(self.player:getZ()))
         ), self.levelLabelX, self.levelDownButton.y + math.floor((self.levelDownButton.height - FONT_HGT_SMALL) / 2),
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_RoomTools", "Room tools"), rightX, self.subHeaderY or 30, Theme.textMuted.r,
+        getText("IGUI_KBW_RoomTools"), rightX, self.subHeaderY or 30, Theme.textMuted.r,
         Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
     -- Selected-color hint swatch beside the room name entry.
@@ -1904,23 +1880,23 @@ function KBWPlanningMode:prerender()
         )
     end
     self:drawText(
-        safeText("IGUI_KBW_GhostOpacity", "Ghost opacity"), rightX, headerTextY(self.opacityButtons[1]),
+        getText("IGUI_KBW_GhostOpacity"), rightX, headerTextY(self.opacityButtons[1]),
         Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_Rooms", "Rooms"), rightX, headerTextY(self.roomList), Theme.accent.r, Theme.accent.g,
+        getText("IGUI_KBW_Rooms"), rightX, headerTextY(self.roomList), Theme.accent.r, Theme.accent.g,
         Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_BlueprintTotals", "Blueprint totals"), leftX, headerTextY(self.totalList), Theme.accent.r,
+        getText("IGUI_KBW_BlueprintTotals"), leftX, headerTextY(self.totalList), Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
     self:drawText(
-        safeText("IGUI_KBW_Placements", "Planned buildables"), rightX, headerTextY(self.placementList), Theme.accent.r,
+        getText("IGUI_KBW_Placements"), rightX, headerTextY(self.placementList), Theme.accent.r,
         Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
     if self.accessHeaderY then
-        local accessLabel = safeText("IGUI_KBW_Access", "Access")
+        local accessLabel = getText("IGUI_KBW_Access")
         self:drawText(
             accessLabel, leftX, self.accessHeaderY, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
         )
@@ -1959,14 +1935,14 @@ function KBWPlanningMode.open(player)
     player = player or getPlayer()
     if not KBW.Runtime.loaded then
         if player and HaloTextHelper and HaloTextHelper.addText then
-            HaloTextHelper.addText(player, safeText("IGUI_KBW_DefinitionsLoading", "Knox Buildworks is still loading"))
+            HaloTextHelper.addText(player, getText("IGUI_KBW_DefinitionsLoading"))
         end
         return nil
     end
     if KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) ~= true then
         if HaloTextHelper and HaloTextHelper.addBadText then
             HaloTextHelper.addBadText(
-                player, safeText("IGUI_KBW_PlanningDisabled", "Planning mode is disabled on this server")
+                player, getText("IGUI_KBW_PlanningDisabled")
             )
         end
         return nil

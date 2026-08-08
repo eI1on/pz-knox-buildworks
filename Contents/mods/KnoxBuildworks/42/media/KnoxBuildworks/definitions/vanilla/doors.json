@@ -59,6 +59,9 @@
       "placement": {
         "kind": "wall"
       },
+      "finishes": {
+        "enabled": false
+      },
       "stages": [
         {
           "id": "built",

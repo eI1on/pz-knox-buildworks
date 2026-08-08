@@ -1,8 +1,8 @@
----Client-local import/export for administrative buildable-rule presets.
+--- Client-local import/export for administrative buildable-rule presets.
 ---
----Preset files are deliberately kept out of the server settings directory.
----Loading one only returns a validated draft; the existing admin editor and
----server command remain the sole path that can make rules authoritative.
+--- Preset files are deliberately kept out of the server settings directory.
+--- Loading one only returns a validated draft; the existing admin editor and
+--- server command remain the sole path that can make rules authoritative.
 local JSON = require("ElyonLib/FileUtils/JSON")
 local SafeJSON = require("KnoxBuildworks/Util/SafeJSON")
 local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
@@ -98,17 +98,13 @@ local function writeValidated(name, normalized)
     if not writer then return nil, "write_failed" end
     writer:write(JSON.stringify(payload))
     writer:close()
-    detailsCache[fileName] = {
-        name = name,
-        registryMismatch = false,
-        valid = true
-    }
+    detailsCache[fileName] = { name = name, registryMismatch = false, valid = true }
     return path, nil, fileName
 end
 
----Validates and writes a rule draft to the local client's Zomboid/Lua folder.
----@return string|nil path
----@return string|nil errorCode
+--- Validates and writes a rule draft to the local client's Zomboid/Lua folder.
+---@return string | nil path
+---@return string | nil errorCode
 function Presets.export(name, document)
     if not validName(name) then return nil, "invalid_name" end
     local normalized, errors = BuildableRules.validateDocument(document)
@@ -139,11 +135,11 @@ local function readText(fileName)
     return table.concat(lines, "\n")
 end
 
----Reads and validates an untrusted client-local preset. Bare rule documents
----are accepted as a compatibility format, but new exports always include
----portable metadata in the versioned wrapper.
----@return table|nil document
----@return table|string metadataOrError
+--- Reads and validates an untrusted client-local preset. Bare rule documents
+--- are accepted as a compatibility format, but new exports always include
+--- portable metadata in the versioned wrapper.
+---@return table | nil document
+---@return table | string metadataOrError
 function Presets.read(fileName)
     local text, readError = readText(fileName)
     if not text then
@@ -186,14 +182,9 @@ function Presets.read(fileName)
         return nil, { code = "invalid_rules", errors = errors }
     end
     normalized.revision = 0
-    metadata.registryMismatch = metadata.registryHash ~= nil
-        and metadata.registryHash ~= ""
+    metadata.registryMismatch = metadata.registryHash ~= nil and metadata.registryHash ~= ""
         and metadata.registryHash ~= tostring(Registry.hash or "")
-    detailsCache[fileName] = {
-        name = metadata.name,
-        registryMismatch = metadata.registryMismatch,
-        valid = true
-    }
+    detailsCache[fileName] = { name = metadata.name, registryMismatch = metadata.registryMismatch, valid = true }
     return normalized, metadata
 end
 
@@ -216,7 +207,7 @@ function Presets.list()
             }
         end
     end
-    table.sort(result, function(a, b)
+    table.sort(result, function (a, b)
         local nameA = string.lower(tostring(a.name or a.fileName))
         local nameB = string.lower(tostring(b.name or b.fileName))
         if nameA ~= nameB then return nameA < nameB end

@@ -1,5 +1,7 @@
----BuildQueue provides the Knox Buildworks blueprint planning layer.
+--- BuildQueue provides the Knox Buildworks blueprint planning layer.
 require "TimedActions/ISInventoryTransferAction"
+require "TimedActions/ISGrabItemAction"
+require "ISUI/ISWorldObjectContextMenu"
 
 local KBW = require("KnoxBuildworks/Core")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
@@ -174,6 +176,31 @@ local function gatherContainers(area, player)
     return containers
 end
 
+local function gatherWorldItems(area)
+    local result = {}
+    local seen = {}
+    if not area then return result end
+    local z = tonumber(area.z) or 0
+    for x = area.x1, area.x2 do
+        for y = area.y1, area.y2 do
+            local square = getCell():getGridSquare(x, y, z)
+            local objects = square and square:getWorldObjects() or nil
+            if objects then
+                for objectIndex = 0, objects:size() - 1 do
+                    local worldItem = objects:get(objectIndex)
+                    local item = worldItem and worldItem.getItem and worldItem:getItem() or nil
+                    local key = worldItem and tostring(worldItem) or nil
+                    if item and key and not seen[key] then
+                        seen[key] = true
+                        result[#result + 1] = worldItem
+                    end
+                end
+            end
+        end
+    end
+    return result
+end
+
 local function itemMatchesRow(item, row)
     if not item then return false end
     local fullType = item:getFullType()
@@ -226,6 +253,41 @@ local function collectContainerTransfers(container, rows)
         end
     end
     return transfers
+end
+
+local function collectWorldTransfers(worldItems, rows)
+    local transfers = {}
+    local usedItems = {}
+    for rowIndex = 1, #rows do
+        local row = rows[rowIndex]
+        local missing = (row.needed or 1) - (row.available or 0)
+        if row.kind == "input" and not row.ok and missing > 0 then
+            for worldIndex = 1, #worldItems do
+                if missing <= 0 then break end
+                local worldItem = worldItems[worldIndex]
+                local item = worldItem and worldItem.getItem and worldItem:getItem() or nil
+                local key = item and tostring(item) or nil
+                if key and not usedItems[key] and worldItem:getSquare() and itemMatchesRow(item, row) then
+                    usedItems[key] = true
+                    transfers[#transfers + 1] = worldItem
+                    missing = missing - itemAmount(item, row)
+                end
+            end
+        end
+    end
+    return transfers
+end
+
+local function queueWorldItemTransfer(state, worldItem, playerInv)
+    local item = worldItem:getItem()
+    if isClient() and ISInventoryTransferUtil and ISInventoryTransferUtil.newInventoryTransferAction then
+        ISTimedActionQueue.add(
+            ISInventoryTransferUtil.newInventoryTransferAction(state.player, item, item:getContainer(), playerInv)
+        )
+    else
+        local time = ISWorldObjectContextMenu.grabItemTime(state.player, worldItem)
+        ISTimedActionQueue.add(ISGrabItemAction:new(state.player, worldItem, time))
+    end
 end
 
 local function canTryContainer(player, container)
@@ -282,6 +344,21 @@ local function queueFetchPass(state, placement)
         missingRowsFor(state, state.remaining[lookahead], rows)
     end
     local playerInv = state.player:getInventory()
+    local worldTransfers = collectWorldTransfers(state.gatherWorldItems or {}, rows)
+    if #worldTransfers > 0 then
+        local firstSquare = worldTransfers[1]:getSquare()
+        if firstSquare and luautils.walkAdj(state.player, firstSquare, true) then
+            local queued = 0
+            for transferIndex = 1, #worldTransfers do
+                local worldItem = worldTransfers[transferIndex]
+                if worldItem:getSquare() == firstSquare then
+                    queueWorldItemTransfer(state, worldItem, playerInv)
+                    queued = queued + 1
+                end
+            end
+            if queued > 0 then return queued, false end
+        end
+    end
     for containerIndex = 1, #containers do
         local container = containers[containerIndex]
         local transfers = collectContainerTransfers(container, rows)
@@ -329,7 +406,7 @@ local function startPlacement(state)
             state.phase = "select"
             return
         end
-        local doneText = string.format(getText("IGUI_KBW_BuildQueueDone"), state.built, state.skipped)
+        local doneText = getText("IGUI_KBW_BuildQueueDone", state.built, state.skipped)
         return finish(state, doneText, state.skipped > 0)
     end
     state.current = placement
@@ -355,9 +432,7 @@ local function tryBuildCurrent(state)
     end)
     if not ok then
         if reason == "requirements not met" or reason == "finish materials missing" then
-            return finish(
-                state, getText("IGUI_KBW_BuildQueueOutOfResources"), true
-            )
+            return finish(state, getText("IGUI_KBW_BuildQueueOutOfResources"), true)
         end
         state.skipped = state.skipped + 1
         if state.pass == 1 then state.retry[#state.retry + 1] = placement end
@@ -387,9 +462,7 @@ function BuildQueue.onTick()
             if queued > 0 then
                 state.fetchAttempts = (state.fetchAttempts or 0) + 1
             elseif starved then
-                return finish(
-                    state, getText("IGUI_KBW_BuildQueueOutOfResources"), true
-                )
+                return finish(state, getText("IGUI_KBW_BuildQueueOutOfResources"), true)
             else
                 tryBuildCurrent(state)
             end
@@ -442,6 +515,7 @@ local function startWithPlacements(player, blueprintId, placements, onFinished)
         prepareIndex = 1
     }
     active.gatherContainers = gatherContainers(active.gatherArea, player)
+    active.gatherWorldItems = gatherWorldItems(active.gatherArea)
     BlueprintFiles.beginBatch(blueprintId)
     if isClient() and sendClientCommand then
         sendClientCommand(player, KBW.NETWORK_MODULE, "BPBuildBatchStart", { id = blueprintId })
@@ -453,18 +527,18 @@ local function startWithPlacements(player, blueprintId, placements, onFinished)
     return true
 end
 
----@param player IsoPlayer
+---@param player      IsoPlayer
 ---@param blueprintId string
----@param placement KBW.BlueprintPlacement
----@param onFinished function|nil
+---@param placement   KBW.BlueprintPlacement
+---@param onFinished  function | nil
 function BuildQueue.startSelected(player, blueprintId, placement, onFinished)
     if not placement then return false, "no placement" end
     return startWithPlacements(player, blueprintId, { placement }, onFinished)
 end
 
----@param player IsoPlayer
+---@param player      IsoPlayer
 ---@param blueprintId string
----@param onFinished function|nil
+---@param onFinished  function | nil
 function BuildQueue.start(player, blueprintId, onFinished)
     local blueprint = Blueprints.get(player, blueprintId)
     if not blueprint then return false, "no blueprint" end

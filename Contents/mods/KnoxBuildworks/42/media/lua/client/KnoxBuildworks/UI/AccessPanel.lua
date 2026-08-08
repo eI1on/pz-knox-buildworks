@@ -108,12 +108,20 @@ end
 
 rowTitle = function (row)
     if row.kind == "skill" then return getText("IGUI_perks_" .. row.name) end
-    if row.kind == "knowledge" then return row.name end
+    if row.kind == "knowledge" then
+        if row.alternativeLabel and row.alternativeLabel ~= "" then
+            return getText("IGUI_KBW_RecipeOrSkill", row.name, row.alternativeLabel)
+        end
+        return row.name
+    end
     return row.id or "?"
 end
 
 rowStatus = function (row)
-    if row.kind == "knowledge" then return row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown") end
+    if row.kind == "knowledge" then
+        if row.alternativeMet then return getText("IGUI_KBW_SkillUnlocked") end
+        return row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown")
+    end
     return tostring(row.available or 0) .. "/" .. tostring(row.needed or 0)
 end
 

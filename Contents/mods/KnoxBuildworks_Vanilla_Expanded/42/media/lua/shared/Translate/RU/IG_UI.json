@@ -1,4 +1,5 @@
 {
+  "IGUI_KBWVE_Buildable_MetalDrum": "Металлическая бочка",
   "IGUI_KBW_Group_architecture_plus_door_trims_black_double_door_frame": "Черная двойная дверная рама",
   "IGUI_KBW_Group_architecture_plus_door_trims_chestnut_double_door_frame": "Каштановая двойная дверная рама",
   "IGUI_KBW_Group_architecture_plus_door_trims_grey_double_door_frame": "Серая двойная дверная рама",
@@ -1309,5 +1310,23 @@
   "IGUI_KBWVE_Buildable_Appliance_DarkIndustrialSink": "Тёмная промышленная раковина",
   "IGUI_KBWVE_Buildable_Appliance_ChromeSink": "Хромированная раковина",
   "IGUI_KBWVE_Buildable_Appliance_WhiteStandingSink": "Белая раковина на пьедестале",
-  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "Белая подвесная раковина"
+  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "Белая подвесная раковина",
+  "IGUI_KBWVE_Group_LightSwitches": "Выключатели света",
+  "IGUI_KBWVE_Group_TableLamps": "Настольные лампы",
+  "IGUI_KBWVE_Group_WallLamps": "Настенные лампы",
+  "IGUI_KBWVE_Group_FloorLamps": "Напольные лампы",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitch": "Выключатель света",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitchAlternate": "Альтернативный выключатель",
+  "IGUI_KBWVE_Buildable_Lighting_StripedLamp": "Полосатая лампа",
+  "IGUI_KBWVE_Buildable_Lighting_GrayLamp": "Серая лампа",
+  "IGUI_KBWVE_Buildable_Lighting_RedLamp": "Красная лампа",
+  "IGUI_KBWVE_Buildable_Lighting_GrayDeskLamp": "Серая настольная лампа",
+  "IGUI_KBWVE_Buildable_Lighting_BlueLamp": "Синяя лампа",
+  "IGUI_KBWVE_Buildable_Lighting_WhiteLamp": "Белая лампа",
+  "IGUI_KBWVE_Buildable_Lighting_PinkWallLamp": "Розовая настенная лампа",
+  "IGUI_KBWVE_Buildable_Lighting_DarkWallLamp": "Тёмная настенная лампа",
+  "IGUI_KBWVE_Buildable_Lighting_ExitSign": "Знак выхода",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp1": "Напольная лампа (вариант 1)",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp2": "Напольная лампа (вариант 2)",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp3": "Напольная лампа (вариант 3)"
 }

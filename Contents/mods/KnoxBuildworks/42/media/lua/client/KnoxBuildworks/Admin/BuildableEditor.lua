@@ -28,9 +28,8 @@ local PAD = 10
 local GAP = 7
 local TABS = { "availability", "requirements", "finishes", "skills", "knowledge" }
 local TAB_TEXT_KEYS = {
-    "IGUI_KBW_AdminEditorTabAvailability", "IGUI_KBW_AdminEditorTabRequirements",
-    "IGUI_KBW_AdminEditorTabFinishes", "IGUI_KBW_AdminEditorTabSkillsXP",
-    "IGUI_KBW_AdminEditorTabKnowledge"
+    "IGUI_KBW_AdminEditorTabAvailability", "IGUI_KBW_AdminEditorTabRequirements", "IGUI_KBW_AdminEditorTabFinishes",
+    "IGUI_KBW_AdminEditorTabSkillsXP", "IGUI_KBW_AdminEditorTabKnowledge"
 }
 
 local function comboData(combo)
@@ -185,9 +184,13 @@ local function allStages(definition)
     end
     add(definition and definition.stages)
     local variants = (definition and definition.variants) or {}
-    for variantIndex = 1, #variants do add(variants[variantIndex].stages) end
+    for variantIndex = 1, #variants do
+        add(variants[variantIndex].stages)
+    end
     local materials = (definition and definition.materialOptions) or {}
-    for materialIndex = 1, #materials do add(materials[materialIndex].stages) end
+    for materialIndex = 1, #materials do
+        add(materials[materialIndex].stages)
+    end
     table.sort(result, function (a, b) return tostring(a.id) < tostring(b.id) end)
     return result
 end
@@ -248,15 +251,15 @@ function KBWBuildableEditor:createChildren()
     self:addChild(self.presetPanel)
 
     self.presetTitle = ISLabel:new(
-        0, 0, self.fontH, getText("IGUI_KBW_AdminEditorPresetPanelTitle"),
-        Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small, true
+        0, 0, self.fontH, getText("IGUI_KBW_AdminEditorPresetPanelTitle"), Theme.accent.r, Theme.accent.g,
+        Theme.accent.b, 1, UIFont.Small, true
     )
     self.presetTitle:initialise()
     self.presetTitle.tooltip = getText("IGUI_KBW_AdminEditorPresetPanelHint")
     self.presetPanel:addChild(self.presetTitle)
     self.presetHint = ISLabel:new(
-        0, 0, self.fontH, getText("IGUI_KBW_AdminEditorPresetPanelHint"),
-        Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small, true
+        0, 0, self.fontH, getText("IGUI_KBW_AdminEditorPresetPanelHint"), Theme.textMuted.r, Theme.textMuted.g,
+        Theme.textMuted.b, 1, UIFont.Small, true
     )
     self.presetHint:initialise()
     self.presetPanel:addChild(self.presetHint)
@@ -280,8 +283,12 @@ function KBWBuildableEditor:createChildren()
     self.exportPresetButton.tooltip = getText("IGUI_KBW_AdminEditorPresetExportTooltip")
 
     self.searchEntry = makeEntry(self, false)
-    if self.searchEntry.setPlaceholderText then self.searchEntry:setPlaceholderText(getText("IGUI_KBW_SearchPlaceholder")) end
-    self.searchEntry.onTextChange = function (box) box.target:queueSearchRefresh() end
+    if self.searchEntry.setPlaceholderText then
+        self.searchEntry:setPlaceholderText(getText("IGUI_KBW_SearchPlaceholder"))
+    end
+    self.searchEntry.onTextChange = function (box)
+        box.target:queueSearchRefresh()
+    end
     self.searchEntry.target = self
     self.categoryFilter = makeCombo(self, self.onFilterChanged)
     self.subcategoryFilter = makeCombo(self, self.onFilterChanged)
@@ -293,9 +300,7 @@ function KBWBuildableEditor:createChildren()
         local key = TAB_TEXT_KEYS[keyIndex]
         local button = makeButton(self, getText(key), self.onTab, false)
         button.tabId = TABS[keyIndex]
-        button.kbwPreferredWidth = math.max(
-            76, getTextManager():MeasureStringX(UIFont.Small, getText(key)) + 24
-        )
+        button.kbwPreferredWidth = math.max(76, getTextManager():MeasureStringX(UIFont.Small, getText(key)) + 24)
         self.tabButtons[#self.tabButtons + 1] = button
     end
 
@@ -455,7 +460,9 @@ function KBWBuildableEditor:populatePerks(combo)
         end
     end
     table.sort(entries, function (a, b) return a.name < b.name end)
-    for entryIndex = 1, #entries do combo:addOptionWithData(entries[entryIndex].name, entries[entryIndex].id) end
+    for entryIndex = 1, #entries do
+        combo:addOptionWithData(entries[entryIndex].name, entries[entryIndex].id)
+    end
 end
 
 function KBWBuildableEditor:populateRecipes()
@@ -573,17 +580,29 @@ end
 function KBWBuildableEditor:drawBuildable(y, item, alt)
     local definition = item.item
     if self.selected == item.index then
-        self:drawRect(0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g, Theme.selected.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g,
+            Theme.selected.b
+        )
     elseif alt then
-        self:drawRect(0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g,
+            Theme.surfaceRaised.b
+        )
     end
-    self:drawRectBorder(0, y, self.width, self.itemheight - 1, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b)
+    self:drawRectBorder(
+        0, y, self.width, self.itemheight - 1, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g,
+        Theme.borderSoft.b
+    )
     local enabled = BuildableRules.isEnabledIn(self.parent.draft, definition)
     local color = enabled and Theme.good or Theme.bad
     self:drawRect(7, y + 10, 6, 6, 1, color.r, color.g, color.b)
     self:drawText(item.text, 20, y + 4, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
-    local path = I18n.category(definition.category or "General") .. " / " .. I18n.subcategory(definition.subcategory or "General")
-    self:drawText(path, 20, y + self.parent.fontH + 6, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
+    local path = I18n.category(definition.category or "General") .. " / "
+        .. I18n.subcategory(definition.subcategory or "General")
+    self:drawText(
+        path, 20, y + self.parent.fontH + 6, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+    )
     return y + self.itemheight
 end
 
@@ -622,18 +641,54 @@ end
 
 function KBWBuildableEditor:tabControls()
     return {
-        availability = { self.categoryPolicy, self.subcategoryPolicy, self.buildablePolicy, self.timeOverride, self.timeEntry },
-        requirements = { self.inputsOverride, self.inputList, self.inputId, self.inputRole, self.inputMode,
-            self.inputSource, self.inputValues, self.inputAmount, self.inputHand, self.inputDegrade,
-            self.inputAdd, self.inputUpdate, self.inputRemove },
-        finishes = {
-            self.wallFinishDefaults.plaster, self.wallFinishDefaults.paint, self.wallFinishDefaults.wallpaper,
-            self.wallFinishOverrides.plaster, self.wallFinishOverrides.paint, self.wallFinishOverrides.wallpaper
+        availability = {
+            self.categoryPolicy, self.subcategoryPolicy, self.buildablePolicy, self.timeOverride, self.timeEntry
         },
-        skills = { self.skillsOverride, self.skillList, self.skillPerk, self.skillAmount, self.skillAdd,
-            self.skillRemove, self.xpOverride, self.xpList, self.xpPerk, self.xpAmount, self.xpAdd, self.xpRemove },
-        knowledge = { self.knowledgeOverride, self.needKnown, self.recipeList, self.recipeCombo,
-            self.recipeAdd, self.recipeRemove }
+        requirements = {
+            self.inputsOverride,
+            self.inputList,
+            self.inputId,
+            self.inputRole,
+            self.inputMode,
+            self.inputSource,
+            self.inputValues,
+            self.inputAmount,
+            self.inputHand,
+            self.inputDegrade,
+            self.inputAdd,
+            self.inputUpdate,
+            self.inputRemove
+        },
+        finishes = {
+            self.wallFinishDefaults.plaster,
+            self.wallFinishDefaults.paint,
+            self.wallFinishDefaults.wallpaper,
+            self.wallFinishOverrides.plaster,
+            self.wallFinishOverrides.paint,
+            self.wallFinishOverrides.wallpaper
+        },
+        skills = {
+            self.skillsOverride,
+            self.skillList,
+            self.skillPerk,
+            self.skillAmount,
+            self.skillAdd,
+            self.skillRemove,
+            self.xpOverride,
+            self.xpList,
+            self.xpPerk,
+            self.xpAmount,
+            self.xpAdd,
+            self.xpRemove
+        },
+        knowledge = {
+            self.knowledgeOverride,
+            self.needKnown,
+            self.recipeList,
+            self.recipeCombo,
+            self.recipeAdd,
+            self.recipeRemove
+        }
     }
 end
 
@@ -643,7 +698,9 @@ function KBWBuildableEditor:applyTabVisibility()
         local tabId = TABS[tabIndex]
         local visible = self.activeTab == tabId
         local list = controls[tabId]
-        for controlIndex = 1, #list do list[controlIndex]:setVisible(visible) end
+        for controlIndex = 1, #list do
+            list[controlIndex]:setVisible(visible)
+        end
     end
 end
 
@@ -699,7 +756,9 @@ function KBWBuildableEditor:onPolicyChanged(combo)
         else
             self.draft.subcategories[category][subcategory] = { enabled = value }
         end
-        if #TableUtil.sortedKeys(self.draft.subcategories[category]) == 0 then self.draft.subcategories[category] = nil end
+        if #TableUtil.sortedKeys(self.draft.subcategories[category]) == 0 then
+            self.draft.subcategories[category] = nil
+        end
     else
         local rule = buildableRule(self.draft, definition, value ~= nil)
         if rule then rule.enabled = value end
@@ -714,7 +773,8 @@ function KBWBuildableEditor:onTimeOverride(_, selected)
     if not definition or not stage then return end
     local rule = stageRule(self.draft, definition, stage, selected == true)
     if selected then
-        rule.time = tonumber(self.timeEntry:getInternalText()) or (StageConfig.construction(definition, stage).time or 200)
+        rule.time = tonumber(self.timeEntry:getInternalText())
+            or (StageConfig.construction(definition, stage).time or 200)
     elseif rule then
         rule.time = nil
         cleanEmptyRules(self.draft, definition, stage)
@@ -750,25 +810,36 @@ function KBWBuildableEditor:refreshInputs()
     local overridden = rule ~= nil and rule.inputs ~= nil
     self.inputsOverride:setSelected(1, overridden)
     self.inputList:clear()
-    local inputs = overridden and rule.inputs or (definition and stage and Requirements.getInputs(definition, stage) or {})
-    for inputIndex = 1, #inputs do self.inputList:addItem(tostring(inputs[inputIndex].id), inputs[inputIndex]) end
+    local inputs = overridden and rule.inputs
+        or (definition and stage and Requirements.getInputs(definition, stage) or {})
+    for inputIndex = 1, #inputs do
+        self.inputList:addItem(tostring(inputs[inputIndex].id), inputs[inputIndex])
+    end
     self.inputList.selected = #inputs > 0 and 1 or 0
     self:onInputSelected()
 end
 
 function KBWBuildableEditor:drawInput(y, item, alt)
     if self.selected == item.index then
-        self:drawRect(0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g, Theme.selected.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g,
+            Theme.selected.b
+        )
     elseif alt then
-        self:drawRect(0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g,
+            Theme.surfaceRaised.b
+        )
     end
     local input = item.item
     local accepted = input.items and #input.items > 0 and joinValues(input.items) or joinValues(input.tags)
     local amount = input.uses or input.amount or 1
     self:drawText(tostring(input.id), 7, y + 3, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
-    self:drawText(tostring(input.role or "material") .. " / " .. tostring(input.mode or "consume") .. " / "
-        .. tostring(amount) .. " - " .. accepted, 7, y + self.parent.fontH + 5,
-        Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
+    self:drawText(tostring(input.role or "material") .. " / "
+            .. tostring(input.mode or "consume") .. " / "
+            .. tostring(amount) .. " - "
+            .. accepted, 7, y + self.parent.fontH + 5, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1,
+        UIFont.Small)
     return y + self.itemheight
 end
 
@@ -867,7 +938,9 @@ end
 local function refreshPerkList(list, values)
     list:clear()
     local keys = TableUtil.sortedKeys(values or {})
-    for keyIndex = 1, #keys do list:addItem(keys[keyIndex], { perk = keys[keyIndex], amount = values[keys[keyIndex]] }) end
+    for keyIndex = 1, #keys do
+        list:addItem(keys[keyIndex], { perk = keys[keyIndex], amount = values[keys[keyIndex]] })
+    end
     list.selected = #keys > 0 and 1 or 0
 end
 
@@ -888,12 +961,21 @@ end
 
 function KBWBuildableEditor:drawPerkRule(y, item, alt)
     if self.selected == item.index then
-        self:drawRect(0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g, Theme.selected.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g,
+            Theme.selected.b
+        )
     elseif alt then
-        self:drawRect(0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g,
+            Theme.surfaceRaised.b
+        )
     end
     self:drawText(tostring(item.item.perk), 7, y + 4, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
-    self:drawText(tostring(item.item.amount), self.width - 70, y + 4, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small)
+    self:drawText(
+        tostring(item.item.amount), self.width - 70, y + 4, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1,
+        UIFont.Small
+    )
     return y + self.itemheight
 end
 
@@ -906,8 +988,12 @@ function KBWBuildableEditor:onSkillsOverride(_, selected)
         return
     end
     local rule = stageRule(self.draft, definition, stage, selected == true)
-    if selected then rule.skills = TableUtil.copy((stage.requirements or {}).skills or {})
-    elseif rule then rule.skills = nil cleanEmptyRules(self.draft, definition, stage) end
+    if selected then
+        rule.skills = TableUtil.copy((stage.requirements or {}).skills or {})
+    elseif rule then
+        rule.skills = nil
+        cleanEmptyRules(self.draft, definition, stage)
+    end
     self:markDirty()
     self:refreshSkillsXP()
     self:updateEnabledStates()
@@ -917,8 +1003,12 @@ function KBWBuildableEditor:onXPOverride(_, selected)
     local definition, stage = self:selectedDefinition(), self:selectedStage()
     if not definition or not stage then return end
     local rule = stageRule(self.draft, definition, stage, selected == true)
-    if selected then rule.xp = TableUtil.copy(StageConfig.recipe(definition, stage).xpAward or {})
-    elseif rule then rule.xp = nil cleanEmptyRules(self.draft, definition, stage) end
+    if selected then
+        rule.xp = TableUtil.copy(StageConfig.recipe(definition, stage).xpAward or {})
+    elseif rule then
+        rule.xp = nil
+        cleanEmptyRules(self.draft, definition, stage)
+    end
     self:markDirty()
     self:refreshSkillsXP()
     self:updateEnabledStates()
@@ -961,10 +1051,18 @@ function KBWBuildableEditor:removePerkRule(field, list)
     self:refreshSkillsXP()
 end
 
-function KBWBuildableEditor:onSkillSet() self:setPerkRule("skills", self.skillPerk, self.skillAmount, 10) end
-function KBWBuildableEditor:onSkillRemove() self:removePerkRule("skills", self.skillList) end
-function KBWBuildableEditor:onXPSet() self:setPerkRule("xp", self.xpPerk, self.xpAmount, 1000000) end
-function KBWBuildableEditor:onXPRemove() self:removePerkRule("xp", self.xpList) end
+function KBWBuildableEditor:onSkillSet()
+    self:setPerkRule("skills", self.skillPerk, self.skillAmount, 10)
+end
+function KBWBuildableEditor:onSkillRemove()
+    self:removePerkRule("skills", self.skillList)
+end
+function KBWBuildableEditor:onXPSet()
+    self:setPerkRule("xp", self.xpPerk, self.xpAmount, 1000000)
+end
+function KBWBuildableEditor:onXPRemove()
+    self:removePerkRule("xp", self.xpList)
+end
 
 function KBWBuildableEditor:refreshKnowledge()
     local definition, stage = self:selectedDefinition(), self:selectedStage()
@@ -987,16 +1085,24 @@ function KBWBuildableEditor:refreshKnowledge()
     if overridden and rule.needToBeLearned ~= nil then mustKnow = rule.needToBeLearned end
     self.needKnown:setSelected(1, mustKnow ~= false)
     self.recipeList:clear()
-    for recipeIndex = 1, #recipes do self.recipeList:addItem(tostring(recipes[recipeIndex]), tostring(recipes[recipeIndex])) end
+    for recipeIndex = 1, #recipes do
+        self.recipeList:addItem(tostring(recipes[recipeIndex]), tostring(recipes[recipeIndex]))
+    end
     self.recipeList.selected = #recipes > 0 and 1 or 0
     self:onRecipeSelected()
 end
 
 function KBWBuildableEditor:drawRecipe(y, item, alt)
     if self.selected == item.index then
-        self:drawRect(0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g, Theme.selected.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, Theme.selected.a, Theme.selected.r, Theme.selected.g,
+            Theme.selected.b
+        )
     elseif alt then
-        self:drawRect(0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b)
+        self:drawRect(
+            0, y, self.width, self.itemheight - 1, 0.18, Theme.surfaceRaised.r, Theme.surfaceRaised.g,
+            Theme.surfaceRaised.b
+        )
     end
     self:drawText(tostring(item.item), 7, y + 4, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
     return y + self.itemheight
@@ -1047,7 +1153,9 @@ function KBWBuildableEditor:onRecipeAdd()
     local rule = stageRule(self.draft, self:selectedDefinition(), self:selectedStage(), false)
     local recipe = comboData(self.recipeCombo)
     if not rule or rule.recipes == nil or not recipe then return end
-    for recipeIndex = 1, #rule.recipes do if rule.recipes[recipeIndex] == recipe then return end end
+    for recipeIndex = 1, #rule.recipes do
+        if rule.recipes[recipeIndex] == recipe then return end
+    end
     rule.recipes[#rule.recipes + 1] = recipe
     table.sort(rule.recipes)
     self:markDirty()
@@ -1131,20 +1239,23 @@ function KBWBuildableEditor:refreshPresetOptions(wantedFileName)
     end
     self.presetCombo:clear()
     self.presetCombo:addOptionWithData(getText("IGUI_KBW_AdminEditorPresetServerCurrent"), {
-        kind = "builtin", id = "server"
+        kind = "builtin",
+        id = "server"
     })
     self.presetCombo:addOptionWithData(getText("IGUI_KBW_AdminEditorPresetDefinitionDefaults"), {
-        kind = "builtin", id = "defaults"
+        kind = "builtin",
+        id = "defaults"
     })
     self.presetCombo:addOptionWithData(getText("IGUI_KBW_AdminEditorPresetDisableAll"), {
-        kind = "builtin", id = "disable_all"
+        kind = "builtin",
+        id = "disable_all"
     })
     local files = RulePresets.list()
     local selected = 1
     for fileIndex = 1, #files do
         local record = files[fileIndex]
         local key = record.valid and "IGUI_KBW_AdminEditorPresetFile" or "IGUI_KBW_AdminEditorPresetFileInvalid"
-        local label = string.format(getText(key), tostring(record.name or record.fileName))
+        local label = getText(key, tostring(record.name or record.fileName))
         if record.registryMismatch then label = label .. " *" end
         self.presetCombo:addOptionWithData(label, record)
         if wantedFileName ~= nil and record.fileName == wantedFileName then
@@ -1172,10 +1283,10 @@ end
 function KBWBuildableEditor:onRefreshPresets()
     RulePresets.clearCache()
     self:refreshPresetOptions()
-    self:setStatus(string.format(
-        getText("IGUI_KBW_AdminEditorPresetFilesRefreshed"),
-        "Zomboid/Lua/" .. RulePresets.FOLDER
-    ), "normal")
+    self:setStatus(
+        getText("IGUI_KBW_AdminEditorPresetFilesRefreshed", "Zomboid/Lua/" .. RulePresets.FOLDER),
+        "normal"
+    )
 end
 
 function KBWBuildableEditor:onInfo()
@@ -1227,13 +1338,15 @@ function KBWBuildableEditor:onLoadPreset()
     self.dirty = true
     self:refreshBuildables(false)
     if metadata and metadata.registryMismatch then
-        self:setStatus(string.format(
-            getText("IGUI_KBW_AdminEditorPresetLoadedMismatch"), tostring(metadata.name or selection.fileName)
-        ), "warning")
+        self:setStatus(
+            getText("IGUI_KBW_AdminEditorPresetLoadedMismatch", tostring(metadata.name or selection.fileName)
+            ), "warning"
+        )
     else
-        self:setStatus(string.format(
-            getText("IGUI_KBW_AdminEditorPresetLoaded"), tostring(metadata and metadata.name or "")
-        ), "warning")
+        self:setStatus(
+            getText("IGUI_KBW_AdminEditorPresetLoaded", tostring(metadata and metadata.name or "")),
+            "warning"
+        )
     end
 end
 
@@ -1251,7 +1364,7 @@ function KBWBuildableEditor:onExportPreset()
         return
     end
     self:refreshPresetOptions(fileName)
-    self:setStatus(string.format(getText("IGUI_KBW_AdminEditorPresetExported"), path), "success")
+    self:setStatus(getText("IGUI_KBW_AdminEditorPresetExported", path), "success")
 end
 
 function KBWBuildableEditor:validatedDraft()
@@ -1318,7 +1431,7 @@ function KBWBuildableEditor:onRulesSync(document, revision)
     self.baseRevision = tonumber(revision) or 0
     self:refreshEditor()
     self:refreshBuildables(false)
-    self:setStatus(string.format(getText("IGUI_KBW_AdminEditorSavedRevision"), self.baseRevision), "success")
+    self:setStatus(getText("IGUI_KBW_AdminEditorSavedRevision", self.baseRevision), "success")
 end
 
 function KBWBuildableEditor:onRulesError(code, errors, revision)
@@ -1338,9 +1451,13 @@ end
 
 function KBWBuildableEditor:setStatus(message, kind)
     local color = "<RGB:0.92,0.91,0.88>"
-    if kind == "error" then color = "<RGB:0.92,0.42,0.26>"
-    elseif kind == "warning" then color = "<RGB:0.90,0.65,0.28>"
-    elseif kind == "success" then color = "<RGB:0.25,0.90,0.32>" end
+    if kind == "error" then
+        color = "<RGB:0.92,0.42,0.26>"
+    elseif kind == "warning" then
+        color = "<RGB:0.90,0.65,0.28>"
+    elseif kind == "success" then
+        color = "<RGB:0.25,0.90,0.32>"
+    end
     self.statusPanel.text = color .. tostring(message or "")
     self.statusPanel:paginate()
 end
@@ -1374,12 +1491,12 @@ function KBWBuildableEditor:layout()
 
     local presetRowOneY = PAD + self.fontH + GAP
     local presetButtonW = math.max(90, self.fontH * 4)
-    local importW = math.max(presetButtonW, getTextManager():MeasureStringX(
-        UIFont.Small, getText("IGUI_KBW_AdminEditorPresetRefresh")
-    ) + 24)
-    local loadW = math.max(presetButtonW, getTextManager():MeasureStringX(
-        UIFont.Small, getText("IGUI_KBW_AdminEditorPresetLoad")
-    ) + 24)
+    local importW = math.max(
+        presetButtonW, getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_KBW_AdminEditorPresetRefresh")) + 24
+    )
+    local loadW = math.max(
+        presetButtonW, getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_KBW_AdminEditorPresetLoad")) + 24
+    )
     self.refreshPresetsButton:setX(presetW - PAD - importW)
     self.refreshPresetsButton:setY(presetRowOneY)
     self.refreshPresetsButton:setWidth(importW)
@@ -1391,9 +1508,9 @@ function KBWBuildableEditor:layout()
     self.presetCombo:setWidth(self.loadPresetButton:getX() - GAP - PAD)
 
     local presetRowTwoY = presetRowOneY + self.controlH + GAP
-    local exportW = math.max(presetButtonW, getTextManager():MeasureStringX(
-        UIFont.Small, getText("IGUI_KBW_AdminEditorPresetExport")
-    ) + 24)
+    local exportW = math.max(
+        presetButtonW, getTextManager():MeasureStringX(UIFont.Small, getText("IGUI_KBW_AdminEditorPresetExport")) + 24
+    )
     self.exportPresetButton:setX(presetW - PAD - exportW)
     self.exportPresetButton:setY(presetRowTwoY)
     self.exportPresetButton:setWidth(exportW)
@@ -1429,9 +1546,9 @@ function KBWBuildableEditor:layout()
         local button = self.tabButtons[tabIndex]
         button:setX(tabX)
         button:setY(tabsY)
-        button:setWidth(tabIndex == #self.tabButtons
-            and rightX + rightW - button:getX()
-            or button.kbwPreferredWidth + tabExtra)
+        button:setWidth(
+            tabIndex == #self.tabButtons and rightX + rightW - button:getX() or button.kbwPreferredWidth + tabExtra
+        )
         tabX = button:getRight() + GAP
     end
     local contentY = tabsY + self.actionH + GAP + self.fontH + 4
@@ -1442,11 +1559,21 @@ function KBWBuildableEditor:layout()
     local labelW = math.max(180, math.floor(rightW * 0.34))
     local controlX = rightX + labelW
     local controlW = rightW - labelW
-    self.categoryPolicy:setX(controlX) self.categoryPolicy:setY(contentY) self.categoryPolicy:setWidth(controlW)
-    self.subcategoryPolicy:setX(controlX) self.subcategoryPolicy:setY(contentY + self.controlH + GAP) self.subcategoryPolicy:setWidth(controlW)
-    self.buildablePolicy:setX(controlX) self.buildablePolicy:setY(contentY + (self.controlH + GAP) * 2) self.buildablePolicy:setWidth(controlW)
-    self.timeOverride:setX(rightX) self.timeOverride:setY(contentY + (self.controlH + GAP) * 3 + GAP) self.timeOverride:setWidth(labelW)
-    self.timeEntry:setX(controlX) self.timeEntry:setY(self.timeOverride:getY()) self.timeEntry:setWidth(controlW)
+    self.categoryPolicy:setX(controlX)
+    self.categoryPolicy:setY(contentY)
+    self.categoryPolicy:setWidth(controlW)
+    self.subcategoryPolicy:setX(controlX)
+    self.subcategoryPolicy:setY(contentY + self.controlH + GAP)
+    self.subcategoryPolicy:setWidth(controlW)
+    self.buildablePolicy:setX(controlX)
+    self.buildablePolicy:setY(contentY + (self.controlH + GAP) * 2)
+    self.buildablePolicy:setWidth(controlW)
+    self.timeOverride:setX(rightX)
+    self.timeOverride:setY(contentY + (self.controlH + GAP) * 3 + GAP)
+    self.timeOverride:setWidth(labelW)
+    self.timeEntry:setX(controlX)
+    self.timeEntry:setY(self.timeOverride:getY())
+    self.timeEntry:setWidth(controlW)
 
     self.finishHeadersY = contentY
     self.finishHintY = self.finishHeadersY + self.fontH + 2
@@ -1470,65 +1597,142 @@ function KBWBuildableEditor:layout()
     end
     self.finishNoteY = self.wallFinishOverrides.wallpaper:getBottom() + GAP
 
-    self.inputsOverride:setX(rightX) self.inputsOverride:setY(contentY) self.inputsOverride:setWidth(rightW)
+    self.inputsOverride:setX(rightX)
+    self.inputsOverride:setY(contentY)
+    self.inputsOverride:setWidth(rightW)
     local inputFormH = (self.fontH + 3) * 4 + self.controlH * 4 + GAP * 5 + self.actionH
     local inputListH = math.max(self.rowH * 2, contentH - self.controlH - GAP - inputFormH)
-    self.inputList:setX(rightX) self.inputList:setY(contentY + self.controlH + GAP) self.inputList:setWidth(rightW) self.inputList:setHeight(inputListH)
+    self.inputList:setX(rightX)
+    self.inputList:setY(contentY + self.controlH + GAP)
+    self.inputList:setWidth(rightW)
+    self.inputList:setHeight(inputListH)
     local formY = self.inputList:getBottom() + GAP + self.fontH + 3
     local halfW = math.floor((rightW - GAP) / 2)
-    self.inputId:setX(rightX) self.inputId:setY(formY) self.inputId:setWidth(halfW)
-    self.inputRole:setX(rightX + halfW + GAP) self.inputRole:setY(formY) self.inputRole:setWidth(rightW - halfW - GAP)
+    self.inputId:setX(rightX)
+    self.inputId:setY(formY)
+    self.inputId:setWidth(halfW)
+    self.inputRole:setX(rightX + halfW + GAP)
+    self.inputRole:setY(formY)
+    self.inputRole:setWidth(rightW - halfW - GAP)
     formY = formY + self.controlH + GAP + self.fontH + 3
-    self.inputMode:setX(rightX) self.inputMode:setY(formY) self.inputMode:setWidth(halfW)
-    self.inputSource:setX(rightX + halfW + GAP) self.inputSource:setY(formY) self.inputSource:setWidth(rightW - halfW - GAP)
+    self.inputMode:setX(rightX)
+    self.inputMode:setY(formY)
+    self.inputMode:setWidth(halfW)
+    self.inputSource:setX(rightX + halfW + GAP)
+    self.inputSource:setY(formY)
+    self.inputSource:setWidth(rightW - halfW
+            - GAP)
     formY = formY + self.controlH + GAP + self.fontH + 3
-    self.inputValues:setX(rightX) self.inputValues:setY(formY) self.inputValues:setWidth(rightW - 120 - GAP)
-    self.inputAmount:setX(self.inputValues:getRight() + GAP) self.inputAmount:setY(formY) self.inputAmount:setWidth(120)
+    self.inputValues:setX(rightX)
+    self.inputValues:setY(formY)
+    self.inputValues:setWidth(rightW - 120 - GAP)
+    self.inputAmount:setX(self.inputValues:getRight() + GAP)
+    self.inputAmount:setY(formY)
+    self.inputAmount:setWidth(120)
     formY = formY + self.controlH + GAP + self.fontH + 3
-    self.inputHand:setX(rightX) self.inputHand:setY(formY) self.inputHand:setWidth(halfW)
-    self.inputDegrade:setX(rightX + halfW + GAP) self.inputDegrade:setY(formY) self.inputDegrade:setWidth(rightW - halfW - GAP)
+    self.inputHand:setX(rightX)
+    self.inputHand:setY(formY)
+    self.inputHand:setWidth(halfW)
+    self.inputDegrade:setX(rightX + halfW + GAP)
+    self.inputDegrade:setY(formY)
+    self.inputDegrade:setWidth(rightW - halfW
+            - GAP)
     local inputButtonY = math.min(bodyBottom - self.actionH, formY + self.controlH + GAP)
     local inputButtonW = math.floor((rightW - GAP * 2) / 3)
     local inputButtons = { self.inputAdd, self.inputUpdate, self.inputRemove }
     for buttonIndex = 1, #inputButtons do
         local button = inputButtons[buttonIndex]
-        button:setX(rightX + (buttonIndex - 1) * (inputButtonW + GAP)) button:setY(inputButtonY)
+        button:setX(rightX + (buttonIndex - 1) * (inputButtonW + GAP))
+        button:setY(inputButtonY)
         button:setWidth(buttonIndex == #inputButtons and rightX + rightW - button:getX() or inputButtonW)
     end
-    self.inputLabels = { idY = self.inputId:getY() - self.fontH - 1, modeY = self.inputMode:getY() - self.fontH - 1,
-        sourceY = self.inputValues:getY() - self.fontH - 1, flagsY = self.inputHand:getY() - self.fontH - 1 }
+    self.inputLabels = {
+        idY = self.inputId:getY() - self.fontH - 1,
+        modeY = self.inputMode:getY() - self.fontH - 1,
+        sourceY = self.inputValues:getY() - self.fontH - 1,
+        flagsY = self.inputHand:getY() - self.fontH - 1
+    }
 
     local sectionH = math.floor((contentH - GAP) / 2)
-    self.skillsOverride:setX(rightX) self.skillsOverride:setY(contentY) self.skillsOverride:setWidth(rightW)
-    self.skillList:setX(rightX) self.skillList:setY(contentY + self.controlH + GAP) self.skillList:setWidth(math.floor(rightW * 0.55)) self.skillList:setHeight(sectionH - self.controlH - GAP)
+    self.skillsOverride:setX(rightX)
+    self.skillsOverride:setY(contentY)
+    self.skillsOverride:setWidth(rightW)
+    self.skillList:setX(rightX)
+    self.skillList:setY(contentY + self.controlH + GAP)
+    self.skillList:setWidth(math.floor(rightW * 0.55))
+    self.skillList:setHeight(sectionH - self.controlH
+            - GAP)
     local perkControlX = self.skillList:getRight() + GAP
     local perkControlW = rightX + rightW - perkControlX
-    self.skillPerk:setX(perkControlX) self.skillPerk:setY(self.skillList:getY()) self.skillPerk:setWidth(perkControlW)
-    self.skillAmount:setX(perkControlX) self.skillAmount:setY(self.skillPerk:getBottom() + GAP) self.skillAmount:setWidth(perkControlW)
-    self.skillAdd:setX(perkControlX) self.skillAdd:setY(self.skillAmount:getBottom() + GAP) self.skillAdd:setWidth(perkControlW)
-    self.skillRemove:setX(perkControlX) self.skillRemove:setY(self.skillAdd:getBottom() + GAP) self.skillRemove:setWidth(perkControlW)
+    self.skillPerk:setX(perkControlX)
+    self.skillPerk:setY(self.skillList:getY())
+    self.skillPerk:setWidth(perkControlW)
+    self.skillAmount:setX(perkControlX)
+    self.skillAmount:setY(self.skillPerk:getBottom() + GAP)
+    self.skillAmount:setWidth(perkControlW)
+    self.skillAdd:setX(perkControlX)
+    self.skillAdd:setY(self.skillAmount:getBottom() + GAP)
+    self.skillAdd:setWidth(perkControlW)
+    self.skillRemove:setX(perkControlX)
+    self.skillRemove:setY(self.skillAdd:getBottom() + GAP)
+    self.skillRemove:setWidth(perkControlW)
     local xpY = contentY + sectionH + GAP
-    self.xpOverride:setX(rightX) self.xpOverride:setY(xpY) self.xpOverride:setWidth(rightW)
-    self.xpList:setX(rightX) self.xpList:setY(xpY + self.controlH + GAP) self.xpList:setWidth(self.skillList:getWidth()) self.xpList:setHeight(bodyBottom - self.xpList:getY())
-    self.xpPerk:setX(perkControlX) self.xpPerk:setY(self.xpList:getY()) self.xpPerk:setWidth(perkControlW)
-    self.xpAmount:setX(perkControlX) self.xpAmount:setY(self.xpPerk:getBottom() + GAP) self.xpAmount:setWidth(perkControlW)
-    self.xpAdd:setX(perkControlX) self.xpAdd:setY(self.xpAmount:getBottom() + GAP) self.xpAdd:setWidth(perkControlW)
-    self.xpRemove:setX(perkControlX) self.xpRemove:setY(self.xpAdd:getBottom() + GAP) self.xpRemove:setWidth(perkControlW)
+    self.xpOverride:setX(rightX)
+    self.xpOverride:setY(xpY)
+    self.xpOverride:setWidth(rightW)
+    self.xpList:setX(rightX)
+    self.xpList:setY(xpY + self.controlH + GAP)
+    self.xpList:setWidth(self.skillList:getWidth())
+    self.xpList:setHeight(bodyBottom - self.xpList:getY())
+    self.xpPerk:setX(perkControlX)
+    self.xpPerk:setY(self.xpList:getY())
+    self.xpPerk:setWidth(perkControlW)
+    self.xpAmount:setX(perkControlX)
+    self.xpAmount:setY(self.xpPerk:getBottom() + GAP)
+    self.xpAmount:setWidth(perkControlW)
+    self.xpAdd:setX(perkControlX)
+    self.xpAdd:setY(self.xpAmount:getBottom() + GAP)
+    self.xpAdd:setWidth(perkControlW)
+    self.xpRemove:setX(perkControlX)
+    self.xpRemove:setY(self.xpAdd:getBottom() + GAP)
+    self.xpRemove:setWidth(perkControlW)
 
-    self.knowledgeOverride:setX(rightX) self.knowledgeOverride:setY(contentY) self.knowledgeOverride:setWidth(rightW)
-    self.needKnown:setX(rightX) self.needKnown:setY(contentY + self.controlH + GAP) self.needKnown:setWidth(rightW)
-    self.recipeList:setX(rightX) self.recipeList:setY(self.needKnown:getBottom() + GAP) self.recipeList:setWidth(rightW) self.recipeList:setHeight(math.max(self.rowH * 4, contentH - self.controlH * 3 - self.actionH - GAP * 5))
-    self.recipeCombo:setX(rightX) self.recipeCombo:setY(self.recipeList:getBottom() + GAP) self.recipeCombo:setWidth(rightW)
+    self.knowledgeOverride:setX(rightX)
+    self.knowledgeOverride:setY(contentY)
+    self.knowledgeOverride:setWidth(rightW)
+    self.needKnown:setX(rightX)
+    self.needKnown:setY(contentY + self.controlH + GAP)
+    self.needKnown:setWidth(rightW)
+    self.recipeList:setX(rightX)
+    self.recipeList:setY(self.needKnown:getBottom() + GAP)
+    self.recipeList:setWidth(rightW)
+    self.recipeList:setHeight(math.max(
+            self.rowH * 4,
+            contentH - self.controlH * 3
+                - self.actionH - GAP * 5
+        ))
+    self.recipeCombo:setX(rightX)
+    self.recipeCombo:setY(self.recipeList:getBottom() + GAP)
+    self.recipeCombo:setWidth(rightW)
     local recipeButtonW = math.floor((rightW - GAP) / 2)
-    self.recipeAdd:setX(rightX) self.recipeAdd:setY(self.recipeCombo:getBottom() + GAP) self.recipeAdd:setWidth(recipeButtonW)
-    self.recipeRemove:setX(self.recipeAdd:getRight() + GAP) self.recipeRemove:setY(self.recipeAdd:getY()) self.recipeRemove:setWidth(rightW - recipeButtonW - GAP)
+    self.recipeAdd:setX(rightX)
+    self.recipeAdd:setY(self.recipeCombo:getBottom() + GAP)
+    self.recipeAdd:setWidth(recipeButtonW)
+    self.recipeRemove:setX(self.recipeAdd:getRight() + GAP)
+    self.recipeRemove:setY(self.recipeAdd:getY())
+    self.recipeRemove:setWidth(rightW - recipeButtonW
+            - GAP)
 
-    self.statusPanel:setX(PAD) self.statusPanel:setY(statusY) self.statusPanel:setWidth(self.width - PAD * 2) self.statusPanel:setHeight(self.statusH)
+    self.statusPanel:setX(PAD)
+    self.statusPanel:setY(statusY)
+    self.statusPanel:setWidth(self.width - PAD * 2)
+    self.statusPanel:setHeight(self.statusH)
     local buttons = { self.reloadButton, self.resetButton, self.validateButton, self.saveButton }
     local buttonW = math.floor((self.width - PAD * 2 - GAP * 3) / 4)
     for buttonIndex = 1, #buttons do
         local button = buttons[buttonIndex]
-        button:setX(PAD + (buttonIndex - 1) * (buttonW + GAP)) button:setY(bottomButtonsY)
+        button:setX(PAD + (buttonIndex - 1) * (buttonW + GAP))
+        button:setY(bottomButtonsY)
         button:setWidth(buttonIndex == #buttons and self.width - PAD - button:getX() or buttonW)
     end
     self.lastLayoutWidth, self.lastLayoutHeight = self.width, self.height
@@ -1539,38 +1743,76 @@ function KBWBuildableEditor:prerender()
     ISCollapsableWindow.prerender(self)
     local definition, stage = self:selectedDefinition(), self:selectedStage()
     local header = definition and I18n.definitionName(definition) or getText("IGUI_KBW_AdminEditorNoSelection")
-    self:drawText(header, self.rightX, self.contentLabelY, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small)
+    self:drawText(
+        header, self.rightX, self.contentLabelY, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+    )
     if self.activeTab == "availability" and definition then
         local y = self.categoryPolicy:getY() + 3
-        self:drawText(getText("IGUI_KBW_AdminEditorCategoryPolicy"), self.rightX, y, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorSubcategoryPolicy"), self.rightX, y + self.controlH + GAP, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorBuildablePolicy"), self.rightX, y + (self.controlH + GAP) * 2, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorCategoryPolicy"), self.rightX, y, Theme.text.r, Theme.text.g, Theme.text.b, 1,
+            UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorSubcategoryPolicy"), self.rightX, y + self.controlH + GAP, Theme.text.r,
+            Theme.text.g, Theme.text.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorBuildablePolicy"), self.rightX, y + (self.controlH + GAP) * 2, Theme.text.r,
+            Theme.text.g, Theme.text.b, 1, UIFont.Small
+        )
         local effective = BuildableRules.isEnabledIn(self.draft, definition, stage)
-        local effectiveText = string.format(getText("IGUI_KBW_AdminEditorEffectiveStatus"), inheritedPolicyText(effective))
+        local effectiveText = getText("IGUI_KBW_AdminEditorEffectiveStatus", inheritedPolicyText(effective)
+        )
         local color = effective and Theme.good or Theme.bad
-        self:drawText(effectiveText, self.rightX, self.timeOverride:getBottom() + GAP, color.r, color.g, color.b, 1, UIFont.Small)
+        self:drawText(
+            effectiveText, self.rightX, self.timeOverride:getBottom() + GAP, color.r, color.g, color.b, 1, UIFont.Small
+        )
     elseif self.activeTab == "requirements" then
         local labels = self.inputLabels
-        self:drawText(getText("IGUI_KBW_AdminEditorInputId"), self.inputId:getX(), labels.idY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorRole"), self.inputRole:getX(), labels.idY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorMode"), self.inputMode:getX(), labels.modeY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorSourceType"), self.inputSource:getX(), labels.modeY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorAcceptedValues"), self.inputValues:getX(), labels.sourceY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorAmountUses"), self.inputAmount:getX(), labels.sourceY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorHandModel"), self.inputHand:getX(), labels.flagsY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
-        self:drawText(getText("IGUI_KBW_AdminEditorToolWear"), self.inputDegrade:getX(), labels.flagsY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorInputId"), self.inputId:getX(), labels.idY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorRole"), self.inputRole:getX(), labels.idY, Theme.textMuted.r, Theme.textMuted.g,
+            Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorMode"), self.inputMode:getX(), labels.modeY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorSourceType"), self.inputSource:getX(), labels.modeY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorAcceptedValues"), self.inputValues:getX(), labels.sourceY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorAmountUses"), self.inputAmount:getX(), labels.sourceY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorHandModel"), self.inputHand:getX(), labels.flagsY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self:drawText(
+            getText("IGUI_KBW_AdminEditorToolWear"), self.inputDegrade:getX(), labels.flagsY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
     elseif self.activeTab == "finishes" then
         self:drawText(
-            getText("IGUI_KBW_AdminEditorWallFinishDefaults"), self.finishDefaultsX, self.finishHeadersY,
-            Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+            getText("IGUI_KBW_AdminEditorWallFinishDefaults"), self.finishDefaultsX, self.finishHeadersY, Theme.accent.r,
+            Theme.accent.g, Theme.accent.b, 1, UIFont.Small
         )
         self:drawText(
             getText("IGUI_KBW_AdminEditorWallFinishOverrides"), self.finishOverridesX, self.finishHeadersY,
             Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
         )
         self:drawText(
-            getText("IGUI_KBW_AdminEditorWallFinishDefaultsHint"), self.rightX, self.finishHintY,
-            Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+            getText("IGUI_KBW_AdminEditorWallFinishDefaultsHint"), self.rightX, self.finishHintY, Theme.textMuted.r,
+            Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
         )
         local labels = {
             plaster = "IGUI_KBW_AdminEditorFinishPlaster",
@@ -1580,22 +1822,22 @@ function KBWBuildableEditor:prerender()
         for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
             local defaultCombo = self.wallFinishDefaults[requirement]
             self:drawText(
-                getText(labels[requirement]), self.rightX, defaultCombo:getY() + 3,
-                Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+                getText(labels[requirement]), self.rightX, defaultCombo:getY() + 3, Theme.text.r, Theme.text.g,
+                Theme.text.b, 1, UIFont.Small
             )
         end
         local overrideHint = BuildableRules.isWallBuildable(definition, stage)
             and getText("IGUI_KBW_AdminEditorWallFinishOverridesHint")
             or getText("IGUI_KBW_AdminEditorWallFinishNotWall")
         self:drawText(
-            overrideHint, self.rightX, self.finishNoteY,
-            Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+            overrideHint, self.rightX, self.finishNoteY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1,
+            UIFont.Small
         )
         for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
             local overrideCombo = self.wallFinishOverrides[requirement]
             self:drawText(
-                getText(labels[requirement]), self.rightX, overrideCombo:getY() + 3,
-                Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+                getText(labels[requirement]), self.rightX, overrideCombo:getY() + 3, Theme.text.r, Theme.text.g,
+                Theme.text.b, 1, UIFont.Small
             )
         end
     end
@@ -1607,14 +1849,26 @@ function KBWBuildableEditor:close()
     if KBWBuildableEditor.instance == self then KBWBuildableEditor.instance = nil end
 end
 
+---@param key string|number
+function KBWBuildableEditor:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWBuildableEditor:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
+end
+
 function KBWBuildableEditor:new(player)
     local screenW, screenH = getCore():getScreenWidth(), getCore():getScreenHeight()
     local fontH = getTextManager():getFontHeight(UIFont.Small)
     local tabAreaW = GAP * (#TAB_TEXT_KEYS - 1)
     for keyIndex = 1, #TAB_TEXT_KEYS do
-        tabAreaW = tabAreaW + math.max(
-            76, getTextManager():MeasureStringX(UIFont.Small, getText(TAB_TEXT_KEYS[keyIndex])) + 24
-        )
+        tabAreaW = tabAreaW
+            + math.max(76, getTextManager():MeasureStringX(UIFont.Small, getText(TAB_TEXT_KEYS[keyIndex])) + 24)
     end
     local minimumW = math.min(math.max(1000, 300 + PAD * 2 + GAP + tabAreaW), screenW - 40)
     local minimumH = math.min(math.max(600, fontH * 8 + 440), screenH - 40)
@@ -1635,6 +1889,7 @@ function KBWBuildableEditor:new(player)
     o.statusH = math.max(52, fontH * 2 + 12)
     o.minimumWidth = minimumW
     o.minimumHeight = minimumH
+    o:setWantKeyEvents(true)
     return o
 end
 

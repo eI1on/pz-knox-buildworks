@@ -7,12 +7,13 @@ local SUPPORTED_TYPES = {
     combinationWasherDryer = true,
     fireplace = true,
     generator = true,
+    lightSwitch = true,
     stove = true
 }
 
 local SUPPORTED_TYPE_MESSAGE = table.concat({
     "'barbecue'", "'clothingDryer'", "'clothingWasher'", "'combinationWasherDryer'",
-    "'fireplace'", "'generator'", "'stove'"
+    "'fireplace'", "'generator'", "'lightSwitch'", "'stove'"
 }, ", ")
 
 local ISO_TYPE_MAP = {
@@ -21,6 +22,7 @@ local ISO_TYPE_MAP = {
     IsoClothingWasher = "clothingWasher",
     IsoCombinationWasherDryer = "combinationWasherDryer",
     IsoFireplace = "fireplace",
+    IsoLightSwitch = "lightSwitch",
     IsoStove = "stove"
 }
 
@@ -63,6 +65,7 @@ function NativeObjectTypes.detectFromSprite(spriteName)
     local containerType = properties:has("container") and properties:get("container") or nil
     local detected = ISO_TYPE_MAP[isoType]
     if detected then return detected end
+    if sprite:getType() == IsoObjectType.lightswitch then return "lightSwitch" end
     if containerType == "fireplace" then return "fireplace" end
     return nil
 end

@@ -149,9 +149,31 @@ local function requirementsFromRecipe(recipe)
         if perk then result.skills[tostring(perk:getId())] = required:getLevel() end
     end
     if recipe:needToBeLearn() then
+        local alternatives = {}
+        -- Older construction recipes often have no AutoLearn entry. Their
+        -- normal required skills are the natural magazine alternative. Do
+        -- not query CraftRecipe's Java AutoLearn accessors here: some B42.20
+        -- runtimes do not expose those methods to Kahlua. Vanilla already
+        -- applies its own AutoLearn rules to the player's known recipes.
+        local requiredSkillAlternative = {}
+        local hasRequiredSkill = false
+        for perkName, level in pairs(result.skills) do
+            requiredSkillAlternative[perkName] = level
+            hasRequiredSkill = true
+        end
+        if hasRequiredSkill then
+            alternatives[1] = { mode = "all", skills = requiredSkillAlternative }
+        end
+        -- B42's metal-floor recipe is learned from the welding magazine but
+        -- declares neither SkillRequired nor AutoLearn. Match the base game's
+        -- generator precedent with a level-1 trade-skill alternative.
+        if #alternatives == 0 and string.lower(tostring(recipe:getCategory() or "")) == "welding" then
+            alternatives[1] = { mode = "all", skills = { MetalWelding = 1 } }
+        end
         result.knowledge = {
             needToBeLearned = true,
-            recipes = { tostring(recipe:getName()) }
+            recipes = { tostring(recipe:getName()) },
+            skillAlternatives = #alternatives > 0 and alternatives or nil
         }
     end
     if #result.inputs == 0 then result.inputs = nil end
@@ -454,6 +476,10 @@ function EntityCompat.hydrateStage(stage)
         end
         if stage.requirements.knowledge == nil then
             stage.requirements.knowledge = TableUtil.copy(nativeRequirements.knowledge)
+        else
+            stage.requirements.knowledge = copyMissing(
+                stage.requirements.knowledge, TableUtil.copy(nativeRequirements.knowledge)
+            )
         end
     end
     return stage

@@ -1842,11 +1842,11 @@ function Blueprints.planErrorText(code, blueprint)
     code = tostring(code or "")
     if code == "no_permission" then return I18n.text("IGUI_KBW_PlanNoPermission") end
     if code == "placement_limit" then
-        return string.format(I18n.text("IGUI_KBW_PlanLimitReached"), Blueprints.maxPlacements())
+        return getText("IGUI_KBW_PlanLimitReached", Blueprints.maxPlacements())
     end
     if code == "out_of_range" then
         local radius = (blueprint and tonumber(blueprint.radius)) or Blueprints.blueprintRadius()
-        return string.format(I18n.text("IGUI_KBW_PlanOutOfRange"), radius)
+        return getText("IGUI_KBW_PlanOutOfRange", radius)
     end
     if code == "plan_overlap" then return I18n.text("IGUI_KBW_PlanConflict") end
     if code == "needs_previous_stage" then return I18n.text("IGUI_KBW_PlanNeedsPreviousStage") end
@@ -1890,7 +1890,7 @@ function Blueprints.importErrorText(error)
     end
     if error == "invalid_json" then return I18n.text("IGUI_KBW_BlueprintImportMalformed") end
     local schema = string.match(error, "^unsupported_schema:(.+)$")
-    if schema then return string.format(I18n.text("IGUI_KBW_BlueprintImportUnsupportedSchema"), schema) end
+    if schema then return getText("IGUI_KBW_BlueprintImportUnsupportedSchema", schema) end
     return I18n.text("IGUI_KBW_BlueprintImportMalformed")
 end
 

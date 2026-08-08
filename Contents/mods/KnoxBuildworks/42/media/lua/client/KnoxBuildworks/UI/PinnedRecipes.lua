@@ -419,7 +419,9 @@ local function newAreaScan(blueprint)
         y = y1,
         z = math.floor(tonumber(area.z) or 0),
         containers = {},
+        worldItems = {},
         seen = {},
+        seenWorldItems = {},
         seenVehicles = {},
         complete = false,
         nextRescan = 0,
@@ -436,8 +438,10 @@ local function ensureAreaScan(blueprint)
     local now = getTimestampMs and getTimestampMs() or 0
     if not state or state.signature ~= signature or (state.complete and now >= (state.nextRescan or 0)) then
         local previousContainers = state and state.signature == signature and state.containers or nil
+        local previousWorldItems = state and state.signature == signature and state.worldItems or nil
         state = newAreaScan(blueprint)
         state.previousContainers = previousContainers
+        state.previousWorldItems = previousWorldItems
         areaContainerCache[id] = state
     end
     if state then state.lastUsed = now end
@@ -452,6 +456,16 @@ local function scanAreaSquare(state)
             local object = objects:get(objectIndex)
             if object and object.getContainer and object:getContainer() then
                 addContainer(state.containers, state.seen, object:getContainer())
+            end
+        end
+        local worldObjects = square:getWorldObjects()
+        for objectIndex = 0, worldObjects:size() - 1 do
+            local worldItem = worldObjects:get(objectIndex)
+            local item = worldItem and worldItem.getItem and worldItem:getItem() or nil
+            local key = worldItem and tostring(worldItem) or nil
+            if item and key and not state.seenWorldItems[key] then
+                state.seenWorldItems[key] = true
+                state.worldItems[#state.worldItems + 1] = worldItem
             end
         end
         local vehicle = square:getVehicleContainer()
@@ -474,6 +488,7 @@ local function scanAreaSquare(state)
     if state.x > state.x2 then
         state.complete = true
         state.previousContainers = nil
+        state.previousWorldItems = nil
         state.nextRescan = (getTimestampMs and getTimestampMs() or 0) + AREA_RESCAN_MS
     end
 end
@@ -510,6 +525,25 @@ local function gatherContainersForBlueprint(player, blueprint)
     return containers
 end
 
+local function gatherWorldItemsForBlueprint(blueprint)
+    local result = {}
+    local seen = {}
+    local state = ensureAreaScan(blueprint)
+    local function append(items)
+        for itemIndex = 1, #(items or {}) do
+            local worldItem = items[itemIndex]
+            local key = worldItem and tostring(worldItem) or nil
+            if key and not seen[key] and worldItem:getSquare() then
+                seen[key] = true
+                result[#result + 1] = worldItem
+            end
+        end
+    end
+    append(state and state.previousWorldItems)
+    append(state and state.worldItems)
+    return result
+end
+
 local function amountForItem(item, row)
     local input = row and row.row or {}
     if (input.mode == "drain" or input.uses ~= nil) and instanceof(item, "DrainableComboItem") then
@@ -543,27 +577,29 @@ local function itemMatchesTotalRow(item, row)
     return false
 end
 
-local function scanContainerForRows(container, rows, snapshot)
+local scanContainerForRows
+
+local function scanItemForRows(item, rows, snapshot)
+    local itemKey = item and tostring(item) or nil
+    if not itemKey or snapshot.seenItems[itemKey] then return end
+    snapshot.seenItems[itemKey] = true
+    for rowIndex = 1, #rows do
+        local row = rows[rowIndex]
+        if itemMatchesTotalRow(item, row) then
+            snapshot.available[row] = (snapshot.available[row] or 0) + amountForItem(item, row)
+            if not snapshot.displayType[row] and item.getFullType then snapshot.displayType[row] = item:getFullType() end
+        end
+    end
+    if instanceof(item, "InventoryContainer") and item.getInventory and item:getInventory() then
+        scanContainerForRows(item:getInventory(), rows, snapshot)
+    end
+end
+
+scanContainerForRows = function(container, rows, snapshot)
     if not container or not container.getItems then return end
     local items = container:getItems()
     for itemIndex = 0, items:size() - 1 do
-        local item = items:get(itemIndex)
-        local itemKey = tostring(item)
-        if item and not snapshot.seenItems[itemKey] then
-            snapshot.seenItems[itemKey] = true
-            for rowIndex = 1, #rows do
-                local row = rows[rowIndex]
-                if itemMatchesTotalRow(item, row) then
-                    snapshot.available[row] = (snapshot.available[row] or 0) + amountForItem(item, row)
-                    if not snapshot.displayType[row] and item.getFullType then
-                        snapshot.displayType[row] = item:getFullType()
-                    end
-                end
-            end
-            if instanceof(item, "InventoryContainer") and item.getInventory and item:getInventory() then
-                scanContainerForRows(item:getInventory(), rows, snapshot)
-            end
-        end
+        scanItemForRows(items:get(itemIndex), rows, snapshot)
     end
 end
 
@@ -572,6 +608,10 @@ local function resourceSnapshot(player, blueprint, rows)
     local snapshot = { available = {}, displayType = {}, seenItems = {} }
     for containerIndex = 1, #containers do
         scanContainerForRows(containers[containerIndex], rows, snapshot)
+    end
+    local worldItems = gatherWorldItemsForBlueprint(blueprint)
+    for worldIndex = 1, #worldItems do
+        scanItemForRows(worldItems[worldIndex]:getItem(), rows, snapshot)
     end
     return snapshot
 end
@@ -614,7 +654,13 @@ end
 
 local function rowTitle(row)
     if row.kind == "skill" then return getText("IGUI_perks_" .. tostring(row.name)) end
-    if row.kind == "knowledge" then return tostring(row.name or "?") end
+    if row.kind == "knowledge" then
+        local name = tostring(row.name or "?")
+        if row.alternativeLabel and row.alternativeLabel ~= "" then
+            return getText("IGUI_KBW_RecipeOrSkill", name, row.alternativeLabel)
+        end
+        return name
+    end
     local displayType = rowDisplayType(row)
     if displayType then return itemDisplayName(displayType) end
     if row.possibleTags and row.possibleTags[1] then return tagDisplayName(row.possibleTags[1]) end
@@ -631,7 +677,10 @@ local function rowTexture(row)
 end
 
 local function rowStatus(row)
-    if row.kind == "knowledge" then return row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown") end
+    if row.kind == "knowledge" then
+        if row.alternativeMet then return getText("IGUI_KBW_SkillUnlocked") end
+        return row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown")
+    end
     return tostring(row.available or 0) .. "/" .. tostring(row.needed or 0)
 end
 
@@ -764,9 +813,7 @@ function PinnedRecipes.toggle(player, definition, stage, variantId, materialId, 
     if not key then return false end
     local data = uiData(player)
     if data.pinnedRecipes[key] then
-        data.pinnedRecipes[key] = nil
-        removeOrderedKey(data.pinnedRecipeOrder, key)
-        hudGeneration = hudGeneration + 1
+        PinnedRecipes.removeRecipe(player, key)
         return false
     end
     data.pinnedRecipes[key] = {
@@ -780,6 +827,30 @@ function PinnedRecipes.toggle(player, definition, stage, variantId, materialId, 
         choices = finishChoices(stage, finish, choices)
     }
     data.pinnedRecipeOrder[#data.pinnedRecipeOrder + 1] = key
+    hudGeneration = hudGeneration + 1
+    return true
+end
+
+function PinnedRecipes.removeRecipe(player, key)
+    if not player or not key then return false end
+    local data = uiData(player)
+    key = tostring(key)
+    if not data.pinnedRecipes[key] then return false end
+    data.pinnedRecipes[key] = nil
+    data.pinnedCollapsed["recipe:" .. key] = nil
+    removeOrderedKey(data.pinnedRecipeOrder, key)
+    hudGeneration = hudGeneration + 1
+    return true
+end
+
+function PinnedRecipes.removeBlueprint(player, blueprintId)
+    if not player or not blueprintId then return false end
+    local data = uiData(player)
+    local id = tostring(blueprintId)
+    if not data.pinnedBlueprints[id] then return false end
+    data.pinnedBlueprints[id] = nil
+    data.pinnedCollapsed["bp:" .. id] = nil
+    removeOrderedKey(data.pinnedBlueprintOrder, id)
     hudGeneration = hudGeneration + 1
     return true
 end
@@ -798,9 +869,7 @@ function PinnedRecipes.toggleBlueprint(player, blueprint)
     local data = uiData(player)
     local id = tostring(blueprint.id)
     if data.pinnedBlueprints[id] then
-        data.pinnedBlueprints[id] = nil
-        removeOrderedKey(data.pinnedBlueprintOrder, id)
-        hudGeneration = hudGeneration + 1
+        PinnedRecipes.removeBlueprint(player, id)
         return false
     end
     data.pinnedBlueprints[id] = { id = id, name = blueprintDisplayName(blueprint) }
@@ -863,6 +932,17 @@ local function buildLines(player, maxWidth, includeTitle)
     local content = optionValue("PinnedContent", CONTENT_VALUES, "icons")
     local useIcons = content == "icons"
     local blueprintOrder = data.pinnedBlueprintOrder or {}
+    local removedStaleBlueprint = false
+    for blueprintIndex = #blueprintOrder, 1, -1 do
+        local blueprintId = blueprintOrder[blueprintIndex]
+        if not Blueprints.get(player, blueprintId) then
+            data.pinnedBlueprints[blueprintId] = nil
+            data.pinnedCollapsed["bp:" .. tostring(blueprintId)] = nil
+            table.remove(blueprintOrder, blueprintIndex)
+            removedStaleBlueprint = true
+        end
+    end
+    if removedStaleBlueprint then hudGeneration = hudGeneration + 1 end
     local blueprintCount = 0
     for blueprintIndex = 1, #blueprintOrder do
         local blueprintId = blueprintOrder[blueprintIndex]
@@ -873,17 +953,18 @@ local function buildLines(player, maxWidth, includeTitle)
             local collapseKey = "bp:" .. tostring(blueprintId)
             local collapsed = isCollapsed(data, collapseKey)
             addWrapped(
-                lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. blueprintDisplayName(blueprint), maxWidth,
+                lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. blueprintDisplayName(blueprint), maxWidth - 20,
                 Theme.accent, BOOK_TEXTURE, "blueprint"
             )
             lines[#lines].collapseKey = collapseKey
+            lines[#lines].unpinKind = "blueprint"
+            lines[#lines].unpinKey = tostring(blueprintId)
             if not collapsed then
                 local totals = cachedBlueprintTotals(player, blueprint)
                 local rooms = blueprint.rooms or {}
                 addWrapped(
                     lines, UIFont.Small,
-                    string.format(
-                        getText("IGUI_KBW_BlueprintTotalsShort"), tostring(totals.placements or 0), tostring(#rooms)
+                    getText("IGUI_KBW_BlueprintTotalsShort", tostring(totals.placements or 0), tostring(#rooms)
                     ), maxWidth, Theme.textMuted, nil, "stage", 4
                 )
                 addWrapped(
@@ -949,9 +1030,6 @@ local function buildLines(player, maxWidth, includeTitle)
                     )
                 end
             end
-        else
-            data.pinnedBlueprints[blueprintId] = nil
-            removeOrderedKey(data.pinnedBlueprintOrder, blueprintId)
         end
     end
     local order = data.pinnedRecipeOrder or {}
@@ -984,10 +1062,12 @@ local function buildLines(player, maxWidth, includeTitle)
                 local collapseKey = "recipe:" .. tostring(order[orderIndex])
                 local collapsed = isCollapsed(data, collapseKey)
                 addWrapped(
-                    lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. displayName(definition), maxWidth,
+                    lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. displayName(definition), maxWidth - 20,
                     Theme.accent, recipeTexture, "recipe"
                 )
                 lines[#lines].collapseKey = collapseKey
+                lines[#lines].unpinKind = "recipe"
+                lines[#lines].unpinKey = tostring(order[orderIndex])
                 -- Collapsed recipes still show their ready/blocked status line.
                 addWrapped(
                     lines, UIFont.Small, prefix, maxWidth, status.ok and Theme.good or Theme.warn, nil, "status", 4
@@ -1071,6 +1151,7 @@ function KBWPinnedRecipesSettings:new(player)
     o.title = getText("IGUI_KBW_PinnedSettings")
     o.backgroundColor = Theme.backdrop
     o.borderColor = Theme.border
+    o:setWantKeyEvents(true)
     return o
 end
 
@@ -1185,6 +1266,19 @@ function KBWPinnedRecipesSettings:close()
     PinnedRecipes.settingsPanel = nil
 end
 
+---@param key string|number
+function KBWPinnedRecipesSettings:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWPinnedRecipesSettings:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
+end
+
 ---@param player IsoPlayer
 function PinnedRecipes.openSettings(player)
     if PinnedRecipes.settingsPanel then
@@ -1279,6 +1373,18 @@ function KBWPinnedRecipesPanel:onMouseDown(x, y)
         and y <= self.gearRect.y + self.gearRect.h then
         PinnedRecipes.openSettings(getPlayer())
         return true
+    end
+    local actionHits = self.headerActionHits or {}
+    for hitIndex = 1, #actionHits do
+        local hit = actionHits[hitIndex]
+        if x >= hit.x0 and x <= hit.x1 and y >= hit.y0 and y <= hit.y1 then
+            if hit.kind == "blueprint" then
+                PinnedRecipes.removeBlueprint(getPlayer(), hit.key)
+            else
+                PinnedRecipes.removeRecipe(getPlayer(), hit.key)
+            end
+            return true
+        end
     end
     -- Clicking a recipe/blueprint header toggles its collapsed detail.
     local headerHits = self.headerHits or {}
@@ -1442,6 +1548,7 @@ function KBWPinnedRecipesPanel:render()
 
     local textY = y + headerHeight + 7
     self.headerHits = {}
+    self.headerActionHits = {}
     for lineIndex = 1, #lines do
         local line = lines[lineIndex]
         if line.kind == "divider" then
@@ -1472,6 +1579,18 @@ function KBWPinnedRecipesPanel:render()
                     y0 = textY - 2,
                     y1 = textY + lineHeight + 2,
                     key = line.collapseKey
+                }
+            end
+            if line.unpinKind then
+                local actionX = width - 21
+                self:drawText("x", actionX + 4, textY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, opacity, font)
+                self.headerActionHits[#self.headerActionHits + 1] = {
+                    x0 = actionX - 2,
+                    x1 = width - 5,
+                    y0 = textY - 2,
+                    y1 = textY + lineHeight + 2,
+                    kind = line.unpinKind,
+                    key = line.unpinKey
                 }
             end
             textY = textY + lineHeight + 4

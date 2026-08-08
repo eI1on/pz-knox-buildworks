@@ -15,6 +15,97 @@ local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 ---@class KBWBuildCardGrid: ISPanel
 KBWBuildCardGrid = ISPanel:derive("KBWBuildCardGrid")
 
+---@class KBWBuildablePreviewToolTip: ISToolTip
+KBWBuildablePreviewToolTip = ISToolTip:derive("KBWBuildablePreviewToolTip")
+
+local function optionIndex(id, fallback)
+    local option = Options and Options.getOption and Options:getOption(id) or nil
+    return math.max(1, math.min(3, tonumber(option and option.getValue and option:getValue()) or fallback or 1))
+end
+
+local function catalogIconScale()
+    return ({ 1, 1.32, 1.68 })[optionIndex("CatalogIconSize", 1)]
+end
+
+local function hoverPreviewPixels()
+    return ({ 144, 208, 280 })[optionIndex("HoverPreviewSize", 1)]
+end
+
+local function hoverPreviewEnabled()
+    local option = Options and Options.getOption and Options:getOption("HoverPreview") or nil
+    return option and option.getValue and option:getValue() == true
+end
+
+function KBWBuildablePreviewToolTip:new()
+    local o = ISToolTip.new(self)
+    setmetatable(o, self)
+    self.__index = self
+    o.previewSize = hoverPreviewPixels()
+    o.maxLineWidth = math.max(240, o.previewSize)
+    return o
+end
+
+function KBWBuildablePreviewToolTip:doLayout()
+    local titleHeight = self.name and (getTextManager():getFontHeight(UIFont.Medium) + 8) or 0
+    local titleWidth = self.name and (getTextManager():MeasureStringX(UIFont.Medium, self.name) + 20) or 0
+    local width = math.min(getCore():getScreenWidth() - 8, math.max(self.previewSize + 20, 280, titleWidth))
+    local descriptionHeight = 0
+    if self.showDetails and self.description and self.description ~= "" then
+        self.descriptionPanel.defaultFont = ISToolTip.GetFont()
+        self.descriptionPanel.text = self.description
+        self.descriptionPanel.maxLineWidth = width - 20
+        self.descriptionPanel:setWidth(width - 20)
+        self.descriptionPanel:paginate()
+        descriptionHeight = self.descriptionPanel:getHeight() + 8
+    end
+    self:setWidth(width)
+    self:setHeight(10 + titleHeight + self.previewSize + descriptionHeight + 10)
+end
+
+function KBWBuildablePreviewToolTip:prerender()
+    if self.owner and not self.owner:isReallyVisible() then
+        self:setVisible(false)
+        self:removeFromUIManager()
+        return
+    end
+    self:doLayout()
+end
+
+function KBWBuildablePreviewToolTip:render()
+    local x = getMouseX() + 28
+    local y = getMouseY() + 12
+    x = math.max(2, math.min(x, getCore():getScreenWidth() - self.width - 2))
+    y = math.max(2, math.min(y, getCore():getScreenHeight() - self.height - 2))
+    self:setX(x)
+    self:setY(y)
+    self:drawRect(0, 0, self.width, self.height, .94, Theme.backdrop.r, Theme.backdrop.g, Theme.backdrop.b)
+    self:drawRectBorder(0, 0, self.width, self.height, .9, Theme.border.r, Theme.border.g, Theme.border.b)
+    local titleHeight = self.name and (getTextManager():getFontHeight(UIFont.Medium) + 8) or 0
+    if self.name then
+        self:drawText(self.name, 10, 6, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Medium)
+    end
+    local previewX = math.floor((self.width - self.previewSize) / 2)
+    local previewY = 8 + titleHeight
+    Theme.drawPreviewBackground(self, previewX, previewY, self.previewSize, self.previewSize, Options)
+    self:drawRectBorder(
+        previewX, previewY, self.previewSize, self.previewSize, .8,
+        Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+    )
+    if self.texture then
+        local color = self.textureColor or { r = 1, g = 1, b = 1 }
+        self:drawTextureScaledAspect(
+            self.texture, previewX + 6, previewY + 6, self.previewSize - 12, self.previewSize - 12,
+            1, color.r or 1, color.g or 1, color.b or 1
+        )
+    end
+    if self.showDetails and self.description and self.description ~= "" then
+        self.descriptionPanel:setX(self:getAbsoluteX() + 10)
+        self.descriptionPanel:setY(self:getAbsoluteY() + previewY + self.previewSize + 7)
+        self.descriptionPanel:prerender()
+        self.descriptionPanel:render()
+    end
+end
+
 local function displayName(definition)
     return I18n.definitionName(definition)
 end
@@ -66,7 +157,7 @@ function KBWBuildCardGrid:new(x, y, width, height, player, target, onSelect, onA
     setmetatable(o, self)
     self.__index = self
     o.player, o.target, o.onSelect, o.onActivate = player, target, onSelect, onActivate
-    o.items, o.selectedIndex, o.hoverIndex = {}, 0, 0
+    o.items, o.selectedIndex, o.hoverIndex, o.previewHoverIndex = {}, 0, 0, 0
     o.cardCache = {}
     o.statusBudget = 0
     o.cardWidth, o.cardHeight, o.gap = 118, 132, 10
@@ -77,6 +168,8 @@ function KBWBuildCardGrid:new(x, y, width, height, player, target, onSelect, onA
     o.starUnsetTexture = getTexture("media/ui/inventoryPanes/FavouriteNo.png")
     o.starSetTexture = getTexture("media/ui/inventoryPanes/FavouriteYes.png")
     o.pinTexture = getTexture("media/ui/inventoryPanes/Button_Pin.png")
+    o.previewTextureOff = getTexture("media/ui/Sidebar/48/Search_Off_48.png")
+    o.previewTextureOn = getTexture("media/ui/Sidebar/48/Search_On_48.png")
     o.background = false
     o.backgroundColor = { r = 0, g = 0, b = 0, a = 0 }
     o.compactMode = nil
@@ -85,21 +178,26 @@ function KBWBuildCardGrid:new(x, y, width, height, player, target, onSelect, onA
     return o
 end
 
-function KBWBuildCardGrid:setCompactMode(compact)
+function KBWBuildCardGrid:setCompactMode(compact, force)
     compact = compact == true
-    if self.compactMode == compact then return end
+    if self.compactMode == compact and not force then return end
     self.compactMode = compact
-    if not self.compactMode and self.hideBuildableTooltip then self:hideBuildableTooltip() end
+    if self.hideBuildableTooltip then self:hideBuildableTooltip() end
+    self.previewHoverIndex = 0
     local fontHeight = getTextManager():getFontHeight(UIFont.Small)
+    local scale = catalogIconScale()
+    self.iconScale = scale
     if self.compactMode then
-        self.cardWidth = math.max(74, fontHeight + 50)
-        self.cardHeight = math.max(78, fontHeight + 54)
-        self.gap = 6
-        self.favoriteSize = 14
-        self.pinSize = 14
+        self.cardWidth = math.floor(math.max(74, fontHeight + 50) * scale + .5)
+        self.cardHeight = math.floor(math.max(78, fontHeight + 54) * scale + .5)
+        self.gap = math.max(6, math.floor(6 * math.min(scale, 1.35) + .5))
+        self.favoriteSize = math.floor(14 * math.min(scale, 1.35) + .5)
+        self.pinSize = self.favoriteSize
     else
-        self.cardWidth = math.max(124, fontHeight * 5 + 18)
-        self.cardHeight = math.max(142, fontHeight * 2 + 112)
+        local baseWidth = math.max(124, fontHeight * 5 + 18)
+        local baseHeight = math.max(142, fontHeight * 2 + 112)
+        self.cardWidth = math.floor(baseWidth * scale + .5)
+        self.cardHeight = math.floor(baseHeight + (scale - 1) * 92 + .5)
         self.rowHeight = math.max(92, fontHeight * 3 + 26)
         self.gap = 10
         self.favoriteSize = 18
@@ -137,6 +235,7 @@ end
 function KBWBuildCardGrid:setItems(items, selectedId)
     self:hideBuildableTooltip()
     self.hoverIndex = 0
+    self.previewHoverIndex = 0
     items = items or {}
     local sameItems = #items == #self.items
     if sameItems then
@@ -171,7 +270,7 @@ function KBWBuildCardGrid:setSelectionPreview(definition, effectiveDefinition, s
             finish = finish
         }
     end
-    if self.compactMode and self.hoverIndex == self.selectedIndex then self:updateBuildableTooltip() end
+    if self.previewHoverIndex == self.selectedIndex then self:updateBuildableTooltip() end
 end
 
 function KBWBuildCardGrid:visualFor(definition, entry, selected)
@@ -195,6 +294,8 @@ end
 function KBWBuildCardGrid:setViewMode(mode)
     mode = mode == "list" and "list" or "grid"
     if self.viewMode == mode then return end
+    self:hideBuildableTooltip()
+    self.previewHoverIndex = 0
     self.viewMode = mode
     self.listLayoutCache = nil
     self:setScrollHeight(self:contentHeight())
@@ -353,6 +454,36 @@ end
 
 ---@param x number
 ---@param y number
+function KBWBuildCardGrid:previewIndexAt(x, y)
+    if not hoverPreviewEnabled() then return 0 end
+    local index = self:indexAt(x, y)
+    if index == 0 then return 0 end
+    if self.viewMode == "list" then
+        local rowY = self:listLayouts().rows[index].y
+        local previewX = self:drawWidth() - self.gap - self.favoriteSize - 12
+        local previewY = rowY + 13 + self.favoriteSize
+        if x >= previewX and x <= previewX + self.favoriteSize
+            and y >= previewY and y <= previewY + self.favoriteSize then
+            return index
+        end
+        return 0
+    end
+    local columns = self:columns()
+    local col, row = (index - 1) % columns, math.floor((index - 1) / columns)
+    local cardX = self.gap + col * (self.cardWidth + self.gap)
+    local cardY = self.gap + row * (self.cardHeight + self.gap)
+    local iconOffset = self.compactMode and 5 or 7
+    local previewX = cardX + self.cardWidth - self.favoriteSize - iconOffset
+    local previewY = cardY + iconOffset + self.favoriteSize + (self.compactMode and 2 or 4)
+    if x >= previewX and x <= previewX + self.favoriteSize
+        and y >= previewY and y <= previewY + self.favoriteSize then
+        return index
+    end
+    return 0
+end
+
+---@param x number
+---@param y number
 function KBWBuildCardGrid:pinIndexAt(x, y)
     local index = self:indexAt(x, y)
     if index == 0 then return 0 end
@@ -393,8 +524,10 @@ end
 ---@param dy number
 function KBWBuildCardGrid:onMouseMove(dx, dy)
     local hoverIndex = self:indexAt(self:getMouseX(), self:getMouseY())
-    if hoverIndex ~= self.hoverIndex then
-        self.hoverIndex = hoverIndex
+    local previewHoverIndex = self:previewIndexAt(self:getMouseX(), self:getMouseY())
+    self.hoverIndex = hoverIndex
+    if previewHoverIndex ~= self.previewHoverIndex then
+        self.previewHoverIndex = previewHoverIndex
         self:updateBuildableTooltip()
     end
 end
@@ -403,6 +536,7 @@ end
 ---@param dy number
 function KBWBuildCardGrid:onMouseMoveOutside(dx, dy)
     self.hoverIndex = 0
+    self.previewHoverIndex = 0
     self:hideBuildableTooltip()
 end
 
@@ -415,21 +549,27 @@ end
 
 function KBWBuildCardGrid:updateBuildableTooltip()
     self:hideBuildableTooltip()
-    if not self.compactMode or self.hoverIndex <= 0 then return end
-    local definition = self.items[self.hoverIndex]
+    if not hoverPreviewEnabled() then return end
+    if self.previewHoverIndex <= 0 then return end
+    local definition = self.items[self.previewHoverIndex]
     if not definition then return end
     local entry = self:cardData(definition)
-    local preview = self.hoverIndex == self.selectedIndex and self.selectionPreview or nil
+    local preview = self.previewHoverIndex == self.selectedIndex and self.selectionPreview or nil
     local tooltipDefinition = preview and preview.id == definition.id and preview.definition or entry.statusDefinition or definition
     local tooltipStage = preview and preview.id == definition.id and preview.stage or entry.statusStage or entry.stage
-    local tooltip = ISToolTip:new()
+    local tooltip = KBWBuildablePreviewToolTip:new()
     tooltip:initialise()
     tooltip:addToUIManager()
     tooltip.owner = self
     tooltip.followMouse = true
     tooltip:setAlwaysOnTop(true)
     tooltip:setName(entry.name)
-    tooltip.description = BuildableInfo.compactTooltip(self.player, tooltipDefinition, tooltipStage)
+    tooltip.showDetails = self.compactMode == true
+    tooltip.description = tooltip.showDetails
+        and BuildableInfo.compactTooltip(self.player, tooltipDefinition, tooltipStage) or nil
+    local texture, textureColor = self:visualFor(definition, entry, self.previewHoverIndex == self.selectedIndex)
+    tooltip:setTextureDirectly(texture)
+    tooltip.textureColor = textureColor
     tooltip:setVisible(true)
     self.buildableTooltip = tooltip
 end
@@ -437,6 +577,7 @@ end
 ---@param x number
 ---@param y number
 function KBWBuildCardGrid:onMouseDown(x, y)
+    if self:previewIndexAt(x, y) > 0 then return true end
     local pinIndex = self:pinIndexAt(x, y)
     if pinIndex > 0 then
         self.selectedIndex = pinIndex
@@ -473,10 +614,8 @@ function KBWBuildCardGrid:onMouseWheel(delta)
     local target = self:getYScroll() - delta * (self.compactMode and self.cardHeight or 46)
     self:setYScroll(math.max(-maximum, math.min(0, target)))
     if self.vscroll then self:updateScrollbars() end
-    if self.compactMode then
-        self.hoverIndex = self:indexAt(self:getMouseX(), self:getMouseY())
-        self:updateBuildableTooltip()
-    end
+    self.hoverIndex = self:indexAt(self:getMouseX(), self:getMouseY())
+    self:updateBuildableTooltip()
     return true
 end
 
@@ -588,6 +727,7 @@ function KBWBuildCardGrid:prerender()
     self.statusBudget = STATUS_BUDGET_PER_FRAME
     self.statusSnapshot = nil
     local unavailableAlpha = unavailableIconAlpha()
+    local previewsEnabled = hoverPreviewEnabled()
 
     if self.viewMode == "list" then
         local layouts = self:listLayouts().rows
@@ -601,6 +741,7 @@ function KBWBuildCardGrid:prerender()
             if viewY > self.height then break end
             if viewY + rowHeight >= 0 then
                 local selected, hovered = index == self.selectedIndex, index == self.hoverIndex
+                local previewHovered = index == self.previewHoverIndex
                 local entry, status = self:cardStatus(definition)
                 local texture, textureColor = self:visualFor(definition, entry, selected)
                 local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
@@ -638,6 +779,16 @@ function KBWBuildCardGrid:prerender()
                         starTexture, x + width - self.favoriteSize - 12, y + 9, self.favoriteSize, self.favoriteSize,
                         alpha, color.r, color.g, color.b
                     )
+                end
+                if previewsEnabled then
+                    local previewTexture = previewHovered and self.previewTextureOn or self.previewTextureOff
+                    if previewTexture then
+                        self:drawTextureScaledAspect(
+                            previewTexture, x + width - self.favoriteSize - 12,
+                            y + 13 + self.favoriteSize, self.favoriteSize, self.favoriteSize,
+                            previewHovered and 1 or .72, 1, 1, 1
+                        )
+                    end
                 end
                 local fontHeight = getTextManager():getFontHeight(UIFont.Small)
                 local lineHeight = fontHeight + 2
@@ -684,6 +835,7 @@ function KBWBuildCardGrid:prerender()
                     local viewY = y + scroll
                     if viewY + self.cardHeight >= 0 and viewY <= self.height then
                         local selected, hovered = index == self.selectedIndex, index == self.hoverIndex
+                        local previewHovered = index == self.previewHoverIndex
                         local entry, status = self:cardStatus(definition)
                         local texture, textureColor = self:visualFor(definition, entry, selected)
                         local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
@@ -694,10 +846,15 @@ function KBWBuildCardGrid:prerender()
                         self:drawRectBorder(
                             x, y, self.cardWidth, self.cardHeight, border.a, border.r, border.g, border.b
                         )
-                        local previewX = self.compactMode and (x + 6) or (x + math.floor((self.cardWidth - 84) / 2))
+                        local normalPreviewWidth = math.min(self.cardWidth - 18, math.floor(84 * (self.iconScale or 1) + .5))
+                        local normalPreviewHeight = math.min(
+                            self.cardHeight - 58, math.floor(70 * (self.iconScale or 1) + .5)
+                        )
+                        local previewX = self.compactMode and (x + 6)
+                            or (x + math.floor((self.cardWidth - normalPreviewWidth) / 2))
                         local previewY = self.compactMode and (y + 6) or (y + 12)
-                        local previewWidth = self.compactMode and (self.cardWidth - 12) or 84
-                        local previewHeight = self.compactMode and (self.cardHeight - 18) or 70
+                        local previewWidth = self.compactMode and (self.cardWidth - 12) or normalPreviewWidth
+                        local previewHeight = self.compactMode and (self.cardHeight - 18) or normalPreviewHeight
                         Theme.drawPreviewBackground(
                             self, previewX, previewY, previewWidth, previewHeight, Options
                         )
@@ -732,6 +889,18 @@ function KBWBuildCardGrid:prerender()
                                 starTexture, x + self.cardWidth - self.favoriteSize - iconOffset, y + iconOffset,
                                 self.favoriteSize, self.favoriteSize, alpha, color.r, color.g, color.b
                             )
+                        end
+                        if previewsEnabled or self.compactMode then
+                            local previewTexture = previewHovered and self.previewTextureOn or self.previewTextureOff
+                            if previewTexture then
+                                local iconOffset = self.compactMode and 5 or 7
+                                self:drawTextureScaledAspect(
+                                    previewTexture,
+                                    x + self.cardWidth - self.favoriteSize - iconOffset,
+                                    y + iconOffset + self.favoriteSize + (self.compactMode and 2 or 4),
+                                    self.favoriteSize, self.favoriteSize, previewHovered and 1 or .72, 1, 1, 1
+                                )
+                            end
                         end
                         local marker = status.pending and Theme.textMuted or (status.ok and Theme.good or Theme.warn)
                         if self.compactMode then

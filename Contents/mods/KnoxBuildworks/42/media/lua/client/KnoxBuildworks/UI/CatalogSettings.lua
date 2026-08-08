@@ -31,6 +31,12 @@ local BACKGROUND_LABELS = {
     "UI_optionscreen_KBW_PreviewBackground_Custom"
 }
 
+local SIZE_LABELS = {
+    "UI_optionscreen_KBW_Size_Default",
+    "UI_optionscreen_KBW_Size_Large",
+    "UI_optionscreen_KBW_Size_ExtraLarge"
+}
+
 local function option(id)
     return Options and Options.getOption and Options:getOption(id) or nil
 end
@@ -76,7 +82,7 @@ function KBWCatalogAppearanceSettings:new(player, target)
     local controlHeight = math.max(26, fontHeight + 10)
     local rowHeight = controlHeight + 10
     local titleBarHeight = math.max(16, fontHeight + 1)
-    local height = math.max(320, titleBarHeight + 36 + rowHeight * 5 + controlHeight * 2)
+    local height = math.max(430, titleBarHeight + 36 + rowHeight * 8 + controlHeight * 2)
     local o = ISCollapsableWindow:new(120, 120, 460, height)
     setmetatable(o, self)
     self.__index = self
@@ -90,6 +96,7 @@ function KBWCatalogAppearanceSettings:new(player, target)
     o.borderColor = Theme.color(Theme.border)
     o.controlHeight = controlHeight
     o.rowHeight = rowHeight
+    o:setWantKeyEvents(true)
     return o
 end
 
@@ -139,7 +146,34 @@ function KBWCatalogAppearanceSettings:createChildren()
     self.fadeUnavailableIcons.tooltip = getText("IGUI_KBW_FadeUnavailableIconsTooltip")
     self:addChild(self.fadeUnavailableIcons)
 
-    local opacityY = top + self.rowHeight * 5
+    self.iconSizeCombo = ISComboBox:new(
+        controlX, top + self.rowHeight * 5, controlWidth, self.controlHeight, self, self.onIconSizeChanged
+    )
+    self.iconSizeCombo:initialise()
+    self:addChild(self.iconSizeCombo)
+
+    self.hoverPreview = ISTickBox:new(
+        18, top + self.rowHeight * 6, self.width - 36, self.controlHeight, "",
+        self, self.onHoverPreviewChanged
+    )
+    self.hoverPreview:initialise()
+    self.hoverPreview:addOption(getText("IGUI_KBW_HoverPreview"))
+    self.hoverPreview.tooltip = getText("IGUI_KBW_HoverPreviewTooltip")
+    self:addChild(self.hoverPreview)
+
+    self.hoverPreviewCombo = ISComboBox:new(
+        controlX, top + self.rowHeight * 7, controlWidth, self.controlHeight, self, self.onHoverPreviewSizeChanged
+    )
+    self.hoverPreviewCombo:initialise()
+    self.hoverPreviewCombo.tooltip = getText("IGUI_KBW_HoverPreviewSizeTooltip")
+    self:addChild(self.hoverPreviewCombo)
+    for labelIndex = 1, #SIZE_LABELS do
+        local label = getText(SIZE_LABELS[labelIndex])
+        self.iconSizeCombo:addOption(label)
+        self.hoverPreviewCombo:addOption(label)
+    end
+
+    local opacityY = top + self.rowHeight * 8
     self.opacityDown = configureButton(
         ISButton:new(controlX, opacityY, 42, self.controlHeight, "-", self, self.onOpacityDown)
     )
@@ -180,6 +214,15 @@ function KBWCatalogAppearanceSettings:syncFromOptions()
     if self.fadeUnavailableIcons then
         self.fadeUnavailableIcons.selected[1] = optionValue("FadeUnavailableIcons", true) ~= false
     end
+    if self.iconSizeCombo then
+        self.iconSizeCombo.selected = tonumber(optionValue("CatalogIconSize", 1)) or 1
+    end
+    if self.hoverPreview then
+        self.hoverPreview.selected[1] = optionValue("HoverPreview", false) == true
+    end
+    if self.hoverPreviewCombo then
+        self.hoverPreviewCombo.selected = tonumber(optionValue("HoverPreviewSize", 1)) or 1
+    end
     self:refreshColorButton()
 end
 
@@ -216,6 +259,21 @@ end
 
 function KBWCatalogAppearanceSettings:onFadeUnavailableIconsChanged(clickedOption, enabled)
     setOption("FadeUnavailableIcons", enabled == true)
+    self:notifyTarget()
+end
+
+function KBWCatalogAppearanceSettings:onIconSizeChanged()
+    setOption("CatalogIconSize", self.iconSizeCombo.selected or 1)
+    self:notifyTarget()
+end
+
+function KBWCatalogAppearanceSettings:onHoverPreviewChanged(clickedOption, enabled)
+    setOption("HoverPreview", enabled == true)
+    self:notifyTarget()
+end
+
+function KBWCatalogAppearanceSettings:onHoverPreviewSizeChanged()
+    setOption("HoverPreviewSize", self.hoverPreviewCombo.selected or 1)
     self:notifyTarget()
 end
 
@@ -275,6 +333,9 @@ function KBWCatalogAppearanceSettings:onReset()
         BuildableBackgroundColor = { r = .35, g = .35, b = .35, a = 1 },
         HighContrast = false,
         FadeUnavailableIcons = true,
+        CatalogIconSize = 1,
+        HoverPreview = false,
+        HoverPreviewSize = 1,
         PanelOpacity = 86
     }
     for id, value in pairs(values) do
@@ -302,7 +363,15 @@ function KBWCatalogAppearanceSettings:render()
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     self:drawText(
-        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 5,
+        getText("IGUI_KBW_CatalogIconSize"), labelX, top + self.rowHeight * 5,
+        Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+    )
+    self:drawText(
+        getText("IGUI_KBW_HoverPreviewSize"), labelX, top + self.rowHeight * 7,
+        Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+    )
+    self:drawText(
+        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 8,
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     local value = tonumber(optionValue("PanelOpacity", 86)) or 86
@@ -310,7 +379,7 @@ function KBWCatalogAppearanceSettings:render()
     local centreX = self.opacityDown:getRight()
         + math.floor((self.opacityUp:getX() - self.opacityDown:getRight()) / 2)
     self:drawTextCentre(
-        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 5,
+        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 8,
         Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
 end
@@ -323,6 +392,19 @@ function KBWCatalogAppearanceSettings:close()
     ISCollapsableWindow.close(self)
     self:removeFromUIManager()
     CatalogSettings.settingsPanel = nil
+end
+
+---@param key string|number
+function KBWCatalogAppearanceSettings:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWCatalogAppearanceSettings:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
 end
 
 ---@param player IsoPlayer

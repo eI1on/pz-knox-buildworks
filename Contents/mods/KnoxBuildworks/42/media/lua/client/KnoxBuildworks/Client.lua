@@ -14,13 +14,29 @@ require("KnoxBuildworks/UI/Sidebar")
 require("KnoxBuildworks/Debug/DebugMenuDock")
 require("KnoxBuildworks/Admin/BuildableEditorDock")
 
-local function hello(player)
+local helloPlayer = nil
+local helloSentAt = 0
+local HELLO_RETRY_MS = 5000
+
+local function hello(player, retry)
     if isClient() then
-        Integrity.setClient("pending", getText("IGUI_KBW_IntegrityPending"))
+        if not retry then Integrity.setClient("pending", getText("IGUI_KBW_IntegrityPending")) end
         sendClientCommand(player, KBW.NETWORK_MODULE, "Hello", { hash = Registry.hash })
+        helloPlayer = player
+        helloSentAt = getTimestampMs()
     else
         Integrity.setClient("ok", getText("IGUI_KBW_IntegritySingleplayer"))
+        helloPlayer = nil
     end
+end
+
+-- B42.20 can create the player before every server-side Lua listener has
+-- finished settling. A dropped first reply used to leave the catalogue in
+-- "Waiting for server definition validation" for the entire session.
+local function retryIntegrityHandshake(player)
+    if not isClient() or not KBW.Runtime.loaded or KBW.Runtime.integrity ~= "pending" then return end
+    local target = helloPlayer or player or getPlayer()
+    if target and getTimestampMs() - helloSentAt >= HELLO_RETRY_MS then hello(target, true) end
 end
 
 -- Definitions load incrementally across ticks; the integrity handshake is
@@ -105,11 +121,12 @@ local function onServerCommand(module, command, args)
     if module ~= KBW.NETWORK_MODULE then return end
     args = args or {}
     if command == "Integrity" then
+        helloPlayer = nil
         local message = args.message
         if args.reason == "match" then
             message = getText("IGUI_KBW_IntegrityMatch")
         elseif args.reason == "mismatch" then
-            message = string.format(getText("IGUI_KBW_IntegrityMismatch"), tostring(args.serverHash or "?"))
+            message = getText("IGUI_KBW_IntegrityMismatch", tostring(args.serverHash or "?"))
         end
         Integrity.setClient(args.allowed and "ok" or "mismatch", message or getText("IGUI_KBW_IntegrityPending"))
     elseif command == "BPSyncAll" then
@@ -257,5 +274,6 @@ Events.OnCreatePlayer.Add(onCreatePlayer)
 Events.OnServerCommand.Add(onServerCommand)
 Events.OnKeyPressed.Add(onKeyPressed)
 Events.OnPlayerUpdate.Add(refreshNearbyBlueprints)
+Events.OnPlayerUpdate.Add(retryIntegrityHandshake)
 Events.OnFillInventoryObjectContextMenu.Add(inventoryContextMenu)
 return true

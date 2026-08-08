@@ -1,4 +1,4 @@
----BuildFromPlan provides the Knox Buildworks blueprint planning layer.
+--- BuildFromPlan provides the Knox Buildworks blueprint planning layer.
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local Placement = require("KnoxBuildworks/Validation/Placement")
@@ -189,10 +189,10 @@ local function queueWallCovering(player, blueprintId, blueprint, placement, defi
     return true
 end
 
----@param player IsoPlayer
+---@param player      IsoPlayer
 ---@param blueprintId string
----@param placement KBW.BlueprintPlacement
----@param onBuilt function|nil
+---@param placement   KBW.BlueprintPlacement
+---@param onBuilt     function | nil
 function BuildFromPlan.queue(player, blueprintId, placement, onBuilt)
     if not placement then return false, "no placement" end
     if not Integrity.isAllowed(player) then
@@ -251,9 +251,7 @@ function BuildFromPlan.queue(player, blueprintId, placement, onBuilt)
         local north = direction == 2 or direction == 4
         local face = north and "N" or "W"
         local baseSprite = (stage.sprites or {})[face]
-        expectedSprite = WallFinishes.previewSprite(
-            placement.finish, north, definition, stage, baseSprite
-        )
+        expectedSprite = WallFinishes.previewSprite(placement.finish, north, definition, stage, baseSprite)
     end
     watchPlacement(player, blueprintId, placement, onBuilt, expectedSprite)
     return true

@@ -4,6 +4,8 @@
     "media/KnoxBuildworks/definitions/appliances/cooking.json",
     "media/KnoxBuildworks/definitions/appliances/laundry.json",
     "media/KnoxBuildworks/definitions/appliances/refrigeration.json",
+    "media/KnoxBuildworks/definitions/lighting/indoor.json",
+    "media/KnoxBuildworks/definitions/outdoors/metal_drums.json",
     "media/KnoxBuildworks/definitions/architecture_plus/canvas_covers.json",
     "media/KnoxBuildworks/definitions/architecture_plus/crown_molding.json",
     "media/KnoxBuildworks/definitions/architecture_plus/door_trims.json",

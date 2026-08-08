@@ -6,6 +6,7 @@
   "Tooltip_KBW_ListView": "以详细列表形式显示可建造物。",
   "Tooltip_KBW_GridView": "以图标磁贴形式显示可建造物。",
   "Tooltip_KBW_ShowAllVersions": "显示所有建造版本，包括通常由基于技能的目录规则隐藏的等级。",
+  "Tooltip_KBW_MultiCategory": "单击仅显示此分类。按住 Shift 单击可在当前选择中添加或移除该分类。",
   "Tooltip_KBW_Search": "搜索当前可建造目录。",
   "Tooltip_KBW_SearchMode": "选择搜索是匹配配方名称、所需物品，还是两者都匹配。",
   "Tooltip_KBW_Sort": "选择可建造物排序方式。固定的配方会保持在最前面。",
@@ -144,5 +145,10 @@
   "Tooltip_KBW_Shared_Toilet": "可连接供水、带小型储水量的浴室马桶。",
   "Tooltip_KBW_Shared_Shower": "可连接供水的淋浴设施。",
   "Tooltip_KBW_Shared_Bathtub": "占两格、可连接供水并带大型储水量的浴缸。",
-  "Tooltip_KBW_Shared_Sink": "可连接供水、带小型储水量的水槽。"
+  "Tooltip_KBW_Shared_Sink": "可连接供水、带小型储水量的水槽。",
+  "Tooltip_KBW_Shared_LightSwitch": "在电网或发电机供电时控制所在房间的照明。",
+  "Tooltip_KBW_Shared_TableLamp": "一盏需要供电的台灯，保留原灯具的光色和照明范围。",
+  "Tooltip_KBW_Shared_WallLamp": "需要供电并安装在合适墙面上的壁灯。",
+  "Tooltip_KBW_Shared_ExitSign": "可安装在墙面或门框上的发光出口标志。",
+  "Tooltip_KBW_Shared_FloorLamp": "一盏独立式供电灯具，保留原灯具的光色和照明范围。"
 }

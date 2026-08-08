@@ -1,3 +1,25 @@
+[b]Build Smarter, Rebuild Faster - Catalogue Visibility & Multiplayer Reliability Update[/b]
+
+[list]
+[*][b]Multi-category browsing:[/b] Categories can now be combined with Shift-click, making it possible to browse related sets together, for example walls, doors and windows, while filters automatically include the combined selection.
+[*][b]Larger icons and focused previews:[/b] Added Default, Large and Extra Large buildable-icon sizes for both the normal catalogue and Compact mode. Added optional hover previews beneath each favorite star, so previews appear only when deliberately requested. Compact previews include descriptions, capacities, materials, tools and skill requirements; normal and detailed-list previews show only the enlarged buildable. Hover previews are disabled by default and have their own size setting.
+[*][b]Improved gathering and build queues:[/b] Gather zones now recognize loose items placed directly on the ground as well as items inside crates, bags, nearby containers and vehicles. Pinned requirement totals include those world items, and queued plans can walk to and collect them automatically.
+[*][b]Multiplayer definition validation:[/b] Added a safe retry for the B42.20 client/server definition handshake, preventing a dropped initial response from leaving players permanently stuck on "Waiting for server definition validation."
+[*][b]Pinned overlay controls:[/b] Added an unpin control to every pinned recipe and blueprint header, so obsolete entries can be removed directly from the overlay. Deleted blueprints are also detected and cleared automatically.
+[*][b]Furnace and charcoal-burner placement:[/b] Blast, primitive and smelting furnaces, together with all charcoal-burner variants, now follow the base game's outdoor-only restriction. The restriction is validated by the definition schema, displayed in compact information and produces a clear placement reason indoors.
+[*][b]Classic brick structures:[/b] Restored the Classic Brick Wall to catalogue searches and grouped it after Brick Wall (Poor), with its old and weathered appearance available through the finish selector. Poor brick walls, door frames and window frames no longer incorrectly offer plaster, paint or wallpaper finishes.
+[*][b]Cleaner logging:[/b] Routine Knox Buildworks debug and information output is now disabled during normal play. Full diagnostics remain available through the Debug option, while genuine errors continue to be logged.
+[*][b]Wall replacement:[/b] Finished player-built walls can now be replaced directly by another solid wall on the same edge. Door and window frames, openings, fences and map-authored walls remain protected, so changing a wall style no longer requires destroying and rebuilding its frame.
+[*][b]Passable pillars and posts:[/b] Fixed the directional invisible collision created by wall pillars, tall posts and other explicitly passable decorative pieces. They now use collision-free world objects and remain walkable in every rotation, including sprites that are not registered as movable furniture.
+[*][b]Magazine or skill progression:[/b] Learned construction recipes can now accept a skill threshold as an alternative to finding their magazine. Native B42 AutoLearn rules are preserved, required construction skills are used where available, and Metal Floor can be unlocked at Welding 1. Recipe-or-skill conditions are shown throughout the catalogue, detailed information, pinned recipes and requirement drawers.
+[*][b]Metal rain drum:[/b] Added the four-direction base-game Metal Drum as a functional rainwater collector in Vanilla Expanded. It uses the native fluid-container system for multiplayer-safe water storage.
+[*][b]Vanilla-style menu controls:[/b] Escape now closes the Knox Buildworks catalogue and its standalone guide, appearance, pinned-recipe, blueprint and administration windows, matching the base-game building and crafting menus.
+[*][b]Localization formatting:[/b] Corrected parameterized translations to use numbered placeholders and direct getText arguments. Removed the blueprint UI's fallback-based safeText wrappers so translated strings now follow the base-game localization path consistently. This is due to B42.20.2 update.
+[*][b]Two-sided frame construction:[/b] Walls can now be completed from a matching frame while the player stands on either usable face or the adjacent approach tile, instead of being routed through or around the frame to its anchor square. This also applies when building walls from plans and queues.
+[*][b]Upper-storey perimeter walls:[/b] Walls, wall frames, door frames and window frames can now use a floor on either side of their placement edge, so south and east exterior walls no longer require a temporary floor outside the building.
+[/list]
+
+
 [b]Knox Buildworks - Build Rules & Appliances Update[/b]
 
 [list]

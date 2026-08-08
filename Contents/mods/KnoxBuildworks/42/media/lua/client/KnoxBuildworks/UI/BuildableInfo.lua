@@ -3,6 +3,7 @@
 local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local I18n = require("KnoxBuildworks/I18n")
+local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 
 ---@class KBW.BuildableInfoModule
 ---@type KBW.BuildableInfoModule
@@ -254,8 +255,13 @@ local function tooltipRow(row)
             .. tostring(row.available or 0) .. "/" .. tostring(row.needed or 0)
     end
     if row.kind == "knowledge" then
-        return color .. "- " .. tostring(row.name or "?") .. ": "
-            .. (row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown"))
+        local name = tostring(row.name or "?")
+        if row.alternativeLabel and row.alternativeLabel ~= "" then
+            name = getText("IGUI_KBW_RecipeOrSkill", name, row.alternativeLabel)
+        end
+        local state = row.alternativeMet and getText("IGUI_KBW_SkillUnlocked")
+            or (row.ok and getText("IGUI_KBW_Known") or getText("IGUI_KBW_NotKnown"))
+        return color .. "- " .. name .. ": " .. state
     end
     local textureName = itemTextureName(row)
     local icon = textureName and ("<IMAGE:" .. textureName .. ",18,18> ") or "- "
@@ -272,6 +278,9 @@ function BuildableInfo.compactTooltip(player, definition, stage)
     local lines = {}
     local description = I18n.definitionDescription(definition)
     if description and description ~= "" then lines[#lines + 1] = "<RGB:0.78,0.78,0.75>" .. description end
+    if StageConfig.placement(definition, stage).requiresOutside == true then
+        lines[#lines + 1] = "<RGB:0.95,0.62,0.28>" .. getText("IGUI_KBW_RequiresOutside")
+    end
     local capacityLines = BuildableInfo.capacityLines(stage)
     if #capacityLines > 0 then
         lines[#lines + 1] = "<RGB:0.86,0.78,0.45>" .. getText("IGUI_KBW_StorageCapacity")

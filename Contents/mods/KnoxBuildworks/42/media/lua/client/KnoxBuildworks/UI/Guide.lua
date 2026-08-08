@@ -353,6 +353,19 @@ function KBWGuideWindow:close()
     self:setVisible(false)
 end
 
+---@param key string|number
+function KBWGuideWindow:isKeyConsumed(key)
+    return Keyboard and key == Keyboard.KEY_ESCAPE
+end
+
+---@param key string|number
+function KBWGuideWindow:onKeyRelease(key)
+    if self:isVisible() and self:isKeyConsumed(key) then
+        self:close()
+        return
+    end
+end
+
 function KBWGuideWindow:new(player, topicId)
     local o = ISCollapsableWindow:new(
         math.floor((getCore():getScreenWidth() - 720) / 2), math.floor((getCore():getScreenHeight() - 520) / 2), 720,
@@ -374,6 +387,7 @@ function KBWGuideWindow:new(player, topicId)
     o.minimumHeight = 520
     o.backgroundColor = Theme.color(Theme.backdrop)
     o.borderColor = Theme.color(Theme.border)
+    o:setWantKeyEvents(true)
     return o
 end
 

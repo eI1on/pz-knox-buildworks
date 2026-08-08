@@ -1,4 +1,5 @@
 {
+  "IGUI_KBWVE_Buildable_MetalDrum": "Bidón metálico",
   "IGUI_KBW_Group_architecture_plus_door_trims_black_double_door_frame": "Marco de puerta doble negro",
   "IGUI_KBW_Group_architecture_plus_door_trims_chestnut_double_door_frame": "Marco de puerta doble color castaño",
   "IGUI_KBW_Group_architecture_plus_door_trims_grey_double_door_frame": "Marco de puerta doble gris",
@@ -1309,5 +1310,23 @@
   "IGUI_KBWVE_Buildable_Appliance_DarkIndustrialSink": "Lavabo industrial oscuro",
   "IGUI_KBWVE_Buildable_Appliance_ChromeSink": "Lavabo cromado",
   "IGUI_KBWVE_Buildable_Appliance_WhiteStandingSink": "Lavabo de pie blanco",
-  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "Lavabo colgante blanco"
+  "IGUI_KBWVE_Buildable_Appliance_WhiteHangingSink": "Lavabo colgante blanco",
+  "IGUI_KBWVE_Group_LightSwitches": "Interruptores de luz",
+  "IGUI_KBWVE_Group_TableLamps": "Lámparas de mesa",
+  "IGUI_KBWVE_Group_WallLamps": "Lámparas de pared",
+  "IGUI_KBWVE_Group_FloorLamps": "Lámparas de pie",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitch": "Interruptor de luz",
+  "IGUI_KBWVE_Buildable_Lighting_LightSwitchAlternate": "Interruptor de luz alternativo",
+  "IGUI_KBWVE_Buildable_Lighting_StripedLamp": "Lámpara a rayas",
+  "IGUI_KBWVE_Buildable_Lighting_GrayLamp": "Lámpara gris",
+  "IGUI_KBWVE_Buildable_Lighting_RedLamp": "Lámpara roja",
+  "IGUI_KBWVE_Buildable_Lighting_GrayDeskLamp": "Lámpara de escritorio gris",
+  "IGUI_KBWVE_Buildable_Lighting_BlueLamp": "Lámpara azul",
+  "IGUI_KBWVE_Buildable_Lighting_WhiteLamp": "Lámpara blanca",
+  "IGUI_KBWVE_Buildable_Lighting_PinkWallLamp": "Lámpara de pared rosa",
+  "IGUI_KBWVE_Buildable_Lighting_DarkWallLamp": "Lámpara de pared oscura",
+  "IGUI_KBWVE_Buildable_Lighting_ExitSign": "Señal de salida",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp1": "Lámpara de pie (estilo 1)",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp2": "Lámpara de pie (estilo 2)",
+  "IGUI_KBWVE_Buildable_Lighting_FloorLamp3": "Lámpara de pie (estilo 3)"
 }
