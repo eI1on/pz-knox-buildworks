@@ -87,7 +87,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_community_school_01_2"
+            "cornerSprite": "location_community_school_01_2",
+            "pillarSprite": "location_community_school_01_3"
           }
         }
       ],

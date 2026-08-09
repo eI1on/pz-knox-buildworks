@@ -116,7 +116,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_trailer_01_2"
+            "cornerSprite": "location_trailer_01_2",
+            "pillarSprite": "location_trailer_01_3"
           },
           "previousStage": [
             "WoodenWallFrame",

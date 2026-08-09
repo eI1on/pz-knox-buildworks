@@ -96,7 +96,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_interior_bathroom_01_2"
+            "cornerSprite": "walls_interior_bathroom_01_2",
+            "pillarSprite": "walls_interior_bathroom_01_3"
           },
           "previousStage": [
             "WoodenWallFrame",

@@ -127,7 +127,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_commercial_03_18"
+            "cornerSprite": "walls_commercial_03_18",
+            "pillarSprite": "walls_commercial_03_19"
           }
         }
       ],

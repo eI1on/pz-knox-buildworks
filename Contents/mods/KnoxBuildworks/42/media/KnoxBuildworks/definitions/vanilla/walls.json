@@ -283,7 +283,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_exterior_house_01_18"
+            "cornerSprite": "walls_exterior_house_01_18",
+            "pillarSprite": "walls_exterior_house_01_19"
           }
         }
       ],

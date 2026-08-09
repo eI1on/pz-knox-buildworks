@@ -97,7 +97,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_sewer_01_2"
+            "cornerSprite": "location_sewer_01_2",
+            "pillarSprite": "location_sewer_01_3"
           }
         }
       ],
@@ -497,7 +498,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_sewer_01_10"
+            "cornerSprite": "location_sewer_01_10",
+            "pillarSprite": "location_sewer_01_11"
           },
           "previousStage": [
             "WoodenWallFrame",

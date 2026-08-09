@@ -51,6 +51,44 @@ local function configuredBoolean(value, default)
     return value == true
 end
 
+local CONNECTION_IDENTITY_FIELDS = { "buildableId", "stageId", "variantId", "materialId" }
+
+local function connectionData(object)
+    local data = object and object.getModData and object:getModData() or nil
+    return data and data.KBW or nil
+end
+
+local function sameConnectionIdentity(left, right)
+    if not left or not right or left.connectionRole ~= nil or right.connectionRole ~= nil then return false end
+    for fieldIndex = 1, #CONNECTION_IDENTITY_FIELDS do
+        local field = CONNECTION_IDENTITY_FIELDS[fieldIndex]
+        if tostring(left[field] or "") ~= tostring(right[field] or "") then return false end
+    end
+    return true
+end
+
+local function findMatchingWallEdge(square, identity, north, excluded)
+    if not square or not identity then return nil end
+    for objectIndex = 0, square:getSpecialObjects():size() - 1 do
+        local object = square:getSpecialObjects():get(objectIndex)
+        if object ~= excluded and instanceof(object, "IsoThumpable") and object:getNorth() == (north == true)
+            and sameConnectionIdentity(identity, connectionData(object)) then
+            return object
+        end
+    end
+    return nil
+end
+
+local function squareHasSprite(square, spriteName)
+    if not square or not spriteName then return false end
+    for objectIndex = 0, square:getObjects():size() - 1 do
+        local object = square:getObjects():get(objectIndex)
+        local sprite = object and object:getSprite() or nil
+        if sprite and sprite:getName() == spriteName then return true end
+    end
+    return false
+end
+
 local function isGarageDoorSprite(spriteName)
     if not spriteName then return false end
     local sprite = getSprite(spriteName)
@@ -394,6 +432,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.isPole = spriteConfig.isPole == true
     o.canBeLockedByPadlock = spriteConfig.canBePadlocked == true
     o.corner = spriteConfig.corner
+    o.pillar = spriteConfig.pillar
     o.bonusHealth = spriteConfig.bonusHealth or 0
     o.baseHealth = spriteConfig.health or 100
     o.skillBaseHealth = spriteConfig.skillBaseHealth or 0
@@ -1010,6 +1049,81 @@ function KBWBuildingObject:applyPartFlags(part)
     end
 end
 
+-- Two matching orientations on the SAME anchor square become one corner.
+-- Matching offset ends keep both edges and receive the optional pillar sprite
+-- in the gap between them.
+---@param square IsoGridSquare
+---@param part IsoThumpable
+---@param north boolean
+function KBWBuildingObject:connectWallParts(square, part, north)
+    local identity = connectionData(part)
+    if not identity or (not self.corner and not self.pillar) then return part end
+    local matchIdentity = copyTable(identity)
+    matchIdentity.connectionRole = nil
+
+    if self.corner then
+        local perpendicular = findMatchingWallEdge(square, matchIdentity, not north, part)
+        if perpendicular then
+            local cornerMaxHealth = math.max(
+                tonumber(part:getMaxHealth()) or 0,
+                tonumber(perpendicular:getMaxHealth()) or 0
+            )
+            local cornerHealth = math.max(
+                tonumber(part:getHealth()) or 0,
+                tonumber(perpendicular:getHealth()) or 0
+            )
+            square:transmitRemoveItemFromSquare(perpendicular)
+            square:RemoveTileObject(part)
+
+            local corner = IsoThumpable.new(getCell(), square, self.corner, false, self)
+            self:applyPartFlags(corner)
+            buildUtil.setInfo(corner, self)
+            corner:setMaxHealth(cornerMaxHealth)
+            corner:setHealth(cornerHealth)
+            corner:setBreakSound(self.breakSound or IsoThumpable.GetBreakFurnitureSound(self.corner))
+            corner:setCanBePlastered(self.canBePlastered == true)
+            corner:setCorner(true)
+            corner:setCanBarricade(false)
+            corner:getModData().KBW = copyTable(matchIdentity)
+            corner:getModData().KBW.direction = 1
+            corner:getModData().KBW.connectionRole = "corner"
+            EntityCompat.attach(corner, self.stage, true)
+            square:AddSpecialObject(corner)
+            square:RecalcAllWithNeighbours(true)
+            return corner
+        end
+    end
+
+    if not self.pillar then return part end
+    local otherX, otherY = square:getX() + 1, square:getY() - 1
+    local pillarX, pillarY = square:getX() + 1, square:getY()
+    if not north then
+        otherX, otherY = square:getX() - 1, square:getY() + 1
+        pillarX, pillarY = square:getX(), square:getY() + 1
+    end
+    local otherSquare = getCell():getGridSquare(otherX, otherY, square:getZ())
+    if not findMatchingWallEdge(otherSquare, matchIdentity, not north, nil) then return part end
+
+    local pillarSquare = self:ensureSquareExists(pillarX, pillarY, square:getZ())
+    if not pillarSquare or pillarSquare:getWallFull() or squareHasSprite(pillarSquare, self.pillar) then return part end
+    local pillar = IsoThumpable.new(getCell(), pillarSquare, self.pillar, false, self)
+    buildUtil.setInfo(pillar, self)
+    pillar:setName(self.name)
+    pillar:setMaxHealth(part:getMaxHealth())
+    pillar:setHealth(part:getHealth())
+    pillar:setCorner(true)
+    pillar:setCanPassThrough(true)
+    pillar:setCanBarricade(false)
+    pillar:setCanBePlastered(self.canBePlastered == true)
+    pillar:getModData().KBW = copyTable(matchIdentity)
+    pillar:getModData().KBW.connectionRole = "pillar"
+    pillarSquare:AddSpecialObject(pillar)
+    pillarSquare:RecalcAllWithNeighbours(true)
+    pillar:transmitCompleteItemToClients()
+    buildUtil.setHaveConstruction(pillarSquare, true)
+    return part
+end
+
 ---@param x      number
 ---@param y      number
 ---@param z      number
@@ -1203,7 +1317,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 else
                     target:AddSpecialObject(part)
                 end
-                buildUtil.checkCorner(target:getX(), target:getY(), target:getZ(), north, part, self)
+                part = self:connectWallParts(target, part, north)
                 -- Registered stage-property handlers (container capacity etc.)
                 -- apply their behavior to the finished part.
                 Properties.applyToObject(

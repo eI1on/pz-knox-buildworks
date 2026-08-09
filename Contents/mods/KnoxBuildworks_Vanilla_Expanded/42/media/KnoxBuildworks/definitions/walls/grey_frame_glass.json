@@ -145,7 +145,8 @@
             "category": "Welding"
           },
           "object": {
-            "cornerSprite": "walls_commercial_02_2"
+            "cornerSprite": "walls_commercial_02_2",
+            "pillarSprite": "walls_commercial_02_3"
           },
           "previousStage": [
             "WoodenWallFrame",

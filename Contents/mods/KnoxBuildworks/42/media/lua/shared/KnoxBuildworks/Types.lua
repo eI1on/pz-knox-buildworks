@@ -84,6 +84,7 @@
 ---@field canBePadlocked? boolean
 ---@field breakSound? string
 ---@field corner? string
+---@field pillar? string
 ---@field dontNeedFrame? boolean
 ---@field needWindowFrame? boolean
 ---@field needToBeAgainstWall? boolean
@@ -185,6 +186,7 @@
 ---@field thumpDamage? number
 ---@field breakSound? string
 ---@field cornerSprite? string
+---@field pillarSprite? string
 ---@field buildLow? boolean
 ---@field drawFloorGrid? boolean
 

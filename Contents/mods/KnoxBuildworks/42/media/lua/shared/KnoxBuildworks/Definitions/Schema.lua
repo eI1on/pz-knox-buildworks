@@ -173,6 +173,13 @@ local function validateStageConfiguration(errors, stage)
     validateConstructionConfiguration(errors, owner, stage.construction)
     if stage.object ~= nil and type(stage.object) ~= "table" then
         add(errors, owner .. " object must be an object")
+    elseif type(stage.object) == "table" then
+        for _, field in ipairs({ "cornerSprite", "pillarSprite" }) do
+            local value = stage.object[field]
+            if value ~= nil and (type(value) ~= "string" or value == "") then
+                add(errors, owner .. " object." .. field .. " must be a non-empty sprite name")
+            end
+        end
     end
     if stage.callbacks ~= nil then
         if type(stage.callbacks) ~= "table" then

@@ -145,7 +145,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_exterior_house_01_34"
+            "cornerSprite": "walls_exterior_house_01_34",
+            "pillarSprite": "walls_exterior_house_01_35"
           },
           "previousStage": [
             "WoodenWallFrame",

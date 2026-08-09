@@ -95,7 +95,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_shop_fossoil_01_4"
+            "cornerSprite": "location_shop_fossoil_01_4",
+            "pillarSprite": "location_shop_fossoil_01_7"
           },
           "previousStage": [
             "WoodenWallFrame",

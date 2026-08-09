@@ -116,7 +116,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_garage_01_34"
+            "cornerSprite": "walls_garage_01_34",
+            "pillarSprite": "walls_garage_01_35"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -711,7 +712,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "walls_garage_01_38"
+            "cornerSprite": "walls_garage_01_38",
+            "pillarSprite": "walls_garage_01_39"
           },
           "previousStage": [
             "WoodenWallFrame",

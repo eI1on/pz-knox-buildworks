@@ -58,6 +58,7 @@ function StageConfig.sprite(definition, stage)
     assign(result, "canBePadlocked", object.canBePadlocked)
     assign(result, "breakSound", object.breakSound)
     assign(result, "corner", object.cornerSprite)
+    assign(result, "pillar", object.pillarSprite)
 
     assign(result, "dontNeedFrame", placement.dontNeedFrame)
     assign(result, "needWindowFrame", placement.needWindowFrame)

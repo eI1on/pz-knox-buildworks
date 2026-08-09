@@ -132,7 +132,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": false,
-            "cornerSprite": "fencing_01_52"
+            "cornerSprite": "fencing_01_52",
+            "pillarSprite": "fencing_01_53"
           }
         }
       ],
@@ -907,7 +908,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": false,
-            "cornerSprite": "fencing_01_75"
+            "cornerSprite": "fencing_01_75",
+            "pillarSprite": "fencing_01_74"
           }
         }
       ],
@@ -1208,7 +1210,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": false,
-            "cornerSprite": "fencing_01_68"
+            "cornerSprite": "fencing_01_68",
+            "pillarSprite": "fencing_01_69"
           }
         }
       ],
@@ -2170,7 +2173,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fencing_01_3"
+            "cornerSprite": "fencing_01_3",
+            "pillarSprite": "fencing_01_0"
           }
         }
       ],
@@ -2509,7 +2513,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fencing_01_6"
+            "cornerSprite": "fencing_01_6",
+            "pillarSprite": "fencing_01_7"
           }
         }
       ],
@@ -2848,7 +2853,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "walls_exterior_wooden_01_62"
+            "cornerSprite": "walls_exterior_wooden_01_62",
+            "pillarSprite": "walls_exterior_wooden_01_63"
           }
         }
       ],
@@ -3145,7 +3151,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fixtures_railings_01_26"
+            "cornerSprite": "fixtures_railings_01_26",
+            "pillarSprite": "fixtures_railings_01_27"
           }
         }
       ],
@@ -3945,7 +3952,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fixtures_railings_01_66"
+            "cornerSprite": "fixtures_railings_01_66",
+            "pillarSprite": "fixtures_railings_01_67"
           }
         }
       ],
@@ -5033,7 +5041,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fixtures_railings_01_114"
+            "cornerSprite": "fixtures_railings_01_114",
+            "pillarSprite": "fixtures_railings_01_115"
           }
         }
       ],
@@ -5436,7 +5445,8 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true,
-            "cornerSprite": "fixtures_railings_01_118"
+            "cornerSprite": "fixtures_railings_01_118",
+            "pillarSprite": "fixtures_railings_01_119"
           }
         }
       ],

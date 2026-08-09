@@ -354,7 +354,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "industry_trucks_01_6"
+            "cornerSprite": "industry_trucks_01_6",
+            "pillarSprite": "industry_trucks_01_7"
           }
         }
       ],
@@ -941,7 +942,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "industry_trucks_01_50"
+            "cornerSprite": "industry_trucks_01_50",
+            "pillarSprite": "industry_trucks_01_51"
           }
         }
       ],
@@ -1528,7 +1530,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_community_police_01_2"
+            "cornerSprite": "location_community_police_01_2",
+            "pillarSprite": "location_community_police_01_3"
           }
         }
       ],

@@ -147,7 +147,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": true,
-            "cornerSprite": "walls_commercial_01_98"
+            "cornerSprite": "walls_commercial_01_98",
+            "pillarSprite": "walls_commercial_01_99"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -448,7 +449,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": true,
-            "cornerSprite": "walls_commercial_01_18"
+            "cornerSprite": "walls_commercial_01_18",
+            "pillarSprite": "walls_commercial_01_19"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -754,7 +756,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": true,
-            "cornerSprite": "walls_commercial_01_34"
+            "cornerSprite": "walls_commercial_01_34",
+            "pillarSprite": "walls_commercial_01_35"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -1060,7 +1063,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": true,
-            "cornerSprite": "walls_commercial_02_10"
+            "cornerSprite": "walls_commercial_02_10",
+            "pillarSprite": "walls_commercial_02_11"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -1366,7 +1370,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": true,
-            "cornerSprite": "walls_commercial_01_114"
+            "cornerSprite": "walls_commercial_01_114",
+            "pillarSprite": "walls_commercial_01_115"
           },
           "previousStage": [
             "WoodenWallFrame",

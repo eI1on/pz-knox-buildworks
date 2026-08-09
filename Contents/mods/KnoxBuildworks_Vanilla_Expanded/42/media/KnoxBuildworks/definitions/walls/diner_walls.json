@@ -95,7 +95,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_restaurant_diner_01_2"
+            "cornerSprite": "location_restaurant_diner_01_2",
+            "pillarSprite": "location_restaurant_diner_01_3"
           },
           "previousStage": [
             "WoodenWallFrame",

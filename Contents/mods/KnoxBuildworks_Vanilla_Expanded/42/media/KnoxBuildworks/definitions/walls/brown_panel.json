@@ -116,7 +116,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_shop_bargNclothes_01_26"
+            "cornerSprite": "location_shop_bargNclothes_01_26",
+            "pillarSprite": "location_shop_bargNclothes_01_27"
           },
           "previousStage": [
             "WoodenWallFrame",

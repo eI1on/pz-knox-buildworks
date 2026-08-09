@@ -95,7 +95,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_business_bank_01_2"
+            "cornerSprite": "location_business_bank_01_2",
+            "pillarSprite": "location_business_bank_01_3"
           },
           "previousStage": [
             "WoodenWallFrame",

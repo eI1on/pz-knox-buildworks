@@ -1,3 +1,12 @@
+
+
+
+[list]
+[*][b]Correct wall and fence connections:[/b] Matching north/west pieces placed on the same tile now merge into their V-shaped corner sprite, while offset perpendicular ends use a dedicated pillar where one exists. Connections are restricted to the same buildable, stage, material and variant, preventing unrelated nearby objects from creating incorrect corners.
+[/list]
+
+
+
 [b]Build Smarter, Rebuild Faster - Catalogue Visibility & Multiplayer Reliability Update[/b]
 
 [list]

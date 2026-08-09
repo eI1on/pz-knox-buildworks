@@ -124,7 +124,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_military_tent_01_2"
+            "cornerSprite": "location_military_tent_01_2",
+            "pillarSprite": "location_military_tent_01_3"
           }
         }
       ],
@@ -4446,7 +4447,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_military_tent_01_66"
+            "cornerSprite": "location_military_tent_01_66",
+            "pillarSprite": "location_military_tent_01_67"
           }
         }
       ],

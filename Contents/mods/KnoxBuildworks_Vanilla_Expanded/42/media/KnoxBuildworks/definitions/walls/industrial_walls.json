@@ -137,7 +137,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "industry_01_2"
+            "cornerSprite": "industry_01_2",
+            "pillarSprite": "industry_01_3"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -837,7 +838,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "industry_railroad_05_10"
+            "cornerSprite": "industry_railroad_05_10",
+            "pillarSprite": "industry_railroad_05_11"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -1847,7 +1849,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "industry_railroad_05_26"
+            "cornerSprite": "industry_railroad_05_26",
+            "pillarSprite": "industry_railroad_05_27"
           },
           "previousStage": [
             "WoodenWallFrame",

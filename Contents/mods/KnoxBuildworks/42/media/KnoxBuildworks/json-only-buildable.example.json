@@ -138,7 +138,8 @@
             "canBePadlocked": false,
             "thumpDamage": 8,
             "breakSound": "BreakObject",
-            "cornerSprite": "",
+            "cornerSprite": "walls_exterior_house_01_18",
+            "pillarSprite": "walls_exterior_house_01_19",
             "buildLow": true,
             "drawFloorGrid": true
           },

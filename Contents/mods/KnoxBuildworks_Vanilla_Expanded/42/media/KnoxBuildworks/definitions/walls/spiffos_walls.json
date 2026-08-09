@@ -116,7 +116,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_restaurant_spiffos_01_7"
+            "cornerSprite": "location_restaurant_spiffos_01_7",
+            "pillarSprite": "location_restaurant_spiffos_01_22"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -949,7 +950,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_restaurant_spiffos_01_15"
+            "cornerSprite": "location_restaurant_spiffos_01_15",
+            "pillarSprite": "location_restaurant_spiffos_01_23"
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -1782,7 +1784,8 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false,
-            "cornerSprite": "location_restaurant_spiffos_01_42"
+            "cornerSprite": "location_restaurant_spiffos_01_42",
+            "pillarSprite": "location_restaurant_spiffos_01_43"
           },
           "previousStage": [
             "WoodenWallFrame",

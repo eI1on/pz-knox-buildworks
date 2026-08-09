@@ -373,7 +373,12 @@
           "type": "string"
         },
         "cornerSprite": {
-          "type": "string"
+          "type": "string",
+          "description": "V-shaped WallNW sprite used when matching north and west pieces of the same buildable meet on one square."
+        },
+        "pillarSprite": {
+          "type": "string",
+          "description": "Optional post/pillar sprite used to close the offset gap where matching perpendicular wall or fence ends meet around an adjacent square."
         },
         "buildLow": {
           "type": "boolean"
