@@ -1,4 +1,5 @@
 {
+  "IGUI_KBW_Subcategory_Wood_Roofs": "木质屋顶",
   "IGUI_KBW_Title": "诺克斯建筑工坊",
   "IGUI_KBW_Categories": "类别",
   "IGUI_KBW_Level": "等级",
@@ -402,6 +403,8 @@
   "IGUI_KBW_Vanilla_FeedingTroughDouble": "长木制食槽",
   "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal": "金属食槽",
   "IGUI_KBW_Vanilla_FeedingTroughSimple": "短木制食槽",
+  "IGUI_KBW_Vanilla_FeedingTroughTripleMetal": "大型金属食槽",
+  "IGUI_KBW_Vanilla_FeedingTroughQuadMetal": "巨型金属食槽",
   "IGUI_KBW_Vanilla_Forge": "锻造炉",
   "IGUI_KBW_Vanilla_Forge_Primitive_Forge": "原始锻造炉",
   "IGUI_KBW_Vanilla_GravelFloor": "砾石地板",
@@ -941,12 +944,14 @@
   "IGUI_KBW_Category_Appliances": "家用电器",
   "IGUI_KBW_Subcategory_Cooking": "烹饪设备",
   "IGUI_KBW_Subcategory_Refrigeration": "制冷设备",
+  "IGUI_KBW_Subcategory_Fireplace_Jambs": "壁炉框",
   "IGUI_KBW_Subcategory_Laundry": "洗衣设备",
   "IGUI_KBW_Subcategory_Bathroom_Fixtures": "浴室设施",
   "IGUI_KBW_Category_Lighting": "照明",
   "IGUI_KBW_Subcategory_Light_Switches": "电灯开关",
   "IGUI_KBW_Subcategory_Table_Lamps": "台灯",
   "IGUI_KBW_Subcategory_Wall_Lights": "壁灯",
+  "IGUI_KBW_Subcategory_Log_Cabin_Walls": "原木小屋墙体",
   "IGUI_KBW_Subcategory_Exit_Signs": "出口标志",
   "IGUI_KBW_Subcategory_Floor_Lamps": "落地灯"
 }

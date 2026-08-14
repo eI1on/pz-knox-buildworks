@@ -27,9 +27,12 @@ local MODE_VALUES = { "auto", "manual" }
 local BAR_VALUES = { "left", "right", "top", "none" }
 local CONTENT_VALUES = { "icons", "text" }
 local PINNED_MAX_TEXT_WIDTH = 360
+local PINNED_MIN_WIDTH = 260
+local PINNED_ACTION_WIDTH = 28
 local PINNED_OPACITY_STEP = 0.05
 local GEAR_TEXTURE = getTexture("media/ui/inventoryPanes/Button_Gear.png")
     or getTexture("media/ui/inventoryPanes/Button_Settings.png")
+local CLOSE_TEXTURE = getTexture("media/ui/inventoryPanes/Button_Close.png")
 local BOOK_TEXTURE = getTexture("media/ui/craftingMenus/BuildProperty_Book_16.png")
 local HUD_REFRESH_MS = 2000
 local AREA_RESCAN_MS = 15000
@@ -87,6 +90,10 @@ local function uiData(player)
     return root.KBW_UI
 end
 
+local function persistUiData(player)
+    if isClient() and player and player.transmitModData then player:transmitModData() end
+end
+
 local function isCollapsed(data, key)
     return key ~= nil and data.pinnedCollapsed and data.pinnedCollapsed[key] == true
 end
@@ -97,6 +104,7 @@ function PinnedRecipes.toggleCollapsed(player, key)
     if not player or not key then return end
     local data = uiData(player)
     data.pinnedCollapsed[key] = not data.pinnedCollapsed[key] or nil
+    persistUiData(player)
     hudGeneration = hudGeneration + 1
 end
 
@@ -765,6 +773,7 @@ function PinnedRecipes.removeDefinition(player, definition)
     if not player or not definition then return end
     local data = uiData(player)
     local order = data.pinnedRecipeOrder or {}
+    local removed = false
     local index = #order
     while index >= 1 do
         local key = order[index]
@@ -772,9 +781,11 @@ function PinnedRecipes.removeDefinition(player, definition)
         if entryMatchesDefinition(entry, definition) then
             data.pinnedRecipes[key] = nil
             table.remove(order, index)
+            removed = true
         end
         index = index - 1
     end
+    if removed then persistUiData(player) end
     hudGeneration = hudGeneration + 1
 end
 
@@ -827,6 +838,7 @@ function PinnedRecipes.toggle(player, definition, stage, variantId, materialId, 
         choices = finishChoices(stage, finish, choices)
     }
     data.pinnedRecipeOrder[#data.pinnedRecipeOrder + 1] = key
+    persistUiData(player)
     hudGeneration = hudGeneration + 1
     return true
 end
@@ -839,6 +851,7 @@ function PinnedRecipes.removeRecipe(player, key)
     data.pinnedRecipes[key] = nil
     data.pinnedCollapsed["recipe:" .. key] = nil
     removeOrderedKey(data.pinnedRecipeOrder, key)
+    persistUiData(player)
     hudGeneration = hudGeneration + 1
     return true
 end
@@ -851,6 +864,7 @@ function PinnedRecipes.removeBlueprint(player, blueprintId)
     data.pinnedBlueprints[id] = nil
     data.pinnedCollapsed["bp:" .. id] = nil
     removeOrderedKey(data.pinnedBlueprintOrder, id)
+    persistUiData(player)
     hudGeneration = hudGeneration + 1
     return true
 end
@@ -874,6 +888,7 @@ function PinnedRecipes.toggleBlueprint(player, blueprint)
     end
     data.pinnedBlueprints[id] = { id = id, name = blueprintDisplayName(blueprint) }
     data.pinnedBlueprintOrder[#data.pinnedBlueprintOrder + 1] = id
+    persistUiData(player)
     hudGeneration = hudGeneration + 1
     return true
 end
@@ -942,7 +957,10 @@ local function buildLines(player, maxWidth, includeTitle)
             removedStaleBlueprint = true
         end
     end
-    if removedStaleBlueprint then hudGeneration = hudGeneration + 1 end
+    if removedStaleBlueprint then
+        persistUiData(player)
+        hudGeneration = hudGeneration + 1
+    end
     local blueprintCount = 0
     for blueprintIndex = 1, #blueprintOrder do
         local blueprintId = blueprintOrder[blueprintIndex]
@@ -952,13 +970,14 @@ local function buildLines(player, maxWidth, includeTitle)
             blueprintCount = blueprintCount + 1
             local collapseKey = "bp:" .. tostring(blueprintId)
             local collapsed = isCollapsed(data, collapseKey)
+            local headerLineIndex = #lines + 1
             addWrapped(
-                lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. blueprintDisplayName(blueprint), maxWidth - 20,
-                Theme.accent, BOOK_TEXTURE, "blueprint"
+                lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. blueprintDisplayName(blueprint),
+                maxWidth - PINNED_ACTION_WIDTH, Theme.text, BOOK_TEXTURE, "blueprint"
             )
-            lines[#lines].collapseKey = collapseKey
-            lines[#lines].unpinKind = "blueprint"
-            lines[#lines].unpinKey = tostring(blueprintId)
+            lines[headerLineIndex].collapseKey = collapseKey
+            lines[headerLineIndex].unpinKind = "blueprint"
+            lines[headerLineIndex].unpinKey = tostring(blueprintId)
             if not collapsed then
                 local totals = cachedBlueprintTotals(player, blueprint)
                 local rooms = blueprint.rooms or {}
@@ -1002,7 +1021,7 @@ local function buildLines(player, maxWidth, includeTitle)
                     end
                     addWrapped(
                         lines, UIFont.Small, label .. " " .. tostring(available) .. "/" .. tostring(needed), maxWidth,
-                        ok and Theme.good or Theme.bad, useIcons and texture or nil, "requirement", 12
+                        ok and Theme.textMuted or Theme.bad, useIcons and texture or nil, "requirement", 12
                     )
                 end
                 local skillRows = {}
@@ -1025,7 +1044,7 @@ local function buildLines(player, maxWidth, includeTitle)
                         getText("IGUI_perks_" .. tostring(row.name)) .. " "
                             .. tostring(available) .. "/"
                             .. tostring(needed),
-                        maxWidth, available >= needed and Theme.good or Theme.bad,
+                        maxWidth, available >= needed and Theme.textMuted or Theme.bad,
                         useIcons and skillTexture(row.name) or nil, "requirement", 12
                     )
                 end
@@ -1061,16 +1080,17 @@ local function buildLines(player, maxWidth, includeTitle)
                 end
                 local collapseKey = "recipe:" .. tostring(order[orderIndex])
                 local collapsed = isCollapsed(data, collapseKey)
+                local headerLineIndex = #lines + 1
                 addWrapped(
-                    lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. displayName(definition), maxWidth - 20,
-                    Theme.accent, recipeTexture, "recipe"
+                    lines, UIFont.Medium, (collapsed and "[+] " or "[-] ") .. displayName(definition),
+                    maxWidth - PINNED_ACTION_WIDTH, Theme.text, recipeTexture, "recipe"
                 )
-                lines[#lines].collapseKey = collapseKey
-                lines[#lines].unpinKind = "recipe"
-                lines[#lines].unpinKey = tostring(order[orderIndex])
+                lines[headerLineIndex].collapseKey = collapseKey
+                lines[headerLineIndex].unpinKind = "recipe"
+                lines[headerLineIndex].unpinKey = tostring(order[orderIndex])
                 -- Collapsed recipes still show their ready/blocked status line.
                 addWrapped(
-                    lines, UIFont.Small, prefix, maxWidth, status.ok and Theme.good or Theme.warn, nil, "status", 4
+                    lines, UIFont.Small, prefix, maxWidth, status.ok and Theme.textMuted or Theme.warn, nil, "status", 4
                 )
                 if not collapsed then
                     addWrapped(lines, UIFont.Small, tostring(stageLabel), maxWidth, Theme.textMuted, nil, "stage", 4)
@@ -1089,7 +1109,7 @@ local function buildLines(player, maxWidth, includeTitle)
                     end
                     for rowIndex = 1, #inputs do
                         local row = inputs[rowIndex]
-                        local color = row.ok and Theme.good or Theme.bad
+                        local color = row.ok and Theme.textMuted or Theme.bad
                         addWrapped(
                             lines, UIFont.Small, rowTitle(row) .. " " .. rowStatus(row), maxWidth, color,
                             useIcons and rowTexture(row) or nil, "requirement", 12
@@ -1103,7 +1123,7 @@ local function buildLines(player, maxWidth, includeTitle)
                     end
                     for rowIndex = 1, #gates do
                         local row = gates[rowIndex]
-                        local color = row.ok and Theme.good or Theme.bad
+                        local color = row.ok and Theme.textMuted or Theme.bad
                         addWrapped(
                             lines, UIFont.Small, rowTitle(row) .. " " .. rowStatus(row), maxWidth, color,
                             useIcons and rowTexture(row) or nil, "requirement", 12
@@ -1234,6 +1254,7 @@ function KBWPinnedRecipesSettings:onResetPosition()
     local data = uiData(self.player)
     data.pinnedX = nil
     data.pinnedY = nil
+    persistUiData(self.player)
 end
 
 function KBWPinnedRecipesSettings:render()
@@ -1437,16 +1458,20 @@ end
 ---@param x number
 ---@param y number
 function KBWPinnedRecipesPanel:onMouseUp(x, y)
+    local moved = self.draggingHud == true
     self.draggingHud = false
     self:setCapture(false)
+    if moved then persistUiData(getPlayer()) end
     return true
 end
 
 ---@param x number
 ---@param y number
 function KBWPinnedRecipesPanel:onMouseUpOutside(x, y)
+    local moved = self.draggingHud == true
     self.draggingHud = false
     self:setCapture(false)
+    if moved then persistUiData(getPlayer()) end
     return true
 end
 
@@ -1457,6 +1482,7 @@ local function measurePinnedLines(lines, maxTextWidth)
         local line = lines[lineIndex]
         local lineWidth = line.kind == "divider" and width
             or (measure(line.font, line.text) + (line.texture and 26 or 0) + (line.indent or 0))
+        if line.unpinKind then lineWidth = lineWidth + PINNED_ACTION_WIDTH end
         if lineWidth > width then width = lineWidth end
         local lineHeight = line.kind == "divider" and 9
             or (line.font == UIFont.Medium and FONT_HGT_MEDIUM or FONT_HGT_SMALL)
@@ -1466,6 +1492,7 @@ local function measurePinnedLines(lines, maxTextWidth)
     width = math.min(maxTextWidth, width) + 24
     local titleMinWidth = measure(UIFont.Small, getText("IGUI_KBW_PinnedRecipes")) + 42
     if width < titleMinWidth then width = titleMinWidth end
+    if width < PINNED_MIN_WIDTH then width = PINNED_MIN_WIDTH end
     return width, height
 end
 
@@ -1582,10 +1609,23 @@ function KBWPinnedRecipesPanel:render()
                 }
             end
             if line.unpinKind then
-                local actionX = width - 21
-                self:drawText("x", actionX + 4, textY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, opacity, font)
+                local actionX = width - PINNED_ACTION_WIDTH
+                self:drawRect(
+                    actionX, textY - 2, PINNED_ACTION_WIDTH - 5, lineHeight + 4, opacity * .35,
+                    Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b
+                )
+                if CLOSE_TEXTURE then
+                    self:drawTextureScaledAspect(
+                        CLOSE_TEXTURE, actionX + 3, textY + math.floor((lineHeight - 16) / 2), 16, 16, opacity,
+                        Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b
+                    )
+                else
+                    self:drawText(
+                        "x", actionX + 6, textY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, opacity, font
+                    )
+                end
                 self.headerActionHits[#self.headerActionHits + 1] = {
-                    x0 = actionX - 2,
+                    x0 = actionX,
                     x1 = width - 5,
                     y0 = textY - 2,
                     y1 = textY + lineHeight + 2,

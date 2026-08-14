@@ -16,7 +16,7 @@
   "Sandbox_KBW_WellWaterMode_option2": "Ограниченный с пополнением",
   "Sandbox_KBW_WellCapacity": "Емкость колодца",
   "Sandbox_KBW_WellCapacity_tooltip": "Максимальное количество литров, хранящихся в каждом колодце с ограниченным запасом.",
-  "Sandbox_KBW_WellInitialPercent": "Начальное заполнение колодца (%)",
+  "Sandbox_KBW_WellInitialPercent": "Начальное заполнение колодца (в процентах)",
   "Sandbox_KBW_WellInitialPercent_tooltip": "Процент от емкости ограниченного колодца, доступный при его первой постройке.",
   "Sandbox_KBW_WellHourlyRefill": "Пополнение из грунтовых вод в час",
   "Sandbox_KBW_WellHourlyRefill_tooltip": "Литров чистой воды, естественным образом восстанавливаемых в каждом ограниченном колодце каждый игровой час.",

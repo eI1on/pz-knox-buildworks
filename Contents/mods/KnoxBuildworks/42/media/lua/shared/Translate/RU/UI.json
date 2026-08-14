@@ -1,6 +1,8 @@
 {
   "UI_optionscreen_KBW_OpenCatalog": "Открыть каталог строительства",
   "UI_optionscreen_KBW_OpenCatalog_Tooltip": "Открывает независимый каталог Knox Buildworks.",
+  "UI_optionscreen_KBW_ShowMenuDock": "Показывать панель меню",
+  "UI_optionscreen_KBW_ShowMenuDock_Tooltip": "Показывает ярлыки Knox Buildworks на панели меню ElyonLib.",
   "UI_optionscreen_KBW_Debug": "Подробное журналирование отладки",
   "UI_optionscreen_KBW_Debug_Tooltip": "Печатать диагностику реестра, проверки и сети.",
   "UI_optionscreen_KBW_Profile": "Профилирование производительности",

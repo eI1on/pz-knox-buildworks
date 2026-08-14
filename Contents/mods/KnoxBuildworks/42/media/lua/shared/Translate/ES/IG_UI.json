@@ -1,4 +1,5 @@
 {
+  "IGUI_KBW_Subcategory_Wood_Roofs": "Tejados de madera",
   "IGUI_KBW_Title": "Knox Buildworks",
   "IGUI_KBW_Categories": "Categorías",
   "IGUI_KBW_Level": "Nivel",
@@ -402,6 +403,8 @@
   "IGUI_KBW_Vanilla_FeedingTroughDouble": "Comedero largo de madera",
   "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal": "Comedero metálico",
   "IGUI_KBW_Vanilla_FeedingTroughSimple": "Comedero corto de madera",
+  "IGUI_KBW_Vanilla_FeedingTroughTripleMetal": "Comedero metálico grande",
+  "IGUI_KBW_Vanilla_FeedingTroughQuadMetal": "Comedero metálico enorme",
   "IGUI_KBW_Vanilla_Forge": "Forja",
   "IGUI_KBW_Vanilla_Forge_Primitive_Forge": "Forja primitiva",
   "IGUI_KBW_Vanilla_GravelFloor": "Piso de grava",
@@ -941,12 +944,14 @@
   "IGUI_KBW_Category_Appliances": "Electrodomésticos",
   "IGUI_KBW_Subcategory_Cooking": "Cocina",
   "IGUI_KBW_Subcategory_Refrigeration": "Refrigeración",
+  "IGUI_KBW_Subcategory_Fireplace_Jambs": "Jambas de chimenea",
   "IGUI_KBW_Subcategory_Laundry": "Lavandería",
   "IGUI_KBW_Subcategory_Bathroom_Fixtures": "Accesorios de baño",
   "IGUI_KBW_Category_Lighting": "Iluminación",
   "IGUI_KBW_Subcategory_Light_Switches": "Interruptores de luz",
   "IGUI_KBW_Subcategory_Table_Lamps": "Lámparas de mesa",
   "IGUI_KBW_Subcategory_Wall_Lights": "Luces de pared",
+  "IGUI_KBW_Subcategory_Log_Cabin_Walls": "Paredes de cabaña de troncos",
   "IGUI_KBW_Subcategory_Exit_Signs": "Señales de salida",
   "IGUI_KBW_Subcategory_Floor_Lamps": "Lámparas de pie"
 }

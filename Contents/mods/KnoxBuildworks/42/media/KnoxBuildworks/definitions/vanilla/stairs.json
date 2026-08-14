@@ -37,6 +37,17 @@
     },
     {
       "id": "kbw.vanilla.metal_stairs",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Stairs",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Stairs",
       "tooltipKey": "Tooltip_craft_stairsDesc",

@@ -81,7 +81,9 @@ end
 
 local function attachmentName(props)
     if not props then return nil end
-    for _, name in ipairs({ "attachedN", "attachedW", "attachedE", "attachedS" }) do
+    local attachmentNames = { "attachedN", "attachedW", "attachedE", "attachedS" }
+    for attachmentIndex = 1, #attachmentNames do
+        local name = attachmentNames[attachmentIndex]
         if props:has(name) then return name end
     end
     if props:has("Facing") then
@@ -553,7 +555,9 @@ function Placement.validate(cursor, square)
                         return false, "west edge blocked"
                     end
                     if target:isVehicleIntersecting() then return false, "vehicle blocked" end
-                    if buildUtil.stairIsBlockingPlacement(target, true) then return false, "stairs blocked" end
+                    if not sprite and buildUtil.stairIsBlockingPlacement(target, true) then
+                        return false, "stairs blocked"
+                    end
                     -- Vanilla ISBuildIsoEntity only runs the isFree tests for
                     -- blocking cells WITHOUT a sprite (a parenthesization quirk
                     -- the game's balance depends on); sprite tiles are governed

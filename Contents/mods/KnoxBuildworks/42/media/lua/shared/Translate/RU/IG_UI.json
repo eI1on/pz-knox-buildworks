@@ -1,4 +1,5 @@
 {
+  "IGUI_KBW_Subcategory_Wood_Roofs": "Деревянные крыши",
   "IGUI_KBW_Title": "Knox Buildworks",
   "IGUI_KBW_Categories": "Категории",
   "IGUI_KBW_Level": "Уровень",
@@ -402,6 +403,8 @@
   "IGUI_KBW_Vanilla_FeedingTroughDouble": "Длинное деревянное корыто",
   "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal": "Металлическое корыто",
   "IGUI_KBW_Vanilla_FeedingTroughSimple": "Короткое деревянное корыто",
+  "IGUI_KBW_Vanilla_FeedingTroughTripleMetal": "Большое металлическое корыто",
+  "IGUI_KBW_Vanilla_FeedingTroughQuadMetal": "Огромное металлическое корыто",
   "IGUI_KBW_Vanilla_Forge": "Горн",
   "IGUI_KBW_Vanilla_Forge_Primitive_Forge": "Примитивный горн",
   "IGUI_KBW_Vanilla_GravelFloor": "Гравийный пол",
@@ -941,12 +944,14 @@
   "IGUI_KBW_Category_Appliances": "Бытовая техника",
   "IGUI_KBW_Subcategory_Cooking": "Приготовление пищи",
   "IGUI_KBW_Subcategory_Refrigeration": "Холодильное оборудование",
+  "IGUI_KBW_Subcategory_Fireplace_Jambs": "Обрамление камина",
   "IGUI_KBW_Subcategory_Laundry": "Прачечная",
   "IGUI_KBW_Subcategory_Bathroom_Fixtures": "Сантехника",
   "IGUI_KBW_Category_Lighting": "Освещение",
   "IGUI_KBW_Subcategory_Light_Switches": "Выключатели света",
   "IGUI_KBW_Subcategory_Table_Lamps": "Настольные лампы",
   "IGUI_KBW_Subcategory_Wall_Lights": "Настенные светильники",
+  "IGUI_KBW_Subcategory_Log_Cabin_Walls": "Стены бревенчатой хижины",
   "IGUI_KBW_Subcategory_Exit_Signs": "Знаки выхода",
   "IGUI_KBW_Subcategory_Floor_Lamps": "Напольные лампы"
 }

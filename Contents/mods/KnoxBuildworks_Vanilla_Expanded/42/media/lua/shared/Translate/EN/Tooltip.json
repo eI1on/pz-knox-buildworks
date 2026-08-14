@@ -13,6 +13,7 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_3": "Build a arched gravestone.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_5": "Build a square gravestone.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_9": "Build a battered gravestone.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_gates_wrought_iron_gate": "A sturdy single-tile wrought iron gate for fences and enclosed yards.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_double_door_gates_double_wrought_iron_gate": "A double door gate for your base.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_left": "An elegant black glass door, the left part of a set for your safe haven.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_right": "An elegant black glass door, the right part of a set for your safe haven.",
@@ -290,5 +291,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_panel_white_panel_window_frame": "An old-fashioned white panel wall with an opening to let in natural light.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_door_frame": "An old-fashioned white wide clapboard door frame, essential for adding doors to your structure.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_pillar": "White wide-clapboard support pillar.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "An old-fashioned white wide clapboard wall with an opening to allow natural light inside."
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "An old-fashioned white wide clapboard wall with an opening to allow natural light inside.",
+  "Tooltip_KBWVE_GrayBrickJamb": "A decorative grey-brick fireplace jamb. Combine the side and middle pieces to form a surround."
 }

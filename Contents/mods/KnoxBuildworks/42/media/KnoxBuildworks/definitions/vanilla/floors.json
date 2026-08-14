@@ -65,6 +65,17 @@
     },
     {
       "id": "kbw.vanilla.metalfloorlvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Floor",
       "translationKey": "IGUI_KBW_Vanilla_MetalFloorLvl1",
       "tooltipKey": "Tooltip_craft_MetalRoofDesc",

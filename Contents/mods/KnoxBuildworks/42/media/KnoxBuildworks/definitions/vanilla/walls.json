@@ -37,6 +37,17 @@
     },
     {
       "id": "kbw.vanilla.metalwallframe",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Wall Frame",
       "translationKey": "IGUI_KBW_Vanilla_MetalWallFrame",
       "tooltipKey": "Tooltip_craft_woodenWallFrameDesc",
@@ -489,6 +500,17 @@
     },
     {
       "id": "kbw.vanilla.metalwalllvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Wall (Good)",
       "translationKey": "IGUI_KBW_Vanilla_MetalWallLvl2",
       "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
@@ -526,6 +548,17 @@
     },
     {
       "id": "kbw.vanilla.metalwalllvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Wall (Poor)",
       "translationKey": "IGUI_KBW_Vanilla_MetalWallLvl1",
       "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",

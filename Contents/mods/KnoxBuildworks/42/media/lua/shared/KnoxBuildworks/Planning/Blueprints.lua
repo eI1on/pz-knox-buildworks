@@ -18,6 +18,10 @@ local Files = require("KnoxBuildworks/Planning/BlueprintFiles")
 ---@type KBW.BlueprintsModule
 local Blueprints = { VERSION = 1, ITEM_TYPE = "KnoxBuildworks.KBW_Blueprint", EXPORT_FOLDER = "KnoxBuildworks/exports" }
 
+local function planningEnabled()
+    return KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) == true
+end
+
 local function timestamp()
     if getTimestampMs then return tostring(getTimestampMs()) end
     if getTimestamp then return tostring(getTimestamp()) end
@@ -304,6 +308,10 @@ end
 ---@param player IsoPlayer
 function Blueprints.serverSyncAll(player)
     if not isServer() then return end
+    if not planningEnabled() then
+        sendServerCommand(player, KBW.NETWORK_MODULE, "BPSyncAll", { items = {} })
+        return
+    end
     local visible = {}
     for id, blueprint in pairs(Blueprints.sharedItems()) do
         if Blueprints.shouldSync(player, blueprint) then visible[id] = blueprint end
@@ -576,7 +584,12 @@ end
 
 ---@param player IsoPlayer
 function Blueprints.active(player)
-    local id = viewStore(player).activeId
+    local view = viewStore(player)
+    if not planningEnabled() then
+        view.activeId = nil
+        return nil
+    end
+    local id = view.activeId
     local blueprint = id and Blueprints.get(player, id) or nil
     if blueprint and not Blueprints.canView(player, blueprint) then return nil end
     return blueprint
@@ -592,6 +605,10 @@ end
 ---@param player IsoPlayer
 function Blueprints.setActive(player, id)
     local view = viewStore(player)
+    if not planningEnabled() then
+        view.activeId = nil
+        return nil
+    end
     if id == nil then
         view.activeId = nil
         return nil

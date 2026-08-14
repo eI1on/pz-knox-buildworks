@@ -67,7 +67,9 @@ local function normalizeRequirements(errors, stage, materialGroups, definitionTo
             add(errors, "stage " .. stage.id .. " references missing skill " .. perkName)
         end
     end
-    for alternativeIndex, alternative in ipairs(stage.requirements.knowledge.skillAlternatives or {}) do
+    local skillAlternatives = stage.requirements.knowledge.skillAlternatives or {}
+    for alternativeIndex = 1, #skillAlternatives do
+        local alternative = skillAlternatives[alternativeIndex]
         if type(alternative) ~= "table" then
             add(errors, "stage " .. stage.id .. " has an invalid knowledge skill alternative")
         elseif alternative.mode ~= nil and alternative.mode ~= "any" and alternative.mode ~= "all" then
@@ -174,7 +176,9 @@ local function validateStageConfiguration(errors, stage)
     if stage.object ~= nil and type(stage.object) ~= "table" then
         add(errors, owner .. " object must be an object")
     elseif type(stage.object) == "table" then
-        for _, field in ipairs({ "cornerSprite", "pillarSprite" }) do
+        local connectionFields = { "cornerSprite", "pillarSprite" }
+        for fieldIndex = 1, #connectionFields do
+            local field = connectionFields[fieldIndex]
             local value = stage.object[field]
             if value ~= nil and (type(value) ~= "string" or value == "") then
                 add(errors, owner .. " object." .. field .. " must be a non-empty sprite name")

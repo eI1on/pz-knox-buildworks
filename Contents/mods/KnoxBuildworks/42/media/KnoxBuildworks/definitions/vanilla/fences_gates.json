@@ -35,6 +35,17 @@
     },
     {
       "id": "kbw.vanilla.metalbigmetalfence",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Metal Pole Fence",
       "translationKey": "IGUI_KBW_Vanilla_MetalBigMetalFence",
       "tooltipKey": "Tooltip_craft_BigMetalFenceDesc",
@@ -65,6 +76,17 @@
     },
     {
       "id": "kbw.vanilla.metalbigwirefence",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Metal Wire Fence",
       "translationKey": "IGUI_KBW_Vanilla_MetalBigWireFence",
       "tooltipKey": "Tooltip_craft_BigWiredFenceDesc",
@@ -164,6 +186,17 @@
     },
     {
       "id": "kbw.vanilla.metalfencelvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Fence (Good)",
       "translationKey": "IGUI_KBW_Vanilla_MetalFenceLvl2",
       "tooltipKey": "Tooltip_craft_metalFenceDesc",
@@ -200,6 +233,17 @@
     },
     {
       "id": "kbw.vanilla.metalfencelvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Fence (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_MetalFenceLvl1",
       "tooltipKey": "Tooltip_craft_metalFenceDesc",
@@ -236,6 +280,17 @@
     },
     {
       "id": "kbw.vanilla.metalsmallpolefence",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Metal Pole Fence (Poor)",
       "translationKey": "IGUI_KBW_Vanilla_MetalSmallPoleFence",
       "tooltipKey": "Tooltip_craft_MetalPoleFenceDesc",
@@ -266,6 +321,17 @@
     },
     {
       "id": "kbw.vanilla.metalsmallwirefence",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Metal Wire Fence",
       "translationKey": "IGUI_KBW_Vanilla_MetalSmallWireFence",
       "tooltipKey": "Tooltip_craft_BigWiredFenceDesc",
@@ -438,6 +504,17 @@
     },
     {
       "id": "kbw.vanilla.doublefencegate",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Double Pole Gate",
       "translationKey": "IGUI_KBW_Vanilla_DoubleFenceGate",
       "tooltipKey": "Tooltip_craft_doublePoleGateDesc",
@@ -469,6 +546,17 @@
     },
     {
       "id": "kbw.vanilla.doublewiregate",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Double Wire Gate",
       "translationKey": "IGUI_KBW_Vanilla_DoubleWireGate",
       "tooltipKey": "Tooltip_craft_doubleWireGateDesc",
@@ -500,6 +588,17 @@
     },
     {
       "id": "kbw.vanilla.metalpolefencegate",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Pole Fence Gate",
       "translationKey": "IGUI_KBW_Vanilla_MetalPoleFenceGate",
       "tooltipKey": "Tooltip_craft_poleFenceGateDesc",
@@ -531,6 +630,17 @@
     },
     {
       "id": "kbw.vanilla.metalwirefencegate",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Wire Fence Gate",
       "translationKey": "IGUI_KBW_Vanilla_MetalWireFenceGate",
       "tooltipKey": "Tooltip_craft_wireFenceGateDesc",
@@ -562,6 +672,17 @@
     },
     {
       "id": "kbw.vanilla.metalpolefencegatesmall",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Pole Fence Gate",
       "translationKey": "IGUI_KBW_Vanilla_MetalPoleFenceGateSmall",
       "tooltipKey": "Tooltip_craft_poleFenceGateSmallDesc",
@@ -593,6 +714,17 @@
     },
     {
       "id": "kbw.vanilla.metalwirefencegatesmall",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Wire Fence Gate",
       "translationKey": "IGUI_KBW_Vanilla_MetalWireFenceGateSmall",
       "tooltipKey": "Tooltip_craft_wireFenceGateSmallDesc",

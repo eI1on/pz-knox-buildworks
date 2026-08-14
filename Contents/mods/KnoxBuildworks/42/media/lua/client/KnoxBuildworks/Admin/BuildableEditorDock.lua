@@ -1,6 +1,12 @@
 local MenuDock = require("ElyonLib/UI/MenuDock/MenuDock")
+local Options = require("KnoxBuildworks/Options")
 
 local EditorDock = {}
+
+local function visibleWhen()
+    local option = Options:getOption("ShowMenuDock")
+    return not option or option:getValue() == true
+end
 
 local function openEditor(playerNum)
     local player = getSpecificPlayer(playerNum)
@@ -16,6 +22,7 @@ function EditorDock.register()
         label = getText("IGUI_KBW_AdminEditorDockLabel"),
         icon = "media/ui/KBW_Dock_BuildableRules.png",
         onClick = openEditor,
+        visibleWhen = visibleWhen,
         minimumAccessLevel = "Admin",
         allowSinglePlayer = true
     })

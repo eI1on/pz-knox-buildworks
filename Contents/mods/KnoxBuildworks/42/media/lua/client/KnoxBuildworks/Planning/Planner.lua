@@ -104,7 +104,11 @@ function Planner.renderWorldPreview(playerIndex, x, y, z, square)
     local player = getSpecificPlayer(playerIndex or 0) or getPlayer()
     if not player then return end
     local activeBlueprint = Blueprints.active(player)
-    if not activeBlueprint then return end
+    if not activeBlueprint then
+        Planner.highlightPlacementId = nil
+        Planner.highlightRoomId = nil
+        return
+    end
     local activeLevel = tonumber(activeBlueprint.level) or math.floor(player:getZ())
     GhostRenderer.renderBlueprint(
         activeBlueprint, activeLevel, Planner.highlightPlacementId, Planner.highlightRoomId, playerIndex

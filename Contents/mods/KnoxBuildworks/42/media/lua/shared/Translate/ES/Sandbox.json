@@ -16,7 +16,7 @@
   "Sandbox_KBW_WellWaterMode_option2": "Limitado y recargable",
   "Sandbox_KBW_WellCapacity": "Capacidad del pozo de agua",
   "Sandbox_KBW_WellCapacity_tooltip": "Litros máximos almacenados por cada pozo de agua limitado.",
-  "Sandbox_KBW_WellInitialPercent": "Porcentaje inicial de llenado del pozo (%)",
+  "Sandbox_KBW_WellInitialPercent": "Porcentaje inicial de llenado del pozo",
   "Sandbox_KBW_WellInitialPercent_tooltip": "Porcentaje de la capacidad de un pozo limitado disponible cuando se construye por primera vez.",
   "Sandbox_KBW_WellHourlyRefill": "Recarga de agua subterránea por hora",
   "Sandbox_KBW_WellHourlyRefill_tooltip": "Litros de agua limpia restaurados naturalmente en cada pozo limitado por cada hora en el juego.",

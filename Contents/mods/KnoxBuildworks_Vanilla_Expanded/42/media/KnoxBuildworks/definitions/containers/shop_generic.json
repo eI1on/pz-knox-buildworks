@@ -1168,6 +1168,15 @@
           "requirements": {
             "inputs": [
               {
+                "id": "welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
                 "id": "torch_fuel",
                 "role": "consumable",
                 "mode": "drain",
@@ -1325,6 +1334,15 @@
           },
           "requirements": {
             "inputs": [
+              {
+                "id": "welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
               {
                 "id": "torch_fuel",
                 "role": "consumable",

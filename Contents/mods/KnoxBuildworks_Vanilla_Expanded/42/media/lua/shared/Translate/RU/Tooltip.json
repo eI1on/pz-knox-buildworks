@@ -13,6 +13,7 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_3": "Построить арочный надгробный камень.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_5": "Построить квадратный надгробный камень.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_9": "Построить поврежденный надгробный камень.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_gates_wrought_iron_gate": "Прочная одностворчатая кованая калитка для заборов и ограждённых участков.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_double_door_gates_double_wrought_iron_gate": "Двойные ворота для вашей базы.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_left": "Элегантная черная стеклянная дверь, левая часть комплекта для вашего убежища.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_right": "Элегантная черная стеклянная дверь, правая часть комплекта для вашего убежища.",
@@ -290,5 +291,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_panel_white_panel_window_frame": "Старомодная стена из белых панелей с проемом для естественного света.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_door_frame": "Старомодная дверная рама из широкого белого сайдинга, необходимая для установки дверей.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_pillar": "Прочная колонна из старомодного широкого белого сайдинга, подходящая для структурной поддержки.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "Старомодная стена из широкого белого сайдинга с проемом для естественного света."
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "Старомодная стена из широкого белого сайдинга с проемом для естественного света.",
+  "Tooltip_KBWVE_GrayBrickJamb": "Декоративное обрамление камина из серого кирпича. Соедините боковые и центральную части, чтобы собрать раму."
 }

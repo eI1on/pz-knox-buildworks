@@ -2,16 +2,21 @@
   "schemaVersion": 1,
   "buildables": [
     {
-      "id": "kbw.vanillaexpanded.containers.others.location_farm_accesories_01_8",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_farm_accesories_01_8",
-      "displayName": "Dog House",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_location_farm_accesories_01_8",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_oakwood",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Oakwood",
+      "displayName": "Oakwood Wall Cabinet",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
+      "subcategory": "Upper Counters",
       "material": "Wood",
-      "iconSprite": "location_farm_accesories_01_8",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_19",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -23,7 +28,7 @@
                   {
                     "rows": [
                       [
-                        "location_farm_accesories_01_8"
+                        "fixtures_counters_01_19"
                       ]
                     ]
                   }
@@ -34,7 +39,7 @@
                   {
                     "rows": [
                       [
-                        "location_farm_accesories_01_9"
+                        "fixtures_counters_01_18"
                       ]
                     ]
                   }
@@ -45,7 +50,7 @@
                   {
                     "rows": [
                       [
-                        "location_farm_accesories_01_10"
+                        "fixtures_counters_01_16"
                       ]
                     ]
                   }
@@ -56,785 +61,7 @@
                   {
                     "rows": [
                       [
-                        "location_farm_accesories_01_11"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "blockAllSquare": true,
-            "canBePadlocked": true
-          },
-          "container": {
-            "type": "doghouse",
-            "capacity": 20
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.furniture_storage_01_53",
-      "translationKey": "IGUI_KBWVE_Buildable_small_table",
-      "displayName": "Small Table",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "furniture_storage_01_53",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "furniture_storage_01_53"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "furniture_storage_01_52"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "E": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "furniture_storage_01_54"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "S": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "furniture_storage_01_55"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "container": {
-            "type": "sidetable",
-            "capacity": 10
-          }
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.location_community_medical_01_36",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_medical_01_36",
-      "displayName": "Pale Drawers",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_community_medical_01_36",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_medical_01_36"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_medical_01_37"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "E": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_medical_01_38"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "S": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_medical_01_39"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "container": {
-            "type": "sidetable",
-            "capacity": 15
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.fixtures_bathroom_02_24",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_fixtures_bathroom_wooden_toilet",
-      "displayName": "Wooden Toilet",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_others_fixtures_bathroom_02_24",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "fixtures_bathroom_02_24",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "fixtures_bathroom_02_24"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "fixtures_bathroom_02_25"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "canBePadlocked": true
-          }
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.fixtures_bathroom_02_24_2",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_fixtures_bathroom_wooden_toilet",
-      "displayName": "Wooden Toilet",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "fixtures_bathroom_02_24",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "fixtures_bathroom_02_24"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "fixtures_bathroom_02_25"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "blockAllSquare": true,
-            "canBePadlocked": true
-          }
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.location_community_school_01_4",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_school_01_4",
-      "displayName": "Dark School Bench",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_community_school_01_4",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_4"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_5"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "E": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_7"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "S": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_6"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "container": {
-            "type": "desk"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.location_community_school_01_12",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_location_community_school_01_12",
-      "displayName": "Light School Bench",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_community_school_01_12",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_12"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_13"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "E": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_15"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "S": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_community_school_01_14"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "container": {
-            "type": "desk"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_empty_shelves",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_empty_shelves",
-      "displayName": "Wooden Barrel Empty Shelves",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_business_distillery_01_0",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_0"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_5"
+                        "fixtures_counters_01_17"
                       ]
                     ]
                   }
@@ -869,344 +96,70 @@
                 "amount": 4
               },
               {
-                "id": "fasteners_nails",
+                "id": "fasteners_screws",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Nails"
+                  "Base.Screws"
                 ],
                 "amount": 4
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_shelves1",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_shelves1",
-      "displayName": "Wooden Barrel Shelves 1",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_business_distillery_01_2",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_2"
-                      ]
-                    ]
-                  }
-                ]
               },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_3"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
               {
-                "id": "tool_hammer",
+                "id": "tool_screwdriver",
                 "role": "tool",
                 "mode": "keep",
                 "resourceType": "Item",
                 "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.containers.others.wooden_barrel_shelves",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_containers_others_wooden_barrel_shelves"
-      }
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.wooden_barrel_shelves2",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_wooden_barrel_shelves2",
-      "displayName": "Wooden Barrel Shelves 2",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "location_business_distillery_01_1",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_1"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_distillery_01_4"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.containers.others.wooden_barrel_shelves",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_containers_others_wooden_barrel_shelves"
-      }
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.scarecrow",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_scarecrow",
-      "displayName": "Scarecrow",
-      "tooltipKey": "Tooltip_KBW_Shared_ClothesStand",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Stone",
-      "iconSprite": "location_shop_mall_01_65",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_shop_mall_01_65"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_masons_trowel",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:masonstrowel"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeLight"
-                ]
-              },
-              {
-                "id": "mortar",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "tags": [
-                  "base:concrete"
-                ],
-                "amount": 1,
-                "uses": 1
-              },
-              {
-                "id": "stone_blocks",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.StoneBlock"
-                ],
-                "amount": 3
-              },
-              {
-                "id": "tool_masons_chisel",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:crudechisel",
-                  "base:masonschisel"
+                  "base:screwdriver"
                 ],
                 "amount": 1,
                 "flags": [
                   "Prop2",
-                  "MayDegradeLight"
+                  "MayDegradeVeryLight"
                 ]
               }
             ],
             "skills": {
-              "Masonry": 3
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildCairn",
-            "completionSound": "BuildMetalStructureMedium",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
             "xp": {
-              "Masonry": 30
+              "Woodwork": 25
             },
-            "category": "Masonry"
+            "category": "Furniture"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
           }
         }
-      ],
-      "allowSpriteReuse": true
+      ]
     },
     {
-      "id": "kbw.vanillaexpanded.containers.others.skeleton",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_skeleton",
-      "displayName": "Skeleton",
-      "tooltipKey": "Tooltip_KBW_Shared_ClothesStand",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_hardwood",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Hardwood",
+      "displayName": "Hardwood Wall Cabinet",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
-      "material": "Stone",
-      "iconSprite": "location_shop_mall_01_66",
+      "subcategory": "Upper Counters",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_23",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1218,7 +171,40 @@
                   {
                     "rows": [
                       [
-                        "location_shop_mall_01_66"
+                        "fixtures_counters_01_23"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_22"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_20"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_21"
                       ]
                     ]
                   }
@@ -1229,87 +215,244 @@
           "requirements": {
             "inputs": [
               {
-                "id": "tool_masons_trowel",
+                "id": "tool_hammer",
                 "role": "tool",
                 "mode": "keep",
                 "resourceType": "Item",
                 "tags": [
-                  "base:masonstrowel"
+                  "base:hammer"
                 ],
                 "amount": 1,
                 "flags": [
                   "Prop1",
-                  "MayDegradeLight"
+                  "MayDegradeVeryLight"
                 ]
               },
               {
-                "id": "mortar",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "tags": [
-                  "base:concrete"
-                ],
-                "amount": 1,
-                "uses": 1
-              },
-              {
-                "id": "stone_blocks",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.StoneBlock"
+                  "Base.Plank"
                 ],
-                "amount": 3
+                "amount": 4
               },
               {
-                "id": "tool_masons_chisel",
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
                 "role": "tool",
                 "mode": "keep",
                 "resourceType": "Item",
                 "tags": [
-                  "base:crudechisel",
-                  "base:masonschisel"
+                  "base:screwdriver"
                 ],
                 "amount": 1,
                 "flags": [
                   "Prop2",
-                  "MayDegradeLight"
+                  "MayDegradeVeryLight"
                 ]
               }
             ],
             "skills": {
-              "Masonry": 3
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildCairn",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_steel",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Steel",
+      "displayName": "Steel Wall Cabinet",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Containers",
+      "subcategory": "Upper Counters",
+      "material": "Metal",
+      "materialTags": [
+        "Metal"
+      ],
+      "iconSprite": "fixtures_counters_01_31",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_31"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 5
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 80,
+            "timedAction": "BuildWallMetal",
             "completionSound": "BuildMetalStructureMedium",
             "xp": {
-              "Masonry": 30
+              "MetalWelding": 25
             },
-            "category": "Masonry"
+            "category": "Welding"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
           }
         }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_oak",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Oak",
+      "displayName": "Oak Wall Cabinet",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Containers",
+      "subcategory": "Upper Counters",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
       ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.containers.others.logs",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
-      "displayName": "Logs",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Others",
-      "material": "Wood",
-      "iconSprite": "camping_01_25",
+      "iconSprite": "fixtures_counters_01_147",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1321,8 +464,7 @@
                   {
                     "rows": [
                       [
-                        "camping_01_24",
-                        "camping_01_25"
+                        "fixtures_counters_01_147"
                       ]
                     ]
                   }
@@ -1333,10 +475,29 @@
                   {
                     "rows": [
                       [
-                        "camping_01_39"
-                      ],
+                        "fixtures_counters_01_146"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
                       [
-                        "camping_01_38"
+                        "fixtures_counters_01_144"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_145"
                       ]
                     ]
                   }
@@ -1361,60 +522,80 @@
                 ]
               },
               {
-                "id": "logs",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Log"
-                ],
-                "amount": 3
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.Plank"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
               }
             ],
             "skills": {
-              "Woodwork": 4
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
             "xp": {
-              "Woodwork": 40
+              "Woodwork": 25
             },
-            "category": "Carpentry"
+            "category": "Furniture"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "container": {
-            "type": "logs",
-            "capacity": 50
+            "type": "counter"
           }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.containers.others.logs_2",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
-      "displayName": "Logs",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_dark",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Dark",
+      "displayName": "Dark Wall Cabinet",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
+      "subcategory": "Upper Counters",
       "material": "Wood",
-      "iconSprite": "camping_01_27",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_151",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1426,8 +607,7 @@
                   {
                     "rows": [
                       [
-                        "camping_01_26",
-                        "camping_01_27"
+                        "fixtures_counters_01_151"
                       ]
                     ]
                   }
@@ -1438,10 +618,29 @@
                   {
                     "rows": [
                       [
-                        "camping_01_37"
-                      ],
+                        "fixtures_counters_01_150"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
                       [
-                        "camping_01_36"
+                        "fixtures_counters_01_148"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_149"
                       ]
                     ]
                   }
@@ -1466,60 +665,80 @@
                 ]
               },
               {
-                "id": "logs",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Log"
-                ],
-                "amount": 3
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.Plank"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
               }
             ],
             "skills": {
-              "Woodwork": 4
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
             "xp": {
-              "Woodwork": 40
+              "Woodwork": 25
             },
-            "category": "Carpentry"
+            "category": "Furniture"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "container": {
-            "type": "logs",
-            "capacity": 50
+            "type": "counter"
           }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.containers.others.logs_3",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
-      "displayName": "Logs",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_green",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_Green",
+      "displayName": "Green Wall Cabinet",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
+      "subcategory": "Upper Counters",
       "material": "Wood",
-      "iconSprite": "camping_01_29",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_155",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1531,8 +750,7 @@
                   {
                     "rows": [
                       [
-                        "camping_01_28",
-                        "camping_01_29"
+                        "fixtures_counters_01_155"
                       ]
                     ]
                   }
@@ -1543,10 +761,29 @@
                   {
                     "rows": [
                       [
-                        "camping_01_35"
-                      ],
+                        "fixtures_counters_01_154"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
                       [
-                        "camping_01_34"
+                        "fixtures_counters_01_152"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_153"
                       ]
                     ]
                   }
@@ -1571,60 +808,80 @@
                 ]
               },
               {
-                "id": "logs",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Log"
-                ],
-                "amount": 3
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.Plank"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
               }
             ],
             "skills": {
-              "Woodwork": 4
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
             "xp": {
-              "Woodwork": 40
+              "Woodwork": 25
             },
-            "category": "Carpentry"
+            "category": "Furniture"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "container": {
-            "type": "logs",
-            "capacity": 50
+            "type": "counter"
           }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.containers.others.logs_4",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
-      "displayName": "Logs",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_white",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_White",
+      "displayName": "White Wall Cabinet",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
+      "subcategory": "Upper Counters",
       "material": "Wood",
-      "iconSprite": "camping_01_31",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_159",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1636,8 +893,7 @@
                   {
                     "rows": [
                       [
-                        "camping_01_30",
-                        "camping_01_31"
+                        "fixtures_counters_01_159"
                       ]
                     ]
                   }
@@ -1648,10 +904,29 @@
                   {
                     "rows": [
                       [
-                        "camping_01_33"
-                      ],
+                        "fixtures_counters_01_158"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
                       [
-                        "camping_01_32"
+                        "fixtures_counters_01_156"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_157"
                       ]
                     ]
                   }
@@ -1676,60 +951,80 @@
                 ]
               },
               {
-                "id": "logs",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Log"
-                ],
-                "amount": 3
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.Plank"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
               }
             ],
             "skills": {
-              "Woodwork": 4
+              "Woodwork": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
             "xp": {
-              "Woodwork": 40
+              "Woodwork": 25
             },
-            "category": "Carpentry"
+            "category": "Furniture"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "container": {
-            "type": "logs",
-            "capacity": 50
+            "type": "counter"
           }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.containers.others.logs_5",
-      "translationKey": "IGUI_KBWVE_Buildable_containers_others_logs",
-      "displayName": "Logs",
+      "id": "kbw.vanillaexpanded.containers.wall_cabinets.wall_cabinet_dark_oak",
+      "translationKey": "IGUI_KBWVE_Buildable_WallCabinet_DarkOak",
+      "displayName": "Dark Oak Wall Cabinet",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
       "category": "Containers",
-      "subcategory": "Others",
+      "subcategory": "Upper Counters",
       "material": "Wood",
-      "iconSprite": "camping_01_41",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "fixtures_counters_01_203",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
       },
       "stages": [
         {
@@ -1741,8 +1036,7 @@
                   {
                     "rows": [
                       [
-                        "camping_01_40",
-                        "camping_01_41"
+                        "fixtures_counters_01_203"
                       ]
                     ]
                   }
@@ -1753,10 +1047,29 @@
                   {
                     "rows": [
                       [
-                        "camping_01_43"
-                      ],
+                        "fixtures_counters_01_202"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
                       [
-                        "camping_01_42"
+                        "fixtures_counters_01_200"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_counters_01_201"
                       ]
                     ]
                   }
@@ -1781,45 +1094,716 @@
                 ]
               },
               {
-                "id": "logs",
+                "id": "lumber",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Log"
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.furniture.wall_shelves.hardwood",
+      "translationKey": "IGUI_KBWVE_Buildable_WallShelf_Hardwood",
+      "displayName": "Hardwood Wall Shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Furniture",
+      "subcategory": "Bookshelves",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "furniture_shelving_01_2",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_2"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_1"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_3"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "shelves"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.furniture.wall_shelves.metal",
+      "translationKey": "IGUI_KBWVE_Buildable_WallShelf_Metal",
+      "displayName": "Metal Wall Shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Furniture",
+      "subcategory": "Bookshelves",
+      "material": "Metal",
+      "materialTags": [
+        "Metal"
+      ],
+      "iconSprite": "furniture_shelving_01_29",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_31"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
                 ],
                 "amount": 3
               },
               {
-                "id": "fasteners_nails",
+                "id": "fasteners_screws",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Nails"
+                  "Base.Screws"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 5
               }
             ],
             "skills": {
-              "Woodwork": 4
+              "MetalWelding": 3
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 80,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
             "xp": {
-              "Woodwork": 40
+              "MetalWelding": 25
             },
-            "category": "Carpentry"
+            "category": "Welding"
           },
           "object": {
-            "dismantable": true
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "container": {
-            "type": "logs",
-            "capacity": 50
+            "type": "metal_shelves"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.furniture.wall_shelves.lightwood",
+      "translationKey": "IGUI_KBWVE_Buildable_WallShelf_Lightwood",
+      "displayName": "Lightwood Wall Shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Furniture",
+      "subcategory": "Bookshelves",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "furniture_shelving_01_32",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "shelves"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.furniture.wall_shelves.darkwood",
+      "translationKey": "IGUI_KBWVE_Buildable_WallShelf_Darkwood",
+      "displayName": "Darkwood Wall Shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Furniture",
+      "subcategory": "Bookshelves",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "furniture_shelving_01_34",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "shelves"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.furniture.wall_shelves.white",
+      "translationKey": "IGUI_KBWVE_Buildable_WallShelf_White",
+      "displayName": "White Wall Shelves",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Furniture",
+      "subcategory": "Bookshelves",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "iconSprite": "furniture_shelving_01_36",
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_36"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_shelving_01_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "shelves"
           }
         }
       ]

@@ -2,7 +2,7 @@ local KBW = require("KnoxBuildworks/Core")
 local Logger = require("ElyonLib/Core/Logger")
 
 local Log = Logger:new(KBW.ID, KBW.VERSION)
-Log:setLogLevel("ERROR")
+Log:setLogLevel("WARNING")
 
 function Log:setDebug(enabled)
     KBW.Runtime.debug = enabled == true

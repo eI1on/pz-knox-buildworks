@@ -83,7 +83,7 @@
       "category": "Road Work",
       "subcategory": "Road Work Asphalt",
       "material": "Other",
-      "iconSprite": "blends_street_01_32",
+      "iconSprite": "blends_street_01_55",
       "placement": {
         "kind": "floor"
       },
@@ -97,7 +97,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_32"
+                        "blends_street_01_55"
                       ]
                     ]
                   }
@@ -108,7 +108,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_37"
+                        "blends_street_01_53"
                       ]
                     ]
                   }
@@ -119,7 +119,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_38"
+                        "blends_street_01_54"
                       ]
                     ]
                   }
@@ -130,7 +130,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_39"
+                        "blends_street_01_48"
                       ]
                     ]
                   }
@@ -184,7 +184,7 @@
       "category": "Road Work",
       "subcategory": "Road Work Asphalt",
       "material": "Other",
-      "iconSprite": "blends_street_01_35",
+      "iconSprite": "blends_street_01_51",
       "placement": {
         "kind": "overlay",
         "needToBeAgainstWall": false
@@ -199,7 +199,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_35"
+                        "blends_street_01_51"
                       ]
                     ]
                   }
@@ -210,7 +210,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_36"
+                        "blends_street_01_52"
                       ]
                     ]
                   }
@@ -221,7 +221,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_34"
+                        "blends_street_01_50"
                       ]
                     ]
                   }
@@ -232,7 +232,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_33"
+                        "blends_street_01_49"
                       ]
                     ]
                   }
@@ -291,7 +291,7 @@
       "category": "Road Work",
       "subcategory": "Road Work Asphalt",
       "material": "Other",
-      "iconSprite": "blends_street_01_41",
+      "iconSprite": "blends_street_01_57",
       "placement": {
         "kind": "overlay",
         "needToBeAgainstWall": false
@@ -306,7 +306,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_41"
+                        "blends_street_01_57"
                       ]
                     ]
                   }
@@ -317,7 +317,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_40"
+                        "blends_street_01_56"
                       ]
                     ]
                   }
@@ -328,7 +328,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_42"
+                        "blends_street_01_58"
                       ]
                     ]
                   }
@@ -339,7 +339,7 @@
                   {
                     "rows": [
                       [
-                        "blends_street_01_43"
+                        "blends_street_01_59"
                       ]
                     ]
                   }

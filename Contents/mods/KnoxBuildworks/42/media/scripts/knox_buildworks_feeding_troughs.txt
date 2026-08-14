@@ -1,0 +1,96 @@
+module Base
+{
+    entity KBW_FeedingTroughTripleMetal
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_FeedingTroughDoubleMetal,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            OnCreate = BuildRecipeCode.feedingTrough.OnCreate,
+            face S
+            {
+                layer
+                {
+                    row = location_farm_accesories_01_24 location_farm_accesories_01_25 location_farm_accesories_01_26,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_farm_accesories_01_29,
+                    row = location_farm_accesories_01_28,
+                    row = location_farm_accesories_01_27,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallHammer,
+            time = 250,
+            category = Farming,
+            Tags = Outdoors,
+            SkillRequired = MetalWelding:4,
+            xpAward = MetalWelding:45,
+            Tooltip = Tooltip_craft_feedingTroughDesc,
+            inputs
+            {
+                item 6 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 tags[base:weldingmask] mode:keep,
+                item 6 [Base.SheetMetal],
+                item 6 [Base.WeldingRods] flags[DontRecordInput],
+            }
+        }
+    }
+
+    entity KBW_FeedingTroughQuadMetal
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_FeedingTroughDoubleMetal,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            OnCreate = BuildRecipeCode.feedingTrough.OnCreate,
+            face N
+            {
+                layer
+                {
+                    row = location_farm_accesories_01_18 location_farm_accesories_01_19,
+                    row = location_farm_accesories_01_16 location_farm_accesories_01_17,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = location_farm_accesories_01_21 location_farm_accesories_01_23,
+                    row = location_farm_accesories_01_20 location_farm_accesories_01_22,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallHammer,
+            time = 300,
+            category = Farming,
+            Tags = Outdoors,
+            SkillRequired = MetalWelding:5,
+            xpAward = MetalWelding:60,
+            Tooltip = Tooltip_craft_feedingTroughDesc,
+            inputs
+            {
+                item 8 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 tags[base:weldingmask] mode:keep,
+                item 8 [Base.SheetMetal],
+                item 8 [Base.WeldingRods] flags[DontRecordInput],
+            }
+        }
+    }
+}

@@ -102,6 +102,10 @@ local function uiData(player)
     return root.KBW_UI
 end
 
+local function persistUiData(player)
+    if isClient() and player and player.transmitModData then player:transmitModData() end
+end
+
 local function copyCategorySet(source)
     local result = {}
     if type(source) == "table" then
@@ -2621,6 +2625,7 @@ function KBWCatalog:onFavorite()
     if not self.selected then return end
     local favorites = uiData(self.player).favorites
     favorites[self.selected.id] = not favorites[self.selected.id]
+    persistUiData(self.player)
     self
         :updateFavorite()
     if self.scope == "Favorites" then self:refreshGrid() end
@@ -2631,6 +2636,7 @@ function KBWCatalog:onGridFavorite(definition)
     if not definition then return end
     local favorites = uiData(self.player).favorites
     favorites[definition.id] = not favorites[definition.id]
+    persistUiData(self.player)
     if self.selected and self.selected.id == definition.id then self:updateFavorite() end
     if self.scope == "Favorites" then self:refreshGrid() end
 end
@@ -2651,6 +2657,7 @@ function KBWCatalog:remember()
         if id ~= self.selected.id and #recent < 12 then recent[#recent + 1] = id end
     end
     data.recent = recent
+    persistUiData(self.player)
 end
 
 local function selectedFilterValue(values, combo)
@@ -2765,10 +2772,11 @@ function KBWCatalog:updateActions()
     local definition, stage = self:effectiveDefinition(), self:selectedStage()
     local status = definition and stage and self:cachedSelectionStatus(definition, stage) or { ok = false }
     local allowed = Integrity.isAllowed(self.player)
+    local planningAllowed = KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) == true
     local finishOk = hasFinishItem(self.player, self:selectedFinish(), definition, stage)
     Theme.applyActionButton(self.buildButton, allowed and status.ok and finishOk, true)
-    Theme.applyActionButton(self.planButton, allowed and self.selected ~= nil, false)
-    Theme.applyActionButton(self.plansButton, true, false)
+    Theme.applyActionButton(self.planButton, planningAllowed and allowed and self.selected ~= nil, false)
+    Theme.applyActionButton(self.plansButton, planningAllowed, false)
     local variantId = ""
     local materialId = ""
     if definition and stage then
@@ -2827,6 +2835,13 @@ function KBWCatalog:onBuild()
 end
 
 function KBWCatalog:onPlan()
+    if KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) ~= true then
+        Planner.cancelCursor(self.player)
+        if HaloTextHelper and HaloTextHelper.addBadText then
+            HaloTextHelper.addBadText(self.player, getText("IGUI_KBW_PlanningDisabled"))
+        end
+        return
+    end
     if not self.selected or not Integrity.isAllowed(self.player) then return end
     local definition, stage = self:effectiveDefinition(), self:selectedStage()
     if not stage or not definition then return end

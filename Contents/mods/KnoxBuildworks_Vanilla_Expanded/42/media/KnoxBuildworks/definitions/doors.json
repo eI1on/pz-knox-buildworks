@@ -7056,6 +7056,141 @@
       ]
     },
     {
+      "id": "kbw.vanillaexpanded.doors.gates.wrought_iron_gate",
+      "translationKey": "IGUI_KBWVE_Buildable_doors_gates_wrought_iron_gate",
+      "displayName": "Wrought Iron Gate",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_gates_wrought_iron_gate",
+      "category": "Doors",
+      "subcategory": "Gates",
+      "material": "Metal",
+      "iconSprite": "fixtures_doors_fences_01_20",
+      "placement": {
+        "kind": "object",
+        "dontNeedFrame": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "skillBaseHealth": 300,
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_doors_fences_01_20"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_doors_fences_01_21"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "scrap_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ScrapMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "door_hinges",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Hinge"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "canBarricade": false,
+            "breakSound": "BreakDoor"
+          },
+          "sprites": {
+            "W_open": "fixtures_doors_fences_01_22",
+            "N_open": "fixtures_doors_fences_01_23"
+          }
+        }
+      ]
+    },
+    {
       "id": "kbw.vanillaexpanded.doors.double_door_gates.double_wrought_iron_gate",
       "translationKey": "IGUI_KBWVE_Buildable_doors_double_door_gates_double_wrought_iron_gate",
       "displayName": "Double Wrought Iron Gate",

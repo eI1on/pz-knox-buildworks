@@ -23,7 +23,7 @@
                   {
                     "rows": [
                       [
-                        "fixtures_fireplaces_01_0"
+                        "fixtures_fireplaces_01_5"
                       ]
                     ]
                   }
@@ -34,7 +34,7 @@
                   {
                     "rows": [
                       [
-                        "fixtures_fireplaces_01_5"
+                        "fixtures_fireplaces_01_0"
                       ]
                     ]
                   }
@@ -136,8 +136,10 @@
                   {
                     "rows": [
                       [
-                        "fixtures_fireplaces_01_1",
-                        "fixtures_fireplaces_01_2"
+                        "fixtures_fireplaces_01_4"
+                      ],
+                      [
+                        "fixtures_fireplaces_01_3"
                       ]
                     ]
                   }
@@ -148,10 +150,8 @@
                   {
                     "rows": [
                       [
-                        "fixtures_fireplaces_01_4"
-                      ],
-                      [
-                        "fixtures_fireplaces_01_3"
+                        "fixtures_fireplaces_01_1",
+                        "fixtures_fireplaces_01_2"
                       ]
                     ]
                   }

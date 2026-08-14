@@ -119,8 +119,12 @@
             "materials": "kbwve.light.basic",
             "skills": { "Electricity": 4 }
           },
-          "nativeObject": { "type": "lightSwitch" },
-          "object": { "isProp": true, "dismantable": true, "blockAllSquare": false, "canPassThrough": true, "drawFloorGrid": false }
+          "lightSource": {
+            "radius": 8,
+            "item": "Base.LightBulb",
+            "fuel": "Base.LightBulb"
+          },
+          "object": { "isThumpable": true, "dismantable": true, "blockAllSquare": false, "canPassThrough": true, "drawFloorGrid": false }
         }
       ]
     },
@@ -143,8 +147,12 @@
           "id": "built",
           "geometry": { "faces": { "W": { "layers": [{ "rows": [["lighting_indoor_01_5"]] }] }, "N": { "layers": [{ "rows": [["lighting_indoor_01_4"]] }] }, "E": { "layers": [{ "rows": [["lighting_indoor_01_7"]] }] }, "S": { "layers": [{ "rows": [["lighting_indoor_01_6"]] }] } } },
           "requirements": { "materials": "kbwve.light.basic", "skills": { "Electricity": 4 } },
-          "nativeObject": { "type": "lightSwitch" },
-          "object": { "isProp": true, "dismantable": true, "blockAllSquare": false, "canPassThrough": true, "drawFloorGrid": false }
+          "lightSource": {
+            "radius": 8,
+            "item": "Base.LightBulb",
+            "fuel": "Base.LightBulb"
+          },
+          "object": { "isThumpable": true, "dismantable": true, "blockAllSquare": false, "canPassThrough": true, "drawFloorGrid": false }
         }
       ]
     },

@@ -4,7 +4,6 @@ require("ISUI/ISTextEntryBox")
 require("ISUI/ISButton")
 require("ISUI/ISComboBox")
 require("ISUI/ISRichTextPanel")
-require("BuildingObjects/ISBrushToolTileCursor")
 
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
@@ -498,6 +497,8 @@ end
 
 function KBWDebugTileBrowser:onPlaceTile()
     if not self.selectedSprite then return end
+    if not ISBrushToolTileCursor then require "BuildingObjects/ISBrushToolTileCursor" end
+    if not ISBrushToolTileCursor then return end
     local cursor = ISBrushToolTileCursor:new(self.selectedSprite, self.selectedSprite, self.player)
     getCell():setDrag(cursor, self.player:getPlayerNum())
 end

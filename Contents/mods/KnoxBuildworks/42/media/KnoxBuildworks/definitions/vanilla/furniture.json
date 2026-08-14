@@ -36,6 +36,17 @@
     },
     {
       "id": "kbw.vanilla.metal_lockerbig_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Metal Locker",
       "translationKey": "IGUI_KBW_Vanilla_Metal_LockerBig_Lvl2",
       "tooltipKey": "Tooltip_craft_lockerDesc",
@@ -73,6 +84,17 @@
     },
     {
       "id": "kbw.vanilla.metal_lockerbig_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Big Metal Locker (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_LockerBig_Lvl1",
       "tooltipKey": "Tooltip_craft_lockerDesc",
@@ -269,6 +291,17 @@
     },
     {
       "id": "kbw.vanilla.barreloven",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Barrel Oven",
       "translationKey": "IGUI_KBW_Vanilla_BarrelOven",
       "tooltipKey": "Tooltip_craft_barrelOvenDesc",
@@ -300,6 +333,17 @@
     },
     {
       "id": "kbw.vanilla.metal_counter_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Counter",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Counter_Lvl2",
       "tooltipKey": "Tooltip_craft_metalCounterDesc",
@@ -337,6 +381,17 @@
     },
     {
       "id": "kbw.vanilla.metal_counter_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Counter (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Counter_Lvl1",
       "tooltipKey": "Tooltip_craft_metalCounterDesc",
@@ -374,6 +429,17 @@
     },
     {
       "id": "kbw.vanilla.metal_countercorner_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Counter Corner",
       "translationKey": "IGUI_KBW_Vanilla_Metal_CounterCorner_Lvl2",
       "tooltipKey": "Tooltip_craft_metalCounterCornerDesc",
@@ -411,6 +477,17 @@
     },
     {
       "id": "kbw.vanilla.metal_countercorner_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Counter Corner (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_CounterCorner_Lvl1",
       "tooltipKey": "Tooltip_craft_metalCounterCornerDesc",
@@ -448,6 +525,17 @@
     },
     {
       "id": "kbw.vanilla.metal_crate_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Crate",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Crate_Lvl2",
       "tooltipKey": "Tooltip_craft_crateDesc",
@@ -485,6 +573,17 @@
     },
     {
       "id": "kbw.vanilla.metal_crate_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Crate (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Crate_Lvl1",
       "tooltipKey": "Tooltip_craft_crateDesc",
@@ -522,6 +621,17 @@
     },
     {
       "id": "kbw.vanilla.metal_shelves_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Shelves",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Shelves_Lvl2",
       "tooltipKey": "Tooltip_craft_NeedsWallDesc",
@@ -560,6 +670,17 @@
     },
     {
       "id": "kbw.vanilla.metal_shelves_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Shelves (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_Shelves_Lvl1",
       "tooltipKey": "Tooltip_craft_NeedsWallDesc",
@@ -660,6 +781,17 @@
     },
     {
       "id": "kbw.vanilla.metal_lockersmall_lvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Metal Locker",
       "translationKey": "IGUI_KBW_Vanilla_Metal_LockerSmall_Lvl2",
       "tooltipKey": "Tooltip_craft_lockerDesc",
@@ -697,6 +829,17 @@
     },
     {
       "id": "kbw.vanilla.metal_lockersmall_lvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Small Metal Locker (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_Metal_LockerSmall_Lvl1",
       "tooltipKey": "Tooltip_craft_lockerDesc",

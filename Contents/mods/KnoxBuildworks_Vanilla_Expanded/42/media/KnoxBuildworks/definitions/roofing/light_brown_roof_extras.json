@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "buildables": [
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_wall",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_wall",
-      "displayName": "Bank Wall",
-      "tooltipKey": "Tooltip_KBW_Shared_BankWall",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
+      "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.slope_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_SlopeMiddle",
+      "displayName": "Light Brown Roof Slope Middle",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_0",
+      "iconSprite": "roofs_03_14",
       "placement": {
-        "kind": "wall"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -23,7 +24,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_0"
+                        "roofs_03_14"
                       ]
                     ]
                   }
@@ -34,7 +35,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_1"
+                        "roofs_03_15"
                       ]
                     ]
                   }
@@ -77,136 +78,32 @@
                   "Base.Nails"
                 ],
                 "amount": 4
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "canBarricade": false,
-            "cornerSprite": "location_business_bank_01_2",
-            "pillarSprite": "location_business_bank_01_3"
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ]
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_door_frame",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_door_frame",
-      "displayName": "Bank Door Frame",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_door_frame",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
-      "material": "Wood",
-      "iconSprite": "location_business_bank_01_10",
-      "placement": {
-        "kind": "wall"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_bank_01_10"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_bank_01_11"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
               },
               {
-                "id": "lumber",
+                "id": "roof_shingles",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Plank"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.ClayShingle"
                 ],
                 "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             }
           },
           "construction": {
             "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
+            "completionSound": "BuildWoodenStructureSmall",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ],
-          "callbacks": {
-            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
-          },
           "object": {
-            "isThumpable": false,
-            "isDoorFrame": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
@@ -215,16 +112,17 @@
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_window_frame",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_window_frame",
-      "displayName": "Bank Window",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_window_frame",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
+      "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.slope_top",
+      "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_SlopeTop",
+      "displayName": "Light Brown Roof Slope Top",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_8",
+      "iconSprite": "roofs_03_70",
       "placement": {
-        "kind": "wall"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -236,7 +134,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_8"
+                        "roofs_03_70"
                       ]
                     ]
                   }
@@ -247,7 +145,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_9"
+                        "roofs_03_71"
                       ]
                     ]
                   }
@@ -290,43 +188,51 @@
                   "Base.Nails"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             }
           },
           "construction": {
             "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
+            "completionSound": "BuildWoodenStructureSmall",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ]
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_corner_wall",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_corner_wall",
-      "displayName": "Bank Corner Wall",
-      "tooltipKey": "Tooltip_KBW_Shared_BankWall",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
+      "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.flat_middle",
+      "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_FlatMiddle",
+      "displayName": "Light Brown Flat Roof Middle",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
+      "iconSprite": "roofs_03_91",
       "placement": {
-        "kind": "wall"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -338,7 +244,18 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_2"
+                        "roofs_03_91"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_90"
                       ]
                     ]
                   }
@@ -381,41 +298,51 @@
                   "Base.Nails"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             }
           },
           "construction": {
             "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
+            "completionSound": "BuildWoodenStructureSmall",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "canBarricade": false,
-            "cornerSprite": "location_business_bank_01_2"
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
           }
         }
-      ],
-      "allowSpriteReuse": true
+      ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_pillar",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_pillar",
-      "displayName": "Bank Pillar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_pillar",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
+      "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.flat_top",
+      "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_FlatTop",
+      "displayName": "Light Brown Flat Roof Top",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_3",
+      "iconSprite": "roofs_03_93",
       "placement": {
-        "kind": "wall"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -427,7 +354,18 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_3"
+                        "roofs_03_93"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_92"
                       ]
                     ]
                   }
@@ -459,7 +397,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -469,23 +407,34 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             }
           },
           "construction": {
             "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
+            "completionSound": "BuildWoodenStructureSmall",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
+            "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           }

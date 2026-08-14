@@ -222,6 +222,17 @@
     },
     {
       "id": "kbw.vanilla.feedingtroughdoublemetal",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Feeding Trough",
       "translationKey": "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal",
       "tooltipKey": "Tooltip_craft_feedingTroughDesc",
@@ -281,6 +292,66 @@
         }
       ],
       "iconName": "Build_TroughWoodShort"
+    },
+    {
+      "id": "kbw.vanilla.feedingtroughtriplemetal",
+      "displayName": "Large Metal Feeding Trough",
+      "translationKey": "IGUI_KBW_Vanilla_FeedingTroughTripleMetal",
+      "tooltipKey": "Tooltip_craft_feedingTroughDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "KBW_FeedingTroughTripleMetal"
+          }
+        }
+      ],
+      "iconName": "Build_TroughMetal"
+    },
+    {
+      "id": "kbw.vanilla.feedingtroughquadmetal",
+      "displayName": "Huge Metal Feeding Trough",
+      "translationKey": "IGUI_KBW_Vanilla_FeedingTroughQuadMetal",
+      "tooltipKey": "Tooltip_craft_feedingTroughDesc",
+      "category": "Animals",
+      "subcategory": "Workstations",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-b42",
+        "entity-script",
+        "animals"
+      ],
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "level": 1,
+          "entityCompat": {
+            "module": "Base",
+            "entity": "KBW_FeedingTroughQuadMetal"
+          }
+        }
+      ],
+      "iconName": "Build_TroughMetal"
     },
     {
       "id": "kbw.vanilla.dryingracksmall",

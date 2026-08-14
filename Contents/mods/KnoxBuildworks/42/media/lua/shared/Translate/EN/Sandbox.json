@@ -16,7 +16,7 @@
   "Sandbox_KBW_WellWaterMode_option2": "Limited and refilling",
   "Sandbox_KBW_WellCapacity": "Water well capacity",
   "Sandbox_KBW_WellCapacity_tooltip": "Maximum litres stored by each limited water well.",
-  "Sandbox_KBW_WellInitialPercent": "Initial well fill (%)",
+  "Sandbox_KBW_WellInitialPercent": "Initial well fill (percent)",
   "Sandbox_KBW_WellInitialPercent_tooltip": "Percentage of a limited well's capacity available when the well is first built.",
   "Sandbox_KBW_WellHourlyRefill": "Groundwater refill per hour",
   "Sandbox_KBW_WellHourlyRefill_tooltip": "Litres of clean water naturally restored to each limited well every in-game hour.",

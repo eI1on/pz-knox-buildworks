@@ -55,6 +55,11 @@ local function startCatalogPrewarm(player)
 end
 
 local function onCreatePlayer(index, player)
+    if KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) ~= true then
+        Blueprints.setActive(player, nil)
+        local Planner = require("KnoxBuildworks/Planning/Planner")
+        Planner.cancelCursor(player)
+    end
     PinnedRecipes.ensurePanel()
     if KBW.Runtime.loaded then
         hello(player)
@@ -156,25 +161,6 @@ local function onKeyPressed(key)
     if key == (Options:getOption("OpenCatalog"):getValue()) and getPlayer() then Catalog.open(getPlayer()) end
 end
 
--- Nearby shared blueprints are discovery-scoped. Refresh after meaningful
--- movement so the server can both add newly nearby plans and prune plans that
--- have left this client's vicinity without polling every tick.
-local discoveryState = {}
-local DISCOVERY_MOVE_TILES = 30
-
-local function refreshNearbyBlueprints(player)
-    if not isClient() or not player or not sendClientCommand then return end
-    local playerIndex = player.getPlayerNum and player:getPlayerNum() or 0
-    local x = math.floor(player:getX())
-    local y = math.floor(player:getY())
-    local previous = discoveryState[playerIndex]
-    local moved = previous == nil or math.abs(x - previous.x) >= DISCOVERY_MOVE_TILES
-        or math.abs(y - previous.y) >= DISCOVERY_MOVE_TILES
-    if not moved then return end
-    discoveryState[playerIndex] = { x = x, y = y }
-    sendClientCommand(player, KBW.NETWORK_MODULE, "BPRequest", {})
-end
-
 local function unwrapInventoryItem(entry)
     if not entry then return nil end
     if entry.getFullType then return entry end
@@ -267,13 +253,60 @@ local function inventoryContextMenu(playerNum, context, items)
     end
 end
 
+local POINT_LIGHT_SWITCH_IDS = {
+    ["kbw.vanillaexpanded.lighting.indoor.light_switch"] = true,
+    ["kbw.vanillaexpanded.lighting.indoor.light_switch_alternate"] = true
+}
+
+local function kbwPointLightSwitch(worldObjects)
+    local visitedSquares = {}
+    worldObjects = worldObjects or {}
+    for worldIndex = 1, #worldObjects do
+        local worldObject = worldObjects[worldIndex]
+        local square = worldObject and worldObject.getSquare and worldObject:getSquare() or nil
+        local squareKey = square and tostring(square) or nil
+        if square and not visitedSquares[squareKey] then
+            visitedSquares[squareKey] = true
+            local objects = square:getObjects()
+            for objectIndex = 0, objects:size() - 1 do
+                local object = objects:get(objectIndex)
+                local data = object and object.getModData and object:getModData() or nil
+                local kbw = data and data.KBW or nil
+                if kbw and POINT_LIGHT_SWITCH_IDS[tostring(kbw.buildableId)] and object.getLightSourceRadius
+                    and object:getLightSourceRadius() > 0 then
+                    return object
+                end
+            end
+        end
+    end
+    return nil
+end
+
+-- Player-built switches use a bounded thumpable point light instead of a
+-- native room switch. Native room switches depend on map-authored room bounds,
+-- which can be absent (no light) or cover an oversized custom structure after
+-- an MP chunk reload. The vanilla timed action still owns synchronization.
+local function lightSwitchContextMenu(playerNum, context, worldObjects, test)
+    if test and ISWorldObjectContextMenu.Test then return true end
+    local lightSwitch = kbwPointLightSwitch(worldObjects)
+    if not lightSwitch then return false end
+    if test then return ISWorldObjectContextMenu.setTest() end
+    local label = lightSwitch:isLightSourceOn() and getText("ContextMenu_Turn_Off")
+        or getText("ContextMenu_Turn_On")
+    local option = context:addGetUpOption(
+        label, lightSwitch, ISWorldObjectContextMenu.onToggleThumpableLight, playerNum
+    )
+    option.iconTexture = getTexture("Item_LightBulb")
+    return true
+end
+
 Events.OnGameBoot.Add(function ()
         if not KBW.Runtime.loaded then Loader.startAsync() end
     end)
 Events.OnCreatePlayer.Add(onCreatePlayer)
 Events.OnServerCommand.Add(onServerCommand)
 Events.OnKeyPressed.Add(onKeyPressed)
-Events.OnPlayerUpdate.Add(refreshNearbyBlueprints)
 Events.OnPlayerUpdate.Add(retryIntegrityHandshake)
 Events.OnFillInventoryObjectContextMenu.Add(inventoryContextMenu)
+Events.OnFillWorldObjectContextMenu.Add(lightSwitchContextMenu)
 return true

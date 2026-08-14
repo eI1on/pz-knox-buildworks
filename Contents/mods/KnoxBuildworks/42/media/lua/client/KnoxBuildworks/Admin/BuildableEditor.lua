@@ -721,7 +721,9 @@ function KBWBuildableEditor:refreshEditor()
     self.timeEntry:setText(rule and rule.time and tostring(rule.time) or tostring(defaultTime or 200))
     local finishDefaults = self.draft.wallFinishRequirements or {}
     local finishOverrides = parent and parent.finishRequirements or {}
-    for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+    local finishRequirements = { "plaster", "paint", "wallpaper" }
+    for requirementIndex = 1, #finishRequirements do
+        local requirement = finishRequirements[requirementIndex]
         selectComboData(self.wallFinishDefaults[requirement], finishPolicyData(finishDefaults[requirement], false))
         selectComboData(self.wallFinishOverrides[requirement], finishPolicyData(finishOverrides[requirement], true))
     end
@@ -1181,7 +1183,9 @@ function KBWBuildableEditor:updateEnabledStates()
     local knowledge = hasSelection and rule ~= nil and (rule.recipes ~= nil or rule.needToBeLearned ~= nil)
     local requirementsEditable = hasSelection and BuildableRules.canOverrideRequirements(definition, stage) == true
     local wallSelected = hasSelection and BuildableRules.isWallBuildable(definition, stage) == true
-    for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+    local finishRequirements = { "plaster", "paint", "wallpaper" }
+    for requirementIndex = 1, #finishRequirements do
+        local requirement = finishRequirements[requirementIndex]
         self.wallFinishOverrides[requirement]:setEnabled(wallSelected)
     end
     self.inputsOverride:disableOption(getText("IGUI_KBW_AdminEditorOverrideInputs"), not requirementsEditable)
@@ -1819,7 +1823,9 @@ function KBWBuildableEditor:prerender()
             paint = "IGUI_KBW_AdminEditorFinishPaint",
             wallpaper = "IGUI_KBW_AdminEditorFinishWallpaper"
         }
-        for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+        local finishRequirements = { "plaster", "paint", "wallpaper" }
+        for requirementIndex = 1, #finishRequirements do
+            local requirement = finishRequirements[requirementIndex]
             local defaultCombo = self.wallFinishDefaults[requirement]
             self:drawText(
                 getText(labels[requirement]), self.rightX, defaultCombo:getY() + 3, Theme.text.r, Theme.text.g,
@@ -1833,7 +1839,8 @@ function KBWBuildableEditor:prerender()
             overrideHint, self.rightX, self.finishNoteY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1,
             UIFont.Small
         )
-        for _, requirement in ipairs({ "plaster", "paint", "wallpaper" }) do
+        for requirementIndex = 1, #finishRequirements do
+            local requirement = finishRequirements[requirementIndex]
             local overrideCombo = self.wallFinishOverrides[requirement]
             self:drawText(
                 getText(labels[requirement]), self.rightX, overrideCombo:getY() + 3, Theme.text.r, Theme.text.g,

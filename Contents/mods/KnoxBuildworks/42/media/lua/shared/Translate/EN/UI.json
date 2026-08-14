@@ -1,6 +1,8 @@
 {
     "UI_optionscreen_KBW_OpenCatalog": "Open building catalog",
     "UI_optionscreen_KBW_OpenCatalog_Tooltip": "Opens the independent Knox Buildworks catalog.",
+    "UI_optionscreen_KBW_ShowMenuDock": "Show Menu Dock",
+    "UI_optionscreen_KBW_ShowMenuDock_Tooltip": "Show Knox Buildworks shortcuts in ElyonLib's Menu Dock.",
     "UI_optionscreen_KBW_Debug": "Verbose debug logging",
     "UI_optionscreen_KBW_Debug_Tooltip": "Print registry, validation, and network diagnostics.",
     "UI_optionscreen_KBW_Profile": "Performance profiling",

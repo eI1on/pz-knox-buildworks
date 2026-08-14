@@ -2,10 +2,14 @@
 require "PZAPI/ModOptions"
 local Log = require("KnoxBuildworks/Log")
 local Theme = require("KnoxBuildworks/UI/Theme")
+local MenuDock = require("ElyonLib/UI/MenuDock/MenuDock")
 
 local Options = PZAPI.ModOptions:create("KnoxBuildworks", "Knox Buildworks")
 Options:addKeyBind(
     "OpenCatalog", "UI_optionscreen_KBW_OpenCatalog", Keyboard.KEY_F7, "UI_optionscreen_KBW_OpenCatalog_Tooltip"
+)
+Options:addTickBox(
+    "ShowMenuDock", "UI_optionscreen_KBW_ShowMenuDock", true, "UI_optionscreen_KBW_ShowMenuDock_Tooltip"
 )
 Options:addTickBox("Debug", "UI_optionscreen_KBW_Debug", false, "UI_optionscreen_KBW_Debug_Tooltip")
 Options:addTickBox("Profile", "UI_optionscreen_KBW_Profile", false, "UI_optionscreen_KBW_Profile_Tooltip")
@@ -113,6 +117,7 @@ function Options:apply()
         if rounded < 35 then rounded = 35 end
         if tonumber(panelOpacity:getValue()) ~= rounded then panelOpacity:setValue(rounded) end
     end
+    MenuDock.refreshRails()
 end
 
 return Options

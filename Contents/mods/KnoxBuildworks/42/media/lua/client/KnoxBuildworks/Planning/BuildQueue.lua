@@ -339,7 +339,6 @@ local function queueFetchPass(state, placement)
     local rows = {}
     if not missingRowsFor(state, placement, rows) then return 0, false end
     local containers = state.gatherContainers or {}
-    if #containers == 0 then return 0, true end
     for lookahead = 1, math.min(FETCH_LOOKAHEAD, #state.remaining) do
         missingRowsFor(state, state.remaining[lookahead], rows)
     end
@@ -359,6 +358,7 @@ local function queueFetchPass(state, placement)
             if queued > 0 then return queued, false end
         end
     end
+    if #containers == 0 then return 0, true end
     for containerIndex = 1, #containers do
         local container = containers[containerIndex]
         local transfers = collectContainerTransfers(container, rows)

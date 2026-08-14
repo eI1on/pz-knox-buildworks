@@ -120,6 +120,17 @@
     },
     {
       "id": "kbw.vanilla.metaldoorframelvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Door Frame (Good)",
       "translationKey": "IGUI_KBW_Vanilla_MetalDoorFrameLvl2",
       "tooltipKey": "Tooltip_craft_doorFrameMetalDesc",
@@ -156,6 +167,17 @@
     },
     {
       "id": "kbw.vanilla.metaldoorframelvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Door Frame (Poor)",
       "translationKey": "IGUI_KBW_Vanilla_MetalDoorFrameLvl1",
       "tooltipKey": "Tooltip_craft_doorFrameMetalDesc",
@@ -366,6 +388,17 @@
     },
     {
       "id": "kbw.vanilla.metaldoorlvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Door (Poor)",
       "translationKey": "IGUI_KBW_Vanilla_MetalDoorLvl2",
       "tooltipKey": "Tooltip_craft_metalDoorDesc",
@@ -403,6 +436,17 @@
     },
     {
       "id": "kbw.vanilla.metaldoorlvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Door (Shoddy)",
       "translationKey": "IGUI_KBW_Vanilla_MetalDoorLvl1",
       "tooltipKey": "Tooltip_craft_metalDoorDesc",

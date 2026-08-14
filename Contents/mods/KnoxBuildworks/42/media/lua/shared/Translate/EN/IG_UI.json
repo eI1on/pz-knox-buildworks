@@ -1,4 +1,5 @@
 {
+  "IGUI_KBW_Subcategory_Wood_Roofs": "Wood Roofs",
  "IGUI_KBW_Title": "Knox Buildworks",
  "IGUI_KBW_Categories": "Categories",
  "IGUI_KBW_Level": "Level",
@@ -402,6 +403,8 @@
  "IGUI_KBW_Vanilla_FeedingTroughDouble": "Long Wood Feeding Trough",
  "IGUI_KBW_Vanilla_FeedingTroughDoubleMetal": "Metal Feeding Trough",
  "IGUI_KBW_Vanilla_FeedingTroughSimple": "Short Wood Feeding Trough",
+ "IGUI_KBW_Vanilla_FeedingTroughTripleMetal": "Large Metal Feeding Trough",
+ "IGUI_KBW_Vanilla_FeedingTroughQuadMetal": "Huge Metal Feeding Trough",
  "IGUI_KBW_Vanilla_Forge": "Forge",
  "IGUI_KBW_Vanilla_Forge_Primitive_Forge": "Primitive Forge",
  "IGUI_KBW_Vanilla_GravelFloor": "Gravel Floor",
@@ -941,12 +944,14 @@
  "IGUI_KBW_Category_Appliances": "Appliances",
  "IGUI_KBW_Subcategory_Cooking": "Cooking",
  "IGUI_KBW_Subcategory_Refrigeration": "Refrigeration",
+ "IGUI_KBW_Subcategory_Fireplace_Jambs": "Fireplace Jambs",
  "IGUI_KBW_Subcategory_Laundry": "Laundry",
   "IGUI_KBW_Subcategory_Bathroom_Fixtures": "Bathroom Fixtures",
   "IGUI_KBW_Category_Lighting": "Lighting",
   "IGUI_KBW_Subcategory_Light_Switches": "Light Switches",
   "IGUI_KBW_Subcategory_Table_Lamps": "Table Lamps",
   "IGUI_KBW_Subcategory_Wall_Lights": "Wall Lights",
+  "IGUI_KBW_Subcategory_Log_Cabin_Walls": "Log Cabin Walls",
   "IGUI_KBW_Subcategory_Exit_Signs": "Exit Signs",
   "IGUI_KBW_Subcategory_Floor_Lamps": "Floor Lamps"
 }

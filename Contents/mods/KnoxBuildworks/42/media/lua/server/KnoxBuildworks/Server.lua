@@ -14,6 +14,17 @@ require "KnoxBuildworks/BuildingObjects/KBWBuildingObject"
 ---@type KBW.ServerModule
 local Server = {}
 local buildBatches = {}
+local blueprintRequestTimes = {}
+local BLUEPRINT_REQUEST_INTERVAL_MS = 10000
+
+local function allowBlueprintRequest(player)
+    local username = tostring(player and player:getUsername() or "?")
+    local now = getTimestampMs()
+    local previous = blueprintRequestTimes[username]
+    if previous and now - previous < BLUEPRINT_REQUEST_INTERVAL_MS then return false end
+    blueprintRequestTimes[username] = now
+    return true
+end
 
 local function batchKey(player, blueprintId)
     return tostring(player and player:getUsername() or "?") .. "|" .. tostring(blueprintId or "")
@@ -105,6 +116,7 @@ function Server.onClientCommand(module, command, player, args)
     args = args or {}
     if command == "Hello" then
         closePlayerBatches(player)
+        blueprintRequestTimes[tostring(player and player:getUsername() or "?")] = nil
         local allowed = args.hash == Registry.hash
         local logMessage = allowed and "Definitions match server"
             or string.format("Definition mismatch: server %s, client %s", Registry.hash, tostring(args.hash))
@@ -121,7 +133,9 @@ function Server.onClientCommand(module, command, player, args)
         if not Integrity.isAllowed(player) then return end
         BuildableRulesServer.onClientCommand(player, command, args)
     elseif command == "BPRequest" then
-        Blueprints.serverSyncAll(player)
+        if not Integrity.isAllowed(player) then return end
+        if KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) ~= true then return end
+        if allowBlueprintRequest(player) then Blueprints.serverSyncAll(player) end
     elseif command == "BPBuildBatchStart" or command == "BPBuildBatchEnd" then
         if not Integrity.isAllowed(player) then return end
         handleBuildBatch(player, command, args)

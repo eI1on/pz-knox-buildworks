@@ -185,22 +185,118 @@ local function uiData(player)
     return root.KBW_UI
 end
 
+local function matchesInventoryBar(element, panel)
+    if not element or not panel then return false end
+    return element == panel or (panel.javaObject ~= nil and element == panel.javaObject)
+end
+
+local function isInventoryBar(element)
+    for playerIndex = 0, 3 do
+        if getPlayerInventory and matchesInventoryBar(element, getPlayerInventory(playerIndex)) then return true end
+        if getPlayerLoot and matchesInventoryBar(element, getPlayerLoot(playerIndex)) then return true end
+    end
+    return false
+end
+
+local function captureInventoryBars()
+    local states = {}
+    local function capture(panel)
+        if not panel then return end
+        states[#states + 1] = {
+            panel = panel,
+            visible = panel:isVisible(),
+            collapsed = panel.isCollapsed == true,
+            pinned = panel.pin == true
+        }
+    end
+    for playerIndex = 0, 3 do
+        if getPlayerInventory then capture(getPlayerInventory(playerIndex)) end
+        if getPlayerLoot then capture(getPlayerLoot(playerIndex)) end
+    end
+    return states
+end
+
+-- Expanded, unpinned inventory windows normally auto-collapse as soon as the
+-- mouse moves to the planner. Hold only those windows open for the lifetime of
+-- Planning Mode, then restore their original collapsed/pinned/visible state.
+local function holdInventoryBars(states)
+    states = states or {}
+    for stateIndex = 1, #states do
+        local state = states[stateIndex]
+        local panel = state.panel
+        if panel and state.visible then
+            panel:setVisible(true)
+            if not state.collapsed then
+                if panel.setPinned then
+                    panel:setPinned()
+                else
+                    panel.pin = true
+                end
+                panel.isCollapsed = false
+                panel.collapseCounter = 0
+                if panel.clearMaxDrawHeight then panel:clearMaxDrawHeight() end
+            end
+            panel:bringToTop()
+        end
+    end
+end
+
+local function raiseInventoryBars(states)
+    states = states or {}
+    for stateIndex = 1, #states do
+        local state = states[stateIndex]
+        local panel = state.panel
+        if panel and state.visible and panel:isVisible() then panel:bringToTop() end
+    end
+end
+
+local function restoreInventoryBars(states)
+    states = states or {}
+    for stateIndex = 1, #states do
+        local state = states[stateIndex]
+        local panel = state.panel
+        if panel then
+            panel:setVisible(state.visible == true)
+            panel.isCollapsed = state.collapsed == true
+            panel.collapseCounter = 0
+            if state.pinned then
+                if panel.setPinned then panel:setPinned() else panel.pin = true end
+            else
+                if panel.collapse then panel:collapse() else panel.pin = false end
+                panel.pin = false
+                if panel.collapseButton then panel.collapseButton:setVisible(false) end
+                if panel.pinButton then
+                    panel.pinButton:setVisible(true)
+                    panel.pinButton:bringToTop()
+                end
+            end
+            panel.isCollapsed = state.collapsed == true
+            if state.collapsed then
+                if panel.setMaxDrawHeight and panel.titleBarHeight then
+                    panel:setMaxDrawHeight(panel:titleBarHeight())
+                end
+            elseif panel.clearMaxDrawHeight then
+                panel:clearMaxDrawHeight()
+            end
+            if state.visible then panel:bringToTop() end
+        end
+    end
+end
+
 local function hideBaseUI()
     local hidden = {}
     local ui = UIManager.getUI()
     for uiIndex = 0, ui:size() - 1 do
         local element = ui:get(uiIndex)
-        if element and element:isVisible() then
+        if element and element:isVisible() and not isInventoryBar(element) then
             hidden[#hidden + 1] = element:toString()
             element:setVisible(false)
         end
     end
-    UIManager.setVisibleAllUI(false)
     return hidden
 end
 
 local function restoreBaseUI(hidden)
-    UIManager.setVisibleAllUI(true)
     local ui = UIManager.getUI()
     hidden = hidden or {}
     for hiddenIndex = 1, #hidden do
@@ -772,8 +868,10 @@ function KBWPlanningCatalogPanel:prerender()
 end
 
 ---@param player IsoPlayer
+---@param hiddenUI string[]|nil
+---@param inventoryBars table[]|nil
 ---@return KBWPlanningMode
-function KBWPlanningMode:new(player, hiddenUI)
+function KBWPlanningMode:new(player, hiddenUI, inventoryBars)
     local playerNum = player:getPlayerNum()
     local screenLeft = getPlayerScreenLeft(playerNum)
     local screenTop = getPlayerScreenTop(playerNum)
@@ -791,6 +889,7 @@ function KBWPlanningMode:new(player, hiddenUI)
     self.__index = self
     o.player = player
     o.hiddenUI = hiddenUI or {}
+    o.inventoryBars = inventoryBars or {}
     o.screenLeft = screenLeft
     o.screenTop = screenTop
     o.screenW = screenW
@@ -1909,6 +2008,9 @@ function KBWPlanningMode:prerender()
             )
         end
     end
+    -- Top-level panels automatically come to the front when focused. Keep the
+    -- inventory bars above both Planning Mode windows throughout the session.
+    raiseInventoryBars(self.inventoryBars)
 end
 
 function KBWPlanningMode:close()
@@ -1927,6 +2029,7 @@ function KBWPlanningMode:close()
     self:setVisible(false)
     self:removeFromUIManager()
     restoreBaseUI(self.hiddenUI)
+    restoreInventoryBars(self.inventoryBars)
     if KBWPlanningMode.instance == self then KBWPlanningMode.instance = nil end
 end
 
@@ -1947,13 +2050,18 @@ function KBWPlanningMode.open(player)
         end
         return nil
     end
+    if isClient() then
+        sendClientCommand(player, KBW.NETWORK_MODULE, "BPRequest", { reason = "planning_open" })
+    end
     if KBWPlanningMode.instance then KBWPlanningMode.instance:close() end
+    local inventoryBars = captureInventoryBars()
     local hidden = hideBaseUI()
-    local ui = KBWPlanningMode:new(player, hidden)
+    local ui = KBWPlanningMode:new(player, hidden, inventoryBars)
     ui:initialise()
     ui:addToUIManager()
     ui:bringToTop()
     if ui.catalogPanel then ui.catalogPanel:bringToTop() end
+    holdInventoryBars(inventoryBars)
     KBWPlanningMode.instance = ui
     return ui
 end

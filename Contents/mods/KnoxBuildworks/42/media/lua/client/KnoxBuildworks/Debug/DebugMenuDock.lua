@@ -1,9 +1,11 @@
 local MenuDock = require("ElyonLib/UI/MenuDock/MenuDock")
+local Options = require("KnoxBuildworks/Options")
 
 local DebugMenuDock = {}
 
 local function visibleWhen()
-    return isDebugEnabled() == true
+    local option = Options:getOption("ShowMenuDock")
+    return (not option or option:getValue() == true) and isDebugEnabled() == true
 end
 
 local function openBuildTests(playerNum)

@@ -12,6 +12,7 @@ local EntityCompat = {}
 
 local metadataCache = {}
 local missingLogged = {}
+local incompatibleSpriteLogged = {}
 
 local FACE_SCRIPTS = {
     { id = 0, name = "N" },
@@ -497,6 +498,22 @@ end
 function EntityCompat.clearCache()
     metadataCache = {}
     missingLogged = {}
+    incompatibleSpriteLogged = {}
+end
+
+local function geometryContainsSprite(geometry, spriteName)
+    if not geometry or not spriteName then return false end
+    for _, face in pairs(geometry.faces or {}) do
+        for layerIndex = 1, #(face.layers or {}) do
+            local rows = face.layers[layerIndex].rows or {}
+            for rowIndex = 1, #rows do
+                for columnIndex = 1, #rows[rowIndex] do
+                    if rows[rowIndex][columnIndex] == spriteName then return true end
+                end
+            end
+        end
+    end
+    return false
 end
 
 local function verifyScriptComponents(object, script, scriptName)
@@ -544,6 +561,21 @@ function EntityCompat.attach(object, stage, isFirstTimeCreated)
             tostring(scriptName)
         )
         return false, "object already has components"
+    end
+    local spriteComponent = script:getComponentScriptFor(ComponentType.SpriteConfig)
+    local sprite = object:getSprite()
+    local spriteName = sprite and sprite:getName() or nil
+    local spriteMetadata = EntityCompat.metadata(stage).spriteConfig
+    if spriteComponent and (not spriteMetadata or not geometryContainsSprite(spriteMetadata.geometry, spriteName)) then
+        local warningKey = tostring(scriptName) .. "|" .. tostring(spriteName)
+        if not incompatibleSpriteLogged[warningKey] then
+            incompatibleSpriteLogged[warningKey] = true
+            Log:warning(
+                "Skipped entity script %s for sprite %s because it is not part of that SpriteConfig",
+                tostring(scriptName), tostring(spriteName)
+            )
+        end
+        return false, "sprite is not part of entity SpriteConfig"
     end
     GameEntityFactory.CreateIsoObjectEntity(object, script, isFirstTimeCreated == true)
     if object:getEntityScript() ~= script then

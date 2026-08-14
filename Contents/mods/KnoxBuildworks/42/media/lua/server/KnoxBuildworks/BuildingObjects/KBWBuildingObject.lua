@@ -106,6 +106,25 @@ local function isFloorAttachmentSprite(spriteName)
         ) or properties:has(IsoFlagType.FloorOverlay)
 end
 
+local function isWallDecorationSprite(spriteName)
+    if not spriteName then return false end
+    local sprite = getSprite(spriteName)
+    local properties = sprite and sprite:getProperties() or nil
+    if not properties then return false end
+    local attached = properties:has(IsoFlagType.attachedN) or properties:has(IsoFlagType.attachedW)
+        or properties:has(IsoFlagType.attachedE) or properties:has(IsoFlagType.attachedS)
+    if not attached then return false end
+    return not (properties:has(IsoFlagType.solid) or properties:has(IsoFlagType.solidtrans)
+        or properties:has(IsoFlagType.collideN) or properties:has(IsoFlagType.collideW)
+        or properties:has(IsoFlagType.WallN) or properties:has(IsoFlagType.WallNTrans)
+        or properties:has(IsoFlagType.WallW) or properties:has(IsoFlagType.WallWTrans)
+        or properties:has(IsoFlagType.WallNW) or properties:has(IsoFlagType.WindowN)
+        or properties:has(IsoFlagType.WindowW) or properties:has(IsoFlagType.windowN)
+        or properties:has(IsoFlagType.windowW) or properties:has(IsoFlagType.doorN)
+        or properties:has(IsoFlagType.doorW) or properties:has(IsoFlagType.DoorWallN)
+        or properties:has(IsoFlagType.DoorWallW))
+end
+
 local function isRoofObjectSprite(spriteName)
     if not spriteName then return false end
     local sprite = getSprite(spriteName)
@@ -248,6 +267,31 @@ local function newNativeBuildLogic(character, recipe, choices, containers)
     logic:setRecipe(recipe)
     applyNativeInputChoices(logic, recipe, choices, containers)
     return logic
+end
+
+---Refreshes the runtime player references after B42's multiplayer BuildAction
+---has reconstructed this cursor on the server.  The constructor receives the
+---serialized player number, then Java replaces `player` with the authoritative
+---IsoPlayer only after construction; keeping the constructor's nil character
+---made remote players' actions remain at 0% while the listen-server host worked.
+---@return IsoPlayer | nil
+function KBWBuildingObject:refreshPlayerContext()
+    local runtimePlayer = self.player
+    if type(runtimePlayer) == "number" then runtimePlayer = getSpecificPlayer(runtimePlayer) end
+    if runtimePlayer and runtimePlayer ~= self.character then
+        self.character = runtimePlayer
+        self.buildPanelLogic = nil
+        self.buildLogicCharacter = nil
+    end
+    if self.character and self.craftRecipe and EntityCompat.usesNativeRecipeInputs(self.stage) and BuildLogic
+        and self.buildLogicCharacter ~= self.character then
+        self.containers = currentBuildContainers(self.character)
+        self.buildPanelLogic = newNativeBuildLogic(
+            self.character, self.craftRecipe, self.inputChoices, self.containers
+        )
+        self.buildLogicCharacter = self.character
+    end
+    return self.character
 end
 
 local function nativeInputFailure(logic, recipe, containers)
@@ -449,9 +493,10 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.canBePlastered = WallFinishes.isPlasterable(o.definition, o.stage)
     local craftRecipe = StageConfig.recipe(o.definition, o.stage)
     o.craftRecipe = EntityCompat.craftRecipeObject(o.stage)
-    if o.craftRecipe and EntityCompat.usesNativeRecipeInputs(o.stage) and BuildLogic then
+    if o.character and o.craftRecipe and EntityCompat.usesNativeRecipeInputs(o.stage) and BuildLogic then
         o.containers = containers or currentBuildContainers(o.character)
         o.buildPanelLogic = newNativeBuildLogic(o.character, o.craftRecipe, o.inputChoices, o.containers)
+        o.buildLogicCharacter = o.character
     end
     o.maxTime = craftRecipe.time or 200
     o.xpAward = craftRecipe.xpAward
@@ -557,6 +602,7 @@ end
 
 ---@param action string
 function KBWBuildingObject:onTimedActionStart(action)
+    self:refreshPlayerContext()
     ISBuildingObject.onTimedActionStart(self, action)
     local construction = StageConfig.construction(self.definition, self.stage)
     local craftRecipe = StageConfig.recipe(self.definition, self.stage)
@@ -582,9 +628,7 @@ end
 
 ---@param square IsoGridSquare | nil
 function KBWBuildingObject:haveMaterial(square)
-    if not self.character then
-        self.character = type(self.player) == "number" and getSpecificPlayer(self.player) or self.player
-    end
+    if not self:refreshPlayerContext() then return false end
     return Requirements.evaluate(self.character, self.definition, self.stage, square, self.inputChoices).ok
 end
 
@@ -663,11 +707,15 @@ function KBWBuildingObject:walkTo(x, y, z)
     local isStairs = (self.definition.placement or {}).kind == "stairs"
         or string.find(string.lower(tostring(self.buildableId or "")), "stairs", 1, true) ~= nil
     if isStairs then
-        local bottom
-        if self.north then
-            bottom = getCell():getGridSquare(x + 2, y, z)
-        else
-            bottom = getCell():getGridSquare(x, y + 2, z)
+        local bottom = nil
+        for cellIndex = 1, #footprint do
+            local cell = footprint[cellIndex]
+            local stairSprite = cell.sprite and getSprite(cell.sprite) or nil
+            local stairType = stairSprite and stairSprite:getType() or nil
+            if stairType == IsoObjectType.stairsBW or stairType == IsoObjectType.stairsBN then
+                bottom = getCell():getGridSquare(x + (cell.dx or 0), y + (cell.dy or 0), z + (cell.dz or 0))
+                break
+            end
         end
         if bottom then return luautils.walkAdj(self.character, bottom, false, occupied) end
     end
@@ -687,9 +735,7 @@ end
 
 ---@param square IsoGridSquare | nil
 function KBWBuildingObject:isValid(square)
-    if not self.character then
-        self.character = type(self.player) == "number" and getSpecificPlayer(self.player) or self.player
-    end
+    if not self:refreshPlayerContext() then return false end
     if self.blockBuild or not self.definition or not self.stage then return false end
     if not Integrity.isAllowed(self.character) then
         self.validationReason = "definition integrity mismatch"
@@ -757,7 +803,11 @@ end
 ---@param z      number
 ---@param square IsoGridSquare | nil
 function KBWBuildingObject:render(x, y, z, square)
-    self:ensureSquaresExist(x, y, z)
+    local previewSquareKey = string.format("%d:%d:%d:%d", x, y, z, self.nSprite or 1)
+    if self.previewSquareKey ~= previewSquareKey then
+        self.previewSquareKey = previewSquareKey
+        self:ensureSquaresExist(x, y, z)
+    end
     local footprint = self:getFootprint()
     if not footprint then
         ISBuildingObject.render(self, x, y, z, square)
@@ -859,9 +909,10 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
         return consumed, consumed and nil or "Knox recipe inputs changed before consumption"
     end
 
-    local containers = accessibleBuildContainers(
-        self.character, self.containers or listedBuildContainers(self.character)
-    )
+    -- The character may have pathfound since the action was queued. Rebuild
+    -- this list at consumption time so newly reachable materials are found and
+    -- containers left behind cannot be consumed remotely.
+    local containers = currentBuildContainers(self.character)
     self.containers = containers
     local logic = newNativeBuildLogic(self.character, self.craftRecipe, self.inputChoices, containers)
     if not logic then return false, "native build logic unavailable" end
@@ -1130,8 +1181,9 @@ end
 ---@param north  boolean
 ---@param sprite IsoSprite | string | nil
 function KBWBuildingObject:create(x, y, z, north, sprite)
-    if not self.character then
-        self.character = type(self.player) == "number" and getSpecificPlayer(self.player) or self.player
+    if not self:refreshPlayerContext() then
+        Log:warning("Server rejected build %s: authoritative player is unavailable", tostring(self.buildableId))
+        return false
     end
     if self.isWallLike then
         self.nSprite = north == true and 2 or 1
@@ -1180,10 +1232,17 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         local tile = footprint[index]
         if tile.sprite then
             local target = self:ensureSquareExists(x + (tile.dx or 0), y + (tile.dy or 0), z + (tile.dz or 0))
-            local nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
+            -- An explicit Knox point-light configuration takes precedence over
+            -- the sprite's native lightswitch marker. Room switches are tied to
+            -- meta-room boundaries; those boundaries can be absent or enormous
+            -- in player-built MP structures after a chunk reload.
+            local nativeObjectType = nil
+            if not spriteConfig.lightRadius then
+                nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
+            end
             self.modData.KBW.groupId, self.modData.KBW.partIndex, self.modData.KBW.partCount = groupId,
                 index, #footprint
-            if placement.kind == "floor" then
+            if placement.kind == "floor" and not isRoofObjectSprite(tile.sprite) then
                 local part = target:addFloor(tile.sprite)
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
@@ -1224,7 +1283,8 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                     self:transmitPart(part, callbackResult)
                 end
                 buildUtil.setHaveConstruction(target, true)
-            elseif self.isProp or isFloorAttachmentSprite(tile.sprite) or isRoofObjectSprite(tile.sprite) then
+            elseif not spriteConfig.lightRadius and (self.isProp or isFloorAttachmentSprite(tile.sprite)
+                or isWallDecorationSprite(tile.sprite) or isRoofObjectSprite(tile.sprite)) then
                 -- Vanilla isProp scripts place a moveable world prop instead
                 -- of an IsoThumpable (ISBuildIsoEntity:setInfo). Floor rugs
                 -- and non-floor roof pieces must follow this path as well.

@@ -16,7 +16,7 @@
   "Sandbox_KBW_WellWaterMode_option2": "有限且可补充",
   "Sandbox_KBW_WellCapacity": "水井容量",
   "Sandbox_KBW_WellCapacity_tooltip": "每口有限水井的最大储水量（升）。",
-  "Sandbox_KBW_WellInitialPercent": "初始水井填充量（%）",
+  "Sandbox_KBW_WellInitialPercent": "水井初始填充百分比",
   "Sandbox_KBW_WellInitialPercent_tooltip": "有限水井建造完成时，其容量可用的初始百分比。",
   "Sandbox_KBW_WellHourlyRefill": "每小时地下水补充量",
   "Sandbox_KBW_WellHourlyRefill_tooltip": "每口有限水井每游戏小时自然恢复的干净水量（升）。",

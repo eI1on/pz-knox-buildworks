@@ -1,8 +1,33 @@
-
-
+[b]Planning Traffic, Construction Stability & Building Variety Update[/b]
 
 [list]
+[*][b]Consistent welding safety:[/b] Audited every JSON-defined welding recipe and added a retained welding mask directly to the definitions that were missing one.
+[*][b]Functional feeding trough family:[/b] Added the missing three-tile and four-tile metal feeding troughs, with every wooden and metal size listed as its own buildable.
+[*][b]Multiplayer light-switch stability:[/b] Player-built light switches now use a bounded, synchronized point light instead of unreliable map-room bounds. They can be turned on and off after chunk reloads without illuminating an entire custom structure or surrounding area.
+[*][b]Cleaner pinned-recipe overlay:[/b] Reworked the overlay with a wider readable minimum size and a reserved close-button column, so long buildable names never overlap the unpin control. Pin, unpin and collapsed states now synchronize immediately in multiplayer, preventing removed pins from returning when blueprint data refreshes.
+[*][b]Planner inventory visibility:[/b] Opening Planning Mode now preserves both collapsed inventory bars and expanded inventory/loot panels. Expanded unpinned panels are held open above the planner, while collapsed bars remain collapsed and visible; all original visible, collapsed and pinned states are restored when Planning Mode closes.
+[*][b]Remote multiplayer construction:[/b] Fixed a Build 42.20 server reconstruction issue that could leave non-host players building indefinitely at 0% while the listen-server host could build normally. Remote actions now recover the authoritative server player and rebuild their native recipe context correctly.
+[*][b]Reliable material checks after walking:[/b] Construction actions now rescan the containers currently reachable by the player after pathfinding. Existing plans no longer keep an outdated container list or repeatedly report missing materials until the player manually moves closer and retries each piece.
+[*][b]Entity and console stability:[/b] Added validation before native entity components are attached to a sprite. Incompatible SpriteConfig combinations are skipped and reported only once, preventing repeated Invalid SpriteConfig warnings and reducing the object desynchronization that could lead to null ObjectModData packets.
+[*][b]Planning traffic overhaul:[/b] Removed movement-driven blueprint requests entirely. Clients now receive their plans during the normal login handshake and request a refresh only when Planning Mode is opened; the server also verifies definition integrity, respects disabled planning and rate-limits requests. Players who never use planning no longer generate BPRequest traffic while walking or driving.
+[*][b]Disabled-planning cleanup:[/b] Planning buttons now visibly respect the server setting. Attempting to use them cancels the cursor, clears stale active plans and highlights, and prevents disabled plans from leaving persistent selector lines in the world after reconnecting.
+[*][b]Loose gather-zone materials:[/b] Gather zones containing only items dropped directly on the ground now work without requiring an otherwise empty crate or container in the selected area.
+[*][b]Optional Menu Dock:[/b] Added a Show Menu Dock option for hiding Knox Buildworks administration and debug shortcuts from ElyonLib's Menu Dock.
+[*][b]Non-blocking wall decorations:[/b] Wall plants, ivy, flowers and similar attached decorations now use collision-free moveable-object placement instead of creating an invisible impassable tile in front of the wall.
+[*][b]Debug Tile Browser compatibility:[/b] Removed startup dependencies on B42.20 server-only cursor files. Its placement cursor is now created only during an active game, eliminating the failed require warning and the derive of non-table startup error.
+[*][b]Localization warning fix:[/b] Reworded the Water Well initial-fill sandbox option in every supported language so literal percent text is no longer misread as a format placeholder.
+[*][b]Stair chaining:[/b] Stairs can now continue from the landing of an existing flight like the vanilla building tools. Rotated stair footprints also route the builder to the actual lower step instead of an incorrect positive-axis offset.
+[*][b]Safer upper-level previews:[/b] Multi-tile build cursors no longer reconnect and recalculate the same empty upper-storey squares every rendered frame. Preview preparation now runs only after the cursor moves or rotates, reducing contention with Build 42.20's asynchronous lighting updates near stairs, floors and floodlights.
+[*][b]Reliable Favorites and Recent:[/b] Catalogue favorites and recent selections now synchronize their player data immediately in multiplayer instead of being vulnerable to a later server copy restoring stale entries.
+[*][b]Expanded roofs, log construction and fireplace:[/b] Added six complete four-direction wooden roof slopes, four missing light-brown roof sections, a full log-cabin set with walls, corners, frames, ends and eight sloped pieces, three grey-brick fireplace-jamb pieces and seven chimney styles. Wooden slope faces are combined correctly instead of appearing as separate reverse recipes.
+[*][b]More wall storage:[/b] Added eight kitchen wall cabinets plus hardwood, metal, lightwood, darkwood and white wall shelves. Every cabinet and shelf remains a separate buildable and follows its tile's native wall attachment and container properties.
+[*][b]Expanded storage, shop fixtures and microwaves:[/b] Added 40 more missing counters, corner and overhead cabinets, wall shelves, lockers, crates, tool storage, restaurant displays, bookcases, multi-tile wardrobes, magazine racks, cooled display shelves and a large log stack. Added white and chrome microwaves as functional appliances.
+[*][b]Wooden-panel fixtures:[/b] Added the matching wooden-panel door frame, window frame and passable pillar, together with the missing plain wooden window.
+[*][b]Vanilla-matched gravel:[/b] Remapped gravel floors, corners and edges to the base game's gravel palette so new paths blend naturally into existing vanilla gravel.
+[*][b]Wrought Iron Gate:[/b] Added the missing single-tile Wrought Iron Gate with correct west/north closed sprites, matching open sprites, metalworking requirements and functional door collision.
 [*][b]Correct wall and fence connections:[/b] Matching north/west pieces placed on the same tile now merge into their V-shaped corner sprite, while offset perpendicular ends use a dedicated pillar where one exists. Connections are restricted to the same buildable, stage, material and variant, preventing unrelated nearby objects from creating incorrect corners.
+[*][b]Fireplace alignment:[/b] Corrected the west/north sprite mapping for single and double fireplaces so they render on the proper side of brick jambs instead of being hidden behind them.
+[*][b]Buildables balance:[/b] Removed glass pane req from Bank Wall Frames.
 [/list]
 
 

@@ -13,6 +13,7 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_3": "Construye una lápida arqueada.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_5": "Construye una lápida cuadrada.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_9": "Construye una lápida desgastada.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_gates_wrought_iron_gate": "Una resistente puerta de hierro forjado de una baldosa para vallas y recintos.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_double_door_gates_double_wrought_iron_gate": "Una puerta doble de hierro forjado para tu base.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_left": "Una elegante puerta de vidrio negro, la parte izquierda de un conjunto para tu refugio seguro.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_right": "Una elegante puerta de vidrio negro, la parte derecha de un conjunto para tu refugio seguro.",
@@ -290,5 +291,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_panel_white_panel_window_frame": "Una pared de panel blanco anticuado con una abertura para dejar entrar luz natural.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_door_frame": "Un marco de puerta de tablones blancos anchos anticuados, esencial para añadir puertas a tu estructura.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_pillar": "Pilar de soporte de tablones blancos anchos.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "Una pared de tablones blancos anchos anticuados con una abertura para permitir la entrada de luz natural."
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "Una pared de tablones blancos anchos anticuados con una abertura para permitir la entrada de luz natural.",
+  "Tooltip_KBWVE_GrayBrickJamb": "Jamba decorativa de ladrillo gris para chimenea. Combina las piezas laterales y central para formar un marco."
 }

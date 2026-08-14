@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "buildables": [
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_wall",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_wall",
-      "displayName": "Bank Wall",
-      "tooltipKey": "Tooltip_KBW_Shared_BankWall",
+      "id": "kbw.vanillaexpanded.walls.log_cabin.wall",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_Wall",
+      "displayName": "Log Cabin Wall",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
       "category": "Walls",
-      "subcategory": "Bank Walls",
+      "subcategory": "Log Cabin Walls",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_0",
+      "iconSprite": "walls_logs_0",
       "placement": {
         "kind": "wall"
       },
@@ -23,7 +23,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_0"
+                        "walls_logs_0"
                       ]
                     ]
                   }
@@ -34,7 +34,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_1"
+                        "walls_logs_1"
                       ]
                     ]
                   }
@@ -45,184 +45,62 @@
           "requirements": {
             "inputs": [
               {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
                 "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
+                "items": [
+                  "Base.Log"
                 ],
-                "amount": 1,
+                "amount": 3
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RippedSheets",
+                  "Base.RippedSheetsDirty",
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 3,
                 "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
+                  "DontReplace"
                 ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 2
             }
           },
           "construction": {
             "time": 200,
-            "timedAction": "BuildWallHammer",
+            "timedAction": "BuildWallNoTool",
             "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 10
             },
             "category": "Carpentry"
           },
           "object": {
             "isThumpable": true,
-            "canBarricade": false,
-            "cornerSprite": "location_business_bank_01_2",
-            "pillarSprite": "location_business_bank_01_3"
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ]
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_door_frame",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_door_frame",
-      "displayName": "Bank Door Frame",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_door_frame",
-      "category": "Walls",
-      "subcategory": "Bank Walls",
-      "material": "Wood",
-      "iconSprite": "location_business_bank_01_10",
-      "placement": {
-        "kind": "wall"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_bank_01_10"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "location_business_bank_01_11"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ],
-          "callbacks": {
-            "onIsValid": "KnoxBuildworks.JsonCallbacks.DoorFrame.OnIsValid"
-          },
-          "object": {
-            "isThumpable": false,
-            "isDoorFrame": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
             "canBarricade": false
           }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_window_frame",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_window_frame",
-      "displayName": "Bank Window",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_window_frame",
+      "id": "kbw.vanillaexpanded.walls.log_cabin.outer_corner",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_OuterCorner",
+      "displayName": "Log Cabin Outer Corner",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
       "category": "Walls",
-      "subcategory": "Bank Walls",
+      "subcategory": "Log Cabin Walls",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_8",
+      "iconSprite": "walls_logs_4",
       "placement": {
         "kind": "wall"
       },
@@ -236,7 +114,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_8"
+                        "walls_logs_4"
                       ]
                     ]
                   }
@@ -247,7 +125,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_9"
+                        "walls_logs_5"
                       ]
                     ]
                   }
@@ -258,73 +136,62 @@
           "requirements": {
             "inputs": [
               {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
                 "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
+                "items": [
+                  "Base.Log"
                 ],
-                "amount": 1,
+                "amount": 3
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RippedSheets",
+                  "Base.RippedSheetsDirty",
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 3,
                 "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
+                  "DontReplace"
                 ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 2
             }
           },
           "construction": {
             "time": 200,
-            "timedAction": "BuildWallHammer",
+            "timedAction": "BuildWallNoTool",
             "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 10
             },
             "category": "Carpentry"
           },
           "object": {
             "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ]
+            "canBarricade": false
+          }
         }
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_corner_wall",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_corner_wall",
-      "displayName": "Bank Corner Wall",
-      "tooltipKey": "Tooltip_KBW_Shared_BankWall",
+      "id": "kbw.vanillaexpanded.walls.log_cabin.inner_corner",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_InnerCorner",
+      "displayName": "Log Cabin Inner Corner",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
       "category": "Walls",
-      "subcategory": "Bank Walls",
+      "subcategory": "Log Cabin Walls",
       "material": "Wood",
+      "iconSprite": "walls_logs_2",
       "placement": {
         "kind": "wall"
       },
@@ -338,7 +205,7 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_2"
+                        "walls_logs_2"
                       ]
                     ]
                   }
@@ -349,71 +216,62 @@
           "requirements": {
             "inputs": [
               {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
                 "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
+                "items": [
+                  "Base.Log"
                 ],
-                "amount": 1,
+                "amount": 6
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RippedSheets",
+                  "Base.RippedSheetsDirty",
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 6,
                 "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
+                  "DontReplace"
                 ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 2
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 2
             }
           },
           "construction": {
             "time": 200,
-            "timedAction": "BuildWallHammer",
+            "timedAction": "BuildWallNoTool",
             "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 10
             },
             "category": "Carpentry"
           },
           "object": {
             "isThumpable": true,
-            "canBarricade": false,
-            "cornerSprite": "location_business_bank_01_2"
+            "canBarricade": false
           }
         }
-      ],
-      "allowSpriteReuse": true
+      ]
     },
     {
-      "id": "kbw.vanillaexpanded.walls.bank_walls.bank_pillar",
-      "translationKey": "IGUI_KBWVE_Buildable_walls_bank_pillar",
-      "displayName": "Bank Pillar",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_pillar",
+      "id": "kbw.vanillaexpanded.walls.log_cabin.door_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_DoorFrame",
+      "displayName": "Log Cabin Door Frame",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
       "category": "Walls",
-      "subcategory": "Bank Walls",
+      "subcategory": "Log Cabin Walls",
       "material": "Wood",
-      "iconSprite": "location_business_bank_01_3",
+      "iconSprite": "walls_logs_10",
       "placement": {
         "kind": "wall"
       },
@@ -427,7 +285,18 @@
                   {
                     "rows": [
                       [
-                        "location_business_bank_01_3"
+                        "walls_logs_10"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_logs_11"
                       ]
                     ]
                   }
@@ -438,54 +307,204 @@
           "requirements": {
             "inputs": [
               {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
+                "id": "logs",
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
                 "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
+                  "Base.Log"
                 ],
                 "amount": 2
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RippedSheets",
+                  "Base.RippedSheetsDirty",
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 2,
+                "flags": [
+                  "DontReplace"
+                ]
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 2
             }
           },
           "construction": {
             "time": 200,
-            "timedAction": "BuildWallHammer",
+            "timedAction": "BuildWallNoTool",
             "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 30
+              "Woodwork": 10
             },
             "category": "Carpentry"
           },
           "object": {
+            "isThumpable": true,
+            "canBarricade": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.log_cabin.window_frame",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_WindowFrame",
+      "displayName": "Log Cabin Window Frame",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
+      "category": "Walls",
+      "subcategory": "Log Cabin Walls",
+      "material": "Wood",
+      "iconSprite": "walls_logs_8",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_logs_8"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_logs_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Log"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RippedSheets",
+                  "Base.RippedSheetsDirty",
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.SheetRope"
+                ],
+                "amount": 3,
+                "flags": [
+                  "DontReplace"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 10
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.log_cabin.wall_end",
+      "translationKey": "IGUI_KBWVE_Buildable_LogCabin_WallEnd",
+      "displayName": "Log Cabin Wall End",
+      "tooltipKey": "Tooltip_craft_wallLogDesc",
+      "category": "Walls",
+      "subcategory": "Log Cabin Walls",
+      "material": "Wood",
+      "iconSprite": "walls_logs_3",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_logs_3"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Log"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 5
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": false,
+            "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           }

@@ -123,6 +123,17 @@
     },
     {
       "id": "kbw.vanilla.metalwindowframelvl2",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Window Frame",
       "translationKey": "IGUI_KBW_Vanilla_MetalWindowFrameLvl2",
       "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",
@@ -160,6 +171,17 @@
     },
     {
       "id": "kbw.vanilla.metalwindowframelvl1",
+      "tools": [
+        {
+          "id": "welding_mask",
+          "role": "tool",
+          "mode": "keep",
+          "tags": [
+            "base:weldingmask"
+          ],
+          "amount": 1
+        }
+      ],
       "displayName": "Metal Window Frame (Poor)",
       "translationKey": "IGUI_KBW_Vanilla_MetalWindowFrameLvl1",
       "tooltipKey": "Tooltip_craft_NeedsWallframeDesc",

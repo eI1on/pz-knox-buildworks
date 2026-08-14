@@ -13,6 +13,7 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_3": "建造一个拱形墓碑。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_5": "建造一个方形墓碑。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_decorations_graves_location_community_cemetary_01_9": "建造一个破损墓碑。",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_gates_wrought_iron_gate": "坚固的单格锻铁栅栏门，适用于围栏和封闭区域。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_double_door_gates_double_wrought_iron_gate": "用于您基地的双开大门。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_left": "优雅的黑色玻璃门，是您避风港套装中的左侧部分。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_doors_glass_double_black_glass_door_right": "优雅的黑色玻璃门，是您避风港套装中的右侧部分。",
@@ -290,5 +291,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_panel_white_panel_window_frame": "具有开口以让自然光进入的老式白色面板墙。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_door_frame": "老式白色宽护墙板门框，为您的建筑添加门所必需。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_pillar": "白色宽护墙板支撑柱。",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "具有开口以允许内部自然光进入的老式白色宽护墙板墙。"
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_white_wide_clapboard_white_wide_clapboard_window_frame": "具有开口以允许内部自然光进入的老式白色宽护墙板墙。",
+  "Tooltip_KBWVE_GrayBrickJamb": "装饰性灰砖壁炉框。组合两侧与中央部件即可构成完整围框。"
 }
