@@ -574,7 +574,13 @@ function Placement.validate(cursor, square)
                             return false, "midair footprint blocked"
                         end
                     end
-                    if props and (target:getProperties():has(IsoPropertyType.BLOCKS_PLACEMENT) or target:isSolid()
+                    -- Framing pieces are meant to be combined on one square: a
+                    -- post, the beam it carries and its brace all share a tile.
+                    -- allowSharedSquare only waives the occupied-square half of
+                    -- this test; genuinely solid terrain still rejects.
+                    local occupiedBlocks = target:getProperties():has(IsoPropertyType.BLOCKS_PLACEMENT)
+                        and placement.allowSharedSquare ~= true
+                    if props and (occupiedBlocks or target:isSolid()
                             or target:isSolidTrans())
                         and (props:has(IsoFlagType.solidtrans) or props:has("BlocksPlacement")) then
                         if props:has("IsStackable") or props:has("IsTableTop") then
@@ -584,6 +590,18 @@ function Placement.validate(cursor, square)
                             end
                         else
                             return false, "solid placement blocked"
+                        end
+                    end
+                    -- Sharing a square is only useful for pieces that differ.
+                    -- The same sprite placed twice hides perfectly inside its
+                    -- own copy, so the player would pay for an invisible build.
+                    if placement.allowSharedSquare == true and tile.sprite then
+                        for i = 0, target:getObjects():size() - 1 do
+                            local existing = target:getObjects():get(i)
+                            local existingSprite = existing and existing:getSprite() or nil
+                            if existingSprite and existingSprite:getName() == tile.sprite then
+                                return false, "square already occupied"
+                            end
                         end
                     end
                     if isWallSprite(sprite) then

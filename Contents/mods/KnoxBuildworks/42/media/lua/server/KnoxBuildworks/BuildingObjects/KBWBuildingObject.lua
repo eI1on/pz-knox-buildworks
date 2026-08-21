@@ -79,6 +79,20 @@ local function findMatchingWallEdge(square, identity, north, excluded)
     return nil
 end
 
+-- Whether a same-identity edge of this orientation carries on past the anchor
+-- square. A wall that continues is part of a run meeting the junction, not an
+-- edge terminating in a corner.
+local function wallRunContinues(square, identity, north)
+    if not square then return false end
+    local x, y, z = square:getX(), square:getY(), square:getZ()
+    local beforeX, beforeY, afterX, afterY = x - 1, y, x + 1, y
+    if not north then beforeX, beforeY, afterX, afterY = x, y - 1, x, y + 1 end
+    local before = getCell():getGridSquare(beforeX, beforeY, z)
+    local after = getCell():getGridSquare(afterX, afterY, z)
+    return findMatchingWallEdge(before, identity, north, nil) ~= nil
+        or findMatchingWallEdge(after, identity, north, nil) ~= nil
+end
+
 local function squareHasSprite(square, spriteName)
     if not square or not spriteName then return false end
     for objectIndex = 0, square:getObjects():size() - 1 do
@@ -180,13 +194,39 @@ local function nativeContainerType(spriteName)
     return containerType
 end
 
-local function listedBuildContainers(character)
-    if ISInventoryPaneContextMenu and ISInventoryPaneContextMenu.getContainers then
-        local containers = ISInventoryPaneContextMenu.getContainers(character)
-        if containers then return containers end
+-- Java's CraftRecipeManager.getAllItemsFromContainers only reads each listed
+-- container's own items; it never recurses. Every carried bag therefore has to
+-- appear in the list or the native recipe cannot see what is inside it. This
+-- mirrors the set Requirements walks with inventory:getAllEvalRecurse, so the
+-- Knox gate and BuildLogic agree on what the character is carrying.
+local function addCarriedContainers(container, containers, depth)
+    if not container or depth > 4 then return end
+    containers:add(container)
+    local nested = container.getItemsFromCategory and container:getItemsFromCategory("Container") or nil
+    if not nested then return end
+    for nestedIndex = 0, nested:size() - 1 do
+        local item = nested:get(nestedIndex)
+        local inventory = item and item.getInventory and item:getInventory() or nil
+        if inventory then addCarriedContainers(inventory, containers, depth + 1) end
     end
+end
+
+-- ISInventoryPaneContextMenu is client-only. It is absent on a dedicated
+-- server, and it indexes getPlayerInventory(character:getPlayerNum()), which is
+-- nil for a remote player on a listen-server host. Restrict it to a local
+-- player and always union the carried containers so the authoritative server
+-- pass never falls back to the bare main inventory.
+local function listedBuildContainers(character)
     local containers = ArrayList.new()
-    if character and character.getInventory then containers:add(character:getInventory()) end
+    if not character then return containers end
+    local playerNum = character.getPlayerNum and character:getPlayerNum() or -1
+    if playerNum >= 0 and ISInventoryPaneContextMenu and ISInventoryPaneContextMenu.getContainers then
+        local listed = ISInventoryPaneContextMenu.getContainers(character)
+        if listed then
+            for listedIndex = 0, listed:size() - 1 do containers:add(listed:get(listedIndex)) end
+        end
+    end
+    if character.getInventory then addCarriedContainers(character:getInventory(), containers, 0) end
     return containers
 end
 
@@ -263,6 +303,14 @@ end
 local function newNativeBuildLogic(character, recipe, choices, containers)
     if not BuildLogic or not character or not recipe or not containers then return nil end
     local logic = BuildLogic.new(character, nil, nil)
+    -- BuildLogic's constructor restores the vanilla build panel's sticky
+    -- "manually select inputs" preference from the character's mod data
+    -- (buildManualInputs). Knox selects ingredients through its own drawer, so
+    -- that inherited mode is cleared before setRecipe auto-populates: manual
+    -- mode makes performCurrentRecipe consume from a nil item pool and honour
+    -- only lists applyNativeInputChoices sets, which is wrong whenever Knox has
+    -- no choices to supply.
+    logic:setManualSelectInputs(false)
     logic:setContainers(containers)
     logic:setRecipe(recipe)
     applyNativeInputChoices(logic, recipe, choices, containers)
@@ -1114,7 +1162,16 @@ function KBWBuildingObject:connectWallParts(square, part, north)
 
     if self.corner then
         local perpendicular = findMatchingWallEdge(square, matchIdentity, not north, part)
-        if perpendicular then
+        -- The merge below consumes BOTH edges, so it is only correct where the
+        -- two of them terminate at this square. At a T-junction one of them is a
+        -- run passing through: merging there deletes a segment of the existing
+        -- run and swallows the wall just built, leaving the player with a bare
+        -- corner sprite and nothing where they placed. Vanilla never merges
+        -- same-square edges at all - buildUtil.checkCorner only drops the
+        -- corner sprite into the diagonal gap, which is the pillar branch below.
+        if perpendicular
+            and not wallRunContinues(square, matchIdentity, north)
+            and not wallRunContinues(square, matchIdentity, not north) then
             local cornerMaxHealth = math.max(
                 tonumber(part:getMaxHealth()) or 0,
                 tonumber(perpendicular:getMaxHealth()) or 0
@@ -1138,7 +1195,10 @@ function KBWBuildingObject:connectWallParts(square, part, north)
             corner:getModData().KBW = copyTable(matchIdentity)
             corner:getModData().KBW.direction = 1
             corner:getModData().KBW.connectionRole = "corner"
-            EntityCompat.attach(corner, self.stage, true)
+            -- Vanilla's gap-filling corner object is not an entity-backed
+            -- SpriteConfig face. The joined V-shaped object is likewise a
+            -- connection helper, so attaching the source wall entity here
+            -- would create an invalid SpriteConfig/object combination.
             square:AddSpecialObject(corner)
             square:RecalcAllWithNeighbours(true)
             return corner
@@ -1208,9 +1268,56 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     self.useNativeXpAward = self.craftRecipe ~= nil and (self.stage.xp == nil and construction.xp == nil)
     self:ensureSquaresExist(x, y, z)
     local square = getCell():getGridSquare(x, y, z)
+    local footprint = self:getFootprint() or { { dx = 0, dy = 0, dz = 0, sprite = sprite } }
+    local hasPlacedSprite = false
+    local hasAnchorSprite = false
+    for footprintIndex = 1, #footprint do
+        local footprintTile = footprint[footprintIndex]
+        if footprintTile.sprite then
+            hasPlacedSprite = true
+            if not getSprite(footprintTile.sprite) then
+                Log:error(
+                    "Server rejected build %s at %d,%d,%d: footprint sprite %s is unavailable",
+                    tostring(self.buildableId), x, y, z, tostring(footprintTile.sprite)
+                )
+                return false
+            end
+            if (footprintTile.dx or 0) == 0 and (footprintTile.dy or 0) == 0
+                and (footprintTile.dz or 0) == 0 then
+                hasAnchorSprite = true
+            end
+            local target = getCell():getGridSquare(
+                x + (footprintTile.dx or 0), y + (footprintTile.dy or 0), z + (footprintTile.dz or 0)
+            )
+            if not target then
+                Log:warning(
+                    "Server rejected build %s at %d,%d,%d: footprint square is unavailable",
+                    tostring(self.buildableId), x, y, z
+                )
+                return false
+            end
+        end
+    end
+    if not hasPlacedSprite then
+        Log:error(
+            "Server rejected build %s at %d,%d,%d: resolved face has no buildable sprites",
+            tostring(self.buildableId), x, y, z
+        )
+        return false
+    end
     local ok, reason, previous = Placement.validate(self, square)
     if not ok or not Requirements.evaluate(self.character, self.definition, self.stage, square, self.inputChoices).ok then
         Log:warning("Server rejected build %s at %d,%d,%d: %s", self.buildableId, x, y, z, reason or "requirements")
+        return false
+    end
+    -- A staged replacement owns the anchor edge. Never consume materials or
+    -- remove its frame/wall when the selected geometry has nothing to replace
+    -- it with at that anchor.
+    if previous and not hasAnchorSprite then
+        Log:error(
+            "Server rejected replacement %s at %d,%d,%d: resolved face has no anchor sprite",
+            tostring(self.buildableId), x, y, z
+        )
         return false
     end
     local spriteConfig = StageConfig.sprite(self.definition, self.stage)
@@ -1224,8 +1331,14 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         return false
     end
     local replacedIndex = -1
-    if previous then replacedIndex = square:transmitRemoveItemFromSquare(previous) or -1 end
-    local footprint = self:getFootprint() or { { dx = 0, dy = 0, dz = 0, sprite = sprite } }
+    local previousRemoved = false
+    local function removePrevious(target)
+        if previous and not previousRemoved and target == square then
+            replacedIndex = square:transmitRemoveItemFromSquare(previous) or -1
+            previousRemoved = true
+        end
+        return replacedIndex
+    end
     local groupId = string.format("%s:%d:%d:%d:%d", self.buildableId, x, y, z, getTimestampMs())
     local placement = StageConfig.placement(self.definition, self.stage)
     for index = 1, #footprint do
@@ -1267,7 +1380,8 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 end
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
-                local nativeInsertIndex = previous and target == square and replacedIndex >= 0 and replacedIndex or nil
+                removePrevious(target)
+                local nativeInsertIndex = previousRemoved and target == square and replacedIndex >= 0 and replacedIndex or nil
                 NativeObjectFactory.insert(part, nativeState, target, nativeInsertIndex)
                 Properties.applyToObject(
                     part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = false }
@@ -1301,7 +1415,12 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 end
                 if part then
                     part:getModData().KBW = copyTable(self.modData.KBW)
-                    EntityCompat.attach(part, self.stage, true)
+                    -- Match ISBuildIsoEntity:setInfo: isProp/moveable objects
+                    -- are placed and returned without instancing their parent
+                    -- entity script. Attaching SpriteConfig here can associate
+                    -- a moveable or collision-free replacement with a script
+                    -- face it does not own, producing Invalid SpriteConfig
+                    -- warnings when the chunk is streamed again.
                     Properties.applyToObject(part, self, {
                         square = target,
                         spriteConfig = spriteConfig,
@@ -1316,16 +1435,17 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                     end
                 end
             elseif isGarageDoorSprite(tile.sprite) then
-                -- Garage-door behavior is owned by IsoDoor. Its sprite-name
-                -- constructor reads GarageDoor=1..6 and derives the open part
-                -- at the engine's +8/-8 offset. A generic IsoThumpable has no
-                -- open sprite and becomes a null-sprite object when toggled.
+                -- Garage-door sprites rely on IsoDoor's GarageDoor part
+                -- handling to resolve their open sprite. IsoThumpable's
+                -- generic toggle path can clear the sprite and crash both
+                -- ToggleDoorActual and B42's lighting thread.
                 local part = IsoDoor.new(getCell(), target, tile.sprite, north)
                 local health = math.max(tonumber(self:getBuildHealth()) or 0, tonumber(part:getHealth()) or 0)
                 part:setHealth(health)
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
-                if previous and target == square and replacedIndex >= 0 then
+                removePrevious(target)
+                if previousRemoved and target == square and replacedIndex >= 0 then
                     target:AddSpecialObject(part, replacedIndex)
                 else
                     target:AddSpecialObject(part)
@@ -1372,7 +1492,8 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 -- SpriteConfig and SpriteOverlayConfig engine-managed.
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
-                if previous and target == square and replacedIndex >= 0 then
+                removePrevious(target)
+                if previousRemoved and target == square and replacedIndex >= 0 then
                     target:AddSpecialObject(part, replacedIndex)
                 else
                     target:AddSpecialObject(part)

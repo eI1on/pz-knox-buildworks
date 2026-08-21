@@ -3,6 +3,8 @@
   "UI_optionscreen_KBW_OpenCatalog_Tooltip": "Abre el catálogo independiente de Knox Buildworks.",
   "UI_optionscreen_KBW_ShowMenuDock": "Mostrar el menú lateral",
   "UI_optionscreen_KBW_ShowMenuDock_Tooltip": "Muestra los accesos directos de Knox Buildworks en el menú lateral de ElyonLib.",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning": "Mantener el inventario visible en el modo Planificación",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning_Tooltip": "Mantiene disponibles los paneles de inventario y botín mientras está abierto el modo Planificación. Desactívalo para ocultarlos junto con el resto de la interfaz del juego.",
   "UI_optionscreen_KBW_Debug": "Registro de depuración detallado",
   "UI_optionscreen_KBW_Debug_Tooltip": "Imprime diagnóstico de registro, validación y red.",
   "UI_optionscreen_KBW_Profile": "Perfil de rendimiento",

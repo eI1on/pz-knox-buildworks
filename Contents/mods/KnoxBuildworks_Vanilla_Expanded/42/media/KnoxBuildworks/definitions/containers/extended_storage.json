@@ -513,6 +513,7 @@
   "buildables": [
     {
       "id": "kbw.vanillaexpanded.extended.steel_counter",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_SteelCounter",
       "displayName": "Steel Counter",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -604,6 +605,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.steel_corner_counter",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_SteelCornerCounter",
       "displayName": "Steel Corner Counter",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -695,6 +697,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.crude_metal_counter",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CrudeMetalCounter",
       "displayName": "Crude Metal Counter",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -787,6 +790,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.crude_metal_corner_counter",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CrudeMetalCornerCounter",
       "displayName": "Crude Metal Corner Counter",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2143,6 +2147,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.crude_metal_wall_shelves",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CrudeMetalWallShelves",
       "displayName": "Crude Metal Wall Shelves",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2236,6 +2241,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.metal_cabinet",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_MetalCabinet",
       "displayName": "Metal Cabinet",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2328,6 +2334,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.green_wall_locker",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_GreenWallLocker",
       "displayName": "Green Wall Locker",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2492,6 +2499,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.crude_tall_locker",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CrudeTallLocker",
       "displayName": "Crude Tall Locker",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2585,6 +2593,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.crude_wall_locker",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CrudeWallLocker",
       "displayName": "Crude Wall Locker",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -2863,6 +2872,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.fancy_metal_crate",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_FancyMetalCrate",
       "displayName": "Fancy Metal Crate",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -3109,6 +3119,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.red_oak_bookcase",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_RedOakBookcase",
       "displayName": "Red Oak Bookcase",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
@@ -3201,6 +3212,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.cedar_low_bookcase",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_CedarLowBookcase",
       "displayName": "Cedar Low Bookcase",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",

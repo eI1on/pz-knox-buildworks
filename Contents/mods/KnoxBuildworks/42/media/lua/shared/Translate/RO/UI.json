@@ -3,6 +3,8 @@
   "UI_optionscreen_KBW_OpenCatalog_Tooltip": "Deschide catalogul independent Knox Buildworks.",
   "UI_optionscreen_KBW_ShowMenuDock": "Afișați meniu Dock",
   "UI_optionscreen_KBW_ShowMenuDock_Tooltip": "Afișați comenzile rapide Knox Buildworks în meniul de andocare al lui ElyonLib.",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning": "Păstrează inventarul vizibil în modul Planificare",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning_Tooltip": "Păstrează panourile de inventar și pradă disponibile cât timp este deschis modul Planificare. Dezactivează opțiunea pentru a le ascunde împreună cu restul interfeței jocului.",
   "UI_optionscreen_KBW_Debug": "Jurnal de depanare explicită",
   "UI_optionscreen_KBW_Debug_Tooltip": "Imprimați registrul, validarea și diagnosticarea rețelei.",
   "UI_optionscreen_KBW_Profile": "Profilarea performanței",

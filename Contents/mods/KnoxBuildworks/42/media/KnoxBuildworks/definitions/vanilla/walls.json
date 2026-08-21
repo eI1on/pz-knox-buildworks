@@ -68,6 +68,10 @@
         {
           "id": "built",
           "level": 1,
+          "object": {
+            "cornerSprite": "constructedobjects_01_70",
+            "pillarSprite": "constructedobjects_01_51"
+          },
           "entityCompat": {
             "module": "Base",
             "entity": "MetalWallFrame"
@@ -99,6 +103,10 @@
         {
           "id": "built",
           "level": 1,
+          "object": {
+            "cornerSprite": "carpentry_02_102",
+            "pillarSprite": "walls_exterior_wooden_01_27"
+          },
           "entityCompat": {
             "module": "Base",
             "entity": "WoodenWallFrame"

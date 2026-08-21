@@ -1297,6 +1297,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.furniture.wall_shelves.metal",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_WallShelf_Metal",
       "displayName": "Metal Wall Shelves",
       "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",

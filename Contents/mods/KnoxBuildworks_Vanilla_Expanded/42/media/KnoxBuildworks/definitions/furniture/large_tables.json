@@ -1646,6 +1646,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.furniture.large_tables.location_business_office_generic_01_43_3_tiles",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_furniture_large_tables_location_business_office_generic_office_desk_3_tiles",
       "displayName": "Office Desk 3 Tiles",
       "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_furniture_large_tables_location_business_office_generic_office_desk",

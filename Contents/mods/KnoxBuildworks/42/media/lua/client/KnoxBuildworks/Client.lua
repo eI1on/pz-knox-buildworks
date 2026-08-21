@@ -3,6 +3,7 @@ local KBW = require("KnoxBuildworks/Core")
 local Loader = require("KnoxBuildworks/Definitions/Loader")
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Integrity = require("KnoxBuildworks/Network/Integrity")
+local I18n = require("KnoxBuildworks/I18n")
 local Catalog = require("KnoxBuildworks/UI/Catalog")
 local Options = require("KnoxBuildworks/Options")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
@@ -300,6 +301,83 @@ local function lightSwitchContextMenu(playerNum, context, worldObjects, test)
     return true
 end
 
+-- One drum serves as either a rain collector or a burn barrel. The object is
+-- always an IsoFireplace carrying a FluidContainer, so switching mode only
+-- changes which behaviour is active plus the sprite; nothing is rebuilt.
+local DRUM_REASON_KEYS = {
+    ["drain first"] = "IGUI_KBW_Drum_DrainFirst",
+    ["put out first"] = "IGUI_KBW_Drum_PutOutFirst"
+}
+
+local function kbwDualModeDrum(worldObjects)
+    local FluidContainers = require("KnoxBuildworks/World/FluidContainers")
+    for index = 1, #worldObjects do
+        local object = worldObjects[index]
+        if FluidContainers.isDualMode(object) then return object, FluidContainers end
+    end
+    return nil, nil
+end
+
+local function drumCommand(object, playerNum, mode)
+    local player = getSpecificPlayer(playerNum)
+    local square = object and object:getSquare() or nil
+    if not player or not square then return end
+    if isClient() and sendClientCommand then
+        sendClientCommand(player, KBW.NETWORK_MODULE, "DrumMode", {
+            x = square:getX(), y = square:getY(), z = square:getZ(),
+            index = object:getObjectIndex(), mode = mode
+        })
+        return
+    end
+    local FluidContainers = require("KnoxBuildworks/World/FluidContainers")
+    local ok, reason
+    if mode == "dumpFuel" then
+        ok, reason = FluidContainers.dumpFuel(object)
+    else
+        ok, reason = FluidContainers.setMode(object, mode)
+    end
+    if not ok and reason then
+        player:setHaloNote(I18n.text(DRUM_REASON_KEYS[reason] or "", reason), 255, 80, 80, 300)
+    end
+end
+
+-- The mode toggle sits directly under the drum's own context entry as a plain
+-- option, rather than in a second submenu that repeats the object's name.
+-- insertOptionAfter falls back to appending when that entry is absent, and
+-- addGetUpOption has no insert form, so its wrapper is applied by hand: it is
+-- addOption(text, context, context.onGetUpAndThen, onSelect, target, ...).
+local function insertDrumOption(context, anchor, label, drum, playerNum, mode)
+    return context:insertOptionAfter(
+        anchor, label, context, context.onGetUpAndThen, drumCommand, drum, playerNum, mode
+    )
+end
+
+local function drumModeContextMenu(playerNum, context, worldObjects, test)
+    if test and ISWorldObjectContextMenu.Test then return true end
+    local drum, FluidContainers = kbwDualModeDrum(worldObjects)
+    if not drum then return false end
+    if test then return ISWorldObjectContextMenu.setTest() end
+
+    local mode = FluidContainers.getMode(drum)
+    local target = mode == "fire" and "water" or "fire"
+    local label = target == "fire" and I18n.text("IGUI_KBW_Drum_UseAsBurnBarrel", "Use as Burn Barrel")
+        or I18n.text("IGUI_KBW_Drum_UseAsRainCollector", "Use as Rain Collector")
+    local anchor = drum.getTileName and drum:getTileName() or nil
+    local option = insertDrumOption(context, anchor, label, drum, playerNum, target)
+    if option then
+        option.iconTexture = getTexture(target == "fire" and "Item_Petrol" or "Item_WaterDrop")
+    end
+
+    -- vanilla has no way to take fireplace fuel back out, so we offer one.
+    if instanceof(drum, "IsoFireplace") and (tonumber(drum:getFuelAmount()) or 0) > 0
+        and not drum:isLit() and not drum:isSmouldering() then
+        insertDrumOption(
+            context, label, I18n.text("IGUI_KBW_Drum_DumpFuel", "Dump Out Fuel"), drum, playerNum, "dumpFuel"
+        )
+    end
+    return true
+end
+
 Events.OnGameBoot.Add(function ()
         if not KBW.Runtime.loaded then Loader.startAsync() end
     end)
@@ -309,4 +387,5 @@ Events.OnKeyPressed.Add(onKeyPressed)
 Events.OnPlayerUpdate.Add(retryIntegrityHandshake)
 Events.OnFillInventoryObjectContextMenu.Add(inventoryContextMenu)
 Events.OnFillWorldObjectContextMenu.Add(lightSwitchContextMenu)
+Events.OnFillWorldObjectContextMenu.Add(drumModeContextMenu)
 return true

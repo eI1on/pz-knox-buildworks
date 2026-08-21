@@ -11,6 +11,10 @@ Options:addKeyBind(
 Options:addTickBox(
     "ShowMenuDock", "UI_optionscreen_KBW_ShowMenuDock", true, "UI_optionscreen_KBW_ShowMenuDock_Tooltip"
 )
+Options:addTickBox(
+    "KeepInventoryVisibleInPlanning", "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning", true,
+    "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning_Tooltip"
+)
 Options:addTickBox("Debug", "UI_optionscreen_KBW_Debug", false, "UI_optionscreen_KBW_Debug_Tooltip")
 Options:addTickBox("Profile", "UI_optionscreen_KBW_Profile", false, "UI_optionscreen_KBW_Profile_Tooltip")
 Options:addSlider(

@@ -217,6 +217,10 @@
         "requiresFloor": {
           "type": "boolean"
         },
+        "allowSharedSquare": {
+          "type": "boolean",
+          "description": "Allows the piece onto a square that already carries a BlocksPlacement object, so framing parts such as posts, beams and braces can be combined on one tile. Solid and solid-trans terrain still rejects."
+        },
         "maxDistance": {
           "type": "number",
           "exclusiveMinimum": 0
@@ -887,6 +891,47 @@
                       }
                     }
                   ]
+                },
+                "fluidContainer": {
+                  "description": "Creates a native B42 FluidContainer on the built object so it collects rain. Used for buildables whose sprite is not part of a vanilla rain-collector entity's SpriteConfig.",
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "capacity": {
+                      "type": "number",
+                      "minimum": 1
+                    },
+                    "rainFactor": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "initialPercent": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "containerName": {
+                      "type": "string"
+                    },
+                    "emptySprite": {
+                      "type": "string",
+                      "description": "Sprite shown while the container is below filledPercent. Must be set together with filledSprite."
+                    },
+                    "filledSprite": {
+                      "type": "string",
+                      "description": "Sprite shown once the container reaches filledPercent."
+                    },
+                    "filledPercent": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100,
+                      "description": "Fill percentage at which filledSprite replaces emptySprite. Defaults to 1."
+                    },
+                    "fireSprite": {
+                      "type": "string",
+                      "description": "Makes the object dual mode: players can switch it between collecting rain and burning fuel, and this sprite is shown while it is a burn barrel. Requires nativeObject type fireplace."
+                    }
+                  }
                 },
                 "well": {
                   "description": "Marks the first built part as a water well. True uses sandbox defaults; an object overrides individual finite-well settings.",

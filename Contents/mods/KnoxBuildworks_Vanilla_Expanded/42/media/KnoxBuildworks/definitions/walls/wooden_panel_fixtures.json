@@ -113,6 +113,7 @@
   "buildables": [
     {
       "id": "kbw.vanillaexpanded.extended.wooden_panel_door_frame",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelDoorFrame",
       "displayName": "Wooden Panel Door Frame",
       "tooltipKey": "Tooltip_KBW_Shared_WoodPanelWall",
@@ -186,6 +187,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.wooden_panel_window_frame",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelWindowFrame",
       "displayName": "Wooden Panel Window Frame",
       "tooltipKey": "Tooltip_KBW_Shared_WoodPanelWall",
@@ -254,6 +256,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.wooden_panel_pillar",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelPillar",
       "displayName": "Wooden Panel Pillar",
       "tooltipKey": "Tooltip_KBW_Shared_WoodPanelWall",
@@ -306,6 +309,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.extended.plain_wooden_window",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_PlainWoodenWindow",
       "displayName": "Plain Wooden Window",
       "tooltipKey": "Tooltip_KBW_Shared_Window",

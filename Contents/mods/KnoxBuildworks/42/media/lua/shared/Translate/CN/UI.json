@@ -3,6 +3,8 @@
   "UI_optionscreen_KBW_OpenCatalog_Tooltip": "打开独立的诺克斯建筑工坊目录。",
   "UI_optionscreen_KBW_ShowMenuDock": "显示菜单停靠栏",
   "UI_optionscreen_KBW_ShowMenuDock_Tooltip": "在 ElyonLib 的菜单停靠栏中显示 Knox Buildworks 快捷方式。",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning": "在规划模式中保持物品栏可见",
+  "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning_Tooltip": "规划模式打开时保留物品栏和拾取面板。禁用后，这些面板会与游戏的其他界面一起隐藏。",
   "UI_optionscreen_KBW_Debug": "详细调试日志",
   "UI_optionscreen_KBW_Debug_Tooltip": "打印注册表、验证和网络诊断信息。",
   "UI_optionscreen_KBW_Profile": "性能分析",

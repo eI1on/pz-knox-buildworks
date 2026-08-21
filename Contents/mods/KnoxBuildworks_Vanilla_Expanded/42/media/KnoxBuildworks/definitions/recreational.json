@@ -153,6 +153,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.recreational.music.recreational_01_9",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_recreational_music_recreational_01_9",
       "displayName": "Western Piano",
       "tooltipKey": "Tooltip_KBW_Shared_MusicDecoration",

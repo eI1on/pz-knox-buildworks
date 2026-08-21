@@ -22,6 +22,7 @@ local I18n = require("KnoxBuildworks/I18n")
 local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
 local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
 local Profiler = require("KnoxBuildworks/Util/Profiler")
+local Options = require("KnoxBuildworks/Options")
 require("KnoxBuildworks/UI/BlueprintAccessWindow")
 require("KnoxBuildworks/UI/BlueprintImportWindow")
 require "ISUI/ISTickBox"
@@ -241,15 +242,6 @@ local function holdInventoryBars(states)
     end
 end
 
-local function raiseInventoryBars(states)
-    states = states or {}
-    for stateIndex = 1, #states do
-        local state = states[stateIndex]
-        local panel = state.panel
-        if panel and state.visible and panel:isVisible() then panel:bringToTop() end
-    end
-end
-
 local function restoreInventoryBars(states)
     states = states or {}
     for stateIndex = 1, #states do
@@ -283,12 +275,12 @@ local function restoreInventoryBars(states)
     end
 end
 
-local function hideBaseUI()
+local function hideBaseUI(keepInventoryBars)
     local hidden = {}
     local ui = UIManager.getUI()
     for uiIndex = 0, ui:size() - 1 do
         local element = ui:get(uiIndex)
-        if element and element:isVisible() and not isInventoryBar(element) then
+        if element and element:isVisible() and (keepInventoryBars ~= true or not isInventoryBar(element)) then
             hidden[#hidden + 1] = element:toString()
             element:setVisible(false)
         end
@@ -1761,7 +1753,7 @@ function KBWPlanningMode:onPickColor(colorIndex)
 end
 
 -- Applies both the name field and the currently selected palette color to the
--- selected room (the hint swatch next to the name field previews the color).
+-- selected room (the hint swatch beside the name field previews the color).
 function KBWPlanningMode:onUpdateRoom()
     local blueprint = self:selectedBlueprint()
     local room = self:selectedRoom()
@@ -2008,9 +2000,6 @@ function KBWPlanningMode:prerender()
             )
         end
     end
-    -- Top-level panels automatically come to the front when focused. Keep the
-    -- inventory bars above both Planning Mode windows throughout the session.
-    raiseInventoryBars(self.inventoryBars)
 end
 
 function KBWPlanningMode:close()
@@ -2054,14 +2043,16 @@ function KBWPlanningMode.open(player)
         sendClientCommand(player, KBW.NETWORK_MODULE, "BPRequest", { reason = "planning_open" })
     end
     if KBWPlanningMode.instance then KBWPlanningMode.instance:close() end
-    local inventoryBars = captureInventoryBars()
-    local hidden = hideBaseUI()
+    local keepOption = Options and Options.getOption and Options:getOption("KeepInventoryVisibleInPlanning") or nil
+    local keepInventoryBars = keepOption and keepOption.getValue and keepOption:getValue() == true
+    local inventoryBars = keepInventoryBars and captureInventoryBars() or {}
+    local hidden = hideBaseUI(keepInventoryBars)
     local ui = KBWPlanningMode:new(player, hidden, inventoryBars)
     ui:initialise()
     ui:addToUIManager()
     ui:bringToTop()
     if ui.catalogPanel then ui.catalogPanel:bringToTop() end
-    holdInventoryBars(inventoryBars)
+    if keepInventoryBars then holdInventoryBars(inventoryBars) end
     KBWPlanningMode.instance = ui
     return ui
 end

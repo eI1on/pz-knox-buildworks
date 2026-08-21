@@ -108,6 +108,34 @@ local function handleBlueprintCommand(player, command, args)
     end
 end
 
+-- The drum toggle is server authoritative: the client only names a position and
+-- object index, and the server re-reads the object, re-checks the distance and
+-- lets FluidContainers decide whether the switch is legal.
+---@param player IsoPlayer
+---@param args table
+local function handleDrumMode(player, args)
+    local x, y, z = tonumber(args.x), tonumber(args.y), tonumber(args.z)
+    local index = tonumber(args.index)
+    if not player or not x or not y or not z or not index then return end
+    local square = getCell() and getCell():getGridSquare(x, y, z) or nil
+    if not square then return end
+    if math.abs(player:getX() - x) > 3 or math.abs(player:getY() - y) > 3
+        or math.abs(player:getZ() - z) > 0.5 then
+        Log:warning("%s requested a drum mode change out of range", tostring(player:getUsername()))
+        return
+    end
+    local objects = square:getObjects()
+    if index < 0 or index >= objects:size() then return end
+    local object = objects:get(index)
+    local FluidContainers = require("KnoxBuildworks/World/FluidContainers")
+    if not FluidContainers.isDualMode(object) then return end
+    if args.mode == "dumpFuel" then
+        FluidContainers.dumpFuel(object)
+    else
+        FluidContainers.setMode(object, args.mode)
+    end
+end
+
 ---@param command string
 ---@param player IsoPlayer
 ---@param args table
@@ -139,6 +167,9 @@ function Server.onClientCommand(module, command, player, args)
     elseif command == "BPBuildBatchStart" or command == "BPBuildBatchEnd" then
         if not Integrity.isAllowed(player) then return end
         handleBuildBatch(player, command, args)
+    elseif command == "DrumMode" then
+        if not Integrity.isAllowed(player) then return end
+        handleDrumMode(player, args)
     elseif BLUEPRINT_COMMANDS[command] then
         if not Integrity.isAllowed(player) then return end
         handleBlueprintCommand(player, command, args)

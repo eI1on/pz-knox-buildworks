@@ -72,9 +72,13 @@ end
 
 local function isWellObject(object)
     if not object then return false end
-    local modData = object:getModData()
-    if modData and modData.KBWWell == true then return true end
-    return object:getSpriteName() == VANILLA_WELL_SPRITE
+    -- Almost every streamed object is not a well. Check the one vanilla
+    -- sprite first, then avoid getModData() entirely when the object has no
+    -- existing table; getModData() would otherwise allocate one while merely
+    -- scanning every object on every loaded square.
+    if object:getSpriteName() == VANILLA_WELL_SPRITE then return true end
+    if not object:hasModData() then return false end
+    return object:getModData().KBWWell == true
 end
 
 local function track(object)

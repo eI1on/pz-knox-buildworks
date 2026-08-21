@@ -750,8 +750,25 @@ local function stackableCell(cell)
     return props and props:has("IsStackable") == true
 end
 
+-- Mirrors the allowSharedSquare branch in Placement.validate. Only the piece
+-- being planned has to opt in, exactly as the direct-build test only inspects
+-- the sprite being placed, so a plan can never go green on something the build
+-- would then reject.
+local function sharesSquare(cell)
+    if not cell or not cell.sourcePlacement then return false end
+    local definition, stage = resolveDefinition(cell.sourcePlacement)
+    if not definition then return false end
+    return StageConfig.placement(definition, stage).allowSharedSquare == true
+end
+
 local function canShareCell(a, b)
     if placementLayer(a and a.layer) ~= "object" or placementLayer(b and b.layer) ~= "object" then return false end
+    if sharesSquare(a) then
+        -- The same sprite twice on one cell hides inside its own copy. Stacked
+        -- crates below deliberately repeat a sprite, so this only guards the
+        -- framing pieces.
+        return not (a.sprite ~= nil and a.sprite == b.sprite)
+    end
     return stackableCell(a) and stackableCell(b)
 end
 

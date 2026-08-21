@@ -348,8 +348,11 @@
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
-            "canBarricade": true
+            "isThumpable": false,
+            "isDoorFrame": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
           }
         }
       ]

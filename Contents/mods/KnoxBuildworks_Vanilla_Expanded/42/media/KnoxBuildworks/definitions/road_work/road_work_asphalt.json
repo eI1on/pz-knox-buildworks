@@ -77,6 +77,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.road_work.road_work_asphalt.gravel",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_road_work_asphalt_gravel",
       "displayName": "Gravel",
       "tooltipKey": "Tooltip_KBW_Shared_AsphaltSurface",
@@ -684,6 +685,7 @@
     },
     {
       "id": "kbw.vanillaexpanded.road_work.road_work_asphalt.beige_asphalt_corner",
+      "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_road_work_asphalt_beige_asphalt_corner",
       "displayName": "Beige Asphalt Corner",
       "tooltipKey": "Tooltip_KBW_Shared_AsphaltSurface",

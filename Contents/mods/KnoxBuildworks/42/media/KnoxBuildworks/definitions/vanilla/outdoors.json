@@ -560,7 +560,8 @@
           }
         }
       ],
-      "iconName": "Build_RainCollectorCrate2"
+      "iconName": "Build_RainCollectorCrate2",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.raincollector_tarp",

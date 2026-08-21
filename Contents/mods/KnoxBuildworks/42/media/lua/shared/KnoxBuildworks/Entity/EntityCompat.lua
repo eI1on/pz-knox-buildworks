@@ -335,7 +335,13 @@ local function spriteMetadata(script)
         skillBaseHealth = component:getSkillBaseHealth(),
         bonusHealth = component:getBonusHealth(),
         breakSound = component:getBreakSound(),
-        corner = component:getCornerSprite(),
+        -- A SpriteConfig "corner" is vanilla's gap filler, not a joined corner
+        -- piece: buildUtil.checkCorner drops it into the diagonal square between
+        -- two walls that meet offset, and never touches the walls themselves.
+        -- That is Knox's `pillar` branch, so the script value belongs there.
+        -- Knox's `corner` merge replaces both edges with one sprite and stays
+        -- opt-in through a definition's cornerSprite.
+        pillar = component:getCornerSprite(),
         onCreate = component:getOnCreate(),
         onIsValid = component:getOnIsValid(),
         timedActionOnIsValid = component:getTimedActionOnIsValid(),

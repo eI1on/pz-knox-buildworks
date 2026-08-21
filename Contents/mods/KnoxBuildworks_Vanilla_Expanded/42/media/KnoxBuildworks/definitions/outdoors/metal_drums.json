@@ -1,13 +1,11 @@
 {
   "schemaVersion": 1,
-  "source": "Project Zomboid Build 42 crafted_01 tile properties and native RainCollector component",
-  "category": "Outdoors",
   "buildables": [
     {
       "id": "kbw.vanillaexpanded.outdoors.metal_drum",
       "translationKey": "IGUI_KBWVE_Buildable_MetalDrum",
       "displayName": "Metal Drum",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_MetalDrum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_MetalDrum",
       "category": "Outdoors",
       "subcategory": "Water Collectors",
       "material": "Metal",
@@ -18,6 +16,7 @@
       "tags": [
         "vanilla-expanded",
         "water-collector",
+        "fireplace",
         "welding"
       ],
       "iconSprite": "crafted_01_24",
@@ -26,63 +25,25 @@
         "requiresFloor": true
       },
       "construction": {
-        "time": 300,
-        "timedAction": "BuildWallMetal",
+        "time": 200,
+        "timedAction": "BuildMetalStructureMedium",
         "completionSound": "BuildMetalStructureMedium",
-        "canWalk": false,
         "category": "Welding",
         "xp": {
-          "MetalWelding": 100
+          "MetalWelding": 40
         }
       },
       "stages": [
         {
           "id": "built",
-          "entityCompat": {
-            "module": "Base",
-            "entity": "RainCollector"
-          },
           "geometry": {
             "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "crafted_01_24"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "crafted_01_25"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "E": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "crafted_01_28"
-                      ]
-                    ]
-                  }
-                ]
-              },
               "S": {
                 "layers": [
                   {
                     "rows": [
                       [
-                        "crafted_01_29"
+                        "crafted_01_24"
                       ]
                     ]
                   }
@@ -93,9 +54,10 @@
           "requirements": {
             "inputs": [
               {
-                "id": "welding_mask",
+                "id": "tool_welding_mask",
                 "role": "tool",
                 "mode": "keep",
+                "resourceType": "Item",
                 "tags": [
                   "base:weldingmask"
                 ],
@@ -105,55 +67,268 @@
                 "id": "torch_fuel",
                 "role": "consumable",
                 "mode": "drain",
+                "resourceType": "Item",
                 "items": [
                   "Base.BlowTorch"
                 ],
-                "uses": 10
+                "uses": 5
               },
               {
                 "id": "welding_rods",
                 "role": "consumable",
                 "mode": "drain",
+                "resourceType": "Item",
                 "items": [
                   "Base.WeldingRods"
                 ],
-                "uses": 10
+                "uses": 3
               },
               {
                 "id": "sheet_metal",
                 "role": "material",
                 "mode": "consume",
+                "resourceType": "Item",
                 "items": [
                   "Base.SheetMetal"
                 ],
-                "amount": 12
-              },
-              {
-                "id": "small_sheet_metal",
-                "role": "material",
-                "mode": "consume",
-                "items": [
-                  "Base.SmallSheetMetal"
-                ],
-                "amount": 7
-              },
-              {
-                "id": "screws",
-                "role": "material",
-                "mode": "consume",
-                "items": [
-                  "Base.Screws"
-                ],
-                "amount": 12
+                "amount": 6
               }
             ],
             "skills": {
-              "MetalWelding": 8
+              "MetalWelding": 4
+            }
+          },
+          "fluidContainer": {
+            "capacity": 600,
+            "rainFactor": 0.3,
+            "initialPercent": 0,
+            "containerName": "Collector",
+            "emptySprite": "crafted_01_24",
+            "filledSprite": "crafted_01_25",
+            "filledPercent": 2,
+            "fireSprite": "crafted_01_26"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": true,
+            "dismantable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.outdoors.metal_drum_orange",
+      "translationKey": "IGUI_KBWVE_Buildable_MetalDrumOrange",
+      "displayName": "Orange Metal Drum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_MetalDrum",
+      "category": "Outdoors",
+      "subcategory": "Water Collectors",
+      "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Water"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "water-collector",
+        "fireplace",
+        "welding"
+      ],
+      "iconSprite": "crafted_01_28",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "construction": {
+        "time": 200,
+        "timedAction": "BuildMetalStructureMedium",
+        "completionSound": "BuildMetalStructureMedium",
+        "category": "Welding",
+        "xp": {
+          "MetalWelding": 40
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 5
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 6
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "fluidContainer": {
+            "capacity": 600,
+            "rainFactor": 0.3,
+            "initialPercent": 0,
+            "containerName": "Collector",
+            "emptySprite": "crafted_01_28",
+            "filledSprite": "crafted_01_29",
+            "filledPercent": 2,
+            "fireSprite": "crafted_01_30"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": true,
+            "dismantable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.outdoors.metal_drum_sealed",
+      "translationKey": "IGUI_KBWVE_Buildable_MetalDrumSealed",
+      "displayName": "Sealed Metal Drum",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_MetalDrumSealed",
+      "category": "Survival",
+      "subcategory": "Metal Drums",
+      "material": "Metal",
+      "materialTags": [
+        "Metal"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "welding",
+        "moveable"
+      ],
+      "iconSprite": "crafted_01_32",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "construction": {
+        "time": 200,
+        "timedAction": "BuildMetalStructureMedium",
+        "completionSound": "BuildMetalStructureMedium",
+        "category": "Welding",
+        "xp": {
+          "MetalWelding": 30
+        }
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 5
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 7
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
             }
           },
           "object": {
-            "dismantable": true,
-            "blockAllSquare": true
+            "isProp": true,
+            "dismantable": true
           }
         }
       ]

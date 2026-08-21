@@ -655,7 +655,7 @@
                   {
                     "rows": [
                       [
-                        "fencing_01_11",
+                        "fencing_01_8",
                         "fencing_01_9"
                       ]
                     ]
@@ -6386,6 +6386,106 @@
             "isThumpable": true,
             "blockAllSquare": false,
             "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.log_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_LogRailing",
+      "displayName": "Log Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_LogRailing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "fencing",
+        "carpentry"
+      ],
+      "iconSprite": "crafted_02_110",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_02_110"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_02_109"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "logs",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Log"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "bindings",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Twine",
+                  "Base.Rope",
+                  "Base.RippedSheets"
+                ],
+                "amount": 2,
+                "flags": [
+                  "DontReplace"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 160,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "canBarricade": false,
+            "dismantable": true,
+            "cornerSprite": "crafted_02_111",
+            "pillarSprite": "crafted_02_108"
           }
         }
       ]

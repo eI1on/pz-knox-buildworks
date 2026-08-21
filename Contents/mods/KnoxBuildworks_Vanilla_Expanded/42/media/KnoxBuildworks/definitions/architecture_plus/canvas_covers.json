@@ -9,6 +9,7 @@
       "category": "Architecture Plus",
       "subcategory": "Canvas Covers",
       "material": "Fabric",
+      "allowSpriteReuse": true,
       "iconSprite": "industry_trucks_01_52",
       "placement": {
         "kind": "overlay",

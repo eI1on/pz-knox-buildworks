@@ -2522,6 +2522,346 @@
       ]
     },
     {
+      "id": "kbw.vanillaexpanded.survival.generator.generator_old",
+      "translationKey": "IGUI_KBWVE_Buildable_GeneratorOld",
+      "displayName": "Old Generator",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GeneratorOld",
+      "category": "Survival",
+      "subcategory": "Generator",
+      "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Electronics"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "generator",
+        "electrical",
+        "welding"
+      ],
+      "iconSprite": "appliances_misc_01_4",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_misc_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 8
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 5
+              },
+              {
+                "id": "electrical_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 8
+              },
+              {
+                "id": "electronic_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 15
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 5
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe",
+                  "Base.MetalBar"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 8
+              },
+              {
+                "id": "engine_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.EngineParts"
+                ],
+                "amount": 15
+              }
+            ],
+            "skills": {
+              "Electricity": 4,
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "Electricity": 60
+            },
+            "category": "Electrical"
+          },
+          "nativeObject": {
+            "type": "generator",
+            "item": "Base.Generator_Old"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.generator.generator_blue",
+      "translationKey": "IGUI_KBWVE_Buildable_GeneratorBlue",
+      "displayName": "Blue Generator",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GeneratorBlue",
+      "category": "Survival",
+      "subcategory": "Generator",
+      "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Electronics"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "generator",
+        "electrical",
+        "welding"
+      ],
+      "iconSprite": "appliances_misc_01_12",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_misc_01_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 8
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 5
+              },
+              {
+                "id": "electrical_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 10
+              },
+              {
+                "id": "electronic_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 18
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 5
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe",
+                  "Base.MetalBar"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 10
+              },
+              {
+                "id": "engine_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.EngineParts"
+                ],
+                "amount": 20
+              }
+            ],
+            "skills": {
+              "Electricity": 5,
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 450,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "Electricity": 80
+            },
+            "category": "Electrical"
+          },
+          "nativeObject": {
+            "type": "generator",
+            "item": "Base.Generator_Blue"
+          }
+        }
+      ]
+    },
+    {
       "id": "kbw.vanillaexpanded.survival.generator.generator",
       "translationKey": "IGUI_KBWVE_Buildable_survival_generator_generator",
       "displayName": "Generator",
@@ -2529,16 +2869,27 @@
       "category": "Survival",
       "subcategory": "Generator",
       "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Electronics"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "generator",
+        "electrical",
+        "welding"
+      ],
       "iconSprite": "appliances_misc_01_0",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "requiresFloor": true
       },
       "stages": [
         {
           "id": "built",
           "geometry": {
             "faces": {
-              "W": {
+              "E": {
                 "layers": [
                   {
                     "rows": [
@@ -2554,6 +2905,50 @@
           "requirements": {
             "inputs": [
               {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 10
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 6
+              },
+              {
                 "id": "electrical_wire",
                 "role": "material",
                 "mode": "consume",
@@ -2561,7 +2956,7 @@
                 "items": [
                   "Base.ElectricWire"
                 ],
-                "amount": 6
+                "amount": 12
               },
               {
                 "id": "electronic_parts",
@@ -2571,7 +2966,28 @@
                 "items": [
                   "Base.ElectronicsScrap"
                 ],
-                "amount": 12
+                "amount": 24
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 7
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe",
+                  "Base.MetalBar"
+                ],
+                "amount": 3
               },
               {
                 "id": "fasteners_screws",
@@ -2581,8 +2997,83 @@
                 "items": [
                   "Base.Screws"
                 ],
-                "amount": 6
+                "amount": 12
               },
+              {
+                "id": "engine_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.EngineParts"
+                ],
+                "amount": 25
+              }
+            ],
+            "skills": {
+              "Electricity": 6,
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 500,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "Electricity": 100
+            },
+            "category": "Electrical"
+          },
+          "nativeObject": {
+            "type": "generator",
+            "item": "Base.Generator"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.generator.generator_yellow",
+      "translationKey": "IGUI_KBWVE_Buildable_GeneratorYellow",
+      "displayName": "Yellow Generator",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GeneratorYellow",
+      "category": "Survival",
+      "subcategory": "Generator",
+      "material": "Metal",
+      "materialTags": [
+        "Metal",
+        "Electronics"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "generator",
+        "electrical",
+        "welding"
+      ],
+      "iconSprite": "appliances_misc_01_8",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_misc_01_8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
               {
                 "id": "tool_screwdriver",
                 "role": "tool",
@@ -2596,232 +3087,116 @@
                   "Prop1",
                   "MayDegradeVeryLight"
                 ]
+              },
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "uses": 14
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "uses": 9
+              },
+              {
+                "id": "electrical_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 16
+              },
+              {
+                "id": "electronic_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 32
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 8
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe",
+                  "Base.MetalBar"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 16
+              },
+              {
+                "id": "engine_parts",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.EngineParts"
+                ],
+                "amount": 25
               }
             ],
             "skills": {
-              "Electricity": 5
+              "Electricity": 8,
+              "MetalWelding": 5
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWallNoTool",
+            "time": 600,
+            "timedAction": "BuildMetalStructureMedium",
             "completionSound": "BuildMetalStructureMedium",
             "xp": {
-              "Electricity": 50
+              "Electricity": 140
             },
             "category": "Electrical"
           },
           "nativeObject": {
             "type": "generator",
-            "item": "Base.Generator"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.survival.metal_drums.metal_drum",
-      "translationKey": "IGUI_KBWVE_Buildable_survival_metal_drums_metal_drum",
-      "displayName": "Metal Drum",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_metal_drums_metal_drum",
-      "category": "Survival",
-      "subcategory": "Metal Drums",
-      "material": "Metal",
-      "iconSprite": "crafted_01_24",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "crafted_01_24"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_welding_mask",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:weldingmask"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "sheet_metal",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.SmallSheetMetal"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "metal_stock",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.IronBar",
-                  "Base.MetalBar",
-                  "Base.SteelBar",
-                  "Base.MetalPipe"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "torch_fuel",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "items": [
-                  "Base.BlowTorch"
-                ],
-                "amount": 1,
-                "uses": 5
-              },
-              {
-                "id": "welding_rods",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "items": [
-                  "Base.WeldingRods"
-                ],
-                "amount": 1,
-                "uses": 3
-              }
-            ],
-            "skills": {
-              "MetalWelding": 4
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildMetalStructureMedium",
-            "completionSound": "BuildMetalStructureMedium",
-            "xp": {
-              "MetalWelding": 40
-            },
-            "category": "Welding"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.survival.metal_drums.metal_drum_3",
-      "translationKey": "IGUI_KBWVE_Buildable_survival_metal_drums_metal_drum",
-      "displayName": "Metal Drum",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_metal_drums_metal_drum",
-      "category": "Survival",
-      "subcategory": "Metal Drums",
-      "material": "Metal",
-      "iconSprite": "crafted_01_28",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "crafted_01_28"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_welding_mask",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:weldingmask"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "sheet_metal",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.SmallSheetMetal"
-                ],
-                "amount": 4
-              },
-              {
-                "id": "metal_stock",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.IronBar",
-                  "Base.MetalBar",
-                  "Base.SteelBar",
-                  "Base.MetalPipe"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "torch_fuel",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "items": [
-                  "Base.BlowTorch"
-                ],
-                "amount": 1,
-                "uses": 5
-              },
-              {
-                "id": "welding_rods",
-                "role": "consumable",
-                "mode": "drain",
-                "resourceType": "Item",
-                "items": [
-                  "Base.WeldingRods"
-                ],
-                "amount": 1,
-                "uses": 3
-              }
-            ],
-            "skills": {
-              "MetalWelding": 4
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildMetalStructureMedium",
-            "completionSound": "BuildMetalStructureMedium",
-            "xp": {
-              "MetalWelding": 40
-            },
-            "category": "Welding"
+            "item": "Base.Generator_Yellow"
           }
         }
       ]
@@ -2963,6 +3338,105 @@
           },
           "object": {
             "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.survival.fireplace.brazier",
+      "translationKey": "IGUI_KBWVE_Buildable_Brazier",
+      "displayName": "Brazier",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_Brazier",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Stone",
+      "materialTags": [
+        "Stone"
+      ],
+      "tags": [
+        "vanilla-expanded",
+        "fireplace",
+        "masonry"
+      ],
+      "iconSprite": "crafted_02_42",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "crafted_02_42"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "stones",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Stone2"
+                ],
+                "amount": 10
+              },
+              {
+                "id": "scrap_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ScrapMetal"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 3
+            }
+          },
+          "construction": {
+            "time": 250,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildStoneStructureMedium",
+            "xp": {
+              "Masonry": 40
+            },
+            "category": "Masonry"
+          },
+          "nativeObject": {
+            "type": "fireplace"
+          },
+          "object": {
+            "blockAllSquare": true,
+            "dismantable": true
           }
         }
       ]

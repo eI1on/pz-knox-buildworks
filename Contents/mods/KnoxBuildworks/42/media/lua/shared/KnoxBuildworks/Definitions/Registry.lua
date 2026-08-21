@@ -12,6 +12,7 @@ local Registry = {
     aliases = {},
     sprites = {},
     spriteReuseAllowed = {},
+    spriteDefinitionOwners = {},
     files = {},
     overridesHash = nil,
     hash = "00000000",
@@ -21,6 +22,7 @@ local Registry = {
 function Registry:reset()
     self.entries, self.aliases, self.sprites, self.files = {}, {}, {}, {}
     self.spriteReuseAllowed = {}
+    self.spriteDefinitionOwners = {}
     self.overridesHash, self.hash, self.locked = nil, "00000000", false
 end
 
@@ -69,23 +71,12 @@ function Registry:register(definition, source)
             for sprite in pairs(unique) do
                 self.sprites[sprite] = self.sprites[sprite] or {}
                 self.spriteReuseAllowed[sprite] = self.spriteReuseAllowed[sprite] or {}
+                self.spriteDefinitionOwners[sprite] = self.spriteDefinitionOwners[sprite] or {}
                 local owner = definition.id .. ":" .. (optionId and (optionId .. ":") or "") .. stage.id
                 self.sprites[sprite][#self.sprites[sprite] + 1] = owner
                 self.spriteReuseAllowed[sprite][#self.spriteReuseAllowed[sprite] + 1] =
                     definition.allowSpriteReuse == true or stage.allowSpriteReuse == true
-                if #self.sprites[sprite] > 1 then
-                    local allOwnersAllowReuse = true
-                    local reuseFlags = self.spriteReuseAllowed[sprite]
-                    for ownerIndex = 1, #reuseFlags do
-                        if not reuseFlags[ownerIndex] then
-                            allOwnersAllowReuse = false
-                            break
-                        end
-                    end
-                    if not allOwnersAllowReuse then
-                        Log:warning("Sprite '%s' reused by %s", sprite, table.concat(self.sprites[sprite], ", "))
-                    end
-                end
+                self.spriteDefinitionOwners[sprite][#self.spriteDefinitionOwners[sprite] + 1] = definition.id
             end
         end
     end
@@ -144,12 +135,31 @@ function Registry:finalize()
     for entryIndex = 1, #sortedEntries do
         payload[#payload + 1] = sortedEntries[entryIndex]
     end
-    if getSprite then
-        for sprite in pairs(self.sprites) do
-            if not getSprite(sprite) then
-                Log:warning("Missing sprite '%s'", sprite)
+    for sprite in pairs(self.sprites) do
+        local definitionSet = {}
+        local definitionCount = 0
+        local definitionOwners = self.spriteDefinitionOwners[sprite] or {}
+        for ownerIndex = 1, #definitionOwners do
+            local definitionId = definitionOwners[ownerIndex]
+            if not definitionSet[definitionId] then
+                definitionSet[definitionId] = true
+                definitionCount = definitionCount + 1
             end
         end
+        if definitionCount > 1 then
+            local reuseDeclared = false
+            local reuseFlags = self.spriteReuseAllowed[sprite] or {}
+            for ownerIndex = 1, #reuseFlags do
+                if reuseFlags[ownerIndex] then
+                    reuseDeclared = true
+                    break
+                end
+            end
+            if not reuseDeclared then
+                Log:warning("Sprite '%s' reused by %s", sprite, table.concat(self.sprites[sprite], ", "))
+            end
+        end
+        if getSprite and not getSprite(sprite) then Log:warning("Missing sprite '%s'", sprite) end
     end
     -- Dedicated servers own definition integrity but do not render localized
     -- UI. Their Translator can be unavailable or incomplete while server Lua
