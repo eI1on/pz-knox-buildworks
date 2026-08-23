@@ -81,6 +81,15 @@ local BLUEPRINT_COMMANDS = {
     BPSetAccess = true
 }
 
+-- Removals stay available with planning disabled. Turning the option off must
+-- not strand a player with plans they can no longer clear, so the gate blocks
+-- creating and extending a blueprint, never tearing one down.
+local BLUEPRINT_CLEANUP_COMMANDS = {
+    BPDelete = true,
+    BPRemovePlacement = true,
+    BPRemoveRoom = true
+}
+
 local function handleBlueprintCommand(player, command, args)
     -- Visibility can change under access edits, deletion and moving a plan's
     -- proximity radius; capture the previous nearby viewer set first.
@@ -183,9 +192,9 @@ function Server.onClientCommand(module, command, player, args)
         handleDrumMode(player, args)
     elseif BLUEPRINT_COMMANDS[command] then
         if not Integrity.isAllowed(player) then return end
-        -- Authoritative, not a UI hint: with planning off no client reaches a
-        -- blueprint mutation, whichever button it found.
-        if not planningEnabled() then return end
+        -- Authoritative, not a UI hint: with planning off no client creates or
+        -- extends a blueprint, whichever button it found.
+        if not planningEnabled() and not BLUEPRINT_CLEANUP_COMMANDS[command] then return end
         handleBlueprintCommand(player, command, args)
     end
 end
