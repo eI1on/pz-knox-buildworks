@@ -1,3 +1,9 @@
+
+[b]Update[/b]
+[list]
+[*][b]Buildables fixes: Piano Stool sprite orientations 
+[/list]
+
 [b]Timber Framing, Working Fixtures & Wall Connections Update[/b]
 [list]
 [*][b]Wall-frame construction:[/b] Corrected wooden and metal frame connection sprites so joined frames use their complete V-shaped corner while offset joins use the separate gap-filling post. Frame corners no longer disappear into a post or attempt to attach an incompatible native entity configuration.
