@@ -744,6 +744,39 @@
                     ]
                   }
                 ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_65"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_65"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_65"
+                      ]
+                    ]
+                  }
+                ]
               }
             }
           },
@@ -853,6 +886,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -881,6 +921,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -999,6 +1072,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1027,6 +1107,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_67"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_67"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_67"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1145,6 +1258,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1172,6 +1292,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_68"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_68"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_68"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1290,6 +1443,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1317,6 +1477,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_69"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_69"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_69"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1435,6 +1628,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1462,6 +1662,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_70"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_70"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_70"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1580,6 +1813,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1607,6 +1847,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_73"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_73"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_73"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1725,6 +1998,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1752,6 +2032,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_74"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_74"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_74"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -1870,6 +2183,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -1897,6 +2217,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_75"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_75"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_75"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -2015,6 +2368,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -2042,6 +2402,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_76"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_76"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_76"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -2160,6 +2553,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -2187,6 +2587,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_77"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_77"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_77"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -2305,6 +2738,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],
@@ -2332,6 +2772,39 @@
           "geometry": {
             "faces": {
               "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_78"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_78"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_shop_mall_01_78"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
                 "layers": [
                   {
                     "rows": [
@@ -2450,6 +2923,13 @@
           },
           "object": {
             "dismantable": true
+          },
+          "nativeObject": {
+            "type": "mannequin"
+          },
+          "container": {
+            "type": "mannequin",
+            "capacity": 50
           }
         }
       ],

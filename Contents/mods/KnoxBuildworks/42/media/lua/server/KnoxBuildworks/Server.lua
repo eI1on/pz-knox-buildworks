@@ -17,6 +17,10 @@ local buildBatches = {}
 local blueprintRequestTimes = {}
 local BLUEPRINT_REQUEST_INTERVAL_MS = 10000
 
+local function planningEnabled()
+    return KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) == true
+end
+
 local function allowBlueprintRequest(player)
     local username = tostring(player and player:getUsername() or "?")
     local now = getTimestampMs()
@@ -65,6 +69,7 @@ local BLUEPRINT_COMMANDS = {
     BPCreate = true,
     BPDelete = true,
     BPAddPlacement = true,
+    BPAddPlacements = true,
     BPRemovePlacement = true,
     BPAddRoom = true,
     BPRemoveRoom = true,
@@ -104,7 +109,12 @@ local function handleBlueprintCommand(player, command, args)
         Blueprints.serverBroadcastAccessChange(blueprint, viewersBefore or {}, player)
     else
         args.updated = blueprint.updated
+        -- The sender is the only player who drew the refused tiles, so it is
+        -- the only one that needs the blueprint back in full.
+        local rejected = command == "BPAddPlacements" and tonumber(args.rejected) or 0
+        args.rejected = nil
         Blueprints.serverBroadcastDelta(blueprint, command, args, player)
+        if rejected > 0 then Blueprints.serverSyncTo(player, blueprint) end
     end
 end
 
@@ -162,16 +172,20 @@ function Server.onClientCommand(module, command, player, args)
         BuildableRulesServer.onClientCommand(player, command, args)
     elseif command == "BPRequest" then
         if not Integrity.isAllowed(player) then return end
-        if KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) ~= true then return end
+        if not planningEnabled() then return end
         if allowBlueprintRequest(player) then Blueprints.serverSyncAll(player) end
     elseif command == "BPBuildBatchStart" or command == "BPBuildBatchEnd" then
         if not Integrity.isAllowed(player) then return end
+        if not planningEnabled() then return end
         handleBuildBatch(player, command, args)
     elseif command == "DrumMode" then
         if not Integrity.isAllowed(player) then return end
         handleDrumMode(player, args)
     elseif BLUEPRINT_COMMANDS[command] then
         if not Integrity.isAllowed(player) then return end
+        -- Authoritative, not a UI hint: with planning off no client reaches a
+        -- blueprint mutation, whichever button it found.
+        if not planningEnabled() then return end
         handleBlueprintCommand(player, command, args)
     end
 end

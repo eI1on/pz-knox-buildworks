@@ -1,4 +1,5 @@
 local NativeObjectTypes = require("KnoxBuildworks/World/NativeObjectTypes")
+local Mannequins = require("KnoxBuildworks/World/Mannequins")
 
 local NativeObjectFactory = {}
 
@@ -6,6 +7,19 @@ local handlers = {}
 
 local function register(objectType, handler)
     handlers[objectType] = handler
+end
+
+-- Matches ISMoveableSpriteProps:placeMoveableInternal: a table-top object sits
+-- at the height of the surface under it.
+local function applyTableTopOffset(object, sprite, square)
+    local properties = sprite and sprite:getProperties() or nil
+    if not properties or not properties:has("IsTableTop") then return end
+    local moveable = ISMoveableSpriteProps.new(sprite)
+    local surface = moveable:getTotalTableHeight(square)
+    if moveable.surface and moveable.surfaceIsOffset then
+        surface = surface - moveable.surface
+    end
+    object:setRenderYOffset(surface)
 end
 
 local function initializeSpriteContainers(object, sprite, markMoved)
@@ -98,15 +112,7 @@ register("lightSwitch", {
 
         object:addLightSourceFromSprite()
 
-        local properties = sprite:getProperties()
-        if properties and properties:has("IsTableTop") then
-            local moveable = ISMoveableSpriteProps.new(sprite)
-            local surface = moveable:getTotalTableHeight(square)
-            if moveable.surface and moveable.surfaceIsOffset then
-                surface = surface - moveable.surface
-            end
-            object:setRenderYOffset(surface)
-        end
+        applyTableTopOffset(object, sprite, square)
 
         return object, {
             alreadyAdded = false,
@@ -116,6 +122,35 @@ register("lightSwitch", {
     finalize = function (object, square)
         square:RecalcAllWithNeighbours(true)
         IsoGenerator.updateGenerator(square)
+    end
+})
+
+-- A mannequin owns its container, its 3D model and its facing; none of that
+-- survives being built as a plain tile object.
+register("mannequin", {
+    create = function (config, square, spriteName, context)
+        local sprite = spriteName and getSprite(spriteName) or nil
+        if not sprite then
+            return nil, "could not resolve mannequin sprite " .. tostring(spriteName)
+        end
+        local object = IsoMannequin.new(getCell(), square, sprite)
+        if not object then
+            return nil, "could not initialize IsoMannequin from " .. tostring(spriteName)
+        end
+        object:setSquare(square)
+        Mannequins.applyScript(object, spriteName, config and config.script)
+        object:setForwardIsoDirection(Mannequins.directionIndex(spriteName, context and context.direction))
+        applyTableTopOffset(object, sprite, square)
+        return object, {
+            alreadyAdded = false,
+            alreadyTransmitted = false
+        }
+    end,
+    finalize = function (object, square)
+        -- Runs after addToWorld, so the outfit the engine rolled there is gone
+        -- too and a built mannequin is the player's to dress.
+        Mannequins.strip(object)
+        square:RecalcAllWithNeighbours(true)
     end
 })
 
@@ -143,10 +178,10 @@ function NativeObjectFactory.resolve(config, spriteName)
     return NativeObjectTypes.resolve(config, spriteName)
 end
 
-function NativeObjectFactory.create(objectType, config, square, spriteName)
+function NativeObjectFactory.create(objectType, config, square, spriteName, context)
     local handler = handlers[objectType]
     if not handler then return nil, nil, "unsupported native object type " .. tostring(objectType) end
-    local object, stateOrReason = handler.create(config or {}, square, spriteName)
+    local object, stateOrReason = handler.create(config or {}, square, spriteName, context)
     if not object then return nil, nil, stateOrReason end
     local state = stateOrReason or {}
     state.type = objectType

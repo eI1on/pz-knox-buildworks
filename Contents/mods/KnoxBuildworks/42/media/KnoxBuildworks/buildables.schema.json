@@ -878,6 +878,24 @@
                       "additionalProperties": false,
                       "properties": {
                         "type": {
+                          "const": "mannequin",
+                          "description": "Creates an IsoMannequin: a 3D-model display body with its own mannequin container. Built mannequins always arrive undressed."
+                        },
+                        "script": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "Mannequin script name (media/scripts/generated/mannequins.txt) that decides body, skin and pose. When omitted, Knox Buildworks uses the script the engine assigns to the tile's sprite."
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "type"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "type": {
                           "enum": [
                             "barbecue",
                             "clothingDryer",

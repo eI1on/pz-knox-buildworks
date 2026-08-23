@@ -15,6 +15,7 @@ local Properties = require("KnoxBuildworks/Definitions/Properties")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local NativeObjectFactory = require("KnoxBuildworks/BuildingObjects/NativeObjectFactory")
+local Mannequins = require("KnoxBuildworks/World/Mannequins")
 
 ---@class KBWBuildingObject: ISBuildingObject
 KBWBuildingObject = ISBuildingObject:derive("KBWBuildingObject")
@@ -878,7 +879,11 @@ function KBWBuildingObject:render(x, y, z, square)
                 self.finish, self.north == true, self.definition, self.stage, tile.sprite
             ) or spriteName
         end
-        local sprite = self:getCachedSprite(spriteName)
+        -- A mannequin is a 3D model behind a marker sprite; preview the model.
+        if Mannequins.renderPreview(spriteName, tileX, tileY, tileZ, self.nSprite) then
+            spriteName = nil
+        end
+        local sprite = spriteName and self:getCachedSprite(spriteName) or nil
         if sprite then
             local tileSquare = getCell():getGridSquare(tileX, tileY, tileZ)
             local offsetY = self:getStackRenderOffset(tile.sprite, tileSquare)
@@ -1369,7 +1374,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
             elseif nativeObjectType then
                 local part, nativeState, nativeError = NativeObjectFactory.create(
-                    nativeObjectType, self.nativeObject, target, tile.sprite
+                    nativeObjectType, self.nativeObject, target, tile.sprite, { direction = self.nSprite }
                 )
                 if not part then
                     Log:error(

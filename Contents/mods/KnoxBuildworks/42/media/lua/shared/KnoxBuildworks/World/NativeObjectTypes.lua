@@ -1,3 +1,5 @@
+local Mannequins = require("KnoxBuildworks/World/Mannequins")
+
 local NativeObjectTypes = {}
 
 local SUPPORTED_TYPES = {
@@ -8,12 +10,13 @@ local SUPPORTED_TYPES = {
     fireplace = true,
     generator = true,
     lightSwitch = true,
+    mannequin = true,
     stove = true
 }
 
 local SUPPORTED_TYPE_MESSAGE = table.concat({
     "'barbecue'", "'clothingDryer'", "'clothingWasher'", "'combinationWasherDryer'",
-    "'fireplace'", "'generator'", "'lightSwitch'", "'stove'"
+    "'fireplace'", "'generator'", "'lightSwitch'", "'mannequin'", "'stove'"
 }, ", ")
 
 local ISO_TYPE_MAP = {
@@ -23,6 +26,7 @@ local ISO_TYPE_MAP = {
     IsoCombinationWasherDryer = "combinationWasherDryer",
     IsoFireplace = "fireplace",
     IsoLightSwitch = "lightSwitch",
+    IsoMannequin = "mannequin",
     IsoStove = "stove"
 }
 
@@ -52,6 +56,16 @@ function NativeObjectTypes.validate(config, addError)
         addError("'item' is only valid for a generator")
     end
 
+    if config.script ~= nil then
+        if objectType ~= "mannequin" then
+            addError("'script' is only valid for a mannequin")
+        elseif type(config.script) ~= "string" or config.script == "" then
+            addError("'script' must be a non-empty mannequin script name")
+        elseif getScriptManager and getScriptManager() and not getScriptManager():getMannequinScript(config.script) then
+            addError("references missing mannequin script " .. tostring(config.script))
+        end
+    end
+
     return config
 end
 
@@ -65,6 +79,7 @@ function NativeObjectTypes.detectFromSprite(spriteName)
     local containerType = properties:has("container") and properties:get("container") or nil
     local detected = ISO_TYPE_MAP[isoType]
     if detected then return detected end
+    if Mannequins.detect(spriteName) then return "mannequin" end
     if sprite:getType() == IsoObjectType.lightswitch then return "lightSwitch" end
     if containerType == "fireplace" then return "fireplace" end
     return nil

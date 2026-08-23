@@ -466,17 +466,8 @@ local function defineClass()
     function KBWPlanCursor:create(x, y, z, north, sprite)
         if self.planX == nil or self.planY == nil then return end
         local candidates = self:candidatePlacements()
-        local added, lastReason = 0, nil
-        for candidateIndex = 1, #candidates do
-            local blueprint = Blueprints.get(self.character, self.blueprintId)
-            Blueprints.prepareFinishPlacement(self.character, blueprint, candidates[candidateIndex])
-            local entry, reason = Blueprints.addPlacement(self.character, self.blueprintId, candidates[candidateIndex])
-            if entry then
-                added = added + 1
-            else
-                lastReason = reason
-            end
-        end
+        local entries, lastReason = Blueprints.addPlacements(self.character, self.blueprintId, candidates)
+        local added = #entries
         if added > 0 then
             Blueprints.setActive(self.character, self.blueprintId)
             GhostRenderer.clearCache()

@@ -112,6 +112,7 @@ BuildableRules.addListener(refreshBuildableRuleConsumers)
 ---@type KBW.BLUEPRINT_DELTASModule
 local BLUEPRINT_DELTAS = {
     BPAddPlacement = true,
+    BPAddPlacements = true,
     BPRemovePlacement = true,
     BPAddRoom = true,
     BPRemoveRoom = true,

@@ -156,6 +156,19 @@ function Blueprints.applyRemoteDelta(command, args)
         blueprint.placements = blueprint.placements or {}
         local _, index = findById(blueprint.placements, args.placement.id)
         blueprint.placements[index or (#blueprint.placements + 1)] = args.placement
+    elseif command == "BPAddPlacements" and type(args.placements) == "table" then
+        if args.anchor and not blueprint.anchored then
+            blueprint.anchor = args.anchor
+            blueprint.anchored = true
+        end
+        blueprint.placements = blueprint.placements or {}
+        for placementIndex = 1, #args.placements do
+            local placement = args.placements[placementIndex]
+            if placement and placement.id then
+                local _, index = findById(blueprint.placements, placement.id)
+                blueprint.placements[index or (#blueprint.placements + 1)] = placement
+            end
+        end
     elseif command == "BPRemovePlacement" then
         local _, index = findById(blueprint.placements, args.placementId)
         if index then table.remove(blueprint.placements, index) end
@@ -1199,7 +1212,8 @@ end
 ---@param player IsoPlayer
 ---@param blueprintId string
 ---@param placement KBW.BlueprintPlacement
-function Blueprints.addPlacement(player, blueprintId, placement)
+---@param defer boolean|nil when set, the caller sends the batched command itself
+function Blueprints.addPlacement(player, blueprintId, placement, defer)
     local blueprint = blueprintId and Blueprints.get(player, blueprintId) or Blueprints.activeOrCreate(player)
     if not blueprint or not placement or not placement.buildableId then return nil, "invalid_placement" end
     if not Blueprints.canContribute(player, blueprint) then return nil, "no_permission" end
@@ -1224,8 +1238,56 @@ function Blueprints.addPlacement(player, blueprintId, placement)
     blueprint.placements = blueprint.placements or {}
     blueprint.placements[#blueprint.placements + 1] = entry
     touch(blueprint)
-    sendToServer(player, "BPAddPlacement", { id = blueprint.id, placement = entry, anchor = blueprint.anchor })
+    if not defer then
+        sendToServer(player, "BPAddPlacement", { id = blueprint.id, placement = entry, anchor = blueprint.anchor })
+    end
     return entry
+end
+
+-- A drag-fill covers up to the clamped 24x24 rectangle, and the server echoes
+-- every accepted command to each player who can view the blueprint. Chunked
+-- rather than one list because a placement entry is ~200 bytes, so a full fill
+-- in a single command would be a ~115KB packet; 32 turns ~576 commands into ~18
+-- while keeping each one small.
+Blueprints.PLACEMENT_BATCH = 32
+
+---Adds several placements at once (drag-fill).
+---@param player IsoPlayer
+---@param blueprintId string
+---@param placements KBW.BlueprintPlacement[]
+---@return KBW.BlueprintPlacement[] added
+---@return string|nil lastReason last rejection, for one message per drag
+function Blueprints.addPlacements(player, blueprintId, placements)
+    placements = placements or {}
+    local added, lastReason = {}, nil
+    if #placements == 0 then return added, "invalid_placement" end
+    local blueprint = blueprintId and Blueprints.get(player, blueprintId) or Blueprints.activeOrCreate(player)
+    if not blueprint then return added, "invalid_placement" end
+    local batched = #placements > 1
+    local pending = {}
+    local function flush()
+        if #pending == 0 then return end
+        sendToServer(
+            player, "BPAddPlacements",
+            { id = blueprint.id, placements = pending, anchor = blueprint.anchor }
+        )
+        pending = {}
+    end
+    for index = 1, #placements do
+        Blueprints.prepareFinishPlacement(player, blueprint, placements[index])
+        local entry, reason = Blueprints.addPlacement(player, blueprint.id, placements[index], batched)
+        if entry then
+            added[#added + 1] = entry
+            if batched then
+                pending[#pending + 1] = entry
+                if #pending >= Blueprints.PLACEMENT_BATCH then flush() end
+            end
+        else
+            lastReason = reason
+        end
+    end
+    if batched then flush() end
+    return added, lastReason
 end
 
 ---@param player IsoPlayer
@@ -2028,6 +2090,42 @@ function Blueprints.applyServerCommand(player, command, args)
             end
         end
         return blueprint, false
+    elseif command == "BPAddPlacements" then
+        -- BPAddPlacement's rules per entry, so one refused tile never discards
+        -- the rest of a drag. args.placements is rewritten to the accepted set,
+        -- which is what the other viewers are echoed.
+        local blueprint = Blueprints.get(player, args.id)
+        if not blueprint then return nil, false end
+        local requested = type(args.placements) == "table" and args.placements or {}
+        local accepted = {}
+        if Blueprints.canContribute(player, blueprint) and #requested > 0 then
+            if not blueprint.anchored and args.anchor then
+                blueprint.anchor = args.anchor
+                blueprint.anchored = true
+            end
+            local limit = Blueprints.maxPlacements()
+            blueprint.placements = blueprint.placements or {}
+            for index = 1, #requested do
+                local placement = requested[index]
+                if #blueprint.placements >= limit then break end
+                if placement and placement.id and not Blueprints.getPlacement(blueprint, placement.id) then
+                    local finishOk = Blueprints.prepareFinishPlacement(player, blueprint, placement)
+                    if finishOk and (blueprint.anchored ~= true
+                            or Blueprints.withinRange(blueprint, placement.x, placement.y))
+                        and #Blueprints.findIntersections(blueprint, placement) == 0 then
+                        local entry = TableUtil.copy(placement)
+                        blueprint.placements[#blueprint.placements + 1] = entry
+                        accepted[#accepted + 1] = entry
+                    end
+                end
+            end
+        end
+        if #accepted == 0 then return blueprint, false end
+        touch(blueprint)
+        args.placements = accepted
+        args.anchor = blueprint.anchor
+        args.rejected = #requested - #accepted
+        return blueprint, true
     elseif command == "BPRemovePlacement" then
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
