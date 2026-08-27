@@ -16,6 +16,7 @@ local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local NativeObjectFactory = require("KnoxBuildworks/BuildingObjects/NativeObjectFactory")
 local Mannequins = require("KnoxBuildworks/World/Mannequins")
+local Durability = require("KnoxBuildworks/Definitions/Durability")
 
 ---@class KBWBuildingObject: ISBuildingObject
 KBWBuildingObject = ISBuildingObject:derive("KBWBuildingObject")
@@ -526,9 +527,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.canBeLockedByPadlock = spriteConfig.canBePadlocked == true
     o.corner = spriteConfig.corner
     o.pillar = spriteConfig.pillar
-    o.bonusHealth = spriteConfig.bonusHealth or 0
-    o.baseHealth = spriteConfig.health or 100
-    o.skillBaseHealth = spriteConfig.skillBaseHealth or 0
+    o.baseHealth, o.bonusHealth, o.skillBaseHealth = Durability.resolve(o.definition, o.stage, spriteConfig)
     o.breakSound = spriteConfig.breakSound
     o.thumpDmg = objectConfig.thumpDamage or o.thumpDmg
     o.canBarricade = not passableWallOpening and objectConfig.canBarricade == true
@@ -902,7 +901,7 @@ function KBWBuildingObject:render(x, y, z, square)
 end
 
 function KBWBuildingObject:getBuildHealth()
-    local base = self.baseHealth or self.stage.health or 100
+    local base = self.baseHealth or 0
     local req = (self.stage.requirements or {}).skills or {}
     local highest = 0
     for perkName in pairs(req) do
@@ -1409,6 +1408,14 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 -- and non-floor roof pieces must follow this path as well.
                 -- IsoThumpable's pathfinding collision remains north/west
                 -- oriented even when the object is marked passable.
+                --
+                -- A staged replacement drops its frame here as well. Passable
+                -- wall pieces (double door frames declare canPassThrough, which
+                -- makes them props) reach this branch, and leaving the old wall
+                -- frame standing left the player dismantling it by hand. Removed
+                -- before the prop is placed, since placeMoveableInternal reads
+                -- the square it is building onto.
+                removePrevious(target)
                 local props = ISMoveableSpriteProps.new(IsoObject.new(target, tile.sprite):getSprite())
                 props.rawWeight = 10
                 local part = props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)

@@ -4,8 +4,7 @@
   "title": "Knox Buildworks definition bundle v1",
   "type": "object",
   "required": [
-    "schemaVersion",
-    "buildables"
+    "schemaVersion"
   ],
   "$defs": {
     "input": {
@@ -1099,6 +1098,15 @@
             }
           }
         }
+      },
+      "description": "Buildables declared by this file."
+    },
+    "patches": {
+      "type": "object",
+      "description": "Amendments to buildables declared elsewhere, keyed by buildable id. Buildable ids are unique, so a companion mod uses this to re-file or rename an entry another mod owns instead of restating it. Merged before the player overrides file and independent of mod load order.",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Partial buildable, deep-merged over the registered definition."
       }
     }
   }

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "patches": {
+    "kbw.vanilla.metalbigwirefence": {
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_fence_chain_half_b",
+      "displayName": "Fence Chain (Half B)",
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.fence_chain",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_fence_chain"
+      }
+    }
+  }
+}

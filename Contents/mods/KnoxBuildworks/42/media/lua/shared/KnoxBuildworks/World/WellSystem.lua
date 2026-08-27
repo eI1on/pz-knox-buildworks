@@ -23,18 +23,22 @@ local function configTable(config)
 end
 
 local function capacityFor(config)
-    return math.max(1, tonumber(configTable(config).capacity)
-        or optionNumber("KnoxBuildworks.WellCapacity", 1500))
+    return math.max(1, tonumber(configTable(config).capacity) or optionNumber("KnoxBuildworks.WellCapacity", 1500))
 end
 
 local function initialPercentFor(config)
-    return math.max(0, math.min(100, tonumber(configTable(config).initialPercent)
-        or optionNumber("KnoxBuildworks.WellInitialPercent", 25)))
+    return math.max(
+        0,
+        math.min(
+            100, tonumber(configTable(config).initialPercent) or optionNumber("KnoxBuildworks.WellInitialPercent", 25)
+        )
+    )
 end
 
 local function refillFor(config)
-    return math.max(0, tonumber(configTable(config).refillPerHour)
-        or optionNumber("KnoxBuildworks.WellHourlyRefill", 3))
+    return math.max(
+        0, tonumber(configTable(config).refillPerHour) or optionNumber("KnoxBuildworks.WellHourlyRefill", 3)
+    )
 end
 
 local function rainFactorFor(config)
@@ -98,8 +102,8 @@ local function syncObject(object)
 end
 
 ---@param object IsoObject
----@param config boolean|table|nil
----@param isNew boolean|nil
+---@param config boolean | table | nil
+---@param isNew  boolean | nil
 function WellSystem.configureObject(object, config, isNew)
     if not object then return false end
     local isFinite = finiteMode()
@@ -118,8 +122,8 @@ function WellSystem.configureObject(object, config, isNew)
     local fluidContainer = ensureFluidContainer(object)
     if not fluidContainer then
         Log:error(
-            "Water well at %s,%s,%s has no FluidContainer component",
-            tostring(object:getX()), tostring(object:getY()), tostring(object:getZ())
+            "Water well at %s,%s,%s has no FluidContainer component", tostring(object:getX()), tostring(object:getY()),
+            tostring(object:getZ())
         )
         return false
     end
@@ -182,13 +186,11 @@ local function refillWells()
     end
 end
 
-if Events then
-    Events.OnGameStart.Add(patchVanillaSprite)
-    Events.OnServerStarted.Add(patchVanillaSprite)
-    Events.LoadGridsquare.Add(configureSquare)
-    Events.OnObjectAdded.Add(onObjectAdded)
-    Events.EveryHours.Add(refillWells)
-end
+Events.OnGameStart.Add(patchVanillaSprite)
+Events.OnServerStarted.Add(patchVanillaSprite)
+Events.LoadGridsquare.Add(configureSquare)
+Events.OnObjectAdded.Add(onObjectAdded)
+Events.EveryHours.Add(refillWells)
 
 KBW.WellSystem = WellSystem
 

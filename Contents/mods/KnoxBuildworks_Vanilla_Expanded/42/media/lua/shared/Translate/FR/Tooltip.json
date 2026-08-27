@@ -311,5 +311,6 @@
   "Tooltip_KBWVE_Buildable_ChurchOrgan": "Un orgue à tuyaux complet, large de trois cases et haut de deux étages de tuyaux. En bâtir un est l'œuvre d'un maître menuisier.",
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Une bannière en tissu suspendue contre un mur.",
   "Tooltip_KBWVE_Buildable_Brazier": "Un simple brasero en pierre. Alimentez-le et allumez-le pour la chaleur, la lumière et la cuisine.",
-  "Tooltip_KBWVE_Buildable_LogRailing": "Un garde-corps bas en rondins que l'on peut enjamber. Les sections qui se rejoignent forment un angle, et les extrémités décalées reçoivent un poteau dans l'espace."
+  "Tooltip_KBWVE_Buildable_LogRailing": "Un garde-corps bas en rondins que l'on peut enjamber. Les sections qui se rejoignent forment un angle, et les extrémités décalées reçoivent un poteau dans l'espace.",
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Habillage pour finir un bord de toit : bandeaux, coins, sommets et descentes."
 }

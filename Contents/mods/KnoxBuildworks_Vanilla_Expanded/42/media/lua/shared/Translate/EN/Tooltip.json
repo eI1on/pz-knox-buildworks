@@ -311,5 +311,6 @@
   "Tooltip_KBWVE_Buildable_ChurchOrgan": "A full pipe organ, three tiles wide and two storeys of pipes tall. Building one is the work of a master carpenter.",
   "Tooltip_KBWVE_Buildable_ChurchBanner": "A cloth banner that hangs against a wall.",
   "Tooltip_KBWVE_Buildable_Brazier": "A simple stone brazier. Feed it fuel and light it for warmth, light and cooking.",
-  "Tooltip_KBWVE_Buildable_LogRailing": "A low log railing you can vault over. Meeting sections join into a corner piece, and offset ends get a post in the gap."
+  "Tooltip_KBWVE_Buildable_LogRailing": "A low log railing you can vault over. Meeting sections join into a corner piece, and offset ends get a post in the gap.",
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Trim for finishing a roof edge - fascia runs, corners, peaks and downpipes."
 }

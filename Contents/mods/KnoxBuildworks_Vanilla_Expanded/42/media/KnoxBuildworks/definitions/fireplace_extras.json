@@ -4,7 +4,7 @@
     {
       "id": "kbw.vanillaexpanded.architecture_plus.fireplace_jambs.gray_brick_left",
       "translationKey": "IGUI_KBWVE_Buildable_GrayBrickJamb_Left",
-      "displayName": "Gray Brick Side Jamb (Left)",
+      "displayName": "Grey Brick Side Jamb (Left)",
       "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GrayBrickJamb",
       "category": "Architecture Plus",
       "subcategory": "Fireplace Jambs",
@@ -120,7 +120,7 @@
     {
       "id": "kbw.vanillaexpanded.architecture_plus.fireplace_jambs.gray_brick_middle",
       "translationKey": "IGUI_KBWVE_Buildable_GrayBrickJamb_Middle",
-      "displayName": "Gray Brick Middle Jamb",
+      "displayName": "Grey Brick Middle Jamb",
       "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GrayBrickJamb",
       "category": "Architecture Plus",
       "subcategory": "Fireplace Jambs",
@@ -236,7 +236,7 @@
     {
       "id": "kbw.vanillaexpanded.architecture_plus.fireplace_jambs.gray_brick_right",
       "translationKey": "IGUI_KBWVE_Buildable_GrayBrickJamb_Right",
-      "displayName": "Gray Brick Side Jamb (Right)",
+      "displayName": "Grey Brick Side Jamb (Right)",
       "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_GrayBrickJamb",
       "category": "Architecture Plus",
       "subcategory": "Fireplace Jambs",
@@ -438,7 +438,7 @@
     {
       "id": "kbw.vanillaexpanded.survival.chimney.gray_brick",
       "translationKey": "IGUI_KBWVE_Buildable_Chimney_GrayBrick",
-      "displayName": "Gray Brick Chimney",
+      "displayName": "Grey Brick Chimney",
       "tooltipKey": "Tooltip_KBW_Shared_InteriorTrim",
       "category": "Survival",
       "subcategory": "Fireplace",

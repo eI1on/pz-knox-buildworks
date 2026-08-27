@@ -342,7 +342,6 @@ end
 ---@param player IsoPlayer
 function CatalogIndex.prewarm(player)
     if not player or prewarmState then return end
-    if not Events or not Events.OnTick then return end
     prewarmState = { player = player, ticks = 0, queued = false }
     Events.OnTick.Add(prewarmTick)
 end

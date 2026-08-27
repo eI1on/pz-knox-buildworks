@@ -166,7 +166,7 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_road_work_sidewalk_edge_sidewalk_edge": "Простое наложение края тротуара",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_generator_generator": "Крепкий генератор. Тихий для своих размеров и износостойкий, но собрать его — серьёзная задача.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_survival_water_well_water_well": "Обеспечивает постоянный источник воды.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_vegetation_flower_beds_vegetation_ornamental_flowerbed": "Клумба, добавляющая нотку естественной красоты вашему окружению. <LINE> Доступна в двух вариантах: <RGB:1,0.8,0>  <SPACE> слегка увядшая <RGB:1,1,1> <SPACE> или в   <RGB:1,0.8,0>  <SPACE> полном цвету <RGB:1,1,1> .",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_vegetation_flower_beds_vegetation_ornamental_flowerbed": "Клумба, добавляющая нотку естественной красоты вашему окружению. <LINE> Доступна в двух вариантах: <RGB:1,0.8,0> <SPACE> слегка увядшая <RGB:1,1,1> <SPACE> или в <RGB:1,0.8,0> <SPACE> полном цвету <RGB:1,1,1> .",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_door_frame": "Дверная рама с дизайном, вдохновленным банком.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_pillar": "Колонна с дизайном, вдохновленным банком.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_bank_walls_bank_window_frame": "Оконная рама с дизайном, вдохновленным банком.",
@@ -311,5 +311,6 @@
   "Tooltip_KBWVE_Buildable_ChurchOrgan": "Полноценный орган: три клетки в ширину и два этажа труб в высоту. Собрать его под силу только мастеру-плотнику.",
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Тканое знамя, висящее на стене.",
   "Tooltip_KBWVE_Buildable_Brazier": "Простая каменная жаровня. Загрузите топливо и разожгите — для тепла, света и готовки.",
-  "Tooltip_KBWVE_Buildable_LogRailing": "Низкие перила из брёвен, через которые можно перепрыгнуть. Сходящиеся секции образуют угол, а смещённые концы получают столб в промежутке."
+  "Tooltip_KBWVE_Buildable_LogRailing": "Низкие перила из брёвен, через которые можно перепрыгнуть. Сходящиеся секции образуют угол, а смещённые концы получают столб в промежутке.",
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Отделка кромки крыши - планки, углы, коньки и водосточные трубы."
 }

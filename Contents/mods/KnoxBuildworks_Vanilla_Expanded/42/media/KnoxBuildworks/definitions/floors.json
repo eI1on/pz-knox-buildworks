@@ -2531,8 +2531,7 @@
       "material": "Metal",
       "iconSprite": "industry_01_37",
       "placement": {
-        "kind": "object",
-        "needToBeAgainstWall": false
+        "kind": "floor"
       },
       "stages": [
         {
@@ -2653,8 +2652,7 @@
       "material": "Metal",
       "iconSprite": "industry_01_39",
       "placement": {
-        "kind": "object",
-        "needToBeAgainstWall": false
+        "kind": "floor"
       },
       "stages": [
         {
@@ -2764,8 +2762,7 @@
       "material": "Metal",
       "iconSprite": "industry_01_12",
       "placement": {
-        "kind": "object",
-        "needToBeAgainstWall": false
+        "kind": "floor"
       },
       "stages": [
         {
@@ -6424,6 +6421,5818 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_0",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_0",
+      "displayName": "Dark Red Dotted Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_0",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_0"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_1",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_1",
+      "displayName": "Black Geometric Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_1",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_1"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_2",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_2",
+      "displayName": "Amber Striped Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_2",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_2"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_3",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_3",
+      "displayName": "Red Persian Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_3",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_3"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_4",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_4",
+      "displayName": "Teal Kilim Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_4",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_4"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_5",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_5",
+      "displayName": "Teal Floral Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_5",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_5"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_6",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_6",
+      "displayName": "Navy Ornamental Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_6",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_6"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_7",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_7",
+      "displayName": "Navy Dotted Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_7",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_7"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_8",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_8",
+      "displayName": "Brown Geometric Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_8",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_9",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_9",
+      "displayName": "Tan Striped Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_9",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_10",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_10",
+      "displayName": "Green Ribbed Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_10",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_10"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_11",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_11",
+      "displayName": "Grey Ribbed Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_11",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_12",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_12",
+      "displayName": "Blue Ribbed Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_12",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_13",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_13",
+      "displayName": "Red Medallion Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_13",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_13"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_14",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_14",
+      "displayName": "Purple Ornamental Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_14",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_14"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floor_carpet_motif_15",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floor_carpet_motif_15",
+      "displayName": "Rose Striped Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floor_carpet_motif_15",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floor_carpet_motif_15"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_32",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_32",
+      "displayName": "Cream Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_32",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_33",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_33",
+      "displayName": "Olive Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_33",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_34",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_34",
+      "displayName": "Dusty Red Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_34",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_35",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_35",
+      "displayName": "Terracotta Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_35",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_36",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_36",
+      "displayName": "Ochre Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_36",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_36"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_37",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_37",
+      "displayName": "Teal Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_37",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_38",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_38",
+      "displayName": "Mauve Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_38",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_38"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_39",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_39",
+      "displayName": "Lavender Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_39",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_39"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_40",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_40",
+      "displayName": "Sea Green Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_40",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_41",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_41",
+      "displayName": "Steel Blue Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_41",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_41"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_42",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_42",
+      "displayName": "Plum Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_42",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_42"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_43",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_43",
+      "displayName": "Brick Red Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_43",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_44",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_44",
+      "displayName": "Light Grey Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_44",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_44"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_45",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_45",
+      "displayName": "Dusty Rose Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_45",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_45"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_46",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_46",
+      "displayName": "Brown Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_46",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_46"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.carpets.floors_interior_carpet_01_47",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_carpets_floors_interior_carpet_01_47",
+      "displayName": "Tan Woven Carpet",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Carpets",
+      "material": "Fabric",
+      "iconSprite": "floors_interior_carpet_01_47",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_carpet_01_47"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 6
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_6",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_6",
+      "displayName": "Red Stone Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_6",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_6"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_7",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_7",
+      "displayName": "Grey Brick Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_7",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_7"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_8",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_8",
+      "displayName": "Brown Scalloped Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_8",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_9",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_9",
+      "displayName": "Brown Patterned Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_9",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_10",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_10",
+      "displayName": "Red Scalloped Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_10",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_10"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_11",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_11",
+      "displayName": "Mottled Scalloped Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_11",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_12",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_12",
+      "displayName": "Dark Patterned Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_12",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_13",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_13",
+      "displayName": "Red Patterned Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_13",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_13"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_14",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_14",
+      "displayName": "Red Bordered Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_14",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_14"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_15",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_15",
+      "displayName": "Grey Bordered Paving",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_15",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_15"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_exterior.floors_exterior_tilesandstone_01_80",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_exterior_floors_exterior_tilesandstone_01_80",
+      "displayName": "Speckled Terrazzo",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Exterior",
+      "material": "Stone",
+      "iconSprite": "floors_exterior_tilesandstone_01_80",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_exterior_tilesandstone_01_80"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "stone_blocks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.StoneBlock"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_6",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_6",
+      "displayName": "Gold Smooth Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_6",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_6"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_11",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_11",
+      "displayName": "White Large Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_11",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_14",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_14",
+      "displayName": "Grey Green Plain Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_14",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_14"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_15",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_15",
+      "displayName": "Sage Plain Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_15",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_15"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_17",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_17",
+      "displayName": "Cream Speckled Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_17",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_23",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_23",
+      "displayName": "Beige Large Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_23",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_23"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_25",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_25",
+      "displayName": "Red Inlay Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_25",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_25"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_26",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_26",
+      "displayName": "Blue Inlay Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_26",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_26"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_smooth.floors_interior_tilesandwood_01_27",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_smooth_floors_interior_tilesandwood_01_27",
+      "displayName": "Black Inlay Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Smooth",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_27",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_32",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_32",
+      "displayName": "Dusty Rose Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_32",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_33",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_33",
+      "displayName": "Tan Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_33",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_34",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_34",
+      "displayName": "Brown Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_34",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_34"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_35",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_35",
+      "displayName": "Sand Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_35",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_36",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_36",
+      "displayName": "Terracotta Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_36",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_36"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_37",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_37",
+      "displayName": "Ochre Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_37",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_38",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_38",
+      "displayName": "Light Blue Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_38",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_38"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.tile_square.floors_interior_tilesandwood_01_39",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_tile_square_floors_interior_tilesandwood_01_39",
+      "displayName": "Dark Grid Tiles",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Tile Square",
+      "material": "Brick",
+      "iconSprite": "floors_interior_tilesandwood_01_39",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_39"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "masonry_tiles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayTile"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Masonry": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 10
+            },
+            "category": "Masonry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_54",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_54",
+      "displayName": "White Plank Floor",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Wooden",
+      "material": "Wood",
+      "iconSprite": "floors_interior_tilesandwood_01_54",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_54"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 20
+            },
+            "category": "Carpentry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_55",
+      "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_55",
+      "displayName": "Grey Plank Floor",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
+      "category": "Floors",
+      "subcategory": "Wooden",
+      "material": "Wood",
+      "iconSprite": "floors_interior_tilesandwood_01_55",
+      "placement": {
+        "kind": "floor"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "floors_interior_tilesandwood_01_55"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 20
+            },
+            "category": "Carpentry"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
     }
   ]
 }

@@ -90,7 +90,7 @@ local function beginState()
     Registry:reset()
     local overrides, overridesHash = Overrides.load()
     Registry.overridesHash = overridesHash
-    return { templates = {}, groups = {}, bundles = {}, overrides = overrides }
+    return { templates = {}, groups = {}, bundles = {}, overrides = overrides, patches = {} }
 end
 
 local function acceptBundle(state, source, bundle, fileHash)
@@ -100,6 +100,7 @@ local function acceptBundle(state, source, bundle, fileHash)
         return
     end
     Registry.files[source] = fileHash
+    Overrides.collect(state.patches, bundle, source)
     for name, value in pairs(bundle.templates or {}) do
         if state.templates[name] then Log:warning("Template '%s' replaced by %s", name, source) end
         state.templates[name] = value
@@ -112,7 +113,8 @@ local function acceptBundle(state, source, bundle, fileHash)
 end
 
 local function normalizeOne(state, bundle, raw)
-    local normalized, errors = Schema.normalize(Overrides.apply(raw, state.overrides), state.templates, state.groups)
+    local patched = Overrides.apply(Overrides.applyPatch(raw, state.patches), state.overrides)
+    local normalized, errors = Schema.normalize(patched, state.templates, state.groups)
     if #errors > 0 then
         Log:validation((raw.id or "<unknown>") .. " in " .. bundle.source, errors)
     else

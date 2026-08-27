@@ -122,6 +122,7 @@
       "tooltipKey": "Tooltip_KBW_Shared_ClassicBrickWall",
       "category": "Walls",
       "subcategory": "Classic Brick",
+      "material": "Brick",
       "materialTags": [
         "Brick",
         "Concrete"

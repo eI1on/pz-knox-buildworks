@@ -1538,7 +1538,7 @@
     {
       "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_patio_shingles_inner",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_roofs_brown_patio_shingles_inner",
-      "displayName": "Brown Patio Shingles  Inner",
+      "displayName": "Brown Patio Shingles Inner",
       "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Brown Shingles Roofs",
@@ -3368,6 +3368,1966 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r1_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r1_1",
+      "displayName": "Brown Shingles Roof Section 1-1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_15",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_15"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_14"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r1",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r1"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r2_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r2_1",
+      "displayName": "Brown Shingles Roof Section 2-1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_16",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r2",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r2"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r11_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r11_1",
+      "displayName": "Brown Shingles Roof Section 11-1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_88",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_88"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_89"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r11",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r11"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r11_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r11_2",
+      "displayName": "Brown Shingles Roof Section 11-2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_90",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_90"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r11",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r11"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r11_3",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r11_3",
+      "displayName": "Brown Shingles Roof Section 11-3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_91",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_91"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r11",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r11"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r11_4",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r11_4",
+      "displayName": "Brown Shingles Roof Section 11-4",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_92",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_92"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r11",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r11"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r11_5",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r11_5",
+      "displayName": "Brown Shingles Roof Section 11-5",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_93",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_93"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r11",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r11"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r12_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r12_1",
+      "displayName": "Brown Shingles Roof Section 12-1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_98",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_98"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_101"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r12",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r12"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r12_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r12_2",
+      "displayName": "Brown Shingles Roof Section 12-2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_103",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_103"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_99"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r12",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r12"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r12_3",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r12_3",
+      "displayName": "Brown Shingles Roof Section 12-3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_96",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_96"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r12",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r12"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r12_4",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r12_4",
+      "displayName": "Brown Shingles Roof Section 12-4",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_100",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_100"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r12",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r12"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r12_5",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r12_5",
+      "displayName": "Brown Shingles Roof Section 12-5",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_97",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_97"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_102"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r12",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r12"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_1",
+      "displayName": "Brown Shingles Roof Section 13-1",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_109",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_109"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_2",
+      "displayName": "Brown Shingles Roof Section 13-2",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_104",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_104"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_3",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_3",
+      "displayName": "Brown Shingles Roof Section 13-3",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_106",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_106"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_111"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_4",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_4",
+      "displayName": "Brown Shingles Roof Section 13-4",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_105",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_105"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 4,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_5",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_5",
+      "displayName": "Brown Shingles Roof Section 13-5",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_108",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_108"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 5,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.brown_shingles_roofs.brown_shingles_section_r13_6",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_brown_shingles_section_r13_6",
+      "displayName": "Brown Shingles Roof Section 13-6",
+      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "category": "Roofing",
+      "subcategory": "Brown Shingles Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_02_107",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_107"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_02_110"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.roofing.brown_shingles_roofs.brown_shingles_section_r13",
+        "level": 6,
+        "translationKey": "IGUI_KBW_Group_roofing_brown_shingles_section_r13"
+      },
+      "allowSpriteReuse": true
     }
   ]
 }

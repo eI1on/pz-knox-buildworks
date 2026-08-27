@@ -137,7 +137,290 @@
           }
         }
       ],
-      "allowSpriteReuse": true
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.chainlink_and_razor_wire_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_chainlink_and_razor_wire_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.chainlink_and_razor_wire_fence.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_chainlink_and_razor_wire_fence_half_a",
+      "displayName": "Chainlink and Razor Wire Fence (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_51",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_51"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_48"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_52",
+            "pillarSprite": "fencing_01_53"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.chainlink_and_razor_wire_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_chainlink_and_razor_wire_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.chainlink_and_razor_wire_fence.half_b",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_chainlink_and_razor_wire_fence_half_b",
+      "displayName": "Chainlink and Razor Wire Fence (Half B)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_50",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_50"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_49"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_52",
+            "pillarSprite": "fencing_01_53"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.chainlink_and_razor_wire_fence",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_chainlink_and_razor_wire_fence"
+      }
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.chainlink_and_razor_wire_fence_corner",
@@ -379,6 +662,288 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.fence_chain",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_fence_chain",
+      "displayName": "Fence Chain",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_59",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_59"
+                      ],
+                      [
+                        "fencing_01_58"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_56",
+                        "fencing_01_57"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_60",
+            "pillarSprite": "fencing_01_61"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.fence_chain",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_fence_chain"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.fence_chain.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_fence_chain_half_a",
+      "displayName": "Fence Chain (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_59",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_59"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_56"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_60",
+            "pillarSprite": "fencing_01_61"
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.fence_chain",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_fence_chain"
+      },
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.fence_chain_corner",
@@ -720,7 +1285,223 @@
             "hoppable": false
           }
         }
-      ]
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_decorative_wooden_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_decorative_wooden_fence"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.tall_decorative_wooden_fence.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_tall_decorative_wooden_fence_half_a",
+      "displayName": "Decorative Wooden Fence (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Wood",
+      "iconSprite": "fencing_01_11",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_11"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_8"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 15
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_decorative_wooden_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_decorative_wooden_fence"
+      },
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.tall_decorative_wooden_fence.half_b",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_tall_decorative_wooden_fence_half_b",
+      "displayName": "Decorative Wooden Fence (Half B)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Wood",
+      "iconSprite": "fencing_01_10",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_10"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_9"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 15
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false
+          }
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_decorative_wooden_fence",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_decorative_wooden_fence"
+      },
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.tall_decorative_wooden_fence_post",
@@ -913,7 +1694,119 @@
           }
         }
       ],
-      "allowSpriteReuse": true
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_wooden_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_wooden_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.tall_wooden_fence.single",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_tall_wooden_fence_single",
+      "displayName": "Wooden Fence (Single Tile)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Wood",
+      "iconSprite": "fencing_01_72",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_72"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_73"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 15
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_75",
+            "pillarSprite": "fencing_01_74"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_wooden_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_wooden_fence"
+      }
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.tall_wooden_fence_corner",
@@ -1215,7 +2108,268 @@
           }
         }
       ],
-      "allowSpriteReuse": true
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_wrought_iron_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_wrought_iron_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.tall_wrought_iron_fence.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_tall_wrought_iron_fence_half_a",
+      "displayName": "Wrought Iron Fence (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_67",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_67"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_64"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_68",
+            "pillarSprite": "fencing_01_69"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_wrought_iron_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_wrought_iron_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.tall_wrought_iron_fence.half_b",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_tall_wrought_iron_fence_half_b",
+      "displayName": "Wrought Iron Fence (Half B)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_66",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_65"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_68",
+            "pillarSprite": "fencing_01_69"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.tall_wrought_iron_fence",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_tall_wrought_iron_fence"
+      }
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.tall_wrought_iron_fence_corner",
@@ -1569,7 +2723,288 @@
           }
         }
       ],
-      "allowSpriteReuse": true
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.wired_fence.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_wired_fence_half_a",
+      "displayName": "Wired Fence (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_83",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_83"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_80"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_84"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.wired_fence.half_b",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_wired_fence_half_b",
+      "displayName": "Wired Fence (Half B)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_82",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_82"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_81"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_84"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_fence",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_fence"
+      }
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.wired_fence_corner",
@@ -1826,7 +3261,288 @@
           }
         }
       ],
-      "allowSpriteReuse": true
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_razor_fence",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_razor_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.wired_razor_fence.half_a",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_wired_razor_fence_half_a",
+      "displayName": "Wired Razor Fence (Half A)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_91",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_91"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_88"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_92"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_razor_fence",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_razor_fence"
+      }
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.high.wired_razor_fence.half_b",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_high_wired_razor_fence_half_b",
+      "displayName": "Wired Razor Fence (Half B)",
+      "tooltipKey": "Tooltip_KBW_Shared_HighMetalFence",
+      "category": "Fencing",
+      "subcategory": "High",
+      "material": "Metal",
+      "iconSprite": "fencing_01_90",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_90"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fencing_01_89"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_wire",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Wire"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 15
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "cornerSprite": "fencing_01_92"
+          }
+        }
+      ],
+      "allowSpriteReuse": true,
+      "group": {
+        "id": "kbw.vanillaexpanded.group.fencing.high.wired_razor_fence",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_fencing_high_wired_razor_fence"
+      }
     },
     {
       "id": "kbw.vanillaexpanded.fencing.high.wired_razor_corner",
@@ -6389,6 +8105,832 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.wood_and_metal_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_wood_and_metal_railing",
+      "displayName": "Wood and Metal Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood and Metal",
+      "iconSprite": "fixtures_railings_01_28",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_28"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true,
+            "cornerSprite": "fixtures_railings_01_30",
+            "pillarSprite": "fixtures_railings_01_31"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.wood_and_metal_railing_corner",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_wood_and_metal_railing_corner",
+      "displayName": "Wood and Metal Railing Corner",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood and Metal",
+      "iconSprite": "fixtures_railings_01_30",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "isCorner": true,
+            "canPassThrough": true,
+            "cornerSprite": "fixtures_railings_01_30",
+            "pillarSprite": "fixtures_railings_01_31"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.wood_and_metal_railing_post",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_wood_and_metal_railing_post",
+      "displayName": "Wood and Metal Railing Post",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood and Metal",
+      "iconSprite": "fixtures_railings_01_31",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_31"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "isCorner": true,
+            "canPassThrough": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.metal_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_metal_railing",
+      "displayName": "Metal Railing",
+      "tooltipKey": "Tooltip_KBW_Shared_MallRailing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Metal",
+      "iconSprite": "fixtures_railings_01_36",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_36"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true,
+            "cornerSprite": "fixtures_railings_01_38",
+            "pillarSprite": "fixtures_railings_01_39"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.metal_railing_corner",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_metal_railing_corner",
+      "displayName": "Metal Railing Corner",
+      "tooltipKey": "Tooltip_KBW_Shared_MallRailing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Metal",
+      "iconSprite": "fixtures_railings_01_38",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_38"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "isCorner": true,
+            "canPassThrough": true,
+            "cornerSprite": "fixtures_railings_01_38",
+            "pillarSprite": "fixtures_railings_01_39"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.metal_railing_post",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_metal_railing_post",
+      "displayName": "Metal Railing Post",
+      "tooltipKey": "Tooltip_KBW_Shared_MallRailing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Metal",
+      "iconSprite": "fixtures_railings_01_39",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_39"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "isCorner": true,
+            "canPassThrough": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.wooden_railing_4",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_wooden_railing_4",
+      "displayName": "Wooden Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood",
+      "iconSprite": "fixtures_railings_01_85",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_85"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_96"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.railing.white_wooden_railing_post_3",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_railing_white_wooden_railing_post_3",
+      "displayName": "White Wooden Railing Post",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Railing",
+      "material": "Wood",
+      "iconSprite": "fixtures_railings_01_77",
+      "placement": {
+        "kind": "wall"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_77"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": false,
+            "isCorner": true,
+            "canPassThrough": true
+          }
+        }
+      ],
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanillaexpanded.fencing.railing.log_railing",

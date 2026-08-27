@@ -311,5 +311,6 @@
   "Tooltip_KBWVE_Buildable_ChurchOrgan": "Um órgão de tubos completo, com três casas de largura e dois andares de tubos de altura. Construí-lo é obra de um mestre carpinteiro.",
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Um estandarte de pano pendurado contra uma parede.",
   "Tooltip_KBWVE_Buildable_Brazier": "Um braseiro de pedra simples. Abasteça-o e acenda-o para ter calor, luz e onde cozinhar.",
-  "Tooltip_KBWVE_Buildable_LogRailing": "Um guarda-corpo baixo de troncos que dá para saltar. As secções que se encontram formam um canto, e as pontas desencontradas recebem um poste no vão."
+  "Tooltip_KBWVE_Buildable_LogRailing": "Um guarda-corpo baixo de troncos que dá para saltar. As secções que se encontram formam um canto, e as pontas desencontradas recebem um poste no vão.",
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Acabamento para a borda do telhado - rufos, cantos, topos e tubos de queda."
 }

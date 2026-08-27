@@ -10,7 +10,9 @@
       "subcategory": "Sliding Doors",
       "material": "Glass",
       "iconSprite": "fixtures_doors_01_106",
-      "placement": {},
+      "placement": {
+        "kind": "wall"
+      },
       "stages": [
         {
           "id": "built",

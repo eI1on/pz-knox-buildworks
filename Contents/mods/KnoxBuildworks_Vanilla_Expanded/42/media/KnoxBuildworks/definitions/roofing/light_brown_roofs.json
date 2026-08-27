@@ -1538,7 +1538,7 @@
     {
       "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.light_brown_patio_shingles_inner",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_light_brown_patio_shingles_inner",
-      "displayName": "Light Brown Patio Shingles  Inner",
+      "displayName": "Light Brown Patio Shingles Inner",
       "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Light Brown Roofs",

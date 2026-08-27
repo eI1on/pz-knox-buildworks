@@ -6,7 +6,7 @@
     {
       "id": "kbw.vanilla.paint_signarrowdown",
       "allowSpriteReuse": true,
-      "displayName": "PaintSign_ArrowDown",
+      "displayName": "Paint Sign (Arrow Down)",
       "translationKey": "IGUI_KBW_Vanilla_Paint_SignArrowDown",
       "tooltipKey": "Tooltip_craft_paintSign",
       "category": "Wall Finishes",
@@ -47,7 +47,7 @@
     {
       "id": "kbw.vanilla.paint_signarrowleft",
       "allowSpriteReuse": true,
-      "displayName": "PaintSign_ArrowLeft",
+      "displayName": "Paint Sign (Arrow Left)",
       "translationKey": "IGUI_KBW_Vanilla_Paint_SignArrowLeft",
       "tooltipKey": "Tooltip_craft_paintSign",
       "category": "Wall Finishes",
@@ -88,7 +88,7 @@
     {
       "id": "kbw.vanilla.paint_signarrowright",
       "allowSpriteReuse": true,
-      "displayName": "PaintSign_ArrowRight",
+      "displayName": "Paint Sign (Arrow Right)",
       "translationKey": "IGUI_KBW_Vanilla_Paint_SignArrowRight",
       "tooltipKey": "Tooltip_craft_paintSign",
       "category": "Wall Finishes",
@@ -129,7 +129,7 @@
     {
       "id": "kbw.vanilla.paint_signarrowup",
       "allowSpriteReuse": true,
-      "displayName": "PaintSign_ArrowUp",
+      "displayName": "Paint Sign (Arrow Up)",
       "translationKey": "IGUI_KBW_Vanilla_Paint_SignArrowUp",
       "tooltipKey": "Tooltip_craft_paintSign",
       "category": "Wall Finishes",
@@ -170,7 +170,7 @@
     {
       "id": "kbw.vanilla.paint_signskull",
       "allowSpriteReuse": true,
-      "displayName": "PaintSign_Skull",
+      "displayName": "Paint Sign (Skull)",
       "translationKey": "IGUI_KBW_Vanilla_Paint_SignSkull",
       "tooltipKey": "Tooltip_craft_paintSign",
       "category": "Wall Finishes",
@@ -210,7 +210,7 @@
     },
     {
       "id": "kbw.vanilla.paint_wall",
-      "displayName": "PaintWall",
+      "displayName": "Paint Wall",
       "translationKey": "IGUI_KBW_Vanilla_Paint_Wall",
       "tooltipKey": "Tooltip_craft_paintWall",
       "category": "Wall Finishes",
@@ -250,7 +250,7 @@
     },
     {
       "id": "kbw.vanilla.paper_wall",
-      "displayName": "PaperWall",
+      "displayName": "Paper Wall",
       "translationKey": "IGUI_KBW_Vanilla_Paper_Wall",
       "tooltipKey": "Tooltip_craft_wallpaperWall",
       "category": "Wall Finishes",
@@ -290,7 +290,7 @@
     },
     {
       "id": "kbw.vanilla.plaster_wall",
-      "displayName": "PlasterWall",
+      "displayName": "Plaster Wall",
       "translationKey": "IGUI_KBW_Vanilla_Plaster_Wall",
       "tooltipKey": "Tooltip_craft_plasterWall",
       "category": "Wall Finishes",

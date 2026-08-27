@@ -1,4 +1,4 @@
----Requirements provides the Knox Buildworks construction validation layer.
+--- Requirements provides the Knox Buildworks construction validation layer.
 local Log = require("KnoxBuildworks/Log")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
@@ -18,9 +18,7 @@ local function bumpInventoryRev()
     inventoryRev = inventoryRev + 1
 end
 
-if Events and Events.OnContainerUpdate then
-    Events.OnContainerUpdate.Add(bumpInventoryRev)
-end
+Events.OnContainerUpdate.Add(bumpInventoryRev)
 
 ---@return number
 function Requirements.inventoryRevision()
@@ -59,6 +57,17 @@ end
 local function predicateNotBroken(item)
     local input = activeInput
     if not item then return false end
+    -- An exhausted drainable has nothing left to give. Skipping it here matters
+    -- twice over: it keeps the availability count honest, and it stops
+    -- consumption re-picking the same empty item until its uses go negative.
+    -- KeepOnDeplete items (the blowtorch) never leave the container, so without
+    -- this the first torch is drained past empty while a full one sits beside
+    -- it, and DrainableComboItem.Use decrements with no floor at zero.
+    if input and (input.uses ~= nil or input.mode == "drain") and not hasFlag(input, "IsEmpty")
+        and not hasFlag(input, "HasNoUses") and item.getCurrentUses and instanceof(item, "DrainableComboItem")
+        and item:getCurrentUses() <= 0 then
+        return false
+    end
     if hasFlag(input, "NoBrokenItems") and item.isBroken and item:isBroken() then return false end
     if not hasFlag(input, "AllowDestroyedItem") and item.isDestroyed and item:isDestroyed() then return false end
     if hasFlag(input, "IsEmptyContainer") and instanceof(item, "InventoryContainer") and not item
@@ -182,7 +191,11 @@ local function findTag(inventory, tags, input)
 end
 
 local function amountForItem(item, countUses)
-    if countUses and instanceof(item, "DrainableComboItem") then return item:getCurrentUses() end
+    -- max(0): a drainable that an older build drove below empty still counts as
+    -- nothing, never as negative stock.
+    if countUses and instanceof(item, "DrainableComboItem") then
+        return math.max(item:getCurrentUses(), 0)
+    end
     return 1
 end
 
@@ -413,11 +426,11 @@ end
 
 local snapshotCache = nil
 
----One recursive walk of the player's inventory plus the on-ground material
----map for the given square, cached until a container changes or the square
----differs. Shared by every readiness check in a refresh cycle.
+--- One recursive walk of the player's inventory plus the on-ground material
+--- map for the given square, cached until a container changes or the square
+--- differs. Shared by every readiness check in a refresh cycle.
 ---@param player IsoPlayer
----@param square IsoGridSquare|nil
+---@param square IsoGridSquare | nil
 ---@return table snapshot
 function Requirements.snapshot(player, square)
     local squareKey = square and (square:getX() .. ":" .. square:getY() .. ":" .. square:getZ()) or ""
@@ -459,8 +472,8 @@ function Requirements.snapshot(player, square)
     return snapshot
 end
 
----Items carrying the tag, filtered lazily from the snapshot and cached per
----tag name so hundreds of cards sharing common tool tags scan once.
+--- Items carrying the tag, filtered lazily from the snapshot and cached per
+--- tag name so hundreds of cards sharing common tool tags scan once.
 local function snapshotTagItems(snapshot, tagName)
     local cached = snapshot.tagCache[tagName]
     if cached then return cached end
@@ -477,9 +490,9 @@ local function snapshotTagItems(snapshot, tagName)
     return result
 end
 
----Counts available units for one input against the snapshot, honouring the
----same predicate flags and ground-item rules as the detailed evaluation
----(carried items pass predicateNotBroken; ground items are counted as-is).
+--- Counts available units for one input against the snapshot, honouring the
+--- same predicate flags and ground-item rules as the detailed evaluation
+--- (carried items pass predicateNotBroken; ground items are counted as-is).
 local function countAvailable(snapshot, input, countUses, includeGround)
     local total = 0
     local seenItems = {}
@@ -540,10 +553,10 @@ local function countAvailable(snapshot, input, countUses, includeGround)
     return total
 end
 
----Normalized inputs cached per stage. The normalized rows derive only from
----the immutable definition/stage data and are treated as read-only by the
----readiness path; the detailed evaluate/consume paths keep building fresh
----copies.
+--- Normalized inputs cached per stage. The normalized rows derive only from
+--- the immutable definition/stage data and are treated as read-only by the
+--- readiness path; the detailed evaluate/consume paths keep building fresh
+--- copies.
 local function readinessInputs(definition, stage)
     local cached = stage.__kbwReadinessInputs
     if not cached then
@@ -553,7 +566,7 @@ local function readinessInputs(definition, stage)
     return cached
 end
 
----Whether the stage recipe carries CanBeDoneInDark, resolved once per stage.
+--- Whether the stage recipe carries CanBeDoneInDark, resolved once per stage.
 local function stageCanBeDoneInDark(definition, stage)
     local cached = stage.__kbwCanBeDoneInDark
     if cached == nil then
@@ -563,7 +576,7 @@ local function stageCanBeDoneInDark(definition, stage)
     return cached
 end
 
----@param player IsoPlayer
+---@param player    IsoPlayer
 ---@param knowledge KBW.KnowledgeRequirement
 ---@return boolean, string
 local function knowledgeAlternativeStatus(player, knowledge)
@@ -585,8 +598,7 @@ local function knowledgeAlternativeStatus(player, knowledge)
             else
                 groupOk = groupOk and skillOk
             end
-            groupLabels[#groupLabels + 1] = getText("IGUI_perks_" .. tostring(perkName))
-                .. " " .. tostring(needed)
+            groupLabels[#groupLabels + 1] = getText("IGUI_perks_" .. tostring(perkName)) .. " " .. tostring(needed)
         end
         table.sort(groupLabels)
         if foundSkill then
@@ -597,22 +609,21 @@ local function knowledgeAlternativeStatus(player, knowledge)
     return false, table.concat(labels, " / ")
 end
 
----Readiness-only evaluation for catalogue cards: same pass/fail logic as
----Requirements.evaluate, but counts against the shared snapshot, skips the
----Available Ingredients / Possible Items detail rows, and exits early.
----@param player IsoPlayer
+--- Readiness-only evaluation for catalogue cards: same pass/fail logic as
+--- Requirements.evaluate, but counts against the shared snapshot, skips the
+--- Available Ingredients / Possible Items detail rows, and exits early.
+---@param player     IsoPlayer
 ---@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
----@param snapshot table
----@return {ok: boolean}
+---@param stage      KBW.BuildStage
+---@param snapshot   table
+---@return { ok: boolean }
 function Requirements.evaluateReadiness(player, definition, stage, snapshot)
     if not player or not definition or not stage then return { ok = false } end
     Profiler.count("requirements.readinessEvals")
     local cheat = player:isBuildCheat()
     local req = stage.requirements or {}
     if req.debugOnly and not isDebugEnabled() then return { ok = false } end
-    if not cheat and player.tooDarkToRead and player:tooDarkToRead()
-        and not stageCanBeDoneInDark(definition, stage) then
+    if not cheat and player.tooDarkToRead and player:tooDarkToRead() and not stageCanBeDoneInDark(definition, stage) then
         return { ok = false }
     end
     if not cheat then
@@ -651,11 +662,11 @@ function Requirements.evaluateReadiness(player, definition, stage, snapshot)
     return { ok = true }
 end
 
----@param player IsoPlayer
+---@param player     IsoPlayer
 ---@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
----@param square IsoGridSquare|nil
----@param choices table<string, string>|nil
+---@param stage      KBW.BuildStage
+---@param square     IsoGridSquare | nil
+---@param choices    table<string, string> | nil
 ---@return KBW.RequirementStatus
 function Requirements.evaluate(player, definition, stage, square, choices)
     Profiler.count("requirements.fullEvals")
@@ -668,8 +679,7 @@ function Requirements.evaluate(player, definition, stage, square, choices)
     local cheat = player:isBuildCheat()
     local req, inventory = stage.requirements or {}, player:getInventory()
     local recipe = StageConfig.recipe(definition, stage)
-    if not cheat and player.tooDarkToRead and player:tooDarkToRead()
-        and not recipeHasTag(recipe, "CanBeDoneInDark") then
+    if not cheat and player.tooDarkToRead and player:tooDarkToRead() and not recipeHasTag(recipe, "CanBeDoneInDark") then
         status.ok = false
         status.reason = "requires light"
     end
@@ -927,11 +937,11 @@ local function consumeInput(player, inventory, input, square, choices, stage, re
     return remaining <= 0
 end
 
----@param player IsoPlayer
----@param stage KBW.BuildStage
----@param square IsoGridSquare|nil
+---@param player     IsoPlayer
+---@param stage      KBW.BuildStage
+---@param square     IsoGridSquare | nil
 ---@param definition KBW.BuildableDefinition
----@param choices table<string, string>|nil
+---@param choices    table<string, string> | nil
 ---@return boolean consumed
 ---@return KBW.CraftRecipeData recipeData
 function Requirements.consume(player, stage, square, definition, choices)
@@ -941,9 +951,7 @@ function Requirements.consume(player, stage, square, definition, choices)
     local inventory = player:getInventory()
     local inputs = normalizedInputs(definition, stage)
     for inputIndex = 1, #inputs do
-        if not consumeInput(
-                player, inventory, inputs[inputIndex], square, choices, stage, recipeData, inputIndex
-            ) then
+        if not consumeInput(player, inventory, inputs[inputIndex], square, choices, stage, recipeData, inputIndex) then
             return false, recipeData
         end
     end
@@ -951,19 +959,19 @@ function Requirements.consume(player, stage, square, definition, choices)
 end
 
 ---@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
+---@param stage      KBW.BuildStage
 ---@return KBW.BuildInput[]
 function Requirements.getInputs(definition, stage)
     return normalizedInputs(definition, stage)
 end
 
----@param player IsoPlayer
+---@param player     IsoPlayer
 ---@param definition KBW.BuildableDefinition
----@param stage KBW.BuildStage
----@param square IsoGridSquare|nil
----@param choices table<string, string>|nil
----@return string|nil primaryModel
----@return string|nil secondaryModel
+---@param stage      KBW.BuildStage
+---@param square     IsoGridSquare | nil
+---@param choices    table<string, string> | nil
+---@return string | nil primaryModel
+---@return string | nil secondaryModel
 function Requirements.handModels(player, definition, stage, square, choices)
     local prop1 = nil
     local prop2 = nil

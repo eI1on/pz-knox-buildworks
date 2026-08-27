@@ -1007,7 +1007,7 @@
     {
       "id": "kbw.vanillaexpanded.architecture_plus.roof_accents.fascia_accent_top_corner",
       "translationKey": "IGUI_KBWVE_Buildable_architecture_plus_roof_accents_fascia_accent_top_corner",
-      "displayName": "Fascia Accent Top Corner Corner",
+      "displayName": "Fascia Accent Top Corner",
       "tooltipKey": "Tooltip_KBW_Shared_RoofAccent",
       "category": "Architecture Plus",
       "subcategory": "Roof Accents",

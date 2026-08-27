@@ -255,7 +255,12 @@ function Schema.validateBundle(bundle)
     if bundle.schemaVersion ~= KBW.SCHEMA_VERSION then
         add(errors, "unsupported schemaVersion " .. tostring(bundle.schemaVersion))
     end
-    if type(bundle.buildables) ~= "table" then add(errors, "buildables must be an array") end
+    if bundle.patches ~= nil and type(bundle.patches) ~= "table" then
+        add(errors, "patches must be an object")
+    end
+    if type(bundle.buildables) ~= "table" and type(bundle.patches) ~= "table" then
+        add(errors, "buildables must be an array")
+    end
     return errors
 end
 

@@ -32,9 +32,9 @@ local function ensureContainer(object)
     return object:getFluidContainer()
 end
 
----Creates and configures the rain-collecting FluidContainer for a built object.
+--- Creates and configures the rain-collecting FluidContainer for a built object.
 ---@param object IsoObject
----@param config table|nil
+---@param config table | nil
 ---@return boolean
 function FluidContainers.configureObject(object, config)
     if not object then return false end
@@ -42,8 +42,8 @@ function FluidContainers.configureObject(object, config)
     local container = ensureContainer(object)
     if not container then
         Log:error(
-            "Buildable at %s,%s,%s could not create a FluidContainer component",
-            tostring(object:getX()), tostring(object:getY()), tostring(object:getZ())
+            "Buildable at %s,%s,%s could not create a FluidContainer component", tostring(object:getX()),
+            tostring(object:getY()), tostring(object:getZ())
         )
         return false
     end
@@ -101,7 +101,7 @@ function FluidContainers.track(object)
     if object:getModData().KBWFluidSprites ~= nil then tracked[object] = true end
 end
 
----Swaps between the empty and filled sprite for the current fluid level.
+--- Swaps between the empty and filled sprite for the current fluid level.
 ---@param object IsoObject
 ---@return boolean
 function FluidContainers.refreshSprite(object)
@@ -127,8 +127,8 @@ function FluidContainers.refreshSprite(object)
     return true
 end
 
----Whether the object is a Knox drum that can be switched between collecting
----rain and burning fuel.
+--- Whether the object is a Knox drum that can be switched between collecting
+--- rain and burning fuel.
 ---@param object IsoObject
 function FluidContainers.isDualMode(object)
     if not object or not object.hasModData or not object:hasModData() then return false end
@@ -142,21 +142,21 @@ function FluidContainers.getMode(object)
     return object:getModData().KBWDrumMode or "water"
 end
 
----Switches a dual-mode drum between rain collection and burning.
+--- Switches a dual-mode drum between rain collection and burning.
 ---
----The two modes need different object classes, and that is the whole point:
----isFireInteractionObject() is true for every IsoFireplace, so a fireplace can
----never hide the vanilla fuel and light options, and anything carrying a
----FluidContainer can never hide the vanilla fluid options. Keeping one object
----that is both left the player with both sets of options at once. Swapping the
----object -- the same thing vanilla does for the rain barrel lid -- gives each
----mode exactly the menu that belongs to it.
+--- The two modes need different object classes, and that is the whole point:
+--- isFireInteractionObject() is true for every IsoFireplace, so a fireplace can
+--- never hide the vanilla fuel and light options, and anything carrying a
+--- FluidContainer can never hide the vanilla fluid options. Keeping one object
+--- that is both left the player with both sets of options at once. Swapping the
+--- object -- the same thing vanilla does for the rain barrel lid -- gives each
+--- mode exactly the menu that belongs to it.
 ---
----Refuses while the drum still holds the other mode's contents, so nothing is
----silently destroyed.
+--- Refuses while the drum still holds the other mode's contents, so nothing is
+--- silently destroyed.
 ---@param object IsoObject
----@param mode string
----@return boolean, string|nil
+---@param mode   string
+---@return boolean, string | nil
 function FluidContainers.setMode(object, mode)
     if not FluidContainers.isDualMode(object) then return false, "not a drum" end
     mode = mode == "fire" and "fire" or "water"
@@ -211,15 +211,23 @@ function FluidContainers.setMode(object, mode)
     local index = square:transmitRemoveItemFromSquare(object) or -1
     tracked[object] = nil
     local newModData = replacement:getModData()
-    for key, value in pairs(carried) do newModData[key] = value end
-    if index >= 0 then square:AddSpecialObject(replacement, index) else square:AddSpecialObject(replacement) end
+    for key, value in pairs(carried) do
+        newModData[key] = value
+    end
+    if index >= 0 then
+        square:AddSpecialObject(replacement, index)
+    else
+        square:AddSpecialObject(replacement)
+    end
 
     if mode == "water" then
         FluidContainers.configureObject(replacement, {
             capacity = tonumber(carried.KBWFluidCapacity),
             rainFactor = tonumber(carried.KBWFluidRain),
-            emptySprite = sprites.empty, filledSprite = sprites.filled,
-            filledPercent = sprites.percent, fireSprite = sprites.fire
+            emptySprite = sprites.empty,
+            filledSprite = sprites.filled,
+            filledPercent = sprites.percent,
+            fireSprite = sprites.fire
         })
     end
     FluidContainers.track(replacement)
@@ -228,9 +236,9 @@ function FluidContainers.setMode(object, mode)
     return true
 end
 
----Empties unburnt fuel out of a drum without changing its mode.
+--- Empties unburnt fuel out of a drum without changing its mode.
 ---@param object IsoObject
----@return boolean, string|nil
+---@return boolean, string | nil
 function FluidContainers.dumpFuel(object)
     if not instanceof(object, "IsoFireplace") then return false, "not a drum" end
     if object:isLit() or object:isSmouldering() then return false, "put out first" end
@@ -248,8 +256,7 @@ end
 local function reconcileMode(object)
     if not FluidContainers.isDualMode(object) then return end
     if not instanceof(object, "IsoFireplace") then return end
-    local burning = object:isLit() or object:isSmouldering()
-        or (tonumber(object:getFuelAmount()) or 0) > 0
+    local burning = object:isLit() or object:isSmouldering() or (tonumber(object:getFuelAmount()) or 0) > 0
     if not burning then return end
     local modData = object:getModData()
     if modData.KBWDrumMode == "fire" then return end
@@ -282,10 +289,8 @@ local function onLoadGridsquare(square)
     end
 end
 
-if Events then
-    Events.LoadGridsquare.Add(onLoadGridsquare)
-    Events.OnObjectAdded.Add(FluidContainers.track)
-    Events.EveryOneMinute.Add(refreshTracked)
-end
+Events.LoadGridsquare.Add(onLoadGridsquare)
+Events.OnObjectAdded.Add(FluidContainers.track)
+Events.EveryOneMinute.Add(refreshTracked)
 
 return FluidContainers

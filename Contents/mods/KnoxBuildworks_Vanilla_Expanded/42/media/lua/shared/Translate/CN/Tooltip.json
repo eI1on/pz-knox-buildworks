@@ -311,5 +311,6 @@
   "Tooltip_KBWVE_Buildable_ChurchOrgan": "完整的管风琴，三格宽、两层管高。建造它是大师级木工的活计。",
   "Tooltip_KBWVE_Buildable_ChurchBanner": "悬挂在墙上的布制旗幔。",
   "Tooltip_KBWVE_Buildable_Brazier": "简易石制火盆。添加燃料点燃后可取暖、照明和烹饪。",
-  "Tooltip_KBWVE_Buildable_LogRailing": "可以翻越的低矮原木栏杆。相接的段会合成转角，错开的末端则在空隙处生成立柱。"
+  "Tooltip_KBWVE_Buildable_LogRailing": "可以翻越的低矮原木栏杆。相接的段会合成转角，错开的末端则在空隙处生成立柱。",
+  "Tooltip_KBWVE_Buildable_RoofTrim": "用于收边的屋顶装饰件——封檐板、转角、顶角和落水管。"
 }

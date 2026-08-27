@@ -126,7 +126,9 @@ end
 
 local function firstSelectedCategory(catalog)
     if not catalog or not catalog.selectedCategories then return "All" end
-    for category in pairs(catalog.selectedCategories) do return category end
+    for category in pairs(catalog.selectedCategories) do
+        return category
+    end
     return "All"
 end
 
@@ -295,8 +297,7 @@ local function drawCompactGroupRow(list, y, item, alt)
         list:drawMouseOverHighlight(0, y, list:getWidth(), rowHeight - 1)
     end
     list:drawRectBorder(
-        0, y, list:getWidth(), rowHeight, .5,
-        list.borderColor.r, list.borderColor.g, list.borderColor.b
+        0, y, list:getWidth(), rowHeight, .5, list.borderColor.r, list.borderColor.g, list.borderColor.b
     )
     drawLinesForFont(list, font, lines, 10, y + 5, textColor, textColor.a)
     return y + rowHeight
@@ -408,13 +409,7 @@ local function drawMetadataChips(panel, entries, x, y, width)
         panel:drawText(
             displayText, textX, chipY + 3, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
         )
-        panel.metaHitRows[#panel.metaHitRows + 1] = {
-            x = chipX,
-            y = chipY,
-            w = chipWidth,
-            h = chipHeight,
-            text = text
-        }
+        panel.metaHitRows[#panel.metaHitRows + 1] = { x = chipX, y = chipY, w = chipWidth, h = chipHeight, text = text }
         chipX = chipX + chipWidth + 6
     end
     return chipY + lineHeight
@@ -650,8 +645,7 @@ function KBWCatalog:new(player)
     local screenHeight = getPlayerScreenHeight(playerNum)
     local compactMinHeight = compactMinimumHeight()
     local detailedMinHeight = detailedMinimumHeight()
-    local defaultHeight = compact
-        and math.max(compactMinHeight, math.floor(screenHeight * .46))
+    local defaultHeight = compact and math.max(compactMinHeight, math.floor(screenHeight * .46))
         or math.max(detailedMinHeight, math.floor(screenHeight * .72))
     local maxHeight = math.max(280, screenHeight - 36)
     local heightKey = compact and "compactHeight" or "detailedHeight"
@@ -662,8 +656,7 @@ function KBWCatalog:new(player)
     height = math.max(compact and compactMinHeight or detailedMinHeight, height)
     local screenLeft = getPlayerScreenLeft(playerNum) + 4
     local screenTop = getPlayerScreenTop(playerNum) + 4
-    local defaultWidth = compact
-        and math.max(COMPACT_MIN_WIDTH, math.floor(screenWidth * .48))
+    local defaultWidth = compact and math.max(COMPACT_MIN_WIDTH, math.floor(screenWidth * .48))
         or math.max(DETAILED_MIN_WIDTH, math.floor(screenWidth * .62))
     local width = math.min(screenWidth, data[widthKey] or defaultWidth)
     width = math.max(compact and COMPACT_MIN_WIDTH or DETAILED_MIN_WIDTH, width)
@@ -1572,16 +1565,8 @@ function KBWCatalog:layout(liveResize)
     self:layoutCategoryButtons(catalogWidth)
 
     local detailControls = {
-        self.stage,
-        self.stagePrevButton,
-        self.stageNextButton,
-        self.variant,
-        self.material,
-        self.finish,
-        self.favoriteButton,
-        self.recipePinButton,
-        self.requirements,
-        self.accessPanel
+        self.stage, self.stagePrevButton, self.stageNextButton, self.variant, self.material, self.finish,
+        self.favoriteButton, self.recipePinButton, self.requirements, self.accessPanel
     }
     for controlIndex = 1, #detailControls do
         detailControls[controlIndex]:setVisible(not self.compact)
@@ -1719,9 +1704,7 @@ function KBWCatalog:layout(liveResize)
         self.infoMetaY = visualTop
         self.infoMetaWidth = math.max(80, textWidth - self.previewWidth - 10)
         self.infoMetaHeight = metadataChipHeight(self.infoMetaEntries, self.infoMetaWidth)
-        local visualBottom = math.max(
-            self.previewY + self.previewHeight, self.infoMetaY + self.infoMetaHeight
-        )
+        local visualBottom = math.max(self.previewY + self.previewHeight, self.infoMetaY + self.infoMetaHeight)
         local capacityLines = {}
         local capacities = BuildableInfo.capacityLines(stage)
         for capacityIndex = 1, #capacities do
@@ -1732,9 +1715,7 @@ function KBWCatalog:layout(liveResize)
         end
         self.infoCapacityLines = capacityLines
         self.capacityY = #capacityLines > 0 and (visualBottom + 7) or nil
-        self.capacityHeight = #capacityLines > 0
-            and (metrics.small + 8 + #capacityLines * (metrics.small + 2) + 7)
-            or 0
+        self.capacityHeight = #capacityLines > 0 and (metrics.small + 8 + #capacityLines * (metrics.small + 2) + 7) or 0
 
         local stageCount = self:stageCountForSelection()
         self.stage:setVisible(false)
@@ -1842,9 +1823,7 @@ function KBWCatalog:layout(liveResize)
             self.skillsHeaderY = panelsTop
             local accessY = panelsTop + headerHeight
             local sharedViewportHeight = panelsHeight - headerHeight * 2 - 8
-            local accessHeight = math.min(
-                118, math.max(minimumAccessHeight, math.floor(sharedViewportHeight * .34))
-            )
+            local accessHeight = math.min(118, math.max(minimumAccessHeight, math.floor(sharedViewportHeight * .34)))
             accessHeight = math.min(accessHeight, sharedViewportHeight - minimumRequirementsHeight)
             self.accessPanel:setX(panelX)
             self.accessPanel:setY(accessY)
@@ -1904,7 +1883,9 @@ end
 function KBWCatalog:refreshCategories()
     self.categories = CatalogIndex.get().categories
     local valid = {}
-    for categoryIndex = 1, #self.categories do valid[self.categories[categoryIndex]] = true end
+    for categoryIndex = 1, #self.categories do
+        valid[self.categories[categoryIndex]] = true
+    end
     for category in pairs(self.selectedCategories or {}) do
         if not valid[category] then self.selectedCategories[category] = nil end
     end
@@ -1919,9 +1900,15 @@ function KBWCatalog:refreshFilterOptions()
         for category in pairs(self.selectedCategories) do
             local categorySets = index.filtersByCategory[category]
             if categorySets then
-                for name in pairs(categorySets.subcategories or {}) do sets.subcategories[name] = true end
-                for name in pairs(categorySets.materials or {}) do sets.materials[name] = true end
-                for name in pairs(categorySets.skills or {}) do sets.skills[name] = true end
+                for name in pairs(categorySets.subcategories or {}) do
+                    sets.subcategories[name] = true
+                end
+                for name in pairs(categorySets.materials or {}) do
+                    sets.materials[name] = true
+                end
+                for name in pairs(categorySets.skills or {}) do
+                    sets.skills[name] = true
+                end
             end
         end
     end
@@ -2027,9 +2014,7 @@ function KBWCatalog:layoutCategoryButtons(gridWidth)
         if not value then break end
         local button = self.categoryButtons[slot]
         if not button then
-            button = configureButton(
-                ISButton:new(0, 0, buttonWidth, 28, "", self, self.onCategory), false
-            )
+            button = configureButton(ISButton:new(0, 0, buttonWidth, 28, "", self, self.onCategory), false)
             self.categoryButtons[slot] = button
             self:addChild(button)
         end
@@ -2915,11 +2900,9 @@ function KBWCatalog:onToggleSize()
     local heightKey = self.compact and "compactHeight" or "detailedHeight"
     local xKey = self.compact and "compactX" or "detailedX"
     local yKey = self.compact and "compactY" or "detailedY"
-    local defaultWidth = self.compact
-        and math.max(COMPACT_MIN_WIDTH, math.floor(screenWidth * .48))
+    local defaultWidth = self.compact and math.max(COMPACT_MIN_WIDTH, math.floor(screenWidth * .48))
         or math.max(DETAILED_MIN_WIDTH, math.floor(screenWidth * .62))
-    local defaultHeight = self.compact
-        and math.max(compactMinHeight, math.floor(screenHeight * .46))
+    local defaultHeight = self.compact and math.max(compactMinHeight, math.floor(screenHeight * .46))
         or math.max(detailedMinHeight, math.floor(screenHeight * .72))
     local width = math.min(screenWidth, data[widthKey] or defaultWidth)
     local height = math.min(screenHeight - 8, data[heightKey] or defaultHeight)
@@ -3188,17 +3171,17 @@ function KBWCatalog:prerender()
         local carouselWidth = self.compactCarouselWidth or (self.width - 20)
         local carouselHeight = self.compactCarouselHeight or 28
         self:drawRect(
-            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.surface.a,
-            Theme.surface.r, Theme.surface.g, Theme.surface.b
+            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.surface.a, Theme.surface.r,
+            Theme.surface.g, Theme.surface.b
         )
         self:drawRectBorder(
-            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.borderSoft.a,
-            Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.borderSoft.a, Theme.borderSoft.r,
+            Theme.borderSoft.g, Theme.borderSoft.b
         )
     elseif self.stageCarouselX then
         self:drawRect(
-            self.stageCarouselX, self.stageCarouselY, self.stageCarouselWidth, self.stageCarouselHeight,
-            Theme.surface.a, Theme.surface.r, Theme.surface.g, Theme.surface.b
+            self.stageCarouselX, self.stageCarouselY, self.stageCarouselWidth, self.stageCarouselHeight, Theme.surface.a,
+            Theme.surface.r, Theme.surface.g, Theme.surface.b
         )
         self:drawRectBorder(
             self.stageCarouselX, self.stageCarouselY, self.stageCarouselWidth, self.stageCarouselHeight,
@@ -3220,8 +3203,8 @@ function KBWCatalog:render()
         local textWidth = math.max(40, carouselWidth - (arrowWidth + 8) * 2)
         local text = shortenedText(UIFont.Small, self.compactStageText, textWidth)
         self:drawTextCentre(
-            text, textX + math.floor(textWidth / 2), carouselY + 2,
-            Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+            text, textX + math.floor(textWidth / 2), carouselY + 2, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1,
+            UIFont.Small
         )
         local stageCount = self:stageCountForSelection()
         if stageCount > 1 and stageCount <= 12 then
@@ -3280,9 +3263,8 @@ function KBWCatalog:render()
                 local finishTexture = finishSpriteName and IconResolver.textureForSpriteName(finishSpriteName) or nil
                 if finishTexture then
                     texture = finishTexture
-                    textureColor = WallFinishes.customColorFor(
-                        WallFinishes.wallType(definition, stage), selectedFinish
-                    ) or { r = 1, g = 1, b = 1, a = 1 }
+                    textureColor = WallFinishes.customColorFor(WallFinishes.wallType(definition, stage), selectedFinish)
+                        or { r = 1, g = 1, b = 1, a = 1 }
                 end
             end
             local previewX = self.previewX or x
@@ -3298,45 +3280,45 @@ function KBWCatalog:render()
             local imageHeight = math.max(30, previewHeight - footerHeight)
             if texture then
                 self:drawTextureScaledAspect(
-                    texture, previewX + 8, previewY + 5, previewWidth - 16, imageHeight - 9,
-                    1, textureColor.r, textureColor.g, textureColor.b
+                    texture, previewX + 8, previewY + 5, previewWidth - 16, imageHeight - 9, 1, textureColor.r,
+                    textureColor.g, textureColor.b
                 )
             end
             local footerY = previewY + previewHeight - footerHeight
             self:drawRect(
-                previewX, footerY, previewWidth, footerHeight, Theme.surfaceRaised.a,
-                Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b
+                previewX, footerY, previewWidth, footerHeight, Theme.surfaceRaised.a, Theme.surfaceRaised.r,
+                Theme.surfaceRaised.g, Theme.surfaceRaised.b
             )
             self:drawRect(
-                previewX, footerY, previewWidth, 1, Theme.borderSoft.a,
-                Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+                previewX, footerY, previewWidth, 1, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g,
+                Theme.borderSoft.b
             )
             local boundsText = BuildableInfo.dimensionsText(stage)
             self:drawTextCentre(
-                boundsText, previewX + math.floor(previewWidth / 2), footerY + 4, Theme.accent.r,
-                Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+                boundsText, previewX + math.floor(previewWidth / 2), footerY + 4, Theme.accent.r, Theme.accent.g,
+                Theme.accent.b, 1, UIFont.Small
             )
             local capacityLines = self.infoCapacityLines or {}
             if #capacityLines > 0 and self.capacityY then
-                local capacityHeight = self.capacityHeight or
-                    (FONT_HGT_SMALL + 8 + #capacityLines * (FONT_HGT_SMALL + 2) + 7)
+                local capacityHeight = self.capacityHeight
+                    or (FONT_HGT_SMALL + 8 + #capacityLines * (FONT_HGT_SMALL + 2) + 7)
                 self:drawRect(
-                    x, self.capacityY, textWidth, capacityHeight, Theme.surface.a,
-                    Theme.surface.r, Theme.surface.g, Theme.surface.b
+                    x, self.capacityY, textWidth, capacityHeight, Theme.surface.a, Theme.surface.r, Theme.surface.g,
+                    Theme.surface.b
                 )
                 self:drawRectBorder(
-                    x, self.capacityY, textWidth, capacityHeight, Theme.borderSoft.a,
-                    Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+                    x, self.capacityY, textWidth, capacityHeight, Theme.borderSoft.a, Theme.borderSoft.r,
+                    Theme.borderSoft.g, Theme.borderSoft.b
                 )
                 self:drawText(
-                    BuildableInfo.capacityHeading(stage), x + 8, self.capacityY + 4,
-                    Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+                    BuildableInfo.capacityHeading(stage), x + 8, self.capacityY + 4, Theme.accent.r, Theme.accent.g,
+                    Theme.accent.b, 1, UIFont.Small
                 )
                 local lineY = self.capacityY + FONT_HGT_SMALL + 10
                 for lineIndex = 1, #capacityLines do
                     self:drawText(
-                        capacityLines[lineIndex], x + 8, lineY,
-                        Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
+                        capacityLines[lineIndex], x + 8, lineY, Theme.text.r, Theme.text.g, Theme.text.b, 1,
+                        UIFont.Small
                     )
                     lineY = lineY + FONT_HGT_SMALL + 2
                 end
@@ -3355,8 +3337,8 @@ function KBWCatalog:render()
                     for lineIndex = 1, #stageLines do
                         self:drawTextCentre(
                             stageLines[lineIndex], stageTextX + math.floor(stageTextWidth / 2),
-                            stageY + (lineIndex - 1) * (FONT_HGT_SMALL + 2),
-                            Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+                            stageY + (lineIndex - 1) * (FONT_HGT_SMALL + 2), Theme.accent.r, Theme.accent.g,
+                            Theme.accent.b, 1, UIFont.Small
                         )
                     end
                 else
@@ -3468,12 +3450,12 @@ function KBWCatalog:close()
     if KBWCatalog.instance == self then KBWCatalog.instance = nil end
 end
 
----@param key string|number
+---@param key string | number
 function KBWCatalog:isKeyConsumed(key)
     return Keyboard and key == Keyboard.KEY_ESCAPE
 end
 
----@param key string|number
+---@param key string | number
 function KBWCatalog:onKeyRelease(key)
     if self:isVisible() and self:isKeyConsumed(key) then
         self:close()
@@ -3513,7 +3495,7 @@ function KBWCatalog.onSetDragItem(item, playerNum)
     if player then KBWCatalog.open(player, state) end
 end
 
-if Events.SetDragItem and not KBWCatalog.eventsInstalled then
+if not KBWCatalog.eventsInstalled then
     Events.SetDragItem.Add(KBWCatalog.onSetDragItem)
     KBWCatalog.eventsInstalled = true
 end

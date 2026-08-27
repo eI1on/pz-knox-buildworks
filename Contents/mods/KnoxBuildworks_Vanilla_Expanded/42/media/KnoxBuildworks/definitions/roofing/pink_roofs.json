@@ -1538,7 +1538,7 @@
     {
       "id": "kbw.vanillaexpanded.roofing.pink_roofs.pink_patio_shingles_inner",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_pink_patio_shingles_inner",
-      "displayName": "Pink Patio Shingles  Inner",
+      "displayName": "Pink Patio Shingles Inner",
       "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
       "category": "Roofing",
       "subcategory": "Pink Roofs",

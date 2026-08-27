@@ -67,7 +67,7 @@
     },
     {
       "id": "kbw.vanilla.drying_rack",
-      "displayName": "LargePlantDryingRack",
+      "displayName": "Large Plant Drying Rack",
       "translationKey": "IGUI_KBW_Vanilla_Drying_Rack",
       "tooltipKey": "Tooltip_craft_dryGrainRackDesc",
       "category": "Agricultural",
@@ -223,7 +223,7 @@
     },
     {
       "id": "kbw.vanilla.simple_drying_rack",
-      "displayName": "SimpleLargePlantDryingRack",
+      "displayName": "Simple Large Plant Drying Rack",
       "translationKey": "IGUI_KBW_Vanilla_Simple_Drying_Rack",
       "tooltipKey": "Tooltip_craft_dryGrainRackDesc",
       "category": "Agricultural",
@@ -255,7 +255,7 @@
     },
     {
       "id": "kbw.vanilla.simple_herb_drying_rack",
-      "displayName": "SimpleSmallPlantDryingRack",
+      "displayName": "Simple Small Plant Drying Rack",
       "translationKey": "IGUI_KBW_Vanilla_Simple_Herb_Drying_Rack",
       "tooltipKey": "Tooltip_craft_dryHerbsRackDesc",
       "category": "Agricultural",
@@ -287,7 +287,7 @@
     },
     {
       "id": "kbw.vanilla.herb_drying_rack",
-      "displayName": "SmallPlantDryingRack",
+      "displayName": "Small Plant Drying Rack",
       "translationKey": "IGUI_KBW_Vanilla_Herb_Drying_Rack",
       "tooltipKey": "Tooltip_craft_dryHerbsRackDesc",
       "category": "Agricultural",
