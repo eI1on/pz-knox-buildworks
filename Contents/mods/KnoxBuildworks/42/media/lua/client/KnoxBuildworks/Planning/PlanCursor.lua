@@ -26,7 +26,11 @@ end
 
 local function finishItemType(itemType)
     if not itemType then return nil end
-    local value = tostring(itemType)
+    -- A blended paint names several cans; the recipe input takes the first,
+    -- and KBWFinishAction consumes the rest alongside it.
+    local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
+    local parts = WallFinishes.paintComponents(itemType)
+    local value = tostring(#parts > 0 and parts[1].item or itemType)
     if string.find(value, ".", 1, true) then return value end
     return "Base." .. value
 end

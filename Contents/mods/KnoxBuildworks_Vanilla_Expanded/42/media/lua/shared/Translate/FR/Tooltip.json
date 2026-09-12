@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "Un cadre de porte en métal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "Un pilier en métal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "Une section de cadre de fenêtre en métal.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Un cadre de porte en bois à l'ancienne, indispensable pour ajouter des portes à votre mur rustique.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Un pilier construit en bois à l'ancienne, offrant un support rustique et robuste.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Un mur en bois à l'ancienne avec une ouverture pour laisser entrer la lumière naturelle à l'intérieur.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "Un cadre de porte au design inspiré de Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "Une clôture au design inspiré de Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "Un poteau de clôture au design inspiré de Pile o Crepe.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Une bannière en tissu suspendue contre un mur.",
   "Tooltip_KBWVE_Buildable_Brazier": "Un simple brasero en pierre. Alimentez-le et allumez-le pour la chaleur, la lumière et la cuisine.",
   "Tooltip_KBWVE_Buildable_LogRailing": "Un garde-corps bas en rondins que l'on peut enjamber. Les sections qui se rejoignent forment un angle, et les extrémités décalées reçoivent un poteau dans l'espace.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "Habillage pour finir un bord de toit : bandeaux, coins, sommets et descentes."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Habillage pour finir un bord de toit : bandeaux, coins, sommets et descentes.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Un mur en bois à l'ancienne avec une ouverture pour laisser entrer la lumière naturelle à l'intérieur.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Un cadre de porte en bois à l'ancienne, indispensable pour ajouter des portes à votre mur rustique.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Un pilier construit en bois à l'ancienne, offrant un support rustique et robuste."
 }

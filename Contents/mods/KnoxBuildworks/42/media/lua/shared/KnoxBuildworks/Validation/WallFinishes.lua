@@ -76,7 +76,13 @@ end
 
 local function itemLabel(itemType)
     local fullType = normalizeFullType(itemType)
-    if fullType and getItemNameFromFullType then return getItemNameFromFullType(fullType) end
+    -- getItemNameFromFullType throws outright on a value with no module prefix,
+    -- and normalizeFullType hands back its input unchanged when no script item
+    -- matches. A blended paint key ("PaintGreen+PaintBlack") is never a real
+    -- full type, so the prefix has to be checked here rather than assumed.
+    if fullType and string.find(fullType, ".", 1, true) and getItemNameFromFullType then
+        return getItemNameFromFullType(fullType)
+    end
     return tostring(itemType or "?")
 end
 
@@ -228,6 +234,81 @@ local function firstType(inventory, itemType)
     return nil
 end
 
+-- A paint finish may name a blend rather than a single can. "PaintWhite*3+PaintYellow"
+-- is three parts white to one part yellow, and the sprite set it selects is the
+-- shade an artist already drew for that combination. Components are ordinary
+-- paint items, so a blend is checked, consumed and labelled as its parts; nothing
+-- downstream has to know a new item type exists.
+---@param paintType string|nil
+---@return {item: string, parts: number}[]
+function WallFinishes.paintComponents(paintType)
+    local out = {}
+    local value = tostring(paintType or "")
+    if value == "" then return out end
+    local from = 1
+    while true do
+        local at = string.find(value, "+", from, true)
+        local piece = at and string.sub(value, from, at - 1) or string.sub(value, from)
+        piece = string.match(piece, "^%s*(.-)%s*$") or piece
+        if piece ~= "" then
+            local name, parts = string.match(piece, "^(.-)%*(%d+)$")
+            out[#out + 1] = { item = name or piece, parts = tonumber(parts) or 1 }
+        end
+        if not at then break end
+        from = at + 1
+    end
+    return out
+end
+
+---@param paintType string|nil
+---@return boolean
+function WallFinishes.isPaintMix(paintType)
+    return #WallFinishes.paintComponents(paintType) > 1
+end
+
+-- What the blend actually draws: a list of {item, uses}, or nil when any colour
+-- is short. The ratio is real - three parts white to one yellow spends three
+-- uses of white and one of yellow - so a part may span more than one can, and a
+-- colour that cannot be covered fails the whole blend. Returning nil rather
+-- than a partial list keeps callers from starting an action they cannot finish
+-- and half-consuming the player's paint.
+---@param inventory ItemContainer|nil
+---@param paintType string|nil
+---@return {item: InventoryItem, uses: number}[]|nil
+function WallFinishes.paintItemsIn(inventory, paintType)
+    local parts = WallFinishes.paintComponents(paintType)
+    if #parts == 0 or not inventory then return nil end
+    local draws = {}
+    for index = 1, #parts do
+        local part = parts[index]
+        local entries = allByTypes(inventory, typeAliases(part.item), predicateEnoughDrain, true)
+        local remaining = part.parts
+        for entryIndex = 1, #entries do
+            local items = entries[entryIndex].items
+            for itemIndex = 1, #items do
+                if remaining > 0 then
+                    local item = items[itemIndex]
+                    local has = amountForItem(item, true)
+                    local take = (has < remaining) and has or remaining
+                    if take > 0 then
+                        draws[#draws + 1] = { item = item, uses = take }
+                        remaining = remaining - take
+                    end
+                end
+            end
+        end
+        if remaining > 0 then return nil end
+    end
+    return draws
+end
+
+-- How many uses of one colour the blend spends, for the requirement rows.
+---@param paintType string|nil
+---@return {item: string, parts: number}[]
+function WallFinishes.paintDraw(paintType)
+    return WallFinishes.paintComponents(paintType)
+end
+
 local function finishConfig(definition, stage)
     return (stage and stage.finishes) or (definition and definition.finishes) or {}
 end
@@ -257,6 +338,22 @@ function WallFinishes.registerSpriteWallType(spriteName, wallType)
     registeredSpriteTypes[tostring(spriteName)] = tostring(wallType)
 end
 
+-- The vanilla tables carry a third face for wall corners, "<finish>Corner",
+-- alongside the west and north ones. Plaster is the exception: the base game
+-- never defines plasterTileCorner, so the corner is taken from whichever paint
+-- draws the same tile as plaster - on every vanilla wall type that is the white
+-- one, which is exactly what plasterTile points at.
+local function cornerForPlaster(painting)
+    if not painting or not painting.plasterTile then return nil end
+    if painting.plasterTileCorner then return painting.plasterTileCorner end
+    for key, sprite in pairs(painting) do
+        if sprite == painting.plasterTile and painting[key .. "Corner"] then
+            return painting[key .. "Corner"]
+        end
+    end
+    return nil
+end
+
 -- Bridges a vanilla Painting/WallPaper wall type into the registry shape.
 local function vanillaMapping(wallType)
     local painting = Painting and Painting[wallType] or nil
@@ -266,7 +363,8 @@ local function vanillaMapping(wallType)
         plaster = painting and painting.plasterTile
             and {
                 W = painting.plasterTile,
-                N = painting.plasterTileNorth or painting.plasterTile
+                N = painting.plasterTileNorth or painting.plasterTile,
+                Corner = cornerForPlaster(painting)
             } or nil,
         paints = {},
         wallpapers = {},
@@ -282,7 +380,11 @@ local function vanillaMapping(wallType)
     for itemIndex = 1, #paintItems do
         local name = paintItems[itemIndex].paint
         if painting and painting[name] then
-            mapping.paints[name] = { W = painting[name], N = painting[name .. "North"] or painting[name] }
+            mapping.paints[name] = {
+                W = painting[name],
+                N = painting[name .. "North"] or painting[name],
+                Corner = painting[name .. "Corner"]
+            }
         end
     end
     local paper = WallPaper and WallPaper[wallType] or nil
@@ -291,7 +393,11 @@ local function vanillaMapping(wallType)
         for itemIndex = 1, #paperItems do
             local name = paperItems[itemIndex].paper
             if paper[name] then
-                mapping.wallpapers[name] = { W = paper[name], N = paper[name .. "North"] or paper[name] }
+                mapping.wallpapers[name] = {
+                    W = paper[name],
+                    N = paper[name .. "North"] or paper[name],
+                    Corner = paper[name .. "Corner"]
+                }
             end
         end
     end
@@ -333,15 +439,51 @@ local function eachStageSprite(stage, callback)
     end
 end
 
+-- The flags ISPaintMenu.getWallType recognises. Anything else - a corner, which
+-- carries WallNW alone - makes it return nil, and its callers index that nil
+-- straight away. Knox must not mark such a sprite IsPaintable or vanilla's menu
+-- will offer it and crash.
+local VANILLA_WALL_FLAGS = { "WallN", "WallW", "WindowN", "WindowW", "DoorWallN", "DoorWallW" }
+
+local function propsVanillaPaintable(props)
+    if not props then return false end
+    for flagIndex = 1, #VANILLA_WALL_FLAGS do
+        if props:has(VANILLA_WALL_FLAGS[flagIndex]) then return true end
+    end
+    return props:has(IsoFlagType.WallSE)
+end
+
+---Whether vanilla's paint menu can classify this sprite at all.
+---@param spriteName string|nil
+---@return boolean
+function WallFinishes.vanillaPaintable(spriteName)
+    local sprite = spriteName and getSprite and getSprite(spriteName) or nil
+    return propsVanillaPaintable(sprite and sprite:getProperties() or nil)
+end
+
 function WallFinishes.prepareStage(definition, stage)
     local config = finishConfig(definition, stage)
     if config.enabled == false then return end
     if type(config.mapping) == "table" then WallFinishes.mappingFor(definition, stage) end
     local surface = config.surface or (config.mapping and config.mapping.surface) or {}
     local paintingType = config.wallType
-    if surface.canPaint ~= true or type(paintingType) ~= "string" or paintingType == "" then return end
+    if type(paintingType) ~= "string" or paintingType == "" then return end
+    -- A surface that refuses every finish still has to claim its sprites. Left
+    -- unclaimed they fall through to the vanilla Painting tables, which are more
+    -- permissive than what the definition just asked for, so a wall that says it
+    -- takes nothing would end up plasterable and paintable after all. Sealed
+    -- sprites are registered but never marked IsPaintable.
+    local sealed = surface.canPlaster ~= true
+        and surface.canPaint ~= true
+        and surface.canWallpaper ~= true
+    if surface.canPaint ~= true and not sealed then return end
+    -- A bare face is paintable as it stands only where the surface takes paint
+    -- or paper without plaster first. Marking every face paintable let vanilla's
+    -- own menu paint an unplastered wall whatever this definition asked for.
+    local bareIsPaintable = surface.paintRequiresPlaster == false
+        or surface.wallpaperRequiresPlaster == false
     local seen = {}
-    local function prepareSprite(spriteName, direction)
+    local function prepareSprite(spriteName, direction, paintable)
         if type(spriteName) ~= "string" or spriteName == "" or seen[spriteName] then return end
         seen[spriteName] = true
         registeredSpriteTypes[spriteName] = paintingType
@@ -353,25 +495,48 @@ function WallFinishes.prepareStage(definition, stage)
         local sprite = getSprite and getSprite(spriteName) or nil
         local props = sprite and sprite:getProperties() or nil
         if props then
-            props:set("IsPaintable", "")
+            if paintable and not sealed and propsVanillaPaintable(props) then
+                props:set("IsPaintable", "")
+            end
             props:set("PaintingType", paintingType)
         end
     end
-    eachStageSprite(stage, prepareSprite)
+    local function prepareBareSprite(spriteName, direction)
+        prepareSprite(spriteName, direction, bareIsPaintable)
+    end
+    eachStageSprite(stage, prepareBareSprite)
     local mapping = config.mapping or {}
+    -- Every face reached through a finish is paintable: it is either the
+    -- plastered wall or one already carrying a colour or a paper.
     local function prepareMapping(spriteMap)
         for finishName, faces in pairs(spriteMap or {}) do
             if type(faces) == "table" then
-                for direction, spriteName in pairs(faces) do prepareSprite(spriteName, direction) end
+                for direction, spriteName in pairs(faces) do
+                    prepareSprite(spriteName, direction, true)
+                end
             end
         end
+    end
+    -- The plastered face has to be registered too. Without it a wall stopped
+    -- being recognisable as its own wall type the instant it was plastered,
+    -- and the paint that was meant to follow was looked up in the vanilla
+    -- table instead of this wall's own - where it does not exist.
+    local plasterFaces = mapping.plaster
+    if type(plasterFaces) == "table" then
+        for direction, spriteName in pairs(plasterFaces) do
+            prepareSprite(spriteName, direction, true)
+        end
+    elseif type(plasterFaces) == "string" then
+        prepareSprite(plasterFaces, nil, true)
     end
     prepareMapping(mapping.paints)
     prepareMapping(mapping.directPaints or mapping.barePaints)
     prepareMapping(mapping.wallpapers)
     prepareMapping(mapping.directWallpapers or mapping.bareWallpapers)
     local baseSprites = mapping.baseSprites or mapping.sprites or {}
-    for spriteIndex = 1, #baseSprites do prepareSprite(baseSprites[spriteIndex]) end
+    for spriteIndex = 1, #baseSprites do
+        prepareSprite(baseSprites[spriteIndex], nil, bareIsPaintable)
+    end
 end
 
 ---@param definition KBW.BuildableDefinition
@@ -575,11 +740,113 @@ function WallFinishes.objectNorth(object)
     return props:has("WallN") or props:has("WindowN") or props:has("DoorWallN")
 end
 
+-- Both a Knox mapping and the vanilla Painting/WallPaper tables describe which
+-- sprite is the plastered face and which are the painted ones, so either will
+-- answer what surface a wall is wearing.
+local function mappingForFinishState(wallType)
+    return registeredWallTypes[wallType] or vanillaMapping(wallType)
+end
+
+local function faceCarriesSprite(entry, spriteName)
+    if type(entry) ~= "table" then return entry ~= nil and tostring(entry) == spriteName end
+    for _direction, name in pairs(entry) do
+        if name ~= nil and tostring(name) == spriteName then return true end
+    end
+    return false
+end
+
+local function mapCarriesSprite(spriteMap, spriteName)
+    for _finishName, faces in pairs(spriteMap or {}) do
+        if faceCarriesSprite(faces, spriteName) then return true end
+    end
+    return false
+end
+
+-- Which surface a wall is actually wearing, read from the sprite rather than
+-- from a flag. A sprite that can be reached without plaster proves nothing, so
+-- the direct maps are consulted first.
+local function mappingSpriteIsPlastered(mapping, spriteName)
+    if not mapping or not spriteName then return false end
+    if faceCarriesSprite(mapping.plaster, spriteName) then return true end
+    if mapCarriesSprite(mapping.directPaints or mapping.barePaints, spriteName)
+        or mapCarriesSprite(mapping.directWallpapers or mapping.bareWallpapers, spriteName) then
+        return false
+    end
+    return mapCarriesSprite(mapping.paints, spriteName)
+        or mapCarriesSprite(mapping.wallpapers, spriteName)
+end
+
+local function objectSpriteName(object)
+    local sprite = object and object.getSprite and object:getSprite() or nil
+    return sprite and sprite:getName() or nil
+end
+
+-- Knox marks every sprite of a finishable wall IsPaintable when it registers the
+-- wall type (see prepareStage) - including the sprites of walls that borrow a
+-- vanilla wall type - so that flag says the surface accepts paint eventually,
+-- not that it has been plastered. Reading it here let paint skip the plaster it
+-- was supposed to require. The vanilla tables describe their plastered and
+-- painted faces just as a Knox mapping does, so both are asked the same
+-- question; only a surface with no mapping at all falls back to the flag.
 local function objectIsPlastered(object)
     if not object then return false end
+    local wallType = WallFinishes.objectWallType(object)
+    local mapping = wallType and mappingForFinishState(tostring(wallType)) or nil
+    if mapping then return mappingSpriteIsPlastered(mapping, objectSpriteName(object)) end
     if object.isPaintable and object:isPaintable() then return true end
     local props = object.getProperties and object:getProperties() or nil
     return props ~= nil and props:has("IsPaintable")
+end
+
+-- Exposed so the finish queue waits on the same signal the validation uses.
+---@param object IsoObject|nil
+---@return boolean
+function WallFinishes.isObjectPlastered(object)
+    return objectIsPlastered(object)
+end
+
+local function namedFinishIn(spriteMap, spriteName, prefix)
+    for finishName, faces in pairs(spriteMap or {}) do
+        if faceCarriesSprite(faces, spriteName) then return prefix .. tostring(finishName) end
+    end
+    return nil
+end
+
+-- The surface a wall is wearing, as a value that can be compared: nil for a
+-- bare wall, otherwise "plaster", "paint:X" or "wallpaper:X". Corner merging
+-- compares this against what the wall being built is about to wear, because a
+-- merge leaves one sprite where there were two and can only ever join walls
+-- whose surfaces agree.
+---@param object IsoObject|nil
+---@return string|nil
+function WallFinishes.objectFinishSignature(object)
+    if not object then return nil end
+    local wallType = WallFinishes.objectWallType(object)
+    local mapping = wallType and mappingForFinishState(tostring(wallType)) or nil
+    if not mapping then return nil end
+    local spriteName = objectSpriteName(object)
+    if not spriteName then return nil end
+    -- Plaster is tested first because vanilla reaches its plastered face with a
+    -- can of white: Painting["wall"]["PaintWhite"] and ["plasterTile"] are the
+    -- same sprite. Checking the paints first made every plastered wall report
+    -- itself as painted white, so it never matched a wall bound for plaster.
+    if faceCarriesSprite(mapping.plaster, spriteName) then return "plaster" end
+    return namedFinishIn(mapping.paints, spriteName, "paint:")
+        or namedFinishIn(mapping.directPaints or mapping.barePaints, spriteName, "paint:")
+        or namedFinishIn(mapping.wallpapers, spriteName, "wallpaper:")
+        or namedFinishIn(mapping.directWallpapers or mapping.bareWallpapers, spriteName, "wallpaper:")
+end
+
+-- The surface a selected finish will end up as, in the same terms. A finish
+-- that plasters and then paints ends up as the paint.
+---@param finish KBW.WallFinish|nil
+---@return string|nil
+function WallFinishes.plannedFinishSignature(finish)
+    if not WallFinishes.isWallFinish(finish) then return nil end
+    if finish.paintType then return "paint:" .. tostring(finish.paintType) end
+    if finish.wallpaperType then return "wallpaper:" .. tostring(finish.wallpaperType) end
+    if finish.plaster then return "plaster" end
+    return nil
 end
 
 ---@param action string
@@ -598,7 +865,17 @@ function WallFinishes.canApplyToObject(action, finish, object, hasPlasterAction)
     end
     if mode == "plaster" then
         if not rules.canPlaster then return false, "wall surface cannot be plastered", wallType end
-        if not (instanceof(object, "IsoThumpable") and object.canBePlastered and object:canBePlastered()) then
+        if objectIsPlastered(object) then return false, "wall is already plastered", wallType end
+        -- canBePlastered is an IsoThumpable flag, and Knox keeps it clear on
+        -- corners so vanilla's menu never offers them - it cannot classify a
+        -- WallNW sprite. A passable wall piece is a world prop and has no such
+        -- flag at all. Where Knox knows the plastered face itself, its own
+        -- mapping is the authority; only walls it does not describe fall back
+        -- to asking the object.
+        local plasterMapping = WallFinishes.mappingForWallType(wallType, objectSprite)
+        if not (plasterMapping and plasterMapping.plaster)
+            and instanceof(object, "IsoThumpable")
+            and not (object.canBePlastered and object:canBePlastered()) then
             return false, "wall is not ready for plaster", wallType
         end
         return true, nil, wallType
@@ -659,12 +936,33 @@ function WallFinishes.canApplyToPlanned(action, finish, definition, stage, plann
     return false, "unsupported wall finish action", wallType
 end
 
+-- Passable wall pieces build as moveable props, not IsoThumpables: pillars and
+-- passable frames all declare canPassThrough, and KBWBuildingObject routes those
+-- through the prop branch. Plaster lives on IsoThumpable (canBePlastered), so a
+-- prop can never take it - offering it left the piece built and the finish
+-- silently never applied.
+---@param definition KBW.BuildableDefinition|nil
+---@param stage KBW.BuildStage|nil
+---@return boolean
+function WallFinishes.buildsAsProp(definition, stage)
+    local placement = StageConfig.placement(definition, stage)
+    if placement.kind == "overlay" or placement.kind == "floor" then return false end
+    local object = (stage and stage.object) or {}
+    if object.isProp == true or object.canPassThrough == true then return true end
+    return StageConfig.sprite(definition, stage).isProp == true
+end
+
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
 function WallFinishes.isPlasterable(definition, stage)
     local config = finishConfig(definition, stage)
     local surface = config.surface or (config.mapping and config.mapping.surface) or nil
+    -- A piece that states outright whether it plasters is taken at its word.
+    -- Passable wall pieces - pillars, door frames - are placed as world props
+    -- rather than thumpables, and that used to disqualify them outright; it is
+    -- only a sensible default for pieces that do not say either way.
     if surface and surface.canPlaster ~= nil then return surface.canPlaster == true end
+    if WallFinishes.buildsAsProp(definition, stage) then return false end
     if config.enabled == false then return false end
     if config.enabled == true then return true end
     if not stage then return false end
@@ -758,6 +1056,28 @@ local function paintLabel(name)
     return tostring(name), nil
 end
 
+-- A blend is shown as its parts, with the swatch mixed in the stated ratio so
+-- the colour chip in the catalogue matches what the wall will look like.
+local function blendedPaintLabel(name)
+    local parts = WallFinishes.paintComponents(name)
+    if #parts < 2 then return paintLabel(name) end
+    local label, total, r, g, b = nil, 0, 0, 0, 0
+    for index = 1, #parts do
+        local text, color = paintLabel(parts[index].item)
+        local weight = parts[index].parts
+        total = total + weight
+        if color then
+            r = r + (color[1] or 0) * weight
+            g = g + (color[2] or 0) * weight
+            b = b + (color[3] or 0) * weight
+        end
+        if weight > 1 then text = text .. " x" .. tostring(weight) end
+        label = label and (label .. " + " .. text) or text
+    end
+    if total > 0 then return label, { r / total, g / total, b / total } end
+    return label, nil
+end
+
 local function paperLabel(name)
     local items = ISPaintMenu and ISPaintMenu.WallpaperMenuItems or {}
     for index = 1, #items do
@@ -801,6 +1121,25 @@ local function paintNamesFor(mapping, wallType, direct)
     return sortedKeys(paints)
 end
 
+-- A finish sometimes is not "the wall, painted X" but a wall the game draws in
+-- its own right that happens to be reached with paint X. Classic Brick's black
+-- is the old weathered brick, and calling it "Black" in the list describes the
+-- can rather than the wall. A mapping may name it instead, and the name is a
+-- translation key so it reads correctly in every language.
+---@param mapping table|nil
+---@param paint string
+local function finishLabel(mapping, paint)
+    local labels = mapping and mapping.paintLabels or nil
+    local key = labels and labels[paint] or nil
+    if key then
+        local text = translated(tostring(key), nil)
+        if text and text ~= tostring(key) then
+            return text, select(2, blendedPaintLabel(paint))
+        end
+    end
+    return blendedPaintLabel(paint)
+end
+
 -- Finish entries for the catalog/planning combos. Every entry is a
 -- self-contained finish selection stored on placements and cursors.
 ---@param definition KBW.BuildableDefinition
@@ -820,7 +1159,7 @@ function WallFinishes.entriesFor(definition, stage)
         for nameIndex = 1, #paintNames do
             local name = paintNames[nameIndex]
             if allowedByConfig(config.paints, name) then
-                local label, color = paintLabel(name)
+                local label, color = finishLabel(mapping, name)
                 entries[#entries + 1] = {
                     label = plasterLabel .. " + " .. label,
                     actionType = "wallFinish",
@@ -848,7 +1187,7 @@ function WallFinishes.entriesFor(definition, stage)
         for nameIndex = 1, #paintNames do
             local name = paintNames[nameIndex]
             if allowedByConfig(config.paints, name) then
-                local label, color = paintLabel(name)
+                local label, color = finishLabel(mapping, name)
                 entries[#entries + 1] = {
                     label = label,
                     actionType = "wallFinish",
@@ -899,7 +1238,9 @@ function WallFinishes.validateItems(player, finish, definition, stage)
     end
     if finish.paintType and BuildableRules.wallFinishRequirement(definition, stage, "paint") then
         if not scanTag(inventory, ItemTag.PAINTBRUSH, predicateNotBroken) then return false, "missing paintbrush" end
-        if not firstType(inventory, finish.paintType) then return false, "missing selected paint" end
+        if not WallFinishes.paintItemsIn(inventory, finish.paintType) then
+            return false, "missing selected paint"
+        end
     end
     if finish.wallpaperType and BuildableRules.wallFinishRequirement(definition, stage, "wallpaper") then
         if not scanTag(inventory, ItemTag.PAINTBRUSH, predicateNotBroken) then return false, "missing paintbrush" end
@@ -939,12 +1280,13 @@ local function tagRow(player, id, label, tag, tagName, mode, role, predicate, fl
     }
 end
 
-local function itemRow(player, id, itemType, mode, role)
+local function itemRow(player, id, itemType, mode, role, needed)
     local inventory = player and player:getInventory() or nil
     local fullType = normalizeFullType(itemType)
     local countUses = mode == "drain"
     local availableItems, available = allByTypes(inventory, typeAliases(itemType), predicateAnyUsable, countUses)
     local cheat = player and player.isBuildCheat and player:isBuildCheat()
+    needed = needed or 1
     return {
         id = id,
         kind = "input",
@@ -953,10 +1295,10 @@ local function itemRow(player, id, itemType, mode, role)
         resourceType = "Item",
         label = itemLabel(fullType),
         selectedFullType = fullType,
-        needed = 1,
-        uses = countUses and 1 or nil,
+        needed = needed,
+        uses = countUses and needed or nil,
         available = available,
-        ok = cheat == true or available >= 1,
+        ok = cheat == true or available >= needed,
         isFinish = true,
         possibleItems = { fullType },
         items = { fullType },
@@ -989,7 +1331,20 @@ function WallFinishes.statusRows(player, finish, definition, stage)
             player, "finish-brush", translated("IGUI_KBW_Paintbrush", "Paintbrush"), ItemTag.PAINTBRUSH,
             "base:paintbrush", "keep", "tool", predicateNotBroken
         )
-        rows[#rows + 1] = itemRow(player, "finish-paint", finish.paintType, "drain", "material")
+        -- A blend gets one row per colour, each asking for the number of uses
+        -- its share of the ratio spends, so the panel lists real items with real
+        -- counts instead of one row named after the blend key.
+        local parts = WallFinishes.paintComponents(finish.paintType)
+        if #parts > 1 then
+            for partIndex = 1, #parts do
+                local part = parts[partIndex]
+                rows[#rows + 1] = itemRow(
+                    player, "finish-paint-" .. tostring(partIndex), part.item, "drain", "material", part.parts
+                )
+            end
+        else
+            rows[#rows + 1] = itemRow(player, "finish-paint", finish.paintType, "drain", "material")
+        end
     end
     if finish.wallpaperType and BuildableRules.wallFinishRequirement(definition, stage, "wallpaper") then
         rows[#rows + 1] = tagRow(

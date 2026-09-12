@@ -5595,7 +5595,7 @@
     {
       "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_43",
       "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_43",
-      "displayName": "Cinnamon West Floor",
+      "displayName": "Cinnamon Floor",
       "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
       "category": "Floors",
       "subcategory": "Wooden",
@@ -5619,80 +5619,8 @@
                     ]
                   }
                 ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
               },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 1
-              }
-            ],
-            "skills": {
-              "Woodwork": 2
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildLowHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 20
-            },
-            "category": "Carpentry"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_44",
-      "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_44",
-      "displayName": "Cinnamon North Floor",
-      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
-      "category": "Floors",
-      "subcategory": "Wooden",
-      "material": "Wood",
-      "iconSprite": "floors_interior_tilesandwood_01_44",
-      "placement": {
-        "kind": "floor"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
+              "N": {
                 "layers": [
                   {
                     "rows": [
@@ -5844,7 +5772,7 @@
     {
       "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_46",
       "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_46",
-      "displayName": "Chestnut West Floor",
+      "displayName": "Chestnut Floor",
       "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
       "category": "Floors",
       "subcategory": "Wooden",
@@ -5868,80 +5796,8 @@
                     ]
                   }
                 ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
               },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 1
-              }
-            ],
-            "skills": {
-              "Woodwork": 2
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildLowHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 20
-            },
-            "category": "Carpentry"
-          }
-        }
-      ]
-    },
-    {
-      "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_47",
-      "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_47",
-      "displayName": "Chestnut North Floor",
-      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
-      "category": "Floors",
-      "subcategory": "Wooden",
-      "material": "Wood",
-      "iconSprite": "floors_interior_tilesandwood_01_47",
-      "placement": {
-        "kind": "floor"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
+              "N": {
                 "layers": [
                   {
                     "rows": [
@@ -12093,81 +11949,8 @@
                     ]
                   }
                 ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
               },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 1
-              }
-            ],
-            "skills": {
-              "Woodwork": 2
-            }
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildLowHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 20
-            },
-            "category": "Carpentry"
-          }
-        }
-      ],
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.floors.wooden.floors_interior_tilesandwood_01_55",
-      "translationKey": "IGUI_KBWVE_Buildable_floors_wooden_floors_interior_tilesandwood_01_55",
-      "displayName": "Grey Plank Floor",
-      "tooltipKey": "Tooltip_KBW_Shared_FloorSurface",
-      "category": "Floors",
-      "subcategory": "Wooden",
-      "material": "Wood",
-      "iconSprite": "floors_interior_tilesandwood_01_55",
-      "placement": {
-        "kind": "floor"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
+              "N": {
                 "layers": [
                   {
                     "rows": [

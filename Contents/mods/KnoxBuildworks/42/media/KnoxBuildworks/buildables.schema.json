@@ -116,6 +116,21 @@
         },
         "name": {
           "type": "string"
+        },
+        "iconSprite": {
+          "type": "string",
+          "description": "Sprite shown for this option in the catalogue."
+        },
+        "stages": {
+          "type": "array",
+          "description": "Stages that replace the buildable’s own when this option is selected. This is how a variant swaps geometry while keeping the buildable’s recipe and placement.",
+          "items": {
+            "$ref": "#/properties/buildables/items/properties/stages/items"
+          }
+        },
+        "finishes": {
+          "$ref": "#/properties/buildables/items/properties/finishes",
+          "description": "Surface capabilities for this option, merged over the buildable’s. Use it when an option is not the same surface as the rest of the family - the poor brick is an unfinished construction stage, so it sets canPlaster, canPaint and canWallpaper false."
         }
       }
     },
@@ -266,6 +281,10 @@
             "string",
             "null"
           ]
+        },
+        "ignoreWindowShape": {
+          "type": "boolean",
+          "description": "Windows and the openings they sit in both declare a WindowShape, and a window is normally refused an opening of a different shape. Set this when the window declares a shape no opening in the game actually uses, so the shape cannot say where it belongs."
         }
       }
     },
@@ -691,7 +710,10 @@
                   },
                   "directPaints": {
                     "type": "object",
-                    "description": "Paint sprite mappings for surfaces that do not require plaster. The '*' key may provide one directional neutral base for every color in the surface's native OtherPainting table."
+                    "description": "Paint sprite mappings for surfaces that do not require plaster. The '*' key may provide one directional neutral base for every color in the surface's native OtherPainting table. A key may also name a blend of paints rather than a single item: \"PaintGreen+PaintBlack\" is one part each, and \"PaintWhite*3+PaintYellow\" is three parts white to one of yellow. Every component must be a real paint item; all of them are required in the inventory and all of them are consumed, and the catalogue shows the blend as its parts with the swatch mixed in the stated ratio. Use a blend when a sheet holds a shade the base game has no single can for, instead of adding a subcategory for the colour.",
+                    "propertyNames": {
+                      "pattern": "^\\*$|^[A-Za-z0-9_.]+(\\*[1-9][0-9]*)?(\\+[A-Za-z0-9_.]+(\\*[1-9][0-9]*)?)*$"
+                    }
                   },
                   "directWallpapers": {
                     "type": "object"
@@ -705,6 +727,13 @@
                   "surface": {
                     "type": "object",
                     "description": "Legacy inline location for surface capabilities. Prefer finishes.surface."
+                  },
+                  "paintLabels": {
+                    "type": "object",
+                    "description": "Optional display name per paint key, given as a translation key. Use it when a finish is not \"this wall, painted X\" but a wall the game draws in its own right that happens to be reached with paint X - Classic Brick's black is the old weathered brick, and naming it after the can describes the wrong thing. Falls back to the paint's own name when the key does not resolve.",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
                   }
                 }
               }

@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Perete exterior clasic din clapeta.",
   "Tooltip_KBW_Shared_RedBarnWall": "Perete din lemn de hambar roșu rustic.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Perete clasic cu panou alb.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Perete rustic din lemn rezistent la intemperii.",
   "Tooltip_KBW_Shared_CinderblockWall": "Perete durabil din blocuri de cenuşă.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Perete tradițional de cărămidă cu finisaj cald.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Perete clasic din panouri din lemn.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "O lampă de masă alimentată a cărei culoare și rază luminii urmează dispozitivul original.",
   "Tooltip_KBW_Shared_WallLamp": "O lampă de perete alimentată care trebuie montată pe un perete compatibil.",
   "Tooltip_KBW_Shared_ExitSign": "Un indicator luminos de ieșire care poate fi montat pe un perete sau pe tocul de ușă.",
-  "Tooltip_KBW_Shared_FloorLamp": "O lampă alimentată de sine stătătoare, cu culoarea și raza luminii originale."
+  "Tooltip_KBW_Shared_FloorLamp": "O lampă alimentată de sine stătătoare, cu culoarea și raza luminii originale.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Perete rustic din lemn rezistent la intemperii."
 }

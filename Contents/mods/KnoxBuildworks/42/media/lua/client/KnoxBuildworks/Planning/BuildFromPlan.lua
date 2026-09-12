@@ -154,6 +154,7 @@ local function queueWallCovering(player, blueprintId, blueprint, placement, defi
     local inventory = player:getInventory()
     local item = nil
     local tool = nil
+    local paintCans = nil
     if not (player.isBuildCheat and player:isBuildCheat()) then
         if mode == "plaster" then
             tool = inventory:getFirstTagEvalRecurse(ItemTag.PLASTER_TROWEL, predicateNotBroken)
@@ -162,9 +163,12 @@ local function queueWallCovering(player, blueprintId, blueprint, placement, defi
             transfer(player, item)
         elseif mode == "paint" then
             tool = inventory:getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
-            item = inventory:getFirstTypeRecurse(placement.finish and placement.finish.paintType)
+            paintCans = WallFinishes.paintItemsIn(inventory, placement.finish and placement.finish.paintType)
+            item = paintCans and paintCans[1] and paintCans[1].item or nil
             transfer(player, tool)
-            transfer(player, item)
+            for canIndex = 1, #(paintCans or {}) do
+                transfer(player, paintCans[canIndex].item)
+            end
         elseif mode == "wallpaper" then
             tool = inventory:getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
             item = inventory:getFirstTypeRecurse(placement.finish and placement.finish.wallpaperType)
@@ -182,7 +186,7 @@ local function queueWallCovering(player, blueprintId, blueprint, placement, defi
     ISTimedActionQueue.add(
         KBWFinishAction:new(
             player, mode, target, sprite, item, mode == "plaster" and tool or nil, blueprintId, placement.id,
-            placement.finish
+            placement.finish, nil, paintCans
         )
     )
     watchFinish(player, blueprintId, placement, target, sprite, onBuilt)

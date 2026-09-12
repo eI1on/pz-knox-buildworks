@@ -13,6 +13,115 @@
         "level": 3,
         "translationKey": "IGUI_KBW_Group_fencing_high_fence_chain"
       }
+    },
+    "kbw.vanilla.brickwalllvl1": {
+      "category": "Walls",
+      "subcategory": "Classic Brick",
+      "material": "Brick",
+      "finishes": {
+        "enabled": true,
+        "wallType": "kbw.vanillaexpanded.finish.brick.poor",
+        "surface": {
+          "canPlaster": false,
+          "canPaint": false,
+          "canWallpaper": false
+        },
+        "mapping": {
+          "baseSprites": [
+            "walls_exterior_house_01_20",
+            "walls_exterior_house_01_21",
+            "walls_exterior_house_01_22",
+            "walls_exterior_house_01_23"
+          ]
+        }
+      }
+    },
+    "kbw.vanilla.stonewall": {
+      "category": "Walls",
+      "subcategory": "Stone",
+      "material": "Stone"
+    },
+    "kbw.vanilla.logwall": {
+      "category": "Walls",
+      "subcategory": "Log Cabin Walls",
+      "material": "Wood"
+    },
+    "kbw.vanilla.metalwalllvl1": {
+      "category": "Walls",
+      "subcategory": "Metal Walls",
+      "material": "Metal"
+    },
+    "kbw.vanilla.metalwalllvl2": {
+      "category": "Walls",
+      "subcategory": "Metal Walls",
+      "material": "Metal"
+    },
+    "kbw.vanilla.woodenwalllvl1": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
+    },
+    "kbw.vanilla.woodenwalllvl2": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
+    },
+    "kbw.vanilla.woodenwalllvl3": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
+    },
+    "kbw.vanilla.woodenpole": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
+    },
+    "kbw.vanilla.brickwindowframelvl2": {
+      "category": "Walls",
+      "subcategory": "Classic Brick",
+      "material": "Brick",
+      "allowSpriteReuse": true
+    },
+    "kbw.vanilla.brickwindowframelvl1": {
+      "category": "Walls",
+      "subcategory": "Classic Brick",
+      "material": "Brick"
+    },
+    "kbw.vanilla.logwindowframelvl1": {
+      "category": "Walls",
+      "subcategory": "Log Cabin Walls",
+      "material": "Wood"
+    },
+    "kbw.vanilla.metalwindowframelvl2": {
+      "category": "Walls",
+      "subcategory": "Metal Walls",
+      "material": "Metal"
+    },
+    "kbw.vanilla.metalwindowframelvl1": {
+      "category": "Walls",
+      "subcategory": "Metal Walls",
+      "material": "Metal"
+    },
+    "kbw.vanilla.stonewindowframe": {
+      "category": "Walls",
+      "subcategory": "Stone",
+      "material": "Stone"
+    },
+    "kbw.vanilla.woodenwindowframelvl3": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood",
+      "allowSpriteReuse": true
+    },
+    "kbw.vanilla.woodenwindowframelvl2": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
+    },
+    "kbw.vanilla.woodenwindowframelvl1": {
+      "category": "Walls",
+      "subcategory": "Wooden Panel",
+      "material": "Wood"
     }
   }
 }

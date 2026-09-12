@@ -213,7 +213,8 @@
           }
         }
       ],
-      "iconName": "Build_Composter"
+      "iconName": "Build_Composter",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.compostershoddy",
@@ -593,7 +594,8 @@
           }
         }
       ],
-      "iconName": "Build_RainCollectorCrate"
+      "iconName": "Build_RainCollectorCrate",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.ruggedcross",

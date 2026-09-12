@@ -1042,6 +1042,122 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.appliances.refrigeration.trailer_builtin_fridge",
+      "extends": "kbwve.appliance.metal",
+      "translationKey": "IGUI_KBWVE_Buildable_Appliance_TrailerBuiltInFridge",
+      "displayName": "Trailer Built-In Fridge",
+      "tooltipKey": "Tooltip_KBW_Shared_Refrigerator",
+      "subcategory": "Refrigeration",
+      "material": "Wood",
+      "materialTags": [
+        "Wood",
+        "Metal"
+      ],
+      "iconSprite": "location_trailer_02_16",
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_17"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_11"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_10"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.appliance.refrigerator",
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4,
+              "Electricity": 3,
+              "Woodwork": 3
+            }
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": true
+          }
+        }
+      ]
     }
   ]
 }

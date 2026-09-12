@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Classic clapboard exterior wall.",
   "Tooltip_KBW_Shared_RedBarnWall": "Rustic red barn-wood wall.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Classic white panel wall.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Rustic weathered wood wall.",
   "Tooltip_KBW_Shared_CinderblockWall": "Durable cinder-block wall.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Traditional brick wall with a warm finish.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Classic wooden panel wall.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "A powered table lamp whose light color and radius follow its original fixture.",
   "Tooltip_KBW_Shared_WallLamp": "A powered wall lamp that must be mounted on a compatible wall.",
   "Tooltip_KBW_Shared_ExitSign": "An illuminated exit sign that can be mounted on a wall or door frame.",
-  "Tooltip_KBW_Shared_FloorLamp": "A freestanding powered lamp with the original fixture's light color and radius."
+  "Tooltip_KBW_Shared_FloorLamp": "A freestanding powered lamp with the original fixture's light color and radius.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Rustic weathered wood wall."
 }

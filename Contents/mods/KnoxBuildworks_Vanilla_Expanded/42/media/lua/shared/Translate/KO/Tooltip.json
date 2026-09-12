@@ -260,9 +260,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "금속으로 만든 문틀입니다.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "금속으로 만든 기둥입니다.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "금속으로 만든 창틀 조각입니다.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "소박한 벽에 문을 다는 데 필요한 옛날식 나무 문틀입니다.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "옛날식 나무로 만들어져 소박하고 튼튼한 지지력을 주는 기둥입니다.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "자연광이 실내로 들어오도록 개구부를 낸 옛날식 나무 벽입니다.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "파일 오 크레이프에서 영감을 받은 디자인의 문틀입니다.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "파일 오 크레이프에서 영감을 받은 디자인의 울타리입니다.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "파일 오 크레이프에서 영감을 받은 디자인의 울타리 기둥입니다.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "벽에 거는 천 현수막입니다.",
   "Tooltip_KBWVE_Buildable_Brazier": "단순한 돌 화로입니다. 연료를 넣고 불을 붙이면 난방과 조명, 요리에 쓸 수 있습니다.",
   "Tooltip_KBWVE_Buildable_LogRailing": "뛰어넘을 수 있는 낮은 통나무 난간입니다. 맞닿는 구간은 모서리로 합쳐지고, 어긋난 끝에는 빈틈에 기둥이 세워집니다.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "지붕 가장자리를 마감하는 부재 - 박공널, 모서리, 꼭대기, 수직 홈통."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "지붕 가장자리를 마감하는 부재 - 박공널, 모서리, 꼭대기, 수직 홈통.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "자연광이 실내로 들어오도록 개구부를 낸 옛날식 나무 벽입니다.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "소박한 벽에 문을 다는 데 필요한 옛날식 나무 문틀입니다.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "옛날식 나무로 만들어져 소박하고 튼튼한 지지력을 주는 기둥입니다."
 }

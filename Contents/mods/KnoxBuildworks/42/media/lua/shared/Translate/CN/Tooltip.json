@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "经典护墙板外墙。",
   "Tooltip_KBW_Shared_RedBarnWall": "质朴的红色谷仓木墙。",
   "Tooltip_KBW_Shared_WhitePanelWall": "经典白色饰板墙。",
-  "Tooltip_KBW_Shared_OldWoodWall": "质朴的风化木墙。",
   "Tooltip_KBW_Shared_CinderblockWall": "坚固耐用的煤渣砖墙。",
   "Tooltip_KBW_Shared_ClassicBrickWall": "具有温暖质感的传统砖墙。",
   "Tooltip_KBW_Shared_WoodPanelWall": "经典木饰板墙。",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "一盏需要供电的台灯，保留原灯具的光色和照明范围。",
   "Tooltip_KBW_Shared_WallLamp": "需要供电并安装在合适墙面上的壁灯。",
   "Tooltip_KBW_Shared_ExitSign": "可安装在墙面或门框上的发光出口标志。",
-  "Tooltip_KBW_Shared_FloorLamp": "一盏独立式供电灯具，保留原灯具的光色和照明范围。"
+  "Tooltip_KBW_Shared_FloorLamp": "一盏独立式供电灯具，保留原灯具的光色和照明范围。",
+  "Tooltip_KBW_Shared_OldWoodWall": "质朴的风化木墙。"
 }

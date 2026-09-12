@@ -9031,6 +9031,770 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.stair_railings.wood_and_metal_stair_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_stair_railings_wood_and_metal_stair_railing",
+      "displayName": "Wood and Metal Stair Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Stair Railings",
+      "material": "Wood and Metal",
+      "iconSprite": "fixtures_railings_01_7",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_5"
+                      ],
+                      [
+                        "fixtures_railings_01_6"
+                      ],
+                      [
+                        "fixtures_railings_01_7"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_4"
+                      ],
+                      [
+                        "fixtures_railings_01_15"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_2",
+                        "fixtures_railings_01_1",
+                        "fixtures_railings_01_0"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_3",
+                        "fixtures_railings_01_14"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 60
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.stair_railings.metal_stair_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_stair_railings_metal_stair_railing",
+      "displayName": "Metal Stair Railing",
+      "tooltipKey": "Tooltip_KBW_Shared_MallRailing",
+      "category": "Fencing",
+      "subcategory": "Stair Railings",
+      "material": "Metal",
+      "iconSprite": "fixtures_railings_01_23",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_21"
+                      ],
+                      [
+                        "fixtures_railings_01_22"
+                      ],
+                      [
+                        "fixtures_railings_01_23"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_20"
+                      ],
+                      [
+                        "fixtures_railings_01_13"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_18",
+                        "fixtures_railings_01_17",
+                        "fixtures_railings_01_16"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_19",
+                        "fixtures_railings_01_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 8
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 60
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.stair_railings.white_metal_stair_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_stair_railings_white_metal_stair_railing",
+      "displayName": "White Metal Stair Railing",
+      "tooltipKey": "Tooltip_KBW_Shared_MallRailing",
+      "category": "Fencing",
+      "subcategory": "Stair Railings",
+      "material": "Metal",
+      "iconSprite": "fixtures_railings_01_71",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_69"
+                      ],
+                      [
+                        "fixtures_railings_01_70"
+                      ],
+                      [
+                        "fixtures_railings_01_71"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_68"
+                      ],
+                      [
+                        "fixtures_railings_01_103"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_94",
+                        "fixtures_railings_01_87",
+                        "fixtures_railings_01_86"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_95",
+                        "fixtures_railings_01_102"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_welding_mask",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:weldingmask"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "metal_stock",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.IronBar",
+                  "Base.MetalBar",
+                  "Base.SteelBar",
+                  "Base.MetalPipe"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "torch_fuel",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.BlowTorch"
+                ],
+                "amount": 1,
+                "uses": 8
+              },
+              {
+                "id": "welding_rods",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WeldingRods"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "MetalWelding": 4
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureMedium",
+            "xp": {
+              "MetalWelding": 60
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.stair_railings.wooden_stair_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_stair_railings_wooden_stair_railing",
+      "displayName": "Wooden Stair Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Stair Railings",
+      "material": "Wood",
+      "iconSprite": "fixtures_railings_01_80",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_82"
+                      ],
+                      [
+                        "fixtures_railings_01_81"
+                      ],
+                      [
+                        "fixtures_railings_01_80"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_84"
+                      ],
+                      [
+                        "fixtures_railings_01_83"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_99",
+                        "fixtures_railings_01_100",
+                        "fixtures_railings_01_101"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_97",
+                        "fixtures_railings_01_98"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 60
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.fencing.stair_railings.white_wooden_stair_railing",
+      "translationKey": "IGUI_KBWVE_Buildable_fencing_stair_railings_white_wooden_stair_railing",
+      "displayName": "White Wooden Stair Railing",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_fencing_railing_white_wooden_railing",
+      "category": "Fencing",
+      "subcategory": "Stair Railings",
+      "material": "Wood",
+      "iconSprite": "fixtures_railings_01_120",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_122"
+                      ],
+                      [
+                        "fixtures_railings_01_121"
+                      ],
+                      [
+                        "fixtures_railings_01_120"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_124"
+                      ],
+                      [
+                        "fixtures_railings_01_123"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_139",
+                        "fixtures_railings_01_140",
+                        "fixtures_railings_01_141"
+                      ]
+                    ]
+                  },
+                  {
+                    "rows": [
+                      [
+                        "fixtures_railings_01_137",
+                        "fixtures_railings_01_138"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            }
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 60
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "hoppable": true
+          }
+        }
+      ]
     }
   ]
 }

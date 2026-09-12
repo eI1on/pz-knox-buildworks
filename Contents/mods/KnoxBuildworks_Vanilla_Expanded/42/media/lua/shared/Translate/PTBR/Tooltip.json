@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "Uma moldura de porta feita de metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "Um pilar feito de metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "Uma seção de moldura de janela feita de metal.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Uma moldura de porta feita de madeira antiga, essencial para adicionar portas à sua parede rústica.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Um pilar construído a partir de madeira antiga, oferecendo um suporte rústico e robusto.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Uma parede de madeira antiga com uma abertura para permitir a entrada de luz natural.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "Uma moldura de porta com um design inspirado em Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "Uma cerca com um design inspirado em Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "Um poste de cerca com um design inspirado em Pile o Crepe.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Um estandarte de pano pendurado contra uma parede.",
   "Tooltip_KBWVE_Buildable_Brazier": "Um braseiro de pedra simples. Abasteça-o e acenda-o para ter calor, luz e onde cozinhar.",
   "Tooltip_KBWVE_Buildable_LogRailing": "Um guarda-corpo baixo de troncos que dá para saltar. As secções que se encontram formam um canto, e as pontas desencontradas recebem um poste no vão.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "Acabamento para a borda do telhado - rufos, cantos, topos e tubos de queda."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Acabamento para a borda do telhado - rufos, cantos, topos e tubos de queda.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Uma parede de madeira antiga com uma abertura para permitir a entrada de luz natural.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Uma moldura de porta feita de madeira antiga, essencial para adicionar portas à sua parede rústica.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Um pilar construído a partir de madeira antiga, oferecendo um suporte rústico e robusto."
 }

@@ -55,6 +55,20 @@ local function hasItemType(player, itemType, requireItems)
     return false
 end
 
+-- A wall paint may name a blend of two cans ("PaintWhite*3+PaintYellow"). Each
+-- component is an ordinary paint item and every one of them has to be present
+-- and valid, so the check runs per component rather than on the joined string.
+local function hasPaintFor(player, paintType, requireItems)
+    local parts = WallFinishes.paintComponents(paintType)
+    if #parts == 0 then return false end
+    for index = 1, #parts do
+        if not paintTypes[parts[index].item] then return false end
+    end
+    if not requireItems then return true end
+    if player and player.isBuildCheat and player:isBuildCheat() then return true end
+    return WallFinishes.paintItemsIn(player and player:getInventory() or nil, paintType) ~= nil
+end
+
 local function predicateNotBroken(item)
     if not item then return false end
     if item.isBroken and item:isBroken() then return false end
@@ -129,7 +143,7 @@ function FinishActions.validate(player, definition, stage, finish, requireItems)
         if not hasTag(player, ItemTag.PAINTBRUSH, requireItems, predicateNotBroken) then
             return false, "missing paintbrush"
         end
-        if not hasItemType(player, finish.paintType, requireItems) then return false, "missing selected paint" end
+        if not hasPaintFor(player, finish.paintType, requireItems) then return false, "missing selected paint" end
         return true
     end
     if action == "paintSign" then

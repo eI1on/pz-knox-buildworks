@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Mur extérieur classique en planches à clin.",
   "Tooltip_KBW_Shared_RedBarnWall": "Mur rustique en bois de grange rouge.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Mur de panneaux blancs classique.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Mur rustique en bois patiné.",
   "Tooltip_KBW_Shared_CinderblockWall": "Mur en parpaings durable.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Mur de brique traditionnel avec une finition chaleureuse.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Mur de panneaux de bois classique.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "Une lampe de table alimentée dont la couleur et le rayon de la lumière suivent son luminaire d'origine.",
   "Tooltip_KBW_Shared_WallLamp": "Une applique alimentée qui doit être montée sur un mur compatible.",
   "Tooltip_KBW_Shared_ExitSign": "Une enseigne de sortie lumineuse qui peut être montée sur un mur ou un cadre de porte.",
-  "Tooltip_KBW_Shared_FloorLamp": "Une lampe autonome avec la couleur et le rayon de lumière du luminaire d'origine."
+  "Tooltip_KBW_Shared_FloorLamp": "Une lampe autonome avec la couleur et le rayon de lumière du luminaire d'origine.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Mur rustique en bois patiné."
 }

@@ -2187,6 +2187,128 @@
           }
         }
       ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.containers.residential.location_trailer_02_66",
+      "translationKey": "IGUI_KBWVE_Buildable_containers_residential_location_trailer_02_66",
+      "displayName": "Trailer Counter Corner",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "category": "Containers",
+      "subcategory": "Residential",
+      "material": "Wood",
+      "iconSprite": "location_trailer_02_66",
+      "placement": {
+        "kind": "object"
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_64"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_67"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_02_65"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 50,
+            "timedAction": "BuildWoodenStructureMedium",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": true
+          },
+          "container": {
+            "type": "counter"
+          }
+        }
+      ]
     }
   ]
 }

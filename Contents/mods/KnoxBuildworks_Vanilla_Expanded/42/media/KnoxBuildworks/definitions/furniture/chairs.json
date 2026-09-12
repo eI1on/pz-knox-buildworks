@@ -21,7 +21,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "recreational_01_15"
@@ -1597,7 +1596,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1784,7 +1782,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1950,7 +1947,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -2137,7 +2133,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",

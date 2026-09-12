@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "A door frame made of metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "A pillar made of metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "A window frame section made of metal.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "An old-fashioned wood door frame, essential for adding doors to your rustic wall.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "A pillar constructed from old-fashioned wood, offering a rustic and sturdy support.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "An old-fashioned wood wall with an opening to allow natural light inside.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "A door frame with a design inspired by Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "A fence with a design inspired by Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "A fence post with a design inspired by Pile o Crepe.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "A cloth banner that hangs against a wall.",
   "Tooltip_KBWVE_Buildable_Brazier": "A simple stone brazier. Feed it fuel and light it for warmth, light and cooking.",
   "Tooltip_KBWVE_Buildable_LogRailing": "A low log railing you can vault over. Meeting sections join into a corner piece, and offset ends get a post in the gap.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "Trim for finishing a roof edge - fascia runs, corners, peaks and downpipes."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Trim for finishing a roof edge - fascia runs, corners, peaks and downpipes.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "An old-fashioned wood wall with an opening to allow natural light inside.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "An old-fashioned wood door frame, essential for adding doors to your rustic wall.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "A pillar constructed from old-fashioned wood, offering a rustic and sturdy support."
 }

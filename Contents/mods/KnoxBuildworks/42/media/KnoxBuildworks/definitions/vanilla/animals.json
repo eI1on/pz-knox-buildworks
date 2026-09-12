@@ -187,7 +187,8 @@
           }
         }
       ],
-      "iconName": "Build_TroughWoodLong"
+      "iconName": "Build_TroughWoodLong",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.dryingrackmedium",
@@ -413,7 +414,8 @@
           }
         }
       ],
-      "iconName": "Build_SofteningBeam"
+      "iconName": "Build_SofteningBeam",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.spinning_wheel",

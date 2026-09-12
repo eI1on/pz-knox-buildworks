@@ -159,7 +159,8 @@
           }
         }
       ],
-      "iconName": "Build_CharcoalDrum"
+      "iconName": "Build_CharcoalDrum",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.charcoal_burner_orangebarrel",

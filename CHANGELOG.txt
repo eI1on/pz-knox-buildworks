@@ -1,3 +1,23 @@
+[b]Windows, Gables & Wall Finishes Update[/b]
+[list]
+[*][b]382 walls became 857, and 21 windows became 91.[/b] Nearly every family is bigger, and about 3,800 sprites the game had drawn, but nothing used, now are buildable.
+[*][b]Window walls.[/b] Eight window designs for most wall families - arched, square, framed, wide, round, full height, plus a double door and a double window two squares across. Grouped by design, so one entry cycles the pieces that make up a window.
+[*][b]70 windows to go in them.[/b] Church, metal, white and wooden, in every shape the frames come in. A window only fits an opening it was drawn for, so a frame of the wrong shape is refused rather than letting you build something that looks wrong.
+[*][b]30-degree gables for every family.[/b] The last update added shallow roofs but nothing to close their ends. Every family that had steep gables now has shallow ones too.
+[*][b]Bathroom tiles: one tiling became thirteen.[/b] Wall, corner, pillar, window frame and door frame in every tiling on the sheet, and nine of them have window walls as well.
+[*][b]Blended paints.[/b] A finish can call for two cans: Classic Brick gains a tan and a forest green, Cinderblock a dark grey. The materials panel shows each can and what it costs.
+[*][b]Old / Weathered Brick and Poor Brick are variants, not paints.[/b] Both were hiding in Classic Brick's colour list. They are their own look now, on every piece, and the poor brick takes no finish at all - it is an unfinished wall.
+[*][b]Painting a wall now paints its gables.[/b] Three families changed the wall and left the gable in the old colour. Corner walls took the flat wall's sprite when painted; they take a corner now.
+[*][b]The vanilla window frames sit with their walls now.[/b] Brick, log, metal, stone and wooden window frames were filed under a Window Frames list of their own. Each family has one entry again: the poor and shoddy grades cycle under it the way the walls do, and the old vanilla look is kept as a variant rather than a second entry.
+[*][b]The Buildable Editor is a debug tool in singleplayer.[/b] It was on the dock for every solo game, though it rewrites the rules the whole catalogue is built from. It now appears only when the game is launched in debug mode. Multiplayer is unchanged - admins only.
+[*][b]Stair railings.[/b] Five of them - wood and metal, metal, white metal, wooden and white wooden - under Fencing > Stair Railings. Each is a full flight in one build: three squares of railing along the stairs and two more on the level above, placed in one go and running in either direction.
+[*][b]Built doors can be locked again.[/b] The key id on the doorknob you put into a door was thrown away, so every door and gate built through Buildworks came out keyed to nothing and no key would ever fit it. The doorknob now hands its key to the finished door, garage doors included, and both halves of a double door share the one key. Doors built before this update are unaffected.
+[*][b]Overhead cabinets hang where you would expect them to.[/b] They refused any square that already held a counter or a cabinet, which is exactly where a kitchen puts them, and they would not go on a door or window frame either. Both now work - the cabinet hangs above whatever stands under it. Corner cabinets took support only from one of the two walls they touch, so whether they went up depended on which wall you had built; either wall carries them now.
+[*][b]The trailer kitchen, finished.[/b] The floating trailer counter only had two of its four sides, so it turned into a doorless box half the time - the missing two are in. Added the counter corner and the floating counter corner to go with them, and the built-in trailer fridge: a fridge with a small freezer recessed into a wooden cupboard, costing a small fridge worth of parts plus planks for the cabinet around it.
+[*][b]A new floor now replaces the old one.[/b] Laying a floor over another left the square still drawing the old one until the chunk reloaded, so the floor you had just paid for looked like it had not been built - and the grass or overlay underneath was never cleared. Floors were the one build that skipped the redraw every other build does, and on a server nothing redrew them at all.
+[*][b]Three floors were the same floor twice.[/b] Cinnamon and Chestnut each had a separate West and North entry, and the "White" and "Grey" Plank floors are one floor in two rotations. Each is a single entry now that you rotate, like every other floor.
+[/list]
+
 [b]Durability, Mannequins & Planning Traffic Update[/b]
 [list]
 [*][b]Mannequins are real mannequins:[/b] Built mannequins were plain tile objects, so they had no storage, showed no capacity and could not be looted or dressed. All twelve are now built as the base game's own mannequin: clothes go on them exactly as on one found in a mall, and the build menu lists their capacity. A mannequin you build arrives undressed rather than in a random outfit, faces any of four directions, and previews the posed body while placing instead of a flat marker. The two Mannequin Stands are unaffected. Mannequins built before this update keep their old form.
@@ -37,7 +57,7 @@
 [*][b]Lighter well streaming:[/b] Well detection now checks the vanilla well sprite and hasModData before reading object mod data, avoiding empty mod-data table allocations on every unrelated object loaded with a square.
 [*][b]Workshop fixtures:[/b] Added the two-tile Wooden Pegboard and Wood-Top Workbench with all four rotations, native wall/table properties, balanced carpentry and welding recipes, and translations in every supported language.
 [*][b]Cleaner sprite diagnostics:[/b] Expected sprite sharing can now be declared by the definition that intentionally reuses it. Material and finish variants inside one buildable no longer generate duplicate warnings, each real cross-buildable conflict is reported only once, and moveable/prop objects no longer receive incompatible SpriteConfig components.
-[*][b]Translations:[/b] Added KO translations
+[*][b]Translations:[/b] All eight languages carry every name and tooltip the definitions ask for, and 1,372 keys left behind by renamed, merged or folded entries were removed.
 [/list]
 
 
@@ -71,7 +91,7 @@
 [*][b]Correct wall and fence connections:[/b] Matching north/west pieces placed on the same tile now merge into their V-shaped corner sprite, while offset perpendicular ends use a dedicated pillar where one exists. Connections are restricted to the same buildable, stage, material and variant, preventing unrelated nearby objects from creating incorrect corners.
 [*][b]Fireplace alignment:[/b] Corrected the west/north sprite mapping for single and double fireplaces so they render on the proper side of brick jambs instead of being hidden behind them.
 [*][b]Buildables balance:[/b] Removed glass pane req from Bank Wall Frames.
-[*][b]Translations:[/b] Added FR, PTBR, RO translations
+[*][b]Translations:[/b] All eight languages carry every name and tooltip the definitions ask for, and 1,372 keys left behind by renamed, merged or folded entries were removed.
 [/list]
 
 

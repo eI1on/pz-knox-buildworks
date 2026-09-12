@@ -21,7 +21,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_restaurant_pileocrepe_01_35"
@@ -120,7 +119,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_3"
@@ -235,7 +233,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_11"
@@ -334,7 +331,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_18"
@@ -433,7 +429,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_25"
@@ -460,7 +455,6 @@
               "E": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_29"
@@ -559,7 +553,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_33"
@@ -674,7 +667,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_39"
@@ -799,7 +791,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_43"
@@ -898,7 +889,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_47"
@@ -1023,7 +1013,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_49"
@@ -1122,7 +1111,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_55"
@@ -1221,7 +1209,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_59"
@@ -1320,7 +1307,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_high_01_63"
@@ -1435,7 +1421,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "furniture_tables_low_01_1"
@@ -1534,7 +1519,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_business_office_generic_01_1"
@@ -1561,7 +1545,6 @@
               "E": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_business_office_generic_01_14"
@@ -1665,7 +1648,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_business_office_generic_01_1"
@@ -1696,7 +1678,6 @@
               "E": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_business_office_generic_01_14"
@@ -1803,7 +1784,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_restaurant_spiffos_02_35"
@@ -1831,7 +1811,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",
@@ -1948,7 +1927,6 @@
               "W": {
                 "layers": [
                   {
-                    
                     "rows": [
                       [
                         "location_restaurant_spiffos_02_37"
@@ -1976,7 +1954,6 @@
           },
           "requirements": {
             "inputs": [
-
               {
                 "id": "tool_welding_mask",
                 "role": "tool",

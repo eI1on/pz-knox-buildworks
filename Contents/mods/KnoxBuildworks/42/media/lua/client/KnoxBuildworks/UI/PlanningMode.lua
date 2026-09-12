@@ -10,6 +10,7 @@ local KBW = require("KnoxBuildworks/Core")
 local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Groups = require("KnoxBuildworks/Definitions/Groups")
+local TableUtil = require("KnoxBuildworks/Util/Table")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local Planner = require("KnoxBuildworks/Planning/Planner")
 local GhostRenderer = require("KnoxBuildworks/Planning/GhostRenderer")
@@ -479,7 +480,7 @@ function KBWPlanningCatalogPanel:createChildren()
 
     self.variantCombo = ISComboBox:new(
         18, self.variantComboY, math.floor((self.width - 44) / 2), self.selectorComboH, self,
-        self.onVariantMaterialChanged
+        self.onPlanVariantChanged
     )
     self.variantCombo:initialise()
     applyCombo(self.variantCombo)
@@ -490,7 +491,7 @@ function KBWPlanningCatalogPanel:createChildren()
 
     self.materialCombo = ISComboBox:new(
         26 + math.floor((self.width - 44) / 2), self.variantComboY, math.floor((self.width - 44) / 2),
-        self.selectorComboH, self, self.onVariantMaterialChanged
+        self.selectorComboH, self, self.onPlanVariantChanged
     )
     self.materialCombo:initialise()
     applyCombo(self.materialCombo)
@@ -752,7 +753,7 @@ function KBWPlanningCatalogPanel:refreshVariantMaterialChoices(definition, stage
         getText("IGUI_KBW_DefaultMaterial"),
         baseDefinition ~= nil and baseDefinition.materialRequired == true
     )
-    self:refreshFinishChoices(baseDefinition, stage)
+    self:refreshFinishChoices(self:effectiveDefinition(definition, stage), stage)
 end
 
 -- Same list the main catalogue offers: wallCovering buildables get the full
@@ -798,7 +799,42 @@ function KBWPlanningCatalogPanel:onStageChanged()
     self:refreshVariantMaterialChoices(self.owner and self.owner.selectedBuildable, self:selectedStage())
 end
 
+-- A variant may declare a different surface from its buildable - the poor brick
+-- declares one that refuses every finish - so the finish list has to be built
+-- from the variant the player has selected. Reading the base offered finishes
+-- the variant does not have.
+---@param definition KBW.BuildableDefinition|nil
+---@param stage KBW.BuildStage|nil
+---@return KBW.BuildableDefinition|nil
+function KBWPlanningCatalogPanel:effectiveDefinition(definition, stage)
+    local baseDefinition = Groups.resolveDefinition(definition, stage)
+    if not baseDefinition then return nil end
+    local optionSets = { self:selectedVariant(), self:selectedMaterial() }
+    local sources = { baseDefinition.variants or {}, baseDefinition.materialOptions or {} }
+    local effective = baseDefinition
+    for setIndex = 1, #optionSets do
+        local wantedId = optionSets[setIndex]
+        if wantedId and wantedId ~= "" then
+            local options = sources[setIndex]
+            for optionIndex = 1, #options do
+                if options[optionIndex].id == wantedId then
+                    effective = TableUtil.merge(effective, options[optionIndex])
+                    break
+                end
+            end
+        end
+    end
+    return effective
+end
+
 function KBWPlanningCatalogPanel:onVariantMaterialChanged()
+end
+
+function KBWPlanningCatalogPanel:onPlanVariantChanged()
+    local definition = self.owner and self.owner.selectedBuildable
+    if not definition then return end
+    local stage = self:selectedStage()
+    self:refreshFinishChoices(self:effectiveDefinition(definition, stage), stage)
 end
 
 function KBWPlanningCatalogPanel:onCategoryChanged()

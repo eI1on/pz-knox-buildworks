@@ -948,6 +948,26 @@ function KBWBuildingObject:runOnCreate(part, context)
     })
 end
 
+-- Vanilla ISBuildingObject:updateModData keeps the key id of the doorknob it
+-- consumed so the finished door can be locked with the matching key. Both build
+-- paths hand back a recipe data object with the same recorded-consumed list, so
+-- one reader serves the Knox recipes and the native entity recipes alike.
+local function consumedKeyId(recipeData)
+    if not recipeData or not recipeData.getAllRecordedConsumedItems then return nil end
+    local items = recipeData:getAllRecordedConsumedItems()
+    if not items then return nil end
+    local fallback = nil
+    for itemIndex = 0, items:size() - 1 do
+        local usedItem = items:get(itemIndex)
+        local keyId = usedItem and usedItem.getKeyId and usedItem:getKeyId() or nil
+        if keyId and keyId ~= -1 then
+            if usedItem:getFullType() == "Base.Doorknob" then return keyId end
+            if fallback == nil then fallback = keyId end
+        end
+    end
+    return fallback
+end
+
 function KBWBuildingObject:consumeConstructionRequirements(square)
     local usesNativeInputs = EntityCompat.usesNativeRecipeInputs(self.stage)
     if usesNativeInputs and not self.craftRecipe then
@@ -1173,7 +1193,18 @@ function KBWBuildingObject:connectWallParts(square, part, north)
         -- corner sprite and nothing where they placed. Vanilla never merges
         -- same-square edges at all - buildUtil.checkCorner only drops the
         -- corner sprite into the diagonal gap, which is the pillar branch below.
+        -- The merge replaces both walls with one sprite, so it can only join
+        -- two walls whose surfaces agree. The finish is not part of the
+        -- connection identity and cannot be - it is applied after the build, so
+        -- a wall waiting for plaster still wears its bare sprite here. What the
+        -- neighbour is wearing is therefore compared against what this wall is
+        -- about to wear: both bare merges, both plastered merges, and a bare
+        -- wall meeting a wall bound for plaster does not - which is what used
+        -- to put the finish on the neighbour and leave this face without one.
+        local finishesMatch = WallFinishes.objectFinishSignature(perpendicular)
+            == WallFinishes.plannedFinishSignature(self.finish)
         if perpendicular
+            and finishesMatch
             and not wallRunContinues(square, matchIdentity, north)
             and not wallRunContinues(square, matchIdentity, not north) then
             local cornerMaxHealth = math.max(
@@ -1193,7 +1224,12 @@ function KBWBuildingObject:connectWallParts(square, part, north)
             corner:setMaxHealth(cornerMaxHealth)
             corner:setHealth(cornerHealth)
             corner:setBreakSound(self.breakSound or IsoThumpable.GetBreakFurnitureSound(self.corner))
-            corner:setCanBePlastered(self.canBePlastered == true)
+            -- Never to vanilla's paint menu: it classifies a wall by WallN /
+            -- WallW / Window / DoorWall / WallSE and a corner has none of them,
+            -- so it would offer plaster and then index Painting[nil]. Knox
+            -- plasters corners through its own path.
+            corner:setCanBePlastered(self.canBePlastered == true
+                and WallFinishes.vanillaPaintable(self.corner))
             corner:setCorner(true)
             corner:setCanBarricade(false)
             corner:getModData().KBW = copyTable(matchIdentity)
@@ -1334,6 +1370,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         )
         return false
     end
+    self.keyId = consumedKeyId(self.craftRecipeData)
     local replacedIndex = -1
     local previousRemoved = false
     local function removePrevious(target)
@@ -1363,6 +1400,20 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 local part = target:addFloor(tile.sprite)
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
+                -- Vanilla's ISWoodenFloor clears the grass or overlay the floor
+                -- is laid over; addFloor itself only clears what the game marks
+                -- as a floor.
+                local objects = target:getObjects()
+                for objectIndex = objects:size() - 1, 0, -1 do
+                    local existing = objects:get(objectIndex)
+                    local existingProps = existing and existing:getProperties() or nil
+                    if existing ~= part and existingProps
+                        and existingProps:has(IsoFlagType.canBeRemoved) then
+                        target:transmitRemoveItemFromSquare(existing)
+                        target:RemoveTileObject(existing)
+                        break
+                    end
+                end
                 target:disableErosion()
                 sendServerCommand(
                     "erosion", "disableForSquare", { x = target:getX(), y = target:getY(), z = target:getZ() }
@@ -1370,6 +1421,12 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 Properties.applyToObject(
                     part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = true }
                 )
+                -- Every other branch below ends with these two. ISBuildAction
+                -- does them for vanilla, but it returns early on a multiplayer
+                -- client and only ever touches the anchor square, so a floor
+                -- kept rendering the old tile until the chunk was streamed again.
+                target:RecalcAllWithNeighbours(true)
+                buildUtil.setHaveConstruction(target, true)
                 self:transmitPart(part, self:runOnCreate(part, { tile = tile, tileIndex = index }))
             elseif nativeObjectType then
                 local part, nativeState, nativeError = NativeObjectFactory.create(
@@ -1454,6 +1511,8 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 local part = IsoDoor.new(getCell(), target, tile.sprite, north)
                 local health = math.max(tonumber(self:getBuildHealth()) or 0, tonumber(part:getHealth()) or 0)
                 part:setHealth(health)
+                -- A garage door is a door whatever its sprite type says.
+                if self.keyId then part:setKeyId(self.keyId) end
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
                 removePrevious(target)
@@ -1489,6 +1548,11 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 buildUtil.setInfo(part, self)
                 self.isContainer = configuredIsContainer
                 self.containerType = configuredContainerType
+                -- applyPartFlags has just worked out isDoor from this tile's
+                -- sprite type, the same test ISBuildIsoEntity:create uses, and
+                -- vanilla stamps the key id here too - before the part is added
+                -- to the square. Both halves of a double door get the same id.
+                if self.isDoor and self.keyId then part:setKeyId(self.keyId) end
                 part:setCanBePlastered(self.canBePlastered == true)
                 local health = self:getBuildHealth()
                 part:setMaxHealth(health)

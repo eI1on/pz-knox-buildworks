@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "由金属制成的门框。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "由金属制成的柱子。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "由金属制成的窗框部分。",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "老式木门框，为您的乡村墙壁添加门所必需。",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "由老式木材建造的柱子，提供乡村风格和坚固的支撑。",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "具有开口以允许自然光进入的老式木墙。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "设计灵感来自 Pile o Crepe 的门框。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "设计灵感来自 Pile o Crepe 的围栏。",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "设计灵感来自 Pile o Crepe 的围栏柱。",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "悬挂在墙上的布制旗幔。",
   "Tooltip_KBWVE_Buildable_Brazier": "简易石制火盆。添加燃料点燃后可取暖、照明和烹饪。",
   "Tooltip_KBWVE_Buildable_LogRailing": "可以翻越的低矮原木栏杆。相接的段会合成转角，错开的末端则在空隙处生成立柱。",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "用于收边的屋顶装饰件——封檐板、转角、顶角和落水管。"
+  "Tooltip_KBWVE_Buildable_RoofTrim": "用于收边的屋顶装饰件——封檐板、转角、顶角和落水管。",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "具有开口以允许自然光进入的老式木墙。",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "老式木门框，为您的乡村墙壁添加门所必需。",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "由老式木材建造的柱子，提供乡村风格和坚固的支撑。"
 }

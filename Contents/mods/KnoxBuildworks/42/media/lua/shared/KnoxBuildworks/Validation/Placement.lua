@@ -79,11 +79,12 @@ local function spriteProps(spriteName)
     return sprite, sprite and sprite:getProperties() or nil
 end
 
+local ATTACHMENT_NAMES = { "attachedN", "attachedW", "attachedE", "attachedS" }
+
 local function attachmentName(props)
     if not props then return nil end
-    local attachmentNames = { "attachedN", "attachedW", "attachedE", "attachedS" }
-    for attachmentIndex = 1, #attachmentNames do
-        local name = attachmentNames[attachmentIndex]
+    for attachmentIndex = 1, #ATTACHMENT_NAMES do
+        local name = ATTACHMENT_NAMES[attachmentIndex]
         if props:has(name) then return name end
     end
     if props:has("Facing") then
@@ -92,14 +93,50 @@ local function attachmentName(props)
     return nil
 end
 
-local function hasWallProperty(square, north, allowDoorFrame)
+-- The square holding the wall a fixture attaches to, and whether that wall runs
+-- north. A square owns only its north and west walls, so the east and south
+-- attachments read the neighbour's.
+local function attachmentWall(square, attachment)
+    local north = attachment == "attachedN" or attachment == "attachedS"
+    if attachment == "attachedE" then
+        return getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ()), north
+    elseif attachment == "attachedS" then
+        return getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ()), north
+    end
+    return square, north
+end
+
+-- Corner cabinets are drawn to sit where two walls meet, and the game names
+-- them so: "Floating Motel Corner", "Floating Trailer Corner", "Wooden Corner".
+local function isCornerFixture(props)
+    if not props or not props:has("GroupName") then return false end
+    local groupName = string.lower(tostring(props:get("GroupName") or ""))
+    return string.find(groupName, "corner", 1, true) ~= nil
+end
+
+-- Something hanging at head height clears whatever stands on the floor beneath
+-- it, which is what lets an overhead cabinet share a square with a counter.
+local function isHighWallObject(props)
+    if not props or not props:has("MoveType") or props:get("MoveType") ~= "WallObject" then return false end
+    return props:has("IsHigh")
+end
+
+local function hasWallProperty(square, north, allowDoorFrame, allowWindowFrame)
     if not square then return false end
-    local wallName, doorName = north and "WallN" or "WallW", north and "DoorWallN" or "DoorWallW"
-    if square:has(wallName) or square:has("WallNW") or allowDoorFrame and square:has(doorName) then return true end
+    local wallName = north and "WallN" or "WallW"
+    local doorName = north and "DoorWallN" or "DoorWallW"
+    local windowName = north and "WindowN" or "WindowW"
+    if square:has(wallName) or square:has("WallNW")
+        or allowDoorFrame and square:has(doorName)
+        or allowWindowFrame and square:has(windowName) then
+        return true
+    end
     for objectIndex = 0, square:getObjects():size() - 1 do
         local object = square:getObjects():get(objectIndex)
         local props = object and object:getProperties()
-        if props and (props:has(wallName) or props:has("WallNW") or allowDoorFrame and props:has(doorName)) then
+        if props and (props:has(wallName) or props:has("WallNW")
+                or allowDoorFrame and props:has(doorName)
+                or allowWindowFrame and props:has(windowName)) then
             return true
         end
     end
@@ -109,15 +146,23 @@ end
 local function hasAttachedWallSupport(square, fixtureProps)
     local attachment = attachmentName(fixtureProps)
     if not square or not attachment then return false end
-    local wallSquare, north = square, attachment == "attachedN" or attachment == "attachedS"
-    if attachment == "attachedE" then
-        wallSquare = getCell():getGridSquare(square:getX() + 1, square:getY(), square:getZ())
-    elseif attachment == "attachedS" then
-        wallSquare = getCell():getGridSquare(square:getX(), square:getY() + 1, square:getZ())
-    end
+    local wallSquare, north = attachmentWall(square, attachment)
     if not wallSquare then return false end
 
-    if not hasWallProperty(wallSquare, north, fixtureProps:has("WallObjectAllowDoorframe")) then return false end
+    -- A door or window frame carries a fixture the same way the wall it sits in
+    -- does, so both count rather than only the walls without an opening.
+    local supported = hasWallProperty(wallSquare, north, true, true)
+    if not supported and isCornerFixture(fixtureProps) then
+        -- A corner piece reaches both walls of the corner it stands in, so the
+        -- one its Facing happens to name is not the only one that can hold it.
+        local attachmentIndex = 1
+        while not supported and attachmentIndex <= #ATTACHMENT_NAMES do
+            local otherSquare, otherNorth = attachmentWall(square, ATTACHMENT_NAMES[attachmentIndex])
+            supported = otherSquare ~= nil and hasWallProperty(otherSquare, otherNorth, true, true)
+            attachmentIndex = attachmentIndex + 1
+        end
+    end
+    if not supported then return false end
 
     -- Match vanilla's high/low overlap behavior while still allowing fixtures
     -- on different faces of a corner square.
@@ -192,6 +237,17 @@ local function isDeclaredWindowFrame(object, north)
     return modData and modData.KBW and modData.KBW.providesWindowFrame == true
 end
 
+-- Shapes 3, 4, 8, 11 and 12 are cutaway and double-door openings rather than
+-- punched windows, and the windows drawn for them declare those same shapes. A
+-- cut opening therefore counts as a frame when - and only when - the window
+-- being placed names the same shape.
+local function cutOpeningMatches(props, north, shapeOf)
+    if not props or shapeOf == nil then return false end
+    local opening = north and props:has(IsoFlagType.cutN) or props:has(IsoFlagType.cutW)
+    if not opening then return false end
+    return Placement.windowShapeOf(props) == shapeOf
+end
+
 local function tileProvidesWindowFrame(props, north)
     if not props then return false end
     if north then
@@ -229,18 +285,53 @@ local function isCompatibleWindowSupport(object, north, patterns)
     return props and (north and props:has(IsoFlagType.cutN) or not north and props:has(IsoFlagType.cutW)) or false
 end
 
-local function checkWallFrame(square, north, wantsWindow, windowSupportSprites)
+-- Windows and the walls they sit in both declare WindowShape, and the art is
+-- drawn to fit: a shape 3 window only fills a shape 3 opening. Older pieces on
+-- both sides declare no shape at all, and those belong with each other - so an
+-- absent shape is a value here, not a wildcard.
+---@param props PropertyContainer|nil
+---@return string|nil
+function Placement.windowShapeOf(props)
+    if not props then return nil end
+    local value = props.get and props:get("WindowShape") or nil
+    if value == nil then return nil end
+    value = tostring(value)
+    if value == "" then return nil end
+    return value
+end
+
+---@param wanted string|nil the shape of the window being placed
+---@param frame string|nil the shape of the opening it would sit in
+function Placement.windowShapesMatch(wanted, frame)
+    return wanted == frame
+end
+
+-- shapeOf is nil when nothing should be filtered (the planning preview asks
+-- only whether a frame exists at all).
+local function frameShapeAccepts(shapeOf, props)
+    if shapeOf == nil then return true end
+    return Placement.windowShapesMatch(shapeOf, Placement.windowShapeOf(props))
+end
+
+local function checkWallFrame(square, north, wantsWindow, windowSupportSprites, shapeOf)
     local hasFrame = false
     local hasBuilt = false
     for i = 0, square:getSpecialObjects():size() - 1 do
         local item = square:getSpecialObjects():get(i)
         if instanceof(item, "IsoThumpable") then
             if wantsWindow and item:getNorth() == north
-                and (item:isWindow() or isDeclaredWindowFrame(item, north)
-                    or tileProvidesWindowFrame(item:getProperties(), north)) then
+                and ((( item:isWindow() or isDeclaredWindowFrame(item, north)
+                        or tileProvidesWindowFrame(item:getProperties(), north))
+                      and frameShapeAccepts(shapeOf, item:getProperties()))
+                    or cutOpeningMatches(item:getProperties(), north, shapeOf)) then
                 hasFrame = true
             end
-            if wantsWindow and isCompatibleWindowSupport(item, north, windowSupportSprites) then hasFrame = true end
+            -- windowSupportSprites is an explicit list the definition author
+            -- wrote; it already says which sprites this window belongs on, so
+            -- the shape filter does not second-guess it.
+            if wantsWindow and isCompatibleWindowSupport(item, north, windowSupportSprites) then
+                hasFrame = true
+            end
             if not wantsWindow and item:isDoorFrame() and item:getNorth() == north then hasFrame = true end
             if not wantsWindow and item:isDoor() and item:getNorth() == north then hasBuilt = true end
         end
@@ -250,8 +341,13 @@ local function checkWallFrame(square, north, wantsWindow, windowSupportSprites)
         local sprite = object and object:getSprite()
         local props = sprite and sprite:getProperties()
         if wantsWindow then
-            if tileProvidesWindowFrame(props, north) then hasFrame = true end
-            if isCompatibleWindowSupport(object, north, windowSupportSprites) then hasFrame = true end
+            if (tileProvidesWindowFrame(props, north) and frameShapeAccepts(shapeOf, props))
+                or cutOpeningMatches(props, north, shapeOf) then
+                hasFrame = true
+            end
+            if isCompatibleWindowSupport(object, north, windowSupportSprites) then
+                hasFrame = true
+            end
             if instanceof(object, "IsoWindow") and object:getNorth() == north then hasBuilt = true end
         else
             if north and object:getType() == IsoObjectType.doorFrN then hasFrame = true end
@@ -361,9 +457,12 @@ end
 ---@param north  boolean
 ---@param wantsWindow boolean
 ---@param windowSupportSprites string[]|nil
-function Placement.hasWallFrame(square, north, wantsWindow, windowSupportSprites)
+---@param windowShape string|nil when given, only an opening of that shape counts
+function Placement.hasWallFrame(square, north, wantsWindow, windowSupportSprites, windowShape)
     if not square then return false end
-    local hasFrame, hasBuilt = checkWallFrame(square, north == true, wantsWindow == true, windowSupportSprites)
+    local hasFrame, hasBuilt = checkWallFrame(
+        square, north == true, wantsWindow == true, windowSupportSprites, windowShape
+    )
     return hasFrame and not hasBuilt
 end
 
@@ -580,7 +679,12 @@ function Placement.validate(cursor, square)
                     -- this test; genuinely solid terrain still rejects.
                     local occupiedBlocks = target:getProperties():has(IsoPropertyType.BLOCKS_PLACEMENT)
                         and placement.allowSharedSquare ~= true
-                    if props and (occupiedBlocks or target:isSolid()
+                    -- An overhead fixture hangs above the floor, so a counter or
+                    -- a table already on the square is not in its way. The wall
+                    -- it attaches to is checked separately, and two high
+                    -- fixtures on the same wall still reject each other.
+                    if props and not isHighWallObject(props)
+                        and (occupiedBlocks or target:isSolid()
                             or target:isSolidTrans())
                         and (props:has(IsoFlagType.solidtrans) or props:has("BlocksPlacement")) then
                         if props:has("IsStackable") or props:has("IsTableTop") then
@@ -626,10 +730,20 @@ function Placement.validate(cursor, square)
                         end
                     end
                     if placement.needWindowFrame then
+                        -- A window whose WindowShape matches no opening the game
+                        -- draws cannot be constrained by it; those say so.
+                        local shapeOf = nil
+                        if placement.ignoreWindowShape ~= true then
+                            shapeOf = Placement.windowShapeOf(sprite and sprite:getProperties())
+                        end
                         local hasFrame, hasWindow = checkWallFrame(
-                            target, cursor.north, true, placement.windowSupportSprites
+                            target, cursor.north, true, placement.windowSupportSprites, shapeOf
                         )
-                        if not hasFrame or hasWindow then return false, "window frame required" end
+                        if hasWindow then return false, "window already built" end
+                        if not hasFrame then
+                            return false, shapeOf and "window frame of a different shape"
+                                or "window frame required"
+                        end
                     end
                     -- DOOR STUFF (vanilla ISBuildIsoEntity:isValidPerSquare):
                     -- doors need a floor, a frame on the same edge (unless the

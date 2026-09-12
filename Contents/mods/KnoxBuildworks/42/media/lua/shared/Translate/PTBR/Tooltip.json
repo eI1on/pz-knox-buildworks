@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Parede externa de tábuas clássica.",
   "Tooltip_KBW_Shared_RedBarnWall": "Parede de celeiro rústica de madeira vermelha.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Seção de parede de painel branco clássico.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Parede de madeira envelhecida e rústica.",
   "Tooltip_KBW_Shared_CinderblockWall": "Parede de bloco de cimento durável.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Parede de tijolos tradicional com um acabamento quente.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Parede de painel de madeira clássica.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "Uma luminária de mesa alimentada cuja cor e raio de luz seguem seu suporte original.",
   "Tooltip_KBW_Shared_WallLamp": "Uma luminária de parede alimentada que deve ser montada em uma parede compatível.",
   "Tooltip_KBW_Shared_ExitSign": "Uma placa de saída iluminada que pode ser montada em uma parede ou moldura de porta.",
-  "Tooltip_KBW_Shared_FloorLamp": "Uma luminária de piso alimentada com a cor e o raio de luz do suporte original."
+  "Tooltip_KBW_Shared_FloorLamp": "Uma luminária de piso alimentada com a cor e o raio de luz do suporte original.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Parede de madeira envelhecida e rústica."
 }

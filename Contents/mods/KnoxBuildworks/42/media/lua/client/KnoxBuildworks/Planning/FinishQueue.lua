@@ -19,19 +19,89 @@ local FinishQueue = {}
 
 local pending = {}
 
-local function findBuiltWall(entry)
+local function matchesEntry(object, entry)
+    if not object or not object.getModData then return false end
+    local data = object:getModData()
+    return data ~= nil and data.KBW ~= nil and data.KBW.buildableId == entry.buildableId
+end
+
+-- The walls of this buildable already standing on the tile when the finish was
+-- queued. The watcher starts from tryBuild, before the build action completes,
+-- so without this the search could settle on a wall that was already there -
+-- the other half of a V corner, or an earlier wall on the same tile - and the
+-- finish went to that one instead of the wall being built.
+local function wallsAlreadyOnTile(buildableId, x, y, z)
+    local existing = {}
+    local square = getCell() and getCell():getGridSquare(x, y, z) or nil
+    if not square then return existing end
+    local probe = { buildableId = buildableId }
+    local special = square:getSpecialObjects()
+    for objectIndex = 0, special:size() - 1 do
+        local object = special:get(objectIndex)
+        if matchesEntry(object, probe) then existing[object] = true end
+    end
+    local objects = square:getObjects()
+    for objectIndex = 0, objects:size() - 1 do
+        local object = objects:get(objectIndex)
+        if matchesEntry(object, probe) then existing[object] = true end
+    end
+    return existing
+end
+
+local function findBuiltWall(entry, preferUnfinished)
+    -- Once a wall has been picked it stays picked. The paint that follows a
+    -- plaster must land on the same wall, and by then the tile can hold two
+    -- finished walls that no longer tell each other apart.
+    if entry.wall and entry.wall.getSquare and entry.wall:getSquare() then return entry.wall end
     local square = getCell():getGridSquare(entry.x, entry.y, entry.z)
     if not square then return nil end
     local candidates = {}
+    local edgeMatch = nil
     for i = 0, square:getSpecialObjects():size() - 1 do
         local object = square:getSpecialObjects():get(i)
-        if instanceof(object, "IsoThumpable") then
-            local data = object:getModData()
-            if data and data.KBW and data.KBW.buildableId == entry.buildableId then
+        if instanceof(object, "IsoThumpable") and matchesEntry(object, entry)
+            and not (entry.existing and entry.existing[object]) then
+            candidates[#candidates + 1] = object
+            if edgeMatch == nil and object:getNorth() == entry.north then edgeMatch = object end
+        end
+    end
+    -- Passable pieces build as props, so they are plain objects on the square
+    -- rather than IsoThumpables among its special objects. Without this the
+    -- watcher never saw them and every such finish waited out its timeout.
+    if #candidates == 0 then
+        local objects = square:getObjects()
+        for i = 0, objects:size() - 1 do
+            local object = objects:get(i)
+            if not instanceof(object, "IsoThumpable") and matchesEntry(object, entry)
+                and not (entry.existing and entry.existing[object]) then
                 candidates[#candidates + 1] = object
-                if object:getNorth() == entry.north then return object end
             end
         end
+    end
+    -- Two walls of one buildable meeting in a V share this tile, and the one
+    -- this finish was queued for is the one still bare - the neighbour has had
+    -- its own finish applied already. Without this the finish could go to the
+    -- neighbour, repainting it and leaving the new wall plain, or match neither
+    -- and wait until it timed out.
+    if preferUnfinished then
+        if edgeMatch ~= nil and WallFinishes.objectFinishSignature(edgeMatch) == nil then
+            return edgeMatch
+        end
+        local bare, bareCount = nil, 0
+        for candidateIndex = 1, #candidates do
+            if WallFinishes.objectFinishSignature(candidates[candidateIndex]) == nil then
+                bare = candidates[candidateIndex]
+                bareCount = bareCount + 1
+            end
+        end
+        if bareCount == 1 then return bare end
+    end
+    if edgeMatch ~= nil then
+        Log:info(
+            "Finish for %s at %d,%d,%d took the edge match out of %d wall(s) on the tile",
+            tostring(entry.buildableId), entry.x, entry.y, entry.z, #candidates
+        )
+        return edgeMatch
     end
     -- A snapped/replaced wall can report its final edge only after creation.
     -- Falling back is safe when this square contains exactly one matching Knox
@@ -88,6 +158,7 @@ local function queuePlaster(entry, wall)
         ISWorldObjectContextMenu.transferIfNeeded(player, trowel)
         ISWorldObjectContextMenu.transferIfNeeded(player, bucket)
     end
+    Log:info("Queued plaster action for %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
     ISTimedActionQueue.add(KBWFinishAction:new(
         player, "plaster", wall, sprite, bucket, trowel, nil, nil, entry.finish, true
     ))
@@ -101,18 +172,31 @@ local function queuePaint(entry, wall)
         Log:warning("No paint sprite for %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
         return false
     end
-    local paintCan = nil
+    local paintCan, paintCans = nil, nil
     local required = BuildableRules.wallFinishRequirement(entry.definition, entry.stage, "paint")
     if required and not cheat(player) then
         local brush = player:getInventory():getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
-        if not brush then return false end
+        if not brush then
+            Log:warning("No usable paintbrush left for %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
+            return false
+        end
         ISWorldObjectContextMenu.transferIfNeeded(player, brush)
-        paintCan = player:getInventory():getFirstTypeRecurse(entry.finish.paintType)
-        if not paintCan then return false end
-        ISWorldObjectContextMenu.transferIfNeeded(player, paintCan)
+        paintCans = WallFinishes.paintItemsIn(player:getInventory(), entry.finish.paintType)
+        if not paintCans then
+            Log:warning(
+                "No %s left for %s at %d,%d,%d", tostring(entry.finish.paintType),
+                entry.buildableId, entry.x, entry.y, entry.z
+            )
+            return false
+        end
+        for canIndex = 1, #paintCans do
+            ISWorldObjectContextMenu.transferIfNeeded(player, paintCans[canIndex].item)
+        end
+        paintCan = paintCans[1].item
     end
+    Log:info("Queued paint action for %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
     ISTimedActionQueue.add(KBWFinishAction:new(
-        player, "paint", wall, sprite, paintCan, nil, nil, nil, entry.finish, true
+        player, "paint", wall, sprite, paintCan, nil, nil, nil, entry.finish, true, paintCans
     ))
     return true
 end
@@ -131,34 +215,47 @@ local function queueWallpaper(entry, wall)
         local brush = player:getInventory():getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
         local paste = player:getInventory():getFirstTagEvalRecurse(ItemTag.WALLPAPER_PASTE, predicateEnoughDrain)
         local scissors = player:getInventory():getFirstTagEvalRecurse(ItemTag.SCISSORS, predicateNotBroken)
-        if not roll or not brush or not paste or not scissors then return false end
+        if not roll or not brush or not paste or not scissors then
+            Log:warning(
+                "Missing wallpaper tools or roll for %s at %d,%d,%d", entry.buildableId,
+                entry.x, entry.y, entry.z
+            )
+            return false
+        end
         ISWorldObjectContextMenu.transferIfNeeded(player, roll)
         ISWorldObjectContextMenu.transferIfNeeded(player, brush)
         ISWorldObjectContextMenu.transferIfNeeded(player, paste)
         ISWorldObjectContextMenu.transferIfNeeded(player, scissors)
     end
+    Log:info("Queued wallpaper action for %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
     ISTimedActionQueue.add(KBWFinishAction:new(
         player, "wallpaper", wall, sprite, roll, nil, nil, nil, entry.finish, true
     ))
     return true
 end
 
-local function isPlastered(wall)
-    if wall.isPaintable and wall:isPaintable() then return true end
-    local sprite = wall:getSprite()
-    local props = sprite and sprite:getProperties()
-    return props ~= nil and props:get("PaintingType") ~= nil
-end
-
 local function step(entry)
     local now = getTimestampMs()
     if now > entry.deadline then
-        Log:warning("Timed out applying selected finish to %s at %d,%d,%d", entry.buildableId, entry.x, entry.y, entry.z)
+        local square = getCell():getGridSquare(entry.x, entry.y, entry.z)
+        local total, matching = 0, 0
+        if square then
+            total = square:getSpecialObjects():size()
+            for i = 0, total - 1 do
+                if matchesEntry(square:getSpecialObjects():get(i), entry) then matching = matching + 1 end
+            end
+        end
+        Log:warning(
+            "Timed out applying selected finish to %s at %d,%d,%d in phase %s"
+            .. " (%d object(s) on the tile, %d of this buildable)",
+            entry.buildableId, entry.x, entry.y, entry.z, tostring(entry.phase), total, matching
+        )
         return false
     end
-    local wall = findBuiltWall(entry)
+    local wall = findBuiltWall(entry, entry.phase == "built")
     if entry.phase == "built" then
         if not wall then return true end
+        entry.wall = wall
         if entry.finish.plaster == false then
             if entry.finish.paintType then
                 queuePaint(entry, wall)
@@ -168,14 +265,14 @@ local function step(entry)
             return false
         end
         if not queuePlaster(entry, wall) then return false end
-        if not entry.finish.paintType and not entry.finish.wallpaperType then return false end
-        entry.phase = "plastered"
-        entry.deadline = now + 30000
-        return true
-    end
-    if entry.phase == "plastered" then
-        if not wall or not isPlastered(wall) then return true end
-        if ISTimedActionQueue.isPlayerDoingAction(entry.player) then return true end
+        -- The colour goes into the same queue, right behind the plaster.
+        -- ISTimedActionQueue runs them in order, KBWFinishAction resolves its
+        -- sprite at completion against whatever the wall is wearing by then,
+        -- and the paint action's own isValid refuses to paint a wall that was
+        -- not plastered - so the order is enforced by the actions themselves.
+        -- Waiting for the player to go idle instead meant that a player who
+        -- kept building never became idle, and the colour was dropped when the
+        -- entry timed out thirty seconds later.
         if entry.finish.paintType then
             queuePaint(entry, wall)
         elseif entry.finish.wallpaperType then
@@ -207,10 +304,17 @@ end
 ---@param stage KBW.BuildStage
 function FinishQueue.watch(player, buildableId, x, y, z, north, finish, definition, stage)
     if not WallFinishes.isWallFinish(finish) then return end
+    Log:info(
+        "Finish queued for %s at %d,%d,%d north=%s plaster=%s paint=%s wallpaper=%s",
+        tostring(buildableId), x, y, z, tostring(north == true),
+        tostring(finish.plaster), tostring(finish.paintType), tostring(finish.wallpaperType)
+    )
     if #pending == 0 then Events.OnTick.Add(onTick) end
     pending[#pending + 1] = {
         player = player,
         buildableId = buildableId,
+        -- taken now, before the wall exists: see wallsAlreadyOnTile
+        existing = wallsAlreadyOnTile(buildableId, x, y, z),
         x = x,
         y = y,
         z = z,

@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Классическая наружная стена, обшитая вагонкой.",
   "Tooltip_KBW_Shared_RedBarnWall": "Деревенская красная стена из сарая.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Классическая белая панельная стена.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Деревянная стена в деревенском стиле.",
   "Tooltip_KBW_Shared_CinderblockWall": "Прочная стена из шлакоблока.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Традиционная кирпичная стена с теплой отделкой.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Классическая стенка из деревянных панелей.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "Настольная лампа, сохраняющая исходные цвет и радиус света.",
   "Tooltip_KBW_Shared_WallLamp": "Настенная лампа, которую необходимо закрепить на подходящей стене.",
   "Tooltip_KBW_Shared_ExitSign": "Светящийся знак выхода, устанавливаемый на стену или дверную раму.",
-  "Tooltip_KBW_Shared_FloorLamp": "Напольная лампа, сохраняющая исходные цвет и радиус света."
+  "Tooltip_KBW_Shared_FloorLamp": "Напольная лампа, сохраняющая исходные цвет и радиус света.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Деревянная стена в деревенском стиле."
 }

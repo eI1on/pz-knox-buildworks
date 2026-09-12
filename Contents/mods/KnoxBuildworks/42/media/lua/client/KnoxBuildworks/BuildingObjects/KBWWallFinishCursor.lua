@@ -43,7 +43,7 @@ local function defineClass()
         local inventory = self.character and self.character:getInventory() or nil
         if not inventory then return false end
         return inventory:getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken) ~= nil
-            and firstType(inventory, self.args and self.args.paintType) ~= nil
+            and WallFinishes.paintItemsIn(inventory, self.args and self.args.paintType) ~= nil
     end
 
     function KBWWallFinishCursor:knoxPaintSprite(object)
@@ -88,16 +88,21 @@ local function defineClass()
         end
         local player = self.character
         local inventory = player:getInventory()
-        local paint = nil
+        local paint, paintCans = nil, nil
         if not buildCheatActive(player) then
             local brush = inventory:getFirstTagEvalRecurse(ItemTag.PAINTBRUSH, predicateNotBroken)
-            paint = firstType(inventory, self.kbwFinish.paintType)
-            if not brush or not paint then return end
+            paintCans = WallFinishes.paintItemsIn(inventory, self.kbwFinish.paintType)
+            if not brush or not paintCans then return end
+            paint = paintCans[1].item
             ISWorldObjectContextMenu.transferIfNeeded(player, brush)
-            ISWorldObjectContextMenu.transferIfNeeded(player, paint)
+            for canIndex = 1, #paintCans do
+                ISWorldObjectContextMenu.transferIfNeeded(player, paintCans[canIndex].item)
+            end
         end
         ISTimedActionQueue.add(
-            KBWFinishAction:new(player, "paint", object, resolvedSprite, paint, nil, nil, nil, self.kbwFinish)
+            KBWFinishAction:new(
+                player, "paint", object, resolvedSprite, paint, nil, nil, nil, self.kbwFinish, nil, paintCans
+            )
         )
     end
 

@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "Дверная рама из металла.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "Колонна из металла.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "Оконная рама из металла.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Старомодная деревянная дверная рама, необходимая для установки дверей.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Колонна из старомодного дерева, обеспечивающая деревенскую и прочную опору.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Старомодная деревянная стена с проемом для естественного света.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "Дверная рама с дизайном, вдохновленным Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "Забор с дизайном, вдохновленным Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "Столб забора с дизайном, вдохновленным Pile o Crepe.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Тканое знамя, висящее на стене.",
   "Tooltip_KBWVE_Buildable_Brazier": "Простая каменная жаровня. Загрузите топливо и разожгите — для тепла, света и готовки.",
   "Tooltip_KBWVE_Buildable_LogRailing": "Низкие перила из брёвен, через которые можно перепрыгнуть. Сходящиеся секции образуют угол, а смещённые концы получают столб в промежутке.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "Отделка кромки крыши - планки, углы, коньки и водосточные трубы."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Отделка кромки крыши - планки, углы, коньки и водосточные трубы.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Старомодная деревянная стена с проемом для естественного света.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Старомодная деревянная дверная рама, необходимая для установки дверей.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Колонна из старомодного дерева, обеспечивающая деревенскую и прочную опору."
 }

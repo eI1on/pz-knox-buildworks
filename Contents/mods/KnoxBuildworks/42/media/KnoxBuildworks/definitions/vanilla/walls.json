@@ -195,6 +195,18 @@
               "N": "walls_exterior_house_02_49",
               "Corner": "walls_exterior_house_02_50",
               "Pillar": "walls_exterior_house_02_50"
+            },
+            "PaintWhite+PaintYellow": {
+              "W": "walls_exterior_house_02_84",
+              "N": "walls_exterior_house_02_85",
+              "Corner": "walls_exterior_house_02_86",
+              "Pillar": "walls_exterior_house_02_86"
+            },
+            "PaintGreen+PaintWhite": {
+              "W": "location_restaurant_pie_01_0",
+              "N": "location_restaurant_pie_01_1",
+              "Corner": "location_restaurant_pie_01_2",
+              "Pillar": "location_restaurant_pie_01_2"
             }
           },
           "baseSprites": [

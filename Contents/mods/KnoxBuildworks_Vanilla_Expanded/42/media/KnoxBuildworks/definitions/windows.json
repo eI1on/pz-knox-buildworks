@@ -672,7 +672,8 @@
       "iconSprite": "fixtures_windows_01_40",
       "placement": {
         "kind": "object",
-        "needWindowFrame": true
+        "needWindowFrame": true,
+        "ignoreWindowShape": true
       },
       "stages": [
         {
@@ -782,7 +783,8 @@
       "iconSprite": "fixtures_windows_01_41",
       "placement": {
         "kind": "object",
-        "needWindowFrame": true
+        "needWindowFrame": true,
+        "ignoreWindowShape": true
       },
       "stages": [
         {
@@ -892,7 +894,8 @@
       "iconSprite": "fixtures_windows_01_48",
       "placement": {
         "kind": "object",
-        "needWindowFrame": true
+        "needWindowFrame": true,
+        "ignoreWindowShape": true
       },
       "stages": [
         {
@@ -1002,7 +1005,8 @@
       "iconSprite": "fixtures_windows_01_49",
       "placement": {
         "kind": "object",
-        "needWindowFrame": true
+        "needWindowFrame": true,
+        "ignoreWindowShape": true
       },
       "stages": [
         {

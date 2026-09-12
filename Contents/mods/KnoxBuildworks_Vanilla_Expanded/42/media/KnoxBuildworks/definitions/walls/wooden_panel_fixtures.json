@@ -124,6 +124,15 @@
       "placement": {
         "kind": "wall"
       },
+      "finishes": {
+        "enabled": true,
+        "wallType": "doorframe",
+        "surface": {
+          "canPlaster": true,
+          "canPaint": true,
+          "canWallpaper": true
+        }
+      },
       "construction": {
         "time": 200,
         "timedAction": "BuildWallHammer",
@@ -186,75 +195,6 @@
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.extended.wooden_panel_window_frame",
-      "allowSpriteReuse": true,
-      "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelWindowFrame",
-      "displayName": "Wooden Panel Window Frame",
-      "tooltipKey": "Tooltip_KBW_Shared_WoodPanelWall",
-      "category": "Walls",
-      "subcategory": "Wooden Panel",
-      "material": "Wood",
-      "iconSprite": "walls_exterior_wooden_01_32",
-      "placement": {
-        "kind": "wall"
-      },
-      "construction": {
-        "time": 200,
-        "timedAction": "BuildWallHammer",
-        "completionSound": "BuildWoodenStructureLarge",
-        "category": "Carpentry",
-        "xp": {
-          "Woodwork": 30
-        }
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "walls_exterior_wooden_01_32"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "walls_exterior_wooden_01_33"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "materials": "kbwve.extended.wall_frame",
-            "skills": {
-              "Woodwork": 3
-            }
-          },
-          "previousStage": [
-            "WoodenWallFrame",
-            "MetalWallFrame"
-          ],
-          "object": {
-            "isThumpable": true,
-            "hoppable": true,
-            "canBarricade": true
-          }
-        }
-      ]
-    },
-    {
       "id": "kbw.vanillaexpanded.extended.wooden_panel_pillar",
       "allowSpriteReuse": true,
       "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelPillar",
@@ -266,6 +206,15 @@
       "iconSprite": "walls_exterior_wooden_01_27",
       "placement": {
         "kind": "wall"
+      },
+      "finishes": {
+        "enabled": true,
+        "wallType": "pillar",
+        "surface": {
+          "canPlaster": true,
+          "canPaint": true,
+          "canWallpaper": true
+        }
       },
       "construction": {
         "time": 200,

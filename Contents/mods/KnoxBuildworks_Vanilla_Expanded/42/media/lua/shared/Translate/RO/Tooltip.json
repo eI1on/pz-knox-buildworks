@@ -261,9 +261,6 @@
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_door_frame": "Un cadru de ușă din metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_pillar": "Un stâlp din metal.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_metal_walls_metal_window_frame": "O secțiune de toc de fereastră din metal.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Un cadru de ușă din lemn de modă veche, esențial pentru adăugarea de uși pe peretele tău rustic.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Un stâlp construit din lemn de modă veche, oferind un suport rustic și robust.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Un perete din lemn de modă veche, cu o deschidere pentru a permite lumina naturală în interior.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_door_frame": "Un toc de ușă cu un design inspirat de Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fence": "Un gard cu un design inspirat de Pile o Crepe.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_pile_o_crepe_walls_pileocrepe_fencepost": "Un stâlp de gard cu un design inspirat de Pile o Crepe.",
@@ -312,5 +309,8 @@
   "Tooltip_KBWVE_Buildable_ChurchBanner": "Un banner din pânză agățat pe un perete.",
   "Tooltip_KBWVE_Buildable_Brazier": "O brasieră simplă din piatră. Pune combustibil și aprinde-o pentru căldură, lumină și gătit.",
   "Tooltip_KBWVE_Buildable_LogRailing": "O balustradă joasă din bușteni peste care poți sări. Secțiunile care se întâlnesc formează un colț, iar capetele decalate primesc un stâlp în gol.",
-  "Tooltip_KBWVE_Buildable_RoofTrim": "Bordură pentru finisarea marginii acoperișului - benzi, colțuri, vârfuri și burlane."
+  "Tooltip_KBWVE_Buildable_RoofTrim": "Bordură pentru finisarea marginii acoperișului - benzi, colțuri, vârfuri și burlane.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "Un perete din lemn de modă veche, cu o deschidere pentru a permite lumina naturală în interior.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "Un cadru de ușă din lemn de modă veche, esențial pentru adăugarea de uși pe peretele tău rustic.",
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "Un stâlp construit din lemn de modă veche, oferind un suport rustic și robust."
 }

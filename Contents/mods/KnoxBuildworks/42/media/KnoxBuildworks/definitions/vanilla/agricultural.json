@@ -314,7 +314,8 @@
           }
         }
       ],
-      "iconName": "Build_HerbDryerSmall"
+      "iconName": "Build_HerbDryerSmall",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.stone_mill",

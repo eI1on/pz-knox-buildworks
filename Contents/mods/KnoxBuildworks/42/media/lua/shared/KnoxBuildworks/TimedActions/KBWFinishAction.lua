@@ -83,8 +83,30 @@ function KBWFinishAction:isValid()
     end
     if self.finish then
         local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
-        local validTarget = WallFinishes.canApplyToObject(self.mode, self.finish, self.thumpable, false)
-        if not validTarget then return false end
+        -- A colour that is part of a "plaster + colour" finish has its own
+        -- plaster action queued directly in front of it. The engine polls this
+        -- while the action is still waiting, so judging the wall as it stands
+        -- refuses a colour that is about to become perfectly valid.
+        local plasterComing = self.mode ~= "plaster" and self.finish.plaster == true
+        local validTarget, reason = WallFinishes.canApplyToObject(
+            self.mode, self.finish, self.thumpable, plasterComing
+        )
+        if not validTarget then
+            -- A timed action that answers false here is dropped in silence, so
+            -- say why once rather than leaving an unfinished wall unexplained.
+            if not self.reportedInvalid then
+                self.reportedInvalid = true
+                local Log = require("KnoxBuildworks/Log")
+                local square = self.thumpable:getSquare()
+                Log:warning(
+                    "%s action refused on %s at %d,%d,%d: %s", tostring(self.mode),
+                    tostring(self.thumpable:getSprite() and self.thumpable:getSprite():getName()),
+                    square and square:getX() or -1, square and square:getY() or -1,
+                    square and square:getZ() or -1, tostring(reason)
+                )
+            end
+            return false
+        end
     end
     if finishRequirementsWaived(self) then return true end
     if cheat(self.character) then return true end
@@ -147,6 +169,16 @@ end
 
 function KBWFinishAction:complete()
     if not self.thumpable then return false end
+    do
+        local Log = require("KnoxBuildworks/Log")
+        local square = self.thumpable:getSquare()
+        Log:info(
+            "Applying %s to %s at %d,%d,%d", tostring(self.mode),
+            tostring(self.thumpable:getSprite() and self.thumpable:getSprite():getName()),
+            square and square:getX() or -1, square and square:getY() or -1,
+            square and square:getZ() or -1
+        )
+    end
     local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
     local requirementsWaived = finishRequirementsWaived(self)
     -- Resolve against the object that actually exists at completion time. This
@@ -162,8 +194,18 @@ function KBWFinishAction:complete()
     if not resolvedSprite then return false end
     if self.mode == "plaster" then
         self.thumpable:setSpriteFromName(resolvedSprite)
-        self.thumpable:setPaintable(true)
-        self.thumpable:setCanBePlastered(false)
+        -- setPaintable and setCanBePlastered belong to IsoThumpable. A passable
+        -- wall piece - a pillar, a door or window frame - is placed as a plain
+        -- world prop and has neither, so calling them threw and left the rest
+        -- of this undone. The prop carries its plastered state in its sprite,
+        -- which is what the queue and the validation read anyway.
+        -- Only where vanilla could actually handle the result. A plastered
+        -- corner is still WallNW-only, so marking it paintable would put it
+        -- back in front of the menu that cannot classify it.
+        if self.thumpable.setPaintable and WallFinishes.vanillaPaintable(resolvedSprite) then
+            self.thumpable:setPaintable(true)
+        end
+        if self.thumpable.setCanBePlastered then self.thumpable:setCanBePlastered(false) end
         self.thumpable:transmitUpdatedSpriteToClients()
         self.thumpable:sendObjectChange(IsoObjectChange.PAINTABLE)
         local square = self.thumpable:getSquare()
@@ -184,7 +226,20 @@ function KBWFinishAction:complete()
         end
     end
     if not requirementsWaived and consumeAllowed(self.character) then
-        if self.item then self.item:UseAndSync() end
+        -- A blended paint spends the share of the ratio each colour carries, so
+        -- it draws from its own list rather than taking one use off the first can.
+        if self.paintDraws then
+            for drawIndex = 1, #self.paintDraws do
+                local draw = self.paintDraws[drawIndex]
+                for _useIndex = 1, (draw.uses or 1) do
+                    if draw.item and (not draw.item.getCurrentUses or draw.item:getCurrentUses() > 0) then
+                        draw.item:UseAndSync()
+                    end
+                end
+            end
+        elseif self.item then
+            self.item:UseAndSync()
+        end
         if self.mode == "wallpaper" then
             local paste = self.character:getInventory():getFirstTagRecurse(ItemTag.WALLPAPER_PASTE)
             if paste then paste:UseAndSync() end
@@ -207,8 +262,10 @@ end
 ---@param finish KBW.WallFinish|nil
 ---@param useWallBuildRules boolean|nil
 ---@return KBWFinishAction
+---@param paintDraws {item: InventoryItem, uses: number}[]|nil cans a blended paint spends
 function KBWFinishAction:new(
-    character, mode, thumpable, sprite, item, tool, blueprintId, placementId, finish, useWallBuildRules
+    character, mode, thumpable, sprite, item, tool, blueprintId, placementId, finish, useWallBuildRules,
+    paintDraws
 )
     local o = ISBaseTimedAction.new(self, character)
     o.character = character
@@ -216,6 +273,7 @@ function KBWFinishAction:new(
     o.thumpable = thumpable
     o.sprite = sprite
     o.item = item
+    o.paintDraws = paintDraws
     o.tool = tool
     o.blueprintId = blueprintId
     o.placementId = placementId

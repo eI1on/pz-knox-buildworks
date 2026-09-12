@@ -78,7 +78,8 @@
         "translationKey": "IGUI_KBW_Group_vanilla_brickdoorframe",
         "level": 1
       },
-      "iconName": "Build_DoorframeBrick"
+      "iconName": "Build_DoorframeBrick",
+      "allowSpriteReuse": true
     },
     {
       "id": "kbw.vanilla.logdoorframelvl1",

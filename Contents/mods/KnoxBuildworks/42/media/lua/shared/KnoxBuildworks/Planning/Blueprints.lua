@@ -1111,8 +1111,19 @@ function Blueprints.hasRequiredFrame(player, blueprint, placement)
     local square = getCell() and getCell():getGridSquare(placement.x, placement.y, placement.z) or nil
     if square then
         local placementConfig = StageConfig.placement(definition, stage)
+        -- a window only fits an opening of its own WindowShape, so the plan has
+        -- to ask the same question the build will ask
+        local shapeOf = nil
+        if need == "window" then
+            local spriteName = StageConfig.sprite(definition, stage).sprite
+                or (stage and stage.sprites and stage.sprites[directionNorth(placement.direction)
+                    and "N" or "W"])
+            local sprite = spriteName and getSprite and getSprite(spriteName) or nil
+            shapeOf = Placement.windowShapeOf(sprite and sprite:getProperties())
+        end
         return Placement.hasWallFrame(
-            square, directionNorth(placement.direction), need == "window", placementConfig.windowSupportSprites
+            square, directionNorth(placement.direction), need == "window",
+            placementConfig.windowSupportSprites, shapeOf
         )
     end
     return false

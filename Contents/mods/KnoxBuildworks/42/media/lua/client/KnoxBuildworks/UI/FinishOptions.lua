@@ -74,7 +74,24 @@ function FinishOptions.paintColorFor(paintType)
         local item = items[itemIndex]
         if item.paint == paintType then return item.color end
     end
-    return nil
+    -- A blended paint has no menu entry of its own, so its swatch is its
+    -- components averaged in the ratio the blend names.
+    local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
+    local parts = WallFinishes.paintComponents(paintType)
+    if #parts < 2 then return nil end
+    local total, r, g, b = 0, 0, 0, 0
+    for partIndex = 1, #parts do
+        local color = FinishOptions.paintColorFor(parts[partIndex].item)
+        local weight = parts[partIndex].parts
+        if color then
+            total = total + weight
+            r = r + (color[1] or 0) * weight
+            g = g + (color[2] or 0) * weight
+            b = b + (color[3] or 0) * weight
+        end
+    end
+    if total == 0 then return nil end
+    return { r / total, g / total, b / total }
 end
 
 ---@param definition KBW.BuildableDefinition

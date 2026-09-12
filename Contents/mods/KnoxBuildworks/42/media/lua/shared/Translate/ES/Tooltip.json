@@ -59,7 +59,6 @@
   "Tooltip_KBW_Shared_ClapboardWall": "Pared exterior clásica con revestimiento.",
   "Tooltip_KBW_Shared_RedBarnWall": "Pared rústica de madera roja de granero.",
   "Tooltip_KBW_Shared_WhitePanelWall": "Sección clásica de pared con panel blanco.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Pared rústica de madera envejecida.",
   "Tooltip_KBW_Shared_CinderblockWall": "Pared duradera de bloques de cemento.",
   "Tooltip_KBW_Shared_ClassicBrickWall": "Pared tradicional de ladrillo con acabado cálido.",
   "Tooltip_KBW_Shared_WoodPanelWall": "Sección clásica de pared con panel de madera.",
@@ -151,5 +150,6 @@
   "Tooltip_KBW_Shared_TableLamp": "Lámpara de mesa eléctrica que conserva el color y el alcance de luz originales.",
   "Tooltip_KBW_Shared_WallLamp": "Lámpara eléctrica que debe montarse en una pared compatible.",
   "Tooltip_KBW_Shared_ExitSign": "Señal de salida iluminada que puede instalarse en una pared o marco de puerta.",
-  "Tooltip_KBW_Shared_FloorLamp": "Lámpara eléctrica de pie que conserva el color y el alcance originales."
+  "Tooltip_KBW_Shared_FloorLamp": "Lámpara eléctrica de pie que conserva el color y el alcance originales.",
+  "Tooltip_KBW_Shared_OldWoodWall": "Pared rústica de madera envejecida."
 }
