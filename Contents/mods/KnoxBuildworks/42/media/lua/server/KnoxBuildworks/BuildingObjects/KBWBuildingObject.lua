@@ -1475,7 +1475,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 removePrevious(target)
                 local props = ISMoveableSpriteProps.new(IsoObject.new(target, tile.sprite):getSprite())
                 props.rawWeight = 10
-                local part = props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)
+                local part = props:placeMoveableInternal(self.character, target, instanceItem("Base.Plank"), tile.sprite)
                 local plainProp = false
                 if not part then
                     part = IsoObject.new(target, tile.sprite)
