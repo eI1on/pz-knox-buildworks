@@ -12,14 +12,12 @@ GhostRenderer.PLAN_COLOR = { r = 0.55, g = 0.78, b = 1.00, a = 0.30 }
 GhostRenderer.PLAN_COLOR_DIM = { r = 0.55, g = 0.78, b = 1.00, a = 0.12 }
 GhostRenderer.CONFLICT_COLOR = { r = 0.80, g = 0.25, b = 0.20, a = 0.34 }
 GhostRenderer.HIGHLIGHT_COLOR = { r = 0.95, g = 0.85, b = 0.35, a = 0.42 }
-GhostRenderer.GATHER_COLOR = { r = 1.00, g = 1.00, b = 1.00, a = 0.13 }
+GhostRenderer.GATHER_COLOR = { r = 0.38, g = 0.86, b = 0.56, a = 0.22 }
 GhostRenderer.RANGE_COLOR = { r = 0.90, g = 0.95, b = 1.00, a = 0.16 }
 GhostRenderer.opacity = 0.14
 
 local spriteCache = {}
 local areaQueue = {}
-local lastAreaQueue = {}
-local lastAreaQueueTime = 0
 local cellCache = {}
 local cellCacheCount = 0
 local CELL_CACHE_LIMIT = 4096
@@ -40,6 +38,10 @@ local function colorAlpha(color, fallback)
     if alpha < 0.015 then return 0.015 end
     if alpha > 0.55 then return 0.55 end
     return alpha
+end
+
+local function roomAlpha(color)
+    return colorAlpha({ a = math.max(tonumber(color and color.a) or 0.26, 0.22) }, 0.22)
 end
 
 ---@param activeLevel number|nil
@@ -96,22 +98,15 @@ local function queueAreaHighlight(playerIndex, x1, y1, x2, y2, z, color, alpha)
     }
 end
 
-function GhostRenderer.flushAreaHighlights()
-    local now = getTimestampMs and getTimestampMs() or 0
-    local source = areaQueue
-    if #areaQueue > 0 then
-        lastAreaQueue = areaQueue
-        lastAreaQueueTime = now
-    elseif now - (lastAreaQueueTime or 0) < 180 then
-        source = lastAreaQueue
-    end
-    for areaIndex = 1, #source do
-        local area = source[areaIndex]
+function GhostRenderer.flushWorldAreaHighlights()
+    local pending = areaQueue
+    areaQueue = {}
+    for areaIndex = 1, #pending do
+        local area = pending[areaIndex]
         addAreaHighlightForPlayer(
             area.playerIndex, area.x1, area.y1, area.x2, area.y2, area.z, area.r, area.g, area.b, area.a
         )
     end
-    areaQueue = {}
 end
 
 local function finishSignature(finish)
@@ -250,9 +245,9 @@ end
 function GhostRenderer.renderRoom(room, defaultZ, activeLevel, highlightRoomId, playerIndex)
     local roomZ = tonumber(room.z)
     if roomZ == nil then roomZ = tonumber(defaultZ) or 0 end
-    local color = room.color or { r = 0.25, g = 0.65, b = 0.95, a = 0.12 }
+    local color = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
     local highlighted = highlightRoomId and room.id == highlightRoomId
-    local base = colorAlpha(color, 0.12)
+    local base = roomAlpha(color)
     if highlighted then base = math.min(0.34, base + 0.08) end
     local alpha = GhostRenderer.levelAlpha(roomZ, activeLevel, base)
     if alpha <= 0 then return end
@@ -423,12 +418,12 @@ function GhostRenderer.renderBlueprintOffset(blueprint, dx, dy, playerIndex)
     for roomIndex = 1, #rooms do
         local room = rooms[roomIndex]
         local roomZ = tonumber(room.z) or tonumber(blueprint.level) or 0
-        local roomColor = room.color or { r = 0.25, g = 0.65, b = 0.95, a = 0.12 }
+        local roomColor = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
         local originX = (room.x or 0) + dx
         local originY = (room.y or 0) + dy
         queueAreaHighlight(
             playerIndex, originX, originY, originX + (room.w or room.width or 1), originY + (room.h or room.height or 1),
-            roomZ, roomColor, colorAlpha(roomColor, 0.12)
+            roomZ, roomColor, roomAlpha(roomColor)
         )
     end
 end
@@ -438,7 +433,7 @@ end
 function GhostRenderer.renderRect(x1, y1, x2, y2, z, color, playerIndex)
     local minX, maxX = math.min(x1, x2), math.max(x1, x2)
     local minY, maxY = math.min(y1, y2), math.max(y1, y2)
-    color = color or { r = 0.25, g = 0.65, b = 0.95, a = 0.12 }
+    color = color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
     local alpha = colorAlpha(color, 0.12)
     queueAreaHighlight(playerIndex, minX, minY, maxX + 1, maxY + 1, z, color, alpha)
 end
@@ -474,7 +469,5 @@ function GhostRenderer.renderTileHighlight(x, y, z, color, alpha, playerIndex)
         colorAlpha({ r = color.r, g = color.g, b = color.b, a = alpha or 0.24 }, alpha or 0.24)
     )
 end
-
-Events.OnPreUIDraw.Add(GhostRenderer.flushAreaHighlights)
 
 return GhostRenderer

@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "Herramienta de borrado",
   "IGUI_KBW_StopTool": "Detener herramienta",
   "IGUI_KBW_BuildPlacement": "Construir",
+  "IGUI_KBW_RemoveSelectedPiece": "Eliminar seleccionado",
   "IGUI_KBW_ExportJSON": "Exportar",
   "IGUI_KBW_Exported": "Exportado \"%1\" como Lua/%2",
   "IGUI_KBW_ExportFailed": "Error al exportar plano",

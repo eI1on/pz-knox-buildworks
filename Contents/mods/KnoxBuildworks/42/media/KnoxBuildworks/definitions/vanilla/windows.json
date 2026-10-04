@@ -613,8 +613,8 @@
     {
       "id": "kbw.vanilla.woodenwindowframelvl3",
       "displayName": "Wooden Panel Window Frame",
-      "translationKey": "IGUI_KBWVE_Buildable_Extended_WoodenPanelWindowFrame",
-      "tooltipKey": "Tooltip_KBW_Shared_WoodPanelWall",
+      "translationKey": "IGUI_KBW_Vanilla_WoodenPanelWindowFrame",
+      "tooltipKey": "Tooltip_KBW_WoodenPanelWindowFrame",
       "category": "Windows",
       "subcategory": "Window Frames",
       "materialTags": [
@@ -659,10 +659,42 @@
             }
           },
           "requirements": {
-            "materials": "kbwve.extended.wall_frame",
             "skills": {
               "Woodwork": 3
-            }
+            },
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ]
           },
           "previousStage": [
             "WoodenWallFrame",

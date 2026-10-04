@@ -69,7 +69,7 @@ local function defineClass()
             end
         end
         self.canBeBuild = true
-        local color = self.roomTemplate.color or { r = 0.25, g = 0.65, b = 0.95, a = 0.12 }
+        local color = self.roomTemplate.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
         if self.anchorX then
             GhostRenderer.renderRect(
                 self.anchorX, self.anchorY, self.currentX, self.currentY, self.planZ, color, self.player

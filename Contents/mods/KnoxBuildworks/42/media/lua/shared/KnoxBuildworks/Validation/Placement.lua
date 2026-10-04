@@ -237,13 +237,24 @@ local function isDeclaredWindowFrame(object, north)
     return modData and modData.KBW and modData.KBW.providesWindowFrame == true
 end
 
+local function isDeclaredDoorFrame(object, north)
+    if not object or not object.getModData then return false end
+    local modData = object:getModData()
+    local data = modData and modData.KBW or nil
+    if not data or data.providesDoorFrame ~= true then return false end
+    local direction = tonumber(data.direction) or 1
+    local frameNorth = direction == 2 or direction == 4
+    return frameNorth == north
+end
+
 -- Shapes 3, 4, 8, 11 and 12 are cutaway and double-door openings rather than
 -- punched windows, and the windows drawn for them declare those same shapes. A
 -- cut opening therefore counts as a frame when - and only when - the window
 -- being placed names the same shape.
 local function cutOpeningMatches(props, north, shapeOf)
     if not props or shapeOf == nil then return false end
-    local opening = north and props:has(IsoFlagType.cutN) or props:has(IsoFlagType.cutW)
+    local opening = north and props:has(IsoFlagType.cutN)
+        or not north and props:has(IsoFlagType.cutW)
     if not opening then return false end
     return Placement.windowShapeOf(props) == shapeOf
 end
@@ -332,7 +343,8 @@ local function checkWallFrame(square, north, wantsWindow, windowSupportSprites, 
             if wantsWindow and isCompatibleWindowSupport(item, north, windowSupportSprites) then
                 hasFrame = true
             end
-            if not wantsWindow and item:isDoorFrame() and item:getNorth() == north then hasFrame = true end
+            if not wantsWindow and (item:isDoorFrame() and item:getNorth() == north
+                or isDeclaredDoorFrame(item, north)) then hasFrame = true end
             if not wantsWindow and item:isDoor() and item:getNorth() == north then hasBuilt = true end
         end
     end
@@ -350,6 +362,7 @@ local function checkWallFrame(square, north, wantsWindow, windowSupportSprites, 
             end
             if instanceof(object, "IsoWindow") and object:getNorth() == north then hasBuilt = true end
         else
+            if isDeclaredDoorFrame(object, north) then hasFrame = true end
             if north and object:getType() == IsoObjectType.doorFrN then hasFrame = true end
             if not north and object:getType() == IsoObjectType.doorFrW then hasFrame = true end
             if north and props and props:has(IsoPropertyType.DOOR_WALL_N) then hasFrame = true end
@@ -495,8 +508,9 @@ function Placement.validate(cursor, square)
         return false, "safehouse denied"
     end
     if placement.requiresOutside == true and not square:isOutside() then return false, "outside required" end
-    local previousStage = Placement.previousStageOf(cursor.stage) or Placement.optionalReplacementStageOf(cursor.stage)
-    local previous = Placement.findPrevious(square, cursor.definition.id, previousStage, cursor.north == true)
+    local previousStage = Placement.previousStageOf(cursor.stage)
+    local replacementStage = previousStage or Placement.optionalReplacementStageOf(cursor.stage)
+    local previous = Placement.findPrevious(square, cursor.definition.id, replacementStage, cursor.north == true)
     if previousStage and not previous then return false, "previous stage missing" end
     local kind = placement.kind
     if not previous and kind == "wall" and cursor.canPassThrough ~= true then

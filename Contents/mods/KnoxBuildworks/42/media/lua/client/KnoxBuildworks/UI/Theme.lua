@@ -16,6 +16,10 @@ Theme.borderSoft = { r = 0.30, g = 0.29, b = 0.27, a = 0.65 }
 Theme.text = { r = 0.92, g = 0.91, b = 0.88, a = 1.0 }
 Theme.textMuted = { r = 0.64, g = 0.63, b = 0.60, a = 1.0 }
 Theme.good = { r = good:getR(), g = good:getG(), b = good:getB(), a = 1.0 }
+-- A restrained status green used for readiness borders and labels. The
+-- engine highlight green is intentionally brighter because it is meant for
+-- world cursors, not dense catalogue rows.
+Theme.ready = { r = 0.42, g = 0.66, b = 0.38, a = 0.92 }
 Theme.bad = { r = 0.84, g = 0.42, b = 0.24, a = 1.0 }
 Theme.warn = { r = 0.86, g = 0.62, b = 0.28, a = 1.0 }
 Theme.warnSoft = { r = 0.46, g = 0.32, b = 0.18, a = 0.80 }
@@ -105,12 +109,14 @@ function Theme.applyAccessibility(options)
         setColor(Theme.border, { .80, .78, .70 }, .95)
         setColor(Theme.borderSoft, { .55, .54, .50 }, .85)
         setColor(Theme.accent, { .95, .84, .38 }, 1)
+        setColor(Theme.ready, { .58, .90, .50 }, 1)
     else
         setColor(Theme.text, { .92, .91, .88 }, 1)
         setColor(Theme.textMuted, { .64, .63, .60 }, 1)
         setColor(Theme.border, { .48, .46, .42 }, .75)
         setColor(Theme.borderSoft, { .30, .29, .27 }, .65)
         setColor(Theme.accent, tone.accent, 1)
+        setColor(Theme.ready, { .42, .66, .38 }, .92)
     end
 end
 
@@ -214,6 +220,53 @@ function Theme.applyActionButton(button, enabled, primary)
     button.textColorDisable = cloneColor(Theme.textMuted)
     Theme.lockButtonColors(button)
     Theme.setButtonEnabled(button, enabled == true)
+end
+
+function Theme.applyScrollbar(scrollbar)
+    if not scrollbar then return end
+    scrollbar.background = true
+    scrollbar.backgroundColor = cloneColor(Theme.surface)
+    scrollbar.borderColor = cloneColor(Theme.borderSoft)
+end
+
+function Theme.applyCombo(combo)
+    if not combo then return end
+    combo.background = true
+    combo.backgroundColor = cloneColor(Theme.surface)
+    combo.backgroundColor.a = .96
+    combo.backgroundColorMouseOver = cloneColor(Theme.surfaceRaised)
+    combo.backgroundColorMouseOver.a = .98
+    combo.borderColor = cloneColor(Theme.borderSoft)
+    combo.borderColor.a = .95
+    combo.textColor = cloneColor(Theme.text)
+end
+
+function Theme.applyTickBox(tickBox)
+    if not tickBox then return end
+    tickBox.borderColor = cloneColor(Theme.border)
+    tickBox._textColor = cloneColor(Theme.text)
+end
+
+function Theme.applySlider(slider)
+    if not slider then return end
+    slider.buttonColor = cloneColor(Theme.textMuted)
+    slider.buttonMouseOverColor = cloneColor(Theme.text)
+    slider.sliderColor = cloneColor(Theme.accent)
+    slider.sliderMouseOverColor = cloneColor(Theme.text)
+    slider.sliderBorderColor = cloneColor(Theme.border)
+    slider.sliderBarColor = cloneColor(Theme.surface)
+    slider.sliderBarBorderColor = cloneColor(Theme.borderSoft)
+end
+
+function Theme.applyList(list)
+    if not list then return end
+    list.backgroundColor = cloneColor(Theme.surface)
+    list.borderColor = cloneColor(Theme.borderSoft)
+    list.selectionColor = cloneColor(Theme.selected)
+    list.mouseOverHighlightColor = cloneColor(Theme.surfaceRaised)
+    list.textColor = cloneColor(Theme.text)
+    list.selectedTextColor = cloneColor(Theme.text)
+    Theme.applyScrollbar(list.vscroll)
 end
 
 return Theme

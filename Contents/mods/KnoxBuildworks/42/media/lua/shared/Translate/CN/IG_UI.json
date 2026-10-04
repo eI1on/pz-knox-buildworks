@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "擦除工具",
   "IGUI_KBW_StopTool": "停止工具",
   "IGUI_KBW_BuildPlacement": "建造",
+  "IGUI_KBW_RemoveSelectedPiece": "删除所选",
   "IGUI_KBW_ExportJSON": "导出",
   "IGUI_KBW_Exported": "已将 \"%1\" 导出为 Lua/%2",
   "IGUI_KBW_ExportFailed": "蓝图导出失败",

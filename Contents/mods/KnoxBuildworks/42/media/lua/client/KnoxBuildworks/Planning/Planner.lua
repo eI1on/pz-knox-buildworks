@@ -123,6 +123,11 @@ function Planner.renderWorldPreview(playerIndex, x, y, z, square)
     end
 end
 
+function Planner.flushWorldHighlights()
+    GhostRenderer.flushWorldAreaHighlights()
+end
+
 Events.RenderOpaqueObjectsInWorld.Add(Planner.renderWorldPreview)
+Events.RenderOpaqueObjectsInWorld.Add(Planner.flushWorldHighlights)
 
 return Planner

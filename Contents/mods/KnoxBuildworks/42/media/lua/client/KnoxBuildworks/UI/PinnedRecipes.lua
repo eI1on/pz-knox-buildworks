@@ -41,6 +41,7 @@ local AREA_RESCAN_MS = 15000
 local AREA_SCAN_BUDGET = 32
 local hudGeneration = 0
 local areaContainerCache = {}
+local areaScanRegistered = false
 local blueprintTotalsCache = {}
 
 local SKILL_ICON_IDS = {
@@ -451,6 +452,10 @@ local function ensureAreaScan(blueprint)
         state.previousContainers = previousContainers
         state.previousWorldItems = previousWorldItems
         areaContainerCache[id] = state
+        if not areaScanRegistered then
+            areaScanRegistered = true
+            Events.OnTick.Add(PinnedRecipes.updateAreaScans)
+        end
     end
     if state then state.lastUsed = now end
     return state
@@ -504,6 +509,7 @@ end
 function PinnedRecipes.updateAreaScans()
     local remaining = AREA_SCAN_BUDGET
     local now = getTimestampMs and getTimestampMs() or 0
+    local pending = false
     for id, state in pairs(areaContainerCache) do
         if remaining <= 0 then break end
         if now - (state.lastUsed or now) > 60000 then
@@ -513,7 +519,15 @@ function PinnedRecipes.updateAreaScans()
                 scanAreaSquare(state)
                 remaining = remaining - 1
             end
+            if not state.complete then pending = true end
         end
+    end
+    -- Completed caches are refreshed lazily by ensureAreaScan. Keeping an
+    -- idle OnTick listener alive made this feature appear in profilers for the
+    -- rest of the session even when no gather area was being scanned.
+    if not pending and areaScanRegistered then
+        Events.OnTick.Remove(PinnedRecipes.updateAreaScans)
+        areaScanRegistered = false
     end
 end
 
@@ -1052,6 +1066,19 @@ local function buildLines(player, maxWidth, includeTitle)
         end
     end
     local order = data.pinnedRecipeOrder or {}
+    local removedStaleRecipe = false
+    for orderIndex = #order, 1, -1 do
+        local key = order[orderIndex]
+        if data.pinnedRecipes[key] == nil then
+            data.pinnedCollapsed["recipe:" .. tostring(key)] = nil
+            table.remove(order, orderIndex)
+            removedStaleRecipe = true
+        end
+    end
+    if removedStaleRecipe then
+        persistUiData(player)
+        hudGeneration = hudGeneration + 1
+    end
     local recipeCount = 0
     for orderIndex = 1, #order do
         local entry = data.pinnedRecipes[order[orderIndex]]
@@ -1169,8 +1196,8 @@ function KBWPinnedRecipesSettings:new(player)
     o.minimumHeight = 228
     o.resizable = false
     o.title = getText("IGUI_KBW_PinnedSettings")
-    o.backgroundColor = Theme.backdrop
-    o.borderColor = Theme.border
+    o.backgroundColor = Theme.color(Theme.backdrop)
+    o.borderColor = Theme.color(Theme.border)
     o:setWantKeyEvents(true)
     return o
 end
@@ -1349,7 +1376,6 @@ local function autoAlignment(screenLeft, screenWidth)
     if KBWCatalog then classify(KBWCatalog.instance) end
     if KBWPlanningMode then
         classify(KBWPlanningMode.instance)
-        if KBWPlanningMode.instance then classify(KBWPlanningMode.instance.catalogPanel) end
     end
     if leftBusy and not rightBusy then return "right" end
     return "left"
@@ -1644,10 +1670,6 @@ function PinnedRecipes.ensurePanel()
     panel:initialise()
     panel:addToUIManager()
     PinnedRecipes.panel = panel
-    if not PinnedRecipes.areaScanRegistered then
-        PinnedRecipes.areaScanRegistered = true
-        Events.OnTick.Add(PinnedRecipes.updateAreaScans)
-    end
 end
 
 return PinnedRecipes

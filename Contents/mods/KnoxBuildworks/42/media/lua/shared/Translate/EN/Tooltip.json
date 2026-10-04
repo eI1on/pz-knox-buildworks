@@ -1,4 +1,6 @@
 {
+  "Tooltip_KBW_ReadyFilter": "Finds a version you can build with your carried supplies and nearby ground items. Results appear as recipes are checked. Placement is checked when you choose a location. Click again to show all recipes.",
+  "Tooltip_KBW_ClearFilters": "Return to all categories and clear the search, material, skill, type, version, and ready-only filters.",
   "Tooltip_KBW_AsphaltMixturePowder": "Mix with water in a bucket to make asphalt for road construction.",
   "Tooltip_KBW_PlanningVariant": "Choose the variant saved into the planned ghost.",
   "Tooltip_KBW_PlanningMaterial": "Choose the material set saved into the planned ghost.",
@@ -27,6 +29,7 @@
   "Tooltip_KBW_StopTool": "Cancel the active planning cursor.",
   "Tooltip_KBW_EraseRoom": "Erase room zones without touching planned buildables.",
   "Tooltip_KBW_BuildTool": "Click planned buildables in the world to build them.",
+  "Tooltip_KBW_BuildPlacement": "Build the selected planned piece.",
   "Tooltip_KBW_MoveBlueprint": "Pick a new origin tile with the cursor; the whole blueprint follows.",
   "Tooltip_KBW_GatherArea": "Drag the container/vehicle area used for blueprint material counts and fetching.",
   "Tooltip_KBW_BuildAll": "Queue every planned buildable, fetching materials from the gather area when possible.",
@@ -151,5 +154,7 @@
   "Tooltip_KBW_Shared_WallLamp": "A powered wall lamp that must be mounted on a compatible wall.",
   "Tooltip_KBW_Shared_ExitSign": "An illuminated exit sign that can be mounted on a wall or door frame.",
   "Tooltip_KBW_Shared_FloorLamp": "A freestanding powered lamp with the original fixture's light color and radius.",
-  "Tooltip_KBW_Shared_OldWoodWall": "Rustic weathered wood wall."
+  "Tooltip_KBW_Shared_OldWoodWall": "Rustic weathered wood wall.",
+  "Tooltip_KBW_DecorativeWallFixture": "Decorative wall fixture. Does not store items.",
+  "Tooltip_KBW_WoodenPanelWindowFrame": "A wooden panel wall with a window opening. Build a wooden or metal wall frame first."
 }

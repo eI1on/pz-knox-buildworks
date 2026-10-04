@@ -71,7 +71,7 @@ function KBWBuildPlanTooltip:new()
     self.__index = self
     o.background = true
     o.backgroundColor = { r = Theme.backdrop.r, g = Theme.backdrop.g, b = Theme.backdrop.b, a = 0.92 }
-    o.borderColor = Theme.border
+    o.borderColor = Theme.color(Theme.border)
     o.lines = {}
     return o
 end

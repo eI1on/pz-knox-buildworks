@@ -3288,9 +3288,8 @@
                 "role": "material",
                 "mode": "consume",
                 "resourceType": "Item",
-                "items": [
-                  "Base.BucketEmpty",
-                  "Base.Bucket"
+                "tags": [
+                  "base:bucket"
                 ],
                 "amount": 1
               },

@@ -1422,6 +1422,14 @@
             "PaintLightBrown": {
               "W": "walls_exterior_roofs_05_33",
               "N": "walls_exterior_roofs_05_28"
+            },
+            "PaintPink": {
+              "W": "walls_exterior_roofs_01_169",
+              "N": "walls_exterior_roofs_01_164"
+            },
+            "PaintTurquoise": {
+              "W": "walls_exterior_roofs_10_9",
+              "N": "walls_exterior_roofs_10_4"
             }
           },
           "baseSprites": [

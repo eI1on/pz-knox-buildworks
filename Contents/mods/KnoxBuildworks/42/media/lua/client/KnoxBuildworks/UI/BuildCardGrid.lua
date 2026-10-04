@@ -24,16 +24,15 @@ local function optionIndex(id, fallback)
 end
 
 local function catalogIconScale()
-    return ({ 1, 1.32, 1.68 })[optionIndex("CatalogIconSize", 1)]
+    local option = Options and Options.getOption and Options:getOption("CatalogIconSize") or nil
+    local value = tonumber(option and option.getValue and option:getValue()) or 100
+    -- Values 1..3 are accepted for saves made before the percentage slider.
+    if value <= 3 then return ({ 1, 1.32, 1.68 })[math.max(1, math.floor(value))] end
+    return math.max(0.75, math.min(1.75, value / 100))
 end
 
 local function hoverPreviewPixels()
     return ({ 144, 208, 280 })[optionIndex("HoverPreviewSize", 1)]
-end
-
-local function hoverPreviewEnabled()
-    local option = Options and Options.getOption and Options:getOption("HoverPreview") or nil
-    return option and option.getValue and option:getValue() == true
 end
 
 function KBWBuildablePreviewToolTip:new()
@@ -205,7 +204,7 @@ function KBWBuildCardGrid:setCompactMode(compact, force)
     end
     self.listLayoutCache = nil
     self:setScrollHeight(self:contentHeight())
-    if self.vscroll then self:updateScrollbars() end
+    self:updateVisibleScrollbar()
 end
 
 function KBWBuildCardGrid:createChildren()
@@ -213,8 +212,10 @@ function KBWBuildCardGrid:createChildren()
     self:addScrollBars()
     self:setScrollChildren(false)
     if self.vscroll then
+        Theme.applyScrollbar(self.vscroll)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
+        self.vscroll:setVisible(false)
     end
 end
 
@@ -227,9 +228,7 @@ function KBWBuildCardGrid:onResize()
     -- listLayouts() already rejects a cache whose draw width changed. Keep a
     -- valid cache when only the height or an unrelated inspector control
     -- changes, and defer width reflow while the player drags the resize grip.
-    if not (self.listLayoutDeferred and self.viewMode == "list") then
-        self:setScrollHeight(self:contentHeight())
-    end
+    if not (self.listLayoutDeferred and self.viewMode == "list") then self:updateVisibleScrollbar() end
 end
 
 function KBWBuildCardGrid:setItems(items, selectedId)
@@ -256,7 +255,7 @@ function KBWBuildCardGrid:setItems(items, selectedId)
     if not (self.listLayoutDeferred and self.viewMode == "list") then
         self:setScrollHeight(self:contentHeight())
     end
-    if self.vscroll then self:updateScrollbars() end
+    self:updateVisibleScrollbar()
 end
 
 function KBWBuildCardGrid:setSelectionPreview(definition, effectiveDefinition, stage, finish)
@@ -299,7 +298,7 @@ function KBWBuildCardGrid:setViewMode(mode)
     self.viewMode = mode
     self.listLayoutCache = nil
     self:setScrollHeight(self:contentHeight())
-    if self.vscroll then self:updateScrollbars() end
+    self:updateVisibleScrollbar()
 end
 
 function KBWBuildCardGrid:setLayoutDeferred(deferred)
@@ -308,11 +307,30 @@ function KBWBuildCardGrid:setLayoutDeferred(deferred)
     self.listLayoutDeferred = deferred
     if deferred or self.viewMode ~= "list" then return end
     self:setScrollHeight(self:contentHeight())
-    if self.vscroll then self:updateScrollbars() end
+    self:updateVisibleScrollbar()
 end
 
 function KBWBuildCardGrid:drawWidth()
-    return self.width - (self.vscroll and self.vscroll:getWidth() or 0)
+    return self.width - (self.vscroll and self.vscroll:isVisible() and self.vscroll:getWidth() or 0)
+end
+
+function KBWBuildCardGrid:updateVisibleScrollbar()
+    if not self.vscroll then return end
+    self.vscroll:setVisible(false)
+    self.listLayoutCache = nil
+    local height = self:contentHeight()
+    self:setScrollHeight(height)
+    local overflowing = height > self.height
+    self.vscroll:setVisible(overflowing)
+    if overflowing then
+        self.listLayoutCache = nil
+        self:setScrollHeight(self:contentHeight())
+        self.vscroll:setX(self.width - self.vscroll:getWidth())
+        self.vscroll:setHeight(self.height)
+        self:updateScrollbars()
+    else
+        self:setYScroll(0)
+    end
 end
 
 function KBWBuildCardGrid:columns()
@@ -455,7 +473,6 @@ end
 ---@param x number
 ---@param y number
 function KBWBuildCardGrid:previewIndexAt(x, y)
-    if not hoverPreviewEnabled() then return 0 end
     local index = self:indexAt(x, y)
     if index == 0 then return 0 end
     if self.viewMode == "list" then
@@ -524,7 +541,8 @@ end
 ---@param dy number
 function KBWBuildCardGrid:onMouseMove(dx, dy)
     local hoverIndex = self:indexAt(self:getMouseX(), self:getMouseY())
-    local previewHoverIndex = self:previewIndexAt(self:getMouseX(), self:getMouseY())
+    local previewHoverIndex = self.compactMode and hoverIndex
+        or self:previewIndexAt(self:getMouseX(), self:getMouseY())
     self.hoverIndex = hoverIndex
     if previewHoverIndex ~= self.previewHoverIndex then
         self.previewHoverIndex = previewHoverIndex
@@ -549,7 +567,6 @@ end
 
 function KBWBuildCardGrid:updateBuildableTooltip()
     self:hideBuildableTooltip()
-    if not hoverPreviewEnabled() then return end
     if self.previewHoverIndex <= 0 then return end
     local definition = self.items[self.previewHoverIndex]
     if not definition then return end
@@ -577,7 +594,7 @@ end
 ---@param x number
 ---@param y number
 function KBWBuildCardGrid:onMouseDown(x, y)
-    if self:previewIndexAt(x, y) > 0 then return true end
+    if not self.compactMode and self:previewIndexAt(x, y) > 0 then return true end
     local pinIndex = self:pinIndexAt(x, y)
     if pinIndex > 0 then
         self.selectedIndex = pinIndex
@@ -613,8 +630,10 @@ function KBWBuildCardGrid:onMouseWheel(delta)
     local maximum = math.max(0, self:contentHeight() - self.height)
     local target = self:getYScroll() - delta * (self.compactMode and self.cardHeight or 46)
     self:setYScroll(math.max(-maximum, math.min(0, target)))
-    if self.vscroll then self:updateScrollbars() end
+    if self.vscroll and self.vscroll:isVisible() then self:updateScrollbars() end
     self.hoverIndex = self:indexAt(self:getMouseX(), self:getMouseY())
+    self.previewHoverIndex = self.compactMode and self.hoverIndex
+        or self:previewIndexAt(self:getMouseX(), self:getMouseY())
     self:updateBuildableTooltip()
     return true
 end
@@ -727,7 +746,7 @@ function KBWBuildCardGrid:prerender()
     self.statusBudget = STATUS_BUDGET_PER_FRAME
     self.statusSnapshot = nil
     local unavailableAlpha = unavailableIconAlpha()
-    local previewsEnabled = hoverPreviewEnabled()
+    local previewsEnabled = not self.compactMode
 
     if self.viewMode == "list" then
         local layouts = self:listLayouts().rows
@@ -745,12 +764,11 @@ function KBWBuildCardGrid:prerender()
                 local entry, status = self:cardStatus(definition)
                 local texture, textureColor = self:visualFor(definition, entry, selected)
                 local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
-                local border = selected and Theme.accent or (status.ok and Theme.good or Theme.borderSoft)
+                local border = selected and Theme.accent or (status.ok and Theme.ready or Theme.borderSoft)
                 local x = self.gap
                 local width = safeWidth - self.gap * 2
                 self:drawRect(x + 2, y + 2, width, rowHeight, 0.26, 0, 0, 0)
                 self:drawRect(x, y, width, rowHeight, fill.a, fill.r, fill.g, fill.b)
-                self:drawRect(x, y, 4, rowHeight, selected and 1 or .72, border.r, border.g, border.b)
                 self:drawRectBorder(x, y, width, rowHeight, border.a, border.r, border.g, border.b)
                 Theme.drawPreviewBackground(self, x + 9, y + 9, 56, 56, Options)
                 self:drawRectBorder(
@@ -786,7 +804,7 @@ function KBWBuildCardGrid:prerender()
                         self:drawTextureScaledAspect(
                             previewTexture, x + width - self.favoriteSize - 12,
                             y + 13 + self.favoriteSize, self.favoriteSize, self.favoriteSize,
-                            previewHovered and 1 or .72, 1, 1, 1
+                            previewHovered and 1 or .62, 1, 1, 1
                         )
                     end
                 end
@@ -808,13 +826,12 @@ function KBWBuildCardGrid:prerender()
                     )
                     textY = textY + lineHeight
                 end
-                local marker = status.pending and Theme.textMuted or (status.ok and Theme.good or Theme.warn)
+                local marker = status.pending and Theme.textMuted or (status.ok and Theme.ready or Theme.warn)
                 local statusY = y + rowHeight - fontHeight - 9
-                self:drawRect(x + 76, statusY + math.floor(fontHeight / 2) - 2, 6, 6, 1, marker.r, marker.g, marker.b)
                 local statusText = status.pending and "..."
                     or (status.ok and getText("IGUI_KBW_Ready") or getText("IGUI_KBW_Missing"))
                 self:drawText(
-                    statusText, x + 86, statusY, marker.r, marker.g, marker.b, 1, UIFont.Small
+                    statusText, x + 76, statusY, marker.r, marker.g, marker.b, 1, UIFont.Small
                 )
             end
         end
@@ -839,10 +856,9 @@ function KBWBuildCardGrid:prerender()
                         local entry, status = self:cardStatus(definition)
                         local texture, textureColor = self:visualFor(definition, entry, selected)
                         local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
-                        local border = selected and Theme.accent or (status.ok and Theme.good or Theme.borderSoft)
+                        local border = selected and Theme.accent or (status.ok and Theme.ready or Theme.borderSoft)
                         self:drawRect(x + 2, y + 2, self.cardWidth, self.cardHeight, 0.24, 0, 0, 0)
                         self:drawRect(x, y, self.cardWidth, self.cardHeight, fill.a, fill.r, fill.g, fill.b)
-                        self:drawRect(x, y, self.cardWidth, 3, selected and 1 or .68, border.r, border.g, border.b)
                         self:drawRectBorder(
                             x, y, self.cardWidth, self.cardHeight, border.a, border.r, border.g, border.b
                         )
@@ -890,7 +906,7 @@ function KBWBuildCardGrid:prerender()
                                 self.favoriteSize, self.favoriteSize, alpha, color.r, color.g, color.b
                             )
                         end
-                        if previewsEnabled or self.compactMode then
+                        if previewsEnabled then
                             local previewTexture = previewHovered and self.previewTextureOn or self.previewTextureOff
                             if previewTexture then
                                 local iconOffset = self.compactMode and 5 or 7
@@ -898,14 +914,12 @@ function KBWBuildCardGrid:prerender()
                                     previewTexture,
                                     x + self.cardWidth - self.favoriteSize - iconOffset,
                                     y + iconOffset + self.favoriteSize + (self.compactMode and 2 or 4),
-                                    self.favoriteSize, self.favoriteSize, previewHovered and 1 or .72, 1, 1, 1
+                                    self.favoriteSize, self.favoriteSize, previewHovered and 1 or .62, 1, 1, 1
                                 )
                             end
                         end
-                        local marker = status.pending and Theme.textMuted or (status.ok and Theme.good or Theme.warn)
-                        if self.compactMode then
-                            self:drawRect(x, y + self.cardHeight - 5, self.cardWidth, 5, 1, marker.r, marker.g, marker.b)
-                        else
+                        local marker = status.pending and Theme.textMuted or (status.ok and Theme.ready or Theme.warn)
+                        if not self.compactMode then
                             local name = self:shortNameFor(entry, self.cardWidth - 10)
                             local nameY = previewY + previewHeight + 6
                             self:drawTextCentre(
@@ -917,14 +931,10 @@ function KBWBuildCardGrid:prerender()
                                 x, y + self.cardHeight - statusHeight, self.cardWidth, statusHeight, .28,
                                 Theme.backdrop.r, Theme.backdrop.g, Theme.backdrop.b
                             )
-                            self:drawRect(
-                                x + 9, y + self.cardHeight - math.floor(statusHeight / 2) - 3, 6, 6, 1, marker.r,
-                                marker.g, marker.b
-                            )
                             local statusText = status.pending and "..."
                                 or (status.ok and getText("IGUI_KBW_Ready") or getText("IGUI_KBW_Missing"))
                             self:drawText(
-                                statusText, x + 18, y + self.cardHeight - statusHeight + 3, marker.r, marker.g,
+                                statusText, x + 9, y + self.cardHeight - statusHeight + 3, marker.r, marker.g,
                                 marker.b, 1, UIFont.Small
                             )
                         end

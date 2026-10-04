@@ -17,6 +17,8 @@ local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local NativeObjectFactory = require("KnoxBuildworks/BuildingObjects/NativeObjectFactory")
 local Mannequins = require("KnoxBuildworks/World/Mannequins")
 local Durability = require("KnoxBuildworks/Definitions/Durability")
+local Collision = require("KnoxBuildworks/World/Collision")
+local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 
 ---@class KBWBuildingObject: ISBuildingObject
 KBWBuildingObject = ISBuildingObject:derive("KBWBuildingObject")
@@ -155,23 +157,7 @@ local function isRoofObjectSprite(spriteName)
         or properties:has("isEave")
 end
 
-local function isPassableWallOpeningSprite(spriteName, north)
-    local sprite = spriteName and getSprite(spriteName) or nil
-    local props = sprite and sprite:getProperties() or nil
-    if not props then return false end
-    if north then
-        return props:has(IsoFlagType.cutN) and not (
-            props:has(IsoFlagType.collideN) or props:has(IsoFlagType.WallN)
-                or props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WindowN)
-                or props:has(IsoFlagType.DoorWallN) or props:has(IsoFlagType.HoppableN)
-        )
-    end
-    return props:has(IsoFlagType.cutW) and not (
-        props:has(IsoFlagType.collideW) or props:has(IsoFlagType.WallW)
-            or props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WindowW)
-            or props:has(IsoFlagType.DoorWallW) or props:has(IsoFlagType.HoppableW)
-    )
-end
+local isPassableWallOpeningSprite = Collision.isPassableOpening
 
 local function isPassableWallOpening(stage)
     local sprites = (stage and stage.sprites) or {}
@@ -324,9 +310,14 @@ end
 ---serialized player number, then Java replaces `player` with the authoritative
 ---IsoPlayer only after construction; keeping the constructor's nil character
 ---made remote players' actions remain at 0% while the listen-server host worked.
+---@param authoritativePlayer IsoPlayer | nil
 ---@return IsoPlayer | nil
-function KBWBuildingObject:refreshPlayerContext()
-    local runtimePlayer = self.player
+function KBWBuildingObject:refreshPlayerContext(authoritativePlayer)
+    -- BuildAction owns the authoritative character on both the client and the
+    -- server. Prefer it when supplied: a serialized building cursor can retain
+    -- its numeric local-player index, which getSpecificPlayer cannot resolve on
+    -- a dedicated server.
+    local runtimePlayer = authoritativePlayer or self.player
     if type(runtimePlayer) == "number" then runtimePlayer = getSpecificPlayer(runtimePlayer) end
     if runtimePlayer and runtimePlayer ~= self.character then
         self.character = runtimePlayer
@@ -510,12 +501,16 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
     o.isWallLike = kind == "wall" or kind == "wallCovering" or placement.needWindowFrame == true
     o.isFloor = kind == "floor"
     o.canBeAlwaysPlaced = kind == "overlay"
-    local passableWallOpening = kind == "wall" and isPassableWallOpening(o.stage)
+    local passableWallOpening = kind == "wall" and (isPassableWallOpening(o.stage)
+        or string.find(tostring(buildableId), "double_door_wall", 1, true) ~= nil)
     o.canPassThrough = configuredBoolean(objectConfig.canPassThrough, kind == "overlay" or passableWallOpening)
     o.isDoorFrame = objectConfig.isDoorFrame == true
     o.isCorner = objectConfig.isCorner == true
+    -- Passable wall pieces (including generated double-door openings) must use
+    -- the moveable-prop path so the tile never receives a solid thumpable
+    -- collision edge. This also keeps native frame metadata available.
     o.isProp = objectConfig.isProp == true or spriteConfig.isProp == true
-        or (objectConfig.canPassThrough == true and kind ~= "overlay" and kind ~= "floor")
+        or (o.canPassThrough == true and kind ~= "overlay" and kind ~= "floor")
     o.isThumpable = configuredBoolean(objectConfig.isThumpable, spriteConfig.isThumpable ~= false and kind ~= "overlay")
     o.dismantable = objectConfig.dismantable ~= false
     o.blockAllTheSquare = configuredBoolean(objectConfig.blockAllSquare, kind == "object")
@@ -567,6 +562,7 @@ function KBWBuildingObject:new(player, buildableId, stageId, variantId, material
             entity = entityMetadata.entity,
             schemaVersion = KBW.SCHEMA_VERSION,
             providesWindowFrame = placement.providesWindowFrame == true and true or nil,
+            providesDoorFrame = (objectConfig.isDoorFrame == true or passableWallOpening) and true or nil,
             wallType = ((o.stage.finishes or o.definition.finishes) and WallFinishes.wallType(o.definition, o.stage))
                 or nil
         }
@@ -650,7 +646,7 @@ end
 
 ---@param action string
 function KBWBuildingObject:onTimedActionStart(action)
-    self:refreshPlayerContext()
+    self:refreshPlayerContext(action and action.character or nil)
     ISBuildingObject.onTimedActionStart(self, action)
     local construction = StageConfig.construction(self.definition, self.stage)
     local craftRecipe = StageConfig.recipe(self.definition, self.stage)
@@ -968,6 +964,28 @@ local function consumedKeyId(recipeData)
     return fallback
 end
 
+-- Preserve vanilla dismantling returns for single-tile walls and frames.
+local function recordWallBuildMaterials(object, footprint)
+    if not object.dismantable or #footprint ~= 1 then return end
+    if StageConfig.placement(object.definition, object.stage).kind ~= "wall" then return end
+    if object.isProp then return end
+    for key in pairs(object.modData) do
+        if type(key) == "string" and string.sub(key, 1, 5) == "need:" then object.modData[key] = nil end
+    end
+    local recipeData = object.craftRecipeData
+    if not recipeData or not recipeData.getAllRecordedConsumedItems then return end
+    local items = recipeData:getAllRecordedConsumedItems()
+    if not items then return end
+    for index = 0, items:size() - 1 do
+        local item = items:get(index)
+        local fullType = item and item.getFullType and item:getFullType() or nil
+        if fullType then
+            local key = "need:" .. fullType
+            object.modData[key] = (object.modData[key] or 0) + 1
+        end
+    end
+end
+
 function KBWBuildingObject:consumeConstructionRequirements(square)
     local usesNativeInputs = EntityCompat.usesNativeRecipeInputs(self.stage)
     if usesNativeInputs and not self.craftRecipe then
@@ -1164,9 +1182,12 @@ function KBWBuildingObject:applyPartFlags(part)
     if objectConfig.canBarricade ~= nil then self.canBarricade = objectConfig.canBarricade == true end
     local sprite = part:getSprite()
     if isPassableWallOpeningSprite(sprite and sprite:getName() or nil, self.north == true) then
-        -- Cut-only arches are openings, not windows: they remain walkable and
-        -- cannot inherit old window-frame interaction flags from definitions.
+        -- Cut-only arches and DoorWall openings have no collision edge.
+        -- DoorWall marks an opening, not a solid wall or a window.
         self.canPassThrough = true
+        self.blockAllTheSquare = false
+        self.isDoorFrame = self.isDoorFrame or props:has(IsoFlagType.DoorWallN)
+            or props:has(IsoFlagType.DoorWallW)
         self.hoppable = false
         self.canBarricade = false
     end
@@ -1371,6 +1392,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         return false
     end
     self.keyId = consumedKeyId(self.craftRecipeData)
+    recordWallBuildMaterials(self, footprint)
     local replacedIndex = -1
     local previousRemoved = false
     local function removePrevious(target)
@@ -1386,17 +1408,28 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         local tile = footprint[index]
         if tile.sprite then
             local target = self:ensureSquareExists(x + (tile.dx or 0), y + (tile.dy or 0), z + (tile.dz or 0))
-            -- An explicit Knox point-light configuration takes precedence over
-            -- the sprite's native lightswitch marker. Room switches are tied to
-            -- meta-room boundaries; those boundaries can be absent or enormous
-            -- in player-built MP structures after a chunk reload.
-            local nativeObjectType = nil
-            if not spriteConfig.lightRadius then
-                nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
-            end
+            -- Preserve native Java object classes whenever the tile declares
+            -- one. In particular, a light-switch sprite must become an
+            -- IsoLightSwitch so the standard click, sound and indicator paths
+            -- remain available.
+            local nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
             self.modData.KBW.groupId, self.modData.KBW.partIndex, self.modData.KBW.partCount = groupId,
                 index, #footprint
-            if placement.kind == "floor" and not isRoofObjectSprite(tile.sprite) then
+            if placement.kind == "overlay" and placement.needToBeAgainstWall == true
+                and isWallDecorationSprite(tile.sprite) then
+                local host = AttachedSprites.findWallHost(target, north, placement.isCorner == true)
+                local attached = host and AttachedSprites.attach(host, tile.sprite, self.modData.KBW) or nil
+                if not attached then
+                    Log:error(
+                        "Failed to attach wall detail %s for %s at %d,%d,%d",
+                        tostring(tile.sprite), tostring(self.buildableId), target:getX(), target:getY(), target:getZ()
+                    )
+                    return false
+                end
+                target:RecalcAllWithNeighbours(true)
+                buildUtil.setHaveConstruction(target, true)
+                self:runOnCreate(host, { tile = tile, tileIndex = index, attachedSprite = attached })
+            elseif placement.kind == "floor" and not isRoofObjectSprite(tile.sprite) then
                 local part = target:addFloor(tile.sprite)
                 part:getModData().KBW = copyTable(self.modData.KBW)
                 EntityCompat.attach(part, self.stage, true)
@@ -1467,15 +1500,17 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 -- oriented even when the object is marked passable.
                 --
                 -- A staged replacement drops its frame here as well. Passable
-                -- wall pieces (double door frames declare canPassThrough, which
-                -- makes them props) reach this branch, and leaving the old wall
+                -- wall pieces (including generated double-door openings) reach
+                -- this branch, and leaving the old wall
                 -- frame standing left the player dismantling it by hand. Removed
                 -- before the prop is placed, since placeMoveableInternal reads
                 -- the square it is building onto.
                 removePrevious(target)
                 local props = ISMoveableSpriteProps.new(IsoObject.new(target, tile.sprite):getSprite())
                 props.rawWeight = 10
-                local part = props:placeMoveableInternal(target, instanceItem("Base.Plank"), tile.sprite)
+                local part = props:placeMoveableInternal(
+                    self.character, target, instanceItem("Base.Plank"), tile.sprite
+                )
                 local plainProp = false
                 if not part then
                     part = IsoObject.new(target, tile.sprite)

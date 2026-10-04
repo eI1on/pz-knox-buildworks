@@ -127,7 +127,8 @@
           "object": {
             "isThumpable": true,
             "blockAllSquare": false,
-            "dismantable": true
+            "dismantable": true,
+            "canPassThrough": true
           }
         }
       ]
@@ -258,7 +259,8 @@
           "object": {
             "isThumpable": true,
             "blockAllSquare": false,
-            "dismantable": true
+            "dismantable": true,
+            "canPassThrough": true
           }
         }
       ]
@@ -389,7 +391,8 @@
           "object": {
             "isThumpable": true,
             "blockAllSquare": false,
-            "dismantable": true
+            "dismantable": true,
+            "canPassThrough": true
           }
         }
       ]
@@ -520,7 +523,8 @@
           "object": {
             "isThumpable": true,
             "blockAllSquare": false,
-            "dismantable": true
+            "dismantable": true,
+            "canPassThrough": true
           }
         }
       ]
@@ -651,7 +655,8 @@
           "object": {
             "isThumpable": true,
             "blockAllSquare": false,
-            "dismantable": true
+            "dismantable": true,
+            "canPassThrough": true
           }
         }
       ]

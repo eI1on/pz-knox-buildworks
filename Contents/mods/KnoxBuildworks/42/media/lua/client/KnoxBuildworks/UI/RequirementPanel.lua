@@ -305,8 +305,10 @@ function KBWRequirementPanel:createChildren()
     self:addScrollBars()
     self:setScrollChildren(false)
     if self.vscroll then
+        Theme.applyScrollbar(self.vscroll)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
+        self.vscroll:setVisible(false)
     end
 end
 
@@ -316,21 +318,35 @@ function KBWRequirementPanel:onResize()
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
     end
-    self:setScrollHeight(math.max(self.height, self:contentHeight()))
+    self:updateScrollBar()
 end
 
 function KBWRequirementPanel:drawWidth()
-    return self.width - (self.vscroll and self.vscroll:getWidth() or 0)
+    return self.width - (self.vscroll and self.vscroll:isVisible() and self.vscroll:getWidth() or 0)
 end
 
-function KBWRequirementPanel:contentHeight()
-    local width = self:drawWidth()
-    local total = 8
+function KBWRequirementPanel:contentHeight(width)
+    width = width or self:drawWidth()
+    local total = 4
     local rows = self.rows or {}
     for rowIndex = 1, #rows do
         total = total + rowLayout(rows[rowIndex], width).height
     end
-    return total
+    if #rows > 0 then return math.max(8, total - 6) end
+    return 8
+end
+
+function KBWRequirementPanel:updateScrollBar()
+    if self.vscroll then self.vscroll:setVisible(false) end
+    local contentHeight = self:contentHeight()
+    if self.vscroll and contentHeight > self.height then
+        self.vscroll:setVisible(true)
+        contentHeight = self:contentHeight()
+    else
+        self:setYScroll(0)
+    end
+    self:setScrollHeight(math.max(self.height, contentHeight))
+    if self.vscroll then self:updateScrollbars() end
 end
 
 ---@param definition KBW.BuildableDefinition
@@ -349,8 +365,7 @@ function KBWRequirementPanel:setSelection(definition, stage, finish)
     end
     self:applyChoices()
     self.clickRows = {}
-    self:setScrollHeight(math.max(self.height, self:contentHeight()))
-    if self.vscroll then self:updateScrollbars() end
+    self:updateScrollBar()
 end
 
 function KBWRequirementPanel:applyChoices()
@@ -401,7 +416,7 @@ end
 ---@param x number
 ---@param y number
 function KBWRequirementPanel:drawBadge(text, x, y, ok)
-    local color = ok and Theme.good or Theme.textMuted
+    local color = ok and Theme.textMuted or Theme.warn
     self:drawRect(x, y, 42, 42, 0.72, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b)
     self:drawRectBorder(x, y, 42, 42, 0.85, color.r, color.g, color.b)
     self:drawTextCentre(text, x + 21, y + 13, color.r, color.g, color.b, 1, UIFont.Small)
@@ -412,8 +427,8 @@ end
 function KBWRequirementPanel:drawRequirementRow(row, y, layout)
     local width = self.currentDrawWidth or self:drawWidth()
     local selected = rowKey(row) == self.selectedRowKey
-    local border = selected and Theme.accent or (row.ok and Theme.good or Theme.borderSoft)
-    local countColor = row.ok and Theme.good or Theme.warn
+    local border = selected and Theme.accent or Theme.borderSoft
+    local countColor = row.ok and Theme.textMuted or Theme.warn
     local fill = selected and Theme.selectedSoft or Theme.surface
     local rowHeight = layout.height
     self:drawRect(0, y, width, rowHeight - 6, fill.a, fill.r, fill.g, fill.b)
@@ -455,19 +470,27 @@ function KBWRequirementPanel:prerender()
         self.vscroll:setHeight(self.height)
     end
     self.currentDrawWidth = self:drawWidth()
-    local stencilX, stencilY, stencilW, stencilH = self:clampStencilRectToParent(
+    self:clampStencilRectToParent(
         0, 0, self.currentDrawWidth, self.height
     )
     self.clickRows = {}
     local scroll = self:getYScroll()
     local y = 4
-    local viewY = y + scroll
     local rows = self.rows or {}
+    if #rows == 0 then
+        self:drawText(
+            getText("IGUI_KBW_NoMaterialsTools"), 4, 4,
+            Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
+        )
+        self.currentDrawWidth = nil
+        self:clearStencilRect()
+        return
+    end
     for rowIndex = 1, #rows do
         local row = rows[rowIndex]
         local layout = rowLayout(row, self.currentDrawWidth)
         self.clickRows[#self.clickRows + 1] = { y = y, h = layout.height, row = row }
-        viewY = y + scroll
+        local viewY = y + scroll
         if viewY + layout.height >= 0 and viewY < self.height then self:drawRequirementRow(row, y, layout) end
         y = y + layout.height
     end

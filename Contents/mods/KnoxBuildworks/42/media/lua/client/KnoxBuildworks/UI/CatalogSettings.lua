@@ -4,6 +4,7 @@ require "ISUI/ISButton"
 require "ISUI/ISComboBox"
 require "ISUI/ISTickBox"
 require "ISUI/ISColorPicker"
+require "RadioCom/ISUIRadio/ISSliderPanel"
 
 local Options = require("KnoxBuildworks/Options")
 local Theme = require("KnoxBuildworks/UI/Theme")
@@ -56,7 +57,11 @@ end
 local function setOption(id, value, persist)
     local target = option(id)
     if target and target.setValue then target:setValue(value) end
-    applyOptions(persist)
+    if persist == false then
+        Theme.applyAccessibility(Options)
+    else
+        applyOptions(true)
+    end
 end
 
 local function clamp(value, minimum, maximum)
@@ -82,7 +87,7 @@ function KBWCatalogAppearanceSettings:new(player, target)
     local controlHeight = math.max(26, fontHeight + 10)
     local rowHeight = controlHeight + 10
     local titleBarHeight = math.max(16, fontHeight + 1)
-    local height = math.max(430, titleBarHeight + 36 + rowHeight * 8 + controlHeight * 2)
+    local height = math.max(390, titleBarHeight + 36 + rowHeight * 7 + controlHeight * 2)
     local o = ISCollapsableWindow:new(120, 120, 460, height)
     setmetatable(o, self)
     self.__index = self
@@ -96,6 +101,7 @@ function KBWCatalogAppearanceSettings:new(player, target)
     o.borderColor = Theme.color(Theme.border)
     o.controlHeight = controlHeight
     o.rowHeight = rowHeight
+    o.syncingOptions = true
     o:setWantKeyEvents(true)
     return o
 end
@@ -146,34 +152,27 @@ function KBWCatalogAppearanceSettings:createChildren()
     self.fadeUnavailableIcons.tooltip = getText("IGUI_KBW_FadeUnavailableIconsTooltip")
     self:addChild(self.fadeUnavailableIcons)
 
-    self.iconSizeCombo = ISComboBox:new(
-        controlX, top + self.rowHeight * 5, controlWidth, self.controlHeight, self, self.onIconSizeChanged
+    self.iconSizeSlider = ISSliderPanel:new(
+        controlX, top + self.rowHeight * 5, controlWidth - 54, self.controlHeight, self, self.onIconSizeChanged
     )
-    self.iconSizeCombo:initialise()
-    self:addChild(self.iconSizeCombo)
-
-    self.hoverPreview = ISTickBox:new(
-        18, top + self.rowHeight * 6, self.width - 36, self.controlHeight, "",
-        self, self.onHoverPreviewChanged
-    )
-    self.hoverPreview:initialise()
-    self.hoverPreview:addOption(getText("IGUI_KBW_HoverPreview"))
-    self.hoverPreview.tooltip = getText("IGUI_KBW_HoverPreviewTooltip")
-    self:addChild(self.hoverPreview)
+    self.iconSizeSlider:initialise()
+    self.iconSizeSlider:instantiate()
+    self.iconSizeSlider:setValues(75, 175, 5, 10, true)
+    self.iconSizeSlider:setDoButtons(true)
+    self:addChild(self.iconSizeSlider)
 
     self.hoverPreviewCombo = ISComboBox:new(
-        controlX, top + self.rowHeight * 7, controlWidth, self.controlHeight, self, self.onHoverPreviewSizeChanged
+        controlX, top + self.rowHeight * 6, controlWidth, self.controlHeight, self, self.onHoverPreviewSizeChanged
     )
     self.hoverPreviewCombo:initialise()
     self.hoverPreviewCombo.tooltip = getText("IGUI_KBW_HoverPreviewSizeTooltip")
     self:addChild(self.hoverPreviewCombo)
     for labelIndex = 1, #SIZE_LABELS do
         local label = getText(SIZE_LABELS[labelIndex])
-        self.iconSizeCombo:addOption(label)
         self.hoverPreviewCombo:addOption(label)
     end
 
-    local opacityY = top + self.rowHeight * 8
+    local opacityY = top + self.rowHeight * 7
     self.opacityDown = configureButton(
         ISButton:new(controlX, opacityY, 42, self.controlHeight, "-", self, self.onOpacityDown)
     )
@@ -191,19 +190,29 @@ function KBWCatalogAppearanceSettings:createChildren()
     )
     self:addChild(self.resetButton)
     self:syncFromOptions()
+    self:notifyTarget(true)
 end
 
-function KBWCatalogAppearanceSettings:notifyTarget(livePreview)
+function KBWCatalogAppearanceSettings:notifyTarget(livePreview, relayout)
     self.backgroundColor = Theme.color(Theme.backdrop)
     self.borderColor = Theme.color(Theme.border)
+    Theme.applyCombo(self.themeCombo)
+    Theme.applyCombo(self.backgroundCombo)
+    Theme.applyCombo(self.hoverPreviewCombo)
+    Theme.applyTickBox(self.highContrast)
+    Theme.applyTickBox(self.fadeUnavailableIcons)
+    Theme.applySlider(self.iconSizeSlider)
     Theme.applyButton(self.opacityDown, false)
     Theme.applyButton(self.opacityUp, false)
     Theme.applyButton(self.resetButton, false)
     self:refreshColorButton()
-    if self.target and self.target.onAppearanceChanged then self.target:onAppearanceChanged(livePreview) end
+    if self.target and self.target.onAppearanceChanged then
+        self.target:onAppearanceChanged(livePreview, relayout)
+    end
 end
 
 function KBWCatalogAppearanceSettings:syncFromOptions()
+    self.syncingOptions = true
     if self.themeCombo then self.themeCombo.selected = tonumber(optionValue("PanelTone", 1)) or 1 end
     if self.backgroundCombo then
         self.backgroundCombo.selected = tonumber(optionValue("PreviewBackground", 1)) or 1
@@ -214,16 +223,16 @@ function KBWCatalogAppearanceSettings:syncFromOptions()
     if self.fadeUnavailableIcons then
         self.fadeUnavailableIcons.selected[1] = optionValue("FadeUnavailableIcons", true) ~= false
     end
-    if self.iconSizeCombo then
-        self.iconSizeCombo.selected = tonumber(optionValue("CatalogIconSize", 1)) or 1
-    end
-    if self.hoverPreview then
-        self.hoverPreview.selected[1] = optionValue("HoverPreview", false) == true
+    if self.iconSizeSlider then
+        local value = tonumber(optionValue("CatalogIconSize", 100)) or 100
+        if value <= 3 then value = ({100, 130, 170})[math.max(1, math.floor(value))] end
+        self.iconSizeSlider:setCurrentValue(value, true)
     end
     if self.hoverPreviewCombo then
         self.hoverPreviewCombo.selected = tonumber(optionValue("HoverPreviewSize", 1)) or 1
     end
     self:refreshColorButton()
+    self.syncingOptions = nil
 end
 
 function KBWCatalogAppearanceSettings:refreshColorButton()
@@ -243,36 +252,38 @@ function KBWCatalogAppearanceSettings:refreshColorButton()
 end
 
 function KBWCatalogAppearanceSettings:onThemeChanged()
+    if self.syncingOptions then return end
     setOption("PanelTone", self.themeCombo.selected or 1)
     self:notifyTarget()
 end
 
 function KBWCatalogAppearanceSettings:onBackgroundChanged()
+    if self.syncingOptions then return end
     setOption("PreviewBackground", self.backgroundCombo.selected or 1)
     self:notifyTarget()
 end
 
 function KBWCatalogAppearanceSettings:onHighContrastChanged(clickedOption, enabled)
+    if self.syncingOptions then return end
     setOption("HighContrast", enabled == true)
     self:notifyTarget()
 end
 
 function KBWCatalogAppearanceSettings:onFadeUnavailableIconsChanged(clickedOption, enabled)
+    if self.syncingOptions then return end
     setOption("FadeUnavailableIcons", enabled == true)
     self:notifyTarget()
 end
 
-function KBWCatalogAppearanceSettings:onIconSizeChanged()
-    setOption("CatalogIconSize", self.iconSizeCombo.selected or 1)
-    self:notifyTarget()
-end
-
-function KBWCatalogAppearanceSettings:onHoverPreviewChanged(clickedOption, enabled)
-    setOption("HoverPreview", enabled == true)
-    self:notifyTarget()
+function KBWCatalogAppearanceSettings:onIconSizeChanged(value)
+    if self.syncingOptions then return end
+    setOption("CatalogIconSize", math.floor((tonumber(value) or 100) + .5), false)
+    self.appearanceDirty = true
+    self:notifyTarget(true, true)
 end
 
 function KBWCatalogAppearanceSettings:onHoverPreviewSizeChanged()
+    if self.syncingOptions then return end
     setOption("HoverPreviewSize", self.hoverPreviewCombo.selected or 1)
     self:notifyTarget()
 end
@@ -333,8 +344,7 @@ function KBWCatalogAppearanceSettings:onReset()
         BuildableBackgroundColor = { r = .35, g = .35, b = .35, a = 1 },
         HighContrast = false,
         FadeUnavailableIcons = true,
-        CatalogIconSize = 1,
-        HoverPreview = false,
+        CatalogIconSize = 100,
         HoverPreviewSize = 1,
         PanelOpacity = 86
     }
@@ -343,6 +353,7 @@ function KBWCatalogAppearanceSettings:onReset()
         if target and target.setValue then target:setValue(value) end
     end
     applyOptions(true)
+    self.appearanceDirty = nil
     self:syncFromOptions()
     self:notifyTarget()
 end
@@ -366,12 +377,18 @@ function KBWCatalogAppearanceSettings:render()
         getText("IGUI_KBW_CatalogIconSize"), labelX, top + self.rowHeight * 5,
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
+    local iconSize = tonumber(optionValue("CatalogIconSize", 100)) or 100
+    if iconSize <= 3 then iconSize = ({100, 130, 170})[math.max(1, math.floor(iconSize))] end
+    self:drawTextRight(
+        tostring(math.floor(iconSize + .5)) .. "%", self.width - 18, top + self.rowHeight * 5,
+        Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
+    )
     self:drawText(
-        getText("IGUI_KBW_HoverPreviewSize"), labelX, top + self.rowHeight * 7,
+        getText("IGUI_KBW_HoverPreviewSize"), labelX, top + self.rowHeight * 6,
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     self:drawText(
-        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 8,
+        getText("IGUI_KBW_PanelOpacity"), labelX, top + self.rowHeight * 7,
         Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small
     )
     local value = tonumber(optionValue("PanelOpacity", 86)) or 86
@@ -379,12 +396,16 @@ function KBWCatalogAppearanceSettings:render()
     local centreX = self.opacityDown:getRight()
         + math.floor((self.opacityUp:getX() - self.opacityDown:getRight()) / 2)
     self:drawTextCentre(
-        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 8,
+        string.format("%d%%", math.floor(value + .5)), centreX, top + self.rowHeight * 7,
         Theme.accent.r, Theme.accent.g, Theme.accent.b, 1, UIFont.Small
     )
 end
 
 function KBWCatalogAppearanceSettings:close()
+    if self.appearanceDirty then
+        applyOptions(true)
+        self.appearanceDirty = nil
+    end
     if self.colorPicker then
         self.colorPicker:removeSelf()
         self.colorPicker = nil

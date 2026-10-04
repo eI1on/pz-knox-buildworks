@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "Инструмент стирания",
   "IGUI_KBW_StopTool": "Остановить инструмент",
   "IGUI_KBW_BuildPlacement": "Построить",
+  "IGUI_KBW_RemoveSelectedPiece": "Удалить выбранное",
   "IGUI_KBW_ExportJSON": "Экспорт",
   "IGUI_KBW_Exported": "Экспортировано \"%1\" как Lua/%2",
   "IGUI_KBW_ExportFailed": "Ошибка экспорта чертежа",

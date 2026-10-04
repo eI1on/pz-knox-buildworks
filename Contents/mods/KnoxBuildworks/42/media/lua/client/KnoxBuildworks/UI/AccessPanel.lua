@@ -92,13 +92,14 @@ local function rowHeightFor(row, width)
     return math.max(44, 16 + (#lines * (getTextManager():getFontHeight(UIFont.Small) + 3)))
 end
 
-local function contentHeightFor(rows, width, panelHeight)
+local function contentHeightFor(rows, width)
     local total = 8
     rows = rows or {}
     for rowIndex = 1, #rows do
         total = total + rowHeightFor(rows[rowIndex], width) + 6
     end
-    return math.max(panelHeight or 0, total)
+    if #rows > 0 then total = total - 6 end
+    return total
 end
 
 local function rowKey(row)
@@ -149,8 +150,10 @@ function KBWAccessPanel:createChildren()
     self:addScrollBars()
     self:setScrollChildren(false)
     if self.vscroll then
+        Theme.applyScrollbar(self.vscroll)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
+        self.vscroll:setVisible(false)
     end
 end
 
@@ -160,11 +163,28 @@ function KBWAccessPanel:onResize()
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
     end
-    self:setScrollHeight(contentHeightFor(self.rows, self:drawWidth(), self.height))
+    self:updateScrollBar()
 end
 
 function KBWAccessPanel:drawWidth()
-    return self.width - (self.vscroll and self.vscroll:getWidth() or 0)
+    return self.width - (self.vscroll and self.vscroll:isVisible() and self.vscroll:getWidth() or 0)
+end
+
+function KBWAccessPanel:contentHeight(width)
+    return contentHeightFor(self.rows, width or self:drawWidth())
+end
+
+function KBWAccessPanel:updateScrollBar()
+    if self.vscroll then self.vscroll:setVisible(false) end
+    local contentHeight = contentHeightFor(self.rows, self:drawWidth())
+    if self.vscroll and contentHeight > self.height then
+        self.vscroll:setVisible(true)
+        contentHeight = contentHeightFor(self.rows, self:drawWidth())
+    else
+        self:setYScroll(0)
+    end
+    self:setScrollHeight(math.max(self.height, contentHeight))
+    if self.vscroll then self:updateScrollbars() end
 end
 
 function KBWAccessPanel:hasRows()
@@ -179,8 +199,7 @@ function KBWAccessPanel:setSelection(definition, stage)
     self.rows = gateRows(status.rows or {})
     self.clickRows = {}
     self:setYScroll(0)
-    self:setScrollHeight(contentHeightFor(self.rows, self:drawWidth(), self.height))
-    if self.vscroll then self:updateScrollbars() end
+    self:updateScrollBar()
 end
 
 ---@param row KBW.RequirementRow
@@ -222,11 +241,11 @@ end
 ---@param row KBW.RequirementRow
 ---@param y number
 function KBWAccessPanel:drawRow(row, y)
-    local color = row.ok and Theme.good or Theme.warn
+    local color = row.ok and Theme.textMuted or Theme.warn
     local width = self.currentDrawWidth or self:drawWidth()
     local selected = rowKey(row) == self.selectedRowKey
     local fill = selected and Theme.selectedSoft or Theme.surface
-    local border = selected and Theme.accent or color
+    local border = selected and Theme.accent or Theme.borderSoft
     local rowHeight = rowHeightFor(row, width)
     self:drawRect(0, y, width, rowHeight, fill.a, fill.r, fill.g, fill.b)
     self:drawRectBorder(0, y, width, rowHeight, 0.65, border.r, border.g, border.b)
@@ -257,7 +276,7 @@ function KBWAccessPanel:prerender()
         self.vscroll:setHeight(self.height)
     end
     self.currentDrawWidth = self:drawWidth()
-    local stencilX, stencilY, stencilW, stencilH = self:clampStencilRectToParent(
+    self:clampStencilRectToParent(
         0, 0, self.currentDrawWidth, self.height
     )
     self.clickRows = {}

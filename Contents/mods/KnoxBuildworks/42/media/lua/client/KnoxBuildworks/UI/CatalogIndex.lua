@@ -81,6 +81,14 @@ local function buildRecord(definition, order)
     if #tags > 0 then
         searchText = searchText .. " " .. string.lower(table.concat(tags, " "))
     end
+    local members = definition.__kbwMembers or {}
+    for index = 1, #members do
+        searchText = searchText .. " " .. string.lower(I18n.definitionName(members[index]))
+    end
+    local stages = definition.stages or {}
+    for index = 1, #stages do
+        searchText = searchText .. " " .. string.lower(I18n.optionName(stages[index], stages[index].id))
+    end
     local category = definition.category or "General"
     local subcategory = definition.subcategory or "General"
     local alwaysVisible, callbackStages = visibilityInfo(definition)
@@ -172,6 +180,8 @@ function CatalogIndex.get()
     end
     cache = {
         hash = hash,
+        rulesRevision = BuildableRules.revision,
+        rulesDocument = BuildableRules.document,
         list = list,
         records = records,
         byId = byId,
@@ -426,6 +436,35 @@ end
 
 function CatalogIndex.invalidate()
     cache = nil
+end
+
+function CatalogIndex.refreshRules()
+    if not cache then return false end
+    if cache.rulesDocument == BuildableRules.document then return true end
+    local startedAt = Profiler.now()
+    local filtersByCategory = {}
+    local allFilters = newFilterSets()
+    for categoryIndex = 1, #cache.categories do
+        filtersByCategory[cache.categories[categoryIndex]] = newFilterSets()
+    end
+    for recordIndex = 1, #cache.records do
+        local record = cache.records[recordIndex]
+        record.skills = skillsFor(record.definition)
+        record.requirementText = nil
+        local categoryFilters = filtersByCategory[record.category]
+        if not categoryFilters then
+            categoryFilters = newFilterSets()
+            filtersByCategory[record.category] = categoryFilters
+        end
+        addToFilterSets(categoryFilters, record)
+        addToFilterSets(allFilters, record)
+    end
+    cache.rulesRevision = BuildableRules.revision
+    cache.rulesDocument = BuildableRules.document
+    cache.filtersByCategory = filtersByCategory
+    cache.allFilters = allFilters
+    Profiler.add("catalogIndex.refreshRules", startedAt)
+    return true
 end
 
 return CatalogIndex

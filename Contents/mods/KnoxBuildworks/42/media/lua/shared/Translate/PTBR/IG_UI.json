@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "Ferramenta de apagar",
   "IGUI_KBW_StopTool": "Ferramenta de parar",
   "IGUI_KBW_BuildPlacement": "Construir",
+  "IGUI_KBW_RemoveSelectedPiece": "Remover selecionado",
   "IGUI_KBW_ExportJSON": "Exportar",
   "IGUI_KBW_Exported": "Exportado \"%1\" como Lua/%2",
   "IGUI_KBW_ExportFailed": "Falha na exportação do blueprint",

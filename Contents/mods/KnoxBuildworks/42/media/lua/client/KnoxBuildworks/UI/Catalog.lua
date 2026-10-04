@@ -6,7 +6,6 @@ require "ISUI/ISTextEntryBox"
 require "ISUI/ISComboBox"
 require "ISUI/ISTickBox"
 require "ISUI/ISToolTip"
-require "ISUI/ISScrollingListBox"
 require "KnoxBuildworks/UI/BuildCardGrid"
 require "KnoxBuildworks/UI/RequirementPanel"
 require "KnoxBuildworks/UI/AccessPanel"
@@ -35,11 +34,15 @@ local BuildableInfo = require("KnoxBuildworks/UI/BuildableInfo")
 local Options = require("KnoxBuildworks/Options")
 local CatalogSettings = require("KnoxBuildworks/UI/CatalogSettings")
 local Guide = require("KnoxBuildworks/UI/Guide")
+local Workspace = require("KnoxBuildworks/UI/CatalogWorkspace")
+local Readiness = require("KnoxBuildworks/UI/CatalogReadiness")
+local VirtualListBox = require("KnoxBuildworks/UI/VirtualListBox")
 
 ---@class KBWCatalog: ISCollapsableWindow
 KBWCatalog = ISCollapsableWindow:derive("KBWCatalog")
 KBWCatalog.instance = nil
 KBWCatalog.dragReturnState = nil
+KBWCatalog.pendingOpenPlayerNum = nil
 
 local STAR_UNSET = getTexture("media/ui/inventoryPanes/FavouriteNo.png")
 local STAR_SET = getTexture("media/ui/inventoryPanes/FavouriteYes.png")
@@ -60,7 +63,7 @@ local META_TEXTURES = {
 local DETAILED_MIN_WIDTH = 900
 local DETAILED_MIN_HEIGHT = 600
 local COMPACT_MIN_WIDTH = 620
-local COMPACT_MIN_HEIGHT = 360
+local COMPACT_MIN_HEIGHT = 520
 local FONT_HGT_SMALL = getTextManager():getFontHeight(UIFont.Small)
 local FONT_HGT_MEDIUM = getTextManager():getFontHeight(UIFont.Medium)
 
@@ -226,81 +229,6 @@ end
 
 local function measureFont(font, text)
     return getTextManager():MeasureStringX(font, text)
-end
-
-local function wrapLongWordForFont(font, lines, word, width)
-    local chunk = ""
-    for charIndex = 1, #word do
-        local char = string.sub(word, charIndex, charIndex)
-        local candidate = chunk .. char
-        if chunk ~= "" and measureFont(font, candidate) > width then
-            lines[#lines + 1] = chunk
-            chunk = char
-        else
-            chunk = candidate
-        end
-    end
-    if chunk ~= "" then lines[#lines + 1] = chunk end
-end
-
-local function wrapTextForFont(font, text, width)
-    text = cleanInlineText(text)
-    local lines = {}
-    if text == "" then return lines end
-    if width < 24 then
-        lines[#lines + 1] = text
-        return lines
-    end
-    local current = ""
-    for word in string.gmatch(text, "%S+") do
-        local candidate = current == "" and word or current .. " " .. word
-        if measureFont(font, candidate) <= width then
-            current = candidate
-        else
-            if current ~= "" then
-                lines[#lines + 1] = current
-                current = ""
-            end
-            if measureFont(font, word) <= width then
-                current = word
-            else
-                wrapLongWordForFont(font, lines, word, width)
-            end
-        end
-    end
-    if current ~= "" then lines[#lines + 1] = current end
-    return lines
-end
-
-local function drawLinesForFont(panel, font, lines, x, y, color, alpha)
-    local lineHeight = getTextManager():getFontHeight(font) + 2
-    for lineIndex = 1, #lines do
-        panel:drawText(lines[lineIndex], x, y, color.r, color.g, color.b, alpha or 1, font)
-        y = y + lineHeight
-    end
-    return y
-end
-
-local function drawCompactGroupRow(list, y, item, alt)
-    local font = list.font or UIFont.Small
-    local fontHeight = getTextManager():getFontHeight(font)
-    local scrollWidth = list.vscroll and list.vscroll:getWidth() or 0
-    local textWidth = math.max(24, list:getWidth() - scrollWidth - 20)
-    local lines = wrapTextForFont(font, item.text, textWidth)
-    local rowHeight = math.max(fontHeight + 10, #lines * (fontHeight + 2) + 10)
-    item.height = rowHeight
-    local textColor = item.textColor or list.textColor
-    if list.selected == item.index then
-        list:drawSelection(0, y, list:getWidth(), rowHeight - 1)
-        textColor = item.selectedTextColor or list.selectedTextColor
-    elseif list.mouseoverselected == item.index and list:isMouseOver() and not list:isMouseOverScrollBar() then
-        list:drawMouseOverHighlight(0, y, list:getWidth(), rowHeight - 1)
-    end
-    list:drawRectBorder(
-        0, y, list:getWidth(), rowHeight, .5, list.borderColor.r, list.borderColor.g, list.borderColor.b
-    )
-    drawLinesForFont(list, font, lines, 10, y + 5, textColor, textColor.a)
-    return y + rowHeight
 end
 
 local function stageRecipe(definition, stage)
@@ -687,8 +615,8 @@ function KBWCatalog:new(player)
     o.title = getText("IGUI_KBW_Title")
     o.selected = nil
     o.categoryButtons = {}
-    o.backgroundColor = Theme.backdrop
-    o.borderColor = Theme.border
+    o.backgroundColor = Theme.color(Theme.backdrop)
+    o.borderColor = Theme.color(Theme.border)
     o.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
     o:setWantKeyEvents(true)
     return o
@@ -800,6 +728,7 @@ function KBWCatalog:bringChromeToTop()
         self.search,
         self.searchMode,
         self.sortCombo,
+        self.clearFiltersButton,
         self.viewButton,
         self.scopeAll,
         self.scopeFav,
@@ -958,7 +887,7 @@ function KBWCatalog:createChildren()
     self
         :addChild(self.skillFilter)
 
-    local showAllLabel = getText("IGUI_CraftingUI_ShowAllVersion")
+    local showAllLabel = I18n.text("IGUI_KBW_ShowAllQualities", "All qualities")
     local showAllWidth = 28 + getTextManager():MeasureStringX(UIFont.Small, showAllLabel)
     self.showAllTickBox = ISTickBox:new(12, top + 112, showAllWidth, 24, "", self, self.onShowAllVersionsChanged)
     self.showAllTickBox:initialise()
@@ -975,14 +904,14 @@ function KBWCatalog:createChildren()
     self.grid:setCompactMode(self.compact)
     self:addChild(self.grid)
 
-    self.compactGroups = ISScrollingListBox:new(10, top + 92, 180, 180)
+    self.compactGroups = VirtualListBox:new(10, top + 92, 180, 180)
     self.compactGroups:initialise()
     self.compactGroups:instantiate()
     self.compactGroups.font = UIFont.Small
     self.compactGroups.fontHgt = FONT_HGT_SMALL
     self.compactGroups.itemPadY = 5
     self.compactGroups.itemheight = FONT_HGT_SMALL + 10
-    self.compactGroups.doDrawItem = drawCompactGroupRow
+    self.compactGroups.drawBorder = true
     self.compactGroups.background = true
     self.compactGroups.backgroundColor = Theme.color(Theme.surface)
     self.compactGroups.borderColor = Theme.color(Theme.borderSoft)
@@ -1043,6 +972,7 @@ function KBWCatalog:createChildren()
         .ingredientDrawer:initialise()
     self.ingredientDrawer:setVisible(false)
     self:addChild(self.ingredientDrawer)
+    Workspace.create(self)
     self:bringChromeToTop()
 
     self:refreshCategories()
@@ -1051,833 +981,16 @@ function KBWCatalog:createChildren()
     self:updateScopeButtons()
     self:layout()
     self:refreshGrid()
-end
-
-function KBWCatalog:layoutLegacy(liveResize)
-    local resizeHeight = self:resizeWidgetHeight()
-    local top = contentTop(self)
-    local contentBottom = self.height - resizeHeight
-    local drawerVisible = (not self.compact) and self.ingredientDrawer and self.ingredientDrawer:isVisible()
-    local drawerWidth = 0
-    if drawerVisible then drawerWidth = math.min(360, math.max(310, math.floor(self.width * .26))) end
-    local availableWidth = self.width - 20 - drawerWidth
-    if drawerVisible then availableWidth = availableWidth - 8 end
-    local inspectorWidth = 0
-    if not self.compact then
-        inspectorWidth = math.min(400, math.max(330, math.floor(availableWidth * .36)))
-        local minGridWidth = 340
-        if availableWidth - inspectorWidth < minGridWidth then
-            inspectorWidth = math.max(300, availableWidth - minGridWidth)
-        end
-    end
-    if inspectorWidth < 0 then inspectorWidth = 0 end
-    local drawerX = self.width - drawerWidth - 8
-    self.drawerWidth = drawerWidth
-    self.drawerX = drawerX
-    self.inspectorWidth = inspectorWidth
-    self.inspectorX = self.compact and self.width
-        or (drawerVisible and (drawerX - inspectorWidth - 8) or (self.width - inspectorWidth))
-    if self.inspectorX < 10 then self.inspectorX = 10 end
-    local headerX = 150
-    local rightReserve = self.compact and 74 or 178
-    local headerRight = math.max(headerX + 360, self.width - rightReserve)
-    local modeWidth = self.compact and 104 or 116
-    local sortWidth = self.compact and 106 or 122
-    local viewWidth = self.compact and 36 or 40
-    local scopeWidth = self.compact and (52 + 36 + 12) or (52 + 36 + 62 + 18)
-    local headerGap = 6
-    local searchWidth = math.max(
-        120, math.min(190, headerRight - headerX - modeWidth - sortWidth - viewWidth - scopeWidth - headerGap * 6)
-    )
-    if self.search then
-        self.search:setX(headerX)
-        self.search:setY(top + 10)
-        self.search:setWidth(searchWidth)
-    end
-    local nextX = headerX + searchWidth + headerGap
-    if self.searchMode then
-        self.searchMode:setX(nextX)
-        self.searchMode:setY(top + 10)
-        self.searchMode:setWidth(modeWidth)
-    end
-    nextX = nextX + modeWidth + headerGap
-    if self.sortCombo then
-        self.sortCombo:setX(nextX)
-        self.sortCombo:setY(top + 10)
-        self.sortCombo:setWidth(sortWidth)
-    end
-    nextX = nextX + sortWidth + headerGap
-    if self.viewButton then
-        self.viewButton:setX(nextX)
-        self.viewButton:setY(top + 10)
-        self.viewButton:setWidth(viewWidth)
-    end
-    nextX = nextX + viewWidth + headerGap
-    if self.scopeAll then
-        self.scopeAll:setX(nextX)
-        self.scopeAll:setY(top + 10)
-    end
-    nextX = nextX + 58
-    if self.scopeFav then
-        self.scopeFav:setX(nextX)
-        self.scopeFav:setY(top + 10)
-    end
-    nextX = nextX + 42
-    if self.scopeRecent then
-        self.scopeRecent:setX(nextX)
-        self.scopeRecent:setY(top + 10)
-        self.scopeRecent:setVisible(not self.compact)
-    end
-    if self.categoryPrev then self.categoryPrev:setY(top + 48) end
-    if self.categoryNext then self.categoryNext:setY(top + 48) end
-    if self.subcategoryFilter then self.subcategoryFilter:setY(top + 80) end
-    if self.materialFilter then self.materialFilter:setY(top + 80) end
-    if self.skillFilter then self.skillFilter:setY(top + 80) end
-    if self.showAllTickBox then
-        self.showAllTickBox:setX(12)
-        self.showAllTickBox:setY(top + 112)
-    end
-    self:positionHeaderActions()
-    local gridWidth = self.compact and self.width - 20 or self.inspectorX - 18
-    if gridWidth < 260 then gridWidth = 260 end
-    local filterGap = 6
-    local filterWidth = math.floor((gridWidth - 24 - (filterGap * 2)) / 3)
-    if filterWidth < 72 then filterWidth = 72 end
-    local filterY = top + 80
-    self.subcategoryFilter:setX(12)
-    self.subcategoryFilter:setY(filterY)
-    self.subcategoryFilter:setWidth(filterWidth)
-    self.materialFilter:setX(12 + filterWidth + filterGap)
-    self.materialFilter:setY(filterY)
-    self.materialFilter
-        :setWidth(filterWidth)
-    self.skillFilter:setX(12 + (filterWidth + filterGap) * 2)
-    self.skillFilter:setY(filterY)
-    self.skillFilter:setWidth(filterWidth)
-    local gridY = top + 144
-    local compactActionHeight = self.compact and 44 or 0
-    local gridHeight = math.max(90, contentBottom - gridY - compactActionHeight)
-    self.grid:setY(gridY)
-    self.grid:setWidth(gridWidth)
-    self.grid:setHeight(gridHeight)
-    self.grid:setScrollHeight(self.grid
-            :contentHeight())
-    if self.grid.onResize then self.grid:onResize() end
-    self:layoutCategoryButtons(gridWidth)
-    local visible = not self.compact
-    local controls = {
-        self.stage,
-        self.stagePrevButton,
-        self.stageNextButton,
-        self.variant,
-        self.material,
-        self.finish,
-        self.favoriteButton,
-        self.recipePinButton,
-        self
-            .requirements,
-        self.accessPanel
-    }
-    for i = 1, #controls do
-        controls[i]:setVisible(visible)
-    end
-    self.buildButton:setVisible(true)
-    self.planButton:setVisible(true)
-    self.plansButton:setVisible(true)
-    if self.compact then
-        local gap = 6
-        local plansW = 84
-        local planW = 112
-        local buildW = 104
-        local totalW = buildW + planW + plansW + gap * 2
-        local actionX = math.max(12, self.width - totalW - 12)
-        local actionY = contentBottom - 38
-        self.buildButton:setX(actionX)
-        self.buildButton:setY(actionY)
-        self.buildButton:setWidth(buildW)
-        self
-            .buildButton:setHeight(32)
-        self.planButton:setX(actionX + buildW + gap)
-        self.planButton:setY(actionY)
-        self.planButton:setWidth(planW)
-        self
-            .planButton:setHeight(32)
-        self.plansButton:setX(actionX + buildW + planW + gap * 2)
-        self.plansButton:setY(actionY)
-        self.plansButton
-            :setWidth(plansW)
-        self.plansButton:setHeight(32)
-    end
-    if visible then
-        local definition, stage = self:effectiveDefinition(), self:selectedStage()
-        local infoX = self.inspectorX + 16
-        local textWidth = math.max(120, inspectorWidth - 32)
-        local titleWidth = math.max(120, textWidth - 64)
-        self.infoNameY = top + 56
-        self.infoNameLines = definition and wrapTextForFont(UIFont.Medium, displayName(definition), titleWidth) or {}
-        local nameBottom = self.infoNameY + (#self.infoNameLines * (FONT_HGT_MEDIUM + 2))
-        local tooltip = definitionDescription(definition)
-        self.infoTooltipY = nameBottom + 4
-        self.infoTooltipLines = wrapTextForFont(UIFont.Small, tooltip, textWidth)
-        local tooltipBottom = self.infoTooltipY + (#self.infoTooltipLines * (FONT_HGT_SMALL + 2))
-        if #self.infoTooltipLines == 0 then tooltipBottom = nameBottom end
-        self.infoMetaEntries = recipeMetadataEntries(definition, stage)
-        self.infoMetaY = tooltipBottom + 8
-        self.infoMetaHeight = metadataChipHeight(self.infoMetaEntries, textWidth)
-        self.previewWidth = 112
-        self.previewHeight = 116
-        self.previewX = infoX + math.floor((textWidth - self.previewWidth) / 2)
-        self.previewY = math.max(top + 98, self.infoMetaY + self.infoMetaHeight + 10)
-        local stageCount = self:stageCountForSelection()
-        self.stage:setVisible(false)
-        self.stagePrevButton:setVisible(stageCount > 1)
-        self.stageNextButton:setVisible(stageCount > 1)
-        self.stagePrevButton:setX(self.previewX - 38)
-        self.stagePrevButton:setY(self.previewY + 38)
-        self.stageNextButton:setX(self.previewX + self.previewWidth + 8)
-        self.stageNextButton:setY(self.previewY + 38)
-        Theme.applyActionButton(self.stagePrevButton, stageCount > 1, false)
-        Theme.applyActionButton(self.stageNextButton, stageCount > 1, false)
-
-        local comboX = infoX
-        local comboWidth = textWidth
-        self.stageLabelY = self.previewY + self.previewHeight + 8
-        self.showStageLabel = shouldShowStageLabel(stage, stageCount)
-        local stageLines = self.showStageLabel
-            and wrapTextForFont(
-                UIFont.Small, stageDisplayText(stage, self.stage and self.stage.selected or 1, stageCount), textWidth
-            )
-            or {}
-        self.infoStageLines = stageLines
-        local stageBlockHeight = self.showStageLabel
-            and math.max(28, (#stageLines * (FONT_HGT_SMALL + 2)) + (stageCount > 1 and 18 or 8))
-            or (stageCount > 1 and 18 or 8)
-        local selectorY = self.stageLabelY + stageBlockHeight
-        local baseDefinition = Groups.resolveDefinition(self.selected, self:rawSelectedStage()) or self.selected
-        self.showVariantControl = hasOptions(baseDefinition and baseDefinition.variants)
-        self.showMaterialControl = hasOptions(baseDefinition and baseDefinition.materialOptions)
-        self.variant:setVisible(self.showVariantControl)
-        self.material:setVisible(self.showMaterialControl)
-        if self.showVariantControl then
-            self.variantLabelY = selectorY
-            self.variant:setX(comboX)
-            self.variant:setY(selectorY + 16)
-            self.variant:setWidth(comboWidth)
-            selectorY = selectorY + 50
-        else
-            self.variantLabelY = nil
-        end
-        if self.showMaterialControl then
-            self.materialLabelY = selectorY
-            self.material:setX(comboX)
-            self.material:setY(selectorY + 16)
-            self.material:setWidth(comboWidth)
-            selectorY = selectorY + 50
-        else
-            self.materialLabelY = nil
-        end
-        if not self.finishValues or #self.finishValues == 0 then self.finish:setVisible(false) end
-        if self.finish:isVisible() then
-            self.finishLabelY = selectorY
-            self.finish:setX(comboX)
-            self.finish:setY(selectorY + 16)
-            self.finish:setWidth(comboWidth)
-            selectorY = selectorY + 50
-        else
-            self.finishLabelY = nil
-        end
-        local titleButtonY = self.infoNameY
-        self.favoriteButton:setX(infoX + textWidth - 26)
-        self.favoriteButton:setY(titleButtonY)
-        self.recipePinButton:setX(infoX + textWidth - 54)
-        self.recipePinButton:setY(titleButtonY)
-        local panelX = self.inspectorX + 14
-        local panelWidth = math.max(250, inspectorWidth - 26)
-        local selectorBottom = selectorY
-        local panelsTop = math.max(self.previewY + 102, selectorBottom) + 32
-        self.actionY = contentBottom - 44
-        local panelBottom = self.actionY - 12
-        local panelsHeight = math.max(0, panelBottom - panelsTop)
-        local listBudget = math.max(0, panelsHeight - 58)
-        local accessHeight = math.floor(listBudget * .32)
-        if accessHeight < 34 then accessHeight = math.min(34, listBudget) end
-        if accessHeight > 132 then accessHeight = 132 end
-        local requirementsHeight = listBudget - accessHeight
-        if requirementsHeight < 40 then requirementsHeight = math.max(0, requirementsHeight) end
-        self.statusY = panelsTop - 24
-        self.skillsHeaderY = panelsTop
-        local accessY = panelsTop + 22
-        accessHeight = math.max(0, math.min(accessHeight, panelBottom - accessY))
-        self.accessPanel:setX(panelX)
-        self.accessPanel:setY(accessY)
-        self.accessPanel:setWidth(panelWidth)
-        self
-            .accessPanel:setHeight(accessHeight)
-        self.accessPanel:setVisible(accessHeight > 12)
-        self.requirementsHeaderY = accessY + accessHeight + 10
-        local requirementsY = self.requirementsHeaderY + 22
-        requirementsHeight = math.max(0, math.min(requirementsHeight, panelBottom - requirementsY))
-        self.requirements:setX(panelX)
-        self.requirements:setY(self.requirementsHeaderY + 22)
-        self.requirements
-            :setWidth(panelWidth)
-        self.requirements:setHeight(requirementsHeight)
-        self.requirements:setVisible(requirementsHeight > 12)
-        local actionGap = 6
-        local actionWidth = math.floor((panelWidth - actionGap) / 2)
-        self.buildButton:setX(panelX)
-        self.buildButton:setY(self.actionY)
-        self.buildButton:setWidth(actionWidth)
-        self
-            .buildButton:setHeight(32)
-        self.planButton:setX(panelX + actionWidth + actionGap)
-        self.planButton:setY(self.actionY)
-        self.planButton
-            :setWidth(actionWidth)
-        self.planButton:setHeight(32)
-        if self.accessPanel.onResize then self.accessPanel:onResize() end
-        if self.requirements.onResize then self.requirements:onResize() end
-    else
-        self.infoNameLines = nil
-        self.infoTooltipLines = nil
-        self.infoMetaEntries = nil
-        self.infoCapacityLines = nil
-        self.capacityY = nil
-        self.capacityHeight = nil
-        self.infoStageLines = nil
-        self.previewX = nil
-        self.previewY = nil
-    end
-    -- Requirement details use a separate right-side column, mirroring vanilla's
-    -- ingredient browser without letting the requirement rows draw underneath it.
-    self.ingredientDrawer:setX(drawerVisible and drawerX or self.width + 20)
-    self.ingredientDrawer:setY(top + 48)
-    self
-        .ingredientDrawer:setWidth(math
-                .max(1, drawerWidth))
-    self.ingredientDrawer:setHeight(math.max(120, contentBottom - top - 58))
-    if self.ingredientDrawer.onResize then self.ingredientDrawer:onResize() end
-    if self.compact then self.ingredientDrawer:setVisible(false) end
-    if self.resizeWidget then
-        self.resizeWidget:setX(self.width - resizeHeight)
-        self.resizeWidget:setY(self.height - resizeHeight)
-        self.resizeWidget:setWidth(resizeHeight)
-        self.resizeWidget:setHeight(resizeHeight)
-    end
-    if self.resizeWidget2 then
-        self.resizeWidget2:setX(0)
-        self.resizeWidget2:setY(self.height - resizeHeight)
-        self.resizeWidget2:setWidth(self.width - resizeHeight)
-        self.resizeWidget2:setHeight(resizeHeight)
-    end
-    self:ensureResizeWidgets()
-    if not liveResize then
-        self:bringChromeToTop()
-    end
-end
-
-local function catalogLayoutMetrics()
-    local small = getTextManager():getFontHeight(UIFont.Small)
-    local medium = getTextManager():getFontHeight(UIFont.Medium)
-    return {
-        small = small,
-        medium = medium,
-        control = math.max(28, small + 10),
-        action = math.max(32, small + 12),
-        gap = 6
-    }
+    self:onAppearanceChanged(true)
 end
 
 function KBWCatalog:layout(liveResize)
     Theme.applyAccessibility(Options)
-    local metrics = catalogLayoutMetrics()
-    local resizeHeight = self:resizeWidgetHeight()
-    local top = contentTop(self)
-    local contentBottom = self.height - resizeHeight
-    local drawerVisible = (not self.compact) and self.ingredientDrawer and self.ingredientDrawer:isVisible()
-    local drawerWidth = drawerVisible and math.min(360, math.max(310, math.floor(self.width * .26))) or 0
-    local availableWidth = self.width - 20 - drawerWidth - (drawerVisible and 8 or 0)
-    local inspectorWidth = 0
-    if not self.compact then
-        inspectorWidth = math.min(400, math.max(330, math.floor(availableWidth * .36)))
-        if availableWidth - inspectorWidth < 340 then inspectorWidth = math.max(300, availableWidth - 340) end
-    end
-    inspectorWidth = math.max(0, inspectorWidth)
-    local drawerX = self.width - drawerWidth - 8
-    self.drawerWidth = drawerWidth
-    self.drawerX = drawerX
-    self.inspectorWidth = inspectorWidth
-    self.inspectorX = self.compact and self.width
-        or (drawerVisible and (drawerX - inspectorWidth - 8) or (self.width - inspectorWidth))
-    if self.inspectorX < 10 then self.inspectorX = 10 end
+    Workspace.layout(self, contentTop(self), liveResize)
+end
 
-    local headerY = top + 8
-    local categoryY = headerY + metrics.control + 8
-    local headerX = 12
-    local compactHeader = self.compact == true
-    self.searchMode:setVisible(not compactHeader)
-    self.sortCombo:setVisible(not compactHeader)
-    self.viewButton:setVisible(not compactHeader)
-    self.scopeRecent:setVisible(not compactHeader)
-    self.subcategoryFilter:setVisible(not compactHeader)
-    self.materialFilter:setVisible(not compactHeader)
-    self.skillFilter:setVisible(not compactHeader)
-    self.showAllTickBox:setVisible(not compactHeader)
-    self.compactGroups:setVisible(compactHeader)
-
-    self.search:setX(headerX)
-    self.search:setY(headerY)
-    self.search:setHeight(metrics.control)
-    if compactHeader then
-        local searchWidth = math.min(300, math.max(150, self.width - 280))
-        self.search:setWidth(searchWidth)
-        local scopeX = headerX + searchWidth + metrics.gap
-        self.scopeAll:setX(scopeX)
-        self.scopeAll:setY(headerY)
-        self.scopeAll:setHeight(metrics.control)
-        self.scopeFav:setX(scopeX + 58)
-        self.scopeFav:setY(headerY)
-        self.scopeFav:setHeight(metrics.control)
-    else
-        local headerRight = math.max(headerX + 540, self.width - 216)
-        local modeWidth = 116
-        local sortWidth = 122
-        local viewWidth = 40
-        local scopeWidth = 176
-        local searchWidth = math.max(
-            150, math.min(260, headerRight - headerX - modeWidth - sortWidth - viewWidth - scopeWidth - 30)
-        )
-        self.search:setWidth(searchWidth)
-        local nextX = headerX + searchWidth + metrics.gap
-        self.searchMode:setX(nextX)
-        self.searchMode:setY(headerY)
-        self.searchMode:setWidth(modeWidth)
-        self.searchMode:setHeight(metrics.control)
-        nextX = nextX + modeWidth + metrics.gap
-        self.sortCombo:setX(nextX)
-        self.sortCombo:setY(headerY)
-        self.sortCombo:setWidth(sortWidth)
-        self.sortCombo:setHeight(metrics.control)
-        nextX = nextX + sortWidth + metrics.gap
-        self.viewButton:setX(nextX)
-        self.viewButton:setY(headerY)
-        self.viewButton:setWidth(viewWidth)
-        self.viewButton:setHeight(metrics.control)
-        nextX = nextX + viewWidth + metrics.gap
-        self.scopeAll:setX(nextX)
-        self.scopeAll:setY(headerY)
-        self.scopeAll:setHeight(metrics.control)
-        nextX = nextX + 58
-        self.scopeFav:setX(nextX)
-        self.scopeFav:setY(headerY)
-        self.scopeFav:setHeight(metrics.control)
-        nextX = nextX + 42
-        self.scopeRecent:setX(nextX)
-        self.scopeRecent:setY(headerY)
-        self.scopeRecent:setHeight(metrics.control)
-    end
-
-    self.categoryRowY = categoryY
-    self.categoryButtonX = 82
-    self.categoryPrev:setX(12)
-    self.categoryPrev:setY(categoryY)
-    self.categoryPrev:setHeight(metrics.control)
-    self.categoryNext:setX(46)
-    self.categoryNext:setY(categoryY)
-    self.categoryNext:setHeight(metrics.control)
-    self:positionHeaderActions()
-
-    local catalogWidth = self.compact and self.width - 20 or self.inspectorX - 18
-    catalogWidth = math.max(260, catalogWidth)
-    local gridY
-    if self.compact then
-        gridY = categoryY + metrics.control + 8
-    else
-        local filterY = categoryY + metrics.control + 8
-        local filterWidth = math.max(72, math.floor((catalogWidth - 24 - metrics.gap * 2) / 3))
-        self.subcategoryFilter:setX(12)
-        self.subcategoryFilter:setY(filterY)
-        self.subcategoryFilter:setWidth(filterWidth)
-        self.subcategoryFilter:setHeight(metrics.control)
-        self.materialFilter:setX(12 + filterWidth + metrics.gap)
-        self.materialFilter:setY(filterY)
-        self.materialFilter:setWidth(filterWidth)
-        self.materialFilter:setHeight(metrics.control)
-        self.skillFilter:setX(12 + (filterWidth + metrics.gap) * 2)
-        self.skillFilter:setY(filterY)
-        self.skillFilter:setWidth(filterWidth)
-        self.skillFilter:setHeight(metrics.control)
-        self.showAllTickBox:setX(12)
-        self.showAllTickBox:setY(filterY + metrics.control + 5)
-        self.showAllTickBox:setHeight(metrics.small + 8)
-        gridY = self.showAllTickBox:getBottom() + 6
-    end
-
-    local compactStageCount = self.compact and self:stageCountForSelection() or 0
-    local compactBaseDefinition = self.compact
-        and (Groups.resolveDefinition(self.selected, self:rawSelectedStage()) or self.selected)
-        or nil
-    local compactShowVariant = self.compact and hasOptions(compactBaseDefinition and compactBaseDefinition.variants)
-    local compactShowMaterial = self.compact
-        and hasOptions(compactBaseDefinition and compactBaseDefinition.materialOptions)
-    local compactShowFinish = self.compact and self.finishValues and #self.finishValues > 0
-    local compactSelectorCount = 0
-    if compactShowVariant then compactSelectorCount = compactSelectorCount + 1 end
-    if compactShowMaterial then compactSelectorCount = compactSelectorCount + 1 end
-    if compactShowFinish then compactSelectorCount = compactSelectorCount + 1 end
-    local compactSelectorRows = math.ceil(compactSelectorCount / 2)
-    local compactSelectorRowHeight = metrics.small + metrics.control + 8
-    local compactSelectorReserve = compactSelectorRows * compactSelectorRowHeight
-        + (compactSelectorCount > 0 and 8 or 0)
-    local compactCarouselReserve = compactStageCount > 1 and (metrics.control + 10) or 0
-    local compactActionReserve = self.compact
-        and (metrics.action + 18 + compactSelectorReserve + compactCarouselReserve)
-        or 0
-    local gridHeight = math.max(50, contentBottom - gridY - compactActionReserve)
-    local gridX = 10
-    local gridWidth = catalogWidth
-    if self.compact then
-        local groupWidth = math.min(
-            math.max(160, catalogWidth - 180),
-            math.min(240, math.max(170, math.floor(catalogWidth * .32), metrics.small * 7 + 18))
-        )
-        self.compactGroups:setX(10)
-        self.compactGroups:setY(gridY)
-        self.compactGroups:setWidth(groupWidth)
-        self.compactGroups:setHeight(gridHeight)
-        self.compactGroups.itemheight = metrics.small + 10
-        if self.compactGroups.vscroll then
-            self.compactGroups.vscroll:setX(groupWidth - self.compactGroups.vscroll:getWidth())
-            self.compactGroups.vscroll:setHeight(gridHeight)
-            self.compactGroups:updateScrollbars()
-        end
-        gridX = groupWidth + 16
-        gridWidth = math.max(120, catalogWidth - groupWidth - 6)
-    end
-    self.grid:setX(gridX)
-    self.grid:setY(gridY)
-    self.grid:setWidth(gridWidth)
-    self.grid:setHeight(gridHeight)
-    self.grid:setCompactMode(self.compact)
-    self.grid:setViewMode(self.compact and "grid" or self.viewMode)
-    self.grid:setScrollHeight(self.grid:contentHeight())
-    if self.grid.onResize then self.grid:onResize() end
-    self:layoutCategoryButtons(catalogWidth)
-
-    local detailControls = {
-        self.stage, self.stagePrevButton, self.stageNextButton, self.variant, self.material, self.finish,
-        self.favoriteButton, self.recipePinButton, self.requirements, self.accessPanel
-    }
-    for controlIndex = 1, #detailControls do
-        detailControls[controlIndex]:setVisible(not self.compact)
-    end
-    self.buildButton:setVisible(true)
-    self.planButton:setVisible(true)
-    self.plansButton:setVisible(true)
-
-    if self.compact then
-        self.stageCarouselX = nil
-        self.stageCarouselY = nil
-        self.stageCarouselWidth = nil
-        self.stageCarouselHeight = nil
-        self.infoNameLines = nil
-        self.infoTooltipLines = nil
-        self.infoMetaEntries = nil
-        self.infoCapacityLines = nil
-        self.capacityY = nil
-        self.capacityHeight = nil
-        self.infoStageLines = nil
-        self.previewX = nil
-        self.previewY = nil
-        local gap = metrics.gap
-        local plansWidth = math.max(84, measureFont(UIFont.Small, getText("IGUI_KBW_Plans")) + 22)
-        local planWidth = math.max(112, measureFont(UIFont.Small, getText("IGUI_KBW_Plan")) + 22)
-        local buildWidth = math.max(104, measureFont(UIFont.Small, getText("IGUI_KBW_Build")) + 22)
-        local totalWidth = buildWidth + planWidth + plansWidth + gap * 2
-        local actionX = math.max(12, self.width - totalWidth - 12)
-        local actionY = contentBottom - metrics.action - 6
-        self.buildButton:setX(actionX)
-        self.buildButton:setY(actionY)
-        self.buildButton:setWidth(buildWidth)
-        self.buildButton:setHeight(metrics.action)
-        self.planButton:setX(actionX + buildWidth + gap)
-        self.planButton:setY(actionY)
-        self.planButton:setWidth(planWidth)
-        self.planButton:setHeight(metrics.action)
-        self.plansButton:setX(actionX + buildWidth + planWidth + gap * 2)
-        self.plansButton:setY(actionY)
-        self.plansButton:setWidth(plansWidth)
-        self.plansButton:setHeight(metrics.action)
-        self.compactSelectors = {}
-        if compactShowVariant then
-            self.compactSelectors[#self.compactSelectors + 1] = {
-                control = self.variant,
-                label = getText("IGUI_KBW_Variant")
-            }
-        end
-        if compactShowMaterial then
-            self.compactSelectors[#self.compactSelectors + 1] = {
-                control = self.material,
-                label = getText("IGUI_KBW_MaterialSet")
-            }
-        end
-        if compactShowFinish then
-            self.compactSelectors[#self.compactSelectors + 1] = {
-                control = self.finish,
-                label = getText("IGUI_KBW_Finish")
-            }
-        end
-        local selectorBottom = actionY - 10
-        local selectorTop = selectorBottom - compactSelectorRows * compactSelectorRowHeight
-        local selectorGap = 10
-        local selectorColumnWidth = math.max(80, math.floor((gridWidth - selectorGap) / 2))
-        for selectorIndex = 1, #self.compactSelectors do
-            local entry = self.compactSelectors[selectorIndex]
-            local row = math.floor((selectorIndex - 1) / 2)
-            local column = (selectorIndex - 1) % 2
-            local isSingleLast = selectorIndex == #self.compactSelectors and #self.compactSelectors % 2 == 1
-            entry.x = isSingleLast and gridX or (gridX + column * (selectorColumnWidth + selectorGap))
-            entry.labelY = selectorTop + row * compactSelectorRowHeight
-            entry.width = isSingleLast and gridWidth or selectorColumnWidth
-            entry.control:setX(entry.x)
-            entry.control:setY(entry.labelY + metrics.small + 3)
-            entry.control:setWidth(entry.width)
-            entry.control:setHeight(metrics.control)
-            entry.control:setVisible(true)
-        end
-        self.compactCarouselY = nil
-        self.compactCarouselHeight = nil
-        self.compactStageText = nil
-        if compactStageCount > 1 then
-            local arrowSize = metrics.control
-            local carouselBottom = compactSelectorCount > 0 and (selectorTop - 8) or (actionY - 10)
-            local carouselY = carouselBottom - arrowSize
-            self.compactCarouselY = carouselY
-            self.compactCarouselHeight = arrowSize
-            self.compactCarouselX = gridX
-            self.compactCarouselWidth = gridWidth
-            self.compactStageText = stageDisplayText(
-                self:selectedStage(), self.stage and self.stage.selected or 1, compactStageCount
-            )
-            self.stagePrevButton:setVisible(true)
-            self.stageNextButton:setVisible(true)
-            self.stagePrevButton:setX(gridX)
-            self.stagePrevButton:setY(carouselY)
-            self.stagePrevButton:setWidth(arrowSize)
-            self.stagePrevButton:setHeight(arrowSize)
-            self.stageNextButton:setX(gridX + gridWidth - arrowSize)
-            self.stageNextButton:setY(carouselY)
-            self.stageNextButton:setWidth(arrowSize)
-            self.stageNextButton:setHeight(arrowSize)
-            Theme.applyActionButton(self.stagePrevButton, true, false)
-            Theme.applyActionButton(self.stageNextButton, true, false)
-        end
-    else
-        self.compactSelectors = nil
-        self.compactCarouselY = nil
-        self.compactCarouselHeight = nil
-        self.compactStageText = nil
-        local definition, stage = self:effectiveDefinition(), self:selectedStage()
-        local infoX = self.inspectorX + 16
-        local textWidth = math.max(120, inspectorWidth - 32)
-        local titleWidth = math.max(120, textWidth - 64)
-        self.infoNameY = top + 54
-        self.infoNameLines = definition and wrapTextForFont(UIFont.Medium, displayName(definition), titleWidth) or {}
-        local nameBottom = self.infoNameY + #self.infoNameLines * (metrics.medium + 2)
-        self.infoTooltipY = nameBottom + 4
-        self.infoTooltipLines = wrapTextForFont(UIFont.Small, definitionDescription(definition), textWidth)
-        local tooltipBottom = self.infoTooltipY + #self.infoTooltipLines * (metrics.small + 2)
-        if #self.infoTooltipLines == 0 then tooltipBottom = nameBottom end
-
-        local dimensionsText = stage and BuildableInfo.dimensionsText(stage) or ""
-        local dimensionWidth = measureFont(UIFont.Small, dimensionsText) + 16
-        self.previewWidth = math.min(
-            math.max(112, math.floor(textWidth * .52)),
-            math.max(112, math.min(170, dimensionWidth), metrics.small * 3 + 28)
-        )
-        self.previewHeight = math.max(112, math.min(154, self.previewWidth))
-        local visualTop = tooltipBottom + 8
-        self.previewX = infoX
-        self.previewY = visualTop
-        self.infoMetaEntries = recipeMetadataEntries(definition, stage)
-        self.infoMetaX = self.previewX + self.previewWidth + 10
-        self.infoMetaY = visualTop
-        self.infoMetaWidth = math.max(80, textWidth - self.previewWidth - 10)
-        self.infoMetaHeight = metadataChipHeight(self.infoMetaEntries, self.infoMetaWidth)
-        local visualBottom = math.max(self.previewY + self.previewHeight, self.infoMetaY + self.infoMetaHeight)
-        local capacityLines = {}
-        local capacities = BuildableInfo.capacityLines(stage)
-        for capacityIndex = 1, #capacities do
-            local wrapped = wrapTextForFont(UIFont.Small, capacities[capacityIndex], textWidth - 16)
-            for lineIndex = 1, #wrapped do
-                capacityLines[#capacityLines + 1] = wrapped[lineIndex]
-            end
-        end
-        self.infoCapacityLines = capacityLines
-        self.capacityY = #capacityLines > 0 and (visualBottom + 7) or nil
-        self.capacityHeight = #capacityLines > 0 and (metrics.small + 8 + #capacityLines * (metrics.small + 2) + 7) or 0
-
-        local stageCount = self:stageCountForSelection()
-        self.stage:setVisible(false)
-        self.stagePrevButton:setVisible(stageCount > 1)
-        self.stageNextButton:setVisible(stageCount > 1)
-        local arrowSize = math.max(28, metrics.small + 8)
-        self.stagePrevButton:setWidth(arrowSize)
-        self.stagePrevButton:setHeight(arrowSize)
-        self.stageLabelY = visualBottom + (#capacityLines > 0 and (self.capacityHeight + 14) or 7)
-        self.stagePrevButton:setX(infoX)
-        self.stagePrevButton:setY(self.stageLabelY)
-        self.stageNextButton:setWidth(arrowSize)
-        self.stageNextButton:setHeight(arrowSize)
-        self.stageNextButton:setX(infoX + textWidth - arrowSize)
-        self.stageNextButton:setY(self.stagePrevButton:getY())
-        Theme.applyActionButton(self.stagePrevButton, stageCount > 1, false)
-        Theme.applyActionButton(self.stageNextButton, stageCount > 1, false)
-
-        self.stageTextX = stageCount > 1 and (infoX + arrowSize + 8) or infoX
-        self.stageTextWidth = stageCount > 1 and math.max(60, textWidth - (arrowSize + 8) * 2) or textWidth
-        self.showStageLabel = shouldShowStageLabel(stage, stageCount)
-        self.infoStageLines = self.showStageLabel
-            and wrapTextForFont(
-                UIFont.Small, stageDisplayText(stage, self.stage and self.stage.selected or 1, stageCount),
-                self.stageTextWidth
-            )
-            or {}
-        local textBlockHeight = #self.infoStageLines * (metrics.small + 2)
-        if stageCount > 1 then textBlockHeight = textBlockHeight + 11 end
-        local stageBlockHeight = math.max(stageCount > 1 and arrowSize or 6, textBlockHeight + 4)
-        self.stageCarouselX = stageCount > 1 and infoX or nil
-        self.stageCarouselY = stageCount > 1 and self.stageLabelY or nil
-        self.stageCarouselWidth = stageCount > 1 and textWidth or nil
-        self.stageCarouselHeight = stageCount > 1 and stageBlockHeight or nil
-        local selectorY = self.stageLabelY + stageBlockHeight
-        local baseDefinition = Groups.resolveDefinition(self.selected, self:rawSelectedStage()) or self.selected
-        self.showVariantControl = hasOptions(baseDefinition and baseDefinition.variants)
-        self.showMaterialControl = hasOptions(baseDefinition and baseDefinition.materialOptions)
-        self.variant:setVisible(self.showVariantControl)
-        self.material:setVisible(self.showMaterialControl)
-        local selectorStep = metrics.small + metrics.control + 8
-        if self.showVariantControl then
-            self.variantLabelY = selectorY
-            self.variant:setX(infoX)
-            self.variant:setY(selectorY + metrics.small + 3)
-            self.variant:setWidth(textWidth)
-            self.variant:setHeight(metrics.control)
-            selectorY = selectorY + selectorStep
-        else
-            self.variantLabelY = nil
-        end
-        if self.showMaterialControl then
-            self.materialLabelY = selectorY
-            self.material:setX(infoX)
-            self.material:setY(selectorY + metrics.small + 3)
-            self.material:setWidth(textWidth)
-            self.material:setHeight(metrics.control)
-            selectorY = selectorY + selectorStep
-        else
-            self.materialLabelY = nil
-        end
-        if not self.finishValues or #self.finishValues == 0 then self.finish:setVisible(false) end
-        if self.finish:isVisible() then
-            self.finishLabelY = selectorY
-            self.finish:setX(infoX)
-            self.finish:setY(selectorY + metrics.small + 3)
-            self.finish:setWidth(textWidth)
-            self.finish:setHeight(metrics.control)
-            selectorY = selectorY + selectorStep
-        else
-            self.finishLabelY = nil
-        end
-        self.favoriteButton:setX(infoX + textWidth - 26)
-        self.favoriteButton:setY(self.infoNameY)
-        self.recipePinButton:setX(infoX + textWidth - 54)
-        self.recipePinButton:setY(self.infoNameY)
-
-        local panelX = self.inspectorX + 14
-        local panelWidth = math.max(250, inspectorWidth - 26)
-        self.actionY = contentBottom - metrics.action - 8
-        local panelBottom = self.actionY - 10
-        local actions = definition and definition.postBuildActions or {}
-        local actionNames = {}
-        for actionIndex = 1, #actions do
-            local action = actions[actionIndex]
-            actionNames[#actionNames + 1] = action.label or action.kind or action.id
-        end
-        self.postActionLines = #actionNames > 0
-            and wrapTextForFont(
-                UIFont.Small, getText("IGUI_KBW_PostBuild") .. ": " .. table.concat(actionNames, ", "), textWidth
-            )
-            or {}
-        self.postActionY = selectorY + 4
-        self.statusY = self.postActionY + #self.postActionLines * (metrics.small + 2)
-            + (#self.postActionLines > 0 and 4 or 0)
-        local panelsTop = self.statusY + metrics.small + 10
-        local panelsHeight = math.max(0, panelBottom - panelsTop)
-        local headerHeight = metrics.small + 9
-        local hasAccessRows = self.accessPanel:hasRows()
-        local minimumAccessHeight = math.max(44, metrics.small + 18)
-        local minimumRequirementsHeight = math.max(42, metrics.small + 16)
-        local bothPanelMinimum = headerHeight * 2 + minimumAccessHeight + minimumRequirementsHeight + 8
-
-        if hasAccessRows and panelsHeight >= bothPanelMinimum then
-            self.skillsHeaderY = panelsTop
-            local accessY = panelsTop + headerHeight
-            local sharedViewportHeight = panelsHeight - headerHeight * 2 - 8
-            local accessHeight = math.min(118, math.max(minimumAccessHeight, math.floor(sharedViewportHeight * .34)))
-            accessHeight = math.min(accessHeight, sharedViewportHeight - minimumRequirementsHeight)
-            self.accessPanel:setX(panelX)
-            self.accessPanel:setY(accessY)
-            self.accessPanel:setWidth(panelWidth)
-            self.accessPanel:setHeight(accessHeight)
-            self.accessPanel:setVisible(accessHeight > 12)
-            self.requirementsHeaderY = accessY + accessHeight + 8
-        else
-            self.skillsHeaderY = nil
-            self.accessPanel:setVisible(false)
-            self.requirementsHeaderY = panelsTop
-        end
-        local requirementsY = self.requirementsHeaderY + headerHeight
-        local requirementsHeight = math.max(0, panelBottom - requirementsY)
-        self.requirements:setX(panelX)
-        self.requirements:setY(requirementsY)
-        self.requirements:setWidth(panelWidth)
-        self.requirements:setHeight(requirementsHeight)
-        self.requirements:setVisible(requirementsHeight > 12)
-        if self.accessPanel.onResize then self.accessPanel:onResize() end
-        if self.requirements.onResize then self.requirements:onResize() end
-
-        local actionGap = metrics.gap
-        local actionWidth = math.floor((panelWidth - actionGap) / 2)
-        self.buildButton:setX(panelX)
-        self.buildButton:setY(self.actionY)
-        self.buildButton:setWidth(actionWidth)
-        self.buildButton:setHeight(metrics.action)
-        self.planButton:setX(panelX + actionWidth + actionGap)
-        self.planButton:setY(self.actionY)
-        self.planButton:setWidth(actionWidth)
-        self.planButton:setHeight(metrics.action)
-    end
-
-    self.ingredientDrawer:setX(drawerVisible and drawerX or self.width + 20)
-    self.ingredientDrawer:setY(top + 48)
-    self.ingredientDrawer:setWidth(math.max(1, drawerWidth))
-    self.ingredientDrawer:setHeight(math.max(120, contentBottom - top - 58))
-    if self.ingredientDrawer.onResize then self.ingredientDrawer:onResize() end
-    if self.compact then self.ingredientDrawer:setVisible(false) end
-    if self.resizeWidget then
-        self.resizeWidget:setX(self.width - resizeHeight)
-        self.resizeWidget:setY(self.height - resizeHeight)
-        self.resizeWidget:setWidth(resizeHeight)
-        self.resizeWidget:setHeight(resizeHeight)
-    end
-    if self.resizeWidget2 then
-        self.resizeWidget2:setX(0)
-        self.resizeWidget2:setY(self.height - resizeHeight)
-        self.resizeWidget2:setWidth(self.width - resizeHeight)
-        self.resizeWidget2:setHeight(resizeHeight)
-    end
-    self:ensureResizeWidgets()
-    if not liveResize then self:bringChromeToTop() end
+function KBWCatalog:recipeMetadata()
+    return recipeMetadataEntries(self:effectiveDefinition(), self:selectedStage())
 end
 
 function KBWCatalog:refreshCategories()
@@ -1947,14 +1060,18 @@ end
 function KBWCatalog:refreshCompactGroups()
     if not self.compactGroups then return end
     local selectedValue = self.subcategoryValues and self.subcategoryValues[self.subcategoryFilter.selected] or false
-    self.compactGroups:clear()
     local values = self.subcategoryValues or { false }
+    local rows = {}
     for valueIndex = 1, #values do
         local value = values[valueIndex]
         local label = value and I18n.subcategory(value) or getText("IGUI_KBW_AllSubcategories")
-        local listItem = self.compactGroups:addItem(label, { value = value, comboIndex = valueIndex })
-        listItem.tooltip = label
-        if value == selectedValue then self.compactGroups.selected = valueIndex end
+        rows[#rows + 1] = {name = label, definition = { value = value, comboIndex = valueIndex }}
+    end
+    self.compactGroups:replaceItems(rows)
+    for valueIndex = 1, #self.compactGroups.items do
+        local listItem = self.compactGroups.items[valueIndex]
+        listItem.tooltip = listItem.text
+        if listItem.item.value == selectedValue then self.compactGroups.selected = valueIndex end
     end
 end
 
@@ -1987,6 +1104,7 @@ function KBWCatalog:onToggleView()
 end
 
 function KBWCatalog:layoutCategoryButtons(gridWidth)
+    if self.workspace then return end
     for buttonIndex = 1, #self.categoryButtons do
         self.categoryButtons[buttonIndex]:setVisible(false)
     end
@@ -2105,15 +1223,31 @@ function KBWCatalog:filteredDefinitions()
     end
     Profiler.add("catalog.filter", filterStart)
     Profiler.count("catalog.filterRuns")
-    return result
+    return Readiness.filter(self, result)
 end
 
-function KBWCatalog:refreshGrid()
+function KBWCatalog:refreshGrid(preserveSelection)
     local refreshStart = Profiler.now()
     local selectedId = self.selected and self.selected.id
+    local state
+    if preserveSelection and selectedId then
+        state = {
+            selectedId = selectedId, scope = self.scope, selectedCategories = copyCategorySet(self.selectedCategories),
+            search = self.search:getInternalText(), stageIndex = self.stage.selected,
+            variantIndex = self.variant.selected, materialIndex = self.material.selected, finishIndex = self.finish.selected,
+            subcategory = self.subcategoryValues and self.subcategoryValues[self.subcategoryFilter.selected],
+            material = self.materialFilterValues and self.materialFilterValues[self.materialFilter.selected],
+            skill = self.skillFilterValues and self.skillFilterValues[self.skillFilter.selected]
+        }
+    end
     self.grid:setItems(self:filteredDefinitions(), selectedId)
     self.selected = self.grid.items[self.grid.selectedIndex]
     self:refreshSelectionControls()
+    if state and self.selected and self.selected.id == selectedId then
+        self:restoreState(state)
+    else
+        Readiness.select(self)
+    end
     self:layout()
     Profiler.add("catalog.refreshGrid", refreshStart)
     Profiler.count("catalog.refreshGridRuns")
@@ -2169,6 +1303,8 @@ function KBWCatalog:onCategory(button)
     self.selectedCategories = self.selectedCategories or {}
     if category == "All" then
         self.selectedCategories = {}
+    elseif self.workspace then
+        self.selectedCategories = { [category] = true }
     elseif isShiftKeyDown() then
         self.selectedCategories[category] = not self.selectedCategories[category] or nil
     else
@@ -2188,6 +1324,7 @@ function KBWCatalog:onCategoryPage(button)
 end
 
 function KBWCatalog:onMouseWheel(delta)
+    if self.workspace then return false end
     local y = self:getMouseY()
     local categoryY = self.categoryRowY or (contentTop(self) + 48)
     if y >= categoryY - 4 and y <= categoryY + math.max(28, FONT_HGT_SMALL + 10) + 4 then
@@ -2226,6 +1363,7 @@ end
 function KBWCatalog:onCardSelected(definition)
     self.selected = definition
     self:refreshSelectionControls()
+    Readiness.select(self)
     self:layout()
 end
 
@@ -2233,7 +1371,29 @@ end
 function KBWCatalog:onCardActivated(definition)
     self.selected = definition
     self:refreshSelectionControls()
+    Readiness.select(self)
     self:onBuild()
+end
+
+function KBWCatalog:onClearFilters()
+    self.search:setText("")
+    self.searchDirtyAt = nil
+    self.scope = "All"
+    self.selectedCategories = {}
+    local data = uiData(self.player)
+    data.selectedCategories = {}
+    self.showAllTickBox.selected[1] = false
+    CatalogVisibility.setShowAll(self.player, false)
+    self.readyOnly = false
+    Readiness.reset(self)
+    Theme.applyActionButton(self.readyButton, true, false)
+    self:updateScopeButtons()
+    self:refreshFilterOptions()
+    self.subcategoryFilter.selected = 1
+    self.materialFilter.selected = 1
+    self.skillFilter.selected = 1
+    self:refreshCompactGroups()
+    self:refreshGrid()
 end
 
 function KBWCatalog:rawSelectedStage()
@@ -2561,7 +1721,7 @@ end
 
 function KBWCatalog:ensureDrawerSpace()
     if self.compact then return end
-    local desiredWidth = math.max(self.width, 1120)
+    local desiredWidth = math.max(self.width, 1250)
     local playerNum = self.player:getPlayerNum()
     local maxWidth = math.max(1, getPlayerScreenLeft(playerNum) + getPlayerScreenWidth(playerNum) - 4 - self.x)
     local newWidth = math.min(desiredWidth, maxWidth)
@@ -2711,12 +1871,35 @@ function KBWCatalog:restoreState(state)
     self.selected = self.grid.items[self.grid.selectedIndex]
     self:refreshSelectionControls()
     if self.selected then
+        -- A grouped recipe's index changes when callbacks hide earlier stages.
+        -- Resolve world picks by their stable member/stage identity first.
+        if state.buildableId and state.stageId then
+            for index = 1, #(self.visibleStages or {}) do
+                local candidate = self.visibleStages[index]
+                if Groups.resolveBuildableId(self.selected, candidate) == state.buildableId
+                    and Groups.resolveStageId(candidate) == state.stageId then
+                    self.stage.selected = index
+                    break
+                end
+            end
+            self.effectiveCache = nil
+            self:refreshVariantMaterialControls()
+        end
         selectComboIndex(self.variant, state.variantIndex)
         selectComboIndex(self.material, state.materialIndex)
         self:refreshStageAndFinish()
-        selectComboIndex(self.stage, state.stageIndex)
+        if not state.stageId then selectComboIndex(self.stage, state.stageIndex) end
+        self.effectiveCache = nil
         self:refreshFinishOptions()
         selectComboIndex(self.finish, state.finishIndex)
+        if state.finishSignature then
+            for index = 1, #self.finishValues do
+                if WallFinishes.plannedFinishSignature(self.finishValues[index]) == state.finishSignature then
+                    self.finish.selected = index
+                    break
+                end
+            end
+        end
         self.requirements:setSelection(self:effectiveDefinition(), self:selectedStage(), self:selectedFinish())
         self.accessPanel:setSelection(self:effectiveDefinition(), self:selectedStage())
     end
@@ -2852,22 +2035,44 @@ function KBWCatalog:onInfo()
     Guide.open(self.player, "welcome")
 end
 
-function KBWCatalog:onAppearanceChanged(livePreview)
+function KBWCatalog:onAppearanceChanged(livePreview, relayout)
     Theme.applyAccessibility(Options)
-    if livePreview then return end
-    self.backgroundColor = Theme.backdrop
-    self.borderColor = Theme.border
-    if self.compactGroups then
-        self.compactGroups.backgroundColor = Theme.color(Theme.surface)
-        self.compactGroups.borderColor = Theme.color(Theme.borderSoft)
-        self.compactGroups.selectionColor = Theme.color(Theme.selected)
-        self.compactGroups.mouseOverHighlightColor = Theme.color(Theme.surfaceRaised)
-        self.compactGroups.textColor = Theme.color(Theme.text)
-        self.compactGroups.selectedTextColor = Theme.color(Theme.text)
+    self.backgroundColor = Theme.color(Theme.backdrop)
+    self.borderColor = Theme.color(Theme.border)
+    Theme.applyList(self.categoryList)
+    Theme.applyList(self.compactGroups)
+    local combos = {
+        self.searchMode, self.sortCombo, self.subcategoryFilter, self.materialFilter, self.skillFilter,
+        self.stage, self.variant, self.material, self.finish
+    }
+    for comboIndex = 1, #combos do Theme.applyCombo(combos[comboIndex]) end
+    Theme.applyTickBox(self.showAllTickBox)
+    local scrollPanels = {
+        self.grid, self.requirements, self.accessPanel, self.ingredientDrawer, self.recipeSummary
+    }
+    for panelIndex = 1, #scrollPanels do
+        local panel = scrollPanels[panelIndex]
+        if panel then Theme.applyScrollbar(panel.vscroll) end
+    end
+    if self.ingredientDrawer then
+        self.ingredientDrawer.backgroundColor = Theme.color(Theme.backdrop)
+        self.ingredientDrawer.borderColor = Theme.color(Theme.border)
+    end
+    if livePreview then
+        if relayout and self.grid then
+            self.grid:hideBuildableTooltip()
+            self.grid:setCompactMode(self.compact, true)
+            self:layout()
+            self:ensureResizeWidgets(true)
+            self:bringChromeToTop()
+        end
+        return
     end
     Theme.applyButton(self.sizeButton, false)
     Theme.applyButton(self.appearanceButton, false)
     Theme.applyButton(self.plansButton, false)
+    Theme.applyButton(self.clearFiltersButton, false)
+    Theme.applyActionButton(self.readyButton, true, self.readyOnly)
     Theme.applyButton(self.categoryPrev, false)
     Theme.applyButton(self.categoryNext, false)
     applyViewButton(self.viewButton, self.viewMode)
@@ -2879,7 +2084,6 @@ function KBWCatalog:onAppearanceChanged(livePreview)
     self:updateFavorite()
     self:updateActions()
     self:layout()
-    self:refreshGrid()
     self:ensureResizeWidgets(true)
     self:bringChromeToTop()
 end
@@ -2922,6 +2126,7 @@ function KBWCatalog:onToggleSize()
     -- positions for the newly selected mode.
     if self.recalcSize then self:recalcSize() end
     if self.grid and self.grid.hideBuildableTooltip then self.grid:hideBuildableTooltip() end
+    if self.grid then self.grid:setCompactMode(self.compact, true) end
     self:ensureResizeWidgets(true)
     self:positionHeaderActions()
     self.sizeButton:setTitle(self.compact and "^" or "v")
@@ -2961,6 +2166,7 @@ function KBWCatalog:update()
     -- catalogue/index refreshes until release so a background visibility
     -- generation cannot force a full list rebuild during the drag.
     if self.moving or self.isResizingFromWidget then return end
+    Readiness.update(self)
     CatalogIndex.pumpVisibility(6)
     if self.lastVisibilityGeneration ~= CatalogIndex.visibilityGeneration then
         self.lastVisibilityGeneration = CatalogIndex.visibilityGeneration
@@ -2974,6 +2180,7 @@ function KBWCatalog:update()
     local now = getTimestampMs()
     if self.lastSafeLayoutCheck and now - self.lastSafeLayoutCheck < 750 then return end;
     self.lastSafeLayoutCheck = now
+    if self.workspace then self:updateActions() end
     local x, y, width, height = clampedWindowRect(self.player:getPlayerNum(), self.x, self.y, self.width, self.height)
     if x ~= self.x or y ~= self.y or width ~= self.width or height ~= self.height then
         self:setX(x)
@@ -3147,296 +2354,10 @@ end
 
 function KBWCatalog:prerender()
     ISCollapsableWindow.prerender(self)
-    local top = contentTop(self)
-    local headerHeight = math.max(44, getTextManager():getFontHeight(UIFont.Small) + 26)
-    self:drawRect(
-        0, top, self.width, headerHeight, Theme.backdrop.a, Theme.backdrop.r, Theme.backdrop.g, Theme.backdrop.b
-    )
-    if not self.compact then
-        local inspectorTop = top + 48
-        local inspectorHeight = self.height - self:resizeWidgetHeight() - inspectorTop - 10
-        self:drawRect(
-            self.inspectorX + 4, inspectorTop, self.inspectorWidth - 12, inspectorHeight, Theme.surface.a,
-            Theme.surface.r, Theme.surface.g, Theme.surface.b
-        )
-        self:drawRectBorder(
-            self.inspectorX + 4, inspectorTop, self.inspectorWidth - 12, inspectorHeight, Theme.borderSoft.a,
-            Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
-        )
-    end
-    -- B42 renders parent render() after its child controls. Carousel backing
-    -- belongs in prerender() so it cannot paint over the arrow buttons.
-    if self.compact and self.compactCarouselY then
-        local carouselX = self.compactCarouselX or 10
-        local carouselWidth = self.compactCarouselWidth or (self.width - 20)
-        local carouselHeight = self.compactCarouselHeight or 28
-        self:drawRect(
-            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.surface.a, Theme.surface.r,
-            Theme.surface.g, Theme.surface.b
-        )
-        self:drawRectBorder(
-            carouselX, self.compactCarouselY, carouselWidth, carouselHeight, Theme.borderSoft.a, Theme.borderSoft.r,
-            Theme.borderSoft.g, Theme.borderSoft.b
-        )
-    elseif self.stageCarouselX then
-        self:drawRect(
-            self.stageCarouselX, self.stageCarouselY, self.stageCarouselWidth, self.stageCarouselHeight, Theme.surface.a,
-            Theme.surface.r, Theme.surface.g, Theme.surface.b
-        )
-        self:drawRectBorder(
-            self.stageCarouselX, self.stageCarouselY, self.stageCarouselWidth, self.stageCarouselHeight,
-            Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
-        )
-    end
 end
 
 function KBWCatalog:render()
-    local top = contentTop(self)
-    self.stageDotHits = {}
-    if self.compact and self.compactCarouselY and self.compactStageText then
-        local carouselX = self.compactCarouselX or 10
-        local carouselY = self.compactCarouselY
-        local carouselWidth = self.compactCarouselWidth or (self.width - 20)
-        local carouselHeight = self.compactCarouselHeight or 28
-        local arrowWidth = self.stagePrevButton:getWidth()
-        local textX = carouselX + arrowWidth + 8
-        local textWidth = math.max(40, carouselWidth - (arrowWidth + 8) * 2)
-        local text = shortenedText(UIFont.Small, self.compactStageText, textWidth)
-        self:drawTextCentre(
-            text, textX + math.floor(textWidth / 2), carouselY + 2, Theme.accent.r, Theme.accent.g, Theme.accent.b, 1,
-            UIFont.Small
-        )
-        local stageCount = self:stageCountForSelection()
-        if stageCount > 1 and stageCount <= 12 then
-            local dotSize = 4
-            local dotGap = 4
-            local totalDots = stageCount * dotSize + (stageCount - 1) * dotGap
-            local dotX = textX + math.floor((textWidth - totalDots) / 2)
-            local dotY = carouselY + carouselHeight - 7
-            local stageIndex = self.stage and self.stage.selected or 1
-            for dotIndex = 1, stageCount do
-                local color = dotIndex == stageIndex and Theme.accent or Theme.borderSoft
-                self:drawRect(dotX, dotY, dotSize, dotSize, 1, color.r, color.g, color.b)
-                self.stageDotHits[#self.stageDotHits + 1] = {
-                    x = dotX - 3,
-                    y = dotY - 3,
-                    w = dotSize + 6,
-                    h = dotSize + 6,
-                    index = dotIndex
-                }
-                dotX = dotX + dotSize + dotGap
-            end
-        end
-    end
-    if self.compact then
-        local selectors = self.compactSelectors or {}
-        for selectorIndex = 1, #selectors do
-            local entry = selectors[selectorIndex]
-            self:drawText(
-                entry.label, entry.x, entry.labelY, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1,
-                UIFont.Small
-            )
-        end
-    end
-    if not self.compact then
-        local definition, stage = self:effectiveDefinition(), self:selectedStage()
-        if definition and stage then
-            local x = self.inspectorX + 16
-            local textWidth = math.max(120, self.inspectorWidth - 32)
-            drawLinesForFont(
-                self, UIFont.Medium,
-                self.infoNameLines or wrapTextForFont(UIFont.Medium, displayName(definition), textWidth), x,
-                self.infoNameY or (top + 56), Theme.text, 1
-            )
-            drawLinesForFont(
-                self, UIFont.Small, self.infoTooltipLines or {}, x, self.infoTooltipY or (top + 78), Theme.textMuted, 1
-            )
-            drawMetadataChips(
-                self, self.infoMetaEntries or {}, self.infoMetaX or x, self.infoMetaY or (top + 96),
-                self.infoMetaWidth or textWidth
-            )
-            local texture, textureColor = IconResolver.textureForDefinition(definition, stage)
-            -- Preview the finished face when a wall finish is selected.
-            local selectedFinish = self:selectedFinish()
-            if WallFinishes.isWallFinish(selectedFinish) then
-                local finishSpriteName = WallFinishes.previewSprite(selectedFinish, false, definition, stage)
-                local finishTexture = finishSpriteName and IconResolver.textureForSpriteName(finishSpriteName) or nil
-                if finishTexture then
-                    texture = finishTexture
-                    textureColor = WallFinishes.customColorFor(WallFinishes.wallType(definition, stage), selectedFinish)
-                        or { r = 1, g = 1, b = 1, a = 1 }
-                end
-            end
-            local previewX = self.previewX or x
-            local previewY = self.previewY or (top + 104)
-            local previewWidth = self.previewWidth or 112
-            local previewHeight = self.previewHeight or 116
-            Theme.drawPreviewBackground(self, previewX, previewY, previewWidth, previewHeight, Options)
-            self:drawRectBorder(
-                previewX, previewY, previewWidth, previewHeight, Theme.border.a, Theme.border.r, Theme.border.g,
-                Theme.border.b
-            )
-            local footerHeight = math.max(FONT_HGT_SMALL + 8, 24)
-            local imageHeight = math.max(30, previewHeight - footerHeight)
-            if texture then
-                self:drawTextureScaledAspect(
-                    texture, previewX + 8, previewY + 5, previewWidth - 16, imageHeight - 9, 1, textureColor.r,
-                    textureColor.g, textureColor.b
-                )
-            end
-            local footerY = previewY + previewHeight - footerHeight
-            self:drawRect(
-                previewX, footerY, previewWidth, footerHeight, Theme.surfaceRaised.a, Theme.surfaceRaised.r,
-                Theme.surfaceRaised.g, Theme.surfaceRaised.b
-            )
-            self:drawRect(
-                previewX, footerY, previewWidth, 1, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g,
-                Theme.borderSoft.b
-            )
-            local boundsText = BuildableInfo.dimensionsText(stage)
-            self:drawTextCentre(
-                boundsText, previewX + math.floor(previewWidth / 2), footerY + 4, Theme.accent.r, Theme.accent.g,
-                Theme.accent.b, 1, UIFont.Small
-            )
-            local capacityLines = self.infoCapacityLines or {}
-            if #capacityLines > 0 and self.capacityY then
-                local capacityHeight = self.capacityHeight
-                    or (FONT_HGT_SMALL + 8 + #capacityLines * (FONT_HGT_SMALL + 2) + 7)
-                self:drawRect(
-                    x, self.capacityY, textWidth, capacityHeight, Theme.surface.a, Theme.surface.r, Theme.surface.g,
-                    Theme.surface.b
-                )
-                self:drawRectBorder(
-                    x, self.capacityY, textWidth, capacityHeight, Theme.borderSoft.a, Theme.borderSoft.r,
-                    Theme.borderSoft.g, Theme.borderSoft.b
-                )
-                self:drawText(
-                    BuildableInfo.capacityHeading(stage), x + 8, self.capacityY + 4, Theme.accent.r, Theme.accent.g,
-                    Theme.accent.b, 1, UIFont.Small
-                )
-                local lineY = self.capacityY + FONT_HGT_SMALL + 10
-                for lineIndex = 1, #capacityLines do
-                    self:drawText(
-                        capacityLines[lineIndex], x + 8, lineY, Theme.text.r, Theme.text.g, Theme.text.b, 1,
-                        UIFont.Small
-                    )
-                    lineY = lineY + FONT_HGT_SMALL + 2
-                end
-            end
-            local stageCount = self:stageCountForSelection()
-            local stageIndex = self.stage and self.stage.selected or 1
-            local stageLines = self.infoStageLines
-                or (self.showStageLabel
-                    and wrapTextForFont(UIFont.Small, stageDisplayText(stage, stageIndex, stageCount), textWidth)
-                    or {})
-            local stageY = self.stageLabelY or (previewY + previewHeight + 8)
-            if #stageLines > 0 then
-                if stageCount > 1 then
-                    local stageTextX = self.stageTextX or x
-                    local stageTextWidth = self.stageTextWidth or textWidth
-                    for lineIndex = 1, #stageLines do
-                        self:drawTextCentre(
-                            stageLines[lineIndex], stageTextX + math.floor(stageTextWidth / 2),
-                            stageY + (lineIndex - 1) * (FONT_HGT_SMALL + 2), Theme.accent.r, Theme.accent.g,
-                            Theme.accent.b, 1, UIFont.Small
-                        )
-                    end
-                else
-                    drawLinesForFont(self, UIFont.Small, stageLines, x, stageY, Theme.accent, 1)
-                end
-            end
-            self.stageDotHits = {}
-            if stageCount > 1 and stageCount <= 12 then
-                local dotSize = 5
-                local dotGap = 5
-                local totalDots = stageCount * dotSize + (stageCount - 1) * dotGap
-                local dotRegionX = self.stageTextX or x
-                local dotRegionWidth = self.stageTextWidth or textWidth
-                local dotX = dotRegionX + math.floor((dotRegionWidth - totalDots) / 2)
-                local dotY = stageY + (#stageLines * (FONT_HGT_SMALL + 2)) + 5
-                for dotIndex = 1, stageCount do
-                    local color = dotIndex == stageIndex and Theme.accent or Theme.borderSoft
-                    self:drawRect(dotX, dotY, dotSize, dotSize, 1, color.r, color.g, color.b)
-                    self.stageDotHits[#self.stageDotHits + 1] = {
-                        x = dotX - 4,
-                        y = dotY - 4,
-                        w = dotSize + 8,
-                        h = dotSize + 8,
-                        index = dotIndex
-                    }
-                    dotX = dotX + dotSize + dotGap
-                end
-            end
-            if self.variant:isVisible() and self.variantLabelY then
-                self:drawText(
-                    getText("IGUI_KBW_Variant"), x, self.variantLabelY, Theme.textMuted.r, Theme.textMuted.g,
-                    Theme.textMuted.b, 1, UIFont.Small
-                )
-            end
-            if self.material:isVisible() and self.materialLabelY then
-                self:drawText(
-                    getText("IGUI_KBW_MaterialSet"), x, self.materialLabelY, Theme.textMuted.r, Theme.textMuted.g,
-                    Theme.textMuted.b, 1, UIFont.Small
-                )
-            end
-            if self.finish:isVisible() then
-                self:drawText(
-                    getText("IGUI_KBW_Finish"), x, self.finishLabelY or (top + 240), Theme.textMuted.r,
-                    Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
-                )
-            end
-            local statusY = self.statusY or (top + 274)
-            local postLines = self.postActionLines or {}
-            if #postLines > 0 then
-                drawLinesForFont(
-                    self, UIFont.Small, postLines, x, self.postActionY or (statusY - #postLines * (FONT_HGT_SMALL + 2)),
-                    Theme.textMuted, 1
-                )
-            end
-            local status = self:cachedSelectionStatus(definition, stage)
-            local finishOk = hasFinishItem(self.player, self:selectedFinish(), definition, stage)
-            local ready = status.ok and finishOk and Integrity.isAllowed(self.player)
-            local color = ready and Theme.good or Theme.warn
-            self:drawText(
-                ready and getText("IGUI_KBW_ReadyToBuild") or getText("IGUI_KBW_CannotBuild"), x, statusY, color.r,
-                color.g, color.b, 1, UIFont.Small
-            )
-            if KnoxBuildworks.Runtime.debug then
-                self:drawText(
-                    definition.id, x, statusY - 19, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1,
-                    UIFont.Small
-                )
-            end
-            if not Integrity.isAllowed(self.player) then
-                self:drawText(
-                    KnoxBuildworks.Runtime.integrityMessage or getText("IGUI_KBW_IntegrityPending"), x, statusY - 19,
-                    Theme.bad
-                        .r,
-                    Theme.bad.g, Theme.bad.b, 1, UIFont.Small
-                )
-            end
-            if self.skillsHeaderY and self.accessPanel:isVisible() then
-                self:drawText(
-                    getText("IGUI_KBW_SkillsKnowledge"), x, self.skillsHeaderY, Theme.accent.r, Theme.accent.g,
-                    Theme.accent.b, 1, UIFont.Small
-                )
-                self:drawRect(
-                    x, self.skillsHeaderY + FONT_HGT_SMALL + 3, self.inspectorWidth - 32, 1, Theme.borderSoft.a,
-                    Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
-                )
-            end
-            if self.requirementsHeaderY and self.requirements:isVisible() then
-                self:drawText(
-                    getText("IGUI_KBW_MaterialsTools"), x, self.requirementsHeaderY, Theme.accent.r, Theme.accent.g,
-                    Theme.accent.b, 1, UIFont.Small
-                )
-                self:drawRect(
-                    x, self.requirementsHeaderY + FONT_HGT_SMALL + 3, self.inspectorWidth - 32, 1, Theme.borderSoft.a,
-                    Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
-                )
-            end
-        end
-    end
+    Workspace.render(self)
     ISCollapsableWindow.render(self)
 end
 
@@ -3470,9 +2391,23 @@ function KBWCatalog.open(player, restoreState)
         if target and HaloTextHelper and HaloTextHelper.addText then
             HaloTextHelper.addText(target, getText("IGUI_KBW_DefinitionsLoading"))
         end
+        if target and KBWCatalog.pendingOpenPlayerNum == nil then
+            KBWCatalog.pendingOpenPlayerNum = target:getPlayerNum()
+            local Loader = require("KnoxBuildworks/Definitions/Loader")
+            Loader.startAsync(function ()
+                local playerNum = KBWCatalog.pendingOpenPlayerNum
+                KBWCatalog.pendingOpenPlayerNum = nil
+                local readyPlayer = playerNum and getSpecificPlayer(playerNum) or nil
+                if readyPlayer and not KBWCatalog.instance then KBWCatalog.open(readyPlayer) end
+            end)
+        end
         return
     end
     if KBWCatalog.instance then KBWCatalog.instance:close() end
+    if KBWCatalog.pendingDragReturn then
+        KBWCatalog.pendingDragReturn = nil
+        Events.OnTick.Remove(KBWCatalog.processDragReturn)
+    end
     local openStart = Profiler.now()
     local ui = KBWCatalog:new(player or getPlayer())
     ui:initialise()
@@ -3482,6 +2417,16 @@ function KBWCatalog.open(player, restoreState)
     Profiler.add("catalog.open", openStart)
     Profiler.mem("catalog.heapAfterOpen")
     Profiler.report("catalog open")
+    return ui
+end
+
+function KBWCatalog.processDragReturn()
+    Events.OnTick.Remove(KBWCatalog.processDragReturn)
+    local state = KBWCatalog.pendingDragReturn
+    KBWCatalog.pendingDragReturn = nil
+    if not state or KBWCatalog.instance then return end
+    local player = getSpecificPlayer(state.playerNum) or getPlayer()
+    if player then KBWCatalog.open(player, state) end
 end
 
 ---@param item      unknown
@@ -3491,8 +2436,9 @@ function KBWCatalog.onSetDragItem(item, playerNum)
     if not state or item ~= nil then return end
     if playerNum ~= nil and tonumber(playerNum) ~= tonumber(state.playerNum) then return end
     KBWCatalog.dragReturnState = nil
-    local player = getSpecificPlayer(state.playerNum) or getPlayer()
-    if player then KBWCatalog.open(player, state) end
+    KBWCatalog.pendingDragReturn = state
+    Events.OnTick.Remove(KBWCatalog.processDragReturn)
+    Events.OnTick.Add(KBWCatalog.processDragReturn)
 end
 
 if not KBWCatalog.eventsInstalled then

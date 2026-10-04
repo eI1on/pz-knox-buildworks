@@ -120,6 +120,11 @@ register("lightSwitch", {
         }
     end,
     finalize = function (object, square)
+        -- Built switches are independent fixtures rather than map-room
+        -- switches. Initialising their power state after insertion makes the
+        -- engine refresh the indicator and generated point light immediately.
+        object:setPower(2)
+        object:update()
         square:RecalcAllWithNeighbours(true)
         IsoGenerator.updateGenerator(square)
     end

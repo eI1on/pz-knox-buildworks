@@ -1179,7 +1179,7 @@ end
 ---@param placement KBW.BlueprintPlacement
 function Blueprints.hasPreviousStage(player, blueprint, placement)
     local definition, stage = resolveDefinition(placement)
-    local previousStage = Placement.previousStageOf(stage) or Placement.optionalReplacementStageOf(stage)
+    local previousStage = Placement.previousStageOf(stage)
     if not previousStage then return true end
     local placements = blueprint and blueprint.placements or {}
     for placementIndex = 1, #placements do
@@ -1312,7 +1312,7 @@ function Blueprints.addRoom(player, blueprintId, room)
     blueprint.rooms = blueprint.rooms or {}
     entry.id = entry.id or newId("r", entryIdTaken(blueprint.rooms))
     entry.type = entry.type or "room"
-    entry.color = entry.color or { r = 0.25, g = 0.65, b = 0.95, a = 0.12 }
+    entry.color = entry.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
     entry.z = entry.z == nil and blueprint.level or entry.z
     blueprint.rooms = blueprint.rooms or {}
     blueprint.rooms[#blueprint.rooms + 1] = entry
@@ -1623,7 +1623,7 @@ function Blueprints.totals(player, blueprint)
                     key = "#" .. input.tags[1]
                     label = input.label or input.tags[1]
                 end
-                if input.role == "tool" or input.mode == "keep" then
+                if input.mode == "keep" then
                     local tool = result.tools[key]
                         or { key = key, label = label, labelKey = labelKey, amount = 0, row = totalRow }
                     tool.amount = math.max(tool.amount or 0, amount)
@@ -1643,7 +1643,7 @@ function Blueprints.totals(player, blueprint)
                     local label = row.label or key
                     local labelKey = row.labelKey
                     local amount = row.uses or row.needed or 1
-                    if row.role == "tool" then
+                    if row.mode == "keep" then
                         local tool = result.tools[key]
                             or { key = key, label = label, labelKey = labelKey, amount = 0, row = row }
                         tool.amount = math.max(tool.amount or 0, amount)

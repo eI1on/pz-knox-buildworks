@@ -575,6 +575,9 @@ end
 ---@param requirement "plaster"|"paint"|"wallpaper"
 function Rules.wallFinishRequirementIn(document, definition, stage, requirement)
     if not VALID_FINISH_REQUIREMENTS[requirement] or not Rules.isWallBuildable(definition, stage) then return true end
+    if requirement == "paint" and KBW.sandboxValue("KnoxBuildworks.RequireConstructionPaint", true) == false then
+        return false
+    end
     document = document or emptyDocument()
     local actual = definitionFor(definition, stage)
     local buildableRule = actual and (document.buildables or {})[actual.id] or nil

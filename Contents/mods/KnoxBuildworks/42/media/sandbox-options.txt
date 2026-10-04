@@ -95,3 +95,11 @@ option KnoxBuildworks.WellRainRefillMultiplier
 	page = KnoxBuildworks,
 	translation = KBW_WellRainRefillMultiplier,
 }
+
+option KnoxBuildworks.RequireConstructionPaint
+{
+    type = boolean,
+    default = true,
+    page = KnoxBuildworks,
+    translation = KBW_RequireConstructionPaint,
+}

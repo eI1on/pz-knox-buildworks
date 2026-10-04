@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "지우기 도구",
   "IGUI_KBW_StopTool": "도구 중지",
   "IGUI_KBW_BuildPlacement": "건축",
+  "IGUI_KBW_RemoveSelectedPiece": "선택 항목 삭제",
   "IGUI_KBW_ExportJSON": "내보내기",
   "IGUI_KBW_Exported": "\"%1\"을(를) Lua/%2로 내보냄",
   "IGUI_KBW_ExportFailed": "청사진 내보내기 실패",

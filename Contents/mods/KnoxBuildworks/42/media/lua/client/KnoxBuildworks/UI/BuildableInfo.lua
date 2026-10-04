@@ -4,6 +4,7 @@ local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local Requirements = require("KnoxBuildworks/Validation/Requirements")
 local I18n = require("KnoxBuildworks/I18n")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
+local Placement = require("KnoxBuildworks/Validation/Placement")
 
 ---@class KBW.BuildableInfoModule
 ---@type KBW.BuildableInfoModule
@@ -269,6 +270,41 @@ local function tooltipRow(row)
         .. "/" .. tostring(row.needed or 1)
 end
 
+-- Keep placement help beside the recipe, before the player commits to a cursor.
+function BuildableInfo.placementHint(definition, stage)
+    if not definition or not stage then return "" end
+    local config = StageConfig.sprite(definition, stage)
+    local previous = config.previousStage or Placement.optionalReplacementStageOf(stage) or {}
+    if type(previous) == "string" then previous = {previous} end
+    local names = {}
+    for index = 1, #previous do
+        local id = tostring(previous[index])
+        local translated = getTextOrNull and getTextOrNull("IGUI_KBW_Vanilla_" .. id)
+        names[#names + 1] = translated or string.gsub(id, "(%l)(%u)", "%1 %2")
+    end
+    if #names > 0 then
+        local key = config.previousStage and "IGUI_KBW_BuildFirst" or "IGUI_KBW_CanReplaceFrame"
+        return getText(key, table.concat(names, " / "))
+    end
+    local placement = StageConfig.placement(definition, stage)
+    if placement.needWindowFrame or config.needWindowFrame then
+        local spriteName = Matrix.getFaceSprite(stage, "W")
+        local sprite = spriteName and getSprite(spriteName)
+        if Placement.windowShapeOf(sprite and sprite:getProperties()) == "8" then
+            return getText("IGUI_KBW_FullHeightWindowFitHelp")
+        end
+        return getText("IGUI_KBW_WindowFitHelp")
+    end
+    return ""
+end
+
+function BuildableInfo.description(definition, stage)
+    local description = I18n.definitionDescription(definition) or ""
+    local hint = BuildableInfo.placementHint(definition, stage)
+    if hint ~= "" then return description .. (description ~= "" and "  " or "") .. hint end
+    return description
+end
+
 ---@param player IsoPlayer
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
@@ -276,7 +312,7 @@ end
 function BuildableInfo.compactTooltip(player, definition, stage)
     if not definition or not stage then return "" end
     local lines = {}
-    local description = I18n.definitionDescription(definition)
+    local description = BuildableInfo.description(definition, stage)
     if description and description ~= "" then lines[#lines + 1] = "<RGB:0.78,0.78,0.75>" .. description end
     if StageConfig.placement(definition, stage).requiresOutside == true then
         lines[#lines + 1] = "<RGB:0.95,0.62,0.28>" .. getText("IGUI_KBW_RequiresOutside")

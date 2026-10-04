@@ -7,7 +7,7 @@ local PlanCursor = require("KnoxBuildworks/Planning/PlanCursor")
 ---@type KBW.GatherAreaCursorModule
 local GatherAreaCursor = {}
 
-local GATHER_COLOR = { r = 1.00, g = 1.00, b = 1.00, a = 0.13 }
+local GATHER_COLOR = GhostRenderer.GATHER_COLOR
 
 local function floorInt(value)
     return math.floor(tonumber(value) or 0)

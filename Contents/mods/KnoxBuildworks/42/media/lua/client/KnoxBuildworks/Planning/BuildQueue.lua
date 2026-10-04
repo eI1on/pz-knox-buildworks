@@ -154,8 +154,10 @@ local function gatherContainers(area, player)
             if square then
                 for objectIndex = 0, square:getObjects():size() - 1 do
                     local object = square:getObjects():get(objectIndex)
-                    if object and object.getContainer and object:getContainer() then
-                        addContainer(containers, seen, object:getContainer())
+                    if object and object.getContainerCount then
+                        for containerIndex = 0, object:getContainerCount() - 1 do
+                            addContainer(containers, seen, object:getContainerByIndex(containerIndex))
+                        end
                     end
                 end
                 local vehicle = square:getVehicleContainer()
@@ -176,10 +178,21 @@ local function gatherContainers(area, player)
     return containers
 end
 
-local function gatherWorldItems(area)
+local function gatherWorldItems(area, player)
     local result = {}
     local seen = {}
-    if not area then return result end
+    if not area then
+        local square = player and player:getSquare()
+        local ground = square and buildUtil.getMaterialOnGround(square) or {}
+        for _, items in pairs(ground) do
+            for index = 1, #items do
+                local world = items[index]:getWorldItem()
+                local key = world and tostring(world)
+                if key and not seen[key] then seen[key] = true; result[#result + 1] = world end
+            end
+        end
+        return result
+    end
     local z = tonumber(area.z) or 0
     for x = area.x1, area.x2 do
         for y = area.y1, area.y2 do
@@ -202,27 +215,12 @@ local function gatherWorldItems(area)
 end
 
 local function itemMatchesRow(item, row)
-    if not item then return false end
-    local fullType = item:getFullType()
-    if row.selectedFullType and row.selectedFullType ~= "" and fullType ~= row.selectedFullType then
-        return false
-    end
-    if row.matchTag and item.hasTag and item:hasTag(row.matchTag) then return true end
-    local possible = row.possibleItems or {}
-    for itemIndex = 1, #possible do
-        if possible[itemIndex] == fullType then return true end
-    end
-    local tags = row.possibleTags or {}
-    for tagIndex = 1, #tags do
-        local tag = tagValue(tags[tagIndex])
-        if tag and item.hasTag and item:hasTag(tag) then return true end
-    end
-    return false
+    return Requirements.matchesInput(item, row, row.selectedFullType)
 end
 
 local function itemAmount(item, row)
     if row.mode == "drain" and instanceof(item, "DrainableComboItem") then
-        return math.max(1, item:getCurrentUses())
+        return math.max(0, item:getCurrentUses())
     end
     return 1
 end
@@ -303,6 +301,44 @@ local function canTryContainer(player, container)
         return false
     end
     return true
+end
+
+-- Read-only supply inspection shares the queue's container discovery rules.
+-- Call with a small area slice to keep planner scans off the rendering path.
+function BuildQueue.inspectSupplies(player, area)
+    local items, incomplete = {}, false
+    local containers = gatherContainers(area, player)
+    for index = 1, #containers do
+        local container = containers[index]
+        if canTryContainer(player, container) then
+            local contents = container:getItems()
+            for itemIndex = 0, contents:size() - 1 do items[#items + 1] = contents:get(itemIndex) end
+        end
+    end
+    local worldItems = gatherWorldItems(area, player)
+    for index = 1, #worldItems do items[#items + 1] = worldItems[index]:getItem() end
+    if area then
+        for x = area.x1, area.x2 do
+            for y = area.y1, area.y2 do
+                if not getCell():getGridSquare(x, y, area.z or 0) then incomplete = true end
+            end
+        end
+    end
+    return items, incomplete
+end
+
+function BuildQueue.supplyOrder(placements)
+    local result, tiers = {}, {}
+    for index = 1, #placements do
+        local placement = placements[index]
+        result[#result + 1] = placement
+        tiers[placement] = placementTier(placement)
+    end
+    table.sort(result, function(a, b)
+        if tiers[a] ~= tiers[b] then return tiers[a] < tiers[b] end
+        return tostring(a.id) < tostring(b.id)
+    end)
+    return result
 end
 
 -- Missing requirement rows for one placement, including wall finish
@@ -515,7 +551,7 @@ local function startWithPlacements(player, blueprintId, placements, onFinished)
         prepareIndex = 1
     }
     active.gatherContainers = gatherContainers(active.gatherArea, player)
-    active.gatherWorldItems = gatherWorldItems(active.gatherArea)
+    active.gatherWorldItems = gatherWorldItems(active.gatherArea, player)
     BlueprintFiles.beginBatch(blueprintId)
     if isClient() and sendClientCommand then
         sendClientCommand(player, KBW.NETWORK_MODULE, "BPBuildBatchStart", { id = blueprintId })

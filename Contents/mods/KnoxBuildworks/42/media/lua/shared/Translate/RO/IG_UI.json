@@ -116,6 +116,7 @@
   "IGUI_KBW_EraseTool": "Instrument de ștergere",
   "IGUI_KBW_StopTool": "Opriți instrumentul",
   "IGUI_KBW_BuildPlacement": "Construiește",
+  "IGUI_KBW_RemoveSelectedPiece": "Elimină selecția",
   "IGUI_KBW_ExportJSON": "Exportați",
   "IGUI_KBW_Exported": "Exportat „%1” ca Lua/%2",
   "IGUI_KBW_ExportFailed": "Exportul planului nu a reușit",

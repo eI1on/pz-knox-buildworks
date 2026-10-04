@@ -1,9 +1,11 @@
 --- Requirements provides the Knox Buildworks construction validation layer.
 local Log = require("KnoxBuildworks/Log")
+local KBW = require("KnoxBuildworks/Core")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local RecipeData = require("KnoxBuildworks/Crafting/RecipeData")
 local Profiler = require("KnoxBuildworks/Util/Profiler")
+local SupplyAllocation = require("KnoxBuildworks/Validation/SupplyAllocation")
 
 ---@class KBW.RequirementsModule
 ---@type KBW.RequirementsModule
@@ -290,7 +292,9 @@ local function availableTypes(inventory, types, tags, countUses, square, input)
         end
         local groundItems = ground[fullType] or {}
         for groundIndex = 1, #groundItems do
-            total = total + addAvailable(result, seen, seenItems, groundItems[groundIndex], countUses)
+            if predicateNotBroken(groundItems[groundIndex]) then
+                total = total + addAvailable(result, seen, seenItems, groundItems[groundIndex], countUses)
+            end
         end
     end
     tags = tags or {}
@@ -308,7 +312,9 @@ local function availableTypes(inventory, types, tags, countUses, square, input)
                 itemsOnGround = itemsOnGround or {}
                 for groundIndex = 1, #itemsOnGround do
                     local item = itemsOnGround[groundIndex]
-                    if item:hasTag(tag) then total = total + addAvailable(result, seen, seenItems, item, countUses) end
+                    if item:hasTag(tag) and predicateNotBroken(item) then
+                        total = total + addAvailable(result, seen, seenItems, item, countUses)
+                    end
                 end
             end
         end
@@ -406,6 +412,22 @@ local function normalizedInputs(definition, stage)
             icon = tool.icon,
             flags = tool.flags
         }
+    end
+    -- Keep input IDs valid for blueprints saved while paint was required.
+    -- Zero-cost rows are still accepted by ingredient-choice validation.
+    if KBW.sandboxValue("KnoxBuildworks.RequireConstructionPaint", true) == false then
+        local hasConstructionPaint = false
+        for index = 1, #rows do
+            if rows[index].id == "finish_paint" then
+                rows[index].amount, rows[index].uses = 0, 0
+                hasConstructionPaint = true
+            end
+        end
+        if hasConstructionPaint then
+            for index = 1, #rows do
+                if rows[index].id == "tool_paintbrush" then rows[index].amount = 0 end
+            end
+        end
     end
     return rows
 end
@@ -515,7 +537,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
             local groundItems = snapshot.ground[fullType] or {}
             for groundIndex = 1, #groundItems do
                 local item = groundItems[groundIndex]
-                if not seenItems[item] then
+                if not seenItems[item] and predicateNotBroken(item) then
                     seenItems[item] = true
                     total = total + amountForItem(item, countUses)
                 end
@@ -540,7 +562,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
                     itemsOnGround = itemsOnGround or {}
                     for groundIndex = 1, #itemsOnGround do
                         local item = itemsOnGround[groundIndex]
-                        if not seenItems[item] and item:hasTag(tag) then
+                        if not seenItems[item] and item:hasTag(tag) and predicateNotBroken(item) then
                             seenItems[item] = true
                             total = total + amountForItem(item, countUses)
                         end
@@ -558,10 +580,12 @@ end
 --- readiness path; the detailed evaluate/consume paths keep building fresh
 --- copies.
 local function readinessInputs(definition, stage)
+    local requirePaint = KBW.sandboxValue("KnoxBuildworks.RequireConstructionPaint", true)
     local cached = stage.__kbwReadinessInputs
-    if not cached then
+    if not cached or stage.__kbwReadinessPaint ~= requirePaint then
         cached = normalizedInputs(definition, stage)
         stage.__kbwReadinessInputs = cached
+        stage.__kbwReadinessPaint = requirePaint
     end
     return cached
 end
@@ -700,6 +724,17 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         local availableItems, available = availableTypes(
             inventory, selectedTypes, selectedTags, countUses, groundSquare, input
         )
+        -- A manual choice narrows the row used for construction, but it must
+        -- not erase the stock preview for the other legal aliases. Keep a
+        -- second, unfiltered snapshot for Possible Items so changing from a
+        -- Smithing Hammer to another hammer still shows the Smithing Hammer
+        -- as available in the player's inventory.
+        local possibleAvailableItems, possibleAvailable = availableItems, available
+        if selectedFullType then
+            possibleAvailableItems, possibleAvailable = availableTypes(
+                inventory, input.items, input.tags, countUses, groundSquare, input
+            )
+        end
         local foundTool = nil
         if selectedFullType then
             local oldInput = activeInput
@@ -714,6 +749,7 @@ function Requirements.evaluate(player, definition, stage, square, choices)
             kind = "input",
             role = input.role,
             mode = input.mode,
+            uses = input.uses,
             resourceType = input
                 .resourceType or "Item",
             label = input.label,
@@ -726,6 +762,8 @@ function Requirements.evaluate(player, definition, stage, square, choices)
             possibleItems = possibleItemsForInput(input),
             possibleTags = input.tags or {},
             availableItems = availableItems,
+            possibleAvailableItems = possibleAvailableItems,
+            possibleAvailable = possibleAvailable,
             needed = needed,
             neededMax = input.amountMax,
             available = available,
@@ -802,139 +840,18 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         status.rows[#status.rows + 1] = row
         if row.needToBeLearned and not row.ok then status.ok = false end
     end
+    if not cheat then
+        local allocation = SupplyAllocation.rows(status.rows)
+        status.allocation = allocation
+        for index = 1, #allocation.rows do
+            local entry = allocation.rows[index]
+            entry.row.totalAvailable = entry.row.available
+            entry.row.available = entry.available
+            entry.row.ok = entry.ok
+        end
+        if not allocation.ok then status.ok = false end
+    end
     return status
-end
-
-local function consumeInput(player, inventory, input, square, choices, stage, recipeData, inputIndex)
-    if input.mode == "keep" then
-        local remaining = input.amount or 1
-        local matches = matchedInventoryItems(inventory, input, choices)
-        for matchIndex = 1, #matches do
-            if remaining <= 0 then break end
-            local item = matches[matchIndex]
-            recipeData:record(input, item, inputIndex)
-            maybeDegradeKeptItem(player, stage, input, item)
-            remaining = remaining - 1
-        end
-        return remaining <= 0
-    end
-    local oldInput = activeInput
-    activeInput = input
-    local remaining = input.uses or input.amount or 1
-    local function consumeItem(item)
-        if not item or remaining <= 0 then return end
-        recipeData:record(input, item, inputIndex)
-        if input.uses or input.mode == "drain" then
-            item:UseAndSync()
-        else
-            player:removeFromHands(item)
-            local container = item:getContainer() or inventory
-            sendRemoveItemFromContainer(container, item)
-            container:Remove(item)
-        end
-        remaining = remaining - 1
-    end
-    local selectedFullType = choices and choices[input.id] or nil
-    if selectedFullType then
-        while remaining > 0 do
-            local item = inventory:getFirstTypeEvalRecurse(selectedFullType, predicateNotBroken)
-            if not item then break end;
-            consumeItem(item)
-        end
-        if remaining > 0 and square then
-            local ground = buildUtil.getMaterialOnGround(square)
-            local groundItems = ground[selectedFullType] or {}
-            for groundIndex = 1, #groundItems do
-                local item = groundItems[groundIndex]
-                if remaining <= 0 then break end
-                recipeData:record(input, item, inputIndex)
-                if input.uses or input.mode == "drain" then
-                    item:UseAndSync()
-                else
-                    local world = item:getWorldItem()
-                    if world then world:getSquare():transmitRemoveItemFromSquare(world) end
-                end
-                remaining = remaining - 1
-            end
-        end
-        activeInput = oldInput
-        return remaining <= 0
-    end
-    local inputItems = input.items or {}
-    for itemIndex = 1, #inputItems do
-        local fullType = inputItems[itemIndex]
-        if fullType ~= selectedFullType then
-            while remaining > 0 do
-                local item = inventory:getFirstTypeEvalRecurse(fullType, predicateNotBroken)
-                if not item then break end;
-                consumeItem(item)
-            end
-        end
-        if remaining <= 0 then break end
-    end
-    local inputTags = input.tags or {}
-    for tagIndex = 1, #inputTags do
-        local tagName = inputTags[tagIndex]
-        if remaining <= 0 then break end
-        local tag = tagValue(tagName)
-        if tag then
-            while remaining > 0 do
-                local item = inventory:getFirstTagEvalRecurse(tag, predicateNotBroken)
-                if not item then break end;
-                consumeItem(item)
-            end
-        end
-    end
-    if remaining > 0 and square then
-        local ground = buildUtil.getMaterialOnGround(square)
-        for itemIndex = 1, #inputItems do
-            local fullType = inputItems[itemIndex]
-            local groundItems = ground[fullType] or {}
-            for groundIndex = 1, #groundItems do
-                local item = groundItems[groundIndex]
-                if remaining <= 0 then break end
-                recipeData:record(input, item, inputIndex)
-                if input.uses or input.mode == "drain" then
-                    item:UseAndSync()
-                else
-                    local world = item:getWorldItem()
-                    if world then
-                        world:getSquare():transmitRemoveItemFromSquare(world)
-                    end
-                end
-                remaining = remaining - 1
-            end
-        end
-        for tagIndex = 1, #inputTags do
-            local tagName = inputTags[tagIndex]
-            local tag = tagValue(tagName)
-            if tag then
-                for _, itemsOnGround in pairs(ground) do
-                    itemsOnGround = itemsOnGround or {}
-                    for groundIndex = 1, #itemsOnGround do
-                        local item = itemsOnGround[groundIndex]
-                        if remaining <= 0 then break end
-                        if item:hasTag(tag) then
-                            recipeData:record(input, item, inputIndex)
-                            if input.uses or input.mode == "drain" then
-                                item:UseAndSync()
-                            else
-                                local world = item:getWorldItem()
-                                if world then
-                                    world:getSquare()
-                                        :transmitRemoveItemFromSquare(world)
-                                end
-                            end
-                            remaining = remaining - 1
-                        end
-                    end
-                    if remaining <= 0 then break end
-                end
-            end
-        end
-    end
-    activeInput = oldInput
-    return remaining <= 0
 end
 
 ---@param player     IsoPlayer
@@ -948,11 +865,36 @@ function Requirements.consume(player, stage, square, definition, choices)
     local recipeData = RecipeData.new(EntityCompat.craftRecipeObject(stage), player)
     if player:isBuildCheat() then return true, recipeData end
     definition = definition or {}
+    local status = Requirements.evaluate(player, definition, stage, square, choices)
+    if not status.ok then return false, recipeData end
     local inventory = player:getInventory()
     local inputs = normalizedInputs(definition, stage)
     for inputIndex = 1, #inputs do
-        if not consumeInput(player, inventory, inputs[inputIndex], square, choices, stage, recipeData, inputIndex) then
-            return false, recipeData
+        local input = inputs[inputIndex]
+        local allocation = status.allocation.rows[inputIndex]
+        for matchIndex = 1, #allocation.items do
+            local match = allocation.items[matchIndex]
+            local item = match.item
+            if input.mode == "keep" then
+                recipeData:record(input, item, inputIndex)
+                maybeDegradeKeptItem(player, stage, input, item)
+            elseif input.uses ~= nil or input.mode == "drain" then
+                for useIndex = 1, match.amount do
+                    recipeData:record(input, item, inputIndex)
+                    item:UseAndSync()
+                end
+            else
+                recipeData:record(input, item, inputIndex)
+                local world = item:getWorldItem()
+                if world then
+                    world:getSquare():transmitRemoveItemFromSquare(world)
+                else
+                    player:removeFromHands(item)
+                    local container = item:getContainer() or inventory
+                    sendRemoveItemFromContainer(container, item)
+                    container:Remove(item)
+                end
+            end
         end
     end
     return true, recipeData
@@ -963,6 +905,27 @@ end
 ---@return KBW.BuildInput[]
 function Requirements.getInputs(definition, stage)
     return normalizedInputs(definition, stage)
+end
+
+-- Shared by gather previews and transfer selection, so broken/empty/favorite
+-- item flags are interpreted exactly as they are during construction.
+function Requirements.matchesInput(item, input, selectedFullType)
+    if not item then return false end
+    local previous = activeInput
+    activeInput = input
+    local accepted = predicateNotBroken(item)
+    activeInput = previous
+    if not accepted then return false end
+    local fullType = item:getFullType()
+    if selectedFullType and selectedFullType ~= "" and fullType ~= selectedFullType then return false end
+    if input.matchTag and item:hasTag(input.matchTag) then return true end
+    local types, tags = input.items or input.possibleItems or {}, input.tags or input.possibleTags or {}
+    for index = 1, #types do if types[index] == fullType then return true end end
+    for index = 1, #tags do
+        local tag = tagValue(tags[index])
+        if tag and item:hasTag(tag) then return true end
+    end
+    return false
 end
 
 ---@param player     IsoPlayer

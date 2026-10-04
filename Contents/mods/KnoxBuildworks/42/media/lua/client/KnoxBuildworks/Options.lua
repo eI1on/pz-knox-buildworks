@@ -38,16 +38,10 @@ Options:addTickBox(
     "FadeUnavailableIcons", "UI_optionscreen_KBW_FadeUnavailableIcons", true,
     "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip"
 )
-Options:addTickBox(
-    "HoverPreview", "UI_optionscreen_KBW_HoverPreview", false,
-    "UI_optionscreen_KBW_HoverPreview_Tooltip"
+Options:addSlider(
+    "CatalogIconSize", "UI_optionscreen_KBW_CatalogIconSize", 75, 175, 5, 100,
+    "UI_optionscreen_KBW_CatalogIconSize_Tooltip"
 )
-local catalogIconSize = Options:addComboBox(
-    "CatalogIconSize", "UI_optionscreen_KBW_CatalogIconSize", "UI_optionscreen_KBW_CatalogIconSize_Tooltip"
-)
-catalogIconSize:addItem("UI_optionscreen_KBW_Size_Default", true)
-catalogIconSize:addItem("UI_optionscreen_KBW_Size_Large", false)
-catalogIconSize:addItem("UI_optionscreen_KBW_Size_ExtraLarge", false)
 local hoverPreviewSize = Options:addComboBox(
     "HoverPreviewSize", "UI_optionscreen_KBW_HoverPreviewSize", "UI_optionscreen_KBW_HoverPreviewSize_Tooltip"
 )

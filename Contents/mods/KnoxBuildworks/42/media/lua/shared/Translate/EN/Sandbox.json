@@ -21,5 +21,7 @@
   "Sandbox_KBW_WellHourlyRefill": "Groundwater refill per hour",
   "Sandbox_KBW_WellHourlyRefill_tooltip": "Litres of clean water naturally restored to each limited well every in-game hour.",
   "Sandbox_KBW_WellRainRefillMultiplier": "Rain refill multiplier",
-  "Sandbox_KBW_WellRainRefillMultiplier_tooltip": "Multiplies the well's native Build 42 rain-catcher factor. Set this to 0 to disable rain refilling."
+  "Sandbox_KBW_WellRainRefillMultiplier_tooltip": "Multiplies the well's native Build 42 rain-catcher factor. Set this to 0 to disable rain refilling.",
+  "Sandbox_KBW_RequireConstructionPaint": "Require paint for construction",
+  "Sandbox_KBW_RequireConstructionPaint_tooltip": "Require paint and a paintbrush for pre-colored Expanded recipes and selected wall finishes during construction. Disable to build those colors without paint. Does not change vanilla painting of existing walls or bucket capacity."
 }

@@ -9,15 +9,20 @@ local Options = require("KnoxBuildworks/Options")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 require("KnoxBuildworks/Planning/Planner")
 require("KnoxBuildworks/World/WellSystem")
+require("KnoxBuildworks/World/Collision")
 local PinnedRecipes = require("KnoxBuildworks/UI/PinnedRecipes")
 local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
+local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 require("KnoxBuildworks/UI/Sidebar")
+require("KnoxBuildworks/UI/WorldCatalog")
 require("KnoxBuildworks/Debug/DebugMenuDock")
 require("KnoxBuildworks/Admin/BuildableEditorDock")
 
 local helloPlayer = nil
 local helloSentAt = 0
 local HELLO_RETRY_MS = 5000
+local retryIntegrityHandshake
+local integrityRetryRegistered = false
 
 local function hello(player, retry)
     if isClient() then
@@ -25,6 +30,10 @@ local function hello(player, retry)
         sendClientCommand(player, KBW.NETWORK_MODULE, "Hello", { hash = Registry.hash })
         helloPlayer = player
         helloSentAt = getTimestampMs()
+        if not integrityRetryRegistered then
+            integrityRetryRegistered = true
+            Events.OnPlayerUpdate.Add(retryIntegrityHandshake)
+        end
     else
         Integrity.setClient("ok", getText("IGUI_KBW_IntegritySingleplayer"))
         helloPlayer = nil
@@ -34,7 +43,7 @@ end
 -- B42.20 can create the player before every server-side Lua listener has
 -- finished settling. A dropped first reply used to leave the catalogue in
 -- "Waiting for server definition validation" for the entire session.
-local function retryIntegrityHandshake(player)
+retryIntegrityHandshake = function (player)
     if not isClient() or not KBW.Runtime.loaded or KBW.Runtime.integrity ~= "pending" then return end
     local target = helloPlayer or player or getPlayer()
     if target and getTimestampMs() - helloSentAt >= HELLO_RETRY_MS then hello(target, true) end
@@ -47,7 +56,9 @@ local pendingHelloPlayer = nil
 local function onDefinitionsLoaded()
     local player = pendingHelloPlayer
     pendingHelloPlayer = nil
-    if player then hello(player) end
+    if player then
+        hello(player)
+    end
 end
 
 local function startCatalogPrewarm(player)
@@ -84,7 +95,7 @@ end
 
 local function refreshBuildableRuleConsumers()
     local CatalogIndex = require("KnoxBuildworks/UI/CatalogIndex")
-    CatalogIndex.invalidate()
+    if not CatalogIndex.refreshRules() then CatalogIndex.prewarm(getPlayer()) end
     PinnedRecipes.invalidate()
     if KBWCatalog and KBWCatalog.instance then
         local catalog = KBWCatalog.instance
@@ -95,9 +106,9 @@ local function refreshBuildableRuleConsumers()
         catalog:refreshGrid()
     end
     if KBWPlanningMode and KBWPlanningMode.instance then
-        local planning = KBWPlanningMode.instance
-        local panel = planning.catalogPanel
+        local panel = KBWPlanningMode.instance.catalogPanel
         if panel and panel.refreshCategories then panel:refreshCategories() end
+        if panel and panel.refreshSubcategories then panel:refreshSubcategories() end
         if panel and panel.refreshCatalog then panel:refreshCatalog() end
     end
     if KBWBuildableEditor and KBWBuildableEditor.instance and KBWBuildableEditor.instance.onRulesSync then
@@ -129,6 +140,10 @@ local function onServerCommand(module, command, args)
     args = args or {}
     if command == "Integrity" then
         helloPlayer = nil
+        if integrityRetryRegistered then
+            Events.OnPlayerUpdate.Remove(retryIntegrityHandshake)
+            integrityRetryRegistered = false
+        end
         local message = args.message
         if args.reason == "match" then
             message = getText("IGUI_KBW_IntegrityMatch")
@@ -255,51 +270,45 @@ local function inventoryContextMenu(playerNum, context, items)
     end
 end
 
-local POINT_LIGHT_SWITCH_IDS = {
-    ["kbw.vanillaexpanded.lighting.indoor.light_switch"] = true,
-    ["kbw.vanillaexpanded.lighting.indoor.light_switch_alternate"] = true
-}
+local function removeAttachedSprite(object, spriteName, playerNum)
+    local player = getSpecificPlayer(playerNum)
+    local square = object and object:getSquare() or nil
+    if not player or not square then return end
+    if isClient() then
+        sendClientCommand(player, KBW.NETWORK_MODULE, "RemoveAttachedSprite", {
+            x = square:getX(), y = square:getY(), z = square:getZ(),
+            index = object:getObjectIndex(), sprite = spriteName
+        })
+    else
+        AttachedSprites.remove(object, spriteName)
+    end
+end
 
-local function kbwPointLightSwitch(worldObjects)
-    local visitedSquares = {}
-    worldObjects = worldObjects or {}
-    for worldIndex = 1, #worldObjects do
-        local worldObject = worldObjects[worldIndex]
-        local square = worldObject and worldObject.getSquare and worldObject:getSquare() or nil
-        local squareKey = square and tostring(square) or nil
-        if square and not visitedSquares[squareKey] then
-            visitedSquares[squareKey] = true
+local function attachedSpriteContextMenu(playerNum, context, worldObjects, test)
+    local seen = {}
+    for worldIndex = 1, #(worldObjects or {}) do
+        local square = worldObjects[worldIndex] and worldObjects[worldIndex]:getSquare() or nil
+        local key = square and tostring(square) or nil
+        if square and not seen[key] then
+            seen[key] = true
             local objects = square:getObjects()
             for objectIndex = 0, objects:size() - 1 do
                 local object = objects:get(objectIndex)
-                local data = object and object.getModData and object:getModData() or nil
-                local kbw = data and data.KBW or nil
-                if kbw and POINT_LIGHT_SWITCH_IDS[tostring(kbw.buildableId)] and object.getLightSourceRadius
-                    and object:getLightSourceRadius() > 0 then
-                    return object
+                local tracked = object:hasModData() and object:getModData().KBWAttachedSprites or nil
+                for attachedIndex = 1, #(tracked or {}) do
+                    local entry = tracked[attachedIndex]
+                    if test then return ISWorldObjectContextMenu.setTest() end
+                    local definition = Registry:get(entry.buildableId)
+                    local name = definition and I18n.definitionName(definition) or tostring(entry.sprite)
+                    context:addGetUpOption(
+                        getText("IGUI_KBW_RemoveAttachedDetail", name), object,
+                        removeAttachedSprite, entry.sprite, playerNum
+                    )
                 end
             end
         end
     end
-    return nil
-end
-
--- Player-built switches use a bounded thumpable point light instead of a
--- native room switch. Native room switches depend on map-authored room bounds,
--- which can be absent (no light) or cover an oversized custom structure after
--- an MP chunk reload. The vanilla timed action still owns synchronization.
-local function lightSwitchContextMenu(playerNum, context, worldObjects, test)
-    if test and ISWorldObjectContextMenu.Test then return true end
-    local lightSwitch = kbwPointLightSwitch(worldObjects)
-    if not lightSwitch then return false end
-    if test then return ISWorldObjectContextMenu.setTest() end
-    local label = lightSwitch:isLightSourceOn() and getText("ContextMenu_Turn_Off")
-        or getText("ContextMenu_Turn_On")
-    local option = context:addGetUpOption(
-        label, lightSwitch, ISWorldObjectContextMenu.onToggleThumpableLight, playerNum
-    )
-    option.iconTexture = getTexture("Item_LightBulb")
-    return true
+    return false
 end
 
 -- One drum serves as either a rain collector or a burn barrel. The object is
@@ -385,8 +394,7 @@ Events.OnGameBoot.Add(function ()
 Events.OnCreatePlayer.Add(onCreatePlayer)
 Events.OnServerCommand.Add(onServerCommand)
 Events.OnKeyPressed.Add(onKeyPressed)
-Events.OnPlayerUpdate.Add(retryIntegrityHandshake)
 Events.OnFillInventoryObjectContextMenu.Add(inventoryContextMenu)
-Events.OnFillWorldObjectContextMenu.Add(lightSwitchContextMenu)
+Events.OnFillWorldObjectContextMenu.Add(attachedSpriteContextMenu)
 Events.OnFillWorldObjectContextMenu.Add(drumModeContextMenu)
 return true

@@ -4083,9 +4083,7 @@
                   {
                     "rows": [
                       [
-                        "floors_rugs_01_52"
-                      ],
-                      [
+                        "floors_rugs_01_52",
                         "floors_rugs_01_53"
                       ]
                     ]
@@ -4097,8 +4095,10 @@
                   {
                     "rows": [
                       [
-                        "floors_rugs_01_54",
                         "floors_rugs_01_55"
+                      ],
+                      [
+                        "floors_rugs_01_54"
                       ]
                     ]
                   }

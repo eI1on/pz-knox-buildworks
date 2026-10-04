@@ -5,9 +5,9 @@
       "id": "kbw.vanillaexpanded.containers.metal_containers.trashcontainers_01_32",
       "translationKey": "IGUI_KBWVE_Buildable_containers_metal_containers_trashcontainers_01_32",
       "displayName": "Wall Bin",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Metal Containers",
+      "tooltipKey": "Tooltip_KBW_DecorativeWallFixture",
+      "category": "Decorations",
+      "subcategory": "Wall Decorations",
       "material": "Metal",
       "iconSprite": "trashcontainers_01_32",
       "placement": {
@@ -139,8 +139,7 @@
             "category": "Welding"
           },
           "object": {
-            "blockAllSquare": false,
-            "canBePadlocked": true
+            "blockAllSquare": false
           }
         }
       ]

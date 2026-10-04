@@ -49,7 +49,7 @@ function KBWBlueprintImportWindow:new(x, y, width, height, player, onImported)
     o.player = player
     o.onImported = onImported
     o.backgroundColor = { r = Theme.backdrop.r, g = Theme.backdrop.g, b = Theme.backdrop.b, a = 0.94 }
-    o.borderColor = Theme.border
+    o.borderColor = Theme.color(Theme.border)
     o.moveWithMouse = true
     o:setWantKeyEvents(true)
     return o
@@ -67,8 +67,8 @@ function KBWBlueprintImportWindow:createChildren()
     self.fileList.itemheight = FONT_HGT_SMALL * 2 + 12
     self.fileList.font = UIFont.Small
     self.fileList.drawBorder = true
-    self.fileList.backgroundColor = Theme.surface
-    self.fileList.borderColor = Theme.borderSoft
+    self.fileList.backgroundColor = Theme.color(Theme.surface)
+    self.fileList.borderColor = Theme.color(Theme.borderSoft)
     self.fileList.doDrawItem = KBWBlueprintImportWindow.drawFileItem
     local owner = self
     self.fileList:setOnMouseDoubleClick(self, function ()

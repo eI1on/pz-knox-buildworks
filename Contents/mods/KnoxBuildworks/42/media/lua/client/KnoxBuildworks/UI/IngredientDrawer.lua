@@ -190,8 +190,8 @@ function KBWIngredientDrawer:new(x, y, w, h, target, onClose, onChoice)
     o.selectedItemKey = nil
     o.availableExpanded = true
     o.possibleExpanded = true
-    o.backgroundColor = Theme.backdrop
-    o.borderColor = Theme.border
+    o.backgroundColor = Theme.color(Theme.backdrop)
+    o.borderColor = Theme.color(Theme.border)
     return o
 end
 
@@ -200,6 +200,7 @@ function KBWIngredientDrawer:createChildren()
     self:addScrollBars()
     self:setScrollChildren(false)
     if self.vscroll then
+        self.vscroll:setVisible(false)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
     end
@@ -208,6 +209,7 @@ end
 function KBWIngredientDrawer:onResize()
     if ISPanel.onResize then ISPanel.onResize(self) end
     if self.vscroll then
+        self.vscroll:setVisible(false)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
     end
@@ -215,7 +217,7 @@ function KBWIngredientDrawer:onResize()
 end
 
 function KBWIngredientDrawer:drawWidth()
-    return self.width - (self.vscroll and self.vscroll:getWidth() or 0)
+    return self.width - (self.vscroll and self.vscroll:isVisible() and self.vscroll:getWidth() or 0)
 end
 
 function KBWIngredientDrawer:hideTooltips()
@@ -353,7 +355,7 @@ local function drawSection(panel, y, text, expanded, action)
         8, y, width - 16, rowHeight, 0.42, Theme.surfaceRaised.r, Theme.surfaceRaised.g, Theme.surfaceRaised.b
     )
     panel:drawRectBorder(
-        8, y, width - 16, rowHeight, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+        8, y, width - 16, rowHeight, Theme.ready.a, Theme.ready.r, Theme.ready.g, Theme.ready.b
     )
     local arrow = expanded and arrowOpen or arrowClosed
     if arrow then
@@ -416,8 +418,6 @@ local function drawAvailableNode(panel, y, entry)
     }
     y = y + rowHeight
     if expanded then
-        -- Instance rows show only the item name; the "(N)" total lives on the
-        -- group header, matching vanilla ISCraftInventoryPanel.
         for itemIndex = 1, #items do
             y = panel:drawChoiceRow(y + 3, entry.fullType, nil, true, items[itemIndex], true)
         end
@@ -432,14 +432,13 @@ function KBWIngredientDrawer:drawChoiceRow(y, fullType, count, available, item, 
     local rowKeyValue = selectedKey(fullType, item)
     local selected = self.selectedFullType == fullType and (self.selectedItemKey == rowKeyValue or not item)
     local fill = selected and Theme.selectedSoft or Theme.surface
-    local border = selected and Theme.accent or Theme.borderSoft
+    local border = selected and Theme.accent or (available and Theme.ready or Theme.borderSoft)
     local x = child and 24 or 8
     local rowWidth = width - x - 8
     local iconSize = child and 28 or 34
     local textX = x + iconSize + 12
     local name = item and item.getName and item:getName() or itemDisplayName(fullType)
     local lines = wrapText(name, math.max(60, width - textX - 18))
-    -- A nil count means "no count line" (individual instance rows).
     local countLines = count ~= nil and wrapText(tostring(count), math.max(40, width - textX - 18)) or {}
     local rowHeight = math.max(iconSize + 10, 10 + (#lines + #countLines) * lineHeight())
     self:drawRect(x, y, rowWidth, rowHeight, fill.a, fill.r, fill.g, fill.b)
@@ -452,7 +451,7 @@ function KBWIngredientDrawer:drawChoiceRow(y, fullType, count, available, item, 
             self:drawTextureScaledAspect(texture, x + 5, y + 5, iconSize, iconSize, available and 1 or .45, 1, 1, 1)
         end
     end
-    local color = available and Theme.good or Theme.textMuted
+    local color = available and Theme.ready or Theme.textMuted
     local textY = drawLines(
         self, lines, textX, y + 6, available and Theme.text or Theme.textMuted, available and 1 or .7
     )
@@ -461,16 +460,16 @@ function KBWIngredientDrawer:drawChoiceRow(y, fullType, count, available, item, 
     return y + rowHeight + 4
 end
 
-local function drawPossibleItems(panel, y, row, availableMap, availablePossibleKeys)
+local function drawPossibleItems(panel, y, row, availableMap, availableByKey)
     local seen = {}
     local possibleItems = row.possibleItems or {}
     local hadPossible = false
     for itemIndex = 1, #possibleItems do
         local fullType = possibleItems[itemIndex]
         local key = possibleDedupKey(fullType)
-        if not seen[key] and not availablePossibleKeys[key] then
+        if not seen[key] then
             seen[key] = true
-            local count = availableMap[fullType] or 0
+            local count = math.max(availableMap[fullType] or 0, availableByKey[key] or 0)
             hadPossible = true
             y = panel:drawChoiceRow(y, fullType, count, count > 0, nil, false)
         end
@@ -493,11 +492,13 @@ function KBWIngredientDrawer:prerender()
     local row = self.row
     if not row then return end
     if self.vscroll then
+        Theme.applyScrollbar(self.vscroll)
         self.vscroll:setX(self.width - self.vscroll:getWidth())
         self.vscroll:setHeight(self.height)
     end
     local width = self:drawWidth()
-    local headerY = -self:getYScroll()
+    local scroll = self:getYScroll()
+    local headerY = -scroll
     local titleLines = wrapText(getText("IGUI_KBW_IngredientBrowser"), math.max(80, width - 48))
     local nameLines = wrapText(rowName(row), math.max(80, width - 24))
     local headerHeight = math.max(72, 22 + (#titleLines + #nameLines) * lineHeight() + 18)
@@ -521,7 +522,7 @@ function KBWIngredientDrawer:prerender()
 
     local y = headerHeight + 8
     local stencilHeight = math.max(1, self.height - headerHeight - 2)
-    local stencilX, stencilY, stencilW, stencilH = self:clampStencilRectToParent(
+    self:clampStencilRectToParent(
         6, headerHeight + 2, math.max(1, width - 12), stencilHeight
     )
     if row.kind == "skill" then
@@ -556,15 +557,17 @@ function KBWIngredientDrawer:prerender()
 
         y = drawSection(self, y + 4, getText("IGUI_CraftUI_AvailableItems"), self.availableExpanded, "toggleAvailable")
         local availableMap = {}
-        local availablePossibleKeys = {}
+        local availableByKey = {}
+        local possibleItemsSource = row.possibleAvailableItems or row.availableItems or {}
         if self.availableExpanded then
             local availableItems = row.availableItems or {}
             local hadAvailable = false
             for entryIndex = 1, #availableItems do
                 local entry = availableItems[entryIndex]
                 availableMap[entry.fullType] = entry.available
+                local possibleKey = possibleDedupKey(entry.fullType)
+                availableByKey[possibleKey] = math.max(availableByKey[possibleKey] or 0, entry.available or 0)
                 if (entry.available or 0) > 0 then
-                    availablePossibleKeys[possibleDedupKey(entry.fullType)] = true
                     hadAvailable = true
                     y = drawAvailableNode(self, y, entry)
                 end
@@ -577,19 +580,30 @@ function KBWIngredientDrawer:prerender()
             for entryIndex = 1, #availableItems do
                 local entry = availableItems[entryIndex]
                 availableMap[entry.fullType] = entry.available
-                if (entry.available or 0) > 0 then availablePossibleKeys[possibleDedupKey(entry.fullType)] = true end
+                local possibleKey = possibleDedupKey(entry.fullType)
+                availableByKey[possibleKey] = math.max(availableByKey[possibleKey] or 0, entry.available or 0)
             end
         end
 
+        for entryIndex = 1, #possibleItemsSource do
+            local entry = possibleItemsSource[entryIndex]
+            availableMap[entry.fullType] = math.max(availableMap[entry.fullType] or 0, entry.available or 0)
+            local possibleKey = possibleDedupKey(entry.fullType)
+            availableByKey[possibleKey] = math.max(availableByKey[possibleKey] or 0, entry.available or 0)
+        end
+
         y = drawSection(self, y + 6, getText("IGUI_CraftUI_PossibleItems"), self.possibleExpanded, "togglePossible")
-        if self.possibleExpanded then y = drawPossibleItems(self, y, row, availableMap, availablePossibleKeys) end
+        if self.possibleExpanded then y = drawPossibleItems(self, y, row, availableMap, availableByKey) end
     end
 
     local scrollHeight = math.max(self.height, y + 30)
     if self.lastScrollHeight ~= scrollHeight then
         self.lastScrollHeight = scrollHeight
         self:setScrollHeight(scrollHeight)
-        if self.vscroll then self:updateScrollbars() end
+        if self.vscroll then
+            self.vscroll:setVisible(scrollHeight > self.height)
+            self:updateScrollbars()
+        end
     end
     self:clearStencilRect()
 end

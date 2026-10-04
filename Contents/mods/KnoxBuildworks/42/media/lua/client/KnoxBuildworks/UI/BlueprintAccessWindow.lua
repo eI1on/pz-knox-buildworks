@@ -49,8 +49,11 @@ local function makeButton(owner, x, y, w, h, title, callback, selected)
     local button = ISButton:new(x, y, w, h, title, owner, callback)
     button:initialise()
     Theme.applyButton(button, selected == true)
-    button.borderColor = selected and Theme.accent or Theme.borderSoft
-    button.backgroundColorMouseOver = Theme.selectedSoft
+    -- ISButton mutates its color tables while hovering/enabling. Keep the
+    -- shared theme palette immutable so opening this window cannot recolor
+    -- the catalogue or leave later controls with a stale stencil/appearance.
+    button.borderColor = Theme.color(selected and Theme.accent or Theme.borderSoft)
+    button.backgroundColorMouseOver = Theme.color(Theme.selectedSoft)
     owner:addChild(button)
     return button
 end
@@ -65,7 +68,7 @@ local function applyCombo(combo)
         a = 0.98
     }
     combo.borderColor = { r = Theme.borderSoft.r, g = Theme.borderSoft.g, b = Theme.borderSoft.b, a = 0.95 }
-    combo.textColor = Theme.text
+    combo.textColor = Theme.color(Theme.text)
 end
 
 local function comboData(combo, fallback)
@@ -189,8 +192,8 @@ function KBWBlueprintAccessWindow:new(owner, player, blueprint)
     o.leftW, o.rightW, o.listH = leftW, rightW, listH
     o.resizable = false
     o.title = getText("IGUI_KBW_BlueprintAccessTitle")
-    o.backgroundColor = Theme.backdrop
-    o.borderColor = Theme.border
+    o.backgroundColor = Theme.color(Theme.backdrop)
+    o.borderColor = Theme.color(Theme.border)
     o.moveWithMouse = true
     o:setWantKeyEvents(true)
     return o
@@ -241,8 +244,8 @@ function KBWBlueprintAccessWindow:createChildren()
     self.aclList:instantiate()
     self.aclList.itemheight = LIST_ROW_H
     self.aclList.drawBorder = true
-    self.aclList.backgroundColor = Theme.surface
-    self.aclList.borderColor = Theme.borderSoft
+    self.aclList.backgroundColor = Theme.color(Theme.surface)
+    self.aclList.borderColor = Theme.color(Theme.borderSoft)
     self.aclList.doDrawItem = function (list, rowY, item, alt) return self:drawAclRow(list, rowY, item, alt) end
     self.aclList:setOnMouseDownFunction(
         self,
@@ -257,8 +260,8 @@ function KBWBlueprintAccessWindow:createChildren()
     self.candidateList:instantiate()
     self.candidateList.itemheight = LIST_ROW_H
     self.candidateList.drawBorder = true
-    self.candidateList.backgroundColor = Theme.surface
-    self.candidateList.borderColor = Theme.borderSoft
+    self.candidateList.backgroundColor = Theme.color(Theme.surface)
+    self.candidateList.borderColor = Theme.color(Theme.borderSoft)
     self.candidateList.doDrawItem = function (list, rowY, item, alt)
         return self:drawCandidateRow(list, rowY, item, alt)
     end

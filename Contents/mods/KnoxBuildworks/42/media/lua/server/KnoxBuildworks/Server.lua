@@ -7,7 +7,10 @@ local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local BlueprintFiles = require("KnoxBuildworks/Planning/BlueprintFiles")
 local BuildableRulesServer = require("KnoxBuildworks/Admin/BuildableRulesServer")
 local Log = require("KnoxBuildworks/Log")
+local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 require("KnoxBuildworks/World/WellSystem")
+require("KnoxBuildworks/World/Collision")
+require("KnoxBuildworks/World/EntityRepair")
 require "KnoxBuildworks/BuildingObjects/KBWBuildingObject"
 
 ---@class KBW.ServerModule
@@ -155,6 +158,25 @@ local function handleDrumMode(player, args)
     end
 end
 
+local function handleRemoveAttachedSprite(player, args)
+    local x, y, z = tonumber(args.x), tonumber(args.y), tonumber(args.z)
+    local index = tonumber(args.index)
+    local spriteName = type(args.sprite) == "string" and args.sprite or nil
+    if not player or not x or not y or not z or not index or not spriteName then return end
+    if math.abs(player:getX() - x) > 3 or math.abs(player:getY() - y) > 3
+        or math.abs(player:getZ() - z) > .5 then return end
+    local square = getCell():getGridSquare(x, y, z)
+    local objects = square and square:getObjects() or nil
+    if not objects or index < 0 or index >= objects:size() then return end
+    local object = objects:get(index)
+    local data = object and object:hasModData() and object:getModData().KBWAttachedSprites or nil
+    local allowed = false
+    for trackedIndex = 1, #(data or {}) do
+        if data[trackedIndex].sprite == spriteName then allowed = true break end
+    end
+    if allowed then AttachedSprites.remove(object, spriteName) end
+end
+
 ---@param command string
 ---@param player IsoPlayer
 ---@param args table
@@ -190,6 +212,9 @@ function Server.onClientCommand(module, command, player, args)
     elseif command == "DrumMode" then
         if not Integrity.isAllowed(player) then return end
         handleDrumMode(player, args)
+    elseif command == "RemoveAttachedSprite" then
+        if not Integrity.isAllowed(player) then return end
+        handleRemoveAttachedSprite(player, args)
     elseif BLUEPRINT_COMMANDS[command] then
         if not Integrity.isAllowed(player) then return end
         -- Authoritative, not a UI hint: with planning off no client creates or

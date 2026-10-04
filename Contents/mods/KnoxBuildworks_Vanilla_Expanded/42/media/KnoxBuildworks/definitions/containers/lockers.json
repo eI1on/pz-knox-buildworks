@@ -5,9 +5,9 @@
       "id": "kbw.vanillaexpanded.containers.lockers.location_business_bank_01_40",
       "translationKey": "IGUI_KBWVE_Buildable_containers_lockers_location_business_bank_01_40",
       "displayName": "Wall Vault",
-      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
-      "category": "Containers",
-      "subcategory": "Lockers",
+      "tooltipKey": "Tooltip_KBW_DecorativeWallFixture",
+      "category": "Decorations",
+      "subcategory": "Wall Decorations",
       "material": "Metal",
       "iconSprite": "location_business_bank_01_40",
       "placement": {
@@ -139,8 +139,7 @@
             "category": "Welding"
           },
           "object": {
-            "blockAllSquare": false,
-            "canBePadlocked": true
+            "blockAllSquare": false
           }
         }
       ]

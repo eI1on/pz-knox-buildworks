@@ -14,7 +14,8 @@
         "kind": "object",
         "needWindowFrame": true,
         "windowSupportSprites": [
-          "walls_interior_house_05_*"
+          "walls_interior_house_05_*",
+          "walls_exterior_house_03_*"
         ]
       },
       "stages": [
