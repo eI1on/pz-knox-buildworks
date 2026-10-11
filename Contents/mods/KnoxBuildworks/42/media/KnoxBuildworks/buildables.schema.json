@@ -1153,7 +1153,8 @@
                         "flat",
                         "slope",
                         "detail",
-                        "gable"
+                        "gable",
+                        "accent"
                       ]
                     },
                     "step": {

@@ -12,7 +12,6 @@
     "media/KnoxBuildworks/definitions/architecture_plus/edge_detailing.json",
     "media/KnoxBuildworks/definitions/architecture_plus/floor_molding.json",
     "media/KnoxBuildworks/definitions/architecture_plus/foundation.json",
-    "media/KnoxBuildworks/definitions/architecture_plus/roof_accents.json",
     "media/KnoxBuildworks/definitions/architecture_plus/wall_panels.json",
     "media/KnoxBuildworks/definitions/containers/clothing.json",
     "media/KnoxBuildworks/definitions/containers/crates.json",
@@ -87,8 +86,7 @@
     "media/KnoxBuildworks/definitions/roofing/sage_green_shallow_roofs.json",
     "media/KnoxBuildworks/definitions/roofing/white_30_roofs.json",
     "media/KnoxBuildworks/definitions/roofing/white_shallow_roofs.json",
-    "media/KnoxBuildworks/definitions/roofing/roof_trim.json",
-    "media/KnoxBuildworks/definitions/roofing/roof_trim_30.json",
+    "media/KnoxBuildworks/definitions/roofing/roof_pieces_45.json",
     "media/KnoxBuildworks/definitions/stairs.json",
     "media/KnoxBuildworks/definitions/structural/timber_framing.json",
     "media/KnoxBuildworks/definitions/survival.json",
@@ -131,7 +129,8 @@
     "media/KnoxBuildworks/definitions/walls/old_wood_panel.json",
     "media/KnoxBuildworks/definitions/windows.json",
     "media/KnoxBuildworks/definitions/patches.json",
-    "media/KnoxBuildworks/definitions/windows_fixtures.json"
+    "media/KnoxBuildworks/definitions/windows_fixtures.json",
+    "media/KnoxBuildworks/definitions/roofing/roof_accents.json"
   ],
   "schemaVersion": 1
 }

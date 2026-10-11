@@ -442,6 +442,7 @@ local RISE = { false, 1, 2, 3, 4 }
 local ELEVATION = { 0, 1, 2, 3, 4, 5, 6, 7, 8 }
 local CEILING = { "auto", "yes", "no" }
 local EAVES = { true, false }
+local ACCENTS = { true, false }
 
 local function steps(values, label)
     local items = {}
@@ -469,9 +470,8 @@ function KBWRoofHelper:createChildren()
         return Visibility.stagePasses(self.player, definition, stage, false)
     end
     -- Only families the helper can lay out by itself. Detail-only sets
-    -- (roof trim, tents) and the shallow sheets, which have two rows of tiles
-    -- per side and cannot cover an arbitrary footprint, stay in the catalogue
-    -- for placing by hand.
+    -- (tents) stay in the catalogue; shallow sets are offered but only for
+    -- layouts two rows high (the planner rejects taller ones).
     self.profiles = {}
     local all = RoofPlanner.profiles(definitions, allowed)
     for index = 1, #all do
@@ -479,6 +479,7 @@ function KBWRoofHelper:createChildren()
     end
     table.sort(self.profiles, function(a, b) return a.id < b.id end)
     self.gableProfiles = RoofPlanner.gables(definitions, allowed)
+    self.accentSet = RoofPlanner.accents(definitions, allowed)[1]
 
     local fontH = fontHeight()
     local row = math.max(28, fontH + 12)
@@ -528,6 +529,7 @@ function KBWRoofHelper:createChildren()
         { "ceiling", "IGUI_KBW_RoofCeiling", steps(CEILING, function(v)
             return getText(v == "auto" and "IGUI_KBW_RoofCeilingAuto" or v == "yes" and "IGUI_KBW_Yes" or "IGUI_KBW_No") end) },
         { "eaves", "IGUI_KBW_RoofEaves", steps(EAVES, function(v) return getText(v and "IGUI_KBW_Yes" or "IGUI_KBW_No") end) },
+        { "accents", "IGUI_KBW_RoofAccents", steps(ACCENTS, function(v) return getText(v and "IGUI_KBW_Yes" or "IGUI_KBW_No") end) },
     }
     -- Steppers line up under the cards in three columns when a label, the
     -- widest value and both arrows fit in a card's width; two otherwise.
@@ -659,7 +661,7 @@ function KBWRoofHelper:fillFamilies()
     local items = {}
     for index = 1, #self.profiles do
         local profile = self.profiles[index]
-        local text = I18n.subcategory(profile.label) .. " · " .. pitchText(profile)
+        local text = I18n.subcategory(profile.label) .. " | " .. pitchText(profile)
         local icon = (profile.pieces or {})["slope:S:2"] or (profile.pieces or {})["slope:S:1"]
             or (profile.details or {})[1] or profile.flat
         items[index] = { profile = profile, label = text, texture = textureFor(entrySprite(icon)) }
@@ -787,7 +789,7 @@ function KBWRoofHelper:gableStyles(gable)
             local f = common and common[order[k]]
             if f then
                 styles[#styles + 1] = { id = tostring(variantId) .. "|" .. order[k], variantId = variantId, finish = f,
-                    label = (variantId and (variantLabel .. " · ") or "") .. tostring(f.label), color = f.color }
+                    label = (variantId and (variantLabel .. " | ") or "") .. tostring(f.label), color = f.color }
             end
         end
     end
@@ -888,6 +890,7 @@ function KBWRoofHelper:selectedRoofOptions()
         ceiling = ceilingValue,
         eaves = value(self.eaves) ~= false,
         gable = self:selectedGable(),
+        accents = value(self.accents) ~= false and self.accentSet or nil,
     }
     if style and (style.variantId or style.finish) then
         local helper = self
@@ -913,7 +916,8 @@ function KBWRoofHelper:optionsKey(profile, options)
     local style = self:selectedStyle()
     return table.concat({ profile and profile.id or "-", options.gable and options.gable.id or "-",
         style and style.id or "-", tostring(options.overhang), tostring(options.riseLevels), tostring(options.z),
-        tostring(options.ceiling), tostring(options.eaves), tostring(self.regionUpdated) }, "|")
+        tostring(options.ceiling), tostring(options.eaves), tostring(options.accents and options.accents.id),
+        tostring(self.regionUpdated) }, "|")
 end
 
 -- ---------------------------------------------------------------------------

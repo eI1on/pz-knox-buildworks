@@ -681,8 +681,8 @@
     {
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_half_pitched_3",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_half_pitched_3",
-      "displayName": "Glass Half Pitched 3",
-      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "displayName": "Glass Odd-Span Ridge (2.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",
@@ -2724,8 +2724,8 @@
     {
       "id": "kbw.vanillaexpanded.roofing.glass_roofs.glass_section_r5_1",
       "translationKey": "IGUI_KBWVE_Buildable_roofing_glass_section_r5_1",
-      "displayName": "Glass Roof Section 5-1",
-      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "displayName": "Glass Odd-Span Ridge (1.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
       "subcategory": "Glass Roofs",
       "material": "Glass",

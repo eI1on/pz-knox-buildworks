@@ -4,8 +4,8 @@
     {
       "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.slope_middle",
       "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_SlopeMiddle",
-      "displayName": "Light Brown Roof Slope Middle",
-      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "displayName": "Light Brown Odd-Span Ridge (1.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
       "subcategory": "Light Brown Roofs",
       "material": "Wood",
@@ -140,8 +140,8 @@
     {
       "id": "kbw.vanillaexpanded.roofing.light_brown_roofs.slope_top",
       "translationKey": "IGUI_KBWVE_Buildable_LightBrownRoof_SlopeTop",
-      "displayName": "Light Brown Roof Slope Top",
-      "tooltipKey": "Tooltip_KBW_Shared_RoofSection",
+      "displayName": "Light Brown Odd-Span Ridge (2.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
       "subcategory": "Light Brown Roofs",
       "material": "Wood",

@@ -120,7 +120,8 @@ function RoofPlanner.profiles(definitions, stageFilter)
         for j = 1, #(definition.stages or {}) do
             local stage = definition.stages[j]
             local roof = stage.roof
-            if roof and roof.role ~= "gable" and (not stageFilter or stageFilter(definition, stage)) then
+            if roof and roof.role ~= "gable" and roof.role ~= "accent"
+                and (not stageFilter or stageFilter(definition, stage)) then
                 local label = definition.subcategory or roof.family
                 if roof.role == "flat" then
                     flats[roof.family] = flats[roof.family] or entry(definition, stage)
@@ -135,6 +136,7 @@ function RoofPlanner.profiles(definitions, stageFilter)
                         if piece then
                             profile = profileFor(roof.family, piece.pitch, label)
                             profile.stepsPerLevel = piece.steps
+                            profile.maxStep = piece.maxStep
                             if piece.kind == "flat" then
                                 flats[roof.family] = flats[roof.family] or entry(definition, stage, face)
                             else
@@ -169,7 +171,8 @@ function RoofPlanner.profiles(definitions, stageFilter)
         local anyPiece = false
         for _ in pairs(profile.pieces) do anyPiece = true; break end
         if anyPiece or #profile.details > 0 then
-            local steps = profile.stepsPerLevel
+            -- Shallow sets only have their first rows.
+            local steps = profile.stepsPerLevel and (profile.maxStep or profile.stepsPerLevel)
             if steps then
                 -- A face is hidden when the set has no tile for it at all:
                 -- the isometric camera never sees a steep north or west slope.
@@ -268,6 +271,40 @@ function RoofPlanner.gables(definitions, stageFilter)
         local p = order[i]
         p.fills = fills[p.family] or {}
         result[#result + 1] = p
+    end
+    table.sort(result, function(a, b) return a.id < b.id end)
+    return result
+end
+
+---Accent trim sets by family: rakes keyed like gable parts per pitch
+---("rake:45:W:lowS:1"), eave boards, corners, returns and corner blocks.
+function RoofPlanner.accents(definitions, stageFilter)
+    local sets, order = {}, {}
+    for i = 1, #(definitions or {}) do
+        local definition = definitions[i]
+        for j = 1, #(definition.stages or {}) do
+            local stage = definition.stages[j]
+            local roof = stage.roof
+            if roof and roof.role == "accent" and (not stageFilter or stageFilter(definition, stage)) then
+                local set = sets[roof.family]
+                if not set then
+                    set = { id = roof.family, family = roof.family, label = definition.subcategory or roof.family, parts = {} }
+                    sets[roof.family] = set
+                    order[#order + 1] = set
+                end
+                for f = 1, 4 do
+                    local face = FACE_NAMES[f]
+                    local sprite = faceExists(stage, face) and faceSprite(stage, face) or nil
+                    local piece = sprite and RoofAtlas.accentPiece(sprite) or nil
+                    local key = piece and RoofAtlas.accentKey(piece) or nil
+                    if key and not set.parts[key] then set.parts[key] = entry(definition, stage, face, piece) end
+                end
+            end
+        end
+    end
+    local result = {}
+    for i = 1, #order do
+        result[#result + 1] = order[i]
     end
     table.sort(result, function(a, b) return a.id < b.id end)
     return result
@@ -822,6 +859,12 @@ local function classify(h)
             local alongY = (nHigh or sHigh) and not (wHigh or eHigh)
             if not alongX and not alongY and (wHigh and eHigh) then alongX = true end
             if not alongX and not alongY and (nHigh and sHigh) then alongY = true end
+            -- Two odd-span ridges meeting over a valley (an L of ridges).
+            if not alongX and not alongY and not (wHigh and eHigh) and not (nHigh and sHigh)
+                and (wHigh or eHigh) and (nHigh or sHigh) then
+                local corner = (sHigh and "S" or "N") .. (eHigh and "E" or "W")
+                return { kind = "junction", corner = corner, step = step, base = b }
+            end
             if alongX then return { kind = "ridge", axis = "EW", step = step, base = b } end
             if alongY then return { kind = "ridge", axis = "NS", step = step, base = b } end
             return { kind = "peak", step = step, base = b }
@@ -959,6 +1002,40 @@ local function placePeak(profile, out, cell, piece, baseZ, steps)
     return nil, false
 end
 
+-- Roof heights (in steps) at the north/west end, middle and south/east end
+-- of one cell edge.
+local function edgeHeights(grid, dist, cap, cell, direction)
+    local function heightAt(u, v)
+        local d = dist[idx(grid, u, v)]
+        if d == nil then return nil end
+        local h = d / 2
+        if cap and h > cap then h = cap end
+        return h
+    end
+    local u, v = (cell.x - grid.minX) * 2, (cell.y - grid.minY) * 2
+    if direction == "W" then return heightAt(u, v), heightAt(u, v + 1), heightAt(u, v + 2) end
+    if direction == "E" then return heightAt(u + 2, v), heightAt(u + 2, v + 1), heightAt(u + 2, v + 2) end
+    if direction == "N" then return heightAt(u, v), heightAt(u + 1, v), heightAt(u + 2, v) end
+    return heightAt(u, v + 2), heightAt(u + 1, v + 2), heightAt(u + 2, v + 2)
+end
+
+-- Gable piece for an edge with heights a (north/west end), m, b: the part key
+-- ("W:lowS:2", "N:peak:1", nil for a level top) and the full storeys below it.
+local function edgeShape(wall, a, m, b, steps)
+    local lo = math.min(a, b)
+    if a ~= b then
+        local lowEnd
+        if wall == "W" then lowEnd = a < b and "N" or "S" else lowEnd = a < b and "W" or "E" end
+        local levels = math.floor(lo / steps)
+        return wall .. ":low" .. lowEnd .. ":" .. (math.floor(lo) - levels * steps + 1), levels
+    elseif m > a then
+        local levels = math.floor(lo / steps)
+        return wall .. ":peak:" .. (math.floor(lo) - levels * steps + 1), levels
+    end
+    -- Level top (a capped crown or the high side of a lean-to).
+    return nil, math.ceil(lo / steps)
+end
+
 -- Gable end walls along the building's own wall line. With an overhang the
 -- roof edge is further out, so heights come from the roof field at the wall.
 local function placeGables(gable, out, region, roof, grid, dist, labels, cap, baseZ, steps, options)
@@ -971,41 +1048,17 @@ local function placeGables(gable, out, region, roof, grid, dist, labels, cap, ba
         local x, y = cell.x + delta[1] * overhang, cell.y + delta[2] * overhang
         return labels[boundaryKey(x, y, direction)]
     end
-    local function heightAt(u, v)
-        local d = dist[idx(grid, u, v)]
-        if d == nil then return nil end
-        local h = d / 2
-        if cap and h > cap then h = cap end
-        return h
-    end
     local failure
     eachBoundary(region, function(cell, direction, key)
         if failure or (region.abut or {})[key] then return end
         local label = roofLabel(cell, direction)
         if label ~= "gable" and label ~= "wall" then return end
-        local u, v = (cell.x - grid.minX) * 2, (cell.y - grid.minY) * 2
         local wall = (direction == "W" or direction == "E") and "W" or "N"
-        local a, m, b -- a: north or west end, b: south or east end
-        if direction == "W" then a, m, b = heightAt(u, v), heightAt(u, v + 1), heightAt(u, v + 2)
-        elseif direction == "E" then a, m, b = heightAt(u + 2, v), heightAt(u + 2, v + 1), heightAt(u + 2, v + 2)
-        elseif direction == "N" then a, m, b = heightAt(u, v), heightAt(u + 1, v), heightAt(u + 2, v)
-        else a, m, b = heightAt(u, v + 2), heightAt(u + 1, v + 2), heightAt(u + 2, v + 2) end
+        local a, m, b = edgeHeights(grid, dist, cap, cell, direction)
         if not a or not b or not m then return end
         local wx = cell.x + (direction == "E" and 1 or 0)
         local wy = cell.y + (direction == "S" and 1 or 0)
-        local lowEnd, levels, part
-        local lo = math.min(a, b)
-        if a ~= b then
-            if wall == "W" then lowEnd = a < b and "N" or "S" else lowEnd = a < b and "W" or "E" end
-            levels = math.floor(lo / steps)
-            part = wall .. ":low" .. lowEnd .. ":" .. (math.floor(lo) - levels * steps + 1)
-        elseif m > a then
-            levels = math.floor(lo / steps)
-            part = wall .. ":peak:" .. (math.floor(lo) - levels * steps + 1)
-        else
-            -- Level top (a capped crown or the high side of a lean-to).
-            levels = math.ceil(lo / steps)
-        end
+        local part, levels = edgeShape(wall, a, m, b, steps)
         local fill = gable.fills and gable.fills[wall]
         for level = 0, levels - 1 do
             if not fill then failure = "missing_gable"; return end
@@ -1024,6 +1077,85 @@ local function placeGables(gable, out, region, roof, grid, dist, labels, cap, ba
         end
     end)
     return failure
+end
+
+-- Roof accent trim, placed as the vanilla map does (measured from the shipped
+-- lotpacks): only what the camera sees. Rakes go on the gable edges facing
+-- east or south, at roof height on the gable wall's square; everything along
+-- the eave hangs one level below the roof on the square just outside it:
+-- fascia under the south and east eaves, a corner piece in inner corners, a
+-- corner block on south-east outside corners, under the front end of each
+-- rake an end return (45 degree) or a corner block (30 degree), and for 30
+-- degree sets a rake foot under each eave end.
+-- Accents are decoration: a missing piece or an occupied slot is skipped.
+local function placeAccents(accent, out, roof, grid, dist, labels, cap, baseZ, steps, pitch)
+    local parts = accent.parts or {}
+    local function put(key, x, y, z, layer)
+        local e = parts[key]
+        if not e then
+            out.metrics.accentMissing = (out.metrics.accentMissing or 0) + 1
+            return
+        end
+        if not out.put(e, x, y, z, layer) then out.metrics.accents = (out.metrics.accents or 0) + 1 end
+    end
+    local abut = roof.abut or {}
+    -- Shallow rows start 1/6 storey up: their eave board is the low one, on
+    -- the roof's own level (the vanilla map always pairs them).
+    local shallow = pitch == "shallow"
+    local below = shallow and baseZ or baseZ - 1
+    local height = shallow and "low" or "top"
+    if grid and dist then
+        eachBoundary(roof, function(cell, direction, key)
+            if (direction ~= "E" and direction ~= "S") or abut[key] or labels[key] ~= "gable" then return end
+            local wall = direction == "E" and "W" or "N"
+            local a, m, b = edgeHeights(grid, dist, cap, cell, direction)
+            if not a or not b or not m then return end
+            local wx = cell.x + (direction == "E" and 1 or 0)
+            local wy = cell.y + (direction == "S" and 1 or 0)
+            local part, levels = edgeShape(wall, a, m, b, steps)
+            if part then put("rake:" .. pitch .. ":" .. part, wx, wy, baseZ + levels, "rake" .. wall) end
+            local footA = "foot:" .. pitch .. ":" .. wall .. ":low" .. (wall == "W" and "N" or "W")
+            local footB = "foot:" .. pitch .. ":" .. wall .. ":low" .. (wall == "W" and "S" or "E")
+            if shallow then return end
+            if a == 0 and parts[footA] then put(footA, wx, wy, below, "foot" .. wall .. "A") end
+            if b == 0 then
+                if parts[footB] then put(footB, wx, wy, below, "foot" .. wall .. "B") end
+                local cx, cy = wx + (wall == "N" and 1 or 0), wy + (wall == "W" and 1 or 0)
+                if pitch == 30 then put("block:top", cx, cy, below, "fasciaBlock")
+                else put("return:" .. wall .. ":top", cx, cy, below, "fasciaReturn" .. wall) end
+            end
+        end)
+    end
+    local boards, order, blocks = {}, {}, {}
+    local function mark(x, y, bit)
+        local key = cellKey(x, y)
+        local target = boards[key]
+        if not target then target = { x = x, y = y }; boards[key] = target; order[#order + 1] = target end
+        target[bit] = true
+    end
+    local function eave(cell, direction)
+        local delta = DIRECTIONS[direction]
+        if roof.cells[cellKey(cell.x + delta[1], cell.y + delta[2])] then return false end
+        local key = boundaryKey(cell.x, cell.y, direction)
+        return not abut[key] and not labels[key]
+    end
+    for index = 1, #roof.list do
+        local cell = roof.list[index]
+        local s, e = eave(cell, "S"), eave(cell, "E")
+        if s then mark(cell.x, cell.y + 1, "n") end
+        if e then mark(cell.x + 1, cell.y, "w") end
+        if s and e then blocks[#blocks + 1] = { x = cell.x + 1, y = cell.y + 1 } end
+    end
+    sortCells(order)
+    for index = 1, #order do
+        local c = order[index]
+        if c.n and c.w then put("fasciaCorner:" .. height, c.x, c.y, below, "fasciaNW")
+        elseif c.n then put("fascia:N:" .. height, c.x, c.y, below, "fasciaN")
+        else put("fascia:W:" .. height, c.x, c.y, below, "fasciaW") end
+    end
+    if shallow then return end
+    sortCells(blocks)
+    for index = 1, #blocks do put("block:top", blocks[index].x, blocks[index].y, below, "fasciaBlock") end
 end
 
 -- Trim hung one level below the visible south and east roof edges.
@@ -1112,7 +1244,24 @@ local function cellPhase(job, cell)
     if h.c > job.top then job.top = h.c end
     local level = math.floor((piece.step - 1) / steps)
     local localStep = piece.step - level * steps
+    if piece.kind == "junction" then
+        local e = (profile.pieces or {})["innerHalf:" .. piece.corner .. ":" .. localStep]
+        if e then
+            job.needsDeck = true
+            out.metrics.roof = out.metrics.roof + 1
+            return out.put(e, cell.x, cell.y, baseZ + level, "roof")
+        end
+        -- No junction tile in this set: stand in as before.
+        piece.kind = "peak"
+    end
     if piece.kind == "flat" then
+        local rise = piece.base - math.floor(piece.base / steps) * steps
+        local raisedFlat = rise > 0 and math.abs(rise - math.floor(rise + 0.5)) < 0.01
+            and (profile.pieces or {})["raisedFlat:" .. math.floor(rise + 0.5)] or nil
+        if raisedFlat then
+            job.needsDeck = true
+            return out.put(raisedFlat, cell.x, cell.y, baseZ + math.floor(piece.base / steps), "floor")
+        end
         if piece.base > 0 or cap == 0 then
             local flatLevel = math.floor(piece.base / steps + 0.5)
             if math.abs(piece.base - flatLevel * steps) > 0.01 then out.metrics.approx = out.metrics.approx + 1 end
@@ -1221,6 +1370,9 @@ local function runJob(job, budget)
             job.index = stop
             if stop >= #list then
                 out.metrics.levels = 1
+                if job.options.accents then
+                    placeAccents(job.options.accents, out, roof, nil, nil, spec.labels or {}, nil, job.baseZ, 1, profile.pitch)
+                end
                 job.phase = "done"
             end
         elseif phase == "field" then
@@ -1255,7 +1407,10 @@ local function runJob(job, budget)
             job.index = stop
             if stop >= #job.deferred then
                 out.metrics.levels = math.max(1, math.ceil(job.top / job.steps))
-                if (out.metrics.ridgeGaps or 0) > 0 and not profile.flat then return fail(job, "odd_gable") end
+                if profile.maxStep and job.top > profile.maxStep then return fail(job, "shallow_span") end
+                if (out.metrics.ridgeGaps or 0) > 0 and (not profile.flat or profile.maxStep) then
+                    return fail(job, "odd_gable")
+                end
                 -- Ceiling deck: rain-proof floor on the roof's first level.
                 local deck = job.options.ceiling
                 if deck == nil then deck = job.needsDeck or (profile.hidden or {}).N == true end
@@ -1286,6 +1441,10 @@ local function runJob(job, budget)
             if options.eaves then
                 local error = placeEaves(profile, out, roof, spec.labels or {}, job.baseZ)
                 if error then return fail(job, error) end
+            end
+            if options.accents then
+                placeAccents(options.accents, out, roof, job.grid, job.dist, spec.labels or {}, job.cap,
+                    job.baseZ, job.steps, profile.pitch)
             end
             budget = budget - 40
             job.phase = "done"
@@ -1504,7 +1663,7 @@ local function runOptionsFor(ctx, spec)
     return { z = ctx.z, ceiling = options.ceiling,
         eaves = spec.kind ~= "flat" and options.eaves and ctx.hasEaves or false,
         gable = spec.kind ~= "flat" and spec.kind ~= "hip" and options.gable or nil,
-        decorateGable = options.decorateGable }
+        decorateGable = options.decorateGable, accents = options.accents }
 end
 
 local function startSpec(ctx, spec)
@@ -1717,7 +1876,8 @@ function RoofPlanner.generate(profile, footprint, options)
     end
     spec.cap = kind ~= "flat" and options.riseLevels or nil
     local built, why = build(profile, region, roof, spec, { z = z, ceiling = options.ceiling,
-        eaves = options.eaves, gable = options.gable, decorateGable = options.decorateGable })
+        eaves = options.eaves, gable = options.gable, decorateGable = options.decorateGable,
+        accents = options.accents })
     if not built then return nil, why end
     if #built.list == 0 then return nil, "missing_face" end
     -- An explicit request must not leave an open ridge for a set without
@@ -1742,7 +1902,8 @@ function RoofPlanner.autoLayout(profile, footprint, options, accept)
             local selected = { kind = layout.kind, direction = layout.face or (layout.alongX ~= nil and (layout.alongX and "N" or "W")) or "S",
                 z = options.z, overhang = options.overhang or 0, riseLevels = layout.cap,
                 ceiling = options.ceiling, eaves = layout.kind ~= "flat" and options.eaves or false,
-                gable = layout.kind ~= "flat" and layout.kind ~= "hip" and options.gable or nil, layout = layout }
+                gable = layout.kind ~= "flat" and layout.kind ~= "hip" and options.gable or nil,
+                accents = options.accents, layout = layout }
             return selected, layout.placements, nil
         end
         reason = layout.reason

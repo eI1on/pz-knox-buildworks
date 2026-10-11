@@ -423,7 +423,8 @@ class AuthoredRoofTests(unittest.TestCase):
             local checked=0
             for profileIndex=1,#profiles do
                 local profile=profiles[profileIndex]
-                if profile.flat and profile.complete then
+                -- Shallow sets only reach two rows; large footprints get a flat roof.
+                if profile.flat and profile.complete and not profile.maxStep then
                     for shapeIndex=1,#footprints do
                         local r=roof.findRegion(footprints[shapeIndex],'a')
                         assert(r)

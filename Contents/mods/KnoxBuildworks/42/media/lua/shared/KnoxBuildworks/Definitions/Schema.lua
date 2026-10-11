@@ -332,7 +332,8 @@ function Schema.normalize(definition, templates, materialGroups)
         if stage.roof ~= nil then
             local roof = stage.roof
             if type(roof) ~= "table" or type(roof.family) ~= "string" or roof.family == ""
-                or (roof.role ~= "flat" and roof.role ~= "slope" and roof.role ~= "detail" and roof.role ~= "gable")
+                or (roof.role ~= "flat" and roof.role ~= "slope" and roof.role ~= "detail" and roof.role ~= "gable"
+                    and roof.role ~= "accent")
                 or (roof.pitch ~= "shallow" and roof.pitch ~= "custom" and roof.pitch ~= 0 and roof.pitch ~= 30 and roof.pitch ~= 45) then
                 add(errors, "stage " .. stage.id .. " has invalid roof metadata")
             elseif roof.role == "slope" and (type(roof.step) ~= "number" or type(roof.stepsPerLevel) ~= "number"

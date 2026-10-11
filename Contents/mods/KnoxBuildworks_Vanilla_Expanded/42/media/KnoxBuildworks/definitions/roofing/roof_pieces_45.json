@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "buildables": [
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_1_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_1_1",
-      "displayName": "Roof Fascia 1-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_odd_ridge",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_odd_ridge",
+      "displayName": "Sage Green Odd-Span Ridge (1.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_0",
+      "iconSprite": "roofs_03_47",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -23,7 +24,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_0"
+                        "roofs_03_47"
                       ]
                     ]
                   }
@@ -34,7 +35,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_11"
+                        "roofs_03_46"
                       ]
                     ]
                   }
@@ -66,7 +67,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -76,11 +77,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -105,45 +116,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_1",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_1"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_1_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_1_2",
-      "displayName": "Roof Fascia 1-2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_odd_ridge_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_odd_ridge_alt",
+      "displayName": "Sage Green Odd-Span Ridge (1.5 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_1",
+      "iconSprite": "roofs_03_49",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -155,7 +161,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_1"
+                        "roofs_03_49"
                       ]
                     ]
                   }
@@ -166,7 +172,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_10"
+                        "roofs_03_48"
                       ]
                     ]
                   }
@@ -198,7 +204,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -208,11 +214,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -237,45 +253,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_1",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_1"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_1_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_1_3",
-      "displayName": "Roof Fascia 1-3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_odd_ridge_high",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_odd_ridge_high",
+      "displayName": "Sage Green Odd-Span Ridge (2.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_2",
+      "iconSprite": "roofs_03_103",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -287,7 +298,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_2"
+                        "roofs_03_103"
                       ]
                     ]
                   }
@@ -298,7 +309,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_9"
+                        "roofs_03_102"
                       ]
                     ]
                   }
@@ -330,7 +341,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -340,11 +351,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -369,45 +390,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_1",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_1"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_1_4",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_1_4",
-      "displayName": "Roof Fascia 1-4",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_raised_flat_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_raised_flat_1",
+      "displayName": "Sage Green Raised Flat Roof (1 Step)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_3",
+      "iconSprite": "roofs_03_122",
       "placement": {
-        "kind": "object"
+        "kind": "floor",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -419,7 +435,511 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_3"
+                        "roofs_03_122"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "sage_green",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_raised_flat_1_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_raised_flat_1_alt",
+      "displayName": "Sage Green Raised Flat Roof (1 Step, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Sage Green Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_03_123",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_123"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "sage_green",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_raised_flat_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_raised_flat_2",
+      "displayName": "Sage Green Raised Flat Roof (2 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Sage Green Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_03_124",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_124"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "sage_green",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_raised_flat_2_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_raised_flat_2_alt",
+      "displayName": "Sage Green Raised Flat Roof (2 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Sage Green Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_03_125",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_125"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "sage_green",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.light_brown_odd_ridge_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_light_brown_odd_ridge_alt",
+      "displayName": "Light Brown Odd-Span Ridge (1.5 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_03_17",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_17"
                       ]
                     ]
                   }
@@ -430,7 +950,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_8"
+                        "roofs_03_16"
                       ]
                     ]
                   }
@@ -462,7 +982,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -472,11 +992,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -501,45 +1031,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "light_brown",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_1",
-        "level": 4,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_1"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_2_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_2_1",
-      "displayName": "Roof Fascia 2-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_odd_ridge",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_odd_ridge",
+      "displayName": "Pink Odd-Span Ridge (1.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_4",
+      "iconSprite": "roofs_04_15",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -551,7 +1076,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_4"
+                        "roofs_04_15"
                       ]
                     ]
                   }
@@ -562,7 +1087,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_30"
+                        "roofs_04_14"
                       ]
                     ]
                   }
@@ -594,7 +1119,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -604,11 +1129,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -633,45 +1168,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_2",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_2"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_2_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_2_2",
-      "displayName": "Roof Fascia 2-2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_odd_ridge_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_odd_ridge_alt",
+      "displayName": "Pink Odd-Span Ridge (1.5 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_5",
+      "iconSprite": "roofs_04_17",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -683,7 +1213,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_5"
+                        "roofs_04_17"
                       ]
                     ]
                   }
@@ -694,7 +1224,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_29"
+                        "roofs_04_16"
                       ]
                     ]
                   }
@@ -726,7 +1256,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -736,11 +1266,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -765,45 +1305,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_2",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_2"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_2_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_2_3",
-      "displayName": "Roof Fascia 2-3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_odd_ridge_high",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_odd_ridge_high",
+      "displayName": "Pink Odd-Span Ridge (2.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_6",
+      "iconSprite": "roofs_04_71",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -815,7 +1350,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_6"
+                        "roofs_04_71"
                       ]
                     ]
                   }
@@ -826,7 +1361,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_28"
+                        "roofs_04_70"
                       ]
                     ]
                   }
@@ -858,7 +1393,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -868,11 +1403,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -897,45 +1442,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_2",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_2"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_3_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_3_1",
-      "displayName": "Roof Fascia 3-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_raised_flat_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_raised_flat_1",
+      "displayName": "Pink Raised Flat Roof (1 Step)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_12",
+      "iconSprite": "roofs_04_90",
       "placement": {
-        "kind": "object"
+        "kind": "floor",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -947,7 +1487,511 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_12"
+                        "roofs_04_90"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "pink",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_raised_flat_1_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_raised_flat_1_alt",
+      "displayName": "Pink Raised Flat Roof (1 Step, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Pink Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_91",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_91"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "pink",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_raised_flat_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_raised_flat_2",
+      "displayName": "Pink Raised Flat Roof (2 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Pink Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_92",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_92"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "pink",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_raised_flat_2_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_raised_flat_2_alt",
+      "displayName": "Pink Raised Flat Roof (2 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "Pink Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_93",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_93"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "pink",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_odd_ridge",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_odd_ridge",
+      "displayName": "White Odd-Span Ridge (1.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_47",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_47"
                       ]
                     ]
                   }
@@ -958,7 +2002,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_38"
+                        "roofs_04_46"
                       ]
                     ]
                   }
@@ -990,7 +2034,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1000,11 +2044,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1029,45 +2083,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "white",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_3",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_3"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_3_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_3_2",
-      "displayName": "Roof Fascia 3-2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_odd_ridge_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_odd_ridge_alt",
+      "displayName": "White Odd-Span Ridge (1.5 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "White Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_13",
+      "iconSprite": "roofs_04_65",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1079,7 +2128,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_13"
+                        "roofs_04_65"
                       ]
                     ]
                   }
@@ -1090,7 +2139,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_37"
+                        "roofs_04_64"
                       ]
                     ]
                   }
@@ -1122,7 +2171,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1132,11 +2181,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1161,45 +2220,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "white",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_3",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_3"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_3_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_3_3",
-      "displayName": "Roof Fascia 3-3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_odd_ridge_high",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_odd_ridge_high",
+      "displayName": "White Odd-Span Ridge (2.5 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_OddRidge",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "White Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_14",
+      "iconSprite": "roofs_04_103",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1211,7 +2265,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_14"
+                        "roofs_04_103"
                       ]
                     ]
                   }
@@ -1222,7 +2276,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_36"
+                        "roofs_04_102"
                       ]
                     ]
                   }
@@ -1254,7 +2308,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1264,11 +2318,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1293,45 +2357,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "white",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_3",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_3"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_4_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_4_1",
-      "displayName": "Roof Fascia 4-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_raised_flat_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_raised_flat_1",
+      "displayName": "White Raised Flat Roof (1 Step)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "White Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_24",
+      "iconSprite": "roofs_04_48",
       "placement": {
-        "kind": "object"
+        "kind": "floor",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1343,7 +2402,511 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_24"
+                        "roofs_04_48"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_raised_flat_1_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_raised_flat_1_alt",
+      "displayName": "White Raised Flat Roof (1 Step, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_49",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_49"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_raised_flat_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_raised_flat_2",
+      "displayName": "White Raised Flat Roof (2 Steps)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_50",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_50"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_raised_flat_2_alt",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_raised_flat_2_alt",
+      "displayName": "White Raised Flat Roof (2 Steps, Alternate)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_RaisedFlat",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_51",
+      "placement": {
+        "kind": "floor",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_51"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.light_brown_slope_edge_a_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_light_brown_slope_edge_a_1",
+      "displayName": "Light Brown Pitched Slope 1 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
+      "category": "Roofing",
+      "subcategory": "Light Brown Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_03_72",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_03_72"
                       ]
                     ]
                   }
@@ -1354,7 +2917,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_34"
+                        "roofs_03_77"
                       ]
                     ]
                   }
@@ -1386,7 +2949,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1396,11 +2959,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1425,45 +2998,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "light_brown",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_4",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_4"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_4_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_4_2",
-      "displayName": "Roof Fascia 4-2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.light_brown_slope_edge_a_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_light_brown_slope_edge_a_2",
+      "displayName": "Light Brown Pitched Slope 2 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_25",
+      "iconSprite": "roofs_03_73",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1475,7 +3043,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_25"
+                        "roofs_03_73"
                       ]
                     ]
                   }
@@ -1486,7 +3054,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_33"
+                        "roofs_03_76"
                       ]
                     ]
                   }
@@ -1518,7 +3086,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1528,11 +3096,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1557,45 +3135,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "light_brown",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_4",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_4"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_4_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_4_3",
-      "displayName": "Roof Fascia 4-3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.light_brown_slope_edge_b_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_light_brown_slope_edge_b_1",
+      "displayName": "Light Brown Pitched Slope 1 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_26",
+      "iconSprite": "roofs_03_74",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1607,7 +3180,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_26"
+                        "roofs_03_74"
                       ]
                     ]
                   }
@@ -1618,7 +3191,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_32"
+                        "roofs_03_79"
                       ]
                     ]
                   }
@@ -1650,7 +3223,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1660,11 +3233,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1689,45 +3272,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "light_brown",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_4",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_4"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_5_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_5_1",
-      "displayName": "Roof Fascia 5-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.light_brown_slope_edge_b_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_light_brown_slope_edge_b_2",
+      "displayName": "Light Brown Pitched Slope 2 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Light Brown Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_21",
+      "iconSprite": "roofs_03_75",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1739,7 +3317,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_21"
+                        "roofs_03_75"
                       ]
                     ]
                   }
@@ -1750,7 +3328,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_45"
+                        "roofs_03_78"
                       ]
                     ]
                   }
@@ -1782,7 +3360,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1792,11 +3370,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1821,45 +3409,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "light_brown",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_5",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_5"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_5_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_5_2",
-      "displayName": "Roof Fascia 5-2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_slope_edge_a_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_slope_edge_a_1",
+      "displayName": "Sage Green Pitched Slope 1 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_22",
+      "iconSprite": "roofs_03_104",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -1871,7 +3454,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_22"
+                        "roofs_03_104"
                       ]
                     ]
                   }
@@ -1882,7 +3465,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_44"
+                        "roofs_03_109"
                       ]
                     ]
                   }
@@ -1914,7 +3497,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -1924,11 +3507,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -1953,45 +3546,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_5",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_5"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_6_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_6_1",
-      "displayName": "Roof Fascia 6-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_slope_edge_a_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_slope_edge_a_2",
+      "displayName": "Sage Green Pitched Slope 2 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_17",
+      "iconSprite": "roofs_03_105",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -2003,7 +3591,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_17"
+                        "roofs_03_105"
                       ]
                     ]
                   }
@@ -2014,7 +3602,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_18"
+                        "roofs_03_108"
                       ]
                     ]
                   }
@@ -2046,7 +3634,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -2056,11 +3644,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -2085,45 +3683,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_6",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_6"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_7_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_7_1",
-      "displayName": "Roof Fascia 7-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_slope_edge_b_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_slope_edge_b_1",
+      "displayName": "Sage Green Pitched Slope 1 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_40",
+      "iconSprite": "roofs_03_106",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -2135,7 +3728,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_40"
+                        "roofs_03_106"
                       ]
                     ]
                   }
@@ -2146,7 +3739,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_41"
+                        "roofs_03_111"
                       ]
                     ]
                   }
@@ -2178,7 +3771,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -2188,11 +3781,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -2217,45 +3820,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_7",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_7"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_8_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_8_1",
-      "displayName": "Roof Fascia 8-1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.sage_green_slope_edge_b_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_sage_green_slope_edge_b_2",
+      "displayName": "Sage Green Pitched Slope 2 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Sage Green Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_50",
+      "iconSprite": "roofs_03_107",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -2267,7 +3865,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_50"
+                        "roofs_03_107"
                       ]
                     ]
                   }
@@ -2278,7 +3876,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_51"
+                        "roofs_03_110"
                       ]
                     ]
                   }
@@ -2310,7 +3908,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -2320,11 +3918,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -2349,45 +3957,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "sage_green",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_8",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_8"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_corner_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_corner_1",
-      "displayName": "Roof Fascia Corner 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_slope_edge_a_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_slope_edge_a_1",
+      "displayName": "Pink Pitched Slope 1 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_15",
+      "iconSprite": "roofs_04_72",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -2399,491 +4002,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_15"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_corner",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_corner"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_corner_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_corner_2",
-      "displayName": "Roof Fascia Corner 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_23",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_23"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_corner",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_corner"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_corner_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_corner_3",
-      "displayName": "Roof Fascia Corner 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_42",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_42"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_corner",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_corner"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.fascia_corner_4",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_fascia_corner_4",
-      "displayName": "Roof Fascia Corner 4",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_48",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_48"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.fascia_corner",
-        "level": 4,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_fascia_corner"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_1",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_1",
-      "displayName": "Roof Downpipe 1",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_16",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_16"
+                        "roofs_04_72"
                       ]
                     ]
                   }
@@ -2894,7 +4013,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_19"
+                        "roofs_04_77"
                       ]
                     ]
                   }
@@ -2926,7 +4045,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -2936,11 +4055,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -2965,45 +4094,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 1,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_2",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_2",
-      "displayName": "Roof Downpipe 2",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_slope_edge_a_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_slope_edge_a_2",
+      "displayName": "Pink Pitched Slope 2 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_20",
+      "iconSprite": "roofs_04_73",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -3015,7 +4139,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_20"
+                        "roofs_04_73"
                       ]
                     ]
                   }
@@ -3026,7 +4150,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_46"
+                        "roofs_04_76"
                       ]
                     ]
                   }
@@ -3058,7 +4182,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -3068,11 +4192,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -3097,45 +4231,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 2,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_3",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_3",
-      "displayName": "Roof Downpipe 3",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_slope_edge_b_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_slope_edge_b_1",
+      "displayName": "Pink Pitched Slope 1 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_43",
+      "iconSprite": "roofs_04_74",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -3147,249 +4276,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_43"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 3,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_4",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_4",
-      "displayName": "Roof Downpipe 4",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_47",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_47"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 4,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_5",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_5",
-      "displayName": "Roof Downpipe 5",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_49",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_49"
+                        "roofs_04_74"
                       ]
                     ]
                   }
@@ -3400,7 +4287,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_52"
+                        "roofs_04_79"
                       ]
                     ]
                   }
@@ -3432,7 +4319,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -3442,11 +4329,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -3471,45 +4368,40 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 5,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
       "allowSpriteReuse": true
     },
     {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_6",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_6",
-      "displayName": "Roof Downpipe 6",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.pink_slope_edge_b_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_pink_slope_edge_b_2",
+      "displayName": "Pink Pitched Slope 2 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
       "category": "Roofing",
-      "subcategory": "Roof Trim",
+      "subcategory": "Pink Roofs",
       "material": "Wood",
-      "iconSprite": "roofs_accents_01_53",
+      "iconSprite": "roofs_04_75",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
       "stages": [
         {
@@ -3521,128 +4413,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_53"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "tool_hammer",
-                "role": "tool",
-                "mode": "keep",
-                "resourceType": "Item",
-                "tags": [
-                  "base:hammer"
-                ],
-                "amount": 1,
-                "flags": [
-                  "Prop1",
-                  "MayDegradeVeryLight"
-                ]
-              },
-              {
-                "id": "lumber",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Plank"
-                ],
-                "amount": 1
-              },
-              {
-                "id": "fasteners_nails",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.Nails"
-                ],
-                "amount": 2
-              }
-            ],
-            "skills": {
-              "Woodwork": 3
-            },
-            "knowledge": {
-              "recipes": [
-                "KBWKnowledge_TheFamilyHandyman_StairsFences"
-              ],
-              "hideUntilLearned": true,
-              "needToBeLearned": true,
-              "sources": [
-                {
-                  "type": "magazine",
-                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
-                }
-              ],
-              "skillAlternatives": [
-                {
-                  "mode": "all",
-                  "skills": {
-                    "Woodwork": 7
-                  }
-                }
-              ]
-            }
-          },
-          "construction": {
-            "time": 120,
-            "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
-            "xp": {
-              "Woodwork": 15
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "isThumpable": true,
-            "blockAllSquare": false,
-            "canPassThrough": true,
-            "canBarricade": false
-          },
-          "roof": {
-            "family": "trim",
-            "pitch": 45,
-            "role": "detail"
-          }
-        }
-      ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 6,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
-      },
-      "allowSpriteReuse": true
-    },
-    {
-      "id": "kbw.vanillaexpanded.roofing.roof_trim.downpipe_7",
-      "translationKey": "IGUI_KBWVE_Buildable_roofing_trim_downpipe_7",
-      "displayName": "Roof Downpipe 7",
-      "tooltipKey": "Tooltip_KBWVE_Buildable_RoofTrim",
-      "category": "Roofing",
-      "subcategory": "Roof Trim",
-      "material": "Wood",
-      "iconSprite": "roofs_accents_01_54",
-      "placement": {
-        "kind": "object"
-      },
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "roofs_accents_01_54"
+                        "roofs_04_75"
                       ]
                     ]
                   }
@@ -3653,7 +4424,7 @@
                   {
                     "rows": [
                       [
-                        "roofs_accents_01_55"
+                        "roofs_04_78"
                       ]
                     ]
                   }
@@ -3685,7 +4456,7 @@
                 "items": [
                   "Base.Plank"
                 ],
-                "amount": 1
+                "amount": 2
               },
               {
                 "id": "fasteners_nails",
@@ -3695,11 +4466,21 @@
                 "items": [
                   "Base.Nails"
                 ],
-                "amount": 2
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
               }
             ],
             "skills": {
-              "Woodwork": 3
+              "Woodwork": 4
             },
             "knowledge": {
               "recipes": [
@@ -3724,32 +4505,574 @@
             }
           },
           "construction": {
-            "time": 120,
+            "time": 200,
             "timedAction": "BuildWallHammer",
-            "completionSound": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
-              "Woodwork": 15
+              "Woodwork": 40
             },
             "category": "Carpentry"
           },
           "object": {
-            "isThumpable": true,
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
           },
           "roof": {
-            "family": "trim",
+            "family": "pink",
             "pitch": 45,
             "role": "detail"
           }
         }
       ],
-      "group": {
-        "id": "kbw.vanillaexpanded.group.roofing.roof_trim.downpipe",
-        "level": 7,
-        "translationKey": "IGUI_KBW_Group_roofing_trim_downpipe"
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_slope_edge_a_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_slope_edge_a_1",
+      "displayName": "White Pitched Slope 1 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_104",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
       },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_104"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_109"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_slope_edge_a_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_slope_edge_a_2",
+      "displayName": "White Pitched Slope 2 (Edge Variant A)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_105",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_105"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_108"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_slope_edge_b_1",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_slope_edge_b_1",
+      "displayName": "White Pitched Slope 1 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_106",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_106"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_111"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
+      "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.roofing.roof_pieces_45.white_slope_edge_b_2",
+      "translationKey": "IGUI_KBWVE_Buildable_roofing_pieces45_white_slope_edge_b_2",
+      "displayName": "White Pitched Slope 2 (Edge Variant B)",
+      "tooltipKey": "Tooltip_KBWVE_RoofPiece_EdgeVariant",
+      "category": "Roofing",
+      "subcategory": "White Roofs",
+      "material": "Wood",
+      "iconSprite": "roofs_04_107",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_107"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "roofs_04_110"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "roof_shingles",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayShingle"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white",
+            "pitch": 45,
+            "role": "detail"
+          }
+        }
+      ],
       "allowSpriteReuse": true
     }
   ]

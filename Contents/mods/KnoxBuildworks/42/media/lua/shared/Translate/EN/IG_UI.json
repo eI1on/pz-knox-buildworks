@@ -1143,6 +1143,7 @@
   "IGUI_KBW_RoofGablePlain": "Bare",
   "IGUI_KBW_RoofNoChoices": "No options",
   "IGUI_KBW_RoofEaves": "Eaves",
+  "IGUI_KBW_RoofAccents": "Trim accents",
   "IGUI_KBW_RoofSuggest": "Suggest layouts",
   "IGUI_KBW_RoofAutoFit": "Auto fit roof",
   "IGUI_KBW_RoofAutoComplex": "This footprint has %1 crossing wings, so Auto fit selected a continuous flat roof.",
