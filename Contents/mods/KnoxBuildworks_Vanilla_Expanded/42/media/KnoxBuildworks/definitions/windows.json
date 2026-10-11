@@ -96,6 +96,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -204,6 +225,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -309,6 +351,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -414,6 +477,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -543,6 +627,28 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -648,6 +754,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -754,6 +881,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -865,6 +1013,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -976,6 +1145,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1087,6 +1277,27 @@
             ],
             "skills": {
               "Woodwork": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_DoorsWindows"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_DoorsWindows"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

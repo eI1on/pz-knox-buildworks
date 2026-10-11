@@ -11,6 +11,7 @@ local SafeJSON = require("KnoxBuildworks/Util/SafeJSON")
 local I18n = require("KnoxBuildworks/I18n")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
+local RoomShape = require("KnoxBuildworks/Planning/RoomShape")
 
 local Files = require("KnoxBuildworks/Planning/BlueprintFiles")
 
@@ -73,6 +74,23 @@ local function findById(list, id)
         if list[index].id == id then return list[index], index end
     end
     return nil, nil
+end
+
+local function validRoomDisplayFields(fields)
+    if type(fields) ~= "table" then return false end
+    for key in pairs(fields) do
+        if key ~= "name" and key ~= "type" and key ~= "color" then return false end
+    end
+    if fields.name ~= nil and (type(fields.name) ~= "string" or #fields.name > 120) then return false end
+    if fields.type ~= nil and (type(fields.type) ~= "string" or #fields.type > 40) then return false end
+    if fields.color ~= nil then
+        if type(fields.color) ~= "table" then return false end
+        for _, channel in pairs({"r", "g", "b", "a"}) do
+            local value = fields.color[channel]
+            if type(value) ~= "number" or value ~= value or value < 0 or value > 1 then return false end
+        end
+    end
+    return true
 end
 
 local function entryIdTaken(list)
@@ -185,6 +203,24 @@ function Blueprints.applyRemoteDelta(command, args)
             for key, value in pairs(args.fields) do
                 room[key] = TableUtil.copy(value)
             end
+        end
+    elseif command == "BPExtendRoom" and type(args.rect) == "table" then
+        local room = findById(blueprint.rooms, args.roomId)
+        if room then
+            local rects = RoomShape.extend(room, args.rect)
+            if rects then room.rects = rects end
+        end
+    elseif command == "BPShrinkRoom" and type(args.rect) == "table" then
+        local room, index = findById(blueprint.rooms, args.roomId)
+        if room then
+            local rects = RoomShape.subtract(room, args.rect)
+            if rects and #rects == 0 then table.remove(blueprint.rooms, index)
+            elseif rects then room.rects = rects end
+        end
+    elseif command == "BPRemovePlacements" and type(args.placementIds) == "table" then
+        for i = 1, #args.placementIds do
+            local _, index = findById(blueprint.placements, args.placementIds[i])
+            if index then table.remove(blueprint.placements, index) end
         end
     elseif command == "BPSetGatherArea" then
         blueprint.gatherArea = args.area or nil
@@ -676,14 +712,26 @@ local placementCellCache = {}
 local placementCellCacheCount = 0
 local PLACEMENT_CELL_CACHE_LIMIT = 4096
 
-local function placementCells(placement)
+local function placementCells(placement, resolved)
     local key = placement.id
     local cached = key and placementCellCache[key] or nil
     if cached and cached.placement == placement and cached.x == placement.x and cached.y == placement.y
         and cached.z == placement.z and cached.direction == placement.direction then
         return cached.cells, cached.definition, cached.stage
     end
-    local definition, stage = resolveDefinition(placement)
+    local definition, stage
+    if resolved then
+        local selection = table.concat({placement.buildableId or "", placement.stageId or "",
+            placement.variantId or "", placement.materialId or ""}, "|")
+        local cached = resolved[selection]
+        if not cached then
+            definition, stage = resolveDefinition(placement)
+            cached = {definition=definition, stage=stage}; resolved[selection] = cached
+        end
+        definition, stage = cached.definition, cached.stage
+    else
+        definition, stage = resolveDefinition(placement)
+    end
     if not stage then return {} end
     local placementKind = ((definition or {}).placement or {}).kind or "object"
     local cells = Matrix.getFaceCells(stage, tonumber(placement.direction) or 1)
@@ -732,6 +780,11 @@ local function placementCells(placement)
         }
     end
     return out, definition, stage
+end
+
+---Expanded cells of one placement (cached; see placementCells).
+function Blueprints.placementCellsOf(placement)
+    return placementCells(placement)
 end
 
 local function cellKey(cell)
@@ -1044,7 +1097,12 @@ end
 local function providesCompatibleWindowSupport(definition, stage, direction, requiredDefinition, requiredStage)
     local requiredPlacement = StageConfig.placement(requiredDefinition, requiredStage)
     local spriteName = Matrix.getFaceSprite(stage, tonumber(direction) or 1)
-    return Placement.matchesWindowSupportSprite(spriteName, requiredPlacement.windowSupportSprites)
+    if Placement.matchesWindowSupportSprite(spriteName, requiredPlacement.windowSupportSprites) then return true end
+    local support = spriteName and getSprite and getSprite(spriteName) or nil
+    local requiredSprite = faceSpriteFor(requiredStage, direction)
+    local shape = Placement.windowShapeOf(requiredSprite and requiredSprite:getProperties())
+    return Placement.cornerOpeningSpriteMatches(spriteName,
+        support and support:getProperties(), directionNorth(direction), shape)
 end
 
 -- A frame and its filler (door frame + door, window frame + window pane) may
@@ -1131,34 +1189,43 @@ end
 
 ---@param blueprint KBW.Blueprint
 ---@param placement KBW.BlueprintPlacement
-function Blueprints.findIntersections(blueprint, placement)
+-- Short-lived index for a batch preview. Callers rebuild it after plan edits;
+-- it is never persisted or used in place of authoritative add validation.
+function Blueprints.indexPlacement(occupied, placement)
+    occupied.resolved = occupied.resolved or {}
+    local cells = placementCells(placement, occupied.resolved)
+    for index = 1, #cells do
+        local cell = cells[index]
+        local key = cellKey(cell)
+        occupied[key] = occupied[key] or {}
+        occupied[key][#occupied[key] + 1] = cell
+    end
+end
+
+function Blueprints.intersectionIndex(blueprint)
+    local occupied = {}
+    local placements = blueprint and blueprint.placements or {}
+    for index = 1, #placements do Blueprints.indexPlacement(occupied, placements[index]) end
+    return occupied
+end
+
+function Blueprints.findIntersections(blueprint, placement, occupied)
     local conflicts = {}
     if not blueprint or not placement then return conflicts end
-    local occupied = {}
-    local placements = blueprint.placements or {}
-    for placementIndex = 1, #placements do
-        local existing = placements[placementIndex]
-        if existing.id ~= placement.id then
-            local cells = placementCells(existing)
-            for cellIndex = 1, #cells do
-                local cell = cells[cellIndex]
-                local key = cellKey(cell)
-                occupied[key] = occupied[key] or {}
-                occupied[key][#occupied[key] + 1] = cell
-            end
-        end
-    end
-    local cells = placementCells(placement)
+    occupied = occupied or Blueprints.intersectionIndex(blueprint)
+    local cells = placementCells(placement, occupied.resolved)
     for cellIndex = 1, #cells do
         local cell = cells[cellIndex]
         local previousCells = occupied[cellKey(cell)] or {}
         for previousIndex = 1, #previousCells do
             local previous = previousCells[previousIndex]
-            if wallCoveringsConflict(previous.sourcePlacement, placement)
+            local same = previous.sourcePlacement == placement
+                or placement.id ~= nil and previous.placementId == placement.id
+            if not same and (wallCoveringsConflict(previous.sourcePlacement, placement)
                 or (layersConflict(cell.layer, previous.layer) and not canShareCell(cell, previous)
                     and not perpendicularWallEdges(cell, previous)
                     and not plannedUpgradeCompatible(previous.sourcePlacement, placement)
-                    and not frameAndFillCompatible(previous.sourcePlacement, placement)) then
+                    and not frameAndFillCompatible(previous.sourcePlacement, placement))) then
                 conflicts[#conflicts + 1] = {
                     x = cell.x,
                     y = cell.y,
@@ -1224,7 +1291,7 @@ end
 ---@param blueprintId string
 ---@param placement KBW.BlueprintPlacement
 ---@param defer boolean|nil when set, the caller sends the batched command itself
-function Blueprints.addPlacement(player, blueprintId, placement, defer)
+function Blueprints.addPlacement(player, blueprintId, placement, defer, occupied)
     local blueprint = blueprintId and Blueprints.get(player, blueprintId) or Blueprints.activeOrCreate(player)
     if not blueprint or not placement or not placement.buildableId then return nil, "invalid_placement" end
     if not Blueprints.canContribute(player, blueprint) then return nil, "no_permission" end
@@ -1244,10 +1311,11 @@ function Blueprints.addPlacement(player, blueprintId, placement, defer)
     elseif not Blueprints.withinRange(blueprint, entry.x, entry.y) then
         return nil, "out_of_range"
     end
-    local conflicts = Blueprints.findIntersections(blueprint, entry)
+    local conflicts = Blueprints.findIntersections(blueprint, entry, occupied)
     if #conflicts > 0 then return nil, "plan_overlap", conflicts end
     blueprint.placements = blueprint.placements or {}
     blueprint.placements[#blueprint.placements + 1] = entry
+    if occupied then Blueprints.indexPlacement(occupied, entry) end
     touch(blueprint)
     if not defer then
         sendToServer(player, "BPAddPlacement", { id = blueprint.id, placement = entry, anchor = blueprint.anchor })
@@ -1275,6 +1343,7 @@ function Blueprints.addPlacements(player, blueprintId, placements)
     local blueprint = blueprintId and Blueprints.get(player, blueprintId) or Blueprints.activeOrCreate(player)
     if not blueprint then return added, "invalid_placement" end
     local batched = #placements > 1
+    local occupied = batched and Blueprints.intersectionIndex(blueprint) or nil
     local pending = {}
     local function flush()
         if #pending == 0 then return end
@@ -1286,7 +1355,7 @@ function Blueprints.addPlacements(player, blueprintId, placements)
     end
     for index = 1, #placements do
         Blueprints.prepareFinishPlacement(player, blueprint, placements[index])
-        local entry, reason = Blueprints.addPlacement(player, blueprint.id, placements[index], batched)
+        local entry, reason = Blueprints.addPlacement(player, blueprint.id, placements[index], batched, occupied)
         if entry then
             added[#added + 1] = entry
             if batched then
@@ -1309,6 +1378,7 @@ function Blueprints.addRoom(player, blueprintId, room)
     if not blueprint or not room then return nil, "invalid_room" end
     if not Blueprints.canContribute(player, blueprint) then return nil, "no_permission" end
     local entry = TableUtil.copy(room)
+    if not RoomShape.cells(entry) then return nil, "invalid_room" end
     blueprint.rooms = blueprint.rooms or {}
     entry.id = entry.id or newId("r", entryIdTaken(blueprint.rooms))
     entry.type = entry.type or "room"
@@ -1319,6 +1389,36 @@ function Blueprints.addRoom(player, blueprintId, room)
     touch(blueprint)
     sendToServer(player, "BPAddRoom", { id = blueprint.id, room = entry })
     return entry
+end
+
+function Blueprints.extendRoom(player, blueprintId, roomId, rect)
+    local blueprint = Blueprints.get(player, blueprintId)
+    local room = Blueprints.getRoom(blueprint, roomId)
+    if not room or not Blueprints.canContribute(player, blueprint) then return false, "no_permission" end
+    local rects, reason = RoomShape.extend(room, rect)
+    if not rects then return false, reason end
+    room.rects = rects
+    touch(blueprint)
+    sendToServer(player, "BPExtendRoom", { id = blueprintId, roomId = roomId, rect = rect })
+    return true
+end
+
+-- Clear a rectangle out of a room (the reverse of extendRoom). A room left
+-- with no tiles is removed. Returns true, or false and a reason code.
+function Blueprints.shrinkRoom(player, blueprintId, roomId, rect)
+    local blueprint = Blueprints.get(player, blueprintId)
+    local room, index = Blueprints.getRoom(blueprint, roomId)
+    if not room or not Blueprints.canContribute(player, blueprint) then return false, "no_permission" end
+    local rects, reason = RoomShape.subtract(room, rect)
+    if not rects then return false, reason end
+    if #rects == 0 then
+        table.remove(blueprint.rooms, index)
+    else
+        room.rects = rects
+    end
+    touch(blueprint)
+    sendToServer(player, "BPShrinkRoom", { id = blueprintId, roomId = roomId, rect = rect })
+    return true, #rects == 0 and "removed" or nil
 end
 
 -- Gather area (container/vehicle search zone) is contributor-editable state.
@@ -1445,7 +1545,7 @@ end
 function Blueprints.updateRoom(player, blueprintId, roomId, fields)
     local blueprint = Blueprints.get(player, blueprintId)
     local room = Blueprints.getRoom(blueprint, roomId)
-    if not room or type(fields) ~= "table" then return false end
+    if not room or not validRoomDisplayFields(fields) then return false end
     if not Blueprints.canContribute(player, blueprint) then return false end
     for key, value in pairs(fields) do
         room[key] = TableUtil.copy(value)
@@ -1489,6 +1589,25 @@ function Blueprints.removePlacement(player, blueprintId, placementId, requireBui
     return true
 end
 
+-- Remove several planned pieces in one request (selection tool, multi-select
+-- in the Pieces list). Returns how many were removed.
+function Blueprints.removePlacements(player, blueprintId, placementIds)
+    local blueprint = Blueprints.get(player, blueprintId)
+    if not blueprint or not Blueprints.canContribute(player, blueprint) then return 0 end
+    local removed = {}
+    for i = 1, #(placementIds or {}) do
+        local _, index = Blueprints.getPlacement(blueprint, placementIds[i])
+        if index then
+            table.remove(blueprint.placements, index)
+            removed[#removed + 1] = placementIds[i]
+        end
+    end
+    if #removed == 0 then return 0 end
+    touch(blueprint)
+    sendToServer(player, "BPRemovePlacements", { id = blueprintId, placementIds = removed })
+    return #removed
+end
+
 -- All placements whose expanded footprint covers the given world tile.
 ---@param blueprint KBW.Blueprint
 ---@param x number
@@ -1521,11 +1640,7 @@ function Blueprints.roomsAt(blueprint, x, y, z)
     for roomIndex = 1, #rooms do
         local room = rooms[roomIndex]
         local roomZ = tonumber(room.z or blueprint.level or 0)
-        local width = room.w or room.width or 1
-        local height = room.h or room.height or 1
-        if roomZ == z and x >= (room.x or 0)
-            and x < (room.x or 0) + width and y >= (room.y or 0)
-            and y < (room.y or 0) + height then
+        if roomZ == z and RoomShape.contains(room, x, y) then
             found[#found + 1] = room
         end
     end
@@ -1959,6 +2074,8 @@ function Blueprints.planErrorText(code, blueprint)
     if code == "needs_previous_stage" then return I18n.text("IGUI_KBW_PlanNeedsPreviousStage") end
     if code == "needs_wall_frame" then return I18n.text("IGUI_KBW_PlanNeedsWallFrame") end
     if code == "needs_frame" then return I18n.text("IGUI_KBW_PlanNeedsFrame") end
+    if code == "nothing_to_cut" then return I18n.text("IGUI_KBW_PlanNothingToCut") end
+    if code == "room_too_complex" then return I18n.text("IGUI_KBW_PlanRoomTooComplex") end
     return I18n.text("IGUI_KBW_PlanInvalid")
 end
 
@@ -2155,7 +2272,7 @@ function Blueprints.applyServerCommand(player, command, args)
     elseif command == "BPAddRoom" then
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
-        if Blueprints.canContribute(player, blueprint) and args.room
+        if Blueprints.canContribute(player, blueprint) and args.room and RoomShape.cells(args.room)
             and args.room.id and not Blueprints.getRoom(blueprint, args.room.id) then
             blueprint.rooms = blueprint.rooms or {}
             blueprint.rooms[#blueprint.rooms + 1] = TableUtil.copy(args.room)
@@ -2163,6 +2280,51 @@ function Blueprints.applyServerCommand(player, command, args)
             return blueprint, true
         end
         return blueprint, false
+    elseif command == "BPExtendRoom" then
+        local blueprint = Blueprints.get(player, args.id)
+        if not blueprint then return nil, false end
+        local room = Blueprints.getRoom(blueprint, args.roomId)
+        if room and Blueprints.canContribute(player, blueprint) then
+            local rects = RoomShape.extend(room, args.rect)
+            if rects then
+                room.rects = rects
+                touch(blueprint)
+                return blueprint, true
+            end
+        end
+        return blueprint, false
+    elseif command == "BPShrinkRoom" then
+        local blueprint = Blueprints.get(player, args.id)
+        if not blueprint then return nil, false end
+        local room, index = Blueprints.getRoom(blueprint, args.roomId)
+        if room and Blueprints.canContribute(player, blueprint) and type(args.rect) == "table" then
+            local rects = RoomShape.subtract(room, args.rect)
+            if rects then
+                if #rects == 0 then table.remove(blueprint.rooms, index) else room.rects = rects end
+                touch(blueprint)
+                return blueprint, true
+            end
+        end
+        return blueprint, false
+    elseif command == "BPRemovePlacements" then
+        local blueprint = Blueprints.get(player, args.id)
+        if not blueprint then return nil, false end
+        if not Blueprints.canContribute(player, blueprint) or type(args.placementIds) ~= "table" then
+            return blueprint, false
+        end
+        local removed = {}
+        for i = 1, math.min(#args.placementIds, Blueprints.maxPlacements()) do
+            local id = args.placementIds[i]
+            local _, index = Blueprints.getPlacement(blueprint, id)
+            if index then
+                table.remove(blueprint.placements, index)
+                removed[#removed + 1] = id
+            end
+        end
+        if #removed == 0 then return blueprint, false end
+        args.placementIds = removed
+        touch(blueprint)
+        return blueprint, true
     elseif command == "BPRemoveRoom" then
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
@@ -2178,7 +2340,7 @@ function Blueprints.applyServerCommand(player, command, args)
     elseif command == "BPUpdateRoom" then
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
-        if Blueprints.canContribute(player, blueprint) and type(args.fields) == "table" then
+        if Blueprints.canContribute(player, blueprint) and validRoomDisplayFields(args.fields) then
             local room = Blueprints.getRoom(blueprint, args.roomId)
             if room then
                 for key, value in pairs(args.fields) do

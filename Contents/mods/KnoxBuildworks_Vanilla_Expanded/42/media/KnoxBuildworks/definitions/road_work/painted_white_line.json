@@ -91,7 +91,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -197,7 +218,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -281,7 +323,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -387,7 +450,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -493,7 +577,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -599,7 +704,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -683,7 +809,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -767,7 +914,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -851,7 +1019,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -935,7 +1124,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1019,7 +1229,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1103,7 +1334,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1187,7 +1439,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1260,7 +1533,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1333,7 +1627,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1417,7 +1732,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1501,7 +1837,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1585,7 +1942,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1669,7 +2047,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1753,7 +2152,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1837,7 +2257,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -1921,7 +2362,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2005,7 +2467,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2089,7 +2572,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2173,7 +2677,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2257,7 +2782,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2341,7 +2887,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2425,7 +2992,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2498,7 +3086,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2572,7 +3181,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2656,7 +3286,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2741,7 +3392,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2825,7 +3497,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2898,7 +3591,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -2982,7 +3696,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3066,7 +3801,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3150,7 +3906,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3234,7 +4011,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3318,7 +4116,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3402,7 +4221,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3486,7 +4326,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3570,7 +4431,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3654,7 +4536,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3738,7 +4641,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3822,7 +4746,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3906,7 +4851,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -3990,7 +4956,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4074,7 +5061,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4158,7 +5166,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4242,7 +5271,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4326,7 +5376,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4410,7 +5481,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4494,7 +5586,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4578,7 +5691,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4662,7 +5796,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4735,7 +5890,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4819,7 +5995,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4903,7 +6100,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -4987,7 +6205,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5071,7 +6310,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5155,7 +6415,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5239,7 +6520,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5323,7 +6625,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5407,7 +6730,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5480,7 +6824,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5564,7 +6929,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5648,7 +7034,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5732,7 +7139,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5816,7 +7244,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5900,7 +7349,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -5984,7 +7454,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -6068,7 +7559,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,
@@ -6152,7 +7664,28 @@
                 "amount": 1,
                 "uses": 1
               }
-            ]
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_DecorationsGuide_RoadwayGarage"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.DecorationsGuide_RoadwayGarage"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
           },
           "construction": {
             "time": 200,

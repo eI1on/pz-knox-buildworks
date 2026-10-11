@@ -39,7 +39,8 @@ function KBWBuildablePreviewToolTip:new()
     local o = ISToolTip.new(self)
     setmetatable(o, self)
     self.__index = self
-    o.previewSize = hoverPreviewPixels()
+    o.basePreviewSize = hoverPreviewPixels()
+    o.previewSize = o.basePreviewSize
     o.maxLineWidth = math.max(240, o.previewSize)
     return o
 end
@@ -47,7 +48,13 @@ end
 function KBWBuildablePreviewToolTip:doLayout()
     local titleHeight = self.name and (getTextManager():getFontHeight(UIFont.Medium) + 8) or 0
     local titleWidth = self.name and (getTextManager():MeasureStringX(UIFont.Medium, self.name) + 20) or 0
-    local width = math.min(getCore():getScreenWidth() - 8, math.max(self.previewSize + 20, 280, titleWidth))
+    local width = math.min(getCore():getScreenWidth() - 8, math.max(self.basePreviewSize + 20, 280, titleWidth))
+    -- A docked tooltip may not cover its catalogue: keep it inside the space
+    -- left of the panel.
+    if self.dock then
+        local room = self.dock:getAbsoluteX() - 12
+        if room >= 240 then width = math.min(width, room) end
+    end
     local descriptionHeight = 0
     if self.showDetails and self.description and self.description ~= "" then
         self.descriptionPanel.defaultFont = ISToolTip.GetFont()
@@ -57,8 +64,17 @@ function KBWBuildablePreviewToolTip:doLayout()
         self.descriptionPanel:paginate()
         descriptionHeight = self.descriptionPanel:getHeight() + 8
     end
+    -- Materials and requirements always fit on screen: a long list shrinks
+    -- the picture (down to a third of its size) before anything is cut.
+    local screenH = getCore():getScreenHeight() - 4
+    self.previewSize = self.basePreviewSize
+    local total = 10 + titleHeight + self.previewSize + descriptionHeight + 10
+    if total > screenH then
+        self.previewSize = math.max(math.floor(self.basePreviewSize / 3), self.previewSize - (total - screenH))
+        total = 10 + titleHeight + self.previewSize + descriptionHeight + 10
+    end
     self:setWidth(width)
-    self:setHeight(10 + titleHeight + self.previewSize + descriptionHeight + 10)
+    self:setHeight(math.min(total, screenH))
 end
 
 function KBWBuildablePreviewToolTip:prerender()
@@ -71,8 +87,17 @@ function KBWBuildablePreviewToolTip:prerender()
 end
 
 function KBWBuildablePreviewToolTip:render()
-    local x = getMouseX() + 28
-    local y = getMouseY() + 12
+    local x, y
+    if self.dock and self.dock:isReallyVisible() then
+        -- Docked beside the panel (Planning catalogue): the cards and the
+        -- mouse stay visible, and the tooltip follows the hovered row.
+        x = self.dock:getAbsoluteX() - self.width - 8
+        y = getMouseY() - math.floor(self.height / 3)
+    end
+    if not x or x < 2 then
+        x = getMouseX() + 28
+        y = getMouseY() + 12
+    end
     x = math.max(2, math.min(x, getCore():getScreenWidth() - self.width - 2))
     y = math.max(2, math.min(y, getCore():getScreenHeight() - self.height - 2))
     self:setX(x)
@@ -232,7 +257,7 @@ function KBWBuildCardGrid:onResize()
 end
 
 function KBWBuildCardGrid:setItems(items, selectedId)
-    self:hideBuildableTooltip()
+    local tooltipDefinition = self.buildableTooltip and self.items[self.previewHoverIndex] or nil
     self.hoverIndex = 0
     self.previewHoverIndex = 0
     items = items or {}
@@ -256,6 +281,20 @@ function KBWBuildCardGrid:setItems(items, selectedId)
         self:setScrollHeight(self:contentHeight())
     end
     self:updateVisibleScrollbar()
+    self:restoreHover(tooltipDefinition)
+end
+
+function KBWBuildCardGrid:restoreHover(tooltipDefinition)
+    if not self:isMouseOver() then
+        self:hideBuildableTooltip()
+        return
+    end
+    local mouseX, mouseY = self:getMouseX(), self:getMouseY()
+    self.hoverIndex = self:indexAt(mouseX, mouseY)
+    self.previewHoverIndex = self.compactMode and self.hoverIndex or self:previewIndexAt(mouseX, mouseY)
+    local hovered = self.items[self.previewHoverIndex]
+    if hovered and hovered == tooltipDefinition and self.buildableTooltip then return end
+    self:updateBuildableTooltip()
 end
 
 function KBWBuildCardGrid:setSelectionPreview(definition, effectiveDefinition, stage, finish)
@@ -578,6 +617,7 @@ function KBWBuildCardGrid:updateBuildableTooltip()
     tooltip:initialise()
     tooltip:addToUIManager()
     tooltip.owner = self
+    tooltip.dock = self.tooltipDock
     tooltip.followMouse = true
     tooltip:setAlwaysOnTop(true)
     tooltip:setName(entry.name)

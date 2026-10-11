@@ -372,7 +372,8 @@ local function vanillaMapping(wallType)
         directWallpapers = {},
         surface = {
             canPaint = customColors and true or nil,
-            paintRequiresPlaster = customColors and false or true,
+            -- Custom-colour types tint the object and need no plaster.
+            paintRequiresPlaster = customColors == nil,
             wallpaperRequiresPlaster = true
         }
     }
@@ -812,6 +813,29 @@ local function namedFinishIn(spriteMap, spriteName, prefix)
     return nil
 end
 
+-- "paint:X" for an OtherPainting tint; shared colours resolve to the first name.
+local function tintedFinish(object, wallType)
+    local reference = OtherPainting and OtherPainting[wallType] or nil
+    if type(reference) ~= "table" or not object.getCustomColor then return nil end
+    local tint = object:getCustomColor()
+    if not tint then return nil end
+    local r, g, b = tint:getR(), tint:getG(), tint:getB()
+    local found = nil
+    for paintName, color in pairs(reference) do
+        if type(color) == "table" then
+            local cr = color.r or color[1]
+            local cg = color.g or color[2]
+            local cb = color.b or color[3]
+            if type(cr) == "number" and type(cg) == "number" and type(cb) == "number"
+                and math.abs(cr - r) < 0.01 and math.abs(cg - g) < 0.01 and math.abs(cb - b) < 0.01
+                and (found == nil or tostring(paintName) < found) then
+                found = tostring(paintName)
+            end
+        end
+    end
+    return found and ("paint:" .. found) or nil
+end
+
 -- The surface a wall is wearing, as a value that can be compared: nil for a
 -- bare wall, otherwise "plaster", "paint:X" or "wallpaper:X". Corner merging
 -- compares this against what the wall being built is about to wear, because a
@@ -822,6 +846,9 @@ end
 function WallFinishes.objectFinishSignature(object)
     if not object then return nil end
     local wallType = WallFinishes.objectWallType(object)
+    -- Custom-colour objects keep their sprite and carry the paint as a tint.
+    local tinted = wallType and tintedFinish(object, tostring(wallType)) or nil
+    if tinted then return tinted end
     local mapping = wallType and mappingForFinishState(tostring(wallType)) or nil
     if not mapping then return nil end
     local spriteName = objectSpriteName(object)
@@ -1007,7 +1034,9 @@ function WallFinishes.spriteFor(mode, finish, north, definition, stage, baseSpri
         entry = finish and finish.paintType and paints
             and (paints[finish.paintType] or paints["*"]) or nil
         if WallFinishes.customColorFor(wallType, finish) then
-            return mappedFaceSprite(entry, north, baseSprite) or baseSprite
+            local sprites = stage and stage.sprites or {}
+            local ownFace = baseSprite or (north and (sprites.N or sprites.W)) or sprites.W or sprites.N
+            return mappedFaceSprite(entry, north, baseSprite) or ownFace
         end
     elseif mode == "wallpaper" then
         local direct = finish and finish.plaster == false
@@ -1144,7 +1173,85 @@ end
 -- self-contained finish selection stored on placements and cursors.
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
+-- Faces a built stage presents to the finish actions (as canApplyToObject sees them).
+local function builtFaces(definition, stage)
+    local configured = nil
+    if (stage and stage.finishes) or (definition and definition.finishes) then
+        configured = WallFinishes.wallType(definition, stage)
+    end
+    local faces = {}
+    local sprites = stage and stage.sprites or {}
+    local seen = {}
+    for _, face in pairs({ "W", "N" }) do
+        local spriteName = sprites[face]
+        if type(spriteName) == "string" and not seen[spriteName] then
+            seen[spriteName] = true
+            local wallType = configured or wallTypeFromSprite(spriteName)
+            if wallType then
+                faces[#faces + 1] = { sprite = spriteName, north = face == "N", wallType = tostring(wallType) }
+            end
+        end
+    end
+    return faces
+end
+
+local function entryAppliesToFace(entry, face)
+    local rules = WallFinishes.surfaceRules(nil, nil, face.wallType, face.sprite)
+    local plastering = entry.plaster == true
+    if plastering then
+        if not rules.canPlaster then return false end
+        if not WallFinishes.spriteForWallType("plaster", entry, face.north, face.wallType, face.sprite) then
+            return false
+        end
+    end
+    if entry.paintType then
+        if not rules.canPaint then return false end
+        if rules.paintRequiresPlaster and not plastering then return false end
+        if not WallFinishes.spriteForWallType("paint", entry, face.north, face.wallType, face.sprite) then
+            return false
+        end
+    end
+    if entry.wallpaperType then
+        if not rules.canWallpaper then return false end
+        if rules.wallpaperRequiresPlaster and not plastering then return false end
+        if not WallFinishes.spriteForWallType("wallpaper", entry, face.north, face.wallType, face.sprite) then
+            return false
+        end
+    end
+    return true
+end
+
+---Whether every built face accepts the finish; nil when the stage has no face sprites.
+function WallFinishes.finishAppliesToStage(definition, stage, finish)
+    local faces = builtFaces(definition, stage)
+    if #faces == 0 then return nil end
+    for faceIndex = 1, #faces do
+        if not entryAppliesToFace(finish, faces[faceIndex]) then return false end
+    end
+    return true
+end
+
+---Finishes the built faces accept.
 function WallFinishes.entriesFor(definition, stage)
+    local candidates = WallFinishes.candidateEntriesFor(definition, stage)
+    local faces = builtFaces(definition, stage)
+    if #faces == 0 then return candidates end
+    local entries = {}
+    for entryIndex = 1, #candidates do
+        local entry = candidates[entryIndex]
+        local applies = true
+        for faceIndex = 1, #faces do
+            if not entryAppliesToFace(entry, faces[faceIndex]) then
+                applies = false
+                break
+            end
+        end
+        if applies then entries[#entries + 1] = entry end
+    end
+    return entries
+end
+
+function WallFinishes.candidateEntriesFor(definition, stage)
     local entries = {}
     local config = finishConfig(definition, stage)
     local mapping = WallFinishes.mappingFor(definition, stage)

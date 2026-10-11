@@ -57,6 +57,23 @@ def requirements_runtime():
     return lua
 
 
+def supply_scan_stub(lua):
+    """Keep allocation tests independent of world discovery; scanner has its own tests."""
+    lua.execute("""
+        local queue=modules['KnoxBuildworks/Planning/BuildQueue']
+        queue.newSupplyScan=function(player,area) return {player=player,area=area,left=area and 2 or 1} end
+        queue.stepSupplyScan=function(scan)
+            local items={}
+            local snapshot=requirements.snapshot(scan.player,scan.player:getSquare())
+            for i=1,#snapshot.allItems do items[#items+1]=snapshot.allItems[i] end
+            local gathered,incomplete=queue.inspectSupplies(scan.player,scan.area)
+            for i=1,#gathered do items[#items+1]=gathered[i] end
+            scan.left=scan.left-1
+            return items,scan.left==0,incomplete
+        end
+    """)
+
+
 class AllocationTests(unittest.TestCase):
     def test_possible_aliases_keep_stock_after_manual_choice_changes(self):
         lua = requirements_runtime()
@@ -101,12 +118,49 @@ class AllocationTests(unittest.TestCase):
                 {id='b',items={'Base.Plank'},amount=1}}}}
             local status=requirements.evaluate(player,{},stage)
             assert(not status.ok and status.rows[1].available==1 and status.rows[2].available==0)
+            assert(not requirements.evaluateReadiness(player,{},stage,requirements.snapshot(player,square)).ok)
             assert(not requirements.consume(player,stage,nil,{}))
             assert(not stock[1].removed and #records==0)
             stock[2]=makeItem('Base.Plank')
+            square.getX=function() return 1 end
+            assert(requirements.evaluateReadiness(player,{},stage,requirements.snapshot(player,square)).ok)
             assert(requirements.consume(player,stage,nil,{}))
             assert(stock[1].removed and stock[2].removed and #records==2)
             assert(records[1].item~=records[2].item)
+        """)
+
+    def test_bounded_allocation_stops_after_enough_items(self):
+        lua = requirements_runtime()
+        lua.execute("""
+            local items={}
+            local visits=0
+            for i=1,1000 do
+                items[i]=setmetatable({}, {__tostring=function() visits=visits+1; return tostring(i) end})
+            end
+            local row={needed=1,mode='consume',availableItems={{items=items}}}
+            local result=allocation.row(row,nil,true)
+            assert(result.ok and visits==1)
+            visits=0
+            local full=allocation.row(row)
+            assert(full.available==1000 and visits==1000)
+        """)
+
+    def test_kept_tool_cannot_be_consumed_by_another_input(self):
+        lua = requirements_runtime()
+        lua.execute("""
+            stock={makeItem('Base.Hammer')}
+            local stage={requirements={inputs={
+                {id='tool',items={'Base.Hammer'},role='tool',mode='keep',amount=1},
+                {id='material',items={'Base.Hammer'},mode='consume',amount=1}}}}
+            local snapshot=requirements.snapshot(player,square)
+            assert(not requirements.evaluateReadiness(player,{},stage,snapshot).ok)
+            assert(not requirements.evaluate(player,{},stage).ok)
+            assert(not requirements.consume(player,stage,square,{}))
+            stock[2]=makeItem('Base.Hammer')
+            square.getX=function() return 1 end
+            snapshot=requirements.snapshot(player,square)
+            assert(requirements.evaluateReadiness(player,{},stage,snapshot).ok)
+            assert(requirements.evaluate(player,{},stage).ok)
         """)
 
     def test_ground_bucket_drains_reserved_uses_across_inputs(self):
@@ -118,6 +172,8 @@ class AllocationTests(unittest.TestCase):
             stage={requirements={inputs={
                 {id='coat',items={'Base.PaintWhite'},mode='drain',uses=2},
                 {id='trim',items={'Base.PaintWhite'},mode='drain',uses=1}}}}
+            assert(not requirements.evaluate(player,{},stage,false).ok,
+                'a missing planned square must not borrow ground items from the player square')
             assert(requirements.evaluate(player,{},stage).ok)
             assert(requirements.consume(player,stage,square,{}))
             assert(paint.uses==0 and #records==3)

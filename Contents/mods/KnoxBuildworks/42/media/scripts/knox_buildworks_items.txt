@@ -38,4 +38,303 @@ module KnoxBuildworks
         WorldStaticModel = BucketFullConcrete_Ground,
         Tags = base:hasmetal;kbw:asphalt,
     }
+
+    /* Building components and the magazines that unlock buildables. */
+
+    item FineWoodWorking_Furniture_BedsCouchesArmchairs
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_BedsCouchesArmchairs,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingBedsCouchesArmchairsGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_Furniture_ChairsBenches
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_ChairsBenches,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingChairsBenchesGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_Furniture_Dressers
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_Dressers,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingDressersGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_Dressers,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_Furniture_Crates
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_Crates,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingCratesGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_Crates,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_Furniture_Counters
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_Counters,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingCountersGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_Counters,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_Furniture_DesksTables
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_Furniture_DesksTables,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingDesksTablesGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_Furniture_DesksTables,
+        NumberOfPages = 20,
+    }
+
+    item FineWoodWorking_DoorsWindows
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FineWoodWorking_DoorsWindows,
+        WorldStaticModel = KnoxBuildworks.KBW_FineWoodWorkingDoorsWindowsGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FineWoodWorking_DoorsWindows,
+        NumberOfPages = 20,
+    }
+
+    item TheFamilyHandyman_StairsFences
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_TheFamilyHandyman_StairsFences,
+        WorldStaticModel = KnoxBuildworks.KBW_TheFamilyHandymanStairsFencesGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_TheFamilyHandyman_StairsFences,
+        NumberOfPages = 20,
+    }
+
+    item OldHouseJournal_WoodenFloors
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_OldHouseJournal_WoodenFloors,
+        WorldStaticModel = KnoxBuildworks.KBW_OldHouseJournalWoodenFloorsGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_OldHouseJournal_WoodenFloors,
+        NumberOfPages = 20,
+    }
+
+    item ArchitecturalDigest_RugsCarpets
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_ArchitecturalDigest_RugsCarpets,
+        WorldStaticModel = KnoxBuildworks.KBW_ArchitecturalDigestRugsCarpetsGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_ArchitecturalDigest_RugsCarpets,
+        NumberOfPages = 20,
+    }
+
+    item HomeMechanix_Bathroom
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_HomeMechanix_Bathroom,
+        WorldStaticModel = KnoxBuildworks.KBW_HomeMechanixBathroomGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_HomeMechanix_Bathroom,
+        NumberOfPages = 20,
+    }
+
+    item ProjectsInMetal_Diverse
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_ProjectsInMetal_Diverse,
+        WorldStaticModel = KnoxBuildworks.KBW_ProjectsInMetalDiverseGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_ProjectsInMetal_Diverse,
+        NumberOfPages = 20,
+    }
+
+    item PopularMechanics_Lighting
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_PopularMechanics_Lighting,
+        WorldStaticModel = KnoxBuildworks.KBW_PopularMechanicsLightingGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_PopularMechanics_Lighting,
+        NumberOfPages = 20,
+    }
+
+    item PopularMechanics_HomeAppliances
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_PopularMechanics_HomeAppliances,
+        WorldStaticModel = KnoxBuildworks.KBW_PopularMechanicsHomeAppliancesGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_PopularMechanics_HomeAppliances,
+        NumberOfPages = 20,
+    }
+
+    item FlooringGuide_Ceramic
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FlooringGuide_Ceramic,
+        WorldStaticModel = KnoxBuildworks.KBW_FlooringGuideCeramicGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FlooringGuide_Ceramic,
+        NumberOfPages = 20,
+    }
+
+    item FlooringGuide_Paved
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_FlooringGuide_Paved,
+        WorldStaticModel = KnoxBuildworks.KBW_FlooringGuidePavedGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_FlooringGuide_Paved,
+        NumberOfPages = 20,
+    }
+
+    item DecorationsGuide_RoadwayGarage
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = KBW_DecorationsGuide_RoadwayGarage,
+        WorldStaticModel = KnoxBuildworks.KBW_DecorationsGuideRoadwayGarageGround,
+        StaticModel = Magazine,
+        Tags = base:magazine,
+        LearnedRecipes = KBWKnowledge_DecorationsGuide_RoadwayGarage,
+        NumberOfPages = 20,
+    }
+
+    item RefrigerantBottle
+    {
+        DisplayCategory = Material,
+        ItemType = base:drainable,
+        Weight = 1,
+        Icon = KBW_RefrigerantBottle,
+        WorldStaticModel = KnoxBuildworks.KBW_RefrigerantBottle,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+    }
+
+    item RefrigeratorCompressor
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 5,
+        Icon = KBW_RefrigeratorCompressor,
+        WorldStaticModel = KnoxBuildworks.KBW_RefrigeratorCompressor,
+    }
+
+    item PlasticSheet
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 1.5,
+        Icon = KBW_PlasticSheet,
+        WorldStaticModel = KnoxBuildworks.KBW_PlasticSheet,
+    }
+
+    item PlasticSheetSmall
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.25,
+        Icon = KBW_PlasticSheetSmall,
+        WorldStaticModel = KnoxBuildworks.KBW_PlasticSheetSmall,
+    }
+
+    item InsulationFoam
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.9,
+        Icon = KBW_PlasticSheetSmall,
+        WorldStaticModel = KnoxBuildworks.KBW_InsulationFoam,
+    }
+
+    item SmallRubberTube
+    {
+        DisplayCategory = Material,
+        ItemType = base:drainable,
+        Weight = 0.3,
+        Icon = RubberHose,
+        WorldStaticModel = KnoxBuildworks.KBW_SmallRubberTube,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+    }
+
+    item ThinCopperPipe
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 1.25,
+        Icon = KBW_ThinCopperTube,
+        WorldStaticModel = KnoxBuildworks.KBW_ThinCopperPipe,
+    }
+
+    item RubberSeal
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.5,
+        Icon = KBW_RubberSeal,
+        WorldStaticModel = KnoxBuildworks.KBW_RubberSeal,
+    }
 }

@@ -121,6 +121,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -136,6 +158,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -261,6 +288,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -276,6 +325,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -401,6 +455,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -416,6 +492,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -541,6 +622,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -556,6 +659,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -681,6 +789,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -696,6 +826,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -821,6 +956,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -836,6 +993,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -950,6 +1112,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -965,6 +1149,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1079,6 +1268,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1094,6 +1305,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1208,6 +1424,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1223,6 +1461,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1337,6 +1580,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1352,6 +1617,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1466,6 +1736,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1481,6 +1773,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1595,6 +1892,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1610,6 +1929,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1724,6 +2048,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1739,6 +2085,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1853,6 +2204,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1868,6 +2241,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1993,6 +2371,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2008,6 +2408,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -2133,6 +2538,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2148,6 +2575,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "glass",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],

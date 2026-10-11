@@ -110,6 +110,19 @@ end
 -- floats over the pointed-at ground column without changing the player camera.
 ---@param playerNum number
 function PlanCursor.pickTileAt(playerNum, buildZ)
+    -- Vanilla DoTileBuildingJoyPad moves xJoypad/yJoypad with the D-pad before
+    -- calling the cursor's render/create methods. Mouse projection here made
+    -- every Knox plan and zone ignore that selected controller square.
+    local joypad = JoypadState and JoypadState.players and JoypadState.players[playerNum + 1]
+    local mouseActive = playerNum == 0 and wasMouseActiveMoreRecentlyThanJoypad
+        and wasMouseActiveMoreRecentlyThanJoypad()
+    if joypad and not mouseActive then
+        local cell = getCell()
+        local drag = cell and cell:getDrag(playerNum)
+        if drag and drag.xJoypad ~= nil and drag.yJoypad ~= nil then
+            return floorInt(drag.xJoypad), floorInt(drag.yJoypad)
+        end
+    end
     local wx, wy = mouseWorldAt(playerNum, pickFloor(playerNum, buildZ))
     return floorInt(wx), floorInt(wy)
 end
@@ -215,7 +228,18 @@ local function defineClass()
 
     function KBWPlanCursor:updatePlanPosition(x, y, z)
         self.planZ = self:getPlanZ()
-        self.planX, self.planY = PlanCursor.pickTileAt(self.player, self.planZ)
+        -- The engine already resolved the cursor square for the active mouse
+        -- or joypad. Reprojecting the mouse here can disagree with that square
+        -- at non-default zoom. During a line drag, however, vanilla pins the
+        -- supplied x/y to the FIRST square; follow the live pointer then.
+        local pointerMode = dragKind(self.definition, self.stage, self.nSprite)
+        if pointerMode and (self.isLeftDown or self.build) then
+            self.planX, self.planY = PlanCursor.pickTileAt(self.player, self.planZ)
+        elseif type(x) == "number" and type(y) == "number" then
+            self.planX, self.planY = floorInt(x), floorInt(y)
+        else
+            self.planX, self.planY = PlanCursor.pickTileAt(self.player, self.planZ)
+        end
         self:snapDirectionToPrevious()
         self:snapDirectionToFinishTarget()
         local mode = dragKind(self.definition, self.stage, self.nSprite)

@@ -187,7 +187,9 @@ local function defineClass()
         local definition, stage = Blueprints.resolvePlacement(placement)
         local status = nil
         if definition and stage then
-            status = Requirements.evaluate(self.character, definition, stage, nil, placement.inputChoices)
+            local square = getCell():getGridSquare(placement.x, placement.y, placement.z)
+            status = Requirements.evaluate(self.character, definition, stage, square or false, placement.inputChoices)
+            if not square then status.ok = false end
         end
         self.statusCache[placement.id] = { status = status, time = now }
         return status

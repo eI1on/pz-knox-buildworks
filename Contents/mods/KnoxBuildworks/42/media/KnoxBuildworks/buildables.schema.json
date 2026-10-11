@@ -123,14 +123,14 @@
         },
         "stages": {
           "type": "array",
-          "description": "Stages that replace the buildable’s own when this option is selected. This is how a variant swaps geometry while keeping the buildable’s recipe and placement.",
+          "description": "Stages that replace the buildable's own when this option is selected. This is how a variant swaps geometry while keeping the buildable's recipe and placement.",
           "items": {
             "$ref": "#/properties/buildables/items/properties/stages/items"
           }
         },
         "finishes": {
           "$ref": "#/properties/buildables/items/properties/finishes",
-          "description": "Surface capabilities for this option, merged over the buildable’s. Use it when an option is not the same surface as the rest of the family - the poor brick is an unfinished construction stage, so it sets canPlaster, canPaint and canWallpaper false."
+          "description": "Surface capabilities for this option, merged over the buildable's. Use it when an option is not the same surface as the rest of the family - the poor brick is an unfinished construction stage, so it sets canPlaster, canPaint and canWallpaper false."
         }
       }
     },
@@ -1109,6 +1109,10 @@
                               }
                             }
                           }
+                        },
+                        "hideUntilLearned": {
+                          "type": "boolean",
+                          "description": "Hide until the required knowledge or its skill alternative is met. Show all versions reveals locked entries without unlocking them."
                         }
                       }
                     },
@@ -1122,6 +1126,116 @@
                       "type": "boolean"
                     }
                   }
+                },
+                "roof": {
+                  "type": "object",
+                  "required": [
+                    "family",
+                    "pitch",
+                    "role"
+                  ],
+                  "properties": {
+                    "family": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "pitch": {
+                      "enum": [
+                        0,
+                        30,
+                        45,
+                        "shallow",
+                        "custom"
+                      ]
+                    },
+                    "role": {
+                      "enum": [
+                        "flat",
+                        "slope",
+                        "detail",
+                        "gable"
+                      ]
+                    },
+                    "step": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "stepsPerLevel": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "faceByEdge": {
+                      "type": "object",
+                      "description": "Map physical low roof edges to authored geometry face names. Missing edges cannot be generated.",
+                      "propertyNames": {
+                        "enum": [
+                          "W",
+                          "N",
+                          "E",
+                          "S"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "enum": [
+                          "W",
+                          "N",
+                          "E",
+                          "S"
+                        ]
+                      },
+                      "minProperties": 1
+                    },
+                    "hiddenEdges": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "enum": [
+                          "W",
+                          "N",
+                          "E",
+                          "S"
+                        ]
+                      }
+                    },
+                    "partsByFace": {
+                      "type": "object",
+                      "minProperties": 1,
+                      "propertyNames": {
+                        "enum": [
+                          "W",
+                          "N",
+                          "E",
+                          "S"
+                        ]
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "description": "Explicit roof family, pitch and slope position. The helper only uses authored faces; detail pieces remain available for manual placement.",
+                  "allOf": [
+                    {
+                      "if": {
+                        "properties": {
+                          "role": {
+                            "const": "slope"
+                          }
+                        },
+                        "required": [
+                          "role"
+                        ]
+                      },
+                      "then": {
+                        "required": [
+                          "step",
+                          "stepsPerLevel",
+                          "faceByEdge"
+                        ]
+                      }
+                    }
+                  ]
                 }
               }
             }

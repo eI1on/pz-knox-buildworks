@@ -133,6 +133,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -148,6 +170,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -712,6 +739,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -727,6 +776,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -1291,6 +1345,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1306,6 +1382,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -1870,6 +1951,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1885,6 +1988,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -2426,6 +2534,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2440,6 +2570,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -2912,6 +3047,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2926,6 +3083,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -3398,6 +3560,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3412,6 +3596,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -3884,6 +4073,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3898,6 +4109,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -4370,6 +4586,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4384,6 +4622,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -4856,6 +5099,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4870,6 +5135,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -5365,6 +5635,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5380,6 +5672,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -5944,6 +6241,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5959,6 +6278,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -6523,6 +6847,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6538,6 +6884,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -7102,6 +7453,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7117,6 +7490,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -7658,6 +8036,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7672,6 +8072,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -8144,6 +8549,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8158,6 +8585,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -8630,6 +9062,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8644,6 +9098,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -9116,6 +9575,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -9130,6 +9611,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -9602,6 +10088,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -9616,6 +10124,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],
@@ -10088,6 +10601,28 @@
             ],
             "skills": {
               "Tailoring": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -10102,6 +10637,11 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "tent",
+            "pitch": "custom",
+            "role": "detail"
           }
         }
       ],

@@ -179,6 +179,28 @@
             "skills": {
               "Woodwork": 4,
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_DesksTables"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_DesksTables"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6,
+                    "MetalWelding": 3
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -312,6 +334,27 @@
             ],
             "skills": {
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_DesksTables"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_DesksTables"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

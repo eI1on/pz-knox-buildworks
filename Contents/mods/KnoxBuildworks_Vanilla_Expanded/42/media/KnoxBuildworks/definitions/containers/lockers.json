@@ -127,6 +127,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -291,6 +312,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -456,6 +498,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -645,6 +708,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -834,6 +918,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

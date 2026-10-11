@@ -96,6 +96,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "fluidContainer": {
@@ -211,6 +232,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "fluidContainer": {
@@ -324,6 +366,27 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "object": {

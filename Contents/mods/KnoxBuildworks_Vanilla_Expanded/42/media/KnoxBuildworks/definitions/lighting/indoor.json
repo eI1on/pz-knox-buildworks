@@ -166,6 +166,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "lightSource": {
@@ -255,6 +276,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "lightSource": {
@@ -340,6 +382,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -421,6 +484,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -502,6 +586,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -583,6 +688,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -664,6 +790,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -745,6 +892,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -830,6 +998,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -917,6 +1106,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -977,6 +1187,27 @@
             "materials": "kbwve.light.basic",
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -1038,6 +1269,27 @@
             ],
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -1097,6 +1349,27 @@
             ],
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {
@@ -1156,6 +1429,27 @@
             ],
             "skills": {
               "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
             }
           },
           "nativeObject": {

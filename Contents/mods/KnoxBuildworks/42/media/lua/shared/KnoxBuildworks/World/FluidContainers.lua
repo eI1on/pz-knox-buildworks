@@ -289,8 +289,11 @@ local function onLoadGridsquare(square)
     end
 end
 
-Events.LoadGridsquare.Add(onLoadGridsquare)
-Events.OnObjectAdded.Add(FluidContainers.track)
-Events.EveryOneMinute.Add(refreshTracked)
+-- The server owns the periodic sprite/mode update. MP clients do not use the
+-- tracked set, so registering load callbacks there only scans squares twice.
+if not isClient() then
+    Events.LoadGridsquare.Add(onLoadGridsquare)
+    Events.EveryOneMinute.Add(refreshTracked)
+end
 
 return FluidContainers

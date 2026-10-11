@@ -6,7 +6,7 @@ local Queue = require("KnoxBuildworks/Planning/BuildQueue")
 local I18n = require("KnoxBuildworks/I18n")
 local Icons = require("KnoxBuildworks/UI/IconResolver")
 local Rules = require("KnoxBuildworks/Admin/BuildableRules")
-local Supplies = {}
+local Supplies = { FRAME_BUDGET_MS = 3, MAX_RECIPES_PER_STEP = 32 }
 
 local function contextKey(player)
     local square = player and player:getSquare()
@@ -23,60 +23,113 @@ local function addItems(state, items)
         if not state.seen[key] then
             state.seen[key] = true
             state.items[#state.items + 1] = item
+            local fullType = item:getFullType()
+            state.byType[fullType] = state.byType[fullType] or {}
+            local typed = state.byType[fullType]
+            typed[#typed + 1] = item
         end
     end
 end
 
 function Supplies.new(player, blueprint)
-    local snapshot = Requirements.snapshot(player, player:getSquare())
     local state = {player = player, blueprint = blueprint, revision = Requirements.inventoryRevision(),
+        rulesRevision = Rules.revision or 0,
         placements = blueprint.placements, updated = blueprint.updated, area = blueprint.gatherArea,
         items = {}, seen = {}, cursor = 1, phase = "scan", incomplete = false,
         allocation = Allocation.new(), materials = {}, tools = {}, skills = {}, recipes = {},
         singleReady = {}, allReady = true, allAccess = true, anyReady = false, count = #(blueprint.placements or {}),
-        context = contextKey(player), matches = {}}
-    addItems(state, snapshot.allItems)
-    for _, items in pairs(snapshot.ground or {}) do addItems(state, items) end
-    if state.area then
-        state.x, state.y = state.area.x1, state.area.y1
-    else
-        addItems(state, Queue.inspectSupplies(player, nil))
-        state.phase = "recipes"
-    end
-    state.ordered = Queue.supplyOrder(blueprint.placements or {})
+        context = contextKey(player), matches = {}, matchStocks = {}, statuses = {}, ground = {}, byType = {}, selections = {}}
+    state.scan = Queue.newSupplyScan(player, state.area)
     return state
 end
 
 function Supplies.current(state, blueprint)
     if not state or state.blueprint ~= blueprint or state.placements ~= blueprint.placements then return false end
-    if state.updated ~= blueprint.updated or state.area ~= blueprint.gatherArea
-        or state.revision ~= Requirements.inventoryRevision() or state.context ~= contextKey(state.player) then return false end
-    return state.phase ~= "done" or getTimestampMs() - (state.checkedAt or 0) < 4000
+    if state.updated ~= blueprint.updated or state.area ~= blueprint.gatherArea then return false end
+    if state.rulesRevision ~= (Rules.revision or 0) then return false end
+    -- A busy server can emit container updates throughout a gather scan. Keep
+    -- that scan moving; execution rechecks materials against the live world.
+    if state.phase ~= "done" then return true end
+    local age = getTimestampMs() - (state.checkedAt or 0)
+    if state.revision ~= Requirements.inventoryRevision() or state.context ~= contextKey(state.player) then
+        return age < 5000
+    end
+    return age < 30000
 end
 
 local function inputKey(row)
     local types = row.selectedFullType and {row.selectedFullType} or row.possibleItems or row.items or {}
     local tags = row.selectedFullType and {} or row.possibleTags or row.tags or {}
-    return tostring(row.mode) .. "|" .. table.concat(types, ",") .. "|" .. table.concat(tags, ",")
-        .. "|" .. table.concat(row.flags or {}, ",")
+    return tostring(row.mode) .. "|" .. tostring(row.uses ~= nil) .. "|" .. table.concat(types, ",") .. "|" .. table.concat(tags, ",")
+        .. "|" .. table.concat(row.flags or {}, ",") .. "|" .. tostring(row.matchTag or "")
 end
 
-local function supplyRow(state, input)
+local function supplyRow(state, input, square, choices)
     local row = {}
     for key, value in pairs(input) do row[key] = value end
+    row.selectedFullType = choices and choices[row.id] or row.selectedFullType
     row.needed = row.needed or row.uses or row.amount or 1
     row.kind = "input"
     local key = inputKey(row)
     local matches = state.matches[key]
     if not matches then
         matches = {}
-        for index = 1, #state.items do
-            local item = state.items[index]
-            if Requirements.matchesInput(item, row, row.selectedFullType) then matches[#matches + 1] = item end
+        local types = row.selectedFullType and {row.selectedFullType} or row.items or row.possibleItems or {}
+        local tags = row.selectedFullType and {} or row.tags or row.possibleTags or {}
+        local scanAll = #tags > 0 or row.matchTag ~= nil
+        local lists = scanAll and {state.items} or {}
+        if not scanAll then
+            for index = 1, #types do lists[#lists + 1] = state.byType[types[index]] or {} end
+        end
+        local seen = {}
+        for listIndex = 1, #lists do
+            local items = lists[listIndex]
+            for index = 1, #items do
+                local item = items[index]
+                if not seen[item] and Requirements.matchesInput(item, row, row.selectedFullType) then
+                    seen[item] = true; matches[#matches + 1] = item
+                end
+            end
         end
         state.matches[key] = matches
     end
+    local stock = state.matchStocks[key]
+    if stock == nil then
+        stock = Allocation.row({ needed = 0, mode = row.mode, uses = row.uses,
+            availableItems = {{items = matches}} }).available
+        state.matchStocks[key] = stock
+    end
     row.availableItems = {{items = matches}}
+    -- Include materials beside this placement even when the gather area is
+    -- elsewhere. Scan only that small ground map: the detailed status row also
+    -- repeats every carried match, which would make a full stockpile cost
+    -- O(placements * inventory size) to enumerate again.
+    local extra = {}
+    local extraSeen = {}
+    if row.mode ~= "keep" and square and buildUtil and buildUtil.getMaterialOnGround then
+        local ground = state.ground[square]
+        if not ground then
+            ground = buildUtil.getMaterialOnGround(square) or {}
+            state.ground[square] = ground
+        end
+        for _, items in pairs(ground) do
+            for itemIndex = 1, #items do
+                local item = items[itemIndex]
+                local itemKey = tostring(item)
+                if not state.seen[itemKey] and not extraSeen[itemKey]
+                    and Requirements.matchesInput(item, row, row.selectedFullType) then
+                    extraSeen[itemKey] = true
+                    extra[#extra + 1] = item
+                end
+            end
+        end
+    end
+    if #extra > 0 then
+        row.availableItems[#row.availableItems + 1] = {items = extra}
+        stock = stock + Allocation.row({ needed = 0, mode = row.mode, uses = row.uses,
+            availableItems = {{items = extra}} }).available
+    end
+    row.stock = stock
     return row
 end
 
@@ -98,15 +151,16 @@ end
 
 local function addTotal(state, row, allocated)
     if allocated.needed == 0 then return end
-    local label, iconKey, key = describe(row)
+    local key = inputKey(row)
     local kept = row.mode == "keep"
     local totals = (row.role == "tool" or kept) and state.tools or state.materials
     local total = totals[key]
     if not total then
+        local label, iconKey = describe(row)
         total = {key = key, iconKey = iconKey, label = label, amount = 0, available = 0, stock = 0, uses = row.mode == "drain" or row.uses ~= nil}
         totals[key] = total
     end
-    local stock = Allocation.row(row).available
+    local stock = row.stock or 0
     total.stock = math.max(total.stock, stock)
     local assigned = math.min(allocated.available, allocated.needed)
     if kept then
@@ -119,14 +173,27 @@ local function addTotal(state, row, allocated)
 end
 
 local function inspectPlacement(state, placement)
-    local definition, stage = Blueprints.resolvePlacement(placement)
+    local key = placement.buildableId and table.concat({placement.buildableId, placement.stageId or "",
+        placement.variantId or "", placement.materialId or ""}, "|") or placement.stage
+    local selection = state.selections[key]
+    if not selection then
+        local definition, stage = Blueprints.resolvePlacement(placement)
+        selection = {definition=definition, stage=stage}
+        state.selections[key] = selection
+    end
+    local definition, stage = selection.definition, selection.stage
     if not definition or not stage then state.allReady = false; state.unknown = true; return end
-    local status = Requirements.evaluate(state.player, definition, stage, nil, placement.inputChoices)
+    local square = getCell and getCell():getGridSquare(placement.x, placement.y, placement.z) or nil
+    local status = state.statuses[stage]
+    if not status then
+        status = Requirements.describe(state.player, definition, stage)
+        state.statuses[stage] = status
+    end
     local rows, access = {}, status.reason == nil
     for index = 1, #status.rows do
         local row = status.rows[index]
         if row.kind == "input" then
-            rows[#rows + 1] = supplyRow(state, row)
+            rows[#rows + 1] = supplyRow(state, row, square, placement.inputChoices)
         else
             if not row.ok and row.needToBeLearned ~= false then access = false end
             local target = row.kind == "skill" and state.skills or state.recipes
@@ -141,11 +208,11 @@ local function inspectPlacement(state, placement)
         end
     end
     local finishes = WallFinishes.fetchRows(state.player, placement.finish, definition, stage)
-    for index = 1, #finishes do rows[#rows + 1] = supplyRow(state, finishes[index]) end
-    local own = Allocation.rows(rows)
+    for index = 1, #finishes do rows[#rows + 1] = supplyRow(state, finishes[index], square) end
+    local own = Allocation.rows(rows, nil, true)
     state.singleReady[placement.id] = access and (own.ok or state.player:isBuildCheat())
     if state.singleReady[placement.id] then state.anyReady = true end
-    local allocation = Allocation.rows(rows, state.allocation)
+    local allocation = Allocation.rows(rows, state.allocation, true)
     if not access then state.allAccess = false end
     if not access or not allocation.ok then state.allReady = false end
     for index = 1, #allocation.rows do
@@ -157,20 +224,23 @@ end
 function Supplies.step(state)
     if state.phase == "done" then return false end
     if state.phase == "scan" then
-        local area = state.area
-        local lastY = math.min(area.y2, state.y + 23)
-        local items, incomplete = Queue.inspectSupplies(state.player,
-            {x1 = state.x, x2 = state.x, y1 = state.y, y2 = lastY, z = area.z})
+        local items, done, incomplete = Queue.stepSupplyScan(state.scan, Supplies.FRAME_BUDGET_MS)
         addItems(state, items)
         state.incomplete = state.incomplete or incomplete
-        state.y = lastY + 1
-        if state.y > area.y2 then state.x, state.y = state.x + 1, area.y1 end
-        if state.x > area.x2 then state.phase = "recipes" end
+        if done then
+            state.scan = nil
+            state.phase = "recipes"
+            state.ordered = Queue.supplyOrder(state.placements or {})
+        end
         return true
     end
-    local limit = math.min(#state.ordered, state.cursor + 2)
-    for index = state.cursor, limit do inspectPlacement(state, state.ordered[index]) end
-    state.cursor = limit + 1
+    local started, processed = getTimestampMs(), 0
+    repeat
+        if state.cursor > #state.ordered then break end
+        inspectPlacement(state, state.ordered[state.cursor])
+        state.cursor = state.cursor + 1
+        processed = processed + 1
+    until processed >= Supplies.MAX_RECIPES_PER_STEP or getTimestampMs() - started >= Supplies.FRAME_BUDGET_MS
     if state.cursor > #state.ordered then
         state.phase = "done"
         state.checkedAt = getTimestampMs()

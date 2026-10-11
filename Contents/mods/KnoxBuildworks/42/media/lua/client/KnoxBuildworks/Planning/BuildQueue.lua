@@ -1,5 +1,6 @@
 --- BuildQueue provides the Knox Buildworks blueprint planning layer.
 require "TimedActions/ISInventoryTransferAction"
+require "TimedActions/ISInventoryTransferUtil"
 require "TimedActions/ISGrabItemAction"
 require "ISUI/ISWorldObjectContextMenu"
 
@@ -27,6 +28,7 @@ local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 ---@type KBW.BuildQueueModule
 local BuildQueue = {}
 local active = nil
+local SupplyContainers = require("KnoxBuildworks/Planning/SupplyContainers")
 
 local FETCH_LOOKAHEAD = 4
 local PREPARE_PER_TICK = 12
@@ -99,35 +101,7 @@ local function prepareTiers(state)
     if state.prepareIndex > #state.remaining then state.phase = "select" end
 end
 
-local function normalizeTagName(name)
-    if not name then return nil end
-    local value = tostring(name)
-    if not string.find(value, ":", 1, true) then
-        local dotIndex = string.find(value, ".", 1, true)
-        if dotIndex then
-            local namespace = string.sub(value, 1, dotIndex - 1)
-            local path = string.sub(value, dotIndex + 1)
-            if namespace ~= "" and path ~= "" and not string.find(path, ".", 1, true) then
-                value = namespace .. ":" .. path
-            end
-        end
-    end
-    return value
-end
-
-local function tagValue(name)
-    local normalized = normalizeTagName(name)
-    if normalized then return ItemTag.get(ResourceLocation.of(normalized)) end
-    return nil
-end
-
-local function addContainer(containers, seen, container)
-    if not container then return end
-    local key = tostring(container)
-    if seen[key] then return end
-    seen[key] = true
-    containers[#containers + 1] = container
-end
+local addContainer = SupplyContainers.add
 
 local function addOpenContainers(containers, seen, player)
     local available = ISInventoryPaneContextMenu.getContainers(player)
@@ -144,6 +118,11 @@ local function gatherContainers(area, player)
     local seen = {}
     if not area then
         addOpenContainers(containers, seen, player)
+        local square = player and player:getSquare()
+        local ground = square and buildUtil.getMaterialOnGround(square) or {}
+        for _, items in pairs(ground) do
+            for index = 1, #items do SupplyContainers.addBag(containers, seen, items[index]) end
+        end
         return containers
     end
     local z = tonumber(area.z) or 0
@@ -152,6 +131,10 @@ local function gatherContainers(area, player)
         for y = area.y1, area.y2 do
             local square = getCell():getGridSquare(x, y, z)
             if square then
+                local worldItems = square:getWorldObjects()
+                for index = 0, worldItems:size() - 1 do
+                    SupplyContainers.addBag(containers, seen, worldItems:get(index):getItem())
+                end
                 for objectIndex = 0, square:getObjects():size() - 1 do
                     local object = square:getObjects():get(objectIndex)
                     if object and object.getContainerCount then
@@ -278,7 +261,7 @@ end
 
 local function queueWorldItemTransfer(state, worldItem, playerInv)
     local item = worldItem:getItem()
-    if isClient() and ISInventoryTransferUtil and ISInventoryTransferUtil.newInventoryTransferAction then
+    if isClient() and item:getContainer() and ISInventoryTransferUtil and ISInventoryTransferUtil.newInventoryTransferAction then
         ISTimedActionQueue.add(
             ISInventoryTransferUtil.newInventoryTransferAction(state.player, item, item:getContainer(), playerInv)
         )
@@ -290,6 +273,7 @@ end
 
 local function canTryContainer(player, container)
     if not player or not container then return false end
+    container = SupplyContainers.root(container)
     local part = container.getVehiclePart and container:getVehiclePart()
     if part and part.getVehicle then
         local vehicle = part:getVehicle()
@@ -312,7 +296,12 @@ function BuildQueue.inspectSupplies(player, area)
         local container = containers[index]
         if canTryContainer(player, container) then
             local contents = container:getItems()
-            for itemIndex = 0, contents:size() - 1 do items[#items + 1] = contents:get(itemIndex) end
+            for itemIndex = 0, contents:size() - 1 do
+                local item = contents:get(itemIndex)
+                if item and (not container.isRemoveItemAllowed or container:isRemoveItemAllowed(item)) then
+                    items[#items + 1] = item
+                end
+            end
         end
     end
     local worldItems = gatherWorldItems(area, player)
@@ -327,12 +316,102 @@ function BuildQueue.inspectSupplies(player, area)
     return items, incomplete
 end
 
+-- Incremental, read-only discovery for the planning window. Each job visits
+-- one square, object, vehicle part or item; a packed crate cannot turn one
+-- nominal map tile into an unbounded inventory walk.
+function BuildQueue.newSupplyScan(player, area)
+    return {player=player, area=area, jobs={}, head=1, containers={}, vehicles={},
+        x=area and area.x1, y=area and area.y1, incomplete=false}
+end
+
+function BuildQueue.stepSupplyScan(scan, budgetMs)
+    local started, work, found = getTimestampMs(), 0, {}
+    local function job(kind, values, container)
+        scan.jobs[#scan.jobs+1]={kind=kind, values=values, index=kind=='ground' and 1 or 0, container=container}
+    end
+    local function container(value)
+        if value and not scan.containers[value] and canTryContainer(scan.player,value) then
+            scan.containers[value]=true
+            job('items',value:getItems(),value)
+        end
+    end
+    if not scan.initialized then
+        scan.initialized=true
+        container(scan.player:getInventory())
+        if not scan.area then
+            local available=ISInventoryPaneContextMenu.getContainers(scan.player)
+            if available then job('containers',available) end
+        end
+        local square=scan.player:getSquare()
+        local ground=square and buildUtil.getMaterialOnGround(square) or {}
+        local seenLists={}
+        for _,items in pairs(ground) do
+            -- Vanilla exposes each ground list under both short/full item type.
+            if not seenLists[items] then seenLists[items]=true; job('ground',items) end
+        end
+    end
+    repeat
+        local current=scan.jobs[scan.head]
+        if current then
+            local values=current.values
+            local luaList=current.kind=='ground'
+            local size=luaList and #values or values:size()
+            if current.index >= (luaList and size+1 or size) then
+                -- Keep the dense queue length stable until all jobs are read.
+                current.values=nil
+                scan.head=scan.head+1
+            else
+                local value=luaList and values[current.index] or values:get(current.index)
+                current.index=current.index+1
+                if current.kind=='containers' then container(value)
+                elseif current.kind=='objects' then
+                    if value and value.getContainerCount then
+                        for index=0,value:getContainerCount()-1 do container(value:getContainerByIndex(index)) end
+                    end
+                elseif current.kind=='parts' then
+                    if value then container(value:getItemContainer()) end
+                else
+                    local item=current.kind=='world' and value:getItem() or value
+                    if item then
+                        if not current.container or not current.container.isRemoveItemAllowed
+                            or current.container:isRemoveItemAllowed(item) then found[#found+1]=item end
+                        if instanceof(item,'InventoryContainer') then container(item:getInventory()) end
+                    end
+                end
+            end
+        elseif scan.area and scan.y<=scan.area.y2 then
+            scan.jobs={}; scan.head=1
+            local square=getCell():getGridSquare(scan.x,scan.y,scan.area.z or 0)
+            if square then
+                job('world',square:getWorldObjects()); job('objects',square:getObjects())
+                local vehicle=square:getVehicleContainer()
+                if vehicle and vehicle.getPartCount and not scan.vehicles[vehicle] then
+                    scan.vehicles[vehicle]=true
+                    -- Vehicle parts expose indexed getters rather than a list.
+                    job('parts',{size=function() return vehicle:getPartCount() end,
+                        get=function(_,index) return vehicle:getPartByIndex(index) end})
+                elseif vehicle and vehicle.getItems then container(vehicle) end
+            else scan.incomplete=true end
+            scan.x=scan.x+1
+            if scan.x>scan.area.x2 then scan.x=scan.area.x1; scan.y=scan.y+1 end
+        else
+            scan.done=true
+        end
+        work=work+1
+    until scan.done or work>=128 or getTimestampMs()-started >= (budgetMs or 3)
+    return found,scan.done,scan.incomplete
+end
+
 function BuildQueue.supplyOrder(placements)
-    local result, tiers = {}, {}
+    local result, tiers, recipes = {}, {}, {}
     for index = 1, #placements do
         local placement = placements[index]
         result[#result + 1] = placement
-        tiers[placement] = placementTier(placement)
+        local key = table.concat({placement.buildableId or "", placement.stageId or "",
+            placement.variantId or "", placement.materialId or ""}, "|")
+        local level = (tonumber(placement.z) or 0) * 100
+        if not recipes[key] then recipes[key] = placementTier(placement) - level end
+        tiers[placement] = recipes[key] + level
     end
     table.sort(result, function(a, b)
         if tiers[a] ~= tiers[b] then return tiers[a] < tiers[b] end
@@ -347,7 +426,10 @@ local function missingRowsFor(state, placement, rows)
     local definition, stage = Blueprints.resolvePlacement(placement)
     if not definition or not stage then return false end
     local anyMissing = false
-    local status = Requirements.evaluate(state.player, definition, stage, nil, placement.inputChoices)
+    -- Materials already beside the work site can be consumed there. Do not
+    -- force the player to lift a heavy pile only to put it into the same build.
+    local square = getCell():getGridSquare(placement.x, placement.y, placement.z)
+    local status = Requirements.evaluate(state.player, definition, stage, square or false, placement.inputChoices)
     local statusRows = status.rows or {}
     for rowIndex = 1, #statusRows do
         local row = statusRows[rowIndex]
@@ -374,35 +456,50 @@ local function queueFetchPass(state, placement)
     if hasBuildCheat(state.player) then return 0, false end
     local rows = {}
     if not missingRowsFor(state, placement, rows) then return 0, false end
-    local containers = state.gatherContainers or {}
+    local containers = SupplyContainers.nearest(state.player, state.gatherContainers or {})
     for lookahead = 1, math.min(FETCH_LOOKAHEAD, #state.remaining) do
         missingRowsFor(state, state.remaining[lookahead], rows)
     end
     local playerInv = state.player:getInventory()
+    state.fetchCapacityBlocked = false
     local worldTransfers = collectWorldTransfers(state.gatherWorldItems or {}, rows)
-    if #worldTransfers > 0 then
-        local firstSquare = worldTransfers[1]:getSquare()
-        if firstSquare and luautils.walkAdj(state.player, firstSquare, true) then
-            local queued = 0
-            for transferIndex = 1, #worldTransfers do
-                local worldItem = worldTransfers[transferIndex]
-                if worldItem:getSquare() == firstSquare then
-                    queueWorldItemTransfer(state, worldItem, playerInv)
-                    queued = queued + 1
+    local visitedSquares = {}
+    for worldIndex = 1, #worldTransfers do
+        local square = worldTransfers[worldIndex]:getSquare()
+        if square and not visitedSquares[square] then
+            visitedSquares[square] = true
+            local requested, worlds = {}, {}
+            for index = 1, #worldTransfers do
+                local world = worldTransfers[index]
+                if world:getSquare() == square then
+                    local item = world:getItem()
+                    requested[#requested + 1], worlds[item] = item, world
                 end
             end
-            if queued > 0 then return queued, false end
+            -- SP's native floor grab ends in the main inventory. Reserve the
+            -- whole batch there in both modes before queuing a walking action.
+            local transfers = SupplyContainers.carryPlan(state.player, requested, true)
+            if #requested > 0 and #transfers == 0 then state.fetchCapacityBlocked = true end
+            if #transfers > 0 and luautils.walkAdj(state.player, square, true) then
+                for index = 1, #transfers do
+                    queueWorldItemTransfer(state, worlds[transfers[index].item], playerInv)
+                end
+                return #transfers, false
+            end
         end
     end
     if #containers == 0 then return 0, true end
     for containerIndex = 1, #containers do
         local container = containers[containerIndex]
-        local transfers = collectContainerTransfers(container, rows)
+        local requested = collectContainerTransfers(container, rows)
+        local transfers = SupplyContainers.carryPlan(state.player, requested)
+        if #requested > 0 and #transfers == 0 then state.fetchCapacityBlocked = true end
         if #transfers > 0 and canTryContainer(state.player, container)
-            and luautils.walkToContainer(container, state.playerNum) then
+            and SupplyContainers.walk(state.player, container) then
             for transferIndex = 1, #transfers do
                 ISTimedActionQueue.add(
-                    ISInventoryTransferAction:new(state.player, transfers[transferIndex], container, playerInv)
+                    ISInventoryTransferUtil.newInventoryTransferAction(state.player, transfers[transferIndex].item,
+                        transfers[transferIndex].item:getContainer(), transfers[transferIndex].destination)
                 )
             end
             return #transfers, false
@@ -453,7 +550,7 @@ local function startPlacement(state)
         state.fetchAttempts = state.fetchAttempts + 1
         state.phase = "waitFetch"
     elseif starved then
-        return finish(state, getText("IGUI_KBW_BuildQueueOutOfResources"), true)
+        return finish(state, getText(state.fetchCapacityBlocked and "IGUI_KBW_FetchCapacityBlocked" or "IGUI_KBW_BuildQueueOutOfResources"), true)
     else
         state.phase = "build"
     end
@@ -468,7 +565,7 @@ local function tryBuildCurrent(state)
     end)
     if not ok then
         if reason == "requirements not met" or reason == "finish materials missing" then
-            return finish(state, getText("IGUI_KBW_BuildQueueOutOfResources"), true)
+            return finish(state, getText(state.fetchCapacityBlocked and "IGUI_KBW_FetchCapacityBlocked" or "IGUI_KBW_BuildQueueOutOfResources"), true)
         end
         state.skipped = state.skipped + 1
         if state.pass == 1 then state.retry[#state.retry + 1] = placement end
@@ -498,7 +595,7 @@ function BuildQueue.onTick()
             if queued > 0 then
                 state.fetchAttempts = (state.fetchAttempts or 0) + 1
             elseif starved then
-                return finish(state, getText("IGUI_KBW_BuildQueueOutOfResources"), true)
+                return finish(state, getText(state.fetchCapacityBlocked and "IGUI_KBW_FetchCapacityBlocked" or "IGUI_KBW_BuildQueueOutOfResources"), true)
             else
                 tryBuildCurrent(state)
             end

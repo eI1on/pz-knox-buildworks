@@ -1,3 +1,5 @@
+if not isDebugEnabled() then return end
+
 require("ISUI/ISCollapsableWindow")
 require("ISUI/ISScrollingListBox")
 require("ISUI/ISTextEntryBox")

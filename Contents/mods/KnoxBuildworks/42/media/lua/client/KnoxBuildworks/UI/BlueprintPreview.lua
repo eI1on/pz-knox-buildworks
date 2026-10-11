@@ -4,6 +4,7 @@ require "ISUI/ISPanel"
 
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local GhostRenderer = require("KnoxBuildworks/Planning/GhostRenderer")
+local RoomShape = require("KnoxBuildworks/Planning/RoomShape")
 local IconResolver = require("KnoxBuildworks/UI/IconResolver")
 local Theme = require("KnoxBuildworks/UI/Theme")
 
@@ -67,16 +68,27 @@ local function includePoint(model, x, y)
     model.maxY = math.max(model.maxY, y)
 end
 
-local function addSprite(model, cell)
+-- Draw order inside one square, as the game renders it: floor, walls (and
+-- what covers them), then objects, then roof tiles on top.
+local LAYER_RANK = { floor = 0, wall = 1, wallCovering = 2, overlay = 3, object = 4, stairs = 4, roof = 5 }
+
+local function layerRank(kind)
+    return LAYER_RANK[kind or "object"] or 4
+end
+
+-- A tile image is 64x128 at 1x (128x256 at 2x) with the floor diamond in its
+-- bottom 32 rows; the diamond's top corner sits on the square's iso point.
+-- Trimmed textures keep their place through the original size and offsets.
+local function addSprite(model, cell, kind)
     local texture = cell.sprite and IconResolver.textureForSpriteName(cell.sprite) or nil
-    local record = { texture = texture, gridX = cell.x, gridY = cell.y, gridZ = cell.z }
+    local record = { texture = texture, gridX = cell.x, gridY = cell.y, gridZ = cell.z, rank = layerRank(kind),
+        order = #model.sprites + 1 }
     if texture then
         local assetScale = textureScale(texture)
-        local widthOrig = texture:getWidthOrig()
-        local heightOrig = texture:getHeightOrig()
-        record.x = (cell.x - cell.y) * 32 - widthOrig / assetScale / 2 + texture:getOffsetX() / assetScale
-        record.y = (cell.x + cell.y) * 16 - (heightOrig - 16 * assetScale) / assetScale
-            + texture:getOffsetY() / assetScale
+        local widthOrig = texture:getWidthOrig() / assetScale
+        local heightOrig = texture:getHeightOrig() / assetScale
+        record.x = (cell.x - cell.y) * 32 - widthOrig / 2 + texture:getOffsetX() / assetScale
+        record.y = (cell.x + cell.y) * 16 - (heightOrig - 32) + texture:getOffsetY() / assetScale
         record.width = texture:getWidth() / assetScale
         record.height = texture:getHeight() / assetScale
     end
@@ -90,13 +102,18 @@ local function buildModel(blueprint, level)
     }
     local placements = blueprint and blueprint.placements or {}
     for placementIndex = 1, #placements do
-        local cells = GhostRenderer.placementCells(placements[placementIndex]) or {}
+        local placement = placements[placementIndex]
+        local cells = GhostRenderer.placementCells(placement) or {}
+        local direction = tonumber(placement.direction) or 1
         for cellIndex = 1, #cells do
             local cell = cells[cellIndex]
             if math.floor(tonumber(cell.z) or 0) == level then
                 includePoint(model, cell.x, cell.y)
-                model.cells[#model.cells + 1] = cell
-                addSprite(model, cell)
+                -- The renderer's cells are cached and shared: copy what the
+                -- top view needs instead of writing into them.
+                model.cells[#model.cells + 1] = { x = cell.x, y = cell.y, kind = cell.kind or "object",
+                    north = direction == 2 or direction == 4 }
+                addSprite(model, cell, cell.kind)
             end
         end
     end
@@ -104,14 +121,24 @@ local function buildModel(blueprint, level)
     for roomIndex = 1, #rooms do
         local room = rooms[roomIndex]
         if math.floor(tonumber(room.z or blueprint.level) or 0) == level then
-            local x1, y1, x2, y2 = zoneBounds(room)
-            model.rooms[#model.rooms + 1] = {
-                x1 = x1, y1 = y1, x2 = x2, y2 = y2,
-                color = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 },
-                name = room.name or room.type
-            }
-            includePoint(model, x1, y1)
-            includePoint(model, x2, y2)
+            local _, cells = RoomShape.cells(room)
+            if cells then
+                model.rooms[#model.rooms + 1] = {
+                    cells = cells, lines = RoomShape.perimeter(room),
+                    color = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 },
+                    name = room.name or room.type
+                }
+                for cellIndex = 1, #cells do includePoint(model, cells[cellIndex].x, cells[cellIndex].y) end
+            else
+                local left, top, right, bottom = RoomShape.bounds(room)
+                model.rooms[#model.rooms + 1] = {
+                    cells = {}, lines = RoomShape.perimeter(room),
+                    color = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 },
+                    name = room.name or room.type
+                }
+                includePoint(model, left, top)
+                includePoint(model, right - 1, bottom - 1)
+            end
         end
     end
     local area = blueprint and blueprint.gatherArea or nil
@@ -127,12 +154,16 @@ local function buildModel(blueprint, level)
         local y = origin and tonumber(origin.y) or 0
         includePoint(model, x, y)
     end
+    -- Back to front by iso depth; inside a square by layer, then in plan
+    -- order so equal pieces never flicker between frames.
     table.sort(model.sprites, function(a, b)
         if a.gridZ ~= b.gridZ then return a.gridZ < b.gridZ end
         local aDepth = a.gridX + a.gridY
         local bDepth = b.gridX + b.gridY
         if aDepth ~= bDepth then return aDepth < bDepth end
-        return a.gridX < b.gridX
+        if a.gridX ~= b.gridX then return a.gridX < b.gridX end
+        if a.rank ~= b.rank then return a.rank < b.rank end
+        return a.order < b.order
     end)
     return model
 end
@@ -242,9 +273,14 @@ function KBWBlueprintPreviewCanvas:drawIso(model)
     end
     for roomIndex = 1, #model.rooms do
         local room = model.rooms[roomIndex]
-        eachZoneTile(room, function(x, y)
-            self:drawDiamond(floorTexture, x, y, scale, room.color, 0.48)
-        end, false)
+        for lineIndex = 1, #room.lines do
+            local line = room.lines[lineIndex]
+            local sx1, sy1 = isoPoint(line[1], line[2])
+            local sx2, sy2 = isoPoint(line[3], line[4])
+            self:drawLine2(self.previewOriginX + sx1 * scale, self.previewOriginY + sy1 * scale,
+                self.previewOriginX + sx2 * scale, self.previewOriginY + sy2 * scale,
+                0.9, room.color.r, room.color.g, room.color.b)
+        end
     end
     for spriteIndex = 1, #model.sprites do
         local sprite = model.sprites[spriteIndex]
@@ -287,18 +323,62 @@ function KBWBlueprintPreviewCanvas:drawTopDown(model)
     end
     for roomIndex = 1, #model.rooms do
         local room = model.rooms[roomIndex]
-        local x, y, width, height = rectFor(room)
-        self:drawRect(x, y, width, height, 0.42, room.color.r, room.color.g, room.color.b)
-        self:drawRectBorder(x, y, width, height, 0.95, room.color.r, room.color.g, room.color.b)
+        for cellIndex = 1, #room.cells do
+            local cell = room.cells[cellIndex]
+            self:drawRect(originX + (cell.x - model.minX) * scale,
+                originY + (cell.y - model.minY) * scale, scale, scale,
+                0.20, room.color.r, room.color.g, room.color.b)
+        end
+        for lineIndex = 1, #room.lines do
+            local line = room.lines[lineIndex]
+            local x1 = originX + (line[1] - model.minX) * scale
+            local y1 = originY + (line[2] - model.minY) * scale
+            local x2 = originX + (line[3] - model.minX) * scale
+            local y2 = originY + (line[4] - model.minY) * scale
+            self:drawLine2(x1, y1, x2, y2, 0.95, room.color.r, room.color.g, room.color.b)
+        end
     end
+    -- A plan, not a heat map: floors fill their square, walls are drawn on
+    -- the edge they stand on, objects as an inset block, roofs hatched.
+    local wallWidth = math.max(2, math.floor(scale * 0.18))
+    local floors, walls, objects, roofs = {}, {}, {}, {}
     for cellIndex = 1, #model.cells do
         local cell = model.cells[cellIndex]
-        local x = originX + (cell.x - model.minX) * scale
-        local y = originY + (cell.y - model.minY) * scale
-        self:drawRect(x + 2, y + 2, math.max(2, scale - 4), math.max(2, scale - 4), 0.82,
-            Theme.accent.r, Theme.accent.g, Theme.accent.b)
-        self:drawRectBorder(x, y, scale, scale, 0.92, Theme.text.r, Theme.text.g, Theme.text.b)
+        if cell.kind == "floor" then floors[#floors + 1] = cell
+        elseif cell.kind == "wall" or cell.kind == "wallCovering" then walls[#walls + 1] = cell
+        elseif cell.kind == "roof" then roofs[#roofs + 1] = cell
+        else objects[#objects + 1] = cell end
     end
+    local function square(cell)
+        return originX + (cell.x - model.minX) * scale, originY + (cell.y - model.minY) * scale
+    end
+    local floorColor, wallColor, objectColor, roofColor = Theme.textMuted, Theme.text, Theme.accent, Theme.warn
+    for i = 1, #floors do
+        local x, y = square(floors[i])
+        self:drawRect(x, y, scale, scale, 0.34, floorColor.r, floorColor.g, floorColor.b)
+    end
+    for i = 1, #roofs do
+        local x, y = square(roofs[i])
+        self:drawRect(x, y, scale, scale, 0.16, roofColor.r, roofColor.g, roofColor.b)
+        self:drawLine2(x, y + scale, x + scale, y, 0.55, roofColor.r, roofColor.g, roofColor.b)
+    end
+    for i = 1, #objects do
+        local x, y = square(objects[i])
+        local inset = math.max(1, math.floor(scale * 0.2))
+        self:drawRect(x + inset, y + inset, math.max(2, scale - inset * 2), math.max(2, scale - inset * 2), 0.85,
+            objectColor.r, objectColor.g, objectColor.b)
+    end
+    for i = 1, #walls do
+        local cell = walls[i]
+        local x, y = square(cell)
+        if cell.north then
+            self:drawRect(x, y - math.floor(wallWidth / 2), scale, wallWidth, 0.95, wallColor.r, wallColor.g, wallColor.b)
+        else
+            self:drawRect(x - math.floor(wallWidth / 2), y, wallWidth, scale, 0.95, wallColor.r, wallColor.g, wallColor.b)
+        end
+    end
+    -- North arrow: the top view keeps world north up.
+    self:drawText("N", self.width - 24, 8, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
 end
 
 function KBWBlueprintPreviewCanvas:prerender()
@@ -548,5 +628,8 @@ function KBWBlueprintPreview.open(owner, player, blueprint)
     KBWBlueprintPreview.instance = window
     return window
 end
+
+-- Exposed for tests and tools.
+KBWBlueprintPreview.buildModel = buildModel
 
 return KBWBlueprintPreview

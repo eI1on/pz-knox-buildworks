@@ -20,11 +20,49 @@ local function bumpInventoryRev()
     inventoryRev = inventoryRev + 1
 end
 
+-- Skill levels and learned recipes; card visibility re-checks when it moves.
+local knowledgeRev = 1
+
+local function bumpKnowledgeRev()
+    knowledgeRev = knowledgeRev + 1
+    inventoryRev = inventoryRev + 1
+end
+
 Events.OnContainerUpdate.Add(bumpInventoryRev)
+if Events.LevelPerk then Events.LevelPerk.Add(bumpKnowledgeRev) end
+
+-- Learning a recipe raises no event, so watch the known-recipe count.
+local knownRecipeCounts = {}
+local nextKnowledgeCheck = {}
+
+local function watchKnownRecipes(player)
+    if isServer() or not player or not player.isLocalPlayer or not player:isLocalPlayer() then return end
+    local index = player:getPlayerNum()
+    local now = getTimestampMs()
+    if now < (nextKnowledgeCheck[index] or 0) then return end
+    nextKnowledgeCheck[index] = now + 500
+    local count = player:getKnownRecipes():size()
+    local previous = knownRecipeCounts[index]
+    knownRecipeCounts[index] = count
+    if previous ~= nil and previous ~= count then bumpKnowledgeRev() end
+end
+
+if Events.OnPlayerUpdate then Events.OnPlayerUpdate.Add(watchKnownRecipes) end
 
 ---@return number
 function Requirements.inventoryRevision()
     return inventoryRev
+end
+
+---@return number
+function Requirements.knowledgeRevision()
+    return knowledgeRev
+end
+
+---Expires every revision-keyed readiness/visibility cache. For changes no
+---engine event reports (debug perk levels, recipes learned by script).
+function Requirements.invalidate()
+    bumpKnowledgeRev()
 end
 
 local activeInput = nil
@@ -512,11 +550,10 @@ local function snapshotTagItems(snapshot, tagName)
     return result
 end
 
---- Counts available units for one input against the snapshot, honouring the
---- same predicate flags and ground-item rules as the detailed evaluation
---- (carried items pass predicateNotBroken; ground items are counted as-is).
-local function countAvailable(snapshot, input, countUses, includeGround)
-    local total = 0
+--- Collect actual instances so readiness reserves shared items across
+--- overlapping inputs, like the detailed construction check does.
+local function snapshotMatches(snapshot, input, includeGround)
+    local matches = {}
     local seenItems = {}
     local oldInput = activeInput
     activeInput = input
@@ -529,7 +566,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
                 local item = list[itemIndex]
                 if not seenItems[item] and predicateNotBroken(item) then
                     seenItems[item] = true
-                    total = total + amountForItem(item, countUses)
+                    matches[#matches + 1] = item
                 end
             end
         end
@@ -539,7 +576,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
                 local item = groundItems[groundIndex]
                 if not seenItems[item] and predicateNotBroken(item) then
                     seenItems[item] = true
-                    total = total + amountForItem(item, countUses)
+                    matches[#matches + 1] = item
                 end
             end
         end
@@ -552,7 +589,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
             local item = tagged[itemIndex]
             if not seenItems[item] and predicateNotBroken(item) then
                 seenItems[item] = true
-                total = total + amountForItem(item, countUses)
+                matches[#matches + 1] = item
             end
         end
         if includeGround then
@@ -564,7 +601,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
                         local item = itemsOnGround[groundIndex]
                         if not seenItems[item] and item:hasTag(tag) and predicateNotBroken(item) then
                             seenItems[item] = true
-                            total = total + amountForItem(item, countUses)
+                            matches[#matches + 1] = item
                         end
                     end
                 end
@@ -572,7 +609,7 @@ local function countAvailable(snapshot, input, countUses, includeGround)
         end
     end
     activeInput = oldInput
-    return total
+    return matches
 end
 
 --- Normalized inputs cached per stage. The normalized rows derive only from
@@ -633,6 +670,23 @@ local function knowledgeAlternativeStatus(player, knowledge)
     return false, table.concat(labels, " / ")
 end
 
+-- Material-independent progression check, also used by catalogue visibility.
+function Requirements.meetsKnowledge(player, stage)
+    if not player then return false end
+    if player:isBuildCheat() then return true end
+    local req = stage and stage.requirements or {}
+    local knowledge = req.knowledge or {}
+    if knowledge.needToBeLearned == false then return true end
+    if knowledgeAlternativeStatus(player, knowledge) then return true end
+    local lists = { req.recipes or {}, knowledge.recipes or {} }
+    for listIndex = 1, #lists do
+        for index = 1, #lists[listIndex] do
+            if not player:isRecipeActuallyKnown(lists[listIndex][index]) then return false end
+        end
+    end
+    return true
+end
+
 --- Readiness-only evaluation for catalogue cards: same pass/fail logic as
 --- Requirements.evaluate, but counts against the shared snapshot, skips the
 --- Available Ingredients / Possible Items detail rows, and exits early.
@@ -652,37 +706,23 @@ function Requirements.evaluateReadiness(player, definition, stage, snapshot)
     end
     if not cheat then
         local inputs = readinessInputs(definition, stage)
+        local rows = {}
         for inputIndex = 1, #inputs do
             local input = inputs[inputIndex]
             local needed = input.uses or input.amount or 1
-            local countUses = input.uses ~= nil or input.mode == "drain"
             local includeGround = input.mode ~= "keep"
-            if countAvailable(snapshot, input, countUses, includeGround) < needed then
-                return { ok = false }
-            end
+            local matches = snapshotMatches(snapshot, input, includeGround)
+            rows[#rows + 1] = { needed = needed, uses = input.uses, mode = input.mode,
+                availableItems = {{ items = matches }} }
         end
+        if not SupplyAllocation.rows(rows, nil, true).ok then return { ok = false } end
         for perkName, needed in pairs(req.skills or {}) do
             local perk = Perks[perkName]
             local available = perk and player:getPerkLevel(perk) or 0
             if perk == nil or available < needed then return { ok = false } end
         end
     end
-    local knowledge = req.knowledge or {}
-    if knowledge.needToBeLearned ~= false then
-        local alternativeMet = knowledgeAlternativeStatus(player, knowledge)
-        local requiredRecipes = req.recipes or {}
-        for recipeIndex = 1, #requiredRecipes do
-            if not player:isRecipeActuallyKnown(requiredRecipes[recipeIndex]) and not alternativeMet then
-                return { ok = false }
-            end
-        end
-        local knowledgeRecipes = knowledge.recipes or {}
-        for recipeIndex = 1, #knowledgeRecipes do
-            if not player:isRecipeActuallyKnown(knowledgeRecipes[recipeIndex]) and not alternativeMet then
-                return { ok = false }
-            end
-        end
-    end
+    if not Requirements.meetsKnowledge(player, stage) then return { ok = false } end
     return { ok = true }
 end
 
@@ -692,8 +732,8 @@ end
 ---@param square     IsoGridSquare | nil
 ---@param choices    table<string, string> | nil
 ---@return KBW.RequirementStatus
-function Requirements.evaluate(player, definition, stage, square, choices)
-    Profiler.count("requirements.fullEvals")
+local function evaluateStatus(player, definition, stage, square, choices, describeOnly)
+    if not describeOnly then Profiler.count("requirements.fullEvals") end
     local status = { ok = true, materials = {}, tools = {}, skills = {}, recipes = {}, rows = {} }
     if not player or not definition or not stage then
         status.ok = false
@@ -715,83 +755,92 @@ function Requirements.evaluate(player, definition, stage, square, choices)
     local inputs = normalizedInputs(definition, stage)
     for inputIndex = 1, #inputs do
         local input = inputs[inputIndex]
-        local needed = input.uses or input.amount or 1
-        local countUses = input.uses ~= nil or input.mode == "drain"
-        local groundSquare = input.mode ~= "keep" and square or nil
-        local selectedFullType = choices and choices[input.id] or nil
-        local selectedTypes = selectedFullType and { selectedFullType } or input.items
-        local selectedTags = selectedFullType and {} or input.tags
-        local availableItems, available = availableTypes(
-            inventory, selectedTypes, selectedTags, countUses, groundSquare, input
-        )
-        -- A manual choice narrows the row used for construction, but it must
-        -- not erase the stock preview for the other legal aliases. Keep a
-        -- second, unfiltered snapshot for Possible Items so changing from a
-        -- Smithing Hammer to another hammer still shows the Smithing Hammer
-        -- as available in the player's inventory.
-        local possibleAvailableItems, possibleAvailable = availableItems, available
-        if selectedFullType then
-            possibleAvailableItems, possibleAvailable = availableTypes(
-                inventory, input.items, input.tags, countUses, groundSquare, input
-            )
-        end
-        local foundTool = nil
-        if selectedFullType then
-            local oldInput = activeInput
-            activeInput = input
-            foundTool = inventory:getFirstTypeEvalRecurse(selectedFullType, predicateNotBroken)
-            activeInput = oldInput
-        elseif input.tags and #input.tags > 0 then
-            foundTool = findTag(inventory, input.tags, input)
-        end
-        local row = {
-            id = input.id,
-            kind = "input",
-            role = input.role,
-            mode = input.mode,
-            uses = input.uses,
-            resourceType = input
-                .resourceType or "Item",
-            label = input.label,
-            labelKey = input.labelKey,
-            icon = input.icon,
-            flags = input.flags or {},
-            materialTags = input
-                .materialTags
-                or {},
-            possibleItems = possibleItemsForInput(input),
-            possibleTags = input.tags or {},
-            availableItems = availableItems,
-            possibleAvailableItems = possibleAvailableItems,
-            possibleAvailable = possibleAvailable,
-            needed = needed,
-            neededMax = input.amountMax,
-            available = available,
-            ok = cheat or available >= needed,
-            item = foundTool,
-            selectedFullType = selectedFullType
-        }
-        status.rows[#status.rows + 1] = row
-        if input.role == "tool" then
-            status.tools[#status.tools + 1] = {
-                tags = input.tags or {},
-                items = input.items or {},
-                item = foundTool,
-                ok = row
-                    .ok,
-                row = row
-            }
+        if describeOnly then
+            -- Planning allocates against its own gathered stock. Describe the
+            -- recipe without enumerating inventory, tags or Possible Items.
+            local row = {}
+            for key, value in pairs(input) do row[key] = value end
+            row.kind, row.needed = "input", input.uses or input.amount or 1
+            status.rows[#status.rows + 1] = row
         else
-            status.materials[#status.materials + 1] = {
-                items = input.items or {},
-                tags = input.tags or {},
+            local needed = input.uses or input.amount or 1
+            local countUses = input.uses ~= nil or input.mode == "drain"
+            local groundSquare = input.mode ~= "keep" and square or nil
+            local selectedFullType = choices and choices[input.id] or nil
+            local selectedTypes = selectedFullType and { selectedFullType } or input.items
+            local selectedTags = selectedFullType and {} or input.tags
+            local availableItems, available = availableTypes(
+                inventory, selectedTypes, selectedTags, countUses, groundSquare, input
+            )
+            -- A manual choice narrows the row used for construction, but it must
+            -- not erase the stock preview for the other legal aliases. Keep a
+            -- second, unfiltered snapshot for Possible Items so changing from a
+            -- Smithing Hammer to another hammer still shows the Smithing Hammer
+            -- as available in the player's inventory.
+            local possibleAvailableItems, possibleAvailable = availableItems, available
+            if selectedFullType then
+                possibleAvailableItems, possibleAvailable = availableTypes(
+                    inventory, input.items, input.tags, countUses, groundSquare, input
+                )
+            end
+            local foundTool = nil
+            if selectedFullType then
+                local oldInput = activeInput
+                activeInput = input
+                foundTool = inventory:getFirstTypeEvalRecurse(selectedFullType, predicateNotBroken)
+                activeInput = oldInput
+            elseif input.tags and #input.tags > 0 then
+                foundTool = findTag(inventory, input.tags, input)
+            end
+            local row = {
+                id = input.id,
+                kind = "input",
+                role = input.role,
+                mode = input.mode,
+                uses = input.uses,
+                resourceType = input
+                    .resourceType or "Item",
+                label = input.label,
+                labelKey = input.labelKey,
+                icon = input.icon,
+                flags = input.flags or {},
+                materialTags = input
+                    .materialTags
+                    or {},
+                possibleItems = possibleItemsForInput(input),
+                possibleTags = input.tags or {},
+                availableItems = availableItems,
+                possibleAvailableItems = possibleAvailableItems,
+                possibleAvailable = possibleAvailable,
                 needed = needed,
+                neededMax = input.amountMax,
                 available = available,
-                ok = row.ok,
-                row = row
+                ok = cheat or available >= needed,
+                item = foundTool,
+                selectedFullType = selectedFullType
             }
+            status.rows[#status.rows + 1] = row
+            if input.role == "tool" then
+                status.tools[#status.tools + 1] = {
+                    tags = input.tags or {},
+                    items = input.items or {},
+                    item = foundTool,
+                    ok = row
+                        .ok,
+                    row = row
+                }
+            else
+                status.materials[#status.materials + 1] = {
+                    items = input.items or {},
+                    tags = input.tags or {},
+                    needed = needed,
+                    available = available,
+                    ok = row.ok,
+                    row = row
+                }
+            end
+            if not row.ok then status.ok = false end
         end
-        if not row.ok then status.ok = false end
     end
     for perkName, needed in pairs(req.skills or {}) do
         local perk = Perks[perkName]
@@ -840,7 +889,7 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         status.rows[#status.rows + 1] = row
         if row.needToBeLearned and not row.ok then status.ok = false end
     end
-    if not cheat then
+    if not cheat and not describeOnly then
         local allocation = SupplyAllocation.rows(status.rows)
         status.allocation = allocation
         for index = 1, #allocation.rows do
@@ -852,6 +901,15 @@ function Requirements.evaluate(player, definition, stage, square, choices)
         if not allocation.ok then status.ok = false end
     end
     return status
+end
+
+function Requirements.evaluate(player, definition, stage, square, choices)
+    return evaluateStatus(player, definition, stage, square, choices, false)
+end
+
+-- Access and input metadata only; never use this result as build approval.
+function Requirements.describe(player, definition, stage)
+    return evaluateStatus(player, definition, stage, false, nil, true)
 end
 
 ---@param player     IsoPlayer

@@ -122,6 +122,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -267,6 +288,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -412,6 +454,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -535,6 +598,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -647,6 +731,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -792,6 +897,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -937,6 +1063,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1082,6 +1229,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1205,6 +1373,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1317,6 +1506,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1462,6 +1672,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1607,6 +1838,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1752,6 +2004,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1875,6 +2148,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1987,6 +2281,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2132,6 +2447,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2277,6 +2613,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2422,6 +2779,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2545,6 +2923,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2657,6 +3056,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2802,6 +3222,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2947,6 +3388,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3092,6 +3554,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3237,6 +3720,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3382,6 +3886,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3527,6 +4052,27 @@
             ],
             "skills": {
               "Tailoring": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3672,6 +4218,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3812,6 +4379,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3919,6 +4507,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4041,6 +4650,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4163,6 +4793,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4285,6 +4936,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4392,6 +5064,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4500,6 +5193,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4608,6 +5322,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4716,6 +5451,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4824,6 +5580,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4932,6 +5709,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5040,6 +5838,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5148,6 +5967,27 @@
             ],
             "skills": {
               "Tailoring": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ArchitecturalDigest_RugsCarpets"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ArchitecturalDigest_RugsCarpets"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {

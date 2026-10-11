@@ -79,10 +79,6 @@ local function detailedMinimumHeight()
     return math.max(DETAILED_MIN_HEIGHT, 430 + getTextManager():getFontHeight(UIFont.Small) * 12)
 end
 
-local function displayName(definition)
-    return I18n.definitionName(definition)
-end
-
 local function definitionDescription(definition)
     return I18n.definitionDescription(definition)
 end
@@ -212,21 +208,6 @@ local function applyPinRecipeButton(button, active, enabled)
     button:setTooltip(active and getText("IGUI_KBW_UnpinRecipe") or getText("IGUI_KBW_PinRecipe"))
 end
 
-local function shortenedText(font, text, width)
-    text = tostring(text or "")
-    text = string.gsub(text, "[\r\n]+", " ")
-    if getTextManager():MeasureStringX(font, text) <= width then return text end
-    while #text > 3 and getTextManager():MeasureStringX(font, text .. "...") > width do
-        text = string.sub(text, 1, #text - 1)
-    end
-    return text .. "..."
-end
-
-local function cleanInlineText(text)
-    text = tostring(text or "")
-    return string.gsub(text, "[\r\n]+", " ")
-end
-
 local function measureFont(font, text)
     return getTextManager():MeasureStringX(font, text)
 end
@@ -282,90 +263,6 @@ local function recipeMetadataEntries(definition, stage)
         entries[#entries + 1] = { text = getText("IGUI_KBW_RequiresOutside") }
     end
     return entries
-end
-
-local function metadataChipHeight(entries, width)
-    if not entries or #entries == 0 then return 0 end
-    local lineHeight = getTextManager():getFontHeight(UIFont.Small) + 8
-    local used = 0
-    local lines = 1
-    for entryIndex = 1, #entries do
-        local entry = entries[entryIndex]
-        local text = tostring(entry.text or "")
-        local horizontalPadding = entry.texture and 34 or 14
-        local chipWidth = math.min(width, getTextManager():MeasureStringX(UIFont.Small, text) + horizontalPadding)
-        if used > 0 and used + chipWidth > width then
-            lines = lines + 1
-            used = 0
-        end
-        used = used + chipWidth + 6
-    end
-    return lines * lineHeight
-end
-
-local function drawMetadataChips(panel, entries, x, y, width)
-    panel.metaHitRows = {}
-    if not entries or #entries == 0 then return y end
-    local fontHeight = getTextManager():getFontHeight(UIFont.Small)
-    local lineHeight = fontHeight + 8
-    local chipHeight = fontHeight + 5
-    local chipX = x
-    local chipY = y
-    for entryIndex = 1, #entries do
-        local entry = entries[entryIndex]
-        local text = tostring(entry.text or "")
-        local horizontalPadding = entry.texture and 34 or 14
-        local chipWidth = math.min(width, getTextManager():MeasureStringX(UIFont.Small, text) + horizontalPadding)
-        if chipX > x and chipX + chipWidth > x + width then
-            chipX = x
-            chipY = chipY + lineHeight
-        end
-        panel:drawRect(
-            chipX, chipY, chipWidth, chipHeight, Theme.surfaceRaised.a, Theme.surfaceRaised.r, Theme.surfaceRaised.g,
-            Theme.surfaceRaised.b
-        )
-        panel:drawRectBorder(
-            chipX, chipY, chipWidth, chipHeight, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g,
-            Theme.borderSoft.b
-        )
-        if entry.texture then
-            local iconSize = math.min(18, fontHeight)
-            panel:drawTextureScaledAspect(entry.texture, chipX + 3, chipY + 2, iconSize, iconSize, 1, 1, 1, 1)
-        end
-        local textX = entry.texture and chipX + 23 or chipX + 7
-        local displayText = shortenedText(UIFont.Small, text, math.max(10, chipWidth - horizontalPadding))
-        panel:drawText(
-            displayText, textX, chipY + 3, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small
-        )
-        panel.metaHitRows[#panel.metaHitRows + 1] = { x = chipX, y = chipY, w = chipWidth, h = chipHeight, text = text }
-        chipX = chipX + chipWidth + 6
-    end
-    return chipY + lineHeight
-end
-
-local function stageDisplayText(stage, index, count)
-    if not stage then return "" end
-    local label = stage.label or stage.displayName or stage.id or tostring(index)
-    if count and count > 1 then
-        return tostring(label) .. "  (" .. tostring(index) .. "/" .. tostring(count) .. ")"
-    end
-    return tostring(label)
-end
-
-local function shouldShowStageLabel(stage, count)
-    if count and count > 1 then return true end
-    if not stage then return false end
-    local id = tostring(stage.id or "")
-    local label = tostring(stage.label or stage.displayName or "")
-    if label ~= "" and label ~= id then return true end
-    return id ~= "" and id ~= "built" and id ~= "default"
-end
-
-local function hasOptions(values)
-    -- Java-backed ISUI setters (notably setVisible) must receive a real
-    -- boolean. Returning nil here is fine for Lua if-tests, but PZ's Java
-    -- bridge throws while unboxing nil as a boolean.
-    return values ~= nil and #values > 0
 end
 
 local function clamp(value, minValue, maxValue)
@@ -440,12 +337,6 @@ end
 
 local FinishOptions = require("KnoxBuildworks/UI/FinishOptions")
 
-local function translated(key, fallback)
-    local text = key and getText(key) or nil
-    if text and text ~= key then return text end
-    return fallback or tostring(key or "?")
-end
-
 local paintColorFor = FinishOptions.paintColorFor
 
 local finishEntriesFor = FinishOptions.entriesFor
@@ -516,28 +407,30 @@ local function patchPlasterCursor(cursor)
     end
 end
 
-local function beginWallCoveringCursor(player, definition, stage, finish)
+---Creates the cursor that applies a wall covering (paint, sign, plaster,
+---wallpaper) without activating it. The debug Test Runner drives the same
+---cursor so automated coverings use exactly the player's code path.
+local function newWallCoveringCursor(player, definition, stage, finish)
     local compat = EntityCompat.metadata(stage)
     local wall = compat.wallCoveringConfig or {}
     local action = wall.type or ((definition and definition.placement or {}).wallCoveringType)
-    if not action then return false end
+    if not action then return nil end
     if action == "wallpaper" then
         if not ISPaperCursor then require "BuildingObjects/ISPaperCursor" end
         local wallpaperType = (finish and finish.wallpaperType) or itemType(
                 findRecipeItem(player, definition, stage, "base:wallpaper")
             ) or wall.wallpaperType
-        if not wallpaperType then return false end
+        if not wallpaperType then return nil end
         local spriteTable = WallPaper and WallPaper["wall"]
         local sprite = spriteTable and spriteTable[wallpaperType]
-        if not sprite then return false end
-        getCell():setDrag(ISPaperCursor:new(player, wallpaperType, sprite), player:getPlayerNum())
-        return true
+        if not sprite then return nil end
+        return ISPaperCursor:new(player, wallpaperType, sprite)
     end
     local args = { actionType = action }
     if action == "paintThump" or action == "paintSign" then
         local paintType = (finish and finish.paintType)
             or itemType(findRecipeItem(player, definition, stage, "base:paint"))
-        if not paintType then return false end
+        if not paintType then return nil end
         args.paintType = paintType
         local color = (finish and finish.color) or paintColorFor(paintType)
         if color then
@@ -553,11 +446,17 @@ local function beginWallCoveringCursor(player, definition, stage, finish)
         cursor = WallFinishCursor.new(player, action, args, finish)
     else
         if not ISPaintCursor then require "BuildingObjects/ISPaintCursor" end
-        if not ISPaintCursor then return false end
+        if not ISPaintCursor then return nil end
         cursor = ISPaintCursor:new(player, action, args)
     end
-    if not cursor then return false end
+    if not cursor then return nil end
     if action == "plaster" then patchPlasterCursor(cursor) end
+    return cursor
+end
+
+local function beginWallCoveringCursor(player, definition, stage, finish)
+    local cursor = newWallCoveringCursor(player, definition, stage, finish)
+    if not cursor then return false end
     getCell():setDrag(cursor, player:getPlayerNum())
     return true
 end
@@ -1240,8 +1139,14 @@ function KBWCatalog:refreshGrid(preserveSelection)
             skill = self.skillFilterValues and self.skillFilterValues[self.skillFilter.selected]
         }
     end
+    local previous = self.selected
     self.grid:setItems(self:filteredDefinitions(), selectedId)
     self.selected = self.grid.items[self.grid.selectedIndex]
+    if previous and self.selected == previous and self:sameVisibleStages() then
+        self:updateActions()
+        self:layout()
+        return
+    end
     self:refreshSelectionControls()
     if state and self.selected and self.selected.id == selectedId then
         self:restoreState(state)
@@ -1251,6 +1156,17 @@ function KBWCatalog:refreshGrid(preserveSelection)
     self:layout()
     Profiler.add("catalog.refreshGrid", refreshStart)
     Profiler.count("catalog.refreshGridRuns")
+end
+
+function KBWCatalog:sameVisibleStages()
+    local current = self.visibleStages
+    if not current then return false end
+    local fresh = CatalogVisibility.filteredStages(self.player, self.selected, CatalogVisibility.shouldShowAll(self.player))
+    if #fresh ~= #current then return false end
+    for index = 1, #fresh do
+        if fresh[index].id ~= current[index].id then return false end
+    end
+    return true
 end
 
 function KBWCatalog:refreshVariantMaterialControls()
@@ -1468,6 +1384,12 @@ function KBWCatalog:refreshSelectionControls()
     self.visibleStages = CatalogVisibility.filteredStages(
         self.player, self.selected, CatalogVisibility.shouldShowAll(self.player)
     )
+    if #self.visibleStages == 0 and self.selected.id then
+        -- Shown from stale cached visibility: settle it now.
+        CatalogIndex.refreshRecordVisibility(
+            self.player, self.selected.id, CatalogVisibility.shouldShowAll(self.player)
+        )
+    end
     self.stage.selected = 1
     self:refreshVariantMaterialControls()
     self:refreshStageAndFinish()
@@ -1571,6 +1493,22 @@ function KBWCatalog:firstIngredientRow(preferFinish)
     return nil
 end
 
+function KBWCatalog:currentDrawerRow()
+    local current = self.ingredientDrawer and self.ingredientDrawer.row
+    if not current then return nil end
+    local panels = { self.requirements, self.accessPanel }
+    for panelIndex = 1, #panels do
+        local rows = panels[panelIndex] and panels[panelIndex].rows or {}
+        for rowIndex = 1, #rows do
+            local row = rows[rowIndex]
+            if row and row.kind == current.kind and (row.id or row.name) == (current.id or current.name) then
+                return row
+            end
+        end
+    end
+    return nil
+end
+
 function KBWCatalog:updateIngredientDrawerForSelection(forceOpen, preferFinish)
     if not self.ingredientDrawer then return end
     if self.compact then
@@ -1578,7 +1516,7 @@ function KBWCatalog:updateIngredientDrawerForSelection(forceOpen, preferFinish)
         return
     end
     if not forceOpen and not self.drawerPinnedOpen then return end
-    local row = self:firstIngredientRow(preferFinish)
+    local row = not preferFinish and self:currentDrawerRow() or self:firstIngredientRow(preferFinish)
     if row then
         self.drawerPinnedOpen = true
         uiData(self.player).drawerPinnedOpen = true
@@ -1999,7 +1937,13 @@ function KBWCatalog:onBuild()
         self:selectedMaterial(), 1, self:selectedInputChoices()
     )
     cursor.finish = self:selectedFinish()
-    getCell():setDrag(cursor, self.player:getPlayerNum())
+    local playerNum = self.player:getPlayerNum()
+    getCell():setDrag(cursor, playerNum)
+    if JoypadState and JoypadState.players and JoypadState.players[playerNum + 1] and setJoypadFocus then
+        -- Vanilla sends D-pad movement to the world drag only without a UI
+        -- focus. The catalogue may still own focus after its window closes.
+        setJoypadFocus(playerNum, nil)
+    end
 end
 
 function KBWCatalog:onPlan()
@@ -2440,6 +2384,8 @@ function KBWCatalog.onSetDragItem(item, playerNum)
     Events.OnTick.Remove(KBWCatalog.processDragReturn)
     Events.OnTick.Add(KBWCatalog.processDragReturn)
 end
+
+KBWCatalog.newWallCoveringCursor = newWallCoveringCursor
 
 if not KBWCatalog.eventsInstalled then
     Events.SetDragItem.Add(KBWCatalog.onSetDragItem)

@@ -1,0 +1,177 @@
+module KnoxBuildworks
+{
+    model KBW_ArchitecturalDigestRugsCarpetsGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWArchitecturalDigestRugsCarpets,
+        scale = 0.4,
+        }
+
+    model KBW_DecorationsGuideRoadwayGarageGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWArchitecturalDigestRugsCarpets,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingBedsCouchesArmchairsGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingBedsCouchesArmchairs,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingChairsBenchesGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingChairsBenches,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingCountersGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingCounters,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingCratesGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingCrates,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingDesksTablesGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingDesksTables,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingDoorsWindowsGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingDoorsWindows,
+        scale = 0.4,
+        }
+
+    model KBW_FineWoodWorkingDressersGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWFineWoodWorkingDressers,
+        scale = 0.4,
+        }
+
+    model KBW_FlooringGuideCeramicGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWOldHouseJournalWoodenFloors,
+        scale = 0.4,
+        }
+
+    model KBW_FlooringGuidePavedGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWOldHouseJournalWoodenFloors,
+        scale = 0.4,
+        }
+
+    model KBW_HomeMechanixBathroomGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWHomeMechanixBathroom,
+        scale = 0.4,
+        }
+
+    model KBW_InsulationFoam
+    {
+		mesh = WorldItems/KBWInsulationFoam,
+		texture = WorldItems/KBWInsulationFoam,
+		scale = 0.5,
+	    }
+
+    model KBW_OldHouseJournalWoodenFloorsGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWOldHouseJournalWoodenFloors,
+        scale = 0.4,
+        }
+
+    model KBW_PlasticSheet
+    {
+		mesh = WorldItems/MetalSheet,
+		texture = WorldItems/KBWPlasticSheet,
+		scale = 0.0085,
+	    }
+
+    model KBW_PlasticSheetSmall
+    {
+		mesh = WorldItems/SmallSheetMetal,
+		texture = WorldItems/KBWPlasticSheet,
+		scale = 0.35,
+	    }
+
+    model KBW_PopularMechanicsHomeAppliancesGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWPopularMechanicsHomeAppliances,
+        scale = 0.4,
+        }
+
+    model KBW_PopularMechanicsLightingGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWPopularMechanicsLighting,
+        scale = 0.4,
+        }
+
+    model KBW_ProjectsInMetalDiverseGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWProjectsInMetalDiverse,
+        scale = 0.4,
+        }
+
+    model KBW_RefrigerantBottle
+    {
+        mesh = WorldItems/KBWRefrigerantBottle,
+        scale = 0.1,
+            texture = WorldItems/KBWRefrigerantBottle,
+    }
+
+    model KBW_RefrigeratorCompressor
+    {
+        mesh = WorldItems/KBWRefrigeratorCompressor,
+        scale = 0.1,
+            texture = WorldItems/KBWRefrigeratorCompressor,
+    }
+
+    model KBW_RubberSeal
+    {
+		mesh = WorldItems/String,
+		texture = WorldItems/KBWRubberSeal,
+		scale = 0.6,
+	    }
+
+    model KBW_SmallRubberTube
+    {
+		mesh = WorldItems/KBWSmallRubberTube,
+		texture = WorldItems/KBWSmallRubberTube,
+		scale = 0.3,
+	    }
+
+    model KBW_TheFamilyHandymanStairsFencesGround
+    {
+        mesh = WorldItems/Magazine,
+        texture = WorldItems/KBWTheFamilyHandymanStairsFences,
+        scale = 0.4,
+        }
+
+    model KBW_ThinCopperPipe
+    {
+		mesh = WorldItems/KBWThinCopperPipe,
+		texture = WorldItems/KBWThinCopperPipe,
+		scale = 0.6,
+	    }
+}

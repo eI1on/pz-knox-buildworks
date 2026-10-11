@@ -3,7 +3,10 @@ import json
 from pathlib import Path
 import unittest
 
+import kbw_runtime as k
+
 from lupa import LuaRuntime
+from test_catalog_workspace import runtime
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -85,6 +88,33 @@ class ReportDefinitionTests(unittest.TestCase):
         self.assertEqual(bucket["tags"], ["base:bucket"])
         self.assertNotIn("items", bucket)
 
+    def test_white_clapboard_accepts_matching_vanilla_frame(self):
+        walls = bundle(EXPANDED, "KnoxBuildworks/definitions/walls/white_wide_clapboard.json")
+        for buildable in walls[:5]:
+            self.assertEqual(
+                buildable["stages"][0]["previousStage"],
+                ["WoodenWallFrame", "MetalWallFrame"],
+            )
+        lua = LuaRuntime(unpack_returned_tuples=True)
+        lua.execute("""
+            function require() return {} end
+            function instanceof(object, className)
+                return className == 'IsoThumpable' and object.thumpable == true
+            end
+        """)
+        lua.globals().placement = lua.execute(
+            (CORE / "lua/shared/KnoxBuildworks/Validation/Placement.lua").read_text(encoding="utf-8-sig")
+        )
+        lua.execute("""
+            local frame={thumpable=true, getName=function() return 'WoodenWallFrame' end,
+                getNorth=function() return true end, getModData=function() return {} end}
+            local objects={size=function() return 1 end, get=function() return frame end}
+            local square={getSpecialObjects=function() return objects end}
+            local stages={'WoodenWallFrame','MetalWallFrame'}
+            assert(placement.findPrevious(square,'white_wide_clapboard_wall',stages,true)==frame)
+            assert(placement.findPrevious(square,'white_wide_clapboard_wall',stages,false)==nil)
+        """)
+
     def test_wall_bin_and_vault_are_decorations(self):
         cases = (
             (
@@ -136,6 +166,100 @@ class ReportDefinitionTests(unittest.TestCase):
             assert(not collision.isPassableOpening('door',true))
         """)
 
+    def test_full_height_arches_are_open_and_shape_three_four_windows_match_their_face(self):
+        walls = bundle(EXPANDED, "KnoxBuildworks/definitions/walls/family_window_walls.json")
+        arches = [b for b in walls if "Arched Full Height Window Wall" in b.get("displayName", "")
+                  and b["stages"][0]["geometry"]["faces"]["W"]["layers"][0]["rows"][0][0]
+                  .startswith(("walls_interior_house_16_", "walls_interior_house_18_"))]
+        self.assertEqual(10, len(arches))
+        for arch in arches:
+            config = arch["stages"][0]["object"]
+            self.assertTrue(config["canPassThrough"])
+            self.assertFalse(config["blockAllSquare"])
+
+        lua = LuaRuntime(unpack_returned_tuples=True)
+        lua.execute("""
+            function require() return {} end
+            IsoFlagType=setmetatable({}, {__index=function(_,key) return key end})
+            IsoPropertyType=setmetatable({}, {__index=function(_,key) return key end})
+            function instanceof() return false end
+            local function list(items)
+                return {size=function() return #items end,get=function(_,index) return items[index+1] end}
+            end
+            function arch(name,shape)
+                local properties={has=function(_,flag) return flag=='WallSE' end,
+                    get=function(_,key) return key=='WindowShape' and shape or nil end}
+                local sprite={getName=function() return name end,getProperties=function() return properties end}
+                return {getSprite=function() return sprite end}
+            end
+            function square(object)
+                return {getSpecialObjects=function() return list({}) end,
+                    getObjects=function() return list({object}) end}
+            end
+        """)
+        lua.globals().placement = lua.execute(
+            (CORE / "lua/shared/KnoxBuildworks/Validation/Placement.lua").read_text(encoding="utf-8-sig")
+        )
+        lua.execute("""
+            assert(placement.hasWallFrame(square(arch('walls_interior_house_18_4','3')),false,true,nil,'3'))
+            assert(not placement.hasWallFrame(square(arch('walls_interior_house_18_4','3')),true,true,nil,'3'))
+            assert(placement.hasWallFrame(square(arch('walls_interior_house_18_5','3')),true,true,nil,'3'))
+            assert(not placement.hasWallFrame(square(arch('walls_interior_house_18_5','3')),false,true,nil,'3'))
+            assert(not placement.hasWallFrame(square(arch('walls_interior_house_18_5','3')),true,true,nil,'4'))
+            assert(placement.hasWallFrame(square(arch('walls_interior_house_18_7','4')),true,true,nil,'4'))
+        """)
+
+    def test_planned_arch_and_window_of_same_shape_can_share_an_edge(self):
+        lua = runtime()
+        lua.execute("""
+            IsoFlagType=setmetatable({}, {__index=function(_,key) return key end})
+            IsoPropertyType=setmetatable({}, {__index=function(_,key) return key end})
+            IsoObjectType={doorW=1,doorN=2,doorFrW=3,doorFrN=4}
+            function getCell() return nil end
+            local function sprite(name, flags, shape)
+                local set={}; for i=1,#flags do set[flags[i]]=true end
+                return {getName=function() return name end,getType=function() return 0 end,
+                    getProperties=function() return {has=function(_,flag) return set[flag]==true end,
+                        get=function(_,key) return key=='WindowShape' and shape or nil end} end}
+            end
+            local sprites={
+                walls_interior_house_18_4=sprite('walls_interior_house_18_4',{'WallSE'},'3'),
+                walls_interior_house_18_5=sprite('walls_interior_house_18_5',{'WallSE'},'3'),
+                fixtures_windows_wood_4=sprite('fixtures_windows_wood_4',{'windowW'},'3'),
+                fixtures_windows_wood_5=sprite('fixtures_windows_wood_5',{'windowN'},'3'),
+                fixtures_windows_wood_6=sprite('fixtures_windows_wood_6',{'windowW'},'4')}
+            function getSprite(name) return sprites[name] end
+            local frame={id='arch',placement={kind='wall'},stages={{id='built',
+                sprites={W='walls_interior_house_18_4',N='walls_interior_house_18_5'}}}}
+            local window={id='pane',placement={kind='object',needWindowFrame=true},stages={{id='built',
+                sprites={W='fixtures_windows_wood_4',N='fixtures_windows_wood_5'}}}}
+            function resolve(id) return (id=='arch' and frame or window) end
+            modules['KnoxBuildworks/Definitions/Resolver']={resolveStage=function(id)
+                local d=resolve(id); return d,d.stages[1] end}
+            modules['KnoxBuildworks/Definitions/StageConfig']={
+                placement=function(d) return d.placement end,sprite=function() return {} end}
+            modules['KnoxBuildworks/Geometry/Matrix']={getFaceCells=function() return nil end,
+                getFaceSprite=function(stage,direction)
+                return stage.sprites[(direction==2 or direction==4) and 'N' or 'W'] end}
+        """)
+        lua.globals().modules["KnoxBuildworks/Validation/Placement"] = lua.execute(
+            (CORE / "lua/shared/KnoxBuildworks/Validation/Placement.lua").read_text(encoding="utf-8-sig")
+        )
+        lua.globals().blueprints = lua.execute(
+            (CORE / "lua/shared/KnoxBuildworks/Planning/Blueprints.lua").read_text(encoding="utf-8-sig")
+        )
+        lua.execute("""
+            local frameW={id='frame-w',buildableId='arch',stageId='built',x=1,y=2,z=0,direction=1}
+            local paneW={id='pane-w',buildableId='pane',stageId='built',x=1,y=2,z=0,direction=1}
+            assert(blueprints.hasRequiredFrame({}, {placements={frameW}}, paneW))
+            assert(#blueprints.findIntersections({placements={frameW}},paneW)==0)
+            local frameN={id='frame-n',buildableId='arch',stageId='built',x=1,y=2,z=0,direction=2}
+            local paneN={id='pane-n',buildableId='pane',stageId='built',x=1,y=2,z=0,direction=2}
+            assert(blueprints.hasRequiredFrame({}, {placements={frameN}}, paneN))
+            assert(#blueprints.findIntersections({placements={frameN}},paneN)==0)
+            assert(not blueprints.hasRequiredFrame({}, {placements={frameW}}, paneN))
+        """)
+
     def test_new_report_paths_use_native_and_attached_object_behaviour(self):
         building = (CORE / "lua/server/KnoxBuildworks/BuildingObjects/KBWBuildingObject.lua").read_text(
             encoding="utf-8-sig"
@@ -185,16 +309,17 @@ class ReportDefinitionTests(unittest.TestCase):
         self.assertIn("if data.pinnedRecipes[key] == nil then", pinned)
         self.assertIn("table.remove(order, orderIndex)", pinned)
 
-    def test_world_highlights_flush_once_in_the_same_world_frame(self):
+    def test_world_highlights_draw_in_the_persistent_world_pass(self):
         ghost = (CORE / "lua/client/KnoxBuildworks/Planning/GhostRenderer.lua").read_text(encoding="utf-8-sig")
         planner = (CORE / "lua/client/KnoxBuildworks/Planning/Planner.lua").read_text(encoding="utf-8-sig")
-        self.assertIn("addAreaHighlightForPlayer(", ghost)
+        self.assertNotIn("addAreaHighlightForPlayer(", ghost)
         self.assertIn("local areaQueue = {}", ghost)
-        self.assertIn("function GhostRenderer.flushWorldAreaHighlights()", ghost)
+        self.assertIn("GhostRenderer.PLAN_COLOR_DIM =", ghost)
+        self.assertIn("function GhostRenderer.flushWorldAreaHighlights(playerIndex, throughZ)", ghost)
         self.assertNotIn("function GhostRenderer.flushAreaHighlights()", ghost)
         self.assertNotIn("lastAreaQueue", ghost)
-        self.assertEqual(planner.count("Events.RenderOpaqueObjectsInWorld.Add"), 2)
-        self.assertLess(planner.index("Planner.renderWorldPreview)"), planner.index("Planner.flushWorldHighlights)"))
+        self.assertEqual(planner.count("Events.OnPostRender.Add(Planner.renderWorldPreview)"), 1)
+        self.assertNotIn("Events.RenderOpaqueObjectsInWorld.Add", planner)
         self.assertNotIn("Events.OnPreUIDraw.Add", planner)
 
     def test_build_42_21_moveable_placement_passes_authoritative_character(self):
@@ -203,8 +328,8 @@ class ReportDefinitionTests(unittest.TestCase):
         )
         self.assertIn("self.character, target, instanceItem(\"Base.Plank\"), tile.sprite", building)
         self.assertNotIn("placeMoveableInternal(target,", building)
-        vanilla = Path("D:/SteamLibrary/steamapps/common/ProjectZomboid/media/lua/shared/Moveables/ISMoveableSpriteProps.lua")
-        if vanilla.exists():
+        vanilla = k.kbw_paths.game_file("lua/shared/Moveables/ISMoveableSpriteProps.lua")
+        if vanilla is not None:
             source = vanilla.read_text(encoding="utf-8-sig")
             self.assertIn("function ISMoveableSpriteProps:placeMoveableInternal(_character, _square, _item, _spriteName)", source)
 
@@ -246,15 +371,16 @@ class ReportDefinitionTests(unittest.TestCase):
             recordWallBuildMaterials(wall, { {} })
             assert(wall.modData['need:Base.Plank'] == nil)
         """)
-        vanilla = Path("D:/SteamLibrary/steamapps/common/ProjectZomboid/media/lua/shared/Moveables/ISMoveableSpriteProps.lua")
-        if vanilla.exists():
+        vanilla = k.kbw_paths.game_file("lua/shared/Moveables/ISMoveableSpriteProps.lua")
+        if vanilla is not None:
             self.assertIn('object:hasBuildMaterials()', vanilla.read_text(encoding="utf-8-sig"))
 
-    def test_entity_backed_builds_have_stream_repair(self):
-        repair = (CORE / "lua/shared/KnoxBuildworks/World/EntityRepair.lua").read_text(encoding="utf-8-sig")
-        self.assertIn("EntityCompat.attach(object, stage, false)", repair)
-        self.assertIn("Events.LoadGridsquare.Add", repair)
-        self.assertIn("Events.OnObjectAdded.Add", repair)
+    def test_entity_backed_builds_attach_at_construction(self):
+        building = (CORE / "lua/server/KnoxBuildworks/BuildingObjects/KBWBuildingObject.lua").read_text(
+            encoding="utf-8-sig"
+        )
+        self.assertIn("EntityCompat.attach(part, self.stage, true)", building)
+        self.assertFalse((CORE / "lua/shared/KnoxBuildworks/World/EntityRepair.lua").exists())
 
     def test_native_light_switch_is_refreshed_after_insertion(self):
         factory = (CORE / "lua/server/KnoxBuildworks/BuildingObjects/NativeObjectFactory.lua").read_text(
@@ -265,8 +391,10 @@ class ReportDefinitionTests(unittest.TestCase):
         switch = factory[switch_start:switch_end]
         self.assertIn("IsoLightSwitch.new", switch)
         self.assertIn("object:addLightSourceFromSprite()", switch)
-        self.assertIn("object:setPower(2)", switch)
-        self.assertIn("object:update()", switch)
+        # A switch in a map room pushes the room state to clients; the old
+        # setPower/update refresh did nothing for wall switches.
+        self.assertIn("object:switchLight(object:isActivated())", switch)
+        self.assertNotIn("setPower", switch)
 
 
 if __name__ == "__main__":

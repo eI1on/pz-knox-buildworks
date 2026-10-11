@@ -25,9 +25,11 @@ class ReleaseDocumentationTests(unittest.TestCase):
 
     def test_changelog_opens_with_the_completed_revamp_entry(self):
         text = (ROOT / "CHANGELOG.txt").read_text(encoding="utf-8")
-        self.assertTrue(text.startswith("[b]Build 42.21 Compatibility[/b]"))
-        self.assertIn("[b]Catalogue & Planning Revamp[/b]", text)
+        # The hotfix sits on top; the released update below it stays as shipped.
+        self.assertTrue(text.startswith("[b]Roof Helper Update - Hotfix[/b]"))
+        self.assertIn("[/list]\n\n\n[b]Roof Helper, Magazines & Planning Tools Update[/b]", text)
         self.assertNotIn("[*][b]\n", text.split("[/list]", 1)[0])
+        self.assertIn("[b]Catalogue and Planning Revamp & Build 42.21 Compatibility[/b]", text)
         self.assertIn("gear window now previews and saves", text)
 
 

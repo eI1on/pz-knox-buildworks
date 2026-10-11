@@ -218,7 +218,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -295,7 +355,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -345,7 +465,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -430,7 +610,67 @@
             "materials": "kbwve.appliance.bathtub",
             "skills": {
               "MetalWelding": 6
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -507,7 +747,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -584,7 +884,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -661,7 +1021,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -738,7 +1158,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -815,7 +1295,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -892,7 +1432,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -969,7 +1569,67 @@
             "materials": "kbwve.appliance.plumbingFixture",
             "skills": {
               "MetalWelding": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_HomeMechanix_Bathroom"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.HomeMechanix_Bathroom"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,

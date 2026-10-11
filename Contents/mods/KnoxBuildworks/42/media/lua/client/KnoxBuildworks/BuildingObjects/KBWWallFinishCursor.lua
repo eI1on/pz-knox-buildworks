@@ -15,17 +15,6 @@ local function predicateNotBroken(item)
     return true
 end
 
-local function firstType(inventory, itemType)
-    if not inventory or not itemType then return nil end
-    local item = inventory:getFirstTypeRecurse(itemType)
-    if item then return item end
-    local value = tostring(itemType)
-    if not string.find(value, ".", 1, true) then
-        return inventory:getFirstTypeRecurse("Base." .. value)
-    end
-    return nil
-end
-
 local function isKnoxObject(object)
     local data = object and object.getModData and object:getModData() or nil
     return data and data.KBW and data.KBW.buildableId ~= nil

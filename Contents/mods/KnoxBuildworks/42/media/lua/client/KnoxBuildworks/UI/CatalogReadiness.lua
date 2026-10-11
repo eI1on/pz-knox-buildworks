@@ -18,6 +18,7 @@ function Readiness.reset(owner)
     owner.readyRevision = Requirements.inventoryRevision()
     owner.readyRules = Rules.revision
     owner.readyEnvironment = environmentKey(owner)
+    owner.readyCompleteAt = nil
 end
 
 function Readiness.filter(owner, definitions)
@@ -72,8 +73,10 @@ end
 -- overlapping ingredients before a recipe is advertised as ready.
 function Readiness.update(owner)
     if not owner.readyOnly then return end
+    local now = getTimestampMs()
     if owner.readyRevision ~= Requirements.inventoryRevision() or owner.readyRules ~= Rules.revision
-        or owner.readyEnvironment ~= environmentKey(owner) then
+        or owner.readyEnvironment ~= environmentKey(owner)
+        or (owner.readyCompleteAt and now - owner.readyCompleteAt >= 30000) then
         Readiness.reset(owner)
         owner:refreshGrid()
     end
@@ -108,11 +111,11 @@ function Readiness.update(owner)
         end
     end
     if dirty then owner.readyDirty = true end
-    local now = getTimestampMs()
     local pending = false
     for index = 1, #source do
         if owner.readyResults[source[index].id] == nil then pending = true; break end
     end
+    if not pending and not owner.readyCompleteAt then owner.readyCompleteAt = now end
     if owner.readyButton then
         owner.readyButton:setTitle(getText(pending and "IGUI_KBW_CheckingRecipes" or "IGUI_KBW_ReadyToBuild"))
     end

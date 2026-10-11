@@ -127,6 +127,28 @@
             ],
             "skills": {
               "Masonry": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 3,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -255,6 +277,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -436,6 +479,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -618,6 +683,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -800,6 +887,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -841,10 +950,10 @@
                   {
                     "rows": [
                       [
-                        "location_restaurant_pileocrepe_01_28"
+                        "location_restaurant_pileocrepe_01_25"
                       ],
                       [
-                        "location_restaurant_pileocrepe_01_29"
+                        "location_restaurant_pileocrepe_01_24"
                       ]
                     ]
                   }
@@ -855,8 +964,8 @@
                   {
                     "rows": [
                       [
-                        "location_restaurant_pileocrepe_01_24",
-                        "location_restaurant_pileocrepe_01_25"
+                        "location_restaurant_pileocrepe_01_28",
+                        "location_restaurant_pileocrepe_01_29"
                       ]
                     ]
                   }
@@ -982,6 +1091,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1023,10 +1154,10 @@
                   {
                     "rows": [
                       [
-                        "location_restaurant_pizzawhirled_01_44"
+                        "location_restaurant_pizzawhirled_01_41"
                       ],
                       [
-                        "location_restaurant_pizzawhirled_01_45"
+                        "location_restaurant_pizzawhirled_01_40"
                       ]
                     ]
                   }
@@ -1037,8 +1168,8 @@
                   {
                     "rows": [
                       [
-                        "location_restaurant_pizzawhirled_01_40",
-                        "location_restaurant_pizzawhirled_01_41"
+                        "location_restaurant_pizzawhirled_01_44",
+                        "location_restaurant_pizzawhirled_01_45"
                       ]
                     ]
                   }
@@ -1164,6 +1295,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1293,6 +1446,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1436,6 +1610,28 @@
             "skills": {
               "Woodwork": 5,
               "Carving": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5,
+                    "Carving": 4
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1588,6 +1784,28 @@
             "skills": {
               "Woodwork": 5,
               "Carving": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5,
+                    "Carving": 4
+                  }
+                }
+              ]
             }
           },
           "construction": {

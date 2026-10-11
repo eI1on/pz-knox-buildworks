@@ -215,7 +215,85 @@
             "skills": {
               "MetalWelding": 4,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -294,7 +372,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -373,7 +529,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -452,7 +686,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -531,7 +843,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -610,7 +1000,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -689,7 +1157,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -768,7 +1314,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -847,7 +1471,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -903,7 +1605,85 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 4
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -959,7 +1739,85 @@
             "skills": {
               "MetalWelding": 7,
               "Electricity": 5
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 7,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -1033,7 +1891,85 @@
             "skills": {
               "MetalWelding": 4,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -1143,12 +2079,89 @@
                   "Base.Nails"
                 ],
                 "amount": 4
+              },
+              {
+                "id": "expansion_refrigeratorcompressor",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_refrigerantbottle",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_insulationfoam",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.InsulationFoam"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "expansion_plasticsheet",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
               }
             ],
             "skills": {
               "MetalWelding": 4,
               "Electricity": 3,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Electricity": 7,
+                    "Woodwork": 3
+                  }
+                }
+              ]
             }
           },
           "object": {

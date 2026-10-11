@@ -361,6 +361,7 @@
 ---@field z number
 ---@field w number
 ---@field h number
+---@field rects? {dx:number, dy:number, w:number, h:number}[] Edge-connected rectangles relative to x/y.
 ---@field color? {r:number, g:number, b:number, a:number}
 
 ---@class KBW.GatherArea

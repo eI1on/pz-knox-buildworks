@@ -10,7 +10,7 @@ local Log = require("KnoxBuildworks/Log")
 local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 require("KnoxBuildworks/World/WellSystem")
 require("KnoxBuildworks/World/Collision")
-require("KnoxBuildworks/World/EntityRepair")
+require("KnoxBuildworks/World/LightSwitches")
 require "KnoxBuildworks/BuildingObjects/KBWBuildingObject"
 
 ---@class KBW.ServerModule
@@ -75,6 +75,9 @@ local BLUEPRINT_COMMANDS = {
     BPAddPlacements = true,
     BPRemovePlacement = true,
     BPAddRoom = true,
+    BPExtendRoom = true,
+    BPShrinkRoom = true,
+    BPRemovePlacements = true,
     BPRemoveRoom = true,
     BPUpdateRoom = true,
     BPSetGatherArea = true,
@@ -90,6 +93,8 @@ local BLUEPRINT_COMMANDS = {
 local BLUEPRINT_CLEANUP_COMMANDS = {
     BPDelete = true,
     BPRemovePlacement = true,
+    BPRemovePlacements = true,
+    BPShrinkRoom = true,
     BPRemoveRoom = true
 }
 

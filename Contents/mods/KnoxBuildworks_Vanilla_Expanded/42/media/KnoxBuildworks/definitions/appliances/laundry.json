@@ -150,7 +150,67 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -224,7 +284,67 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,
@@ -298,7 +418,67 @@
             "skills": {
               "MetalWelding": 6,
               "Electricity": 3
-            }
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6,
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "expansion_smallrubbertube",
+                "role": "component",
+                "mode": "drain",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "uses": 2
+              },
+              {
+                "id": "expansion_rubberseal",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_thincopperpipe",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "expansion_plasticsheetsmall",
+                "role": "component",
+                "mode": "consume",
+                "items": [
+                  "KnoxBuildworks.PlasticSheetSmall"
+                ],
+                "amount": 1
+              }
+            ]
           },
           "object": {
             "isProp": true,

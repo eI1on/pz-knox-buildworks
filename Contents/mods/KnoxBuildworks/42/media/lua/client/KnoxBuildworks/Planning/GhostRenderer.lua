@@ -1,40 +1,59 @@
 ---GhostRenderer provides the Knox Buildworks blueprint planning layer.
+local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Matrix = require("KnoxBuildworks/Geometry/Matrix")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
+local RoomShape = require("KnoxBuildworks/Planning/RoomShape")
 
 ---@class KBW.GhostRendererModule
 ---@type KBW.GhostRendererModule
 local GhostRenderer = {}
 
 GhostRenderer.PLAN_COLOR = { r = 0.55, g = 0.78, b = 1.00, a = 0.30 }
-GhostRenderer.PLAN_COLOR_DIM = { r = 0.55, g = 0.78, b = 1.00, a = 0.12 }
+GhostRenderer.PLAN_COLOR_DIM = { r = 0.36, g = 0.49, b = 0.62, a = 0.18 }
 GhostRenderer.CONFLICT_COLOR = { r = 0.80, g = 0.25, b = 0.20, a = 0.34 }
 GhostRenderer.HIGHLIGHT_COLOR = { r = 0.95, g = 0.85, b = 0.35, a = 0.42 }
 GhostRenderer.GATHER_COLOR = { r = 0.38, g = 0.86, b = 0.56, a = 0.22 }
 GhostRenderer.RANGE_COLOR = { r = 0.90, g = 0.95, b = 1.00, a = 0.16 }
-GhostRenderer.opacity = 0.14
+GhostRenderer.opacity = 0.5
+GhostRenderer.view = { style = "ghost", levels = "adjacent", roofs = true, rooms = true, walls = true }
+local OPACITIES = {0.15, 0.35, 0.65, 1.0}
+
+-- Restore the rendering player's preferences even before the planning UI opens.
+-- Each split-screen world pass supplies its own player; no settings leak between saves.
+function GhostRenderer.applyPreferences(player)
+    local data = player and player:getModData().KBW_UI or {}
+    data = type(data) == "table" and data or {}
+    local saved = type(data.ghostView) == "table" and data.ghostView or {}
+    local view = GhostRenderer.view
+    view.style = (saved.style == "texture" or saved.style == "solid") and saved.style or "ghost"
+    view.levels = (saved.levels == "current" or saved.levels == "below" or saved.levels == "all") and saved.levels or "adjacent"
+    view.roofs, view.rooms, view.walls = saved.roofs ~= false, saved.rooms ~= false, saved.walls ~= false
+    GhostRenderer.opacity = OPACITIES[data.ghostOpacityIndex] or OPACITIES[2]
+end
 
 local spriteCache = {}
 local areaQueue = {}
+local roomOutlineCache = setmetatable({}, {__mode = "k"})
+local queueRoomOutline
 local cellCache = {}
 local cellCacheCount = 0
 local CELL_CACHE_LIMIT = 4096
-local orderCache = { source = nil, updated = nil, count = 0, order = {} }
+local orderCaches = {}
 
 ---@param value unknown
 function GhostRenderer.setOpacity(value)
     value = tonumber(value) or 0.14
     if value < 0.04 then value = 0.04 end
-    if value > 0.55 then value = 0.55 end
+    if value > 1 then value = 1 end
     GhostRenderer.opacity = value
 end
 
 local function colorAlpha(color, fallback)
-    local opacity = GhostRenderer.opacity or 0.14
+    local opacity = GhostRenderer.opacity or 0.35
     local requested = color and color.a or fallback or 0.14
-    local alpha = requested * (opacity / 0.14)
+    local alpha = requested * (opacity / 0.35)
     if alpha < 0.015 then return 0.015 end
     if alpha > 0.55 then return 0.55 end
     return alpha
@@ -47,6 +66,10 @@ end
 ---@param activeLevel number|nil
 function GhostRenderer.levelAlpha(cellZ, activeLevel, base)
     if activeLevel == nil then return base end
+    local mode = GhostRenderer.view.levels
+    if mode == "all" then return base end
+    if mode == "below" then return (cellZ or 0) <= activeLevel and base or 0 end
+    if mode == "current" then return (cellZ or 0) == activeLevel and base or 0 end
     local diff = math.abs((cellZ or 0) - activeLevel)
     if diff == 0 then return base end
     if diff == 1 then return base * 0.35 end
@@ -90,7 +113,7 @@ local function queueAreaHighlight(playerIndex, x1, y1, x2, y2, z, color, alpha)
         y1 = y1,
         x2 = x2,
         y2 = y2,
-        z = z,
+        z = tonumber(z) or 0,
         r = color.r or 0.25,
         g = color.g or 0.65,
         b = color.b or 0.95,
@@ -98,16 +121,10 @@ local function queueAreaHighlight(playerIndex, x1, y1, x2, y2, z, color, alpha)
     }
 end
 
-function GhostRenderer.flushWorldAreaHighlights()
-    local pending = areaQueue
-    areaQueue = {}
-    for areaIndex = 1, #pending do
-        local area = pending[areaIndex]
-        addAreaHighlightForPlayer(
-            area.playerIndex, area.x1, area.y1, area.x2, area.y2, area.z, area.r, area.g, area.b, area.a
-        )
-    end
-end
+-- Implemented below, after visibleTileBounds. The B42 area-highlight FBO
+-- retains entries only for the UI render timestamp; when the world callback
+-- is skipped over a panel, its colours blink off. World ghost tiles have no
+-- such lifetime and can be painted from the guaranteed post-render pass.
 
 local function finishSignature(finish)
     if type(finish) ~= "table" then return "" end
@@ -133,7 +150,8 @@ end
 function GhostRenderer.clearCache()
     cellCache = {}
     cellCacheCount = 0
-    orderCache = { source = nil, updated = nil, count = 0, order = {} }
+    orderCaches = {}
+    roomOutlineCache = setmetatable({}, {__mode = "k"})
 end
 
 local function cacheCells(key, entry)
@@ -208,6 +226,7 @@ function GhostRenderer.placementCells(placement)
             y = (placement.y or 0) + (cell.dy or 0),
             z = (placement.z or 0) + (cell.dz or 0),
             sprite = (cell.sprite and finishSprite) or cell.sprite,
+            kind = cell.kind or (stage.placement or {}).kind or ((definition or {}).placement or {}).kind,
             blocks = cell.blocks
         }
     end
@@ -222,7 +241,12 @@ function GhostRenderer.renderPlacement(placement, activeLevel, color)
     local cells = GhostRenderer.placementCells(placement)
     if not cells then return end
     color = color or GhostRenderer.PLAN_COLOR
-    local baseAlpha = colorAlpha(color, 0.25)
+    local normal = color == GhostRenderer.PLAN_COLOR
+    local baseAlpha = normal and GhostRenderer.opacity or colorAlpha(color, 0.25)
+    if normal and GhostRenderer.view.style ~= "ghost" then
+        color = { r = 1, g = 1, b = 1 }
+        if GhostRenderer.view.style == "solid" then baseAlpha = 1 end
+    end
     for cellIndex = 1, #cells do
         local cell = cells[cellIndex]
         local alpha = GhostRenderer.levelAlpha(cell.z, activeLevel, baseAlpha)
@@ -251,47 +275,47 @@ function GhostRenderer.renderRoom(room, defaultZ, activeLevel, highlightRoomId, 
     if highlighted then base = math.min(0.34, base + 0.08) end
     local alpha = GhostRenderer.levelAlpha(roomZ, activeLevel, base)
     if alpha <= 0 then return end
-    local width = room.w or room.width or 1
-    local height = room.h or room.height or 1
-    local originX = room.x or 0
-    local originY = room.y or 0
-    queueAreaHighlight(playerIndex, originX, originY, originX + width, originY + height, roomZ, color, alpha)
+    queueRoomOutline(playerIndex, room, roomZ, color, alpha, 0, 0)
 end
 
-local function placementSortValue(placement)
-    return (tonumber(placement.z) or 0) * 100000 + (tonumber(placement.y) or 0) * 100 + (tonumber(placement.x) or 0)
-end
-
-local function sortedPlacements(blueprint)
+-- Sort expanded cells, not anchors: stairs and multi-tile pieces cross both
+-- diagonals and storeys. Keep floors first on each level, then use isometric
+-- depth with deterministic ties. World coordinates must never be packed into
+-- a weighted scalar (large X/Y values previously overwhelmed the Z term).
+local function sortedCells(blueprint)
     local placements = blueprint.placements or {}
-    if orderCache.source == placements and orderCache.updated == blueprint.updated and orderCache.count == #placements then
-        return orderCache.order
-    end
-    if orderCache.source == placements and #placements == orderCache.count - 1 then
-        local present = {}
-        for placementIndex = 1, #placements do
-            local placement = placements[placementIndex]
-            if placement.id then present[tostring(placement.id)] = true end
-        end
-        local filtered = {}
-        for orderIndex = 1, #orderCache.order do
-            local placement = orderCache.order[orderIndex]
-            if placement.id and present[tostring(placement.id)] then filtered[#filtered + 1] = placement end
-        end
-        -- A multiplayer sync may replace placement tables while retaining the
-        -- same placement array. IDs remain stable; if they do not reconcile,
-        -- rebuild instead of caching an empty/incomplete render order.
-        if #filtered == #placements then
-            orderCache = { source = placements, updated = blueprint.updated, count = #placements, order = filtered }
-            return filtered
+    for index = #orderCaches, 1, -1 do
+        local cached = orderCaches[index]
+        if cached.source == placements then
+            if cached.updated == blueprint.updated and cached.count == #placements then return cached.order end
+            table.remove(orderCaches, index)
         end
     end
     local order = {}
-    for placementIndex = 1, #placements do
-        order[placementIndex] = placements[placementIndex]
+    for index = 1, #placements do
+        local placement = placements[index]
+        local definition = Registry:get(placement.buildableId)
+        local kind = definition and (definition.placement or {}).kind
+        local cells = GhostRenderer.placementCells(placement) or {}
+        for cellIndex = 1, #cells do
+            local cellKind = cells[cellIndex].kind or kind
+            order[#order + 1] = { placement = placement, cell = cells[cellIndex],
+                floor = cellKind == "floor", wall = cellKind == "wall" or cellKind == "wallCovering",
+                roof = definition and definition.category == "Roofing", sequence = #order + 1 }
+        end
     end
-    table.sort(order, function (a, b) return placementSortValue(a) < placementSortValue(b) end)
-    orderCache = { source = placements, updated = blueprint.updated, count = #placements, order = order }
+    table.sort(order, function(a, b)
+        local ac, bc = a.cell, b.cell
+        if ac.z ~= bc.z then return ac.z < bc.z end
+        if a.floor ~= b.floor then return a.floor end
+        local ad, bd = ac.x + ac.y, bc.x + bc.y
+        if ad ~= bd then return ad < bd end
+        if ac.y ~= bc.y then return ac.y < bc.y end
+        if a.wall ~= b.wall then return a.wall end
+        return a.sequence < b.sequence
+    end)
+    if #orderCaches >= 8 then table.remove(orderCaches, 1) end
+    orderCaches[#orderCaches + 1] = { source = placements, updated = blueprint.updated, count = #placements, order = order }
     return order
 end
 
@@ -348,10 +372,78 @@ local function visibleTileBounds(playerIndex, z)
     return minX, minY, maxX, maxY
 end
 
+queueRoomOutline = function(playerIndex, room, z, color, alpha, dx, dy)
+    if alpha <= 0 then return end
+    local cached = roomOutlineCache[room]
+    if not cached or cached.x ~= room.x or cached.y ~= room.y or cached.rects ~= room.rects
+        or cached.w ~= room.w or cached.h ~= room.h then
+        cached = {x = room.x, y = room.y, rects = room.rects, w = room.w, h = room.h,
+            lines = RoomShape.perimeter(room)}
+        roomOutlineCache[room] = cached
+    end
+    areaQueue[#areaQueue + 1] = {
+        playerIndex = playerIndex or 0, z = z, lines = cached.lines, dx = dx or 0, dy = dy or 0,
+        r = color.r or 0.25, g = color.g or 0.65, b = color.b or 0.95, a = alpha
+    }
+end
+
+function GhostRenderer.flushWorldAreaHighlights(playerIndex, throughZ)
+    local pending = areaQueue
+    areaQueue = {}
+    if #pending == 0 then return end
+    local bounds = {}
+    for areaIndex = 1, #pending do
+        local area = pending[areaIndex]
+        if (playerIndex ~= nil and area.playerIndex ~= playerIndex)
+            or (throughZ ~= nil and area.z > throughZ) then
+            areaQueue[#areaQueue + 1] = area
+        else
+            if not bounds[area.playerIndex] then bounds[area.playerIndex] = {} end
+            local playerBounds = bounds[area.playerIndex]
+            if not playerBounds[area.z] then playerBounds[area.z] = {visibleTileBounds(area.playerIndex, area.z)} end
+            local minX,minY,maxX,maxY = unpack(playerBounds[area.z])
+            if area.lines then
+                for lineIndex = 1, #area.lines do
+                    local line = area.lines[lineIndex]
+                    local dx, dy = area.dx, area.dy
+                    local x1, y1, x2, y2 = line[1] + dx, line[2] + dy, line[3] + dx, line[4] + dy
+                    if math.max(x1, x2) >= minX and math.min(x1, x2) <= maxX
+                        and math.max(y1, y2) >= minY and math.min(y1, y2) <= maxY then
+                        if renderIsoLine then
+                            renderIsoLine(x1, y1, area.z + 0.02, x2, y2, area.z + 0.02,
+                                2, area.r, area.g, area.b, area.a)
+                        elseif renderLine then
+                            renderLine(x1, y1, area.z + 0.02, x2, y2, area.z + 0.02,
+                                area.r, area.g, area.b, area.a)
+                        end
+                    end
+                end
+            else
+                local sprite = GhostRenderer.getFloorCursorSprite()
+                local x1 = math.max(area.x1, math.floor(minX))
+                local y1 = math.max(area.y1, math.floor(minY))
+                local x2 = math.min(area.x2 - 1, math.ceil(maxX))
+                local y2 = math.min(area.y2 - 1, math.ceil(maxY))
+                local width,height = area.x2-area.x1,area.y2-area.y1
+                local borderOnly = width*height > 64
+                for y = y1,y2 do
+                    for x = x1,x2 do
+                        local border = x==area.x1 or x==area.x2-1 or y==area.y1 or y==area.y2-1
+                        if not borderOnly or border then
+                            local alpha = border and area.a or area.a*0.4
+                            drawCell(sprite,x,y,area.z,area,alpha)
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
 ---@param blueprint KBW.Blueprint
 ---@param activeLevel number|nil
 ---@param playerIndex number
-function GhostRenderer.renderBlueprint(blueprint, activeLevel, highlightId, highlightRoomId, playerIndex)
+function GhostRenderer.renderBlueprint(blueprint, activeLevel, highlightId, highlightRoomId, playerIndex, previewColor)
     local area = blueprint.gatherArea
     if area then
         queueAreaHighlight(
@@ -360,28 +452,42 @@ function GhostRenderer.renderBlueprint(blueprint, activeLevel, highlightId, high
         )
     end
     local rooms = blueprint.rooms or {}
-    for roomIndex = 1, #rooms do
+    for roomIndex = 1, GhostRenderer.view.rooms and #rooms or 0 do
         GhostRenderer.renderRoom(rooms[roomIndex], blueprint.level, activeLevel, highlightRoomId, playerIndex)
     end
-    local order = sortedPlacements(blueprint)
-    local minX, minY, maxX, maxY = visibleTileBounds(playerIndex, activeLevel)
-    for pass = 1, 2 do
-        for placementIndex = 1, #order do
-            local placement = order[placementIndex]
-            local px = tonumber(placement.x) or 0
-            local py = tonumber(placement.y) or 0
-            if px >= minX and px <= maxX and py >= minY and py <= maxY then
-                local onActive = (tonumber(placement.z) or 0) == activeLevel
-                if (pass == 1 and not onActive) or (pass == 2 and onActive) then
-                    local color = GhostRenderer.PLAN_COLOR
-                    if highlightId and placement.id == highlightId then
-                        color = GhostRenderer.HIGHLIGHT_COLOR
-                    end
-                    GhostRenderer.renderPlacement(placement, activeLevel, color)
-                end
+    local order = sortedCells(blueprint)
+    local bounds = {}
+    local lastZ
+    for index = 1, #order do
+        local entry = order[index]
+        local cell, placement = entry.cell, entry.placement
+        if cell.z ~= lastZ then
+            -- Interleave room floors with objects by storey: upper room
+            -- colours must not end up underneath lower-storey ghosts.
+            GhostRenderer.flushWorldAreaHighlights(playerIndex, cell.z)
+            lastZ = cell.z
+        end
+        if not bounds[cell.z] then bounds[cell.z] = { visibleTileBounds(playerIndex, cell.z) } end
+        local minX, minY, maxX, maxY = unpack(bounds[cell.z])
+        if (previewColor or GhostRenderer.view.roofs or not entry.roof) and (previewColor or GhostRenderer.view.walls or not entry.wall)
+            and cell.x >= minX and cell.x <= maxX and cell.y >= minY and cell.y <= maxY then
+            local color, base = GhostRenderer.PLAN_COLOR, GhostRenderer.opacity
+            if previewColor or highlightId and placement.id == highlightId then
+                color = previewColor or GhostRenderer.HIGHLIGHT_COLOR
+                base = colorAlpha(color, 0.25)
+            elseif GhostRenderer.view.style ~= "ghost" then
+                color = {r = 1, g = 1, b = 1}
+                if GhostRenderer.view.style == "solid" then base = 1 end
+            end
+            local alpha = GhostRenderer.levelAlpha(cell.z, activeLevel, base)
+            if cell.sprite then
+                drawCell(GhostRenderer.getSprite(cell.sprite), cell.x, cell.y, cell.z, color, alpha)
+            elseif cell.blocks then
+                drawCell(GhostRenderer.getFloorCursorSprite(), cell.x, cell.y, cell.z, color, alpha * 0.7)
             end
         end
     end
+    GhostRenderer.flushWorldAreaHighlights(playerIndex)
 end
 
 -- Preview of a whole blueprint shifted by (dx, dy); the move-blueprint cursor
@@ -393,24 +499,17 @@ end
 function GhostRenderer.renderBlueprintOffset(blueprint, dx, dy, playerIndex)
     local color = GhostRenderer.HIGHLIGHT_COLOR
     local alpha = colorAlpha(color, 0.30)
-    local placements = blueprint.placements or {}
-    local minX, minY, maxX, maxY = visibleTileBounds(playerIndex, blueprint.level)
-    for placementIndex = 1, #placements do
-        local placement = placements[placementIndex]
-        local px = (tonumber(placement.x) or 0) + dx
-        local py = (tonumber(placement.y) or 0) + dy
-        local cells = nil
-        if px >= minX and px <= maxX and py >= minY and py <= maxY then
-            cells = GhostRenderer.placementCells(placement)
-        end
-        if cells then
-            for cellIndex = 1, #cells do
-                local cell = cells[cellIndex]
-                if cell.sprite then
-                    drawCell(GhostRenderer.getSprite(cell.sprite), cell.x + dx, cell.y + dy, cell.z, color, alpha)
-                elseif cell.blocks then
-                    drawCell(GhostRenderer.getFloorCursorSprite(), cell.x + dx, cell.y + dy, cell.z, color, alpha * 0.7)
-                end
+    local order, bounds = sortedCells(blueprint), {}
+    for index = 1, #order do
+        local cell = order[index].cell
+        if not bounds[cell.z] then bounds[cell.z] = {visibleTileBounds(playerIndex, cell.z)} end
+        local minX,minY,maxX,maxY = unpack(bounds[cell.z])
+        local x,y = cell.x+dx,cell.y+dy
+        if x >= minX and x <= maxX and y >= minY and y <= maxY then
+            if cell.sprite then
+                drawCell(GhostRenderer.getSprite(cell.sprite), x, y, cell.z, color, alpha)
+            elseif cell.blocks then
+                drawCell(GhostRenderer.getFloorCursorSprite(), x, y, cell.z, color, alpha*0.7)
             end
         end
     end
@@ -419,13 +518,25 @@ function GhostRenderer.renderBlueprintOffset(blueprint, dx, dy, playerIndex)
         local room = rooms[roomIndex]
         local roomZ = tonumber(room.z) or tonumber(blueprint.level) or 0
         local roomColor = room.color or { r = 0.20, g = 0.62, b = 1.00, a = 0.26 }
-        local originX = (room.x or 0) + dx
-        local originY = (room.y or 0) + dy
-        queueAreaHighlight(
-            playerIndex, originX, originY, originX + (room.w or room.width or 1), originY + (room.h or room.height or 1),
-            roomZ, roomColor, roomAlpha(roomColor)
-        )
+        queueRoomOutline(playerIndex, room, roomZ, roomColor, roomAlpha(roomColor), dx, dy)
     end
+end
+
+function GhostRenderer.renderRoomRect(x1, y1, x2, y2, z, color, playerIndex)
+    local left, top = math.min(x1, x2), math.min(y1, y2)
+    local room = {x = left, y = top, w = math.abs(x2 - x1) + 1, h = math.abs(y2 - y1) + 1}
+    color = color or GhostRenderer.HIGHLIGHT_COLOR
+    queueRoomOutline(playerIndex, room, z, color, roomAlpha(color), 0, 0)
+end
+
+function GhostRenderer.renderOutline(lines, z, color, playerIndex)
+    if not lines or #lines == 0 then return end
+    color = color or GhostRenderer.HIGHLIGHT_COLOR
+    areaQueue[#areaQueue + 1] = {
+        playerIndex = playerIndex or 0, z = tonumber(z) or 0, lines = lines, dx = 0, dy = 0,
+        r = color.r or 0.9, g = color.g or 0.85, b = color.b or 0.35,
+        a = colorAlpha(color, 0.35)
+    }
 end
 
 ---@param z number
@@ -464,6 +575,7 @@ end
 ---@param z number
 ---@param playerIndex number
 function GhostRenderer.renderTileHighlight(x, y, z, color, alpha, playerIndex)
+    color = color or GhostRenderer.PLAN_COLOR_DIM
     queueAreaHighlight(
         playerIndex, x, y, x + 1, y + 1, z, color,
         colorAlpha({ r = color.r, g = color.g, b = color.b, a = alpha or 0.24 }, alpha or 0.24)

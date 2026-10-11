@@ -2673,6 +2673,28 @@
             "skills": {
               "Electricity": 4,
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 4,
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2843,6 +2865,28 @@
             "skills": {
               "Electricity": 5,
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5,
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3013,6 +3057,28 @@
             "skills": {
               "Electricity": 6,
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 6,
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3183,6 +3249,28 @@
             "skills": {
               "Electricity": 8,
               "MetalWelding": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 8,
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

@@ -143,6 +143,9 @@ function KBWPlanningCatalog:createChildren()
     self.catalogGrid:initialise()
     self.catalogGrid:setViewMode("grid")
     self.catalogGrid:setCompactMode(true, true)
+    -- Hover details (picture, materials, tools, skills) open beside this
+    -- panel, over the world, never over the cards.
+    self.catalogGrid.tooltipDock = self
     self:addChild(self.catalogGrid)
 
     self.selectorButtons = {}
@@ -503,15 +506,29 @@ function KBWPlanningCatalog:layout()
         Theme.applyButton(self.favoriteButton, self.owner:isFavorite(definition))
         Theme.applyButton(self.pinButton, self.owner:isPinnedDefinition(definition))
     end
+    -- The selected name wraps (never cut) and the panel grows to fit it.
     local fullName = definition and I18n.definitionName(definition) or getText("IGUI_KBW_NoBuildableSelected")
     local titleWidth = self.width - (definition and 104 or 36)
-    local renderedName = fullName
-    while #renderedName > 3 and getTextManager():MeasureStringX(UIFont.Small, renderedName) > titleWidth do
-        renderedName = string.sub(renderedName, 1, #renderedName - 1)
+    local nameLines, line = {}, ""
+    for word in string.gmatch(fullName, "%S+") do
+        local candidate = line == "" and word or (line .. " " .. word)
+        if line ~= "" and getTextManager():MeasureStringX(UIFont.Small, candidate) > titleWidth then
+            nameLines[#nameLines + 1] = line
+            line = word
+        else
+            line = candidate
+        end
     end
-    if renderedName ~= fullName then renderedName = renderedName .. "..." end
-    self.renderedSelectedName = renderedName
-    local rowY = self.selectorPanelY + 36
+    if line ~= "" then nameLines[#nameLines + 1] = line end
+    self.selectedNameLines = nameLines
+    local nameExtra = math.max(0, #nameLines - 1) * (getTextManager():getFontHeight(UIFont.Small) + 2)
+    if nameExtra > 0 then
+        self.selectorPanelY = self.selectorPanelY - nameExtra
+        self.selectorPanelH = self.selectorPanelH + nameExtra
+        self.favoriteButton:setY(self.selectorPanelY + 6)
+        self.pinButton:setY(self.selectorPanelY + 6)
+    end
+    local rowY = self.selectorPanelY + 36 + nameExtra
     for rowIndex = 1, #self.selectorRows do
         local kind = self.selectorRows[rowIndex]
         local buttons = self.selectorButtons[kind]
@@ -543,11 +560,11 @@ function KBWPlanningCatalog:onPlanSelected()
 end
 
 function KBWPlanningCatalog:isKeyConsumed(key)
-    return Keyboard and key == Keyboard.KEY_ESCAPE
+    return self.owner and self.owner:isKeyConsumed(key) or false
 end
 
 function KBWPlanningCatalog:onKeyRelease(key)
-    if self:isKeyConsumed(key) and self.owner then self.owner:close() end
+    if self.owner then self.owner:onKeyRelease(key) end
 end
 
 function KBWPlanningCatalog:update()
@@ -583,13 +600,18 @@ function KBWPlanningCatalog:prerender()
         Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
     )
     self:drawRect(10, self.selectorPanelY, self.width - 20, 2, Theme.ready.a, Theme.ready.r, Theme.ready.g, Theme.ready.b)
-    local name = self.renderedSelectedName or getText("IGUI_KBW_NoBuildableSelected")
-    self:drawText(name, 18, self.selectorPanelY + 11, Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
+    local nameLines = self.selectedNameLines or { getText("IGUI_KBW_NoBuildableSelected") }
+    local lineH = getTextManager():getFontHeight(UIFont.Small) + 2
+    for lineIndex = 1, #nameLines do
+        self:drawText(nameLines[lineIndex], 18, self.selectorPanelY + 11 + (lineIndex - 1) * lineH,
+            Theme.text.r, Theme.text.g, Theme.text.b, 1, UIFont.Small)
+    end
+    local nameExtra = math.max(0, #nameLines - 1) * lineH
     local rowLabels = {
         stage = getText("IGUI_KBW_Stage"), variant = getText("IGUI_KBW_Variant"),
         material = getText("IGUI_KBW_MaterialSet"), finish = getText("IGUI_KBW_Finish")
     }
-    local rowY = self.selectorPanelY + 36
+    local rowY = self.selectorPanelY + 36 + nameExtra
     local control = math.max(28, getTextManager():getFontHeight(UIFont.Small) + 12)
     for rowIndex = 1, #self.selectorRows do
         local kind = self.selectorRows[rowIndex]

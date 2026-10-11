@@ -11,7 +11,7 @@
   "Sandbox_KBW_BlueprintRadius": "Rayon du plan (tuiles)",
   "Sandbox_KBW_BlueprintRadius_tooltip": "Demi-taille du carré qu'un plan peut couvrir, mesurée à partir de son premier fantôme. 200 donne une zone de 400x400.",
   "Sandbox_KBW_WellWaterMode": "Approvisionnement en eau de puits",
-  "Sandbox_KBW_WellWaterMode_tooltip": "Choisissez si les puits d’eau fournissent une eau propre illimitée ou si vous utilisez un réservoir limité qui se remplit à partir des eaux souterraines et de la pluie.",
+  "Sandbox_KBW_WellWaterMode_tooltip": "Choisissez si les puits d'eau fournissent une eau propre illimitée ou si vous utilisez un réservoir limité qui se remplit à partir des eaux souterraines et de la pluie.",
   "Sandbox_KBW_WellWaterMode_option1": "Infini",
   "Sandbox_KBW_WellWaterMode_option2": "Limité et remplissant",
   "Sandbox_KBW_WellCapacity": "Capacité du puits d'eau",

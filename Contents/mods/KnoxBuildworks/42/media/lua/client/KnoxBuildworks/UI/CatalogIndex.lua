@@ -54,7 +54,8 @@ local function visibilityInfo(definition)
     for stageIndex = 1, #stages do
         local stage = stages[stageIndex]
         local callback = stageOnAddToMenu(stage)
-        if not callback then return true, nil end
+        local gated = ((stage.requirements or {}).knowledge or {}).hideUntilLearned == true
+        if not callback and not gated then return true, nil end
         callbackStages[#callbackStages + 1] = { stage = stage, callback = callback }
     end
     return false, callbackStages
@@ -226,16 +227,19 @@ local function evaluateVisibility(player, record, shouldShowAll)
     local stages = record.callbackStages
     for stageIndex = 1, #stages do
         local entry = stages[stageIndex]
-        if entry.recipeObject == nil then
+        if entry.callback and entry.recipeObject == nil then
             entry.recipeObject = EntityCompat.craftRecipeObject(entry.stage) or false
         end
-        if LuaCallback.callBool(entry.callback, {
+        local effective = BuildableRules.effectiveStage(record.definition, entry.stage)
+        local knowledge = effective and (effective.requirements or {}).knowledge or {}
+        local unlocked = effective and (shouldShowAll or not knowledge.hideUntilLearned or Requirements.meetsKnowledge(player, effective))
+        if unlocked and (not entry.callback or LuaCallback.callBool(entry.callback, {
                 player = player,
                 recipe = entry.recipeObject or nil,
                 definition = record.definition,
                 stage = entry.stage,
                 shouldShowAll = shouldShowAll == true
-            }, true) then
+            }, true)) then
             visible = true
             break
         end
@@ -290,12 +294,25 @@ function CatalogIndex.recordVisible(player, record, shouldShowAll)
     return evaluateVisibility(player, record, shouldShowAll)
 end
 
----Processes up to maxCount queued visibility re-evaluations. Call from UI
----update loops (and the post-spawn prewarm); bumps visibilityGeneration when
----any cached value changes so callers know a rebuild is worthwhile.
----@param maxCount number|nil
----@return number processed
+local seenKnowledgeRev = nil
+
+local function queueAllForKnowledge()
+    local knowledgeRev = Requirements.knowledgeRevision()
+    if seenKnowledgeRev == knowledgeRev then return end
+    seenKnowledgeRev = knowledgeRev
+    if not cache then return end
+    local records = cache.records
+    for recordIndex = 1, #records do
+        local record = records[recordIndex]
+        local cached = record.visibleCache
+        if cached and not record.alwaysVisible then
+            queueVisibility(record, cached.player, cached.showAll)
+        end
+    end
+end
+
 function CatalogIndex.pumpVisibility(maxCount)
+    queueAllForKnowledge()
     local limit = maxCount or 8
     local processed = 0
     while processed < limit do
@@ -313,6 +330,24 @@ function CatalogIndex.pumpVisibility(maxCount)
         processed = processed + 1
     end
     return processed
+end
+
+---Re-evaluates one record now; bumps visibilityGeneration when it flips.
+---@param player IsoPlayer
+---@param id string
+---@param shouldShowAll boolean
+---@return boolean|nil visible, nil when the id is not a catalogue record
+function CatalogIndex.refreshRecordVisibility(player, id, shouldShowAll)
+    local record = CatalogIndex.get().byId[id]
+    if not record then return nil end
+    if record.alwaysVisible then return true end
+    local cached = record.visibleCache
+    local before = cached and cached.player == player and cached.value
+    local value = evaluateVisibility(player, record, shouldShowAll == true)
+    if value ~= before then
+        CatalogIndex.visibilityGeneration = CatalogIndex.visibilityGeneration + 1
+    end
+    return value
 end
 
 -- Post-spawn prewarm: build the index and evaluate every callback-bearing

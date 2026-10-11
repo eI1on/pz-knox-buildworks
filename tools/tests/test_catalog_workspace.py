@@ -58,6 +58,7 @@ def runtime():
         ISButton={new=function(s,x,y,w,h,title) local c=control(); c.title=title or ''; return c end}
         ISScrollingListBox=ISButton; ISRichTextPanel=ISButton
         modules['KnoxBuildworks/UI/Theme']={color=function(v) return v end,
+            fitScrollbar=function(p) return (p:getScrollHeight() or 0) > p.height end,
             applyButton=function() end, applyActionButton=function() end, lockButtonColors=function(button)
                 button.backgroundColorEnabled=button.backgroundColor
                 button.borderColorEnabled=button.borderColor
@@ -266,6 +267,13 @@ class WorkspaceTests(unittest.TestCase):
             local ok,reason=Placement.validate(cursor,square)
             assert(not ok and reason=='previous stage missing')
             square.previous={}
+            local originalFindPrevious=Placement.findPrevious
+            Placement.findPrevious=function(s,id,name,north)
+                if north==nil then return s.previous end
+            end
+            local wrongEdge,wrongEdgeReason=Placement.validate(cursor,square)
+            assert(not wrongEdge and wrongEdgeReason=='previous stage direction mismatch')
+            Placement.findPrevious=originalFindPrevious
             local accepted,_,previous=Placement.validate(cursor,square)
             assert(accepted and previous==square.previous)
             cursor.stage.required=nil
@@ -347,6 +355,37 @@ class WorkspaceTests(unittest.TestCase):
             assert(compact.sizeButton.visible)
         """)
 
+    def test_scrollbars_are_docked_by_hand_not_by_engine_anchors(self):
+        lua = runtime()
+        lua.execute("""
+            function getCore() return {getGoodHighlitedColor=function() return {getR=function() return 0 end,
+                getG=function() return 1 end,getB=function() return 0 end} end,
+                getBadHighlitedColor=function() return {getR=function() return 1 end,
+                getG=function() return 0 end,getB=function() return 0 end} end} end
+        """)
+        theme = lua.execute((LUA / "client/KnoxBuildworks/UI/Theme.lua").read_text(encoding="utf-8"))
+        lua.globals().theme = theme
+        lua.execute("""
+            local bar=control(); bar.x=223; bar.y=0; bar.width=17; bar.height=120
+            bar.getWidth=function(s) return s.width end
+            bar.setAnchorLeft=function(s,v) s.anchorLeft=v end; bar.setAnchorRight=function(s,v) s.anchorRight=v end
+            bar.setAnchorTop=function(s,v) s.anchorTop=v end; bar.setAnchorBottom=function(s,v) s.anchorBottom=v end
+            local panel=control(); panel.vscroll=bar; panel.width=180; panel.height=90; panel.scrollHeight=200
+            panel.updateScrollbars=function(s) s.updated=true end
+            -- Resized twice before a frame: the bar still sits on the new right edge.
+            assert(theme.fitScrollbar(panel))
+            panel.width=150; panel.height=70
+            assert(theme.fitScrollbar(panel))
+            assert(bar.x==133 and bar.y==0 and bar.height==70 and bar.visible and panel.updated)
+            assert(bar.anchorLeft==true and bar.anchorRight==false and bar.anchorTop==true and bar.anchorBottom==false)
+            panel.scrollHeight=40
+            assert(not theme.fitScrollbar(panel) and not bar.visible)
+        """)
+        source = (LUA / "client/KnoxBuildworks/UI/CatalogWorkspace.lua").read_text(encoding="utf-8")
+        # The description wraps short of the scrollbar column when it overflows.
+        self.assertIn("summary:setMargins(4, 2, summary.vscroll:getWidth() + 6, 4)", source)
+        self.assertIn("Theme.fitScrollbar(owner.recipeSummary)", source)
+
     def test_cancelled_placement_reopens_catalogue_on_the_next_tick(self):
         source = (LUA / "client/KnoxBuildworks/UI/Catalog.lua").read_text(encoding="utf-8")
         process = source[source.index("function KBWCatalog.processDragReturn"):source.index("function KBWCatalog.onSetDragItem")]
@@ -407,6 +446,10 @@ class WorkspaceTests(unittest.TestCase):
             for i=1,4 do readiness.update(owner) end
             assert(owner.readyResults.group.stageId=='stage9')
             assert(#readiness.filter(owner,{definition})==1)
+            now=owner.readyCompleteAt+30001
+            readiness.update(owner)
+            assert(owner.readyResults.group==nil, 'skill and knowledge changes must eventually invalidate readiness')
+            now=1000
             revision=2
             readiness.update(owner)
             assert(owner.readyResults.group==nil, 'inventory changes must invalidate readiness')

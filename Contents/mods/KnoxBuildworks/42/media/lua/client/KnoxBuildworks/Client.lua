@@ -10,6 +10,7 @@ local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 require("KnoxBuildworks/Planning/Planner")
 require("KnoxBuildworks/World/WellSystem")
 require("KnoxBuildworks/World/Collision")
+require("KnoxBuildworks/World/BuildingRender")
 local PinnedRecipes = require("KnoxBuildworks/UI/PinnedRecipes")
 local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
@@ -126,6 +127,9 @@ local BLUEPRINT_DELTAS = {
     BPAddPlacements = true,
     BPRemovePlacement = true,
     BPAddRoom = true,
+    BPExtendRoom = true,
+    BPShrinkRoom = true,
+    BPRemovePlacements = true,
     BPRemoveRoom = true,
     BPUpdateRoom = true,
     BPSetGatherArea = true,

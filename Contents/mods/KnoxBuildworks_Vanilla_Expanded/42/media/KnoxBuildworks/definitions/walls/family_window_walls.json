@@ -328,7 +328,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_business_bank_01_2",
-            "pillarSprite": "location_business_bank_01_3"
+            "pillarSprite": "location_business_bank_01_3",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -442,7 +444,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_business_bank_01_2",
-            "pillarSprite": "location_business_bank_01_3"
+            "pillarSprite": "location_business_bank_01_3",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -2190,7 +2194,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_restaurant_bar_01_46",
-            "pillarSprite": "location_restaurant_bar_01_47"
+            "pillarSprite": "location_restaurant_bar_01_47",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -2320,7 +2326,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_restaurant_bar_01_46",
-            "pillarSprite": "location_restaurant_bar_01_47"
+            "pillarSprite": "location_restaurant_bar_01_47",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -4275,7 +4283,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_shop_bargNclothes_01_26",
-            "pillarSprite": "location_shop_bargNclothes_01_27"
+            "pillarSprite": "location_shop_bargNclothes_01_27",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -4410,7 +4420,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_shop_bargNclothes_01_26",
-            "pillarSprite": "location_shop_bargNclothes_01_27"
+            "pillarSprite": "location_shop_bargNclothes_01_27",
+            "canPassThrough": true,
+            "blockAllSquare": false
           },
           "previousStage": [
             "WoodenWallFrame",
@@ -6327,7 +6339,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_community_school_01_2",
-            "pillarSprite": "location_community_school_01_3"
+            "pillarSprite": "location_community_school_01_3",
+            "canPassThrough": true,
+            "blockAllSquare": false
           }
         }
       ],
@@ -6428,7 +6442,9 @@
             "isThumpable": true,
             "canBarricade": false,
             "cornerSprite": "location_community_school_01_2",
-            "pillarSprite": "location_community_school_01_3"
+            "pillarSprite": "location_community_school_01_3",
+            "canPassThrough": true,
+            "blockAllSquare": false
           }
         }
       ],
@@ -9418,7 +9434,11 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "object": {
+            "canPassThrough": true,
+            "blockAllSquare": false
+          }
         }
       ],
       "group": {
@@ -10257,7 +10277,11 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "object": {
+            "canPassThrough": true,
+            "blockAllSquare": false
+          }
         }
       ],
       "group": {

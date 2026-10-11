@@ -90,6 +90,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -105,6 +126,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -199,6 +225,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -214,6 +261,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -308,6 +360,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -323,6 +396,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -417,6 +495,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -432,6 +531,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -526,6 +630,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -541,6 +666,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -635,6 +765,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -650,6 +801,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -733,6 +889,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -748,6 +925,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -831,6 +1013,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -846,6 +1049,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -929,6 +1137,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -944,6 +1173,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1027,6 +1261,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1042,6 +1297,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1125,6 +1385,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1140,6 +1421,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1223,6 +1509,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1238,6 +1545,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1321,6 +1633,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1336,6 +1669,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1419,6 +1757,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1434,6 +1793,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1528,6 +1892,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1543,6 +1928,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],
@@ -1637,6 +2027,27 @@
             ],
             "skills": {
               "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1652,6 +2063,11 @@
             "blockAllSquare": false,
             "canPassThrough": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_shakes",
+            "pitch": "shallow",
+            "role": "detail"
           }
         }
       ],

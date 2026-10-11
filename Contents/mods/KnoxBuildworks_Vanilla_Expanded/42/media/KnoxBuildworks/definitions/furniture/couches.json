@@ -164,6 +164,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -338,6 +360,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -520,6 +564,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -694,6 +760,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -876,6 +964,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1050,6 +1160,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1232,6 +1364,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1406,6 +1560,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1588,6 +1764,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1762,6 +1960,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1944,6 +2164,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2118,6 +2360,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2300,6 +2564,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2474,6 +2760,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2656,6 +2964,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2830,6 +3160,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3012,6 +3364,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3186,6 +3560,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3368,6 +3764,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3542,6 +3960,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3724,6 +4164,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3898,6 +4360,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4080,6 +4564,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4254,6 +4760,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4436,6 +4964,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4610,6 +5160,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4792,6 +5364,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4966,6 +5560,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5148,6 +5764,28 @@
             "skills": {
               "Tailoring": 4,
               "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5322,6 +5960,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_BedsCouchesArmchairs"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

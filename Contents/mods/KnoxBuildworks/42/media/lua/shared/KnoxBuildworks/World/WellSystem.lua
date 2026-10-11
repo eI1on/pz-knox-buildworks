@@ -149,21 +149,8 @@ local function configureSquare(square)
     for objectIndex = 0, objects:size() - 1 do
         local object = objects:get(objectIndex)
         if isWellObject(object) then
-            if isClient() then
-                patchSprite(object:getSprite(), finiteMode())
-            else
-                WellSystem.configureObject(object, object:getModData().KBWWellOptions, false)
-            end
+            WellSystem.configureObject(object, object:getModData().KBWWellOptions, false)
         end
-    end
-end
-
-local function onObjectAdded(object)
-    if not isWellObject(object) then return end
-    if isClient() then
-        patchSprite(object:getSprite(), finiteMode())
-    else
-        WellSystem.configureObject(object, object:getModData().KBWWellOptions, false)
     end
 end
 
@@ -188,9 +175,12 @@ end
 
 Events.OnGameStart.Add(patchVanillaSprite)
 Events.OnServerStarted.Add(patchVanillaSprite)
-Events.LoadGridsquare.Add(configureSquare)
-Events.OnObjectAdded.Add(onObjectAdded)
-Events.EveryHours.Add(refillWells)
+-- Clients patch the shared sprite once at startup; only the server maintains
+-- the finite well registry and therefore needs streamed-square discovery.
+if not isClient() then
+    Events.LoadGridsquare.Add(configureSquare)
+    Events.EveryHours.Add(refillWells)
+end
 
 KBW.WellSystem = WellSystem
 

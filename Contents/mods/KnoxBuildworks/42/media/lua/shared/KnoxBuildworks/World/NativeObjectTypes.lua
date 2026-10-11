@@ -7,6 +7,7 @@ local SUPPORTED_TYPES = {
     clothingDryer = true,
     clothingWasher = true,
     combinationWasherDryer = true,
+    curtain = true,
     fireplace = true,
     generator = true,
     lightSwitch = true,
@@ -16,7 +17,7 @@ local SUPPORTED_TYPES = {
 
 local SUPPORTED_TYPE_MESSAGE = table.concat({
     "'barbecue'", "'clothingDryer'", "'clothingWasher'", "'combinationWasherDryer'",
-    "'fireplace'", "'generator'", "'lightSwitch'", "'mannequin'", "'stove'"
+    "'curtain'", "'fireplace'", "'generator'", "'lightSwitch'", "'mannequin'", "'stove'"
 }, ", ")
 
 local ISO_TYPE_MAP = {
@@ -75,6 +76,9 @@ function NativeObjectTypes.detectFromSprite(spriteName)
     local properties = sprite and sprite:getProperties() or nil
     if not properties then return nil end
 
+    -- Vanilla moveable placement makes every WindowObject an IsoCurtain.
+    -- Sprite type alone is insufficient for the open/closed sprite variants.
+    if properties:has("MoveType") and properties:get("MoveType") == "WindowObject" then return "curtain" end
     local isoType = properties:has("IsoType") and properties:get("IsoType") or nil
     local containerType = properties:has("container") and properties:get("container") or nil
     local detected = ISO_TYPE_MAP[isoType]

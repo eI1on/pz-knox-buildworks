@@ -61,6 +61,12 @@ local TOPICS = {
         bodyKey = "IGUI_KBW_GuideReadinessBody"
     },
     {
+        id = "magazines",
+        icon = ICONS.book,
+        titleKey = "IGUI_KBW_GuideMagazinesTitle",
+        bodyKey = "IGUI_KBW_GuideMagazinesBody"
+    },
+    {
         id = "building",
         icon = ICONS.walking,
         titleKey = "IGUI_KBW_GuideBuildingTitle",
@@ -85,6 +91,15 @@ local TOPICS = {
         titleKey = "IGUI_KBW_GuidePlanningTitle",
         bodyKey = "IGUI_KBW_GuidePlanningBody"
     },
+    {
+        id = "planning_tools",
+        icon = ICONS.walking,
+        titleKey = "IGUI_KBW_GuidePlanningToolsTitle",
+        bodyKey = "IGUI_KBW_GuidePlanningToolsBody"
+    },
+    { id = "rooms", icon = ICONS.resize, titleKey = "IGUI_KBW_GuideRoomsTitle", bodyKey = "IGUI_KBW_GuideRoomsBody" },
+    { id = "roofs", icon = ICONS.surface, titleKey = "IGUI_KBW_GuideRoofsTitle", bodyKey = "IGUI_KBW_GuideRoofsBody" },
+    { id = "preview", icon = ICONS.list, titleKey = "IGUI_KBW_GuidePreviewTitle", bodyKey = "IGUI_KBW_GuidePreviewBody" },
     { id = "queue", icon = ICONS.clock, titleKey = "IGUI_KBW_GuideQueueTitle", bodyKey = "IGUI_KBW_GuideQueueBody" },
     {
         id = "sharing",

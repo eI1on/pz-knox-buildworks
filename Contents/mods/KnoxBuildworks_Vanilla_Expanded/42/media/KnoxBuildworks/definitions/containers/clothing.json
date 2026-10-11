@@ -123,6 +123,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -265,6 +287,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -399,6 +443,28 @@
             ],
             "skills": {
               "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -548,6 +614,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -697,6 +785,28 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 4,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -872,6 +982,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1058,6 +1190,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1244,6 +1398,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1429,6 +1605,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1614,6 +1812,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1799,6 +2019,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1984,6 +2226,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2169,6 +2433,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2354,6 +2640,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2539,6 +2847,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2724,6 +3054,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2909,6 +3261,28 @@
             "skills": {
               "Tailoring": 3,
               "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Dressers"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Dressers"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Tailoring": 3,
+                    "Woodwork": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {

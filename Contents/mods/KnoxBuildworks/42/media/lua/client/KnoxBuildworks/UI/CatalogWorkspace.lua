@@ -44,16 +44,7 @@ end
 local function updateListScrollbar(list)
     if not list or not list.vscroll then return end
     Theme.applyScrollbar(list.vscroll)
-    local overflowing = list:getScrollHeight() > list.height
-    list.vscroll:setVisible(overflowing)
-    if overflowing then
-        list.vscroll:setX(list.width - list.vscroll:getWidth())
-        list.vscroll:setY(0)
-        list.vscroll:setHeight(list.height)
-        list:updateScrollbars()
-    else
-        list:setYScroll(0)
-    end
+    Theme.fitScrollbar(list)
 end
 
 local function plain(text)
@@ -287,19 +278,18 @@ function Workspace.layout(owner, top, liveResize)
         or owner.workspaceSummaryHeight ~= owner.recipeSummary.height) then
         owner.workspaceSummaryText, owner.workspaceSummaryWidth = text, owner.recipeSummary.width
         owner.workspaceSummaryHeight = owner.recipeSummary.height
-        owner.recipeSummary:setText(text)
-        owner.recipeSummary:setMargins(4, 2, 6, 4)
-        owner.recipeSummary:paginate()
-        if owner.recipeSummary.vscroll then
-            local overflowing = owner.recipeSummary:getScrollHeight() > owner.recipeSummary.height
-            owner.recipeSummary.vscroll:setVisible(overflowing)
-            if overflowing then
-                owner.recipeSummary:setMargins(4, 2, 18, 4)
-                owner.recipeSummary:paginate()
-            end
+        local summary = owner.recipeSummary
+        summary:setText(text)
+        summary:setMargins(4, 2, 6, 4)
+        summary:paginate()
+        if summary:getScrollHeight() > summary.height and summary.vscroll then
+            -- Wrap the text short of the scrollbar column so the bar never covers it.
+            summary:setMargins(4, 2, summary.vscroll:getWidth() + 6, 4)
+            summary:paginate()
         end
-        owner.recipeSummary:setYScroll(0)
+        summary:setYScroll(0)
     end
+    if showInspector then Theme.fitScrollbar(owner.recipeSummary) end
     y = summaryY + summaryHeight + 8
     owner.stage:setVisible(false)
     local stageCount = owner:stageCountForSelection()

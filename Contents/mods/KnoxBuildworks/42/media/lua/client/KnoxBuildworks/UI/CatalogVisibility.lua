@@ -7,6 +7,7 @@ local BuildableRules = require("KnoxBuildworks/Admin/BuildableRules")
 ---@class KBW.CatalogVisibilityModule
 ---@type KBW.CatalogVisibilityModule
 local CatalogVisibility = {}
+local Requirements = require("KnoxBuildworks/Validation/Requirements")
 
 local function uiData(player)
     local root = player:getModData()
@@ -35,6 +36,9 @@ function CatalogVisibility.stagePasses(player, definition, stage, shouldShowAll)
     if not stage then return false end
     stage = BuildableRules.effectiveStage(definition, stage)
     if not stage then return false end
+    if shouldShowAll == nil then shouldShowAll = CatalogVisibility.shouldShowAll(player) end
+    local knowledge = (stage.requirements or {}).knowledge or {}
+    if knowledge.hideUntilLearned and not shouldShowAll and not Requirements.meetsKnowledge(player, stage) then return false end
     local recipe = StageConfig.recipe(definition, stage)
     if not recipe.onAddToMenu then return true end
     if shouldShowAll == nil then shouldShowAll = CatalogVisibility.shouldShowAll(player) end

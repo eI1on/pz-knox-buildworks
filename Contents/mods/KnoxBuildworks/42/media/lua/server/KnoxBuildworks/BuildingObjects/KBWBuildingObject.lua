@@ -75,7 +75,9 @@ local function findMatchingWallEdge(square, identity, north, excluded)
     if not square or not identity then return nil end
     for objectIndex = 0, square:getSpecialObjects():size() - 1 do
         local object = square:getSpecialObjects():get(objectIndex)
-        if object ~= excluded and instanceof(object, "IsoThumpable") and object:getNorth() == (north == true)
+        -- Built glass panes are IsoWindow objects; they still join a wall run.
+        if object ~= excluded and (instanceof(object, "IsoThumpable") or instanceof(object, "IsoWindow"))
+            and object:getNorth() == (north == true)
             and sameConnectionIdentity(identity, connectionData(object)) then
             return object
         end
@@ -125,22 +127,19 @@ local function isFloorAttachmentSprite(spriteName)
 end
 
 local function isWallDecorationSprite(spriteName)
-    if not spriteName then return false end
-    local sprite = getSprite(spriteName)
+    return AttachedSprites.isWallDecorationSprite(spriteName)
+end
+
+-- A glass pane (windowN/windowW) is an IsoWindow everywhere in the engine
+-- (CellLoader, BuildRecipeCode.windowGlass). Window recipes already convert
+-- through their onCreate; anything else with glass (sliding-door side panels,
+-- shop and diner glass walls) is created as a native window here.
+local function isGlassPaneSprite(spriteName)
+    local sprite = spriteName and getSprite(spriteName) or nil
     local properties = sprite and sprite:getProperties() or nil
     if not properties then return false end
-    local attached = properties:has(IsoFlagType.attachedN) or properties:has(IsoFlagType.attachedW)
-        or properties:has(IsoFlagType.attachedE) or properties:has(IsoFlagType.attachedS)
-    if not attached then return false end
-    return not (properties:has(IsoFlagType.solid) or properties:has(IsoFlagType.solidtrans)
-        or properties:has(IsoFlagType.collideN) or properties:has(IsoFlagType.collideW)
-        or properties:has(IsoFlagType.WallN) or properties:has(IsoFlagType.WallNTrans)
-        or properties:has(IsoFlagType.WallW) or properties:has(IsoFlagType.WallWTrans)
-        or properties:has(IsoFlagType.WallNW) or properties:has(IsoFlagType.WindowN)
-        or properties:has(IsoFlagType.WindowW) or properties:has(IsoFlagType.windowN)
-        or properties:has(IsoFlagType.windowW) or properties:has(IsoFlagType.doorN)
-        or properties:has(IsoFlagType.doorW) or properties:has(IsoFlagType.DoorWallN)
-        or properties:has(IsoFlagType.DoorWallW))
+    if properties:has(IsoFlagType.doorN) or properties:has(IsoFlagType.doorW) then return false end
+    return properties:has(IsoFlagType.windowN) or properties:has(IsoFlagType.windowW)
 end
 
 local function isRoofObjectSprite(spriteName)
@@ -187,15 +186,16 @@ end
 -- appear in the list or the native recipe cannot see what is inside it. This
 -- mirrors the set Requirements walks with inventory:getAllEvalRecurse, so the
 -- Knox gate and BuildLogic agree on what the character is carrying.
-local function addCarriedContainers(container, containers, depth)
-    if not container or depth > 4 then return end
+local function addCarriedContainers(container, containers, seen)
+    if not container or seen[container] then return end
+    seen[container] = true
     containers:add(container)
     local nested = container.getItemsFromCategory and container:getItemsFromCategory("Container") or nil
     if not nested then return end
     for nestedIndex = 0, nested:size() - 1 do
         local item = nested:get(nestedIndex)
         local inventory = item and item.getInventory and item:getInventory() or nil
-        if inventory then addCarriedContainers(inventory, containers, depth + 1) end
+        if inventory then addCarriedContainers(inventory, containers, seen) end
     end
 end
 
@@ -214,7 +214,7 @@ local function listedBuildContainers(character)
             for listedIndex = 0, listed:size() - 1 do containers:add(listed:get(listedIndex)) end
         end
     end
-    if character.getInventory then addCarriedContainers(character:getInventory(), containers, 0) end
+    if character.getInventory then addCarriedContainers(character:getInventory(), containers, {}) end
     return containers
 end
 
@@ -353,24 +353,6 @@ local function nativeInputFailure(logic, recipe, containers)
     end
     if #missing > 0 then return "native recipe inputs unavailable: " .. table.concat(missing, "; ") end
     return "native recipe rejected the current items or character state"
-end
-
-local function snapshotXp(character, awards)
-    local xp = character and character:getXp() or nil
-    for awardIndex = 1, #awards do
-        local award = awards[awardIndex]
-        award.before = xp and xp:getXP(award.perk) or 0
-    end
-end
-
-local function nativeXpWasGranted(character, awards)
-    local xp = character and character:getXp() or nil
-    if not xp or #awards == 0 then return #awards == 0 end
-    for awardIndex = 1, #awards do
-        local award = awards[awardIndex]
-        if xp:getXP(award.perk) > (tonumber(award.before) or 0) then return true end
-    end
-    return false
 end
 
 local function showConfiguredXpHalo(character, perk, gained)
@@ -923,6 +905,11 @@ end
 function KBWBuildingObject:runOnCreate(part, context)
     local onCreate = StageConfig.sprite(self.definition, self.stage).onCreate
     if not onCreate or not part then return nil end
+    -- BuildRecipeCode callbacks expect an IsoThumpable; vanilla never runs them for props.
+    if context and context.prop and type(onCreate) == "string"
+        and string.find(onCreate, "^BuildRecipeCode%.") and not instanceof(part, "IsoThumpable") then
+        return nil
+    end
     local square = part:getSquare()
     return LuaCallback.callObject(onCreate, {
         thumpable = part,
@@ -1006,31 +993,17 @@ function KBWBuildingObject:consumeConstructionRequirements(square)
     self.containers = containers
     local logic = newNativeBuildLogic(self.character, self.craftRecipe, self.inputChoices, containers)
     if not logic then return false, "native build logic unavailable" end
-    local nativeAwards = self.stage._kbwAdminXpOverride and {} or EntityCompat.xpAwards(self.stage)
-    Log:info(
-        "Entity XP check for %s uses recipe %s with %d award(s)", tostring(self.buildableId),
-        tostring(self.craftRecipe:getName()), #nativeAwards
-    )
-    snapshotXp(self.character, nativeAwards)
     logic:startCraftAction(nil)
     self.craftRecipeData = logic:getRecipeData()
     self.nativeRecipeHandled = true
     if self.character:isBuildCheat() then return true end
+    -- CraftRecipeData.perform awards XpAward itself (B42.21+).
     if not logic:performCurrentRecipe() then
         return false, nativeInputFailure(logic, self.craftRecipe, containers)
     end
     local inProgress = logic:getRecipeDataInProgress()
     inProgress:luaCallOnCreate(self.character)
     inProgress:processDestroyAndUsedItems(self.character)
-    self.nativeXpPending = #nativeAwards > 0 and not nativeXpWasGranted(self.character, nativeAwards)
-    if #nativeAwards > 0 and not self.nativeXpPending then
-        Log:info("Entity recipe XP credited during native completion for %s", tostring(self.buildableId))
-    elseif #nativeAwards == 0 then
-        Log:info(
-            "Entity recipe %s has no configured XP award for %s", tostring(self.craftRecipe:getName()),
-            tostring(self.buildableId)
-        )
-    end
     return true
 end
 
@@ -1222,6 +1195,10 @@ function KBWBuildingObject:connectWallParts(square, part, north)
         -- about to wear: both bare merges, both plastered merges, and a bare
         -- wall meeting a wall bound for plaster does not - which is what used
         -- to put the finish on the neighbour and leave this face without one.
+        -- Only solid wall pieces merge into a corner; a glass pane keeps its glass.
+        if not instanceof(part, "IsoThumpable") or not instanceof(perpendicular, "IsoThumpable") then
+            perpendicular = nil
+        end
         local finishesMatch = WallFinishes.objectFinishSignature(perpendicular)
             == WallFinishes.plannedFinishSignature(self.finish)
         if perpendicular
@@ -1281,8 +1258,9 @@ function KBWBuildingObject:connectWallParts(square, part, north)
     local pillar = IsoThumpable.new(getCell(), pillarSquare, self.pillar, false, self)
     buildUtil.setInfo(pillar, self)
     pillar:setName(self.name)
-    pillar:setMaxHealth(part:getMaxHealth())
-    pillar:setHealth(part:getHealth())
+    local partMaxHealth = part.getMaxHealth and part:getMaxHealth() or self:getBuildHealth()
+    pillar:setMaxHealth(partMaxHealth)
+    pillar:setHealth(partMaxHealth)
     pillar:setCorner(true)
     pillar:setCanPassThrough(true)
     pillar:setCanBarricade(false)
@@ -1413,11 +1391,15 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
             -- IsoLightSwitch so the standard click, sound and indicator paths
             -- remain available.
             local nativeObjectType = NativeObjectFactory.resolve(self.nativeObject, tile.sprite)
+            if not nativeObjectType and not spriteConfig.onCreate and isGlassPaneSprite(tile.sprite) then
+                nativeObjectType = "window"
+            end
             self.modData.KBW.groupId, self.modData.KBW.partIndex, self.modData.KBW.partCount = groupId,
                 index, #footprint
             if placement.kind == "overlay" and placement.needToBeAgainstWall == true
                 and isWallDecorationSprite(tile.sprite) then
-                local host = AttachedSprites.findWallHost(target, north, placement.isCorner == true)
+                local isCorner = AttachedSprites.isCornerStage(placement, self.stage)
+                local host = AttachedSprites.findWallHost(target, north, isCorner)
                 local attached = host and AttachedSprites.attach(host, tile.sprite, self.modData.KBW) or nil
                 if not attached then
                     Log:error(
@@ -1477,6 +1459,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                 removePrevious(target)
                 local nativeInsertIndex = previousRemoved and target == square and replacedIndex >= 0 and replacedIndex or nil
                 NativeObjectFactory.insert(part, nativeState, target, nativeInsertIndex)
+                if nativeObjectType == "window" then part = self:connectWallParts(target, part, north) end
                 Properties.applyToObject(
                     part, self, { square = target, spriteConfig = spriteConfig, tileIndex = index, isFloor = false }
                 )
@@ -1531,7 +1514,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
                         tileIndex = index,
                         isFloor = isFloorAttachmentSprite(tile.sprite)
                     })
-                    self:runOnCreate(part, { tile = tile, tileIndex = index })
+                    self:runOnCreate(part, { tile = tile, tileIndex = index, prop = true })
                     if plainProp and part.transmitCompleteItemToClients then
                         part:transmitCompleteItemToClients()
                     elseif part.transmitModData then
@@ -1624,14 +1607,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
             end
         end
     end
-    if self.character and self.nativeXpPending and self.craftRecipe then
-        Log:warning(
-            "Native recipe XP was not credited during %s; applying the B42.20 CraftRecipe fallback",
-            tostring(self.buildableId)
-        )
-        self.craftRecipe:addXP(self.character, true)
-        self.nativeXpPending = false
-    elseif self.character and self.craftRecipe and self.useNativeXpAward and not self.nativeRecipeHandled then
+    if self.character and self.craftRecipe and self.useNativeXpAward and not self.nativeRecipeHandled then
         local nativeAwards = EntityCompat.xpAwards(self.stage)
         Log:info(
             "Entity XP completion for %s uses recipe %s with %d award(s) outside BuildLogic", tostring(self.buildableId),

@@ -62,6 +62,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -143,6 +164,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -257,6 +299,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -338,6 +401,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -430,6 +514,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -522,6 +627,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -614,6 +740,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -706,6 +853,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -798,6 +966,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -890,6 +1079,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -982,6 +1192,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1074,6 +1305,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1166,6 +1418,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1258,6 +1531,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1350,6 +1644,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1442,6 +1757,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1534,6 +1870,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1626,6 +1983,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1718,6 +2096,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1810,6 +2209,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1902,6 +2322,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1994,6 +2435,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2075,6 +2537,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2189,6 +2672,27 @@
             ],
             "skills": {
               "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
             }
           },
           "construction": {

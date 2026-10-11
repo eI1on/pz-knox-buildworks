@@ -541,9 +541,14 @@ function KBWIngredientDrawer:prerender()
         local sources = row.sources or {}
         for sourceIndex = 1, #sources do
             local source = sources[sourceIndex]
-            y = drawTextBlock(
-                self, y, (source.type or "source") .. ": " .. tostring(source.item or source.name or "?"), Theme.text
-            )
+            -- Name the magazine the player can look for, not its item id.
+            local text
+            if source.type == "magazine" and source.item and getItemNameFromFullType then
+                text = getText("IGUI_KBW_KnowledgeFromMagazine", getItemNameFromFullType(source.item))
+            else
+                text = (source.type or "source") .. ": " .. tostring(source.item or source.name or "?")
+            end
+            y = drawTextBlock(self, y, text, Theme.text)
         end
     else
         y = drawMode(self, row, y)

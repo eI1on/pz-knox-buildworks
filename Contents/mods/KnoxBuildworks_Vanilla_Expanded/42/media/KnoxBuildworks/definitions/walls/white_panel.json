@@ -122,7 +122,16 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "roof": {
+            "family": "white_panel",
+            "pitch": 0,
+            "role": "gable",
+            "partsByFace": {
+              "W": "fill",
+              "N": "fill"
+            }
+          }
         }
       ],
       "allowSpriteReuse": true
@@ -722,6 +731,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -846,6 +864,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -970,6 +997,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -1094,6 +1130,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -1218,6 +1263,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -1342,6 +1396,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -1466,6 +1529,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ]
@@ -1585,6 +1657,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ]
@@ -1704,6 +1785,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ]
@@ -1823,6 +1913,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -1948,6 +2047,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -2073,6 +2181,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -2198,6 +2315,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:4",
+              "N": "riseW:4"
+            }
           }
         }
       ],
@@ -2323,6 +2449,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:5",
+              "N": "riseW:5"
+            }
           }
         }
       ],
@@ -2448,6 +2583,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:6",
+              "N": "riseW:6"
+            }
           }
         }
       ],
@@ -2573,6 +2717,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -2698,6 +2851,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -2823,6 +2985,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -2948,6 +3119,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:4",
+              "N": "riseE:4"
+            }
           }
         }
       ],
@@ -3073,6 +3253,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:5",
+              "N": "riseE:5"
+            }
           }
         }
       ],
@@ -3198,6 +3387,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:6",
+              "N": "riseE:6"
+            }
           }
         }
       ],
@@ -3323,6 +3521,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ],
@@ -3448,6 +3655,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ],
@@ -3573,6 +3789,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ],
@@ -3698,6 +3923,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:4",
+              "N": "peak:4"
+            }
           }
         }
       ],
@@ -3823,6 +4057,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:5",
+              "N": "peak:5"
+            }
           }
         }
       ],
@@ -3948,6 +4191,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_panel",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:6",
+              "N": "peak:6"
+            }
           }
         }
       ],

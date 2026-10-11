@@ -49,6 +49,9 @@ local function normalizeRequirements(errors, stage, materialGroups, definitionTo
     else
         stage.requirements.knowledge = stage.requirements.knowledge or {}
     end
+    if stage.requirements.knowledge.hideUntilLearned ~= nil and type(stage.requirements.knowledge.hideUntilLearned) ~= "boolean" then
+        add(errors, "stage " .. stage.id .. " hideUntilLearned must be a boolean")
+    end
     stage.requirements.inputs = stage.requirements.inputs or {}
     if type(stage.requirements.materials) == "string" then
         local group = materialGroups[stage.requirements.materials]
@@ -326,6 +329,56 @@ function Schema.normalize(definition, templates, materialGroups)
         local stage = stages[index]
         stage.id = stage.id or tostring(index)
         stage.level = stage.level or index
+        if stage.roof ~= nil then
+            local roof = stage.roof
+            if type(roof) ~= "table" or type(roof.family) ~= "string" or roof.family == ""
+                or (roof.role ~= "flat" and roof.role ~= "slope" and roof.role ~= "detail" and roof.role ~= "gable")
+                or (roof.pitch ~= "shallow" and roof.pitch ~= "custom" and roof.pitch ~= 0 and roof.pitch ~= 30 and roof.pitch ~= 45) then
+                add(errors, "stage " .. stage.id .. " has invalid roof metadata")
+            elseif roof.role == "slope" and (type(roof.step) ~= "number" or type(roof.stepsPerLevel) ~= "number"
+                or roof.step < 1 or roof.step > roof.stepsPerLevel or roof.step ~= math.floor(roof.step)
+                or roof.stepsPerLevel ~= math.floor(roof.stepsPerLevel)) then
+                add(errors, "stage " .. stage.id .. " has invalid roof slope step")
+            end
+            if type(roof) == "table" and roof.role == "slope" then
+                if type(roof.faceByEdge) ~= "table" then
+                    add(errors, "stage " .. stage.id .. " is missing roof edge mappings")
+                else
+                    local count = 0
+                    for edge, face in pairs(roof.faceByEdge) do
+                        count = count + 1
+                        if not DIRECTIONS[edge] or not DIRECTIONS[face] then
+                            add(errors, "stage " .. stage.id .. " has invalid roof edge mapping")
+                        end
+                    end
+                    if count == 0 then add(errors, "stage " .. stage.id .. " has empty roof edge mappings") end
+                end
+            end
+            if type(roof) == "table" then
+                if roof.hiddenEdges ~= nil then
+                    if type(roof.hiddenEdges) ~= "table" then
+                        add(errors, "stage " .. stage.id .. " has invalid hidden roof edges")
+                    else
+                        for _,edge in pairs(roof.hiddenEdges) do
+                            if not DIRECTIONS[edge] or type(roof.faceByEdge) == "table" and roof.faceByEdge[edge] then
+                                add(errors, "stage " .. stage.id .. " has invalid hidden roof edge")
+                            end
+                        end
+                    end
+                end
+                if roof.partsByFace ~= nil then
+                    if type(roof.partsByFace) ~= "table" then
+                        add(errors, "stage " .. stage.id .. " has invalid roof parts")
+                    else
+                        for face,part in pairs(roof.partsByFace) do
+                            if not DIRECTIONS[face] or type(part) ~= "string" or part == "" then
+                                add(errors, "stage " .. stage.id .. " has invalid roof part mapping")
+                            end
+                        end
+                    end
+                end
+            end
+        end
         validateStageConfiguration(errors, stage)
         validateEntityReference(errors, stage)
         EntityCompat.hydrateStage(stage)

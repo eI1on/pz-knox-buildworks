@@ -7,10 +7,24 @@ local EraseCursor = require("KnoxBuildworks/Planning/EraseCursor")
 local BuildPlanCursor = require("KnoxBuildworks/Planning/BuildPlanCursor")
 local GatherAreaCursor = require("KnoxBuildworks/Planning/GatherAreaCursor")
 local MoveBlueprintCursor = require("KnoxBuildworks/Planning/MoveBlueprintCursor")
+local SelectCursor = require("KnoxBuildworks/Planning/SelectCursor")
+local PipetteCursor = require("KnoxBuildworks/Planning/PipetteCursor")
 
 ---@class KBW.PlannerModule
 ---@type KBW.PlannerModule
-local Planner = { highlightPlacementId = nil, highlightRoomId = nil }
+local Planner = { highlightPlacementId = nil, highlightRoomId = nil, selection = nil }
+Planner.SELECT_COLOR = { r = 0.35, g = 0.80, b = 1.00, a = 0.55 }
+
+local function activateCursor(player, cursor)
+    local playerNum = player:getPlayerNum()
+    getCell():setDrag(cursor, playerNum)
+    if JoypadState and JoypadState.players and JoypadState.players[playerNum + 1] and setJoypadFocus then
+        -- The world cursor receives D-pad/A/B only after the catalogue gives
+        -- up controller focus. Mouse users can still click its panels.
+        setJoypadFocus(playerNum, nil)
+    end
+    return cursor
+end
 
 ---@param player IsoPlayer
 ---@param buildableId string
@@ -21,8 +35,7 @@ local Planner = { highlightPlacementId = nil, highlightRoomId = nil }
 ---@param finish KBW.WallFinish|nil
 function Planner.begin(player, buildableId, stageId, variantId, materialId, direction, finish)
     local cursor = PlanCursor.new(player, buildableId, stageId, variantId, materialId, direction or 1, finish)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
 end
 
 ---@param player IsoPlayer
@@ -30,8 +43,7 @@ end
 ---@param onRoomAdded function|nil
 function Planner.beginRoom(player, blueprintId, roomTemplate, onRoomAdded)
     local cursor = RoomCursor.new(player, blueprintId, roomTemplate, onRoomAdded)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
 end
 
 ---@param player IsoPlayer
@@ -40,8 +52,7 @@ end
 ---@param mode string|nil
 function Planner.beginErase(player, blueprintId, onErased, mode)
     local cursor = EraseCursor.new(player, blueprintId, onErased, mode)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
 end
 
 ---@param player IsoPlayer
@@ -49,8 +60,7 @@ end
 ---@param onBuilt function|nil
 function Planner.beginBuildTool(player, blueprintId, onBuilt)
     local cursor = BuildPlanCursor.new(player, blueprintId, onBuilt)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
 end
 
 ---@param player IsoPlayer
@@ -58,8 +68,7 @@ end
 ---@param onAreaSet function|nil
 function Planner.beginGatherArea(player, blueprintId, onAreaSet)
     local cursor = GatherAreaCursor.new(player, blueprintId, onAreaSet)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
 end
 
 ---@param player IsoPlayer
@@ -67,8 +76,30 @@ end
 ---@param onMoved function|nil
 function Planner.beginMoveBlueprint(player, blueprintId, onMoved)
     local cursor = MoveBlueprintCursor.new(player, blueprintId, onMoved)
-    getCell():setDrag(cursor, player:getPlayerNum())
-    return cursor
+    return activateCursor(player, cursor)
+end
+
+---@param player IsoPlayer
+---@param blueprintId string
+---@param onSelected function|nil
+function Planner.beginSelect(player, blueprintId, onSelected)
+    local cursor = SelectCursor.new(player, blueprintId, onSelected)
+    return activateCursor(player, cursor)
+end
+
+---Pick a planned ghost or a built piece and plan more of exactly that piece.
+---@param player IsoPlayer
+---@param blueprintId string
+---@param onPicked function(choice)
+function Planner.beginPipette(player, blueprintId, onPicked)
+    local cursor = PipetteCursor.new(player, blueprintId, onPicked)
+    return activateCursor(player, cursor)
+end
+
+---The current selection of planned ghosts ({ blueprintId, z, ghosts = {id=true} })
+---drawn on top of the plan; nil clears it.
+function Planner.setSelection(selection)
+    Planner.selection = selection
 end
 
 ---@param player IsoPlayer
@@ -78,7 +109,7 @@ function Planner.cancelCursor(player)
     if drag
         and (drag.Type == "KBWPlanCursor" or drag.Type == "KBWRoomCursor" or drag.Type == "KBWEraseCursor"
             or drag.Type == "KBWBuildPlanCursor" or drag.Type == "KBWGatherAreaCursor"
-            or drag.Type == "KBWMoveBlueprintCursor") then
+            or drag.Type == "KBWMoveBlueprintCursor" or drag.Type == "KBWSelectCursor" or drag.Type == "KBWPipetteCursor") then
         getCell():setDrag(nil, playerNum)
     end
 end
@@ -95,18 +126,18 @@ end
 
 -- Ghost drawing follows the player's active blueprint; when no blueprint is
 -- active (Hide ghosts in planning mode) nothing is drawn.
----@param playerIndex number
----@param x number
----@param y number
----@param z number
----@param square IsoGridSquare|nil
-function Planner.renderWorldPreview(playerIndex, x, y, z, square)
-    local player = getSpecificPlayer(playerIndex or 0) or getPlayer()
+function Planner.renderWorldPreview()
+    -- IngameState selects the current IsoPlayer before each split-screen
+    -- OnPostRender call. Kahlua cannot index IsoCamera.frameState's Java field.
+    local player = getPlayer()
     if not player then return end
+    local playerIndex = player:getPlayerNum()
+    GhostRenderer.applyPreferences(player)
     local activeBlueprint = Blueprints.active(player)
     if not activeBlueprint then
         Planner.highlightPlacementId = nil
         Planner.highlightRoomId = nil
+        GhostRenderer.flushWorldAreaHighlights(playerIndex)
         return
     end
     local activeLevel = tonumber(activeBlueprint.level) or math.floor(player:getZ())
@@ -121,13 +152,24 @@ function Planner.renderWorldPreview(playerIndex, x, y, z, square)
             activeBlueprint.anchor.y + radius, activeLevel, GhostRenderer.RANGE_COLOR, playerIndex
         )
     end
+    Planner.renderSelection(activeBlueprint, playerIndex)
+    GhostRenderer.flushWorldAreaHighlights(playerIndex)
 end
 
-function Planner.flushWorldHighlights()
-    GhostRenderer.flushWorldAreaHighlights()
+function Planner.renderSelection(blueprint, playerIndex)
+    local selection = Planner.selection
+    if not selection or selection.blueprintId ~= blueprint.id then return end
+    if (selection.ghostCount or 0) > 0 then
+        local placements = blueprint.placements or {}
+        for index = 1, #placements do
+            local placement = placements[index]
+            if selection.ghosts[placement.id] then
+                GhostRenderer.renderPlacementLayerAll(placement, Planner.SELECT_COLOR)
+            end
+        end
+    end
 end
 
-Events.RenderOpaqueObjectsInWorld.Add(Planner.renderWorldPreview)
-Events.RenderOpaqueObjectsInWorld.Add(Planner.flushWorldHighlights)
+Events.OnPostRender.Add(Planner.renderWorldPreview)
 
 return Planner

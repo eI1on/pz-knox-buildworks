@@ -1,3 +1,36 @@
+[b]Roof Helper Update - Hotfix[/b]
+[list]
+[*][b]Magazines unlock right away.[/b] Buildables taught by a magazine now appear in the catalogue and Planning catalogue as soon as you finish reading it, instead of only after loading the save again. The same goes for cards that change with your skill level, such as the shoddy, poor and good tiers.
+[*][b]Magazines show what they unlock.[/b] Hovering a magazine adds a panel under its tooltip listing the buildables it teaches, or the catalogue sections and how many pieces each gains for the big ones, and it turns green once you know them. The list is read from the loaded buildables, so add-ons that use the same knowledge show up too.
+[*][b]Painted doors, chairs and tables.[/b] Wood doors, chairs and tables with drawers offered paint colours that the build then refused ("paint not available for this wall"). The finish list and the build now use the same check.
+[*][b]Paint only where the wall takes it.[/b] Direct paint is offered only on walls that accept it without plaster, so a wall can no longer be queued with a colour it later refuses with "wall must be plastered before painting".
+[*][b]Painted fences and furniture are recognised.[/b] Fences, bar elements, shelves and bookcases that are painted with a tint now count as painted, so the Pipette, blueprints and corner merging see their colour.
+[*][b]Wall details attach reliably.[/b] Wall decorations check every tile they cover and corner walls the same way when you place them and when they are built, so a piece the ghost allowed no longer fails with "Failed to attach wall detail".
+[*][b]Construction XP from the game.[/b] Build 42.21 awards a recipe's XP itself; the old Knox fallback that could add it a second time was removed.
+[*][b]Fixes.[/b] Building some furniture props no longer throws a Lua error from a plaster callback; removing multi-tile pieces no longer logs warnings for parts already gone; skill level-ups refresh card visibility; mannequin containers show a translated title.
+[*][b]For server owners and modders.[/b] The Knox Build Test Runner was rebuilt as an automated in-game test suite (definitions, catalogue, planning, world builds with finishes and coverings, plan build queue) with a report in Zomboid/Lua/KnoxBuildworks/tests. It and the tile browser load only when the game runs in debug mode, in single player and multiplayer alike.
+[*][b]Note.[/b] "Invalid SpriteConfig object!" warnings for plastered or painted walls, frames and poles are logged by the base game for its own finished walls too; they are harmless.
+[/list]
+
+
+[b]Roof Helper, Magazines & Planning Tools Update[/b]
+[list]
+[*][b]Roof Helper.[/b] Select a room in Planning Mode and open Roof helper: it lists every roof that fits - flat, shed, lean-to, gable, hip and cross-gable, at 30 or 45 degrees - as small 3D models, best first, with the recommended one marked. Neighbouring rooms are roofed together, L, T, U and irregular rooms get proper hips and valleys, and a room under an upper storey is roofed against its wall.
+[*][b]Roofs your way.[/b] Pick the roof family and pitch, gable walls and gable finish on cards that preview the real tiles - gable walls come in any variant their family shares and in paint, plaster or wallpaper - plus overhang, maximum rise, start level, ceiling deck and eaves. Hover a layout to see it in the world in its real tiles, then add it to the plan as ordinary ghosts.
+[*][b]Magazines unlock buildables.[/b] 17 magazines - Fine Wood Working, The Family Handyman, Old House Journal, Popular Mechanics, Home Mechanix, the Flooring Guide and more - each teach a group of recipes; a high enough skill unlocks them too. Locked recipes stay hidden until learned, All qualities shows what each magazine will unlock, and the server checks the same rule. Look for them in bookshops, libraries, magazine racks and mechanic shelves.
+[*][b]New building components.[/b] Refrigerant bottles, refrigerator compressors, plastic sheets, insulation foam, rubber tubing, thin copper pipe and rubber seals are used by appliances and plumbing. They turn up in tool and electronics stores and tool crates; plastic sheets can be cut, rubber tubes made from hose, and compressors assembled.
+[*][b]Planning quickbar and pipette.[/b] Save catalogue selections to a numbered quickbar and place them again with a click or the 1-9 keys. The new Pipette picks a planned ghost or a built piece in the world and plans more of exactly that piece - same variant, material, direction and paint, plaster or wallpaper - without searching the catalogue.
+[*][b]Edit plans faster.[/b] Select ghosts with a box or with Ctrl and Shift in the Pieces list, then delete them all at once or with the Delete key.
+[*][b]Rooms of any shape.[/b] Extend room adds wings to a room, and Cut from room clears an area out of it for notches, holes or trimming a side.
+[*][b]World preview settings.[/b] Draw ghosts in blueprint tint, original textures or as a solid preview, show one level, neighbouring levels, lower levels or all, and hide roofs, planned walls or room zones while working inside. Settings are kept per player.
+[*][b]Supplies in bags and on the floor.[/b] Building and the Supplies tab find materials in bags inside containers, bags on the ground and piles next to the planned piece, and fetching reserves room in your bags for the whole trip.
+[*][b]Player buildings act like buildings.[/b] Enclosed player buildings get the same indoor state and wall cutaway as map houses.
+[*][b]A fuller in-game Guide.[/b] New pages cover magazines and building components, placing and editing pieces, rooms, the Roof helper and the previews.
+[*][b]Fixes.[/b] Built light switches work and stay in sync for every player; sliding-door side panels and shop glass are real glass instead of climbable frames; metal stairs are placed correctly; the catalogue description's scrollbar no longer covers its text; built curtains behave like vanilla ones; full-height arch pieces no longer block the way; the blueprint preview draws tiles on their own squares and its top view shows walls on their edges; Planning catalogue hover details no longer cover the list; ghosts no longer flicker or draw in the wrong order.
+[*][b]French translation updated.[/b]
+[/list]
+
+
 [b]Catalogue and Planning Revamp & Build 42.21 Compatibility[/b]
 [list]
 [*][b]Updated furniture placement for Build 42.21.[/b] Buildworks now passes the authoritative player to the changed moveable placement API, removing the argument-order failure that consumed materials without creating counters, shelves, roofs, wells, and other prop-backed builds.

@@ -10,10 +10,10 @@ local Workspace = {}
 local names = {
     "blueprintList", "blueprintName", "renameButton", "newButton", "duplicateButton", "deleteButton",
     "activateButton", "pinBlueprintButton", "exportButton", "importButton", "copyJsonButton", "manageAccessButton",
-    "totalList", "roomName", "drawRoomButton", "eraseRoomButton", "eraseButton", "gatherAreaButton",
+    "totalList", "roomName", "drawRoomButton", "extendRoomButton", "cutRoomButton", "eraseRoomButton", "eraseButton", "gatherAreaButton",
     "buildToolButton", "buildAllButton", "stopToolButton", "stopQueueButton", "moveBlueprintButton",
     "roomList", "updateRoomButton", "deleteRoomButton", "placementList", "buildSelectedButton", "removeSelectedButton", "exitButton",
-    "browseButton", "previewButton", "moreButton"
+    "previewButton", "moreButton", "viewButton", "roofButton", "selectToolButton", "pipetteButton"
 }
 
 local function rect(control, x, y, width, height)
@@ -26,16 +26,7 @@ end
 local function updateListScrollbar(list)
     if not list or not list.vscroll or not list:isVisible() then return end
     Theme.applyScrollbar(list.vscroll)
-    local overflowing = list:getScrollHeight() > list.height
-    list.vscroll:setVisible(overflowing)
-    if overflowing then
-        list.vscroll:setX(list.width - list.vscroll:getWidth())
-        list.vscroll:setY(0)
-        list.vscroll:setHeight(list.height)
-        list:updateScrollbars()
-    else
-        list:setYScroll(0)
-    end
+    Theme.fitScrollbar(list)
 end
 
 local function makeButton(owner, key, callback)
@@ -93,6 +84,8 @@ function Workspace.create(owner, roomColors, opacityValues)
         {"importButton", "IGUI_KBW_Import", "onImportBlueprint"},
         {"copyJsonButton", "IGUI_KBW_CopyBlueprintJSON", "onCopyBlueprintJSON"},
         {"drawRoomButton", "IGUI_KBW_DrawRoom", "onDrawRoom"},
+        {"extendRoomButton", "IGUI_KBW_ExtendRoom", "onExtendRoom"},
+        {"cutRoomButton", "IGUI_KBW_CutRoom", "onCutRoom"},
         {"eraseRoomButton", "IGUI_KBW_EraseRoomTool", "onEraseRoomTool"},
         {"eraseButton", "IGUI_KBW_EraseTool", "onEraseTool"},
         {"gatherAreaButton", "IGUI_KBW_GatherArea", "onGatherArea"},
@@ -105,12 +98,16 @@ function Workspace.create(owner, roomColors, opacityValues)
         {"deleteRoomButton", "IGUI_KBW_DeleteRoom", "onDeleteRoom"},
         {"buildSelectedButton", "IGUI_KBW_BuildPlacement", "onBuildSelected"},
         {"removeSelectedButton", "IGUI_KBW_RemoveSelectedPiece", "onRemoveSelectedPlacement"},
+        {"selectToolButton", "IGUI_KBW_SelectTool", "onSelectTool"},
+        {"pipetteButton", "IGUI_KBW_PipetteTool", "onPipette"},
         {"exitButton", "IGUI_KBW_ClosePlanning", "onExit"},
         {"levelDownButton", "IGUI_KBW_FloorDown", "onLevelDown"},
         {"levelUpButton", "IGUI_KBW_FloorUp", "onLevelUp"},
         {"usePlayerLevelButton", "IGUI_KBW_UsePlayerLevel", "onUsePlayerLevel"},
         {"manageAccessButton", "IGUI_KBW_ManageAccess", "onManageAccess"},
-        {"previewButton", "IGUI_KBW_PreviewBlueprint", "onPreviewBlueprint"}
+        {"previewButton", "IGUI_KBW_PreviewBlueprint", "onPreviewBlueprint"},
+        {"viewButton", "IGUI_KBW_WorldView", "onViewSettings"},
+        {"roofButton", "IGUI_KBW_RoofHelper", "onRoofHelper"}
     }
     for index = 1, #buttons do
         local entry = buttons[index]
@@ -192,7 +189,6 @@ function Workspace.create(owner, roomColors, opacityValues)
         button.tabId = entry[1]
         owner.workspaceTabs[#owner.workspaceTabs + 1] = button
     end
-    owner.browseButton = makeButton(owner, "IGUI_KBW_AddPieces", function(self) self:onBrowsePieces() end)
     owner.moreButton = makeButton(owner, "IGUI_KBW_BlueprintActions", function(self)
         local menu = ISContextMenu.get(self.player:getPlayerNum(), getMouseX(), getMouseY())
         local actions = {
@@ -211,6 +207,9 @@ function Workspace.create(owner, roomColors, opacityValues)
             end
         end
     end)
+    owner.selectToolButton:setTooltip(getText("Tooltip_KBW_SelectTool"))
+    owner.pipetteButton:setTooltip(getText("Tooltip_KBW_PipetteTool"))
+    owner.cutRoomButton:setTooltip(getText("Tooltip_KBW_CutRoom"))
     owner.exitButton:setTitle(getText("IGUI_KBW_ClosePlanning"))
     Workspace.layout(owner)
 end
@@ -239,9 +238,7 @@ function Workspace.layout(owner)
         owner.workspaceSummaryText = text
         summary:setText(text); summary:paginate(); summary:setYScroll(0)
     end
-    if summary.vscroll then
-        summary.vscroll:setVisible(summary:getScrollHeight() > summary.height)
-    end
+    Theme.fitScrollbar(summary)
     local y = 72
     local tabWidth = math.floor((width - gap * 3) / 4)
     local twoRows = false
@@ -267,9 +264,9 @@ function Workspace.layout(owner)
     local tab = owner.workspaceTab
     if tab == "plans" then
         local showFileActions = owner.height >= 800
-        local actionRows = 4 + pairRows(owner.newButton, owner.duplicateButton, width, gap)
+        local actionRows = 5 + pairRows(owner.newButton, owner.duplicateButton, width, gap)
             + pairRows(owner.pinBlueprintButton, owner.manageAccessButton, width, gap)
-            + pairRows(owner.activateButton, owner.browseButton, width, gap)
+            + 1
             + (showFileActions and (pairRows(owner.exportButton, owner.importButton, width, gap)
                 + pairRows(owner.copyJsonButton, owner.deleteButton, width, gap)) or 1)
         local listHeight = math.max(60, bottom - y - (height + gap) * actionRows - font - 8)
@@ -281,8 +278,11 @@ function Workspace.layout(owner)
         y = y + height + gap
         y = placePairTop(owner.newButton, owner.duplicateButton, pad, y, width, height, gap)
         y = placePairTop(owner.pinBlueprintButton, owner.manageAccessButton, pad, y, width, height, gap)
-        y = placePairTop(owner.activateButton, owner.browseButton, pad, y, width, height, gap)
+        rect(owner.activateButton, pad, y, width, height)
+        y = y + height + gap
         rect(owner.previewButton, pad, y, width, height)
+        y = y + height + gap
+        rect(owner.viewButton, pad, y, width, height)
         y = y + height + gap
         if showFileActions then
             y = placePairTop(owner.exportButton, owner.importButton, pad, y, width, height, gap)
@@ -296,13 +296,21 @@ function Workspace.layout(owner)
         local opacityWidth = math.floor((width - gap * (#owner.opacityButtons - 1)) / #owner.opacityButtons)
         for index = 1, #owner.opacityButtons do rect(owner.opacityButtons[index], pad + (index - 1) * (opacityWidth + gap), y, opacityWidth, height) end
     elseif tab == "pieces" then
-        rect(owner.browseButton, pad, y, width, height)
-        y = y + height + gap
-        y = placePairTop(owner.buildToolButton, owner.eraseButton, pad, y, width, height, gap)
-        y = placePairTop(owner.moveBlueprintButton, owner.removeSelectedButton, pad, y, width, height, gap)
+        -- Pieces come from the catalogue on the right, or straight from the
+        -- world with the pipette; this tab edits what is planned.
+        y = placePairTop(owner.pipetteButton, owner.selectToolButton, pad, y, width, height, gap)
+        local summary = owner.selectionSummaryText and owner:selectionSummaryText() or nil
+        if summary then
+            labels[#labels + 1] = {summary, pad, y + 2}
+            y = y + font + 8
+        end
+        y = placePairTop(owner.removeSelectedButton, owner.eraseButton, pad, y, width, height, gap)
+        y = placePairTop(owner.moveBlueprintButton, owner.buildToolButton, pad, y, width, height, gap)
         bottom = placePairBottom(owner.buildSelectedButton, owner.buildAllButton, pad, bottom, width, height, gap)
         rect(owner.placementList, pad, y, width, bottom - y)
     elseif tab == "rooms" then
+        rect(owner.roofButton, pad, y, width, height)
+        y = y + height + gap
         rect(owner.roomName, pad, y, width, height)
         y = y + height + gap
         local columns = math.max(1, math.floor((width + gap) / 30))
@@ -310,7 +318,8 @@ function Workspace.layout(owner)
             rect(owner.colorButtons[index], pad + ((index - 1) % columns) * 30, y + math.floor((index - 1) / columns) * 30, 24, 24)
         end
         y = y + math.ceil(#owner.colorButtons / columns) * 30 + gap
-        y = placePairTop(owner.drawRoomButton, owner.eraseRoomButton, pad, y, width, height, gap)
+        y = placePairTop(owner.drawRoomButton, owner.extendRoomButton, pad, y, width, height, gap)
+        y = placePairTop(owner.cutRoomButton, owner.eraseRoomButton, pad, y, width, height, gap)
         bottom = placePairBottom(owner.updateRoomButton, owner.deleteRoomButton, pad, bottom, width, height, gap)
         rect(owner.roomList, pad, y, width, bottom - y)
     else

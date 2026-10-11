@@ -1,10 +1,38 @@
 import json
 import unittest
 from test_catalog_workspace import runtime, LUA
-from test_supply_allocation import requirements_runtime
+from test_supply_allocation import requirements_runtime, supply_scan_stub
 
 
 class PlanningTests(unittest.TestCase):
+    def test_recipe_totals_accept_boolean_blueprint_entries(self):
+        source = (LUA / "client/KnoxBuildworks/UI/PlanningMode.lua").read_text(encoding="utf-8-sig")
+        helper = source[source.index("local function mapToSortedList"):source.index("function KBWPlanningMode:new")]
+        lua = runtime()
+        lua.execute("local function totalDisplayLabel(key) return tostring(key) end\n" + helper + "\nresult=mapToSortedList({BuildWoodenWall=true}, 'knowledge')")
+        lua.execute("assert(#result==1 and result[1].label=='BuildWoodenWall' and result[1].source.name=='BuildWoodenWall')")
+
+    def test_build_plan_tooltip_checks_resources_at_planned_square(self):
+        source = (LUA / "client/KnoxBuildworks/Planning/BuildPlanCursor.lua").read_text(encoding="utf-8-sig")
+        helper = source[source.index("    function KBWBuildPlanCursor:statusFor("):source.index("    function KBWBuildPlanCursor:ensureTooltip(")]
+        lua = runtime()
+        lua.execute("""
+            KBWBuildPlanCursor={}; KBWBuildPlanCursor.__index=KBWBuildPlanCursor
+            local site={}
+            resultSquare=nil
+            Blueprints={resolvePlacement=function() return {},{} end}
+            Requirements={evaluate=function(player,definition,stage,square)
+                resultSquare=square; return {ok=true,rows={}} end}
+            function getCell() return {getGridSquare=function(_,x,y,z)
+                assert(x==20 and y==30 and z==1); return site end} end
+            expectedSquare=site
+        """ + helper)
+        lua.execute("""
+            local cursor=setmetatable({statusCache={},character={}},KBWBuildPlanCursor)
+            local result=cursor:statusFor({id='a',x=20,y=30,z=1})
+            assert(result.ok and resultSquare==expectedSquare)
+        """)
+
     def test_planning_uses_its_own_two_panel_catalogue(self):
         mode = (LUA / "client/KnoxBuildworks/UI/PlanningMode.lua").read_text(encoding="utf-8")
         catalog = (LUA / "client/KnoxBuildworks/UI/PlanningCatalog.lua").read_text(encoding="utf-8")
@@ -139,6 +167,7 @@ class PlanningTests(unittest.TestCase):
                 borderSoft={r=.2,g=.2,b=.2,a=1},accent={r=1,g=.8,b=.2,a=1},
                 text={r=1,g=1,b=1,a=1},textMuted={r=.7,g=.7,b=.7,a=1},
                 color=function(value) return value end,applyButton=function() end,
+                fitScrollbar=function(p) return false end,
                 setButtonEnabled=function() end
             }
             blueprint={id='bp',level=0,updated=1,placements={
@@ -147,6 +176,9 @@ class PlanningTests(unittest.TestCase):
                 gatherArea={x1=20,y1=21,x2=22,y2=24,z=1}}
             modules['KnoxBuildworks/Planning/Blueprints']={get=function() return blueprint end}
         """)
+        lua.globals().modules["KnoxBuildworks/Planning/RoomShape"] = lua.execute(
+            (LUA / "shared/KnoxBuildworks/Planning/RoomShape.lua").read_text(encoding="utf-8")
+        )
         lua.globals().blueprint_preview = lua.execute(
             (LUA / "client/KnoxBuildworks/UI/BlueprintPreview.lua").read_text(encoding="utf-8")
         )
@@ -230,7 +262,9 @@ class PlanningTests(unittest.TestCase):
             assert(o.blueprintName and o.roomName and o.workspaceSummary)
             assert(#o.workspaceTabs==4 and #o.colorButtons==2 and #o.opacityButtons==3)
             assert(o.colorButtons[1].backgroundColorEnabled==o.colorButtons[1].backgroundColor)
-            assert(o.browseButton and o.moreButton and o.exitButton)
+            -- Pieces come from the catalogue; the Pieces tab edits the plan.
+            assert(o.browseButton==nil and o.moreButton and o.exitButton)
+            assert(o.selectToolButton and o.pipetteButton and o.cutRoomButton)
             assert(o.previewButton)
             assert(o.duplicateButton and o.pinBlueprintButton and o.manageAccessButton)
             assert(o.exportButton and o.importButton and o.copyJsonButton and o.deleteButton)
@@ -276,7 +310,12 @@ class PlanningTests(unittest.TestCase):
                     assert(o.placementList.visible==(tab=='pieces'))
                     if tab=='plans' then
                         assert(o.duplicateButton.visible and o.pinBlueprintButton.visible and o.manageAccessButton.visible)
-                        assert(o.activateButton.visible and o.browseButton.visible)
+                        assert(o.activateButton.visible and o.browseButton==nil)
+                    elseif tab=='pieces' then
+                        assert(o.selectToolButton.visible and o.pipetteButton.visible)
+                        assert(o.removeSelectedButton.visible and o.eraseButton.visible)
+                    elseif tab=='rooms' then
+                        assert(o.cutRoomButton.visible and o.extendRoomButton.visible)
                     end
                 end
             end
@@ -291,7 +330,6 @@ class PlanningTests(unittest.TestCase):
                 supplyOrder=function(p) return p end,
                 inspectSupplies=function(p,area)
                     scanCalls=scanCalls+1
-                    if area then assert(area.y2-area.y1+1<=24) end
                     return gathered,scanIncomplete
                 end}
             modules['KnoxBuildworks/UI/IconResolver']={displayNameForTag=function(t) return t end}
@@ -304,10 +342,11 @@ class PlanningTests(unittest.TestCase):
                 {id='wood',items={'Base.Plank'},amount=2}}}}
             blueprint={updated=1,placements={{id='a',definition={},stage=stage},{id='b',definition={},stage=stage}}}
         """)
+        supply_scan_stub(lua)
         lua.globals().supplies = lua.execute((LUA / "client/KnoxBuildworks/Planning/Supplies.lua").read_text(encoding="utf-8"))
         lua.execute("""
             local state=supplies.new(player,blueprint)
-            supplies.step(state)
+            supplies.step(state); supplies.step(state)
             assert(state.phase=='done' and not state.allReady and state.anyReady)
             assert(state.singleReady.a and state.singleReady.b)
             for _,row in pairs(state.materials) do assert(row.amount==4 and row.stock==3 and row.available==3) end
@@ -315,31 +354,78 @@ class PlanningTests(unittest.TestCase):
             assert(#records==0 and not stock[1].removed)
             gathered={makeItem('Base.Plank')}
             blueprint.gatherArea={x1=0,x2=1,y1=0,y2=49,z=0}
+            scanCalls=0
             state=supplies.new(player,blueprint)
+            assert(state.phase=="scan")
             supplies.step(state)
-            assert(state.phase=='scan')
+            assert(state.phase=="scan")
+            local revision=2
+            requirements.inventoryRevision=function() return revision end
+            assert(supplies.current(state,blueprint),'container changes must not restart a running scan')
             for i=1,10 do supplies.step(state) end
             assert(state.phase=='done' and state.allReady)
+            assert(scanCalls==2,'the scan should advance without being restarted')
             for _,row in pairs(state.materials) do assert(row.amount==4 and row.stock==4 and row.available==4) end
+            now=state.checkedAt+5001
+            assert(not supplies.current(state,blueprint), 'changed supplies must eventually refresh')
+            now=1000
             scanIncomplete=true
             blueprint.gatherArea={x1=0,x2=0,y1=0,y2=0,z=0}
             state=supplies.new(player,blueprint)
-            supplies.step(state); supplies.step(state)
+            supplies.step(state); supplies.step(state); supplies.step(state)
             assert(state.phase=='done' and not state.allReady, 'unloaded gather tiles must keep Build All disabled')
             scanIncomplete=false
             assert(supplies.current(state,blueprint))
-            now=state.checkedAt+4001
+            now=state.checkedAt+29000
+            assert(supplies.current(state,blueprint), 'unchanged supplies should stay available')
+            now=state.checkedAt+30001
             assert(not supplies.current(state,blueprint), 'completed supply results must expire')
             now=1000
             blueprint.gatherArea=nil
             state=supplies.new(player,blueprint)
             assert(supplies.current(state,blueprint))
             square.getX=function() return 1 end
-            assert(not supplies.current(state,blueprint), 'moving must invalidate nearby supplies')
+            assert(supplies.current(state,blueprint), 'movement should not restart a running scan')
+            supplies.step(state); supplies.step(state)
+            now=state.checkedAt+5001
+            assert(not supplies.current(state,blueprint), 'moving must eventually refresh nearby supplies')
+            now=1000
             square.getX=function() return 0 end
             state=supplies.new(player,blueprint)
             modules['KnoxBuildworks/Admin/BuildableRules'].revision=2
             assert(not supplies.current(state,blueprint), 'server rule changes must invalidate readiness')
+        """)
+
+    def test_supply_totals_include_ground_beside_each_placement(self):
+        lua = requirements_runtime()
+        lua.execute("""
+            function getItemNameFromFullType(t) return t end
+            modules['KnoxBuildworks/Planning/BuildQueue']={supplyOrder=function(p) return p end,
+                inspectSupplies=function() return {},false end}
+            modules['KnoxBuildworks/UI/IconResolver']={displayNameForTag=function(t) return t end}
+            modules['KnoxBuildworks/Validation/WallFinishes']={fetchRows=function() return {} end}
+            modules['KnoxBuildworks/Planning/Blueprints']={resolvePlacement=function(p) return p.definition,p.stage end}
+            modules['KnoxBuildworks/Validation/Requirements']=requirements
+            stock={makeItem('Base.Plank'),makeItem('Base.Plank'),makeItem('Base.Plank')}
+            local extra=makeItem('Base.Plank'); extra.world={}
+            local site={getX=function() return 10 end,getY=function() return 10 end,getZ=function() return 0 end}
+            function getCell() return {getGridSquare=function() return site end} end
+            buildUtil.getMaterialOnGround=function(s)
+                return s==site and {['Base.Plank']={extra}} or {}
+            end
+            local stage={requirements={inputs={{id='wood',items={'Base.Plank'},amount=2}}}}
+            blueprint={updated=1,placements={{id='a',x=10,y=10,z=0,definition={},stage=stage},
+                {id='b',x=11,y=10,z=0,definition={},stage=stage}}}
+        """)
+        supply_scan_stub(lua)
+        lua.globals().supplies = lua.execute((LUA / "client/KnoxBuildworks/Planning/Supplies.lua").read_text(encoding="utf-8"))
+        lua.execute("""
+            local state=supplies.new(player,blueprint)
+            supplies.step(state); supplies.step(state)
+            assert(state.phase=='done' and state.allReady)
+            for _,row in pairs(state.materials) do
+                assert(row.amount==4 and row.stock==4 and row.available==4)
+            end
         """)
 
     def test_drainable_tools_stay_in_the_tools_section(self):
@@ -356,10 +442,11 @@ class PlanningTests(unittest.TestCase):
             local stage={requirements={inputs={{id='torch',items={'Base.BlowTorch'},role='tool',mode='drain',uses=2}}}}
             blueprint={updated=1,placements={{id='a',definition={},stage=stage},{id='b',definition={},stage=stage}}}
         """)
+        supply_scan_stub(lua)
         lua.globals().supplies = lua.execute((LUA / "client/KnoxBuildworks/Planning/Supplies.lua").read_text(encoding="utf-8"))
         lua.execute("""
             local state=supplies.new(player,blueprint)
-            supplies.step(state)
+            supplies.step(state); supplies.step(state)
             local materialCount,toolCount=0,0
             for _ in pairs(state.materials) do materialCount=materialCount+1 end
             for _,row in pairs(state.tools) do toolCount=toolCount+1; assert(row.amount==4 and row.stock==4) end

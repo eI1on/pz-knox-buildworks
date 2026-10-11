@@ -34,4 +34,60 @@ module Base
             item 1 KnoxBuildworks.KBW_Blueprint,
         }
     }
+
+    craftRecipe KBWCutPlasticSheet
+    {
+        timedAction = Making,
+        time = 80,
+        Tags = InHandCraft,
+        category = Carpentry,
+        inputs
+        {
+            item 1 [Base.Scissors] mode:keep,
+            item 1 [KnoxBuildworks.PlasticSheet],
+        }
+        outputs
+        {
+            item 6 KnoxBuildworks.PlasticSheetSmall,
+        }
+    }
+
+    craftRecipe KBWPrepareRubberTube
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft,
+        category = Mechanics,
+        inputs
+        {
+            item 1 [Base.Scissors] mode:keep,
+            item 1 [Base.RubberHose],
+        }
+        outputs
+        {
+            item 1 KnoxBuildworks.SmallRubberTube,
+        }
+    }
+
+    craftRecipe KBWAssembleCompressor
+    {
+        timedAction = Making,
+        time = 300,
+        Tags = InHandCraft,
+        category = Electrical,
+        SkillRequired = Electricity:5;Mechanics:3,
+        inputs
+        {
+            item 1 [Base.Screwdriver] mode:keep,
+            item 2 [Base.SheetMetal],
+            item 20 [Base.ElectronicsScrap],
+            item 4 [Base.ElectricWire],
+            item 6 [Base.Screws],
+            item 2 [KnoxBuildworks.ThinCopperPipe],
+        }
+        outputs
+        {
+            item 1 KnoxBuildworks.RefrigeratorCompressor,
+        }
+    }
 }

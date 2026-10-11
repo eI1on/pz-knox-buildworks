@@ -229,6 +229,31 @@ function Theme.applyScrollbar(scrollbar)
     scrollbar.borderColor = cloneColor(Theme.borderSoft)
 end
 
+---Docks a panel's vertical scrollbar to its right edge at full height and shows
+---it only when the content overflows. The engine's anchors only remember the
+---last size change, so a panel resized twice before a frame leaves an anchored
+---scrollbar drifting over its content; the bar is unanchored and placed by hand.
+---@return boolean overflowing
+function Theme.fitScrollbar(panel)
+    local scrollbar = panel and panel.vscroll
+    if not scrollbar then return false end
+    if not scrollbar.kbwPinned then
+        scrollbar.kbwPinned = true
+        scrollbar:setAnchorLeft(true)
+        scrollbar:setAnchorRight(false)
+        scrollbar:setAnchorTop(true)
+        scrollbar:setAnchorBottom(false)
+    end
+    local overflowing = (panel:getScrollHeight() or 0) > panel.height
+    scrollbar:setX(panel.width - scrollbar:getWidth())
+    scrollbar:setY(0)
+    scrollbar:setHeight(panel.height)
+    scrollbar:setVisible(overflowing)
+    if not overflowing then panel:setYScroll(0) end
+    if panel.updateScrollbars then panel:updateScrollbars() end
+    return overflowing
+end
+
 function Theme.applyCombo(combo)
     if not combo then return end
     combo.background = true

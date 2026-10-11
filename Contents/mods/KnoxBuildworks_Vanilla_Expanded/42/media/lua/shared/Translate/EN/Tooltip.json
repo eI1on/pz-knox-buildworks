@@ -312,5 +312,6 @@
   "Tooltip_KBWVE_Buildable_RoofTrim": "Trim for finishing a roof edge - fascia runs, corners, peaks and downpipes.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame": "An old-fashioned wood wall with an opening to allow natural light inside.",
   "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_door_frame": "An old-fashioned wood door frame, essential for adding doors to your rustic wall.",
-  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "A pillar constructed from old-fashioned wood, offering a rustic and sturdy support."
+  "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_pillar": "A pillar constructed from old-fashioned wood, offering a rustic and sturdy support.",
+  "Tooltip_KBWVE_SlidingGlassSideWall": "The glass is part of this side wall. It is a built-in window; no separate window item is needed."
 }

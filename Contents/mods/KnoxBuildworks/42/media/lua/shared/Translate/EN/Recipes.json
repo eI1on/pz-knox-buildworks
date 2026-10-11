@@ -1,3 +1,23 @@
 {
-  "MakeBucketOfAsphaltMixture": "Mix Bucket of Asphalt"
+  "MakeBucketOfAsphaltMixture": "Mix Bucket of Asphalt",
+  "KBWKnowledge_FineWoodWorking_Furniture_BedsCouchesArmchairs": "Fine Wood Working: Beds Couches & Armchairs",
+  "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches": "Fine Wood Working: Chairs & Benches",
+  "KBWKnowledge_FineWoodWorking_Furniture_Dressers": "Fine Wood Working: Dressers",
+  "KBWKnowledge_FineWoodWorking_Furniture_Crates": "Fine Wood Working: Crates",
+  "KBWKnowledge_FineWoodWorking_Furniture_Counters": "Fine Wood Working: Counters",
+  "KBWKnowledge_FineWoodWorking_Furniture_DesksTables": "Fine Wood Working: Desks & Tables",
+  "KBWKnowledge_FineWoodWorking_DoorsWindows": "Fine Wood Working: Doors & Windows",
+  "KBWKnowledge_TheFamilyHandyman_StairsFences": "The Family Handyman: Stairs & Fences",
+  "KBWKnowledge_OldHouseJournal_WoodenFloors": "Old House Journal: Wooden Floors",
+  "KBWKnowledge_ArchitecturalDigest_RugsCarpets": "Architectural Digest: Rugs & Carpets",
+  "KBWKnowledge_HomeMechanix_Bathroom": "Home Mechanix: Bathroom Appliances",
+  "KBWKnowledge_ProjectsInMetal_Diverse": "Projects In Metal",
+  "KBWKnowledge_PopularMechanics_Lighting": "Popular Mechanics: Lighting",
+  "KBWKnowledge_PopularMechanics_HomeAppliances": "Popular Mechanics: Home Appliances",
+  "KBWKnowledge_FlooringGuide_Ceramic": "Flooring Guide: Ceramic Tiles",
+  "KBWKnowledge_FlooringGuide_Paved": "Flooring Guide: Paved Surfaces",
+  "KBWKnowledge_DecorationsGuide_RoadwayGarage": "Decoration Guide: Roadway & Garage",
+  "KBWCutPlasticSheet": "Cut Plastic Sheet",
+  "KBWPrepareRubberTube": "Prepare Rubber Tube",
+  "KBWAssembleCompressor": "Assemble Refrigerator Compressor"
 }

@@ -123,6 +123,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -143,7 +164,16 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 0,
+            "role": "gable",
+            "partsByFace": {
+              "W": "fill",
+              "N": "fill"
+            }
+          }
         }
       ],
       "allowSpriteReuse": true
@@ -270,6 +300,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -420,6 +471,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -553,6 +625,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -684,6 +777,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -824,6 +938,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -844,7 +979,16 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 0,
+            "role": "gable",
+            "partsByFace": {
+              "W": "fill",
+              "N": "fill"
+            }
+          }
         }
       ],
       "allowSpriteReuse": true
@@ -971,6 +1115,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1121,6 +1286,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1276,6 +1462,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1431,6 +1638,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1564,6 +1792,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1695,6 +1944,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1835,6 +2105,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -1855,7 +2146,16 @@
           "previousStage": [
             "WoodenWallFrame",
             "MetalWallFrame"
-          ]
+          ],
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 0,
+            "role": "gable",
+            "partsByFace": {
+              "W": "fill",
+              "N": "fill"
+            }
+          }
         }
       ],
       "allowSpriteReuse": true
@@ -1982,6 +2282,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2132,6 +2453,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2287,6 +2629,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2442,6 +2805,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2575,6 +2959,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2706,6 +3111,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2846,6 +3272,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -2860,6 +3307,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -2992,6 +3448,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3006,6 +3483,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -3138,6 +3624,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3152,6 +3659,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -3284,6 +3800,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3298,6 +3835,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -3430,6 +3976,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3444,6 +4011,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -3576,6 +4152,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3590,6 +4187,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -3722,6 +4328,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3736,6 +4363,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ],
@@ -3863,6 +4499,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -3877,6 +4534,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ],
@@ -4004,6 +4670,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4018,6 +4705,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "brown_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ],
@@ -4145,6 +4841,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4159,6 +4876,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -4291,6 +5017,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4305,6 +5052,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -4437,6 +5193,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4451,6 +5228,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -4583,6 +5369,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4597,6 +5404,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -4729,6 +5545,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4743,6 +5580,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -4875,6 +5721,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -4889,6 +5756,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -5021,6 +5897,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5035,6 +5932,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ],
@@ -5162,6 +6068,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5176,6 +6103,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ],
@@ -5303,6 +6239,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5317,6 +6274,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "chestnut_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ],
@@ -5444,6 +6410,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5458,6 +6445,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -5590,6 +6586,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5604,6 +6621,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -5736,6 +6762,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5750,6 +6797,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -5882,6 +6938,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -5896,6 +6973,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -6028,6 +7114,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6042,6 +7149,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -6174,6 +7290,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6188,6 +7325,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -6320,6 +7466,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6334,6 +7501,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ],
@@ -6461,6 +7637,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6475,6 +7672,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ],
@@ -6602,6 +7808,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6616,6 +7843,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 45,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ],
@@ -6743,6 +7979,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6757,6 +8014,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:1",
+              "N": "riseW:1"
+            }
           }
         }
       ],
@@ -6889,6 +8155,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -6903,6 +8190,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:2",
+              "N": "riseW:2"
+            }
           }
         }
       ],
@@ -7035,6 +8331,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7049,6 +8366,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:3",
+              "N": "riseW:3"
+            }
           }
         }
       ],
@@ -7181,6 +8507,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7195,6 +8542,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:4",
+              "N": "riseW:4"
+            }
           }
         }
       ],
@@ -7327,6 +8683,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7341,6 +8718,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:5",
+              "N": "riseW:5"
+            }
           }
         }
       ],
@@ -7473,6 +8859,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7487,6 +8894,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseS:6",
+              "N": "riseW:6"
+            }
           }
         }
       ],
@@ -7619,6 +9035,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7633,6 +9070,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:1",
+              "N": "riseE:1"
+            }
           }
         }
       ],
@@ -7765,6 +9211,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7779,6 +9246,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:2",
+              "N": "riseE:2"
+            }
           }
         }
       ],
@@ -7911,6 +9387,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -7925,6 +9422,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:3",
+              "N": "riseE:3"
+            }
           }
         }
       ],
@@ -8057,6 +9563,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8071,6 +9598,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:4",
+              "N": "riseE:4"
+            }
           }
         }
       ],
@@ -8203,6 +9739,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8217,6 +9774,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:5",
+              "N": "riseE:5"
+            }
           }
         }
       ],
@@ -8349,6 +9915,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8363,6 +9950,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "riseN:6",
+              "N": "riseE:6"
+            }
           }
         }
       ],
@@ -8495,6 +10091,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8509,6 +10126,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:1",
+              "N": "peak:1"
+            }
           }
         }
       ],
@@ -8641,6 +10267,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8655,6 +10302,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:2",
+              "N": "peak:2"
+            }
           }
         }
       ],
@@ -8787,6 +10443,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8801,6 +10478,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:3",
+              "N": "peak:3"
+            }
           }
         }
       ],
@@ -8933,6 +10619,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -8947,6 +10654,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:4",
+              "N": "peak:4"
+            }
           }
         }
       ],
@@ -9079,6 +10795,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -9093,6 +10830,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:5",
+              "N": "peak:5"
+            }
           }
         }
       ],
@@ -9225,6 +10971,27 @@
             ],
             "skills": {
               "MetalWelding": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_ProjectsInMetal_Diverse"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.ProjectsInMetal_Diverse"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 6
+                  }
+                }
+              ]
             }
           },
           "construction": {
@@ -9239,6 +11006,15 @@
           "object": {
             "isThumpable": true,
             "canBarricade": false
+          },
+          "roof": {
+            "family": "white_industrial",
+            "pitch": 30,
+            "role": "gable",
+            "partsByFace": {
+              "W": "peak:6",
+              "N": "peak:6"
+            }
           }
         }
       ],

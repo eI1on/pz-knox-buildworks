@@ -5,6 +5,7 @@ local KBW = require("KnoxBuildworks/Core")
 local Registry = require("KnoxBuildworks/Definitions/Registry")
 local Groups = require("KnoxBuildworks/Definitions/Groups")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
+local RoomShape = require("KnoxBuildworks/Planning/RoomShape")
 local Planner = require("KnoxBuildworks/Planning/Planner")
 local GhostRenderer = require("KnoxBuildworks/Planning/GhostRenderer")
 local Theme = require("KnoxBuildworks/UI/Theme")
@@ -37,7 +38,7 @@ local ROOM_COLORS = {
     { r = 1.00, g = 0.62, b = 0.28, a = 0.26 }, { r = 0.92, g = 0.32, b = 0.66, a = 0.26 }
 }
 
-local OPACITY_VALUES = { 0.08, 0.14, 0.22, 0.34 }
+local OPACITY_VALUES = { 0.15, 0.35, 0.65, 1.0 }
 
 -- Per-player/faction grant levels (labels for the access summary line; the
 -- access editor itself lives in UI/BlueprintAccessWindow.lua).
@@ -263,73 +264,23 @@ end
 local function mapToSortedList(map, kind)
     local list = {}
     for key, value in pairs(map or {}) do
+        -- Blueprint totals record required recipes as `true` until the live
+        -- supply pass fills in availability. The other total maps use rows.
+        local source = type(value) == "table" and value or { name = tostring(key) }
         local row = {
             kind = kind,
-            key = value.iconKey or key,
-            label = totalDisplayLabel(value.iconKey or key, value, kind),
-            rawLabel = tostring((value and value.label) or (value and value.name) or key),
-            source = value
+            key = source.iconKey or key,
+            label = totalDisplayLabel(source.iconKey or key, source, kind),
+            rawLabel = tostring(source.label or source.name or key),
+            source = source
         }
-        if value and value.amount then row.amount = value.amount end
-        if value and value.needed then row.amount = value.needed end
-        row.stock, row.available = value.stock, value.available
+        if source.amount then row.amount = source.amount end
+        if source.needed then row.amount = source.needed end
+        row.stock, row.available = source.stock, source.available
         list[#list + 1] = row
     end
     table.sort(list, function (a, b) return tostring(a.label) < tostring(b.label) end)
     return list
-end
-
-local function levelLabel(level)
-    level = tostring(level or "none")
-    for levelIndex = 1, #GRANT_LEVELS do
-        if GRANT_LEVELS[levelIndex].id == level then
-            return getText(GRANT_LEVELS[levelIndex].label)
-        end
-    end
-    if level == "private" then return getText("IGUI_KBW_LevelNone") end
-    return tostring(level)
-end
-
-local function scopeShortLabel(scope)
-    if scope == "view" then return getText("IGUI_KBW_AllCanViewShort") end
-    if scope == "build" then return getText("IGUI_KBW_AllCanBuildShort") end
-    if scope == "contribute" then return getText("IGUI_KBW_AllCanContributeShort") end
-    return getText("IGUI_KBW_PrivateShort")
-end
-
-local function currentFaction(player)
-    if not player or not Faction or not Faction.getPlayerFaction then return nil end
-    return Faction.getPlayerFaction(player)
-end
-
-local function factionName(faction)
-    if faction and faction.getName then return tostring(faction:getName()) end
-    return nil
-end
-
-local function currentFactionName(player)
-    return factionName(currentFaction(player))
-end
-
-local function blueprintAccessSummary(player, blueprint)
-    if not blueprint then return getText("IGUI_KBW_NoBlueprintSelected") end
-    local access = blueprint.access or {}
-    local playerCount = 0
-    for _ in pairs(access.players or {}) do
-        playerCount = playerCount + 1
-    end
-    local factionCount = 0
-    for _ in pairs(access.factions or {}) do
-        factionCount = factionCount + 1
-    end
-    local faction = currentFactionName(player)
-    local factionAccess = faction and access.factions and access.factions[faction] or nil
-    if factionAccess then
-        return string.format(
-            "%s - faction %s - %d players", scopeShortLabel(access.scope), levelLabel(factionAccess), playerCount
-        )
-    end
-    return string.format("%s - %d players - %d factions", scopeShortLabel(access.scope), playerCount, factionCount)
 end
 
 function KBWPlanningMode:new(player, hiddenUI, inventoryBars)
@@ -364,7 +315,7 @@ function KBWPlanningMode:new(player, hiddenUI, inventoryBars)
     o.borderColor = Theme.color(Theme.border)
     o.roomColorIndex = 1
     o.selectedBuildable = nil
-    o.opacityIndex = 2
+    o.opacityIndex = uiData(player).ghostOpacityIndex or 2
     return o
 end
 
@@ -382,16 +333,10 @@ function KBWPlanningMode:createChildren()
     self.catalogPanel:initialise()
     self.catalogPanel:addToUIManager()
     self.catalogPanel:bringToTop()
-end
-
-function KBWPlanningMode:onBrowsePieces()
-    local blueprint = self:selectedOrActiveBlueprint()
-    if not blueprint or not Blueprints.canContribute(self.player, blueprint) then return end
-    Planner.cancelCursor(self.player)
-    Blueprints.setActive(self.player, blueprint.id)
-    self.workspaceTab = "pieces"
-    Workspace.layout(self)
-    self:focusCatalog()
+    local Quickbar = require("KnoxBuildworks/UI/PlanQuickbar")
+    self.quickbar = Quickbar:new(self)
+    self.quickbar:initialise(); self.quickbar:addToUIManager()
+    self:loadViewSettings()
 end
 
 function KBWPlanningMode:focusCatalog()
@@ -404,12 +349,19 @@ end
 ---@param key string|number
 function KBWPlanningMode:isKeyConsumed(key)
     if Keyboard and key == Keyboard.KEY_ESCAPE then return true end
-    return false
+    if Keyboard and key == Keyboard.KEY_DELETE and self:selectionGhostCount() > 0 then return true end
+    return self.quickbar ~= nil and self.quickbar:keySlot(key) ~= nil
 end
 
 ---@param key string|number
 function KBWPlanningMode:onKeyRelease(key)
-    if Keyboard and key == Keyboard.KEY_ESCAPE then self:close() end
+    if Keyboard and key == Keyboard.KEY_ESCAPE then self:close(); return end
+    if Keyboard and key == Keyboard.KEY_DELETE and self:selectionGhostCount() > 0 then
+        self:onRemoveSelectedPlacement()
+        return
+    end
+    local slot = self.quickbar and self.quickbar:keySlot(key)
+    if slot then self.quickbar:activate(slot) end
 end
 
 function KBWPlanningMode:selectedBlueprint()
@@ -512,7 +464,13 @@ end
 ---@param item table
 function KBWPlanningMode:drawPlacementRow(list, y, item, alt)
     local placement = item.item
-    local selected = list.selected == item.index
+    local selection = self.selection
+    local selected
+    if selection and selection.blueprintId == (self:selectedBlueprint() or {}).id then
+        selected = selection.ghosts[placement.id] == true
+    else
+        selected = list.selected == item.index
+    end
     local fill = selected and Theme.selected or (alt and Theme.surfaceRaised or Theme.surface)
     list:drawRect(0, y, list.width, item.height - 2, fill.a, fill.r, fill.g, fill.b)
     local nameLines = item.nameLines or { displayName(Registry:get(placement.buildableId)) }
@@ -536,9 +494,11 @@ function KBWPlanningMode:drawRoomRow(list, y, item, alt)
     list:drawRectBorder(8, y + 8, 14, 14, Theme.border.a, Theme.border.r, Theme.border.g, Theme.border.b)
     local nameLines = item.nameLines or { tostring(room.name or room.type or "Room") }
     local textY = drawWrapped(list, nameLines, 30, y + 3, Theme.text)
-    local details = string.format(
-        "%dx%d  %d,%d z%d", room.w or room.width or 1, room.h or room.height or 1, room.x or 0, room.y or 0, room.z or 0
-    )
+    local left, top, right, bottom = RoomShape.bounds(room)
+    local _, cells = RoomShape.cells(room)
+    local tileCount = cells and #cells or (right - left) * (bottom - top)
+    local details = string.format("%d tiles  %dx%d  %d,%d z%d", tileCount,
+        right - left, bottom - top, left, top, room.z or 0)
     list:drawText(details, 30, textY + 2, Theme.textMuted.r, Theme.textMuted.g, Theme.textMuted.b, 1, UIFont.Small)
     return y + item.height
 end
@@ -630,15 +590,19 @@ function KBWPlanningMode:updateAccessControls()
     end
     -- Contribute-gated editing tools.
     local editButtons = {
-        self.levelDownButton, self.levelUpButton, self.usePlayerLevelButton, self.drawRoomButton, self.eraseRoomButton,
+        self.levelDownButton, self.levelUpButton, self.usePlayerLevelButton, self.drawRoomButton, self.extendRoomButton,
+        self.eraseRoomButton, self.cutRoomButton, self.selectToolButton, self.pipetteButton,
         self.eraseButton, self.gatherAreaButton, self.moveBlueprintButton, self.removeSelectedButton,
         self.updateRoomButton, self.deleteRoomButton
     }
     for buttonIndex = 1, #editButtons do
         Theme.setButtonEnabled(editButtons[buttonIndex], canContribute == true)
     end
-    Theme.setButtonEnabled(self.browseButton, canContribute == true)
-    Theme.setButtonEnabled(self.removeSelectedButton, canContribute == true and self:selectedPlacement() ~= nil)
+    Theme.setButtonEnabled(self.roofButton, canContribute == true and self:selectedRoom() ~= nil)
+    Theme.setButtonEnabled(self.extendRoomButton, canContribute == true and self:selectedRoom() ~= nil)
+    Theme.setButtonEnabled(self.cutRoomButton, canContribute == true and self:selectedRoom() ~= nil)
+    Theme.setButtonEnabled(self.removeSelectedButton, canContribute == true and self:selectionGhostCount() > 0)
+
     -- Build-gated tools (build access can raise ghosts, not edit the plan).
     local canBuild = blueprint ~= nil and Blueprints.canBuild(self.player, blueprint)
     local buildButtons = { self.buildToolButton, self.buildAllButton, self.buildSelectedButton }
@@ -702,6 +666,21 @@ function KBWPlanningMode:refreshPlacements()
     local blueprint = self:selectedBlueprint()
     if not blueprint then return end
     local placements = blueprint.placements or {}
+    -- Drop selected ids that are gone (erased, built, or removed by others).
+    local selection = self.selection
+    if selection and selection.blueprintId == blueprint.id and (selection.ghostCount or 0) > 0 then
+        local present = {}
+        for i = 1, #placements do present[placements[i].id] = true end
+        local changed = false
+        for id in pairs(selection.ghosts) do
+            if not present[id] then selection.ghosts[id] = nil; changed = true end
+        end
+        if changed then
+            local count = 0
+            for _ in pairs(selection.ghosts) do count = count + 1 end
+            selection.ghostCount = count
+        end
+    end
     for placementIndex = 1, #placements do
         local placement = placements[placementIndex]
         local item = self.placementList:addItem(tostring(placement.id), placement)
@@ -718,7 +697,9 @@ function KBWPlanningMode:refreshTotals()
     if not blueprint then return end
     if not Supplies.current(self.supplyState, blueprint) then self.supplyState = Supplies.new(self.player, blueprint) end
     local checked = self.supplyState.phase == "done"
-    local totals = checked and self.supplyState or Blueprints.totals(self.player, blueprint)
+    -- The asynchronous check owns totals too. Building a second synchronous
+    -- set here used to stall every refresh before the scan even started.
+    local totals = self.supplyState
     local listWidth = self.totalList.width
     local function addHeader(label)
         local item = self.totalList:addItem(label, { kind = "header", label = label })
@@ -752,7 +733,7 @@ function KBWPlanningMode:refreshTotals()
             tostring(#rooms)
         )
     )
-    if not checked then addHeader(getText("IGUI_KBW_CheckingSupplies"))
+    if not checked then addHeader(getText("IGUI_KBW_CheckingSupplies")); return
     elseif totals.incomplete then addHeader(getText("IGUI_KBW_UnloadedSupplies")) end
     if checked then addHeader(getText("IGUI_KBW_SupplySources")) end
     addHeader(getText("IGUI_KBW_MaterialsTools"))
@@ -777,10 +758,96 @@ function KBWPlanningMode:onBlueprintSelected()
     self:updateAccessControls()
 end
 
+-- Click selects one piece, Ctrl+click adds or removes one, Shift+click
+-- selects the range from the last clicked piece. The same selection is used
+-- by the box Select tool, Delete selected and the Delete key.
 function KBWPlanningMode:onPlacementSelected()
-    self:updateAccessControls()
     local placement = self:selectedPlacement()
+    local blueprint = self:selectedBlueprint()
+    if placement and blueprint then
+        local ctrl = isCtrlKeyDown and isCtrlKeyDown()
+        local shift = isShiftKeyDown and isShiftKeyDown()
+        local selection = self.selection
+        if not selection or selection.blueprintId ~= blueprint.id or not (ctrl or shift) then
+            selection = { blueprintId = blueprint.id, z = placement.z, ghosts = {}, ghostCount = 0 }
+        end
+        local index = self.placementList.selected
+        if shift and self.selectionAnchor then
+            local from, to = math.min(self.selectionAnchor, index), math.max(self.selectionAnchor, index)
+            for i = from, to do
+                local item = self.placementList.items[i]
+                if item then selection.ghosts[item.item.id] = true end
+            end
+        elseif ctrl and selection.ghosts[placement.id] then
+            selection.ghosts[placement.id] = nil
+        else
+            selection.ghosts[placement.id] = true
+        end
+        if not shift then self.selectionAnchor = index end
+        self:setSelection(selection)
+    end
+    self:updateAccessControls()
     Planner.setHighlight(placement and placement.id or nil)
+end
+
+function KBWPlanningMode:selectionGhostCount()
+    return self.selection and self.selection.ghostCount or 0
+end
+
+function KBWPlanningMode:setSelection(selection)
+    if selection then
+        local count = 0
+        for _ in pairs(selection.ghosts or {}) do count = count + 1 end
+        selection.ghostCount = count
+        if count == 0 then selection = nil end
+    end
+    self.selection = selection
+    Planner.setSelection(selection)
+    self:updateAccessControls()
+    Workspace.layout(self)
+end
+
+function KBWPlanningMode:selectionSummaryText()
+    local selection = self.selection
+    if not selection then return nil end
+    return getText("IGUI_KBW_SelectionSummary", selection.ghostCount or 0)
+end
+
+function KBWPlanningMode:onSelectTool()
+    local blueprint = self:selectedOrActiveBlueprint()
+    if not blueprint then return end
+    Blueprints.setActive(self.player, blueprint.id)
+    local owner = self
+    Planner.beginSelect(self.player, blueprint.id, function(selection, additive)
+        local current = owner.selection
+        if additive and current and current.blueprintId == selection.blueprintId then
+            for id in pairs(selection.ghosts) do current.ghosts[id] = true end
+            selection = current
+        end
+        owner.workspaceTab = "pieces"
+        owner:setSelection(selection)
+        owner:refreshPlacements()
+    end)
+end
+
+-- Pipette: click a planned ghost or a built piece in the world and keep
+-- planning with exactly that piece (recipe, stage, variant, material,
+-- direction and finish), without looking it up in the catalogue.
+function KBWPlanningMode:onPipette()
+    local blueprint = self:selectedOrActiveBlueprint()
+    if not blueprint then return end
+    if not Blueprints.canContribute(self.player, blueprint) then
+        say(self.player, getText("IGUI_KBW_PlanNoPermission"), true)
+        return
+    end
+    Blueprints.setActive(self.player, blueprint.id)
+    local owner = self
+    Planner.beginPipette(self.player, blueprint.id, function(choice)
+        local picked = choice.placement
+        Planner.begin(owner.player, picked.buildableId, picked.stageId, picked.variantId or "",
+            picked.materialId or "", tonumber(picked.direction) or 1, picked.finish)
+        say(owner.player, getText("IGUI_KBW_PipettePicked", choice.label))
+    end)
 end
 
 function KBWPlanningMode:onRoomSelected()
@@ -967,6 +1034,7 @@ end
 
 function KBWPlanningMode:onOpacity(opacityIndex)
     self.opacityIndex = opacityIndex
+    uiData(self.player).ghostOpacityIndex = opacityIndex
     local value = OPACITY_VALUES[opacityIndex] or 0.5
     GhostRenderer.setOpacity(value)
     for buttonIndex = 1, #self.opacityButtons do
@@ -1063,10 +1131,59 @@ function KBWPlanningMode:onStopTool()
     Planner.setHighlightRoom(nil)
 end
 
+function KBWPlanningMode:onRoofHelper()
+    local blueprint, room = self:selectedBlueprint(), self:selectedRoom()
+    if not blueprint or not Blueprints.canContribute(self.player, blueprint) then return end
+    if not room then say(self.player, getText("IGUI_KBW_RoofSelectRoom"), true); return end
+    if self.roofWindow then self.roofWindow:close() end
+    Planner.cancelCursor(self.player)
+    local RoofHelper = require("KnoxBuildworks/UI/RoofHelper")
+    self.roofWindow = RoofHelper:new(self, blueprint, room)
+    self.roofWindow:initialise(); self.roofWindow:addToUIManager(); self.roofWindow:bringToTop()
+end
+
 function KBWPlanningMode:onPreviewBlueprint()
     local blueprint = self:selectedBlueprint()
     if not blueprint then return end
     self.previewWindow = BlueprintPreview.open(self, self.player, blueprint)
+end
+
+function KBWPlanningMode:loadViewSettings()
+    GhostRenderer.applyPreferences(self.player)
+end
+
+function KBWPlanningMode:onViewSettings()
+    self:loadViewSettings()
+    local menu = ISContextMenu.get(self.player:getPlayerNum(), getMouseX(), getMouseY())
+    local function choice(key, value, label)
+        local option = menu:addOption(getText(label), self, function(owner)
+            local data = uiData(owner.player)
+            data.ghostView = type(data.ghostView) == "table" and data.ghostView or {}
+            data.ghostView[key] = value
+            GhostRenderer.applyPreferences(owner.player)
+        end)
+        if menu.setOptionChecked then menu:setOptionChecked(option, GhostRenderer.view[key] == value) end
+    end
+    choice("style", "ghost", "IGUI_KBW_ViewGhost")
+    choice("style", "texture", "IGUI_KBW_ViewTexture")
+    choice("style", "solid", "IGUI_KBW_ViewSolid")
+    choice("levels", "current", "IGUI_KBW_ViewCurrent")
+    choice("levels", "adjacent", "IGUI_KBW_ViewAdjacent")
+    choice("levels", "below", "IGUI_KBW_ViewBelow")
+    choice("levels", "all", "IGUI_KBW_ViewAll")
+    choice("roofs", not GhostRenderer.view.roofs, GhostRenderer.view.roofs and "IGUI_KBW_HideRoofs" or "IGUI_KBW_ShowRoofs")
+    choice("walls", not GhostRenderer.view.walls, GhostRenderer.view.walls and "IGUI_KBW_HideWalls" or "IGUI_KBW_ShowWalls")
+    choice("rooms", not GhostRenderer.view.rooms, GhostRenderer.view.rooms and "IGUI_KBW_HideRooms" or "IGUI_KBW_ShowRooms")
+end
+
+function KBWPlanningMode:planSelection()
+    local definition, catalog = self.selectedBuildable, self.catalogPanel
+    if not definition then return nil end
+    local stage = catalog and catalog:selectedStage() or (definition.stages and definition.stages[1])
+    if not stage then return nil end
+    return { buildableId = Groups.resolveBuildableId(definition, stage), stageId = Groups.resolveStageId(stage),
+        variantId = catalog and catalog:selectedVariant() or "", materialId = catalog and catalog:selectedMaterial() or "",
+        direction = 1, finish = catalog and catalog:selectedFinish() or nil }
 end
 
 function KBWPlanningMode:onPlanSelected()
@@ -1118,7 +1235,10 @@ function KBWPlanningMode:update()
     ISPanel.update(self)
     if self.closing then return end
     local blueprint = self:selectedBlueprint()
-    if blueprint and not Supplies.current(self.supplyState, blueprint) then self:refreshTotals() end
+    if blueprint and not Supplies.current(self.supplyState, blueprint) then
+        self:refreshTotals()
+        self:updateAccessControls()
+    end
     local state = self.supplyState
     if blueprint and state and state.phase ~= "done" then
         Supplies.step(state)
@@ -1129,8 +1249,39 @@ function KBWPlanningMode:update()
     end
 end
 
+function KBWPlanningMode:onExtendRoom()
+    local blueprint = self:selectedOrActiveBlueprint()
+    local room = self:selectedRoom()
+    if not blueprint or not room then return end
+    Blueprints.setActive(self.player, blueprint.id)
+    local template = self:roomTemplate()
+    template.extendRoomId = room.id
+    local owner = self
+    Planner.beginRoom(self.player, blueprint.id, template, function ()
+        owner:refreshBlueprints()
+    end)
+end
+
+-- The reverse of Extend room: drag an area to clear it out of the selected
+-- room. A room cut down to nothing is removed.
+function KBWPlanningMode:onCutRoom()
+    local blueprint = self:selectedOrActiveBlueprint()
+    local room = self:selectedRoom()
+    if not blueprint then return end
+    if not room then say(self.player, getText("IGUI_KBW_RoofSelectRoom"), true); return end
+    Blueprints.setActive(self.player, blueprint.id)
+    local template = self:roomTemplate()
+    template.shrinkRoomId = room.id
+    local owner = self
+    Planner.beginRoom(self.player, blueprint.id, template, function ()
+        owner:refreshBlueprints()
+    end)
+end
+
 function KBWPlanningMode:close()
     self.closing = true
+    if self.quickbar then self.quickbar:close(); self.quickbar = nil end
+    if self.roofWindow then self.roofWindow:close(); self.roofWindow = nil end
     if self.catalogPanel then
         self.catalogPanel:close()
         self.catalogPanel = nil
@@ -1138,6 +1289,7 @@ function KBWPlanningMode:close()
     Planner.cancelCursor(self.player)
     Planner.setHighlight(nil)
     Planner.setHighlightRoom(nil)
+    Planner.setSelection(nil)
     if self.accessWindow then
         self.accessWindow:close()
         self.accessWindow = nil
@@ -1187,11 +1339,20 @@ end
 
 function KBWPlanningMode:onRemoveSelectedPlacement()
     local blueprint = self:selectedBlueprint()
-    local placement = self:selectedPlacement()
-    if not blueprint or not placement or not Blueprints.canContribute(self.player, blueprint) then return end
-    if Blueprints.removePlacement(self.player, blueprint.id, placement.id) then
+    local selection = self.selection
+    if not blueprint or not selection or selection.blueprintId ~= blueprint.id then return end
+    if not Blueprints.canContribute(self.player, blueprint) then return end
+    local ids = {}
+    for id in pairs(selection.ghosts) do ids[#ids + 1] = id end
+    table.sort(ids)
+    local removed = Blueprints.removePlacements(self.player, blueprint.id, ids)
+    if removed > 0 then
         Planner.setHighlight(nil)
+        GhostRenderer.clearCache()
+        selection.ghosts = {}
+        say(self.player, getText("IGUI_KBW_RemovedPieces", removed))
         self:refreshBlueprints(blueprint.id)
+        self:setSelection(selection)
     end
 end
 

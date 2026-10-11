@@ -6,6 +6,7 @@ local LuaCallback = require("KnoxBuildworks/Util/LuaCallback")
 local I18n = require("KnoxBuildworks/I18n")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local StageConfig = require("KnoxBuildworks/Definitions/StageConfig")
+local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 
 -- Placement.validate returns short internal reason strings (stable for logs
 -- and server checks). reasonText maps them to player-facing translations,
@@ -208,27 +209,8 @@ local function hasWallSupport(square, north, isPole)
     )
 end
 
-local function isRelevantOverlayWall(object, north, isCorner)
-    local modData = object:getModData()
-    if modData and modData.WindowWall then return true end
-    local props = object:getProperties()
-    if not props or instanceof(object, "IsoWindow") or props:has(IsoFlagType.solidfloor) then return false end
-    if isCorner then return props:has(IsoFlagType.WallNW) or props:has(IsoFlagType.WallSE) end
-    if north then
-        return props:has(IsoFlagType.WallN) or props:has(IsoFlagType.WindowN) or props:has(IsoFlagType.WallNW)
-            or props:has(IsoFlagType.WallSE) or props:has(IsoFlagType.DoorWallN)
-            or (props:has(IsoFlagType.HoppableN) and props:has(IsoFlagType.WallNTrans))
-    end
-    return props:has(IsoFlagType.WallW) or props:has(IsoFlagType.WindowW) or props:has(IsoFlagType.WallNW)
-        or props:has(IsoFlagType.WallSE) or props:has(IsoFlagType.DoorWallW)
-        or (props:has(IsoFlagType.HoppableW) and props:has(IsoFlagType.WallWTrans))
-end
-
 local function hasOverlayWallSupport(square, north, isCorner)
-    for objectIndex = 0, square:getObjects():size() - 1 do
-        if isRelevantOverlayWall(square:getObjects():get(objectIndex), north, isCorner) then return true end
-    end
-    return false
+    return AttachedSprites.findWallHost(square, north, isCorner) ~= nil
 end
 
 local function isDeclaredWindowFrame(object, north)
@@ -257,6 +239,25 @@ local function cutOpeningMatches(props, north, shapeOf)
         or not north and props:has(IsoFlagType.cutW)
     if not opening then return false end
     return Placement.windowShapeOf(props) == shapeOf
+end
+
+-- A few full-height arch frames are authored as WallSE corners instead of
+-- WindowW/WindowN edges. Their paired sprites use even ids for the west face
+-- and odd ids for the north face. Accept only the matching half of a matching
+-- WindowShape; otherwise a window can be hung on the perpendicular edge and
+-- render beside the opening.
+function Placement.cornerOpeningSpriteMatches(name, props, north, shapeOf)
+    if shapeOf == nil then return false end
+    if not props or not props:has(IsoFlagType.WallSE)
+        or Placement.windowShapeOf(props) ~= shapeOf then return false end
+    local number = tonumber(string.match(name or "", "_(%d+)$"))
+    return number ~= nil and (number % 2 == 1) == north
+end
+
+local function cornerOpeningMatches(object, north, shapeOf)
+    local sprite = object and object:getSprite() or nil
+    return Placement.cornerOpeningSpriteMatches(sprite and sprite:getName(),
+        sprite and sprite:getProperties(), north, shapeOf)
 end
 
 local function tileProvidesWindowFrame(props, north)
@@ -343,6 +344,7 @@ local function checkWallFrame(square, north, wantsWindow, windowSupportSprites, 
             if wantsWindow and isCompatibleWindowSupport(item, north, windowSupportSprites) then
                 hasFrame = true
             end
+            if wantsWindow and cornerOpeningMatches(item, north, shapeOf) then hasFrame = true end
             if not wantsWindow and (item:isDoorFrame() and item:getNorth() == north
                 or isDeclaredDoorFrame(item, north)) then hasFrame = true end
             if not wantsWindow and item:isDoor() and item:getNorth() == north then hasBuilt = true end
@@ -360,6 +362,7 @@ local function checkWallFrame(square, north, wantsWindow, windowSupportSprites, 
             if isCompatibleWindowSupport(object, north, windowSupportSprites) then
                 hasFrame = true
             end
+            if cornerOpeningMatches(object, north, shapeOf) then hasFrame = true end
             if instanceof(object, "IsoWindow") and object:getNorth() == north then hasBuilt = true end
         else
             if isDeclaredDoorFrame(object, north) then hasFrame = true end
@@ -511,15 +514,20 @@ function Placement.validate(cursor, square)
     local previousStage = Placement.previousStageOf(cursor.stage)
     local replacementStage = previousStage or Placement.optionalReplacementStageOf(cursor.stage)
     local previous = Placement.findPrevious(square, cursor.definition.id, replacementStage, cursor.north == true)
-    if previousStage and not previous then return false, "previous stage missing" end
+    if previousStage and not previous then
+        if Placement.findPrevious(square, cursor.definition.id, previousStage) then
+            return false, "previous stage direction mismatch"
+        end
+        return false, "previous stage missing"
+    end
     local kind = placement.kind
     if not previous and kind == "wall" and cursor.canPassThrough ~= true then
         previous = findReplaceableWall(square, cursor.north == true)
     end
     if not previous and (placement.againstWall or placement.needToBeAgainstWall) then
         if kind == "overlay" then
-            local objectConfig = (cursor.stage and cursor.stage.object) or {}
-            if not hasOverlayWallSupport(square, cursor.north == true, objectConfig.isCorner == true) then
+            local isCorner = AttachedSprites.isCornerStage(placement, cursor.stage)
+            if not hasOverlayWallSupport(square, cursor.north == true, isCorner) then
                 return false, "wall required"
             end
         else
@@ -594,6 +602,13 @@ function Placement.validate(cursor, square)
                     :getGridSquare(square:getX() + (tile.dx or 0), square:getY() + (tile.dy or 0), square:getZ()
                         + (tile.dz or 0))
                 if not target then return false, "missing footprint square" end
+                -- Every decoration tile needs its own host wall.
+                if not previous and kind == "overlay" and placement.needToBeAgainstWall == true
+                    and AttachedSprites.isWallDecorationSprite(tile.sprite)
+                    and not hasOverlayWallSupport(target, cursor.north == true,
+                        AttachedSprites.isCornerStage(placement, cursor.stage)) then
+                    return false, "wall required"
+                end
                 local sprite, props = spriteProps(tile.sprite)
                 local spriteType = sprite and sprite:getType() or nil
                 if spriteType == IsoObjectType.doorFrN or spriteType == IsoObjectType.doorFrW then

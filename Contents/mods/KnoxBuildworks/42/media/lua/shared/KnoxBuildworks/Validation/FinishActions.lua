@@ -105,19 +105,23 @@ function FinishActions.validate(player, definition, stage, finish, requireItems)
         -- painted/papered). Validated against the wall type's sprite mapping
         -- so custom tilepack walls only accept the finishes they define.
         if WallFinishes.isWallFinish(finish) then
-            if finish.plaster ~= false then
-                if not WallFinishes.isPlasterable(definition, stage) then
-                    return false, "stage cannot be plastered"
-                end
-                if not WallFinishes.spriteFor("plaster", finish, false, definition, stage) then
+            if finish.plaster ~= false and not WallFinishes.isPlasterable(definition, stage) then
+                return false, "stage cannot be plastered"
+            end
+            -- Same check as the catalogue's finish list.
+            local applies = WallFinishes.finishAppliesToStage(definition, stage, finish)
+            if applies == false then return false, "finish not available for this wall" end
+            if applies == nil then
+                if finish.plaster ~= false and not WallFinishes.spriteFor("plaster", finish, false, definition, stage) then
                     return false, "wall has no plaster mapping"
                 end
-            end
-            if finish.paintType and not WallFinishes.spriteFor("paint", finish, false, definition, stage) then
-                return false, "paint not available for this wall"
-            end
-            if finish.wallpaperType and not WallFinishes.spriteFor("wallpaper", finish, false, definition, stage) then
-                return false, "wallpaper not available for this wall"
+                if finish.paintType and not WallFinishes.spriteFor("paint", finish, false, definition, stage) then
+                    return false, "paint not available for this wall"
+                end
+                if finish.wallpaperType
+                    and not WallFinishes.spriteFor("wallpaper", finish, false, definition, stage) then
+                    return false, "wallpaper not available for this wall"
+                end
             end
             if requireItems then return WallFinishes.validateItems(player, finish, definition, stage) end
             return true

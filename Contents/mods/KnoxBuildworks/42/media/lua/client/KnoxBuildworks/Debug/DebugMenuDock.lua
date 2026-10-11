@@ -1,3 +1,5 @@
+if not isDebugEnabled() then return end
+
 local MenuDock = require("ElyonLib/UI/MenuDock/MenuDock")
 local Options = require("KnoxBuildworks/Options")
 

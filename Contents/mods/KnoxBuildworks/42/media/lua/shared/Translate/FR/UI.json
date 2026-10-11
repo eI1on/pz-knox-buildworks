@@ -52,7 +52,7 @@
   "UI_optionscreen_KBW_PinnedPositionMode_Auto": "Correction automatique",
   "UI_optionscreen_KBW_PinnedPositionMode_Manual": "Déplaçable manuellement",
   "UI_optionscreen_KBW_PinnedOpacity": "Opacité de la recette épinglée",
-  "UI_optionscreen_KBW_PinnedOpacity_Tooltip": "Ajustez l’opacité de l’arrière-plan et du texte du HUD de la recette épinglée.",
+  "UI_optionscreen_KBW_PinnedOpacity_Tooltip": "Ajustez l'opacité de l'arrière-plan et du texte du HUD de la recette épinglée.",
   "UI_optionscreen_KBW_PinnedBar": "Barre d'accent de recette épinglée",
   "UI_optionscreen_KBW_PinnedBar_Tooltip": "Choisissez de quel côté de la recette épinglée le HUD obtient la barre d'accent.",
   "UI_optionscreen_KBW_PinnedBar_Left": "Gauche",
