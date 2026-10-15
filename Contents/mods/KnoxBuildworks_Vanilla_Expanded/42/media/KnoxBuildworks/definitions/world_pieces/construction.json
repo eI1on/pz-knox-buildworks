@@ -1,0 +1,1585 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.world.construction.attic_floorboards",
+      "category": "Floors",
+      "subcategory": "Attic Floors",
+      "material": "Wood",
+      "placement": {
+        "kind": "floor"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_attic_floorboards",
+      "displayName": "Attic Floorboards",
+      "tooltipKey": "Tooltip_KBWVE_World_AtticFloor",
+      "iconSprite": "ceilings_01_0",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "ceilings_01_0"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_OldHouseJournal_WoodenFloors"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.OldHouseJournal_WoodenFloors"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 20
+            },
+            "category": "Carpentry"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.white_baseboard_2",
+      "category": "Architecture Plus",
+      "subcategory": "Floor Molding",
+      "material": "Wood",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_white_baseboard_2",
+      "displayName": "White Baseboard (Style 2)",
+      "tooltipKey": "Tooltip_KBW_Shared_FloorMolding",
+      "iconSprite": "walls_interior_detailing_01_13",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_interior_detailing_01_12"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_interior_detailing_01_13"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "tool_carpentry_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:carpentrychisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3,
+              "Carving": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30,
+              "Carving": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.wooden_fascia_board",
+      "category": "Roofing",
+      "subcategory": "Roof Accents",
+      "material": "Wood",
+      "placement": {
+        "kind": "object",
+        "allowSharedSquare": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_wooden_fascia_board",
+      "displayName": "Wooden Fascia Board",
+      "tooltipKey": "Tooltip_KBWVE_RoofAccent_Fascia",
+      "iconSprite": "industry_01_29",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_29"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_saw",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:saw",
+                  "base:crudesaw"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 7
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 100,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 10
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white_trim",
+            "pitch": 45,
+            "role": "accent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.trailer_wall_panel",
+      "category": "Architecture Plus",
+      "subcategory": "Wall Panels",
+      "material": "Wood",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_trailer_wall_panel",
+      "displayName": "Trailer Wall Panel",
+      "tooltipKey": "Tooltip_KBW_Shared_WallPanel",
+      "iconSprite": "location_trailer_01_4",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_trailer_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "tool_carpentry_chisel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:carpentrychisel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintWhite"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3,
+              "Carving": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Woodwork": 30,
+              "Carving": 20
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.chimney_pots",
+      "category": "Survival",
+      "subcategory": "Fireplace",
+      "material": "Brick",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_chimney_pots",
+      "displayName": "Chimney Pots",
+      "tooltipKey": "Tooltip_KBWVE_World_ChimneyPots",
+      "iconSprite": "fixtures_fireplaces_01_72",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "fixtures_fireplaces_01_72"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "mortar",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "clay_bricks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 10
+              }
+            ],
+            "skills": {
+              "Masonry": 4
+            }
+          },
+          "construction": {
+            "time": 160,
+            "timedAction": "BuildCairn",
+            "completionSound": "BuildWoodenStructureSmall",
+            "xp": {
+              "Masonry": 25
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.wooden_post",
+      "category": "Structural",
+      "subcategory": "Posts",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_wooden_post",
+      "displayName": "Wooden Post",
+      "tooltipKey": "Tooltip_KBWVE_World_WoodenPost",
+      "iconSprite": "carpentry_02_103",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "carpentry_02_103"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Crates"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Crates"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": false
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.curb_edge",
+      "category": "Road Work",
+      "subcategory": "Sidewalk Edge",
+      "material": "Concrete",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_curb_edge",
+      "displayName": "Curb Edge",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_road_work_sidewalk_edge_sidewalk_edge",
+      "iconSprite": "street_curbs_01_43",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "street_curbs_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_masons_trowel",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:masonstrowel"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "concrete_mix",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:concrete"
+                ],
+                "amount": 1,
+                "uses": 1
+              }
+            ],
+            "skills": {
+              "Masonry": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FlooringGuide_Paved"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FlooringGuide_Paved"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Masonry": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "DropSoilFromGravelBag",
+            "xp": {
+              "Masonry": 20
+            },
+            "category": "Masonry"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.pipe_stack",
+      "category": "Structural",
+      "subcategory": "Industrial",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_pipe_stack",
+      "displayName": "Stacked Steel Pipes",
+      "tooltipKey": "Tooltip_KBWVE_World_Pipes",
+      "iconSprite": "industry_01_45",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_45"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "metal_pipe",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe"
+                ],
+                "amount": 6
+              }
+            ],
+            "skills": {}
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": true
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.pipe_pile",
+      "category": "Structural",
+      "subcategory": "Industrial",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_pipe_pile",
+      "displayName": "Steel Pipe Pile",
+      "tooltipKey": "Tooltip_KBWVE_World_Pipes",
+      "iconSprite": "industry_01_44",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_44"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "metal_pipe",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalPipe"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {}
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": true
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.wall_cables",
+      "subcategory": "Industrial",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_wall_cables",
+      "displayName": "Wall Cables",
+      "tooltipKey": "Tooltip_KBWVE_World_Cables",
+      "category": "Structural",
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "industry_02_209",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_02_209"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 2
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 10
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.junction_box",
+      "subcategory": "Industrial",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_junction_box",
+      "displayName": "Electrical Junction Box",
+      "tooltipKey": "Tooltip_KBWVE_World_Cables",
+      "category": "Structural",
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "industry_02_221",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_02_221"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 3
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          },
+          "construction": {
+            "time": 250,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.drainpipe",
+      "category": "Roofing",
+      "subcategory": "Roof Accents",
+      "material": "Metal",
+      "placement": {
+        "kind": "object",
+        "allowSharedSquare": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_drainpipe",
+      "displayName": "Metal Drainpipe",
+      "tooltipKey": "Tooltip_KBWVE_RoofAccent_DownpipeShoe",
+      "iconSprite": "industry_02_238",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_02_238"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 80,
+            "timedAction": "BuildMetalStructureSmall",
+            "completionSound": "BuildMetalStructureSmall",
+            "xp": {
+              "MetalWelding": 5
+            },
+            "category": "Metalworking"
+          },
+          "object": {
+            "isThumpable": false,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white_trim",
+            "pitch": 45,
+            "role": "accent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.drainpipe_elbow",
+      "category": "Roofing",
+      "subcategory": "Roof Accents",
+      "material": "Metal",
+      "placement": {
+        "kind": "object",
+        "allowSharedSquare": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_drainpipe_elbow",
+      "displayName": "Metal Drainpipe Elbow",
+      "tooltipKey": "Tooltip_KBWVE_RoofAccent_DownpipeShoe",
+      "iconSprite": "industry_02_260",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_02_260"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 80,
+            "timedAction": "BuildMetalStructureSmall",
+            "completionSound": "BuildMetalStructureSmall",
+            "xp": {
+              "MetalWelding": 5
+            },
+            "category": "Metalworking"
+          },
+          "object": {
+            "isThumpable": false,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white_trim",
+            "pitch": 45,
+            "role": "accent"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.construction.rusty_pipe",
+      "category": "Roofing",
+      "subcategory": "Roof Accents",
+      "material": "Metal",
+      "placement": {
+        "kind": "object",
+        "allowSharedSquare": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_construction_rusty_pipe",
+      "displayName": "Rusty Standing Pipe",
+      "tooltipKey": "Tooltip_KBWVE_RoofAccent_DownpipeShoe",
+      "iconSprite": "industry_02_34",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_02_34"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "MetalWelding": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_TheFamilyHandyman_StairsFences"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.TheFamilyHandyman_StairsFences"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 80,
+            "timedAction": "BuildMetalStructureSmall",
+            "completionSound": "BuildMetalStructureSmall",
+            "xp": {
+              "MetalWelding": 5
+            },
+            "category": "Metalworking"
+          },
+          "object": {
+            "isThumpable": false,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          },
+          "roof": {
+            "family": "white_trim",
+            "pitch": 45,
+            "role": "accent"
+          }
+        }
+      ]
+    }
+  ]
+}

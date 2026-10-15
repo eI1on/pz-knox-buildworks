@@ -210,7 +210,7 @@
 ---@field offsets? table<KBW.DirectionName, KBW.LightOffset>
 
 ---@class KBW.NativeObjectConfig
----@field type 'barbecue'|'clothingDryer'|'clothingWasher'|'combinationWasherDryer'|'fireplace'|'generator'|'lightSwitch'|'stove'
+---@field type 'barbecue'|'clothingDryer'|'clothingWasher'|'combinationWasherDryer'|'fireplace'|'generator'|'lightSwitch'|'radio'|'stove'|'television'
 ---@field item? string Full item type used to initialize IsoGenerator; required only when type is generator.
 
 ---@class KBW.WellConfig

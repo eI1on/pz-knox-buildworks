@@ -326,5 +326,22 @@
   "Tooltip_KBWVE_RoofPiece_Junction": "Where two odd-span ridges meet in an L over a south-east valley.",
   "Tooltip_KBWVE_RoofPiece_HipEnd": "Hip end of an odd-span hip roof, where the half-step ridge meets the hips.",
   "Tooltip_KBWVE_RoofPiece_RaisedFlat": "Flat roof drawn one or two steps above the floor of its level, for a flat top part-way up a storey.",
-  "Tooltip_KBWVE_RoofPiece_EdgeVariant": "The pitched slope with a different board edge, for finishing the end of a slope run."
+  "Tooltip_KBWVE_RoofPiece_EdgeVariant": "The pitched slope with a different board edge, for finishing the end of a slope run.",
+  "Tooltip_KBWVE_World_Radio": "A working table radio, assembled from a receiver, an amplifier, a speaker and spare electronics. It receives broadcasts like any radio found in the world.",
+  "Tooltip_KBWVE_World_Television": "A working television, assembled from a receiver, speakers and a glass screen.",
+  "Tooltip_KBWVE_World_Antenna": "A rooftop television antenna on a two-tile mast.",
+  "Tooltip_KBWVE_World_CoffeeMachine": "A countertop coffee machine that heats like the world's own coffee makers.",
+  "Tooltip_KBWVE_World_WaterDispenser": "An office water dispenser built around a water dispenser bottle.",
+  "Tooltip_KBWVE_World_Telephone": "A wired telephone for decoration.",
+  "Tooltip_KBWVE_World_AirConditioner": "A wall-mounted air conditioning unit.",
+  "Tooltip_KBWVE_World_Pallet": "A wooden shipping pallet, as found on building sites.",
+  "Tooltip_KBWVE_World_WallDecor": "A wall decoration mounted on a wooden backing board.",
+  "Tooltip_KBWVE_World_Sign": "A freestanding two-tile wooden sign.",
+  "Tooltip_KBWVE_World_AtticFloor": "Plain boards laid over the ceiling joists of an attic or upper storey.",
+  "Tooltip_KBWVE_World_ChimneyPots": "Clay chimney pots set on top of a chimney stack.",
+  "Tooltip_KBWVE_World_WoodenPost": "A thin upright wooden post.",
+  "Tooltip_KBWVE_World_Pipes": "Spare steel pipes stacked on the ground.",
+  "Tooltip_KBWVE_World_Cables": "Exposed electrical wiring fixed to a wall.",
+  "Tooltip_KBWVE_World_WoodenChair": "A plain wooden chair, nailed together from planks.",
+  "Tooltip_KBWVE_World_HamRadio": "A working ham radio set that transmits as well as receives, built around a receiver, a transmitter and a microphone."
 }

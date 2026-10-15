@@ -19,6 +19,14 @@ local Files = require("KnoxBuildworks/Planning/BlueprintFiles")
 ---@type KBW.BlueprintsModule
 local Blueprints = { VERSION = 1, ITEM_TYPE = "KnoxBuildworks.KBW_Blueprint", EXPORT_FOLDER = "KnoxBuildworks/exports" }
 
+-- Absolute size of any blueprint, however it was made. Not a sandbox option:
+-- it is what the planner, the server store and Buildworks Studio (whose
+-- uploads hold about this many pieces) are built and tested for.
+Blueprints.HARD_LIMIT = 10000
+-- Placements per multiplayer command when a whole blueprint travels (see
+-- TRANSPORT): at most ~360 bytes each on the wire, ~145 KB a command.
+Blueprints.TRANSFER_CHUNK = 400
+
 local function planningEnabled()
     return KBW.sandboxValue("KnoxBuildworks.EnablePlanningMode", true) == true
 end
@@ -123,6 +131,13 @@ local function persist(blueprint)
     if not isMPClient() and blueprint then Files.queueSave(blueprint) end
 end
 
+local function appendPlacements(blueprint, placements)
+    blueprint.placements = blueprint.placements or {}
+    local list = blueprint.placements
+    for index = 1, #placements do list[#list + 1] = placements[index] end
+end
+
+
 local function touch(blueprint)
     if not blueprint then return end
     blueprint.updated = timestamp()
@@ -187,6 +202,8 @@ function Blueprints.applyRemoteDelta(command, args)
                 blueprint.placements[index or (#blueprint.placements + 1)] = placement
             end
         end
+    elseif command == "BPImportChunk" and type(args.placements) == "table" then
+        appendPlacements(blueprint, args.placements)
     elseif command == "BPRemovePlacement" then
         local _, index = findById(blueprint.placements, args.placementId)
         if index then table.remove(blueprint.placements, index) end
@@ -270,6 +287,60 @@ local function sendToServer(player, command, args)
     end
 end
 
+-- TRANSPORT -----------------------------------------------------------------
+-- Every multiplayer command is written into one fixed 1,000,000-byte
+-- connection buffer (UdpConnection.startPacket, no growth), and a placement
+-- costs 160-360 bytes on the wire, so a whole blueprint in a single command
+-- overflows somewhere between 3,000 and 6,000 pieces. A whole blueprint
+-- therefore travels as a head - every field, with the first TRANSFER_CHUNK
+-- placements - followed by chunks of the rest. Commands on one connection
+-- arrive in order, so receivers append each chunk as it comes.
+
+---Head of a blueprint for transport (a shallow copy; the original is not
+---touched) and its full placement list.
+---@param blueprint KBW.Blueprint
+function Blueprints.transferHead(blueprint)
+    local head = {}
+    for key, value in pairs(blueprint or {}) do head[key] = value end
+    local placements = (blueprint and blueprint.placements) or {}
+    local first = {}
+    for index = 1, math.min(#placements, Blueprints.TRANSFER_CHUNK) do first[index] = placements[index] end
+    head.placements = first
+    return head, placements
+end
+
+---Calls callback(part) for every chunk after the head's.
+function Blueprints.eachTransferChunk(placements, callback)
+    local size = Blueprints.TRANSFER_CHUNK
+    for start = size + 1, #(placements or {}), size do
+        local part = {}
+        for index = start, math.min(#placements, start + size - 1) do part[#part + 1] = placements[index] end
+        callback(part)
+    end
+end
+
+
+---Sends a new or imported blueprint to the server: BPCreate with the head and
+---the declared total, then BPImportChunk for the rest.
+---@param player IsoPlayer
+---@param blueprint KBW.Blueprint
+function Blueprints.sendCreate(player, blueprint)
+    if not isMPClient() or not blueprint then return end
+    local head, placements = Blueprints.transferHead(blueprint)
+    head.importTotal = #placements
+    sendToServer(player, "BPCreate", { blueprint = head })
+    Blueprints.eachTransferChunk(placements, function (part)
+        sendToServer(player, "BPImportChunk", { id = blueprint.id, placements = part })
+    end)
+end
+
+---Client: the rest of a blueprint the server is sending (after its BPSync).
+function Blueprints.applySyncChunk(id, placements)
+    local blueprint = clientCache.items and clientCache.items[tostring(id or "")] or nil
+    if not blueprint or type(placements) ~= "table" then return end
+    appendPlacements(blueprint, placements)
+end
+
 -- SERVER SYNC ---------------------------------------------------------------
 -- The server never rebroadcasts whole blueprints on ordinary edits: it echoes
 -- the (validated) delta command to the players who may view the blueprint,
@@ -305,7 +376,11 @@ end
 ---@param player IsoPlayer
 ---@param blueprint KBW.Blueprint
 function Blueprints.serverSyncTo(player, blueprint)
-    sendServerCommand(player, KBW.NETWORK_MODULE, "BPSync", { item = blueprint })
+    local head, placements = Blueprints.transferHead(blueprint)
+    sendServerCommand(player, KBW.NETWORK_MODULE, "BPSync", { item = head })
+    Blueprints.eachTransferChunk(placements, function (part)
+        sendServerCommand(player, KBW.NETWORK_MODULE, "BPSyncChunk", { id = blueprint.id, placements = part })
+    end)
 end
 
 ---@param player IsoPlayer
@@ -361,11 +436,12 @@ function Blueprints.serverSyncAll(player)
         sendServerCommand(player, KBW.NETWORK_MODULE, "BPSyncAll", { items = {} })
         return
     end
-    local visible = {}
-    for id, blueprint in pairs(Blueprints.sharedItems()) do
-        if Blueprints.shouldSync(player, blueprint) then visible[id] = blueprint end
+    -- An empty BPSyncAll clears the client's cache; each visible blueprint
+    -- then streams on its own (TRANSPORT), so no command carries them all.
+    sendServerCommand(player, KBW.NETWORK_MODULE, "BPSyncAll", { items = {} })
+    for _id, blueprint in pairs(Blueprints.sharedItems()) do
+        if Blueprints.shouldSync(player, blueprint) then Blueprints.serverSyncTo(player, blueprint) end
     end
-    sendServerCommand(player, KBW.NETWORK_MODULE, "BPSyncAll", { items = visible })
 end
 
 -- PERMISSIONS -------------------------------------------------------------
@@ -564,8 +640,33 @@ function Blueprints.blueprintRadius()
     return math.floor(tonumber(KBW.sandboxValue("KnoxBuildworks.BlueprintRadius", 200)) or 200)
 end
 
+---How far players may grow a blueprint by hand (sandbox "Max pieces per
+---blueprint"), never above HARD_LIMIT.
 function Blueprints.maxPlacements()
-    return math.floor(tonumber(KBW.sandboxValue("KnoxBuildworks.MaxPlacementsPerBlueprint", 1000)) or 1000)
+    local value = math.floor(tonumber(KBW.sandboxValue("KnoxBuildworks.MaxPlacementsPerBlueprint", 2500)) or 2500)
+    return math.max(1, math.min(value, Blueprints.HARD_LIMIT))
+end
+
+---Largest blueprint that may be brought in whole - imported files, Buildworks
+---Studio designs, duplicates, captures: HARD_LIMIT, or only the building limit
+---when the server turns "Allow importing blueprints over the limit" off.
+function Blueprints.importLimit()
+    if KBW.sandboxValue("KnoxBuildworks.AllowOversizedImports", true) == false then
+        return Blueprints.maxPlacements()
+    end
+    return Blueprints.HARD_LIMIT
+end
+
+---The piece cap of one blueprint. Hand placement is capped by maxPlacements;
+---a blueprint brought in larger keeps the size it arrived with (importedSize,
+---up to importLimit). It stays fully editable - move, remove, replace,
+---repaint - and can be built back up to that size, never past it.
+---@param blueprint KBW.Blueprint|nil
+function Blueprints.limitFor(blueprint)
+    local limit = Blueprints.maxPlacements()
+    local reserved = math.floor(tonumber(blueprint and blueprint.importedSize) or 0)
+    if reserved > limit then limit = math.min(reserved, Blueprints.importLimit()) end
+    return limit
 end
 
 local function storeIdTaken(items)
@@ -575,7 +676,8 @@ end
 ---@param player IsoPlayer
 ---@param name string|nil
 ---@param level number|string
-function Blueprints.create(player, name, level)
+---@param reserve number|nil pieces a capture will bring in (see limitFor)
+function Blueprints.create(player, name, level, reserve)
     local items = Blueprints.sharedItems()
     local id = newId("bp", storeIdTaken(items))
     local x = player and player.getX and math.floor(player:getX()) or 0
@@ -594,14 +696,13 @@ function Blueprints.create(player, name, level)
         access = defaultAccess(),
         rooms = {},
         placements = {},
+        importedSize = reserve and math.min(math.floor(tonumber(reserve) or 0), Blueprints.importLimit()) or nil,
         updated = timestamp()
     }
     items[id] = blueprint
     persist(blueprint)
     viewStore(player).activeId = id
-    if isMPClient() then
-        sendToServer(player, "BPCreate", { blueprint = blueprint })
-    end
+    Blueprints.sendCreate(player, blueprint)
     return blueprint
 end
 
@@ -877,10 +978,20 @@ local function stageNameMatches(definition, stage, names)
     if not definition or not stage then return false end
     local compat = EntityCompat.metadata(stage)
     local spriteConfig = compat.spriteConfig or {}
-    local candidates = {
-        stage.id, stage.label, stage.displayName, definition.id, definition.displayName, compat.entity,
-        spriteConfig.logicClass
-    }
+    -- Any of these may be nil. "#" of a table with nil holes is undefined in
+    -- Lua (Kahlua and Lua 5.4 happen to reach the entity name, Lua 5.5 stops
+    -- at the first hole), so the list is built without holes.
+    local candidates = {}
+    local function addCandidate(value)
+        if value ~= nil then candidates[#candidates + 1] = value end
+    end
+    addCandidate(stage.id)
+    addCandidate(stage.label)
+    addCandidate(stage.displayName)
+    addCandidate(definition.id)
+    addCandidate(definition.displayName)
+    addCandidate(compat.entity)
+    addCandidate(spriteConfig.logicClass)
     for candidateIndex = 1, #candidates do
         local candidate = compactName(candidates[candidateIndex])
         if candidate ~= "" then
@@ -1038,6 +1149,15 @@ end
 ---@param placement KBW.BlueprintPlacement
 function Blueprints.placementMatchesPrevious(previousStage, placement)
     return plannedStageMatches(previousStage, placement)
+end
+
+---Whether a recipe stage answers one of a previousStage's names (entity,
+---buildable id, logic class...), by the same rules plan validation uses.
+---@param previousStage string|string[]
+---@param definition KBW.BuildableDefinition
+---@param stage KBW.BuildStage
+function Blueprints.stageMatchesPrevious(previousStage, definition, stage)
+    return stageNameMatches(definition, stage, previousNameList(previousStage))
 end
 
 local function plannedUpgradeCompatible(existing, incoming)
@@ -1295,7 +1415,7 @@ function Blueprints.addPlacement(player, blueprintId, placement, defer, occupied
     local blueprint = blueprintId and Blueprints.get(player, blueprintId) or Blueprints.activeOrCreate(player)
     if not blueprint or not placement or not placement.buildableId then return nil, "invalid_placement" end
     if not Blueprints.canContribute(player, blueprint) then return nil, "no_permission" end
-    if #(blueprint.placements or {}) >= Blueprints.maxPlacements() then
+    if #(blueprint.placements or {}) >= Blueprints.limitFor(blueprint) then
         return nil, "placement_limit"
     end
     local entry = TableUtil.copy(placement)
@@ -1334,9 +1454,10 @@ Blueprints.PLACEMENT_BATCH = 32
 ---@param player IsoPlayer
 ---@param blueprintId string
 ---@param placements KBW.BlueprintPlacement[]
+---@param onRejected function|nil called (placement, reason) for each refused entry
 ---@return KBW.BlueprintPlacement[] added
 ---@return string|nil lastReason last rejection, for one message per drag
-function Blueprints.addPlacements(player, blueprintId, placements)
+function Blueprints.addPlacements(player, blueprintId, placements, onRejected)
     placements = placements or {}
     local added, lastReason = {}, nil
     if #placements == 0 then return added, "invalid_placement" end
@@ -1364,6 +1485,7 @@ function Blueprints.addPlacements(player, blueprintId, placements)
             end
         else
             lastReason = reason
+            if onRejected then onRejected(placements[index], reason) end
         end
     end
     if batched then flush() end
@@ -1522,7 +1644,7 @@ function Blueprints.duplicate(player, id)
     copy.updated = timestamp()
     items[copy.id] = copy
     persist(copy)
-    if isMPClient() then sendToServer(player, "BPCreate", { blueprint = copy }) end
+    Blueprints.sendCreate(player, copy)
     return copy
 end
 
@@ -1799,7 +1921,8 @@ end
 function Blueprints.exportTable(blueprint)
     local data = TableUtil.copy(blueprint or {})
     data.id, data.owner, data.access, data.updated = nil, nil, nil, nil
-    data.anchor, data.anchored, data.radius = nil, nil, nil
+    data.anchor, data.anchored, data.radius, data.importedSize = nil, nil, nil, nil
+    data.importPending, data.importTotal = nil, nil
     local origin = data.origin or { x = 0, y = 0, z = tonumber(data.level) or 0 }
     local placements = data.placements or {}
     for placementIndex = 1, #placements do
@@ -1916,6 +2039,9 @@ function Blueprints.importExported(player, exported)
     if exported.exportSchema ~= Blueprints.VERSION then
         return nil, "unsupported_schema:" .. tostring(exported.exportSchema)
     end
+    if #exported.placements > Blueprints.importLimit() then
+        return nil, "too_many_pieces:" .. tostring(#exported.placements)
+    end
     local blueprint = TableUtil.copy(exported)
     blueprint.exportSchema = nil
     Blueprints.anchorImported(
@@ -1930,6 +2056,8 @@ function Blueprints.importExported(player, exported)
     blueprint.radius = Blueprints.blueprintRadius()
     blueprint.anchored = false
     blueprint.anchor = nil
+    blueprint.importedSize = #(blueprint.placements or {}) > Blueprints.maxPlacements()
+        and #blueprint.placements or nil
     if #(blueprint.placements or {}) > 0 then
         blueprint.anchor = { x = blueprint.placements[1].x, y = blueprint.placements[1].y }
         blueprint.anchored = true
@@ -1938,7 +2066,7 @@ function Blueprints.importExported(player, exported)
     items[blueprint.id] = blueprint
     persist(blueprint)
     viewStore(player).activeId = blueprint.id
-    if isMPClient() then sendToServer(player, "BPCreate", { blueprint = blueprint }) end
+    Blueprints.sendCreate(player, blueprint)
     return blueprint
 end
 
@@ -2064,7 +2192,7 @@ function Blueprints.planErrorText(code, blueprint)
     code = tostring(code or "")
     if code == "no_permission" then return I18n.text("IGUI_KBW_PlanNoPermission") end
     if code == "placement_limit" then
-        return getText("IGUI_KBW_PlanLimitReached", Blueprints.maxPlacements())
+        return getText("IGUI_KBW_PlanLimitReached", Blueprints.limitFor(blueprint))
     end
     if code == "out_of_range" then
         local radius = (blueprint and tonumber(blueprint.radius)) or Blueprints.blueprintRadius()
@@ -2115,6 +2243,8 @@ function Blueprints.importErrorText(error)
     if error == "invalid_json" then return I18n.text("IGUI_KBW_BlueprintImportMalformed") end
     local schema = string.match(error, "^unsupported_schema:(.+)$")
     if schema then return getText("IGUI_KBW_BlueprintImportUnsupportedSchema", schema) end
+    local pieces = string.match(error, "^too_many_pieces:(%d+)$")
+    if pieces then return getText("IGUI_KBW_BlueprintImportTooLarge", pieces, Blueprints.importLimit()) end
     return I18n.text("IGUI_KBW_BlueprintImportMalformed")
 end
 
@@ -2174,7 +2304,19 @@ function Blueprints.applyServerCommand(player, command, args)
     if command == "BPCreate" then
         local blueprint = args.blueprint
         if type(blueprint) ~= "table" or not blueprint.id then return nil, false end
-        if #(blueprint.placements or {}) > Blueprints.maxPlacements() then return nil, false end
+        -- The head carries the first chunk; importTotal says how many pieces
+        -- the BPImportChunk commands after it bring in total (TRANSPORT).
+        local size = #(blueprint.placements or {})
+        local total = math.max(size, math.floor(tonumber(blueprint.importTotal) or size))
+        blueprint.importTotal = nil
+        if total > Blueprints.importLimit() then return nil, false end
+        -- A blueprint arriving bigger than the building limit (import, Studio,
+        -- duplicate, capture reserve) keeps that size, never past importLimit.
+        local reserved = math.floor(tonumber(blueprint.importedSize) or 0)
+        local claimed = math.max(total, reserved)
+        blueprint.importedSize = claimed > Blueprints.maxPlacements()
+            and math.min(claimed, Blueprints.importLimit()) or nil
+        blueprint.importPending = total > size and (total - size) or nil
         local items = Blueprints.sharedItems()
         local id = tostring(blueprint.id)
         -- Random ids never collide in practice; if one does, the sender is
@@ -2189,6 +2331,25 @@ function Blueprints.applyServerCommand(player, command, args)
         items[id] = blueprint
         persist(blueprint)
         return blueprint, true
+    elseif command == "BPImportChunk" then
+        -- Only the rest of a creation in progress: the owner, never more than
+        -- the total its BPCreate declared, so chunks cannot grow a blueprint
+        -- later. Placements are taken as BPCreate takes them.
+        local blueprint = Blueprints.get(player, args.id)
+        if not blueprint then return nil, false end
+        local pending = math.floor(tonumber(blueprint.importPending) or 0)
+        local incoming = type(args.placements) == "table" and args.placements or {}
+        if not Blueprints.isOwner(player, blueprint) or pending <= 0 or #incoming == 0
+            or #incoming > pending then
+            return blueprint, false
+        end
+        local copies = {}
+        for index = 1, #incoming do copies[index] = TableUtil.copy(incoming[index]) end
+        appendPlacements(blueprint, copies)
+        pending = pending - #incoming
+        blueprint.importPending = pending > 0 and pending or nil
+        touch(blueprint)
+        return blueprint, true
     elseif command == "BPDelete" then
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
@@ -2200,7 +2361,7 @@ function Blueprints.applyServerCommand(player, command, args)
         local blueprint = Blueprints.get(player, args.id)
         if not blueprint then return nil, false end
         if Blueprints.canContribute(player, blueprint) and args.placement
-            and args.placement.id and #(blueprint.placements or {}) < Blueprints.maxPlacements()
+            and args.placement.id and #(blueprint.placements or {}) < Blueprints.limitFor(blueprint)
             and not Blueprints.getPlacement(blueprint, args.placement.id) then
             if not blueprint.anchored and args.anchor then
                 blueprint.anchor = args.anchor
@@ -2231,7 +2392,7 @@ function Blueprints.applyServerCommand(player, command, args)
                 blueprint.anchor = args.anchor
                 blueprint.anchored = true
             end
-            local limit = Blueprints.maxPlacements()
+            local limit = Blueprints.limitFor(blueprint)
             blueprint.placements = blueprint.placements or {}
             for index = 1, #requested do
                 local placement = requested[index]
@@ -2313,7 +2474,7 @@ function Blueprints.applyServerCommand(player, command, args)
             return blueprint, false
         end
         local removed = {}
-        for i = 1, math.min(#args.placementIds, Blueprints.maxPlacements()) do
+        for i = 1, math.min(#args.placementIds, Blueprints.importLimit()) do
             local id = args.placementIds[i]
             local _, index = Blueprints.getPlacement(blueprint, id)
             if index then

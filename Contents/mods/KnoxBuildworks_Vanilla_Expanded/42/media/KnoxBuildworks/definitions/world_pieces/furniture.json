@@ -1,0 +1,803 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.wooden_chair",
+      "category": "Furniture",
+      "subcategory": "Chairs",
+      "material": "Metal",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_wooden_chair",
+      "displayName": "Wooden Chair",
+      "tooltipKey": "Tooltip_KBWVE_World_WoodenChair",
+      "iconSprite": "furniture_seating_indoor_02_5",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_indoor_02_4"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_indoor_02_5"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_indoor_02_6"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_indoor_02_7"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.plastic_chair",
+      "category": "Furniture",
+      "subcategory": "Chairs",
+      "material": "Metal",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_plastic_chair",
+      "displayName": "Plastic Chair",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_furniture_chairs_furniture_seating_indoor_02_12",
+      "iconSprite": "furniture_seating_outdoor_01_17",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_outdoor_01_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_outdoor_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_outdoor_01_18"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "furniture_seating_outdoor_01_19"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "plastic_sheet",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.PlasticSheet"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_ChairsBenches"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_ChairsBenches"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "MetalWelding": 3,
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildMetalStructureMedium",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "MetalWelding": 30
+            },
+            "category": "Welding"
+          },
+          "object": {
+            "isThumpable": true,
+            "canPassThrough": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.office_desk",
+      "category": "Furniture",
+      "subcategory": "Desks",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_office_desk",
+      "displayName": "Office Desk",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_furniture_large_tables_location_business_office_generic_office_desk",
+      "iconSprite": "location_business_office_generic_01_42",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_41"
+                      ],
+                      [
+                        "location_business_office_generic_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_42",
+                        "location_business_office_generic_01_43"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_44",
+                        "location_business_office_generic_01_45"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_47"
+                      ],
+                      [
+                        "location_business_office_generic_01_46"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              }
+            ],
+            "skills": {
+              "Woodwork": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_DesksTables"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_DesksTables"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 40
+            },
+            "category": "Carpentry"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.cardboard_box",
+      "category": "Containers",
+      "subcategory": "Crates",
+      "material": "Other",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_cardboard_box",
+      "displayName": "Cardboard Box",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_containers_crates_trashcontainers_01_26",
+      "iconSprite": "trashcontainers_01_24",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "trashcontainers_01_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "trashcontainers_01_25"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "paper",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetPaper2"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "adhesive",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Scotchtape",
+                  "Base.Glue"
+                ],
+                "amount": 1,
+                "uses": 1
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Crates"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Crates"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Other"
+          },
+          "object": {
+            "blockAllSquare": true
+          },
+          "container": {
+            "type": "smallbox",
+            "capacity": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.empty_pallet",
+      "category": "Furniture",
+      "subcategory": "Pallets",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_empty_pallet",
+      "displayName": "Empty Pallet",
+      "tooltipKey": "Tooltip_KBWVE_World_Pallet",
+      "iconSprite": "construction_01_5",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "construction_01_5"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Crates"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Crates"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": true,
+            "canBePadlocked": true
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.furniture.brick_pallet",
+      "category": "Furniture",
+      "subcategory": "Pallets",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_furniture_brick_pallet",
+      "displayName": "Pallet With Bricks",
+      "tooltipKey": "Tooltip_KBWVE_World_Pallet",
+      "iconSprite": "construction_01_4",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "construction_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "clay_bricks",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ClayBrick"
+                ],
+                "amount": 12
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Crates"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Crates"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": true,
+            "canBePadlocked": true
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    }
+  ]
+}

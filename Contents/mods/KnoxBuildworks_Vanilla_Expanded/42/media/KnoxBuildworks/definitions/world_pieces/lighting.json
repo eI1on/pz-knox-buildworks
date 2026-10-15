@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.black_table_lamp",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Table Lamps",
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_black_table_lamp",
+      "displayName": "Black Table Lamp",
+      "tooltipKey": "Tooltip_KBW_Shared_TableLamp",
+      "iconSprite": "lighting_indoor_02_10",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_8"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_9"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_10"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.grey_table_lamp",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Table Lamps",
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_grey_table_lamp",
+      "displayName": "Grey Table Lamp",
+      "tooltipKey": "Tooltip_KBW_Shared_TableLamp",
+      "iconSprite": "lighting_indoor_02_2",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_0"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_1"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_2"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_3"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.blue_table_lamp",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Table Lamps",
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_blue_table_lamp",
+      "displayName": "Blue Table Lamp",
+      "tooltipKey": "Tooltip_KBW_Shared_TableLamp",
+      "iconSprite": "lighting_indoor_02_26",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_24"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_25"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_26"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_27"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.fluorescent_wall_light",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Wall Lights",
+      "placement": {
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_fluorescent_wall_light",
+      "displayName": "Fluorescent Wall Light",
+      "tooltipKey": "Tooltip_KBW_Shared_WallLamp",
+      "iconSprite": "lighting_indoor_02_45",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_44"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_45"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_46"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_indoor_02_47"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "drawFloorGrid": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.modern_outdoor_lamp",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Outdoor Lights",
+      "placement": {
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_modern_outdoor_lamp",
+      "displayName": "Modern Outdoor Wall Lamp",
+      "tooltipKey": "Tooltip_KBW_Shared_WallLamp",
+      "iconSprite": "lighting_outdoor_01_32",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_32"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_33"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_36"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_37"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "drawFloorGrid": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.lighting.oval_outdoor_lamp",
+      "extends": "kbwve.light.electrical",
+      "subcategory": "Outdoor Lights",
+      "placement": {
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_lighting_oval_outdoor_lamp",
+      "displayName": "Oval Outdoor Wall Lamp",
+      "tooltipKey": "Tooltip_KBW_Shared_WallLamp",
+      "iconSprite": "lighting_outdoor_01_40",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_41"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_44"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "lighting_outdoor_01_45"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "materials": "kbwve.light.basic",
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_Lighting"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_Lighting"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 5
+                  }
+                }
+              ]
+            }
+          },
+          "nativeObject": {
+            "type": "lightSwitch"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "drawFloorGrid": false
+          }
+        }
+      ]
+    }
+  ]
+}

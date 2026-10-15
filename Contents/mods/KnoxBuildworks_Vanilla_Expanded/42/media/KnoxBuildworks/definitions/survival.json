@@ -3512,7 +3512,7 @@
           "construction": {
             "time": 250,
             "timedAction": "BuildWallNoTool",
-            "completionSound": "BuildStoneStructureMedium",
+            "completionSound": "BuildWoodenStructureLarge",
             "xp": {
               "Masonry": 40
             },

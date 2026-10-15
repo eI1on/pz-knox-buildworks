@@ -1,0 +1,1586 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.world.decor.deer_trophy",
+      "category": "Decorations",
+      "subcategory": "Wall Decor",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_deer_trophy",
+      "displayName": "Mounted Deer Trophy",
+      "tooltipKey": "Tooltip_KBWVE_World_WallDecor",
+      "iconSprite": "camping_01_18",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "camping_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "camping_01_18"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "camping_01_21"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "camping_01_22"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "hide",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.DeerLeather_Fur_Tan"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Counters"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Counters"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.deer_hide_rug",
+      "category": "Decorations",
+      "subcategory": "Rugs",
+      "material": "Fabric",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_deer_hide_rug",
+      "displayName": "Dapple Deer Hide Rug",
+      "tooltipKey": "Tooltip_KBW_Shared_Rug",
+      "iconSprite": "rugs_animals_7",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rugs_animals_2",
+                        "rugs_animals_3"
+                      ],
+                      [
+                        "rugs_animals_1",
+                        "rugs_animals_0"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rugs_animals_7",
+                        "rugs_animals_6"
+                      ],
+                      [
+                        "rugs_animals_5",
+                        "rugs_animals_4"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rugs_animals_10",
+                        "rugs_animals_11"
+                      ],
+                      [
+                        "rugs_animals_9",
+                        "rugs_animals_8"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rugs_animals_15",
+                        "rugs_animals_14"
+                      ],
+                      [
+                        "rugs_animals_13",
+                        "rugs_animals_12"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "placed_item",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.DeerLeather_Fur_Tan"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {}
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildLowNoTool",
+            "xp": {
+              "Tailoring": 20
+            },
+            "category": "Tailoring"
+          },
+          "object": {
+            "isThumpable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.first_aid_cabinet",
+      "category": "Containers",
+      "subcategory": "Wall Cabinets",
+      "material": "Wood",
+      "materialTags": [
+        "Wood"
+      ],
+      "placement": {
+        "kind": "object",
+        "againstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_first_aid_cabinet",
+      "displayName": "First Aid Wall Cabinet",
+      "tooltipKey": "Tooltip_KBW_Shared_StorageFixture",
+      "iconSprite": "location_community_medical_01_88",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_medical_01_88"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_medical_01_89"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_medical_01_90"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_medical_01_91"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "fasteners_screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "mirror",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Mirror"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Counters"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Counters"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 6
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 60,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureMedium",
+            "xp": {
+              "Woodwork": 25
+            },
+            "category": "Furniture"
+          },
+          "object": {
+            "isThumpable": false,
+            "canPassThrough": true,
+            "blockAllSquare": false
+          },
+          "container": {
+            "type": "counter"
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.usa_map",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_usa_map",
+      "displayName": "Map of the USA",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "location_community_school_01_22",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_school_01_22",
+                        "location_community_school_01_23"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_community_school_01_31"
+                      ],
+                      [
+                        "location_community_school_01_30"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.usa_flag",
+      "category": "Decorations",
+      "subcategory": "Flags & Bunting",
+      "material": "Fabric",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_usa_flag",
+      "displayName": "Stars and Stripes Flag",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_01_16",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "covering_fabric",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 10
+              },
+              {
+                "id": "tool_cutting",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:scissors",
+                  "base:sharpknife"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "tool_sewing_needle",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:sewingneedle",
+                  "base:awl"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop2",
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "thread",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "tags": [
+                  "base:thread",
+                  "base:twine"
+                ],
+                "amount": 1,
+                "uses": 8
+              }
+            ],
+            "skills": {
+              "Tailoring": 2
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "category": "Tailoring",
+            "xp": {
+              "Tailoring": 20
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.large_mirror",
+      "category": "Decorations",
+      "subcategory": "Mirrors",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_large_mirror",
+      "displayName": "Large Wall Mirror",
+      "tooltipKey": "Tooltip_KBWVE_World_WallDecor",
+      "iconSprite": "walls_decoration_01_5",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_5"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "mirror",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Mirror"
+                ],
+                "amount": 1
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.lakeside_painting",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_lakeside_painting",
+      "displayName": "Lakeside Painting",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_01_52",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_52",
+                        "walls_decoration_01_53"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_01_55"
+                      ],
+                      [
+                        "walls_decoration_01_54"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.framed_picture_1",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_framed_picture_1",
+      "displayName": "Framed Picture (Style 1)",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_02_16",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_02_16"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.framed_picture_2",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_framed_picture_2",
+      "displayName": "Framed Picture (Style 2)",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_02_17",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_02_17"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.framed_picture_3",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_framed_picture_3",
+      "displayName": "Framed Picture (Style 3)",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_02_24",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_02_24"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.framed_picture_4",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_framed_picture_4",
+      "displayName": "Framed Picture (Style 4)",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_02_25",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_02_25"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.framed_picture_5",
+      "category": "Decorations",
+      "subcategory": "Posters & Paintings",
+      "material": "Other",
+      "placement": {
+        "kind": "overlay",
+        "needToBeAgainstWall": true
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_framed_picture_5",
+      "displayName": "Framed Picture (Style 5)",
+      "tooltipKey": "Tooltip_KBW_Shared_Poster",
+      "iconSprite": "walls_decoration_02_28",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_decoration_02_28"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "wood_frame",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "canvas",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.FabricRoll_Cotton"
+                ],
+                "amount": 1,
+                "uses": 4
+              },
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              }
+            ],
+            "skills": {
+              "Woodwork": 1
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "category": "Carpentry",
+            "xp": {
+              "Woodwork": 10
+            }
+          },
+          "object": {
+            "blockAllSquare": false,
+            "canPassThrough": true,
+            "canBarricade": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.decor.ranger_station_sign",
+      "category": "Decorations",
+      "subcategory": "Signs",
+      "material": "Wood",
+      "placement": {
+        "kind": "object"
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_decor_ranger_station_sign",
+      "displayName": "Ranger Station Sign",
+      "tooltipKey": "Tooltip_KBWVE_World_Sign",
+      "iconSprite": "signs_one-off_08_269",
+      "tags": [
+        "capture-gap"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "signs_one-off_08_269",
+                        "signs_one-off_08_270"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1,
+                "flags": []
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintBrown"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 2
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_FineWoodWorking_Furniture_Crates"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.FineWoodWorking_Furniture_Crates"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Woodwork": 5
+                  }
+                }
+              ]
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "blockAllSquare": true
+          },
+          "container": {
+            "type": "smallcrate",
+            "capacity": 25
+          }
+        }
+      ]
+    }
+  ]
+}

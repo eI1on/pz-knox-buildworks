@@ -31,6 +31,7 @@
   "Tooltip_KBW_BuildTool": "Click planned buildables in the world to build them.",
   "Tooltip_KBW_SelectTool": "Drag a box on the planning level to select planned ghosts. Hold Shift to add to the selection. Delete removes the selected ghosts.",
   "Tooltip_KBW_PipetteTool": "Click a planned ghost or a built piece in the world to plan more of exactly that piece - same recipe, variant, material, direction and paint, plaster or wallpaper - without searching the catalogue. The rotate key steps through the pieces on a tile.",
+  "Tooltip_KBW_CaptureTool": "Click a building in the world to turn it into a new blueprint made of catalogue pieces: floors, wall frames, walls with their plaster, paint or wallpaper, doors, windows, furniture, overlays and its rooms, on every level. Drag to capture any area instead. Tiles with no catalogue piece are listed in a report.",
   "Tooltip_KBW_CutRoom": "Drag an area to clear it out of the selected room. A room cut down to nothing is removed.",
   "Tooltip_KBW_BuildPlacement": "Build the selected planned piece.",
   "Tooltip_KBW_MoveBlueprint": "Pick a new origin tile with the cursor; the whole blueprint follows.",

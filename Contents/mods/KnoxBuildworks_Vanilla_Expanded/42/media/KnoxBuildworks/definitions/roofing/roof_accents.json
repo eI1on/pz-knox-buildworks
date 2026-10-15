@@ -11,7 +11,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_28",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -163,7 +164,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_36",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -315,7 +317,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_24",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -466,7 +469,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_29",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -618,7 +622,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_37",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -770,7 +775,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_25",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -921,7 +927,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_30",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1073,7 +1080,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_38",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1225,7 +1233,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_26",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1376,7 +1385,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_8",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1528,7 +1538,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_9",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1680,7 +1691,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_11",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1832,7 +1844,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_10",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -1984,7 +1997,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_18",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2136,7 +2150,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_41",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2287,7 +2302,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_50",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2438,7 +2454,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_22",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2590,7 +2607,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_21",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2741,7 +2759,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_15",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -2881,7 +2900,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_42",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3021,7 +3041,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_48",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3161,7 +3182,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_23",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3301,7 +3323,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_54",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3452,7 +3475,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_52",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3603,7 +3627,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_46",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3755,7 +3780,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_43",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -3895,7 +3921,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_53",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4035,7 +4062,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_01_47",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4176,7 +4204,8 @@
       "material": "Metal",
       "iconSprite": "roofs_accents_01_16",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4307,7 +4336,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_0",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4458,7 +4488,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_13",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4606,7 +4637,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_32",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4757,7 +4789,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_1",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -4908,7 +4941,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_12",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5056,7 +5090,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_33",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5207,7 +5242,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_2",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5358,7 +5394,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_11",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5506,7 +5543,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_34",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5657,7 +5695,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_3",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5808,7 +5847,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_10",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -5956,7 +5996,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_35",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6107,7 +6148,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_4",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6258,7 +6300,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_9",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6406,7 +6449,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_36",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6557,7 +6601,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_5",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6708,7 +6753,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_8",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -6856,7 +6902,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_37",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -7007,7 +7054,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_6",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {
@@ -7158,7 +7206,8 @@
       "material": "Wood",
       "iconSprite": "roofs_accents_30_01_14",
       "placement": {
-        "kind": "object"
+        "kind": "object",
+        "allowSharedSquare": true
       },
       "stages": [
         {

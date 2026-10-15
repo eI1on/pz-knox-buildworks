@@ -13,7 +13,7 @@ local names = {
     "totalList", "roomName", "drawRoomButton", "extendRoomButton", "cutRoomButton", "eraseRoomButton", "eraseButton", "gatherAreaButton",
     "buildToolButton", "buildAllButton", "stopToolButton", "stopQueueButton", "moveBlueprintButton",
     "roomList", "updateRoomButton", "deleteRoomButton", "placementList", "buildSelectedButton", "removeSelectedButton", "exitButton",
-    "previewButton", "moreButton", "viewButton", "roofButton", "selectToolButton", "pipetteButton"
+    "previewButton", "moreButton", "viewButton", "roofButton", "selectToolButton", "pipetteButton", "captureButton"
 }
 
 local function rect(control, x, y, width, height)
@@ -100,6 +100,7 @@ function Workspace.create(owner, roomColors, opacityValues)
         {"removeSelectedButton", "IGUI_KBW_RemoveSelectedPiece", "onRemoveSelectedPlacement"},
         {"selectToolButton", "IGUI_KBW_SelectTool", "onSelectTool"},
         {"pipetteButton", "IGUI_KBW_PipetteTool", "onPipette"},
+        {"captureButton", "IGUI_KBW_CaptureTool", "onCaptureBuilding"},
         {"exitButton", "IGUI_KBW_ClosePlanning", "onExit"},
         {"levelDownButton", "IGUI_KBW_FloorDown", "onLevelDown"},
         {"levelUpButton", "IGUI_KBW_FloorUp", "onLevelUp"},
@@ -209,6 +210,7 @@ function Workspace.create(owner, roomColors, opacityValues)
     end)
     owner.selectToolButton:setTooltip(getText("Tooltip_KBW_SelectTool"))
     owner.pipetteButton:setTooltip(getText("Tooltip_KBW_PipetteTool"))
+    owner.captureButton:setTooltip(getText("Tooltip_KBW_CaptureTool"))
     owner.cutRoomButton:setTooltip(getText("Tooltip_KBW_CutRoom"))
     owner.exitButton:setTitle(getText("IGUI_KBW_ClosePlanning"))
     Workspace.layout(owner)
@@ -299,6 +301,11 @@ function Workspace.layout(owner)
         -- Pieces come from the catalogue on the right, or straight from the
         -- world with the pipette; this tab edits what is planned.
         y = placePairTop(owner.pipetteButton, owner.selectToolButton, pad, y, width, height, gap)
+        -- Capture is a debug tool for now (Planning/BuildingCapture.lua).
+        if isDebugEnabled() then
+            rect(owner.captureButton, pad, y, width, height)
+            y = y + height + gap
+        end
         local summary = owner.selectionSummaryText and owner:selectionSummaryText() or nil
         if summary then
             labels[#labels + 1] = {summary, pad, y + 2}

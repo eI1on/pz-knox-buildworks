@@ -930,9 +930,11 @@
                             "clothingWasher",
                             "combinationWasherDryer",
                             "lightSwitch",
-                            "stove"
+                            "radio",
+                            "stove",
+                            "television"
                           ],
-                          "description": "Creates the matching native B42 appliance or light-switch class. When omitted, Knox Buildworks detects it from the tile's IsoType property or native sprite type."
+                          "description": "Creates the matching native B42 appliance, radio/television (IsoRadio/IsoTelevision with device data from the tile's signal properties) or light-switch class. When omitted, Knox Buildworks detects it from the tile's IsoType property or native sprite type."
                         }
                       }
                     }

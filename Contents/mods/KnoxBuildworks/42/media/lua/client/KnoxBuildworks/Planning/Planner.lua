@@ -9,6 +9,7 @@ local GatherAreaCursor = require("KnoxBuildworks/Planning/GatherAreaCursor")
 local MoveBlueprintCursor = require("KnoxBuildworks/Planning/MoveBlueprintCursor")
 local SelectCursor = require("KnoxBuildworks/Planning/SelectCursor")
 local PipetteCursor = require("KnoxBuildworks/Planning/PipetteCursor")
+local CaptureCursor = require("KnoxBuildworks/Planning/CaptureCursor")
 
 ---@class KBW.PlannerModule
 ---@type KBW.PlannerModule
@@ -96,6 +97,13 @@ function Planner.beginPipette(player, blueprintId, onPicked)
     return activateCursor(player, cursor)
 end
 
+---@param player IsoPlayer
+---@param onCapture function(area) receives a BuildingCapture area
+function Planner.beginCapture(player, onCapture)
+    local cursor = CaptureCursor.new(player, onCapture)
+    return activateCursor(player, cursor)
+end
+
 ---The current selection of planned ghosts ({ blueprintId, z, ghosts = {id=true} })
 ---drawn on top of the plan; nil clears it.
 function Planner.setSelection(selection)
@@ -109,7 +117,8 @@ function Planner.cancelCursor(player)
     if drag
         and (drag.Type == "KBWPlanCursor" or drag.Type == "KBWRoomCursor" or drag.Type == "KBWEraseCursor"
             or drag.Type == "KBWBuildPlanCursor" or drag.Type == "KBWGatherAreaCursor"
-            or drag.Type == "KBWMoveBlueprintCursor" or drag.Type == "KBWSelectCursor" or drag.Type == "KBWPipetteCursor") then
+            or drag.Type == "KBWMoveBlueprintCursor" or drag.Type == "KBWSelectCursor" or drag.Type == "KBWPipetteCursor"
+            or drag.Type == "KBWCaptureCursor") then
         getCell():setDrag(nil, playerNum)
     end
 end

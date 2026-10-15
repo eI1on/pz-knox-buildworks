@@ -194,7 +194,9 @@ def buildables():
             "subcategory": "Roof Accents",
             "material": "Metal" if metal else "Wood",
             "iconSprite": w,
-            "placement": {"kind": "object"},
+            # Fascia, rakes and corner blocks sit on the same squares as the eave
+            # and gable pieces (as in the vanilla map), so they may share them.
+            "placement": {"kind": "object", "allowSharedSquare": True},
             "stages": [metal_stage(geometry) if metal else wood_stage(geometry, pitch)],
         }
         if aliases:

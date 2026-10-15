@@ -24554,6 +24554,2188 @@
         "translationKey": "IGUI_KBW_Group_walls_white_panel_white_panel_dbl_window_wall"
       },
       "allowSpriteReuse": true
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_arched_window_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_arched_window_wall_1",
+      "displayName": "Old Wood Panel Arched Window Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_64",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_64"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_65"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_arched_window_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_arched_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_arched_window_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_arched_window_wall_2",
+      "displayName": "Old Wood Panel Arched Window Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_66",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_66"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_67"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_arched_window_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_arched_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_arched_full_window_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_arched_full_window_wall_1",
+      "displayName": "Old Wood Panel Arched Full Height Window Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_68",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_68"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_69"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_arched_full_window_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_arched_full_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_arched_full_window_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_arched_full_window_wall_2",
+      "displayName": "Old Wood Panel Arched Full Height Window Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_70",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_70"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_71"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_arched_full_window_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_arched_full_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_square_window_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_square_window_wall_1",
+      "displayName": "Old Wood Panel Square Window Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_72",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_72"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_73"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_square_window_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_square_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_square_window_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_square_window_wall_2",
+      "displayName": "Old Wood Panel Square Window Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_74",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_74"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_75"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_square_window_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_square_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_square_window_wall_3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_square_window_wall_3",
+      "displayName": "Old Wood Panel Square Window Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_76",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_76"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_77"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_square_window_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_square_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_full_window_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_full_window_wall",
+      "displayName": "Old Wood Panel Full Height Window Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_78",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_78"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_79"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_framed_window_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_framed_window_wall_1",
+      "displayName": "Old Wood Panel Framed Window Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_80",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_80"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_81"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_framed_window_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_framed_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_framed_window_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_framed_window_wall_2",
+      "displayName": "Old Wood Panel Framed Window Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_82",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_82"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_83"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_framed_window_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_framed_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_double_door_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_double_door_wall_1",
+      "displayName": "Old Wood Panel Double Door Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_84",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_84"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_85"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_double_door_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_double_door_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_double_door_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_double_door_wall_2",
+      "displayName": "Old Wood Panel Double Door Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_86",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_86"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_87"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_double_door_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_double_door_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_wide_window_wall_1",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_wide_window_wall_1",
+      "displayName": "Old Wood Panel Wide Window Wall 1",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_88",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_88"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_89"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_wide_window_wall",
+        "level": 1,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_wide_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_wide_window_wall_2",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_wide_window_wall_2",
+      "displayName": "Old Wood Panel Wide Window Wall 2",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_90",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_90"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_91"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_wide_window_wall",
+        "level": 2,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_wide_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_wide_window_wall_3",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_wide_window_wall_3",
+      "displayName": "Old Wood Panel Wide Window Wall 3",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_92",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_92"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_93"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "group": {
+        "id": "kbw.vanillaexpanded.group.walls.old_wood_panel.old_wood_panel_wide_window_wall",
+        "level": 3,
+        "translationKey": "IGUI_KBW_Group_walls_old_wood_panel_old_wood_panel_wide_window_wall"
+      },
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.walls.old_wood_panel.old_wood_panel_round_window_wall",
+      "translationKey": "IGUI_KBWVE_Buildable_walls_old_wood_panel_old_wood_panel_round_window_wall",
+      "displayName": "Old Wood Panel Round Window Wall",
+      "tooltipKey": "Tooltip_KBWVE_Buildable_kbw_vanillaexpanded_walls_old_wood_panel_old_wood_panel_window_frame",
+      "category": "Walls",
+      "subcategory": "Old Wood Panel",
+      "material": "Wood",
+      "iconSprite": "walls_exterior_house_13_94",
+      "placement": {
+        "kind": "wall",
+        "dontNeedFrame": true
+      },
+      "finishes": {
+        "enabled": false
+      },
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_94"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "walls_exterior_house_13_95"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "inputs": [
+              {
+                "id": "tool_hammer",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:hammer"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "lumber",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Plank"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "fasteners_nails",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Nails"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "tool_paintbrush",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:paintbrush"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "finish_paint",
+                "role": "consumable",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "Base.PaintRed"
+                ],
+                "amount": 1,
+                "uses": 2
+              }
+            ],
+            "skills": {
+              "Woodwork": 3
+            }
+          },
+          "construction": {
+            "time": 200,
+            "timedAction": "BuildWallHammer",
+            "completionSound": "BuildWoodenStructureLarge",
+            "xp": {
+              "Woodwork": 30
+            },
+            "category": "Carpentry"
+          },
+          "object": {
+            "isThumpable": true,
+            "hoppable": true,
+            "canBarricade": true
+          },
+          "previousStage": [
+            "WoodenWallFrame",
+            "MetalWallFrame"
+          ]
+        }
+      ],
+      "allowSpriteReuse": true,
+      "tags": [
+        "capture-gap"
+      ]
     }
   ]
 }

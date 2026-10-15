@@ -130,7 +130,12 @@
     "media/KnoxBuildworks/definitions/windows.json",
     "media/KnoxBuildworks/definitions/patches.json",
     "media/KnoxBuildworks/definitions/windows_fixtures.json",
-    "media/KnoxBuildworks/definitions/roofing/roof_accents.json"
+    "media/KnoxBuildworks/definitions/roofing/roof_accents.json",
+    "media/KnoxBuildworks/definitions/world_pieces/lighting.json",
+    "media/KnoxBuildworks/definitions/world_pieces/appliances.json",
+    "media/KnoxBuildworks/definitions/world_pieces/furniture.json",
+    "media/KnoxBuildworks/definitions/world_pieces/decor.json",
+    "media/KnoxBuildworks/definitions/world_pieces/construction.json"
   ],
   "schemaVersion": 1
 }

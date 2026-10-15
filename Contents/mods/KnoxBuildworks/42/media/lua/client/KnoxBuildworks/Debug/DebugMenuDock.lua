@@ -22,6 +22,19 @@ local function openTileBrowser(playerNum)
     Browser.open(player)
 end
 
+local function runStudioExport(playerNum)
+    local player = getSpecificPlayer(playerNum)
+    local StudioExport = require("KnoxBuildworks/Debug/StudioExport")
+    local ok = StudioExport.run()
+    if player and HaloTextHelper then
+        if ok then
+            HaloTextHelper.addGoodText(player, getText("IGUI_KBW_DebugStudioExported"))
+        else
+            HaloTextHelper.addBadText(player, getText("IGUI_KBW_DebugStudioFailed"))
+        end
+    end
+end
+
 function DebugMenuDock.register()
     MenuDock.registerButton({
         id = "KnoxBuildworks.DebugBuildTests",
@@ -37,6 +50,14 @@ function DebugMenuDock.register()
         label = getText("IGUI_KBW_DebugTilesDockLabel"),
         icon = "media/ui/KBW_Dock_TileBrowser.png",
         onClick = openTileBrowser,
+        visibleWhen = visibleWhen
+    })
+    MenuDock.registerButton({
+        id = "KnoxBuildworks.DebugStudioExport",
+        title = getText("IGUI_KBW_DebugStudioDockTooltip"),
+        label = getText("IGUI_KBW_DebugStudioDockLabel"),
+        icon = "media/ui/KBW_Planning_Mode.png",
+        onClick = runStudioExport,
         visibleWhen = visibleWhen
     })
 end

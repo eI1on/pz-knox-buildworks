@@ -12,12 +12,15 @@ local SUPPORTED_TYPES = {
     generator = true,
     lightSwitch = true,
     mannequin = true,
-    stove = true
+    radio = true,
+    stove = true,
+    television = true
 }
 
 local SUPPORTED_TYPE_MESSAGE = table.concat({
     "'barbecue'", "'clothingDryer'", "'clothingWasher'", "'combinationWasherDryer'",
-    "'curtain'", "'fireplace'", "'generator'", "'lightSwitch'", "'mannequin'", "'stove'"
+    "'curtain'", "'fireplace'", "'generator'", "'lightSwitch'", "'mannequin'", "'radio'", "'stove'",
+    "'television'"
 }, ", ")
 
 local ISO_TYPE_MAP = {
@@ -28,7 +31,9 @@ local ISO_TYPE_MAP = {
     IsoFireplace = "fireplace",
     IsoLightSwitch = "lightSwitch",
     IsoMannequin = "mannequin",
-    IsoStove = "stove"
+    IsoRadio = "radio",
+    IsoStove = "stove",
+    IsoTelevision = "television"
 }
 
 function NativeObjectTypes.isSupported(objectType)

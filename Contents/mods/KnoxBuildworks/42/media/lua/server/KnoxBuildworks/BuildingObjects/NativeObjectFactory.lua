@@ -250,6 +250,16 @@ registerSpriteObject("combinationWasherDryer", function (cell, square, sprite)
     return IsoCombinationWasherDryer.new(cell, square, sprite)
 end)
 
+-- Radios and televisions: IsoWaveSignal(cell, square, sprite) builds the
+-- device data from the tile's own signal properties, as map-placed sets get.
+registerSpriteObject("radio", function (cell, square, sprite)
+    return IsoRadio.new(cell, square, sprite)
+end)
+
+registerSpriteObject("television", function (cell, square, sprite)
+    return IsoTelevision.new(cell, square, sprite)
+end)
+
 registerSpriteObject("stove", function (cell, square, sprite)
     return IsoStove.new(cell, square, sprite)
 end)

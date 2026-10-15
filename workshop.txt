@@ -41,6 +41,10 @@ description=[*][b]Supplies[/b] totals from inventory, bags, the ground, gather c
 description=[/list]
 description=Plans can be exported, imported, written to an in-game blueprint item and shared with faction members or players.
 description=
+description=[h2]Buildworks Studio[/h2]
+description=Design blueprints in your browser at [url=https://buildworks-studio.elyonmods.com/][b]Buildworks Studio[/b][/url]. It runs Knox's own placement rules on the same catalogue, totals the materials, and saves a file you import in Planning Mode - up to 10,000 pieces.
+description=[img]https://i.imgur.com/yrjNQD3.png[/img]
+description=
 description=[h2]Roof Helper[/h2]
 description=Select a room and the helper lists every roof that fits it - flat, shed, gable, hip and cross-gable, at 30 or 45 degrees, over L, T, U or irregular rooms - as small 3D models, best first. Hover to see it in the world, then add it to the plan with gable walls in any variant and paint, plaster or wallpaper.
 description=
@@ -64,7 +68,7 @@ description=
 description=[h2]Vanilla Expanded[/h2]
 description=The optional add-on turns the Build 42 tile library into an organized collection: walls, roofs, doors, windows, floors, fences, containers, furniture, details, decorations, road pieces, vegetation and survival structures.
 description=
-description=[url=https://ei1on.github.io/pz-knox-buildworks-docs/][b]Documentation[/b][/url] | [url=https://github.com/eI1on/pz-knox-buildworks][b]Source and issue tracker[/b][/url]
+description=[url=https://buildworks-studio.elyonmods.com/][b]Buildworks Studio[/b][/url] | [url=https://ei1on.github.io/pz-knox-buildworks-docs/][b]Documentation[/b][/url] | [url=https://github.com/eI1on/pz-knox-buildworks][b]Source and issue tracker[/b][/url]
 description=
 description=[hr][/hr]
 description=Knox Buildworks is under active development for Build 42. Include the game version, Knox version, exact buildable, game mode, steps, and logs with reproducible reports.

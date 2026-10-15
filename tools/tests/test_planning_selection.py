@@ -94,6 +94,7 @@ class RoomCutTests(unittest.TestCase):
             bp.get=function() return plan end
             bp.canContribute=function() return true end
             bp.maxPlacements=function() return 1000 end
+            bp.importLimit=function() return 1000 end
             assert(bp.removePlacements({},'plan',{'p2','p4','missing'})==2)
             assert(#plan.placements==3 and plan.placements[2].id=='p3')
             local server={id='s',placements={{id='a'},{id='b'},{id='c'}}}
@@ -159,11 +160,13 @@ class SelectionTests(unittest.TestCase):
                 previewSprite=function() return nil end,
                 plannedFinishSignature=function(f) return f.paintType end,
                 objectFinishSignature=function(o) return o.paint end,
-                paintComponents=function() return {} end}
-            modules['KnoxBuildworks/Validation/Placement']={}
+                paintComponents=function() return {} end, wallType=function() return nil end}
+            modules['KnoxBuildworks/Validation/Placement']={previousStageOf=function() return nil end,
+                optionalReplacementStageOf=function() return nil end}
             modules['KnoxBuildworks/UI/Catalog']={}
             IsoObjectType={doorN=1,doorW=2}
-            function getSprite(name) return {getType=function() return 0 end, getName=function() return name end} end
+            function getSprite(name) return {getType=function() return 0 end, getName=function() return name end,
+                getProperties=function() return {has=function() return false end} end} end
             Events={OnFillWorldObjectContextMenu={Add=function() end}}
             function object(sprite, x, y, paint)
                 return {paint=paint, getSprite=function() return getSprite(sprite) end,

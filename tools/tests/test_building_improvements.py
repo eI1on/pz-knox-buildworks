@@ -404,6 +404,7 @@ class RoofTests(unittest.TestCase):
             plan={id='plan',updated=1,placements={},rooms={{id='r',x=0,y=0,z=0,w=8,h=4},{id='w',x=0,y=4,z=0,w=4,h=4}}}
             modules['KnoxBuildworks/Planning/Blueprints']={get=function() return plan end,
                 canContribute=function() return true end,maxPlacements=function() return 100000 end,
+                limitFor=function() return 100000 end,
                 intersectionIndex=function() return {} end,findIntersections=function() return {} end,
                 indexPlacement=function() end,withinRange=function() return true end,
                 resolvePlacement=function() return {},{} end}

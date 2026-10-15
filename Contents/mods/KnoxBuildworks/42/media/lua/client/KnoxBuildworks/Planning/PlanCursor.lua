@@ -368,7 +368,7 @@ local function defineClass()
             self.planInvalidReason = "no_permission"
             return false
         end
-        if #(blueprint.placements or {}) + #candidates > Blueprints.maxPlacements() then
+        if #(blueprint.placements or {}) + #candidates > Blueprints.limitFor(blueprint) then
             self.planInvalidReason = "placement_limit"
             return false
         end

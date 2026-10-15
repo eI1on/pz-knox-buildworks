@@ -1,0 +1,2152 @@
+{
+  "schemaVersion": 1,
+  "buildables": [
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.valutech_radio",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_valutech_radio",
+      "displayName": "ValuTech Radio",
+      "tooltipKey": "Tooltip_KBWVE_World_Radio",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_radio_01_0",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_radio_01_0"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_radio_01_1"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_radio_01_2"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_radio_01_3"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 5
+            },
+            "knowledge": {
+              "recipes": [
+                "CraftMakeshiftRadio"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "Base.RadioMag1"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "radio_receiver",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioReceiver"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "amplifier",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Amplifier"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulb"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "aluminum",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "tags": [
+                  "base:aluminum"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 6
+              }
+            ]
+          },
+          "nativeObject": {
+            "type": "radio"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 400,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 25
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.army_ham_radio",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_army_ham_radio",
+      "displayName": "US Army Ham Radio",
+      "tooltipKey": "Tooltip_KBWVE_World_HamRadio",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_com_01_8",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_8"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_9"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_10"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_11"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 7
+            },
+            "knowledge": {
+              "recipes": [
+                "CraftMakeshiftHAMRadio"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "Base.RadioMag3"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 9
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "radio_receiver",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioReceiver"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "radio_transmitter",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioTransmitter"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "amplifier",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Amplifier"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "microphone",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Microphone"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulb"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb_green",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulbGreen"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 10
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 5
+              },
+              {
+                "id": "aluminum",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "tags": [
+                  "base:aluminum"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 8
+              }
+            ]
+          },
+          "nativeObject": {
+            "type": "radio"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 600,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 40
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.premium_ham_radio",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_premium_ham_radio",
+      "displayName": "Premium Technologies Ham Radio",
+      "tooltipKey": "Tooltip_KBWVE_World_HamRadio",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_com_01_7",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_7"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 7
+            },
+            "knowledge": {
+              "recipes": [
+                "CraftMakeshiftHAMRadio"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "Base.RadioMag3"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 9
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "radio_receiver",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioReceiver"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "radio_transmitter",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioTransmitter"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "amplifier",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Amplifier"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "microphone",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Microphone"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulb"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb_green",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulbGreen"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 10
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 5
+              },
+              {
+                "id": "aluminum",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "tags": [
+                  "base:aluminum"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 8
+              }
+            ]
+          },
+          "nativeObject": {
+            "type": "radio"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 600,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 40
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.valutech_television",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_valutech_television",
+      "displayName": "ValuTech Television",
+      "tooltipKey": "Tooltip_KBWVE_World_Television",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_television_01_4",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_television_01_4"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_television_01_5"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_television_01_6"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_television_01_7"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 6
+            },
+            "knowledge": {
+              "recipes": [
+                "CraftMakeshiftRadio"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "Base.RadioMag1"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "radio_receiver",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.RadioReceiver"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "amplifier",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Amplifier"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screen",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.GlassPanel"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "light_bulb",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulb"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 12
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 4
+              },
+              {
+                "id": "aluminum",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "tags": [
+                  "base:aluminum"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 8
+              }
+            ]
+          },
+          "nativeObject": {
+            "type": "television"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 500,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 30
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.tv_antenna",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_tv_antenna",
+      "displayName": "Rooftop TV Antenna",
+      "tooltipKey": "Tooltip_KBWVE_World_Antenna",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_com_01_81",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_81"
+                      ],
+                      [
+                        "appliances_com_01_80"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_com_01_82",
+                        "appliances_com_01_83"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 3
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "metal_bars",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.MetalBar"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "aluminum",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "tags": [
+                  "base:aluminum"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 4
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 300,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.coffee_machine",
+      "subcategory": "Kitchen Appliances",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_coffee_machine",
+      "displayName": "X-press Coffee Machine",
+      "tooltipKey": "Tooltip_KBWVE_World_CoffeeMachine",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "appliances_cooking_01_56",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_cooking_01_56"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_cooking_01_57"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_cooking_01_58"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "appliances_cooking_01_59"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 4
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "light_bulb",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.LightBulb"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 5
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "rubber_seal",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.RubberSeal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 6
+              }
+            ]
+          },
+          "nativeObject": {
+            "type": "stove"
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 350,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 20
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.water_dispenser",
+      "subcategory": "Kitchen Appliances",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_water_dispenser",
+      "displayName": "Water Dispenser",
+      "tooltipKey": "Tooltip_KBWVE_World_WaterDispenser",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "location_business_office_generic_01_49",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_48"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_49"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_56"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_01_57"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "dispenser_bottle",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.WaterDispenserBottle"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "rubber_tube",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.SmallRubberTube"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 6
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": true
+          },
+          "construction": {
+            "time": 350,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 20
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.modern_phone",
+      "subcategory": "Radios & TVs",
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_modern_phone",
+      "displayName": "White Modern Telephone",
+      "tooltipKey": "Tooltip_KBWVE_World_Telephone",
+      "category": "Appliances",
+      "placement": {
+        "kind": "object",
+        "requiresFloor": true
+      },
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "location_business_office_generic_02_16",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_02_16"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_02_17"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_02_18"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "location_business_office_generic_02_19"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 3
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "microphone",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Microphone"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 2
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false
+          },
+          "construction": {
+            "time": 250,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.air_conditioner",
+      "subcategory": "Climate",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_air_conditioner",
+      "displayName": "Wall Air Conditioner",
+      "tooltipKey": "Tooltip_KBWVE_World_AirConditioner",
+      "category": "Appliances",
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "rooftop_furniture_35",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rooftop_furniture_34"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "rooftop_furniture_35"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 5,
+              "MetalWelding": 3
+            },
+            "knowledge": {
+              "recipes": [
+                "KBWKnowledge_PopularMechanics_HomeAppliances"
+              ],
+              "hideUntilLearned": true,
+              "needToBeLearned": true,
+              "sources": [
+                {
+                  "type": "magazine",
+                  "item": "KnoxBuildworks.PopularMechanics_HomeAppliances"
+                }
+              ],
+              "skillAlternatives": [
+                {
+                  "mode": "all",
+                  "skills": {
+                    "Electricity": 7
+                  }
+                }
+              ]
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_wrench",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:wrench"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "compressor",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.RefrigeratorCompressor"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "refrigerant",
+                "role": "component",
+                "mode": "drain",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.RefrigerantBottle"
+                ],
+                "amount": 1,
+                "uses": 2
+              },
+              {
+                "id": "copper_pipe",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "KnoxBuildworks.ThinCopperPipe"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 10
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          },
+          "construction": {
+            "time": 700,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 30,
+              "MetalWelding": 15
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "kbw.vanillaexpanded.world.appliances.pay_phone",
+      "subcategory": "Radios & TVs",
+      "placement": {
+        "kind": "object",
+        "needToBeAgainstWall": true,
+        "requiresFloor": false
+      },
+      "translationKey": "IGUI_KBWVE_Buildable_world_appliances_pay_phone",
+      "displayName": "Pay Phone",
+      "tooltipKey": "Tooltip_KBWVE_World_Telephone",
+      "category": "Appliances",
+      "material": "Electronics",
+      "materialTags": [
+        "Electronics",
+        "Metal"
+      ],
+      "iconSprite": "street_decoration_01_39",
+      "tags": [
+        "capture-gap",
+        "electrical",
+        "vanilla-b42"
+      ],
+      "stages": [
+        {
+          "id": "built",
+          "geometry": {
+            "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "street_decoration_01_38"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "N": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "street_decoration_01_39"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "E": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "street_decoration_01_46"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "S": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "street_decoration_01_47"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "requirements": {
+            "skills": {
+              "Electricity": 4
+            },
+            "inputs": [
+              {
+                "id": "tool_screwdriver",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:screwdriver"
+                ],
+                "amount": 1,
+                "flags": [
+                  "Prop1",
+                  "MayDegradeVeryLight"
+                ]
+              },
+              {
+                "id": "tool_pliers",
+                "role": "tool",
+                "mode": "keep",
+                "resourceType": "Item",
+                "tags": [
+                  "base:pliers"
+                ],
+                "amount": 1,
+                "flags": [
+                  "MayDegradeLight"
+                ]
+              },
+              {
+                "id": "microphone",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Microphone"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "speaker",
+                "role": "component",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Speaker"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "electronics",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectronicsScrap"
+                ],
+                "amount": 6
+              },
+              {
+                "id": "electric_wire",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.ElectricWire"
+                ],
+                "amount": 3
+              },
+              {
+                "id": "sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SheetMetal"
+                ],
+                "amount": 1
+              },
+              {
+                "id": "small_sheet_metal",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.SmallSheetMetal"
+                ],
+                "amount": 2
+              },
+              {
+                "id": "screws",
+                "role": "material",
+                "mode": "consume",
+                "resourceType": "Item",
+                "items": [
+                  "Base.Screws"
+                ],
+                "amount": 8
+              }
+            ]
+          },
+          "object": {
+            "isProp": true,
+            "dismantable": true,
+            "blockAllSquare": false,
+            "canPassThrough": true
+          },
+          "construction": {
+            "time": 450,
+            "timedAction": "BuildWallMetal",
+            "completionSound": "BuildMetalStructureSmall",
+            "canWalk": false,
+            "category": "Electrical",
+            "xp": {
+              "Electricity": 25
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -938,7 +938,7 @@ function KBWRoofHelper:pieceChecker()
         self.collisionPlacements = blueprint.placements
     end
     local index = self.collisionIndex
-    local room = Blueprints.maxPlacements() - #(blueprint.placements or {})
+    local room = Blueprints.limitFor(blueprint) - #(blueprint.placements or {})
     return {
         start = function() state.count = 0 end,
         each = function(candidate)

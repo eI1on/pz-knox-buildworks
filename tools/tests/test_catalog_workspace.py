@@ -19,6 +19,7 @@ def runtime():
         UIFont = {Small=1, Medium=2}
         fontHeight = 16
         function getText(key) return key:gsub('IGUI_KBW_', '') end
+        function isDebugEnabled() return false end
         function getTextManager() return {
             getFontHeight=function() return fontHeight end,
             MeasureStringX=function(_,font,text) return #text * fontHeight * .45 end
@@ -210,7 +211,8 @@ class WorkspaceTests(unittest.TestCase):
             modules['KnoxBuildworks/I18n'].optionName=function(o) return o.label or o.id or 'finish' end
             modules['KnoxBuildworks/UI/CatalogVisibility'].definitionEnabled=function() return true end
             modules['KnoxBuildworks/Definitions/StageConfig']={sprite=function() return {} end,placement=function() return {} end}
-            modules['KnoxBuildworks/Validation/Placement']={windowShapeOf=function() return nil end,hasWallFrame=function() return false end}
+            modules['KnoxBuildworks/Validation/Placement']={windowShapeOf=function() return nil end,hasWallFrame=function() return false end,
+                previousStageOf=function() return nil end,optionalReplacementStageOf=function() return nil end}
             modules['KnoxBuildworks/Validation/WallFinishes']={
                 entriesFor=function() return {{actionType='wallFinish',paintType='red',label='Red'}} end,
                 isWallFinish=function() return true end,

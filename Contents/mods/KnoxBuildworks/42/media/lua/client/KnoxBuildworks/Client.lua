@@ -123,6 +123,7 @@ BuildableRules.addListener(refreshBuildableRuleConsumers)
 ---@class KBW.BLUEPRINT_DELTASModule
 ---@type KBW.BLUEPRINT_DELTASModule
 local BLUEPRINT_DELTAS = {
+    BPImportChunk = true,
     BPAddPlacement = true,
     BPAddPlacements = true,
     BPRemovePlacement = true,
@@ -163,6 +164,9 @@ local function onServerCommand(module, command, args)
             Blueprints.applySync({ [tostring(args.item.id)] = args.item }, false)
             refreshPlanningUI()
         end
+    elseif command == "BPSyncChunk" then
+        Blueprints.applySyncChunk(args.id, args.placements)
+        refreshPlanningUI()
     elseif command == "BPForget" then
         Blueprints.forget(args.id)
         refreshPlanningUI()

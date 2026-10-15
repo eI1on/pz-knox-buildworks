@@ -850,6 +850,45 @@ function KBWPlanningMode:onPipette()
     end)
 end
 
+-- Capture: click a building (or drag any area) in the world and get a new
+-- blueprint of catalogue pieces for it - floors, wall frames, walls with
+-- their plaster/paint/wallpaper, doors, windows, furniture, overlays and the
+-- building's rooms. See Planning/BuildingCapture.lua.
+function KBWPlanningMode:onCaptureBuilding()
+    if not isDebugEnabled() then return end
+    local BuildingCapture = require("KnoxBuildworks/Planning/BuildingCapture")
+    if BuildingCapture.isRunning() then
+        say(self.player, getText("IGUI_KBW_CaptureBusy"), true)
+        return
+    end
+    local owner = self
+    Planner.beginCapture(self.player, function(area)
+        local started = BuildingCapture.start(owner.player, area, function(job) owner:onCaptureDone(job) end)
+        say(owner.player, getText(started and "IGUI_KBW_CaptureStarted" or "IGUI_KBW_CaptureBusy"), not started)
+    end)
+end
+
+---@param job table finished BuildingCapture job
+function KBWPlanningMode:onCaptureDone(job)
+    local BuildingCapture = require("KnoxBuildworks/Planning/BuildingCapture")
+    if not job.blueprint then
+        say(self.player, getText("IGUI_KBW_CaptureNothing"), true)
+        return
+    end
+    say(self.player, getText("IGUI_KBW_CaptureDone", tostring(job.added)))
+    if KBWPlanningMode.instance == self then
+        self.workspaceTab = "pieces"
+        self:refreshBlueprints(job.blueprint.id)
+        self:onBlueprintSelected()
+    end
+    local width, height = 520, 300
+    local modal = ISModalRichText:new(getCore():getScreenWidth() / 2 - width / 2,
+        getCore():getScreenHeight() / 2 - height / 2, width, height, BuildingCapture.summaryText(job), false,
+        nil, nil, self.player:getPlayerNum())
+    modal:initialise()
+    modal:addToUIManager()
+end
+
 function KBWPlanningMode:onRoomSelected()
     local room = self:selectedRoom()
     if room and self.roomName then self.roomName:setText(tostring(room.name or room.type or "")) end

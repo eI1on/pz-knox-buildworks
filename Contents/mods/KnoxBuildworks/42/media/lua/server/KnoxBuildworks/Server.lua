@@ -70,6 +70,7 @@ end
 -- payloads only travel on login sync, creation, access changes and rollbacks.
 local BLUEPRINT_COMMANDS = {
     BPCreate = true,
+    BPImportChunk = true,
     BPDelete = true,
     BPAddPlacement = true,
     BPAddPlacements = true,
