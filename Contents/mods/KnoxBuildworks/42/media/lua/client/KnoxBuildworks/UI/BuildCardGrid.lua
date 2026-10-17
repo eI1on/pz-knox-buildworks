@@ -134,15 +134,6 @@ local function displayName(definition)
     return I18n.definitionName(definition)
 end
 
-local function shorten(text, width)
-    text = string.gsub(tostring(text or ""), "[\r\n]+", " ")
-    if getTextManager():MeasureStringX(UIFont.Small, text) <= width then return text end
-    while #text > 3 and getTextManager():MeasureStringX(UIFont.Small, text .. "...") > width do
-        text = string.sub(text, 1, #text - 1)
-    end
-    return text .. "..."
-end
-
 local function wrapText(text, width)
     text = string.gsub(tostring(text or ""), "[\r\n]+", " ")
     if text == "" then return {} end
@@ -219,7 +210,7 @@ function KBWBuildCardGrid:setCompactMode(compact, force)
         self.pinSize = self.favoriteSize
     else
         local baseWidth = math.max(124, fontHeight * 5 + 18)
-        local baseHeight = math.max(142, fontHeight * 2 + 112)
+        local baseHeight = math.max(150, fontHeight * 3 + 100)
         self.cardWidth = math.floor(baseWidth * scale + .5)
         self.cardHeight = math.floor(baseHeight + (scale - 1) * 92 + .5)
         self.rowHeight = math.max(92, fontHeight * 3 + 26)
@@ -754,18 +745,63 @@ function KBWBuildCardGrid:cardStatus(definition)
 end
 
 ---@param width number
-function KBWBuildCardGrid:shortNameFor(entry, width)
-    if entry.shortName == nil or entry.shortWidth ~= width then
-        entry.shortWidth = width
-        entry.shortName = shorten(entry.name, width)
+---@return string[]
+function KBWBuildCardGrid:nameLinesFor(entry, width)
+    if entry.nameLines == nil or entry.nameLinesWidth ~= width then
+        entry.nameLinesWidth = width
+        entry.nameLines = wrapText(entry.name, width)
     end
-    return entry.shortName
+    return entry.nameLines
 end
 
 function KBWBuildCardGrid:invalidateStatuses()
     for _, entry in pairs(self.cardCache) do
         entry.statusTime = 0
     end
+end
+
+local READINESS_BAR = 3
+
+-- Cards are flat: no drop shadow and no outline at rest. Hover lifts the fill,
+-- selection adds the accent outline, so the grid reads as one surface rather
+-- than a wall of boxed tiles.
+local function drawCardFrame(panel, x, y, width, height, selected, hovered)
+    local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
+    panel:drawRect(x, y, width, height, fill.a, fill.r, fill.g, fill.b)
+    if selected then
+        panel:drawRectBorder(x, y, width, height, Theme.accent.a, Theme.accent.r, Theme.accent.g, Theme.accent.b)
+    elseif hovered then
+        panel:drawRectBorder(
+            x, y, width, height, Theme.borderSoft.a, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
+        )
+    end
+end
+
+-- Readiness is a thin strip: green when the recipe can be built now, dim
+-- amber when something is missing. Unavailable icons are faded too, so the
+-- state never rests on colour alone.
+local function drawReadiness(panel, x, y, width, height, status)
+    if status.pending then return end
+    local color = status.ok and Theme.ready or (status.reason == "unlearned" and Theme.textMuted or Theme.warn)
+    panel:drawRect(x, y, width, height, status.ok and .95 or .45, color.r, color.g, color.b)
+end
+
+local STATUS_TEXT = {
+    unlearned = "IGUI_KBW_StatusUnlearned",
+    skill = "IGUI_KBW_StatusSkill",
+    dark = "IGUI_KBW_StatusDark",
+    items = "IGUI_KBW_StatusMissingItems",
+    debug = "IGUI_KBW_StatusDebug"
+}
+
+-- The words under a card: what stops it, not only that something does. An
+-- unlearned recipe is dimmer than one you could build with more items.
+local function statusLabel(status)
+    if status.pending then return getText("IGUI_KBW_StatusChecking"), Theme.textMuted end
+    if status.ok then return getText("IGUI_KBW_Ready"), Theme.ready end
+    local key = STATUS_TEXT[status.reason] or "IGUI_KBW_Missing"
+    if status.reason == "unlearned" then return getText(key), Theme.textMuted end
+    return getText(key), Theme.warn
 end
 
 local function unavailableIconAlpha()
@@ -803,17 +839,11 @@ function KBWBuildCardGrid:prerender()
                 local previewHovered = index == self.previewHoverIndex
                 local entry, status = self:cardStatus(definition)
                 local texture, textureColor = self:visualFor(definition, entry, selected)
-                local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
-                local border = selected and Theme.accent or (status.ok and Theme.ready or Theme.borderSoft)
                 local x = self.gap
                 local width = safeWidth - self.gap * 2
-                self:drawRect(x + 2, y + 2, width, rowHeight, 0.26, 0, 0, 0)
-                self:drawRect(x, y, width, rowHeight, fill.a, fill.r, fill.g, fill.b)
-                self:drawRectBorder(x, y, width, rowHeight, border.a, border.r, border.g, border.b)
+                drawCardFrame(self, x, y, width, rowHeight, selected, hovered)
+                drawReadiness(self, x, y, READINESS_BAR, rowHeight, status)
                 Theme.drawPreviewBackground(self, x + 9, y + 9, 56, 56, Options)
-                self:drawRectBorder(
-                    x + 9, y + 9, 56, 56, .6, Theme.borderSoft.r, Theme.borderSoft.g, Theme.borderSoft.b
-                )
                 if texture then
                     self:drawTextureScaledAspect(
                         texture, x + 11, y + 11, 52, 52, status.ok and 1 or unavailableAlpha, textureColor.r, textureColor.g,
@@ -866,10 +896,8 @@ function KBWBuildCardGrid:prerender()
                     )
                     textY = textY + lineHeight
                 end
-                local marker = status.pending and Theme.textMuted or (status.ok and Theme.ready or Theme.warn)
+                local statusText, marker = statusLabel(status)
                 local statusY = y + rowHeight - fontHeight - 9
-                local statusText = status.pending and "..."
-                    or (status.ok and getText("IGUI_KBW_Ready") or getText("IGUI_KBW_Missing"))
                 self:drawText(
                     statusText, x + 76, statusY, marker.r, marker.g, marker.b, 1, UIFont.Small
                 )
@@ -895,13 +923,7 @@ function KBWBuildCardGrid:prerender()
                         local previewHovered = index == self.previewHoverIndex
                         local entry, status = self:cardStatus(definition)
                         local texture, textureColor = self:visualFor(definition, entry, selected)
-                        local fill = selected and Theme.selected or (hovered and Theme.surfaceRaised or Theme.surface)
-                        local border = selected and Theme.accent or (status.ok and Theme.ready or Theme.borderSoft)
-                        self:drawRect(x + 2, y + 2, self.cardWidth, self.cardHeight, 0.24, 0, 0, 0)
-                        self:drawRect(x, y, self.cardWidth, self.cardHeight, fill.a, fill.r, fill.g, fill.b)
-                        self:drawRectBorder(
-                            x, y, self.cardWidth, self.cardHeight, border.a, border.r, border.g, border.b
-                        )
+                        drawCardFrame(self, x, y, self.cardWidth, self.cardHeight, selected, hovered)
                         local normalPreviewWidth = math.min(self.cardWidth - 18, math.floor(84 * (self.iconScale or 1) + .5))
                         local normalPreviewHeight = math.min(
                             self.cardHeight - 58, math.floor(70 * (self.iconScale or 1) + .5)
@@ -913,10 +935,6 @@ function KBWBuildCardGrid:prerender()
                         local previewHeight = self.compactMode and (self.cardHeight - 18) or normalPreviewHeight
                         Theme.drawPreviewBackground(
                             self, previewX, previewY, previewWidth, previewHeight, Options
-                        )
-                        self:drawRectBorder(
-                            previewX, previewY, previewWidth, previewHeight, .65, Theme.borderSoft.r,
-                            Theme.borderSoft.g, Theme.borderSoft.b
                         )
                         if texture then
                             local inset = self.compactMode and 3 or 8
@@ -958,25 +976,26 @@ function KBWBuildCardGrid:prerender()
                                 )
                             end
                         end
-                        local marker = status.pending and Theme.textMuted or (status.ok and Theme.ready or Theme.warn)
+                        local barY = y + self.cardHeight - READINESS_BAR
+                        drawReadiness(self, x, barY, self.cardWidth, READINESS_BAR, status)
                         if not self.compactMode then
-                            local name = self:shortNameFor(entry, self.cardWidth - 10)
-                            local nameY = previewY + previewHeight + 6
+                            local fontHeight = getTextManager():getFontHeight(UIFont.Small)
+                            local statusY = barY - fontHeight - 3
+                            local statusText, marker = statusLabel(status)
                             self:drawTextCentre(
-                                name, x + self.cardWidth / 2, nameY, Theme.text.r, Theme.text.g, Theme.text.b, 1,
-                                UIFont.Small
+                                statusText, x + self.cardWidth / 2, statusY, marker.r, marker.g, marker.b, 1, UIFont.Small
                             )
-                            local statusHeight = math.max(24, getTextManager():getFontHeight(UIFont.Small) + 8)
-                            self:drawRect(
-                                x, y + self.cardHeight - statusHeight, self.cardWidth, statusHeight, .28,
-                                Theme.backdrop.r, Theme.backdrop.g, Theme.backdrop.b
-                            )
-                            local statusText = status.pending and "..."
-                                or (status.ok and getText("IGUI_KBW_Ready") or getText("IGUI_KBW_Missing"))
-                            self:drawText(
-                                statusText, x + 9, y + self.cardHeight - statusHeight + 3, marker.r, marker.g,
-                                marker.b, 1, UIFont.Small
-                            )
+                            -- The whole name, wrapped; the hover tooltip repeats it.
+                            local lines = self:nameLinesFor(entry, self.cardWidth - 12)
+                            local nameY = previewY + previewHeight + 5
+                            for lineIndex = 1, #lines do
+                                if nameY + fontHeight > statusY - 1 then break end
+                                self:drawTextCentre(
+                                    lines[lineIndex], x + self.cardWidth / 2, nameY, Theme.text.r, Theme.text.g,
+                                    Theme.text.b, 1, UIFont.Small
+                                )
+                                nameY = nameY + fontHeight
+                            end
                         end
                     end
                 end

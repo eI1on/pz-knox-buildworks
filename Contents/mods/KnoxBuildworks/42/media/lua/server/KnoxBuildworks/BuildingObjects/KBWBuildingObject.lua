@@ -23,6 +23,27 @@ local AttachedSprites = require("KnoxBuildworks/World/AttachedSprites")
 ---@class KBWBuildingObject: ISBuildingObject
 KBWBuildingObject = ISBuildingObject:derive("KBWBuildingObject")
 
+-- The server ends a refused build without a word; on a dedicated server the
+-- player only saw the action stop and nothing appear. Tell them why.
+local function notifyRejected(character, buildableId, reason)
+    if not isServer() or not character then return end
+    sendServerCommand(character, KBW.NETWORK_MODULE, "BuildRejected", {
+        buildableId = tostring(buildableId or ""), reason = tostring(reason or "")
+    })
+end
+
+-- Vanilla's tryBuild skips walking, equipping and fetching while the client's
+-- ISBuildMenu.cheat is on, but the admin panel's older Build Cheat button and
+-- a -debug launch set only that flag, never the player's synced isBuildCheat.
+-- A multiplayer server judges by isBuildCheat, so it refused every such build
+-- for being out of reach or short of materials. In multiplayer only the synced
+-- flag counts.
+local function effectiveBuildCheat(character)
+    local synced = character and character.isBuildCheat and character:isBuildCheat() == true or false
+    if isClient() then return synced end
+    return synced or (ISBuildMenu ~= nil and ISBuildMenu.cheat == true)
+end
+
 local function faceName(nSprite)
     return ({ "W", "N", "E", "S" })[nSprite or 1] or "W"
 end
@@ -601,7 +622,10 @@ function KBWBuildingObject:tryBuild(x, y, z)
         self.buildPanelLogic:setContainers(self.containers)
         applyNativeInputChoices(self.buildPanelLogic, self.craftRecipe, self.inputChoices, self.containers)
     end
+    local menuCheat = ISBuildMenu and ISBuildMenu.cheat
+    if ISBuildMenu then ISBuildMenu.cheat = effectiveBuildCheat(self.character) end
     local buildAction = ISBuildingObject.tryBuild(self, x, y, z)
+    if ISBuildMenu then ISBuildMenu.cheat = menuCheat end
     local construction = StageConfig.construction(self.definition, self.stage)
     local timedActionOnIsValid = StageConfig.sprite(self.definition, self.stage).timedActionOnIsValid
     if buildAction and timedActionOnIsValid then buildAction.onIsValid = timedActionOnIsValid end
@@ -864,15 +888,16 @@ function KBWBuildingObject:render(x, y, z, square)
         if sprite then
             local tileSquare = getCell():getGridSquare(tileX, tileY, tileZ)
             local offsetY = self:getStackRenderOffset(tile.sprite, tileSquare)
+            -- A valid ghost wears the paint colour of a tint finish (crates,
+            -- chairs, doors); an invalid one stays red.
+            local tint = valid and WallFinishes.previewTint(self.finish, self.definition, self.stage, tile.sprite) or nil
+            local r = valid and (tint and tint.r or 1.0) or 0.65
+            local g = valid and (tint and tint.g or 1.0) or 0.2
+            local b = valid and (tint and tint.b or 1.0) or 0.2
             if offsetY ~= 0 then
-                sprite:RenderGhostTileColor(
-                    tileX, tileY, tileZ, 0, offsetY * Core.getTileScale(), valid and 1.0 or 0.65, valid and 1.0 or 0.2,
-                    valid and 1.0 or 0.2, 0.6
-                )
+                sprite:RenderGhostTileColor(tileX, tileY, tileZ, 0, offsetY * Core.getTileScale(), r, g, b, 0.6)
             else
-                sprite:RenderGhostTileColor(
-                    tileX, tileY, tileZ, valid and 1.0 or 0.65, valid and 1.0 or 0.2, valid and 1.0 or 0.2, 0.6
-                )
+                sprite:RenderGhostTileColor(tileX, tileY, tileZ, r, g, b, 0.6)
             end
         end
     end
@@ -1282,6 +1307,7 @@ end
 function KBWBuildingObject:create(x, y, z, north, sprite)
     if not self:refreshPlayerContext() then
         Log:warning("Server rejected build %s: authoritative player is unavailable", tostring(self.buildableId))
+        notifyRejected(self.character, self.buildableId, "player unavailable")
         return false
     end
     if self.isWallLike then
@@ -1296,6 +1322,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
         Log:warning(
             "Server rejected build %s at %d,%d,%d: %s", tostring(self.buildableId), x, y, z, tostring(verifyReason)
         )
+        notifyRejected(self.character, self.buildableId, verifyReason)
         return false
     end
     -- The rules document may have changed after the client opened its cursor.
@@ -1347,6 +1374,7 @@ function KBWBuildingObject:create(x, y, z, north, sprite)
     local ok, reason, previous = Placement.validate(self, square)
     if not ok or not Requirements.evaluate(self.character, self.definition, self.stage, square, self.inputChoices).ok then
         Log:warning("Server rejected build %s at %d,%d,%d: %s", self.buildableId, x, y, z, reason or "requirements")
+        notifyRejected(self.character, self.buildableId, reason or "requirements")
         return false
     end
     -- A staged replacement owns the anchor edge. Never consume materials or

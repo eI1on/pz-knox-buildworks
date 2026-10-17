@@ -1040,8 +1040,10 @@
                   {
                     "rows": [
                       [
-                        "appliances_com_01_82",
                         "appliances_com_01_83"
+                      ],
+                      [
+                        "appliances_com_01_82"
                       ]
                     ]
                   }

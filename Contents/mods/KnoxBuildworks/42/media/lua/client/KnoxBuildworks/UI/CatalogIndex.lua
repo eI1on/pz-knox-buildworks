@@ -231,8 +231,7 @@ local function evaluateVisibility(player, record, shouldShowAll)
             entry.recipeObject = EntityCompat.craftRecipeObject(entry.stage) or false
         end
         local effective = BuildableRules.effectiveStage(record.definition, entry.stage)
-        local knowledge = effective and (effective.requirements or {}).knowledge or {}
-        local unlocked = effective and (shouldShowAll or not knowledge.hideUntilLearned or Requirements.meetsKnowledge(player, effective))
+        local unlocked = effective and not CatalogVisibility.hiddenUntilLearned(player, effective, shouldShowAll)
         if unlocked and (not entry.callback or LuaCallback.callBool(entry.callback, {
                 player = player,
                 recipe = entry.recipeObject or nil,
@@ -247,6 +246,7 @@ local function evaluateVisibility(player, record, shouldShowAll)
     record.visibleCache = {
         player = player,
         showAll = shouldShowAll == true,
+        showUnlearned = CatalogVisibility.showUnlearned,
         rev = Requirements.inventoryRevision(),
         time = nowMs(),
         value = visible
@@ -285,6 +285,7 @@ function CatalogIndex.recordVisible(player, record, shouldShowAll)
     local cached = record.visibleCache
     if cached and cached.player == player then
         if cached.showAll ~= shouldShowAll
+            or cached.showUnlearned ~= CatalogVisibility.showUnlearned
             or cached.rev ~= Requirements.inventoryRevision()
             or (nowMs() - cached.time) >= VISIBILITY_TTL_MS then
             queueVisibility(record, player, shouldShowAll)

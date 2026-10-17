@@ -4,8 +4,9 @@ local KBWFinishAction = require("KnoxBuildworks/TimedActions/KBWFinishAction")
 local WallFinishCursor = {}
 
 local function buildCheatActive(character)
+    -- multiplayer servers honour only the synced flag
     return (character and character.isBuildCheat and character:isBuildCheat())
-        or (ISBuildMenu and ISBuildMenu.cheat == true)
+        or (not isClient() and ISBuildMenu and ISBuildMenu.cheat == true)
 end
 
 local function predicateNotBroken(item)

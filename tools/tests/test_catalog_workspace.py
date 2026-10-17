@@ -237,6 +237,9 @@ class WorkspaceTests(unittest.TestCase):
             local square={getObjects=function() return objects end}
             worldObjects={{getSquare=function() return square end}}
         """)
+        # The menu over the real index (the menu only lists what the index finds).
+        lua.globals().modules["KnoxBuildworks/UI/WorldPieceIndex"] = lua.execute(
+            (LUA / "client/KnoxBuildworks/UI/WorldPieceIndex.lua").read_text())
         lua.globals().world = lua.execute((LUA / "client/KnoxBuildworks/UI/WorldCatalog.lua").read_text())
         lua.execute("""
             world.onContextMenu(0,context,worldObjects,false)

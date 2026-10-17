@@ -161,6 +161,9 @@ function KBWBlueprintImportWindow:onImport()
         return
     end
     self:say(getText("IGUI_KBW_PickBlueprintOrigin"), false)
+    -- Pieces from mods that are not active import too, but cannot show or be built: say so.
+    local missing = Blueprints.missingContentText(blueprint)
+    if missing then self:say(missing, true) end
     local onImported = self.onImported
     self:close()
     if onImported then onImported(blueprint) end

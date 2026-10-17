@@ -229,6 +229,7 @@ class PlanningPerformanceTests(unittest.TestCase):
                 sprite=function() return {} end}
             modules['KnoxBuildworks/Planning/BlueprintFiles']={queueSave=function() end}
             function isClient() return false end
+            function isServer() return false end
         """)
         load(lua, "shared/KnoxBuildworks/Planning/Blueprints.lua", "bp")
         lua.execute("""

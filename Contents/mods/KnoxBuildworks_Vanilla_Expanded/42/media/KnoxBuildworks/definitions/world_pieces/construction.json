@@ -832,84 +832,6 @@
       ]
     },
     {
-      "id": "kbw.vanillaexpanded.world.construction.pipe_stack",
-      "category": "Structural",
-      "subcategory": "Industrial",
-      "material": "Wood",
-      "placement": {
-        "kind": "object"
-      },
-      "translationKey": "IGUI_KBWVE_Buildable_world_construction_pipe_stack",
-      "displayName": "Stacked Steel Pipes",
-      "tooltipKey": "Tooltip_KBWVE_World_Pipes",
-      "iconSprite": "industry_01_45",
-      "tags": [
-        "capture-gap"
-      ],
-      "stages": [
-        {
-          "id": "built",
-          "geometry": {
-            "faces": {
-              "W": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "industry_01_43"
-                      ]
-                    ]
-                  }
-                ]
-              },
-              "N": {
-                "layers": [
-                  {
-                    "rows": [
-                      [
-                        "industry_01_45"
-                      ]
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          "requirements": {
-            "inputs": [
-              {
-                "id": "metal_pipe",
-                "role": "material",
-                "mode": "consume",
-                "resourceType": "Item",
-                "items": [
-                  "Base.MetalPipe"
-                ],
-                "amount": 6
-              }
-            ],
-            "skills": {}
-          },
-          "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
-          },
-          "object": {
-            "blockAllSquare": true
-          },
-          "container": {
-            "type": "smallcrate",
-            "capacity": 25
-          }
-        }
-      ]
-    },
-    {
       "id": "kbw.vanillaexpanded.world.construction.pipe_pile",
       "category": "Structural",
       "subcategory": "Industrial",
@@ -929,12 +851,31 @@
           "id": "built",
           "geometry": {
             "faces": {
+              "W": {
+                "layers": [
+                  {
+                    "rows": [
+                      [
+                        "industry_01_42"
+                      ],
+                      [
+                        "industry_01_41"
+                      ],
+                      [
+                        "industry_01_40"
+                      ]
+                    ]
+                  }
+                ]
+              },
               "N": {
                 "layers": [
                   {
                     "rows": [
                       [
-                        "industry_01_44"
+                        "industry_01_43",
+                        "industry_01_44",
+                        "industry_01_45"
                       ]
                     ]
                   }
@@ -958,13 +899,11 @@
             "skills": {}
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildWoodenStructureSmall",
-            "completionSound": "BuildWoodenStructureLarge",
-            "xp": {
-              "Woodwork": 30
-            },
-            "category": "Carpentry"
+            "time": 100,
+            "timedAction": "BuildLowNoTool",
+            "completionSound": "BuildWoodenStructureSmall",
+            "category": "Furniture",
+            "xp": {}
           },
           "object": {
             "blockAllSquare": true

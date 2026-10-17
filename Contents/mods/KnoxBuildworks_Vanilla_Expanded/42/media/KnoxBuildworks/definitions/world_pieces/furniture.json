@@ -132,12 +132,12 @@
           },
           "construction": {
             "time": 200,
-            "timedAction": "BuildMetalStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureSmall",
+            "category": "Carpentry",
             "xp": {
-              "MetalWelding": 30
-            },
-            "category": "Welding"
+              "Woodwork": 20
+            }
           },
           "object": {
             "isThumpable": true,
@@ -276,13 +276,13 @@
             }
           },
           "construction": {
-            "time": 200,
-            "timedAction": "BuildMetalStructureMedium",
-            "completionSound": "BuildWoodenStructureLarge",
+            "time": 150,
+            "timedAction": "BuildWoodenStructureSmall",
+            "completionSound": "BuildWoodenStructureSmall",
+            "category": "Carpentry",
             "xp": {
-              "MetalWelding": 30
-            },
-            "category": "Welding"
+              "Woodwork": 10
+            }
           },
           "object": {
             "isThumpable": true,

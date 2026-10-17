@@ -267,12 +267,11 @@
             "skills": {}
           },
           "construction": {
-            "time": 200,
+            "time": 100,
             "timedAction": "BuildLowNoTool",
-            "xp": {
-              "Tailoring": 20
-            },
-            "category": "Tailoring"
+            "completionSound": "BuildWoodenStructureSmall",
+            "category": "Furniture",
+            "xp": {}
           },
           "object": {
             "isThumpable": true,

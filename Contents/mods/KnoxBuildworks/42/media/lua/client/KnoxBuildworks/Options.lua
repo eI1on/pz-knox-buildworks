@@ -3,6 +3,7 @@ require "PZAPI/ModOptions"
 local Log = require("KnoxBuildworks/Log")
 local Theme = require("KnoxBuildworks/UI/Theme")
 local MenuDock = require("ElyonLib/UI/MenuDock/MenuDock")
+local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
 
 local Options = PZAPI.ModOptions:create("KnoxBuildworks", "Knox Buildworks")
 Options:addKeyBind(
@@ -14,6 +15,10 @@ Options:addTickBox(
 Options:addTickBox(
     "KeepInventoryVisibleInPlanning", "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning", true,
     "UI_optionscreen_KBW_KeepInventoryVisibleInPlanning_Tooltip"
+)
+Options:addTickBox(
+    "ShowUnlearnedRecipes", "UI_optionscreen_KBW_ShowUnlearnedRecipes", true,
+    "UI_optionscreen_KBW_ShowUnlearnedRecipes_Tooltip"
 )
 Options:addTickBox("Debug", "UI_optionscreen_KBW_Debug", false, "UI_optionscreen_KBW_Debug_Tooltip")
 Options:addTickBox("Profile", "UI_optionscreen_KBW_Profile", false, "UI_optionscreen_KBW_Profile_Tooltip")
@@ -100,6 +105,8 @@ function Options:apply()
     local debugOption = self:getOption("Debug")
     Log:setDebug(debugOption and debugOption:getValue() == true)
     Theme.applyAccessibility(self)
+    local unlearned = self:getOption("ShowUnlearnedRecipes")
+    if unlearned and unlearned.getValue then CatalogVisibility.setShowUnlearned(unlearned:getValue() == true) end
     local profile = self:getOption("Profile")
     if profile and profile.getValue then
         KnoxBuildworks.Runtime.profile = profile:getValue() == true

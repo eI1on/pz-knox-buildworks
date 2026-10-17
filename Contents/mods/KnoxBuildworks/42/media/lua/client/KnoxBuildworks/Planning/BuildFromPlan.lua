@@ -203,7 +203,6 @@ function BuildFromPlan.queue(player, blueprintId, placement, onBuilt)
         say(player, getText("IGUI_KBW_CannotBuild"), true)
         return false, "integrity mismatch"
     end
-    if ISBuildMenu and player and player.isBuildCheat then ISBuildMenu.cheat = player:isBuildCheat() end
     local blueprint = Blueprints.get(player, blueprintId)
     local definition, stage = Blueprints.resolvePlacement(placement)
     if not blueprint or not definition or not stage then return false, "unknown blueprint or placement" end

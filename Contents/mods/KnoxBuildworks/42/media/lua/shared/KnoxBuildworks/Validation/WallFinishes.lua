@@ -40,6 +40,10 @@ local WallFinishes = {}
 
 local registeredWallTypes = {}
 local registeredSpriteTypes = {}
+-- Mappings a definition declares inline, by the sprites they cover. Such a
+-- mapping belongs to that buildable and its tiles only (see mappingFor).
+local registeredSpriteMappings = {}
+local inlineMappings = {}
 local registeredSpriteDirections = {}
 
 local function translated(key, fallback)
@@ -313,9 +317,8 @@ local function finishConfig(definition, stage)
     return (stage and stage.finishes) or (definition and definition.finishes) or {}
 end
 
-function WallFinishes.registerWallType(id, mapping)
-    if id == nil or type(mapping) ~= "table" then return end
-    registeredWallTypes[tostring(id)] = {
+local function normalizedMapping(mapping)
+    return {
         plaster = mapping.plaster,
         paints = mapping.paints or {},
         wallpapers = mapping.wallpapers or {},
@@ -323,6 +326,11 @@ function WallFinishes.registerWallType(id, mapping)
         directWallpapers = mapping.directWallpapers or mapping.bareWallpapers or {},
         surface = mapping.surface or mapping.capabilities or {}
     }
+end
+
+function WallFinishes.registerWallType(id, mapping)
+    if id == nil or type(mapping) ~= "table" then return end
+    registeredWallTypes[tostring(id)] = normalizedMapping(mapping)
     local sprites = mapping.sprites or mapping.baseSprites or {}
     for spriteIndex = 1, #sprites do
         registeredSpriteTypes[tostring(sprites[spriteIndex])] = tostring(id)
@@ -549,7 +557,12 @@ function WallFinishes.wallType(definition, stage, spriteName)
     local derived = wallTypeFromSprite(spriteName)
     if derived then return derived end
     local sprites = stage and stage.sprites or {}
-    return wallTypeFromSprite(sprites.W) or wallTypeFromSprite(sprites.N) or "wall"
+    -- Walls face W/N; furniture can have only S or E faces (the vanilla Wood
+    -- Crate entity defines just "face S"). Reading W/N alone made such a
+    -- crate a "wall", whose paint needs plaster first, so it offered no
+    -- colours even though its tile is PaintingType "crates".
+    return wallTypeFromSprite(sprites.W) or wallTypeFromSprite(sprites.N)
+        or wallTypeFromSprite(sprites.S) or wallTypeFromSprite(sprites.E) or "wall"
 end
 
 -- Resolves the sprite mapping for a stage: inline stage mapping first
@@ -562,21 +575,26 @@ function WallFinishes.mappingFor(definition, stage, spriteName)
     local config = finishConfig(definition, stage)
     local wallType = WallFinishes.wallType(definition, stage, spriteName)
     if type(config.mapping) == "table" then
-        if not registeredWallTypes[wallType] then
-            WallFinishes.registerWallType(wallType, config.mapping)
+        -- An inline mapping is this buildable's own. The Military Crate maps
+        -- every paint to its paintable crate tiles under the vanilla type
+        -- "crates"; registered under that shared name it was handed to the
+        -- Wood Crate too, whose painted ghost then showed a Military Crate.
+        -- It is kept with this definition and its own sprites, and only a
+        -- type no base-game table describes is registered by name.
+        local inline = inlineMappings[config.mapping]
+        if not inline then
+            inline = normalizedMapping(config.mapping)
+            if config.surface then inline.surface = config.surface end
+            inlineMappings[config.mapping] = inline
+            local sprites = config.mapping.sprites or config.mapping.baseSprites or {}
+            for spriteIndex = 1, #sprites do
+                registeredSpriteMappings[tostring(sprites[spriteIndex])] = inline
+                registeredSpriteTypes[tostring(sprites[spriteIndex])] = wallType
+            end
+            local vanillaType = (Painting and Painting[wallType]) or (OtherPainting and OtherPainting[wallType])
+            if not vanillaType and not registeredWallTypes[wallType] then registeredWallTypes[wallType] = inline end
         end
-        if config.surface and registeredWallTypes[wallType] then
-            registeredWallTypes[wallType].surface = config.surface
-        end
-        return registeredWallTypes[wallType]
-            or {
-                plaster = config.mapping.plaster,
-                paints = config.mapping.paints or {},
-                wallpapers = config.mapping.wallpapers or {},
-                directPaints = config.mapping.directPaints or config.mapping.barePaints or {},
-                directWallpapers = config.mapping.directWallpapers or config.mapping.bareWallpapers or {},
-                surface = config.surface or config.mapping.surface or config.mapping.capabilities or {}
-            }
+        return inline
     end
     return registeredWallTypes[wallType] or vanillaMapping(wallType)
 end
@@ -585,6 +603,8 @@ end
 ---@param spriteName string|nil
 function WallFinishes.mappingForWallType(wallType, spriteName)
     wallType = tostring(wallType or "wall")
+    local own = spriteName and registeredSpriteMappings[tostring(spriteName)] or nil
+    if own and registeredSpriteTypes[tostring(spriteName)] == wallType then return own end
     if spriteName and registeredWallTypes[wallType]
         and registeredSpriteTypes[spriteName] ~= wallType then
         return vanillaMapping(wallType)
@@ -744,8 +764,8 @@ end
 -- Both a Knox mapping and the vanilla Painting/WallPaper tables describe which
 -- sprite is the plastered face and which are the painted ones, so either will
 -- answer what surface a wall is wearing.
-local function mappingForFinishState(wallType)
-    return registeredWallTypes[wallType] or vanillaMapping(wallType)
+local function mappingForFinishState(wallType, spriteName)
+    return WallFinishes.mappingForWallType(wallType, spriteName)
 end
 
 local function faceCarriesSprite(entry, spriteName)
@@ -792,7 +812,7 @@ end
 local function objectIsPlastered(object)
     if not object then return false end
     local wallType = WallFinishes.objectWallType(object)
-    local mapping = wallType and mappingForFinishState(tostring(wallType)) or nil
+    local mapping = wallType and mappingForFinishState(tostring(wallType), objectSpriteName(object)) or nil
     if mapping then return mappingSpriteIsPlastered(mapping, objectSpriteName(object)) end
     if object.isPaintable and object:isPaintable() then return true end
     local props = object.getProperties and object:getProperties() or nil
@@ -849,9 +869,9 @@ function WallFinishes.objectFinishSignature(object)
     -- Custom-colour objects keep their sprite and carry the paint as a tint.
     local tinted = wallType and tintedFinish(object, tostring(wallType)) or nil
     if tinted then return tinted end
-    local mapping = wallType and mappingForFinishState(tostring(wallType)) or nil
-    if not mapping then return nil end
     local spriteName = objectSpriteName(object)
+    local mapping = wallType and mappingForFinishState(tostring(wallType), spriteName) or nil
+    if not mapping then return nil end
     if not spriteName then return nil end
     -- Plaster is tested first because vanilla reaches its plastered face with a
     -- can of white: Painting["wall"]["PaintWhite"] and ["plasterTile"] are the
@@ -1036,6 +1056,7 @@ function WallFinishes.spriteFor(mode, finish, north, definition, stage, baseSpri
         if WallFinishes.customColorFor(wallType, finish) then
             local sprites = stage and stage.sprites or {}
             local ownFace = baseSprite or (north and (sprites.N or sprites.W)) or sprites.W or sprites.N
+                or sprites.S or sprites.E
             return mappedFaceSprite(entry, north, baseSprite) or ownFace
         end
     elseif mode == "wallpaper" then
@@ -1065,6 +1086,18 @@ function WallFinishes.previewSprite(finish, north, definition, stage, baseSprite
     end
     return WallFinishes.spriteFor(mode, finish, north, definition, stage, baseSprite)
         or WallFinishes.spriteFor("plaster", finish, north, definition, stage, baseSprite)
+end
+
+-- Tint-painted pieces (crates, chairs, doors) keep their own tile and wear
+-- the paint as a colour, so a preview has to be drawn in that colour.
+---@param finish KBW.WallFinish|nil
+---@param definition KBW.BuildableDefinition
+---@param stage KBW.BuildStage
+---@param baseSprite string|nil
+---@return {r: number, g: number, b: number, a: number}|nil
+function WallFinishes.previewTint(finish, definition, stage, baseSprite)
+    if not WallFinishes.isWallFinish(finish) or not finish.paintType then return nil end
+    return WallFinishes.customColorFor(WallFinishes.wallType(definition, stage, baseSprite), finish)
 end
 
 local function allowedByConfig(configured, name)
@@ -1189,6 +1222,20 @@ local function builtFaces(definition, stage)
             local wallType = configured or wallTypeFromSprite(spriteName)
             if wallType then
                 faces[#faces + 1] = { sprite = spriteName, north = face == "N", wallType = tostring(wallType) }
+            end
+        end
+    end
+    -- Furniture defined only facing S or E (the vanilla Wood Crate) still
+    -- presents that face; walls always have W/N and never reach this.
+    if #faces == 0 then
+        for _, face in pairs({ "S", "E" }) do
+            local spriteName = sprites[face]
+            if type(spriteName) == "string" and not seen[spriteName] then
+                seen[spriteName] = true
+                local wallType = configured or wallTypeFromSprite(spriteName)
+                if wallType then
+                    faces[#faces + 1] = { sprite = spriteName, north = face == "S", wallType = tostring(wallType) }
+                end
             end
         end
     end

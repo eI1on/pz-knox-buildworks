@@ -695,16 +695,25 @@ end
 ---@param stage      KBW.BuildStage
 ---@param snapshot   table
 ---@return { ok: boolean }
+-- `reason` names the first blocker a card shows, the biggest first: an
+-- unlearned recipe or a missing skill outweighs items you could still fetch.
+-- One of "invalid", "debug", "unlearned", "skill", "dark", "items".
 function Requirements.evaluateReadiness(player, definition, stage, snapshot)
-    if not player or not definition or not stage then return { ok = false } end
+    if not player or not definition or not stage then return { ok = false, reason = "invalid" } end
     Profiler.count("requirements.readinessEvals")
     local cheat = player:isBuildCheat()
     local req = stage.requirements or {}
-    if req.debugOnly and not isDebugEnabled() then return { ok = false } end
-    if not cheat and player.tooDarkToRead and player:tooDarkToRead() and not stageCanBeDoneInDark(definition, stage) then
-        return { ok = false }
-    end
+    if req.debugOnly and not isDebugEnabled() then return { ok = false, reason = "debug" } end
+    if not Requirements.meetsKnowledge(player, stage) then return { ok = false, reason = "unlearned" } end
     if not cheat then
+        for perkName, needed in pairs(req.skills or {}) do
+            local perk = Perks[perkName]
+            local available = perk and player:getPerkLevel(perk) or 0
+            if perk == nil or available < needed then return { ok = false, reason = "skill" } end
+        end
+        if player.tooDarkToRead and player:tooDarkToRead() and not stageCanBeDoneInDark(definition, stage) then
+            return { ok = false, reason = "dark" }
+        end
         local inputs = readinessInputs(definition, stage)
         local rows = {}
         for inputIndex = 1, #inputs do
@@ -715,14 +724,8 @@ function Requirements.evaluateReadiness(player, definition, stage, snapshot)
             rows[#rows + 1] = { needed = needed, uses = input.uses, mode = input.mode,
                 availableItems = {{ items = matches }} }
         end
-        if not SupplyAllocation.rows(rows, nil, true).ok then return { ok = false } end
-        for perkName, needed in pairs(req.skills or {}) do
-            local perk = Perks[perkName]
-            local available = perk and player:getPerkLevel(perk) or 0
-            if perk == nil or available < needed then return { ok = false } end
-        end
+        if not SupplyAllocation.rows(rows, nil, true).ok then return { ok = false, reason = "items" } end
     end
-    if not Requirements.meetsKnowledge(player, stage) then return { ok = false } end
     return { ok = true }
 end
 

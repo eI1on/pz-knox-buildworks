@@ -390,7 +390,7 @@ local function defineClass()
                 return false
             end
             local conflicts = Blueprints.findIntersections(temporary, candidate)
-            if #conflicts > 0 then
+            if #conflicts > 0 and not Blueprints.floorsReplacedBy(temporary, candidate, conflicts) then
                 self.planInvalidReason = "plan_overlap"
                 return false
             end

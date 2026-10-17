@@ -7,6 +7,7 @@ local I18n = require("KnoxBuildworks/I18n")
 local Catalog = require("KnoxBuildworks/UI/Catalog")
 local Options = require("KnoxBuildworks/Options")
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
+local Placement = require("KnoxBuildworks/Validation/Placement")
 require("KnoxBuildworks/Planning/Planner")
 require("KnoxBuildworks/World/WellSystem")
 require("KnoxBuildworks/World/Collision")
@@ -173,6 +174,12 @@ local function onServerCommand(module, command, args)
     elseif BLUEPRINT_DELTAS[command] then
         Blueprints.applyRemoteDelta(command, args)
         refreshPlanningUI()
+    elseif command == "BuildRejected" then
+        local player = getPlayer()
+        if player then
+            HaloTextHelper.addBadText(player, getText("IGUI_KBW_ServerRejectedBuild",
+                Placement.reasonText(args.reason)))
+        end
     elseif command == "BuildableRulesSync" then
         BuildableRules.applySync(args.document or {}, args.revision)
     elseif command == "BuildableRulesError" then
@@ -208,6 +215,11 @@ local function importBlueprintItem(player, item)
     end
     if HaloTextHelper and HaloTextHelper.addText then
         HaloTextHelper.addText(player, getText("IGUI_KBW_PickBlueprintOrigin"))
+    end
+    -- Pieces from mods that are not active import too, but cannot show or be built: say so.
+    local missing = Blueprints.missingContentText(blueprint)
+    if missing and HaloTextHelper and HaloTextHelper.addBadText then
+        HaloTextHelper.addBadText(player, missing)
     end
     -- Imported blueprints land wherever the player stands; let them pick the
     -- real origin with the cursor right away

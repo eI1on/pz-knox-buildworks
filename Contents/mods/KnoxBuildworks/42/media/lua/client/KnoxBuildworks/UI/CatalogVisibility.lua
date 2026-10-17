@@ -27,6 +27,29 @@ function CatalogVisibility.setShowAll(player, enabled)
     if player then uiData(player).showAllVersions = enabled == true end
 end
 
+-- Recipes taught by a magazine (hideUntilLearned) stay listed, locked, with
+-- the magazine or skill that unlocks them: hidden, most Vanilla Expanded
+-- pieces never appeared at all and players could not tell what to look for.
+-- The requirement itself is unchanged. The "Show unlearned recipes" option
+-- turns the old hiding back on.
+CatalogVisibility.showUnlearned = true
+
+---@param enabled boolean
+function CatalogVisibility.setShowUnlearned(enabled)
+    CatalogVisibility.showUnlearned = enabled ~= false
+end
+
+---True when the stage is hidden because its knowledge is not learned yet.
+---@param player IsoPlayer
+---@param stage KBW.BuildStage
+---@param shouldShowAll boolean
+---@return boolean
+function CatalogVisibility.hiddenUntilLearned(player, stage, shouldShowAll)
+    local knowledge = (stage.requirements or {}).knowledge or {}
+    if not knowledge.hideUntilLearned or shouldShowAll or CatalogVisibility.showUnlearned then return false end
+    return not Requirements.meetsKnowledge(player, stage)
+end
+
 ---@param player IsoPlayer
 ---@param definition KBW.BuildableDefinition
 ---@param stage KBW.BuildStage
@@ -37,8 +60,7 @@ function CatalogVisibility.stagePasses(player, definition, stage, shouldShowAll)
     stage = BuildableRules.effectiveStage(definition, stage)
     if not stage then return false end
     if shouldShowAll == nil then shouldShowAll = CatalogVisibility.shouldShowAll(player) end
-    local knowledge = (stage.requirements or {}).knowledge or {}
-    if knowledge.hideUntilLearned and not shouldShowAll and not Requirements.meetsKnowledge(player, stage) then return false end
+    if CatalogVisibility.hiddenUntilLearned(player, stage, shouldShowAll) then return false end
     local recipe = StageConfig.recipe(definition, stage)
     if not recipe.onAddToMenu then return true end
     if shouldShowAll == nil then shouldShowAll = CatalogVisibility.shouldShowAll(player) end

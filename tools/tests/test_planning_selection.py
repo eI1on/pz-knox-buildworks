@@ -174,7 +174,7 @@ class SelectionTests(unittest.TestCase):
                         getZ=function() return 0 end} end}
             end
         """)
-        load(lua, "client/KnoxBuildworks/UI/WorldCatalog.lua", "world")
+        load(lua, "client/KnoxBuildworks/UI/WorldPieceIndex.lua", "world")
         lua.execute("""
             local painted=world.placementsForObject({}, object('wall_n', 5, 7, 'PaintRed'))
             assert(#painted==1)
@@ -290,7 +290,7 @@ class PipetteTests(unittest.TestCase):
                 wall_n={buildableId='brick_wall',direction=2,x=3,y=4,z=0,label='Brick wall',
                     finish={paintType='PaintRed'}},
                 chair={buildableId='chair',direction=4,x=3,y=4,z=0,variantId='oak',label='Chair'}}
-            modules['KnoxBuildworks/UI/WorldCatalog']={placementsForObject=function(player, o)
+            modules['KnoxBuildworks/UI/WorldPieceIndex']={placementsForObject=function(player, o)
                 local c=byName[o.sprite]; return c and {c} or {} end}
         """)
         load(lua, "client/KnoxBuildworks/Planning/PipetteCursor.lua", "pipette")

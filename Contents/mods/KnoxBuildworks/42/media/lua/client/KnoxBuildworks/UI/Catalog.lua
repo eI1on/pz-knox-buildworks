@@ -371,8 +371,11 @@ local function predicateEnoughDrain(item)
     return true
 end
 
+-- In multiplayer the server honours only the synced isBuildCheat, so a
+-- client-only ISBuildMenu.cheat must not mark recipes ready.
 local function buildCheatActive(player)
     if player and player.isBuildCheat and player:isBuildCheat() then return true end
+    if isClient() then return false end
     return ISBuildMenu and ISBuildMenu.cheat == true
 end
 

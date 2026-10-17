@@ -143,8 +143,10 @@ function Theme.drawPreviewBackground(panel, x, y, width, height, options)
         panel:drawRect(x, y, width, height, color.a, color.r, color.g, color.b)
         return
     end
-    local cell = 12
-    panel:drawRect(x, y, width, height, .96, .48, .48, .46)
+    -- A quiet, dark check: it still shows transparency at the sprite's edges
+    -- without becoming the brightest thing on every card.
+    local cell = 8
+    panel:drawRect(x, y, width, height, .96, .205, .200, .190)
     local rows = math.ceil(height / cell)
     local columns = math.ceil(width / cell)
     for row = 0, rows - 1 do
@@ -152,7 +154,7 @@ function Theme.drawPreviewBackground(panel, x, y, width, height, options)
             if (row + column) % 2 == 0 then
                 panel:drawRect(
                     x + column * cell, y + row * cell, math.min(cell, width - column * cell),
-                    math.min(cell, height - row * cell), .72, .22, .22, .22
+                    math.min(cell, height - row * cell), .96, .165, .160, .152
                 )
             end
         end
@@ -161,6 +163,14 @@ end
 
 local function cloneColor(c)
     return { r = c.r or 1, g = c.g or 1, b = c.b or 1, a = c.a or 1 }
+end
+
+-- Secondary controls carry only a faint edge so the eye lands on the
+-- selected filter and the primary action, not on a grid of outlined boxes.
+local function quietBorder()
+    local color = cloneColor(Theme.borderSoft)
+    color.a = color.a * .5
+    return color
 end
 
 Theme.color = cloneColor
@@ -200,7 +210,7 @@ function Theme.applyButton(button, selected)
     button.backgroundColor = cloneColor(selected and Theme.selectedSoft or Theme.surface)
     button.backgroundColorMouseOver = cloneColor(Theme.surfaceRaised)
     button.backgroundColorPressed = nil
-    button.borderColor = cloneColor(selected and Theme.accent or Theme.borderSoft)
+    button.borderColor = selected and cloneColor(Theme.accent) or quietBorder()
     button.textColor = cloneColor(Theme.text)
     button.textColorMouseOver = cloneColor(Theme.text)
     button.textColorDisable = cloneColor(Theme.textMuted)
@@ -215,7 +225,7 @@ function Theme.applyActionButton(button, enabled, primary)
     button.backgroundColor = cloneColor(primary and Theme.primary or Theme.surface)
     button.backgroundColorMouseOver = cloneColor(primary and Theme.primaryHover or Theme.surfaceRaised)
     button.backgroundColorPressed = nil
-    button.borderColor = cloneColor(primary and Theme.accent or Theme.borderSoft)
+    button.borderColor = primary and cloneColor(Theme.primaryHover) or quietBorder()
     button.textColor = cloneColor(Theme.text)
     button.textColorDisable = cloneColor(Theme.textMuted)
     Theme.lockButtonColors(button)
@@ -226,7 +236,7 @@ function Theme.applyScrollbar(scrollbar)
     if not scrollbar then return end
     scrollbar.background = true
     scrollbar.backgroundColor = cloneColor(Theme.surface)
-    scrollbar.borderColor = cloneColor(Theme.borderSoft)
+    scrollbar.borderColor = quietBorder()
 end
 
 ---Docks a panel's vertical scrollbar to its right edge at full height and shows
@@ -261,8 +271,7 @@ function Theme.applyCombo(combo)
     combo.backgroundColor.a = .96
     combo.backgroundColorMouseOver = cloneColor(Theme.surfaceRaised)
     combo.backgroundColorMouseOver.a = .98
-    combo.borderColor = cloneColor(Theme.borderSoft)
-    combo.borderColor.a = .95
+    combo.borderColor = quietBorder()
     combo.textColor = cloneColor(Theme.text)
 end
 
@@ -288,6 +297,7 @@ function Theme.applyList(list)
     list.backgroundColor = cloneColor(Theme.surface)
     list.borderColor = cloneColor(Theme.borderSoft)
     list.selectionColor = cloneColor(Theme.selected)
+    list.accentColor = cloneColor(Theme.accent)
     list.mouseOverHighlightColor = cloneColor(Theme.surfaceRaised)
     list.textColor = cloneColor(Theme.text)
     list.selectedTextColor = cloneColor(Theme.text)

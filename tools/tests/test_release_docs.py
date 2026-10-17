@@ -27,9 +27,11 @@ class ReleaseDocumentationTests(unittest.TestCase):
     def test_changelog_opens_with_the_completed_revamp_entry(self):
         text = (ROOT / "CHANGELOG.txt").read_text(encoding="utf-8")
         # The newest entry sits on top; released entries below it stay as shipped.
-        self.assertTrue(text.startswith("[b]Buildworks Studio & World Pieces Update[/b]"))
+        self.assertTrue(text.startswith("[b]Buildworks Studio & World Pieces Update - Hotfix[/b]"))
+        self.assertIn("[/list]\n\n\n[b]Buildworks Studio & World Pieces Update[/b]", text)
         self.assertIn("[/list]\n\n\n[b]Roof Helper Update - Hotfix[/b]", text)
-        self.assertIn("https://buildworks-studio.elyonmods.com/", text.split("[/list]", 1)[0])
+        studio_entry = text.split("[b]Buildworks Studio & World Pieces Update[/b]", 1)[1].split("[/list]", 1)[0]
+        self.assertIn("https://buildworks-studio.elyonmods.com/", studio_entry)
         self.assertIn("[/list]\n\n\n[b]Roof Helper, Magazines & Planning Tools Update[/b]", text)
         self.assertNotIn("[*][b]\n", text.split("[/list]", 1)[0])
         self.assertIn("[b]Catalogue and Planning Revamp & Build 42.21 Compatibility[/b]", text)

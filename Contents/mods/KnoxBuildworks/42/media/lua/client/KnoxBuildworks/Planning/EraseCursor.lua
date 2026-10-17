@@ -2,6 +2,7 @@
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local GhostRenderer = require("KnoxBuildworks/Planning/GhostRenderer")
 local PlanCursor = require("KnoxBuildworks/Planning/PlanCursor")
+local I18n = require("KnoxBuildworks/I18n")
 
 ---@class KBW.EraseCursorModule
 ---@type KBW.EraseCursorModule
@@ -9,6 +10,23 @@ local EraseCursor = {}
 
 local function floorInt(value)
     return math.floor(tonumber(value) or 0)
+end
+
+-- Ghosts stacked on one tile (a floor, the wall on its edge, the table on
+-- it) are listed bottom to top. The cursor starts on the top one, and the
+-- Rotate key (R) steps down through the rest, wrapping round.
+---@param count number pieces on the tile
+---@param offset number how many times the key was pressed
+---@return number index into the stack
+function EraseCursor.pickIndex(count, offset)
+    if count <= 0 then return 0 end
+    return count - (offset % count)
+end
+
+local function targetName(target, mode)
+    if mode == "rooms" then return target.name or getText("IGUI_KBW_RoomTypeGeneric") end
+    local definition = Blueprints.resolvePlacement(target)
+    return definition and I18n.definitionName(definition) or tostring(target.buildableId)
 end
 
 -- ISBuildingObject only exists once the server Lua directory loads at game
@@ -45,21 +63,34 @@ local function defineClass()
     end
 
     function KBWEraseCursor:rotateKey(key)
+        if not getCore():isKey(KeybindId.ROTATE_BUILDING, key) then return end
+        local stack = self.stack or {}
+        if #stack < 2 then return end
+        self.cycle = (self.cycle or 0) + 1
+        local index = EraseCursor.pickIndex(#stack, self.cycle)
+        self.target = stack[index]
+        if HaloTextHelper and HaloTextHelper.addText then
+            HaloTextHelper.addText(self.character, getText(
+                "IGUI_KBW_EraseCycle", targetName(self.target, self.mode), #stack - index + 1, #stack
+            ))
+        end
     end
 
     function KBWEraseCursor:getSprite()
         return nil
     end
 
-    function KBWEraseCursor:targetAt(x, y)
+    ---Everything erasable on the tile, bottom to top.
+    function KBWEraseCursor:stackAt(x, y)
         local blueprint = Blueprints.get(self.character, self.blueprintId)
-        if not blueprint then return nil end
-        if self.mode == "rooms" then
-            local rooms = Blueprints.roomsAt(blueprint, x, y, self.planZ)
-            return rooms[#rooms]
-        end
-        local placements = Blueprints.placementsAt(blueprint, x, y, self.planZ)
-        return placements[#placements]
+        if not blueprint then return {} end
+        if self.mode == "rooms" then return Blueprints.roomsAt(blueprint, x, y, self.planZ) end
+        return Blueprints.placementsAt(blueprint, x, y, self.planZ)
+    end
+
+    function KBWEraseCursor:targetAt(x, y)
+        local stack = self:stackAt(x, y)
+        return stack[#stack]
     end
 
     function KBWEraseCursor:isValid(square)
@@ -72,8 +103,11 @@ local function defineClass()
         self.currentX, self.currentY = PlanCursor.pickTileAt(self.player, self.planZ)
         local key = self.currentX .. "|" .. self.currentY .. "|" .. self.planZ
         if self.targetKey ~= key then
+            -- A new tile starts again from the top piece.
             self.targetKey = key
-            self.target = self:targetAt(self.currentX, self.currentY)
+            self.stack = self:stackAt(self.currentX, self.currentY)
+            self.cycle = 0
+            self.target = self.stack[#self.stack]
         end
         self.canBeBuild = self.target ~= nil
         local color = self.target and GhostRenderer.CONFLICT_COLOR or GhostRenderer.PLAN_COLOR_DIM
@@ -88,14 +122,13 @@ local function defineClass()
     end
 
     function KBWEraseCursor:create(x, y, z, north, sprite)
-        if self.currentX == nil then return end
-        local removed
+        if self.currentX == nil or not self.target then return end
+        -- Erase the piece the cursor shows, which R may have moved off the top.
+        local removed = nil
         if self.mode == "rooms" then
-            removed = Blueprints.eraseRoomAt(self.character, self.blueprintId, self.currentX, self.currentY, self.planZ)
-        else
-            removed = Blueprints.erasePlacementAt(
-                self.character, self.blueprintId, self.currentX, self.currentY, self.planZ
-            )
+            if Blueprints.removeRoom(self.character, self.blueprintId, self.target.id) then removed = self.target end
+        elseif Blueprints.removePlacement(self.character, self.blueprintId, self.target.id) then
+            removed = self.target
         end
         self.targetKey = nil
         if removed then

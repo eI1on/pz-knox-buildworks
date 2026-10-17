@@ -2,7 +2,7 @@
 ---a shop, a player base - into a new blueprint made of catalogue pieces.
 ---
 ---Every object on every square of the area is matched back to the recipe that
----draws its sprite (WorldCatalog, the same lookup the pipette uses), including
+---draws its sprite (WorldPieceIndex, the same lookup the pipette uses), including
 ---the overlays the map loader attaches to walls and floors. On top of what is
 ---visible, the steps a builder has to go through are added back:
 ---
@@ -40,7 +40,7 @@ local Placement = require("KnoxBuildworks/Validation/Placement")
 local WallFinishes = require("KnoxBuildworks/Validation/WallFinishes")
 local EntityCompat = require("KnoxBuildworks/Entity/EntityCompat")
 local CatalogVisibility = require("KnoxBuildworks/UI/CatalogVisibility")
-local WorldCatalog = require("KnoxBuildworks/UI/WorldCatalog")
+local WorldPieceIndex = require("KnoxBuildworks/UI/WorldPieceIndex")
 local Log = require("KnoxBuildworks/Log")
 
 ---@class KBW.BuildingCaptureModule
@@ -315,9 +315,9 @@ local function approximateWall(job, square, props)
     local wallType = propValue(props, "PaintingType")
     if not wallType or wallType == "" then return nil end
     local north = props:has("WallN") or props:has("WindowN") or props:has("DoorWallN")
-    local candidates = WorldCatalog.candidatesForWallType(job.player, wallType, square, north)
+    local candidates = WorldPieceIndex.candidatesForWallType(job.player, wallType, square, north)
     if #candidates == 0 and APPROXIMATE_WALL_TYPES[wallType] then
-        candidates = WorldCatalog.candidatesForWallType(job.player, APPROXIMATE_WALL_TYPES[wallType], square, north)
+        candidates = WorldPieceIndex.candidatesForWallType(job.player, APPROXIMATE_WALL_TYPES[wallType], square, north)
     end
     local best = pickCandidate(job, candidates)
     if not best then return nil end
@@ -332,14 +332,14 @@ end
 -- capture leaves it out; an area capture keeps what it can match. Neither
 -- reports unmatched ground - it is mostly grass and pavement.
 local function captureSprite(job, square, spriteName, object, outdoorGround, depth)
-    if not spriteName or WorldCatalog.isAutoSprite(spriteName) then return end
+    if not spriteName or WorldPieceIndex.isAutoSprite(spriteName) then return end
     if outdoorGround and job.area.mode == "building" then return end
     local props = spriteProps(spriteName)
     if props and props:has("TileOverlay") then
         job.overlaysSkipped = job.overlaysSkipped + 1
         return
     end
-    local candidates = WorldCatalog.placementsForSprite(job.player, spriteName, square, object, true)
+    local candidates = WorldPieceIndex.placementsForSprite(job.player, spriteName, square, object, true)
     -- A corner tile is two walls. Knox's merged corner knows its recipe; any
     -- other corner names its two halves in its tile properties.
     local knoxCorner = false
@@ -356,7 +356,7 @@ local function captureSprite(job, square, spriteName, object, outdoorGround, dep
     if #candidates == 0 and object then
         local closed = closedSpriteNames(object, spriteName)
         for index = 1, #closed do
-            candidates = WorldCatalog.placementsForSprite(job.player, closed[index], square, object, true)
+            candidates = WorldPieceIndex.placementsForSprite(job.player, closed[index], square, object, true)
             if #candidates > 0 then break end
         end
     end

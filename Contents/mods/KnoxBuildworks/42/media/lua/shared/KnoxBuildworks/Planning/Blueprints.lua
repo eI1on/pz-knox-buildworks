@@ -1322,6 +1322,56 @@ function Blueprints.indexPlacement(occupied, placement)
     end
 end
 
+local function unindexPlacement(occupied, placement)
+    local cells = placementCells(placement, occupied.resolved)
+    for index = 1, #cells do
+        local key = cellKey(cells[index])
+        local list = occupied[key]
+        if list then
+            for entryIndex = #list, 1, -1 do
+                if list[entryIndex].placementId == placement.id then table.remove(list, entryIndex) end
+            end
+        end
+    end
+end
+
+local function isFloorPlacement(placement)
+    local definition = resolveDefinition(placement)
+    return definition ~= nil and (definition.placement or {}).kind == "floor"
+end
+
+local function sameFloor(left, right)
+    return left.buildableId == right.buildableId and left.stageId == right.stageId
+        and left.variantId == right.variantId and left.materialId == right.materialId
+end
+
+---A different floor laid over planned floors replaces them, as building a
+---floor over a floor does in the world (the walls stay). Returns the ids of
+---the planned floors it replaces, or nil when the conflicts are anything else
+---or the same floor again (still an overlap).
+---@param blueprint KBW.Blueprint
+---@param placement KBW.BlueprintPlacement
+---@param conflicts table[] from findIntersections
+---@return string[]|nil
+function Blueprints.floorsReplacedBy(blueprint, placement, conflicts)
+    if not conflicts or #conflicts == 0 or not isFloorPlacement(placement) then return nil end
+    local ids, seen = {}, {}
+    for index = 1, #conflicts do
+        local id = conflicts[index].previousPlacementId
+        if id == nil then return nil end
+        if not seen[id] then
+            seen[id] = true
+            local previous = Blueprints.getPlacement(blueprint, id)
+            if not previous or not isFloorPlacement(previous) or sameFloor(previous, placement) then return nil end
+            ids[#ids + 1] = id
+        end
+    end
+    return ids
+end
+
+-- Floors replaced during a drag, sent in one removal before the batch's adds.
+local pendingFloorRemovals = {}
+
 function Blueprints.intersectionIndex(blueprint)
     local occupied = {}
     local placements = blueprint and blueprint.placements or {}
@@ -1432,7 +1482,26 @@ function Blueprints.addPlacement(player, blueprintId, placement, defer, occupied
         return nil, "out_of_range"
     end
     local conflicts = Blueprints.findIntersections(blueprint, entry, occupied)
-    if #conflicts > 0 then return nil, "plan_overlap", conflicts end
+    if #conflicts > 0 then
+        -- Only the client replaces: it sends the removal first, so the server
+        -- and every viewer apply the same two commands in order.
+        local replaced = not isServer() and Blueprints.floorsReplacedBy(blueprint, entry, conflicts) or nil
+        if not replaced then return nil, "plan_overlap", conflicts end
+        for index = 1, #replaced do
+            local previous, previousIndex = Blueprints.getPlacement(blueprint, replaced[index])
+            if previous then
+                if occupied then unindexPlacement(occupied, previous) end
+                table.remove(blueprint.placements, previousIndex)
+            end
+        end
+        if occupied and defer then
+            local pending = pendingFloorRemovals[occupied] or {}
+            pendingFloorRemovals[occupied] = pending
+            for index = 1, #replaced do pending[#pending + 1] = replaced[index] end
+        else
+            sendToServer(player, "BPRemovePlacements", { id = blueprint.id, placementIds = replaced })
+        end
+    end
     blueprint.placements = blueprint.placements or {}
     blueprint.placements[#blueprint.placements + 1] = entry
     if occupied then Blueprints.indexPlacement(occupied, entry) end
@@ -1467,6 +1536,11 @@ function Blueprints.addPlacements(player, blueprintId, placements, onRejected)
     local occupied = batched and Blueprints.intersectionIndex(blueprint) or nil
     local pending = {}
     local function flush()
+        local removals = occupied and pendingFloorRemovals[occupied] or nil
+        if removals and #removals > 0 then
+            sendToServer(player, "BPRemovePlacements", { id = blueprint.id, placementIds = removals })
+            pendingFloorRemovals[occupied] = {}
+        end
         if #pending == 0 then return end
         sendToServer(
             player, "BPAddPlacements",
@@ -1489,6 +1563,7 @@ function Blueprints.addPlacements(player, blueprintId, placements, onRejected)
         end
     end
     if batched then flush() end
+    if occupied then pendingFloorRemovals[occupied] = nil end
     return added, lastReason
 end
 
@@ -2246,6 +2321,125 @@ function Blueprints.importErrorText(error)
     local pieces = string.match(error, "^too_many_pieces:(%d+)$")
     if pieces then return getText("IGUI_KBW_BlueprintImportTooLarge", pieces, Blueprints.importLimit()) end
     return I18n.text("IGUI_KBW_BlueprintImportMalformed")
+end
+
+-- Missing content after an import -------------------------------------------
+-- A blueprint keeps every piece it was made with, so one that uses another
+-- mod's buildables still imports when that mod is not active: those pieces
+-- show nothing and cannot be built. Tell the player why, and which mods.
+
+local MISSING_MOD_NAMES = 5
+local MISSING_NAME_LENGTH = 60
+
+local function bareModId(id)
+    return (string.gsub(tostring(id or ""), "^\\+", ""))
+end
+
+local function modActive(modId)
+    local mods = getActivatedMods and getActivatedMods() or nil
+    if not mods then return false end
+    local wanted = bareModId(modId)
+    for index = 0, mods:size() - 1 do
+        if bareModId(mods:get(index)) == wanted then return true end
+    end
+    return false
+end
+
+-- Names come from the file (untrusted): plain text, one line, short.
+local function safeName(value)
+    if type(value) ~= "string" then return nil end
+    local text = string.gsub(value, "[%c]", " ")
+    text = string.gsub(text, "^%s+", "")
+    text = string.gsub(text, "%s+$", "")
+    if text == "" then return nil end
+    if #text > MISSING_NAME_LENGTH then text = string.sub(text, 1, MISSING_NAME_LENGTH) end
+    return text
+end
+
+---Pieces of a blueprint this game cannot use, by cause: no active mod defines
+---the buildable (missing), the installed version lacks its stage, variant or
+---material (outdated), or the server's buildable rules turned it off
+---(disabled). Files from Buildworks Studio list the mods they need
+---(studio.requires); the ones that are not active are named.
+---@param blueprint table
+---@return { missing: integer, outdated: integer, disabled: integer, mods: string[] }
+function Blueprints.missingContent(blueprint)
+    local result = { missing = 0, outdated = 0, disabled = 0, mods = {} }
+    local placements = type(blueprint) == "table" and blueprint.placements or nil
+    if type(placements) ~= "table" then return result end
+    for index = 1, #placements do
+        local placement = placements[index]
+        if type(placement) == "table" then
+            local definition, stage, reason = Resolver.resolveStage(
+                placement.buildableId, placement.variantId, placement.materialId, placement.stageId
+            )
+            if not definition then
+                result.missing = result.missing + 1
+            elseif not stage then
+                if reason == "buildable disabled by server" then
+                    result.disabled = result.disabled + 1
+                else
+                    result.outdated = result.outdated + 1
+                end
+            end
+        end
+    end
+    local requires = type(blueprint.studio) == "table" and blueprint.studio.requires or nil
+    if result.missing > 0 and type(requires) == "table" then
+        local seen = {}
+        for index = 1, #requires do
+            local entry = requires[index]
+            local modIds = type(entry) == "table" and entry.modIds or nil
+            if type(modIds) == "table" then
+                for modIndex = 1, #modIds do
+                    local modId = modIds[modIndex]
+                    if type(modId) == "string" and modId ~= "" and not modActive(modId) then
+                        local name = safeName(entry.title) or safeName(modId)
+                        if name and not seen[name] then
+                            seen[name] = true
+                            result.mods[#result.mods + 1] = name
+                        end
+                    end
+                end
+            end
+        end
+        table.sort(result.mods)
+    end
+    return result
+end
+
+-- One notice line; a single piece has its own wording ("1 piece needs").
+local function countText(key, count, extra)
+    if count == 1 then
+        if extra then return getText(key .. "One", extra) end
+        return getText(key .. "One")
+    end
+    return getText(key, tostring(count), extra)
+end
+
+---The notice for the player after an import, or nil when every piece resolves.
+---@param blueprint table
+---@return string|nil
+function Blueprints.missingContentText(blueprint)
+    local found = Blueprints.missingContent(blueprint)
+    local lines = {}
+    if found.missing > 0 then
+        if #found.mods > 0 then
+            local names = {}
+            for index = 1, math.min(#found.mods, MISSING_MOD_NAMES) do names[index] = found.mods[index] end
+            local list = table.concat(names, ", ")
+            if #found.mods > MISSING_MOD_NAMES then
+                list = getText("IGUI_KBW_ImportMoreMods", list, tostring(#found.mods - MISSING_MOD_NAMES))
+            end
+            lines[#lines + 1] = countText("IGUI_KBW_ImportMissingMods", found.missing, list)
+        else
+            lines[#lines + 1] = countText("IGUI_KBW_ImportMissingPieces", found.missing)
+        end
+    end
+    if found.outdated > 0 then lines[#lines + 1] = countText("IGUI_KBW_ImportOutdatedPieces", found.outdated) end
+    if found.disabled > 0 then lines[#lines + 1] = countText("IGUI_KBW_ImportDisabledPieces", found.disabled) end
+    if #lines == 0 then return nil end
+    return table.concat(lines, " ")
 end
 
 -- True when the placement's target square already holds the matching built

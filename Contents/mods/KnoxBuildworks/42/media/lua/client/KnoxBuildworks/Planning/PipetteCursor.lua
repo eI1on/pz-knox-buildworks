@@ -10,6 +10,7 @@
 local Blueprints = require("KnoxBuildworks/Planning/Blueprints")
 local GhostRenderer = require("KnoxBuildworks/Planning/GhostRenderer")
 local PlanCursor = require("KnoxBuildworks/Planning/PlanCursor")
+local WorldPieceIndex = require("KnoxBuildworks/UI/WorldPieceIndex")
 
 local PipetteCursor = {}
 PipetteCursor.COLOR = { r = 0.40, g = 0.95, b = 0.60, a = 0.45 }
@@ -50,10 +51,9 @@ function PipetteCursor.choicesAt(player, blueprint, x, y, z)
     local square = getCell():getGridSquare(x, y, z)
     local objects = square and square:getObjects() or nil
     if objects then
-        local WorldCatalog = require("KnoxBuildworks/UI/WorldCatalog")
         local seen = {}
         for index = objects:size() - 1, 0, -1 do
-            local candidates = WorldCatalog.placementsForObject(player, objects:get(index))
+            local candidates = WorldPieceIndex.placementsForObject(player, objects:get(index))
             local candidate = candidates[1]
             if candidate then
                 local key = candidate.buildableId .. "|" .. tostring(candidate.direction)

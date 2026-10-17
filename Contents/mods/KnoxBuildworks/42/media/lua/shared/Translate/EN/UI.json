@@ -22,6 +22,8 @@
     "UI_optionscreen_KBW_PanelTone_Sandstone": "Sandstone",
     "UI_optionscreen_KBW_HighContrast": "High-contrast Knox UI",
     "UI_optionscreen_KBW_HighContrast_Tooltip": "Increase text, border, and selection contrast throughout Knox Buildworks.",
+    "UI_optionscreen_KBW_ShowUnlearnedRecipes": "Show recipes you have not learned yet",
+    "UI_optionscreen_KBW_ShowUnlearnedRecipes_Tooltip": "List magazine recipes before you read the magazine, locked, with the magazine or skill level that unlocks them. Turn this off to hide them until learned.",
     "UI_optionscreen_KBW_FadeUnavailableIcons": "Fade unavailable buildable icons",
     "UI_optionscreen_KBW_FadeUnavailableIcons_Tooltip": "Dim icons that cannot currently be built. Turn this off to keep every buildable icon fully visible; availability markers and restrictions remain unchanged.",
     "UI_optionscreen_KBW_HoverPreview": "Enable hover previews",

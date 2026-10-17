@@ -640,10 +640,16 @@ class ProgressionTests(unittest.TestCase):
             modules['KnoxBuildworks/I18n'].subcategory=function(s) return s end
             modules['KnoxBuildworks/I18n'].optionName=function(s) return s.id end
         """)
+        module(lua, "client/KnoxBuildworks/UI/CatalogVisibility.lua", "visibility")
+        lua.globals().modules["KnoxBuildworks/UI/CatalogVisibility"] = lua.globals().visibility
         module(lua, "client/KnoxBuildworks/UI/CatalogIndex.lua", "index")
         lua.execute("""
             local record=index.get().records[1]
             assert(not record.alwaysVisible)
+            -- listed (locked) by default; hidden only with the option off
+            assert(index.recordVisible(player,record,false))
+            visibility.setShowUnlearned(false)
+            index.recordVisible(player,record,false); index.pumpVisibility(8)
             assert(not index.recordVisible(player,record,false))
             known=true; now=6000
             index.recordVisible(player,record,false); index.pumpVisibility(8)
@@ -662,6 +668,9 @@ class ProgressionTests(unittest.TestCase):
             player.isBuildCheat=function() return cheat end
             local stage={requirements={skills={Woodwork=3},knowledge={hideUntilLearned=true,
                 recipes={'KnoxKnowledge'},skillAlternatives={{mode='all',skills={Woodwork=7}}}}}}
+            -- listed but locked by default: the requirement still holds
+            assert(visibility.stagePasses(player,{},stage,false) and not requirements.evaluate(player,{},stage).ok)
+            visibility.setShowUnlearned(false)
             assert(not visibility.stagePasses(player,{},stage,false))
             assert(visibility.stagePasses(player,{},stage,true))
             assert(not requirements.evaluate(player,{},stage).ok)
@@ -669,6 +678,11 @@ class ProgressionTests(unittest.TestCase):
             assert(visibility.stagePasses(player,{},stage,false) and requirements.evaluate(player,{},stage).ok)
             known=false; level=7
             assert(visibility.stagePasses(player,{},stage,false) and requirements.evaluate(player,{},stage).ok)
+            -- the card names the biggest blocker first
+            known=false; level=3
+            assert(requirements.evaluateReadiness(player,{},stage,{}).reason=='unlearned')
+            known=true; level=1
+            assert(requirements.evaluateReadiness(player,{},stage,{}).reason=='skill')
             level=0; cheat=true
             assert(requirements.evaluateReadiness(player,{},stage,{}).ok)
         """)

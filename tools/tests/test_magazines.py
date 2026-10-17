@@ -34,6 +34,8 @@ class MagazineTests(unittest.TestCase):
             Requirements = require('KnoxBuildworks/Validation/Requirements')
             Index = require('KnoxBuildworks/UI/CatalogIndex')
             MagazineTooltip = require('KnoxBuildworks/UI/MagazineTooltip')
+            -- the hide-until-learned path (option off)
+            require('KnoxBuildworks/UI/CatalogVisibility').setShowUnlearned(false)
         """)
 
     def test_reading_shows_the_cards_without_a_relog(self):

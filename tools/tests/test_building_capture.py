@@ -2,7 +2,7 @@
 
 Runs the real BuildingCapture engine over the real registry. Only the world
 (squares, objects, sprite properties) and the sprite -> recipe lookup
-(WorldCatalog, which needs sprite data the tests cannot read) are faked.
+(WorldPieceIndex, which needs sprite data the tests cannot read) are faked.
 """
 import unittest
 
@@ -21,7 +21,7 @@ WORLD = """
     modules['KnoxBuildworks/UI/CatalogVisibility'] = { definitionEnabled = function() return true end }
     local CYAN = { actionType = 'wallFinish', plaster = true, paintType = 'PaintCyan' }
     local PLASTER = { actionType = 'wallFinish', plaster = true }
-    -- sprite -> candidate template(s); the anchor comes from the square, as in WorldCatalog
+    -- sprite -> candidate template(s); the anchor comes from the square, as in WorldPieceIndex
     CANDIDATES = {
         bankW = { buildableId = '%(wall)s', stageId = 'built', direction = 1, kind = 'wall', chain = true,
             finish = { actionType = 'wallFinish', paintType = 'PaintBlue' } },
@@ -56,7 +56,7 @@ WORLD = """
         if north ~= nil then candidate.direction = north and 2 or 1 end
         return candidate
     end
-    modules['KnoxBuildworks/UI/WorldCatalog'] = {
+    modules['KnoxBuildworks/UI/WorldPieceIndex'] = {
         isAutoSprite = function(name) return name == 'pillar' end,
         placementsForSprite = function(player, name, square, object, showAll)
             assert(showAll == true, 'capture must not hide hide-until-learned recipes')

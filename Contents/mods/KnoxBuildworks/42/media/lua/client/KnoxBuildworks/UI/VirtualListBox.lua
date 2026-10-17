@@ -28,6 +28,30 @@ function VirtualListBox:ensureVisible(index)
     end
 end
 
+-- Rows are split by a hairline instead of each being boxed, and the selected
+-- row carries an accent bar on its left edge. Vanilla's per-row rectangle
+-- turned the category panes into a stack of identical outlined buttons.
+function VirtualListBox:doDrawItem(y, item, alt)
+    local height = item.height or self.itemheight
+    local width = self:getWidth()
+    local textColor = item.textColor or self.textColor
+    local selected = self.selected == item.index
+    if selected then
+        self:drawSelection(0, y, width, height - 1)
+        local accent = self.accentColor
+        if accent then self:drawRect(0, y, 3, height - 1, accent.a, accent.r, accent.g, accent.b) end
+        textColor = item.selectedTextColor or self.selectedTextColor
+    elseif self.mouseoverselected == item.index and self:isMouseOver() and not self:isMouseOverScrollBar() then
+        self:drawMouseOverHighlight(0, y, width, height - 1)
+    end
+    local line = self.borderColor
+    self:drawRect(8, y + height - 1, width - 16, 1, line.a * .45, line.r, line.g, line.b)
+    local padY = self.itemPadY or (height - self.fontHgt) / 2
+    self:drawText(item.text, selected and 14 or 12, y + padY, textColor.r, textColor.g, textColor.b, textColor.a,
+        self.font)
+    return y + height
+end
+
 function VirtualListBox:clear()
     self.items = {}
     self.selected = 0

@@ -215,9 +215,10 @@ function GhostRenderer.placementCells(placement)
     local out = {}
     for cellIndex = 1, #cells do
         local cell = cells[cellIndex]
-        local finishSprite = nil
+        local finishSprite, tint = nil, nil
         if cell.sprite and WallFinishes.isWallFinish(placement.finish) then
             finishSprite = WallFinishes.previewSprite(placement.finish, north, definition, stage, cell.sprite)
+            tint = WallFinishes.previewTint(placement.finish, definition, stage, cell.sprite)
         elseif cell.sprite and coveringAction and targetWallType then
             finishSprite = WallFinishes.spriteForWallType(coveringAction, placement.finish, north, targetWallType)
         end
@@ -226,6 +227,7 @@ function GhostRenderer.placementCells(placement)
             y = (placement.y or 0) + (cell.dy or 0),
             z = (placement.z or 0) + (cell.dz or 0),
             sprite = (cell.sprite and finishSprite) or cell.sprite,
+            tint = tint,
             kind = cell.kind or (stage.placement or {}).kind or ((definition or {}).placement or {}).kind,
             blocks = cell.blocks
         }
@@ -251,7 +253,10 @@ function GhostRenderer.renderPlacement(placement, activeLevel, color)
         local cell = cells[cellIndex]
         local alpha = GhostRenderer.levelAlpha(cell.z, activeLevel, baseAlpha)
         if cell.sprite then
-            drawCell(GhostRenderer.getSprite(cell.sprite), cell.x, cell.y, cell.z, color, alpha)
+            -- A tint-painted piece shows its paint colour unless it is flagged
+            -- (conflict, selection), which keeps that colour.
+            local cellColor = normal and cell.tint or color
+            drawCell(GhostRenderer.getSprite(cell.sprite), cell.x, cell.y, cell.z, cellColor, alpha)
         elseif cell.blocks then
             drawCell(GhostRenderer.getFloorCursorSprite(), cell.x, cell.y, cell.z, color, alpha * 0.7)
         end
@@ -278,6 +283,19 @@ function GhostRenderer.renderRoom(room, defaultZ, activeLevel, highlightRoomId, 
     queueRoomOutline(playerIndex, room, roomZ, color, alpha, 0, 0)
 end
 
+-- Draw layer inside one square, back to front: wall structure (frames, walls),
+-- then what covers a wall (finishes, overlays such as trims and lower panels),
+-- then pieces hung against a wall, then free-standing pieces. Overlays used to
+-- tie with free-standing pieces and fell back to placement order, so a trim on
+-- a wall could draw over a chair standing in front of it (captured buildings
+-- list pieces in scan order).
+local function cellLayer(cellKind, placementInfo)
+    if cellKind == "wall" then return 1 end
+    if cellKind == "wallCovering" or cellKind == "overlay" then return 2 end
+    if placementInfo.needToBeAgainstWall == true then return 3 end
+    return 4
+end
+
 -- Sort expanded cells, not anchors: stairs and multi-tile pieces cross both
 -- diagonals and storeys. Keep floors first on each level, then use isometric
 -- depth with deterministic ties. World coordinates must never be packed into
@@ -295,12 +313,14 @@ local function sortedCells(blueprint)
     for index = 1, #placements do
         local placement = placements[index]
         local definition = Registry:get(placement.buildableId)
-        local kind = definition and (definition.placement or {}).kind
+        local placementInfo = (definition and definition.placement) or {}
+        local kind = placementInfo.kind
         local cells = GhostRenderer.placementCells(placement) or {}
         for cellIndex = 1, #cells do
             local cellKind = cells[cellIndex].kind or kind
             order[#order + 1] = { placement = placement, cell = cells[cellIndex],
                 floor = cellKind == "floor", wall = cellKind == "wall" or cellKind == "wallCovering",
+                layer = cellLayer(cellKind, placementInfo),
                 roof = definition and definition.category == "Roofing", sequence = #order + 1 }
         end
     end
@@ -311,7 +331,7 @@ local function sortedCells(blueprint)
         local ad, bd = ac.x + ac.y, bc.x + bc.y
         if ad ~= bd then return ad < bd end
         if ac.y ~= bc.y then return ac.y < bc.y end
-        if a.wall ~= b.wall then return a.wall end
+        if a.layer ~= b.layer then return a.layer < b.layer end
         return a.sequence < b.sequence
     end)
     if #orderCaches >= 8 then table.remove(orderCaches, 1) end
